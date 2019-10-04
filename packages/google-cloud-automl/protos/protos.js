@@ -43,6 +43,8958 @@
                  */
                 var automl = {};
     
+                automl.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.automl
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.AutoMl = (function() {
+    
+                        /**
+                         * Constructs a new AutoMl service.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an AutoMl
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function AutoMl(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (AutoMl.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AutoMl;
+    
+                        /**
+                         * Creates new AutoMl service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {AutoMl} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        AutoMl.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#createDataset}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef CreateDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.CreateDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.createDataset = function createDataset(request, callback) {
+                            return this.rpcCall(createDataset, $root.google.cloud.automl.v1.CreateDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateDataset" });
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#getDataset}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef GetDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.GetDatasetCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.getDataset = function getDataset(request, callback) {
+                            return this.rpcCall(getDataset, $root.google.cloud.automl.v1.GetDatasetRequest, $root.google.cloud.automl.v1.Dataset, request, callback);
+                        }, "name", { value: "GetDataset" });
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#listDatasets}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef ListDatasetsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.ListDatasetsResponse} [response] ListDatasetsResponse
+                         */
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.ListDatasetsCallback} callback Node-style callback called with the error, if any, and ListDatasetsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.listDatasets = function listDatasets(request, callback) {
+                            return this.rpcCall(listDatasets, $root.google.cloud.automl.v1.ListDatasetsRequest, $root.google.cloud.automl.v1.ListDatasetsResponse, request, callback);
+                        }, "name", { value: "ListDatasets" });
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.ListDatasetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#updateDataset}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef UpdateDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls UpdateDataset.
+                         * @function updateDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest} request UpdateDatasetRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.UpdateDatasetCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.updateDataset = function updateDataset(request, callback) {
+                            return this.rpcCall(updateDataset, $root.google.cloud.automl.v1.UpdateDatasetRequest, $root.google.cloud.automl.v1.Dataset, request, callback);
+                        }, "name", { value: "UpdateDataset" });
+    
+                        /**
+                         * Calls UpdateDataset.
+                         * @function updateDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest} request UpdateDatasetRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#deleteDataset}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef DeleteDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.DeleteDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.deleteDataset = function deleteDataset(request, callback) {
+                            return this.rpcCall(deleteDataset, $root.google.cloud.automl.v1.DeleteDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteDataset" });
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#importData}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef ImportDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportData.
+                         * @function importData
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IImportDataRequest} request ImportDataRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.ImportDataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.importData = function importData(request, callback) {
+                            return this.rpcCall(importData, $root.google.cloud.automl.v1.ImportDataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportData" });
+    
+                        /**
+                         * Calls ImportData.
+                         * @function importData
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IImportDataRequest} request ImportDataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#exportData}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef ExportDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportData.
+                         * @function exportData
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IExportDataRequest} request ExportDataRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.ExportDataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.exportData = function exportData(request, callback) {
+                            return this.rpcCall(exportData, $root.google.cloud.automl.v1.ExportDataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportData" });
+    
+                        /**
+                         * Calls ExportData.
+                         * @function exportData
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IExportDataRequest} request ExportDataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#createModel}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef CreateModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateModel.
+                         * @function createModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.ICreateModelRequest} request CreateModelRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.CreateModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.createModel = function createModel(request, callback) {
+                            return this.rpcCall(createModel, $root.google.cloud.automl.v1.CreateModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateModel" });
+    
+                        /**
+                         * Calls CreateModel.
+                         * @function createModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.ICreateModelRequest} request CreateModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#getModel}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef GetModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.Model} [response] Model
+                         */
+    
+                        /**
+                         * Calls GetModel.
+                         * @function getModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetModelRequest} request GetModelRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.GetModelCallback} callback Node-style callback called with the error, if any, and Model
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.getModel = function getModel(request, callback) {
+                            return this.rpcCall(getModel, $root.google.cloud.automl.v1.GetModelRequest, $root.google.cloud.automl.v1.Model, request, callback);
+                        }, "name", { value: "GetModel" });
+    
+                        /**
+                         * Calls GetModel.
+                         * @function getModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetModelRequest} request GetModelRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.Model>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#listModels}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef ListModelsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.ListModelsResponse} [response] ListModelsResponse
+                         */
+    
+                        /**
+                         * Calls ListModels.
+                         * @function listModels
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListModelsRequest} request ListModelsRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.ListModelsCallback} callback Node-style callback called with the error, if any, and ListModelsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.listModels = function listModels(request, callback) {
+                            return this.rpcCall(listModels, $root.google.cloud.automl.v1.ListModelsRequest, $root.google.cloud.automl.v1.ListModelsResponse, request, callback);
+                        }, "name", { value: "ListModels" });
+    
+                        /**
+                         * Calls ListModels.
+                         * @function listModels
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListModelsRequest} request ListModelsRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.ListModelsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#deleteModel}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef DeleteModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteModel.
+                         * @function deleteModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest} request DeleteModelRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.DeleteModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.deleteModel = function deleteModel(request, callback) {
+                            return this.rpcCall(deleteModel, $root.google.cloud.automl.v1.DeleteModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteModel" });
+    
+                        /**
+                         * Calls DeleteModel.
+                         * @function deleteModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest} request DeleteModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#updateModel}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef UpdateModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.Model} [response] Model
+                         */
+    
+                        /**
+                         * Calls UpdateModel.
+                         * @function updateModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest} request UpdateModelRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.UpdateModelCallback} callback Node-style callback called with the error, if any, and Model
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.updateModel = function updateModel(request, callback) {
+                            return this.rpcCall(updateModel, $root.google.cloud.automl.v1.UpdateModelRequest, $root.google.cloud.automl.v1.Model, request, callback);
+                        }, "name", { value: "UpdateModel" });
+    
+                        /**
+                         * Calls UpdateModel.
+                         * @function updateModel
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest} request UpdateModelRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.Model>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#getModelEvaluation}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef GetModelEvaluationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.ModelEvaluation} [response] ModelEvaluation
+                         */
+    
+                        /**
+                         * Calls GetModelEvaluation.
+                         * @function getModelEvaluation
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest} request GetModelEvaluationRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.GetModelEvaluationCallback} callback Node-style callback called with the error, if any, and ModelEvaluation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.getModelEvaluation = function getModelEvaluation(request, callback) {
+                            return this.rpcCall(getModelEvaluation, $root.google.cloud.automl.v1.GetModelEvaluationRequest, $root.google.cloud.automl.v1.ModelEvaluation, request, callback);
+                        }, "name", { value: "GetModelEvaluation" });
+    
+                        /**
+                         * Calls GetModelEvaluation.
+                         * @function getModelEvaluation
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest} request GetModelEvaluationRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.ModelEvaluation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.AutoMl#listModelEvaluations}.
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @typedef ListModelEvaluationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.ListModelEvaluationsResponse} [response] ListModelEvaluationsResponse
+                         */
+    
+                        /**
+                         * Calls ListModelEvaluations.
+                         * @function listModelEvaluations
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest} request ListModelEvaluationsRequest message or plain object
+                         * @param {google.cloud.automl.v1.AutoMl.ListModelEvaluationsCallback} callback Node-style callback called with the error, if any, and ListModelEvaluationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AutoMl.prototype.listModelEvaluations = function listModelEvaluations(request, callback) {
+                            return this.rpcCall(listModelEvaluations, $root.google.cloud.automl.v1.ListModelEvaluationsRequest, $root.google.cloud.automl.v1.ListModelEvaluationsResponse, request, callback);
+                        }, "name", { value: "ListModelEvaluations" });
+    
+                        /**
+                         * Calls ListModelEvaluations.
+                         * @function listModelEvaluations
+                         * @memberof google.cloud.automl.v1.AutoMl
+                         * @instance
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest} request ListModelEvaluationsRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.ListModelEvaluationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return AutoMl;
+                    })();
+    
+                    v1.CreateDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ICreateDatasetRequest
+                         * @property {string|null} [parent] CreateDatasetRequest parent
+                         * @property {google.cloud.automl.v1.IDataset|null} [dataset] CreateDatasetRequest dataset
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a CreateDatasetRequest.
+                         * @implements ICreateDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest=} [properties] Properties to set
+                         */
+                        function CreateDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatasetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatasetRequest dataset.
+                         * @member {google.cloud.automl.v1.IDataset|null|undefined} dataset
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.dataset = null;
+    
+                        /**
+                         * Creates a new CreateDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.CreateDatasetRequest} CreateDatasetRequest instance
+                         */
+                        CreateDatasetRequest.create = function create(properties) {
+                            return new CreateDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message. Does not implicitly {@link google.cloud.automl.v1.CreateDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                $root.google.cloud.automl.v1.Dataset.encode(message.dataset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.CreateDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.CreateDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.dataset = $root.google.cloud.automl.v1.Dataset.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset")) {
+                                var error = $root.google.cloud.automl.v1.Dataset.verify(message.dataset);
+                                if (error)
+                                    return "dataset." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.CreateDatasetRequest} CreateDatasetRequest
+                         */
+                        CreateDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.CreateDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.CreateDatasetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataset != null) {
+                                if (typeof object.dataset !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.CreateDatasetRequest.dataset: object expected");
+                                message.dataset = $root.google.cloud.automl.v1.Dataset.fromObject(object.dataset);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.CreateDatasetRequest} message CreateDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataset = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = $root.google.cloud.automl.v1.Dataset.toObject(message.dataset, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.CreateDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateDatasetRequest;
+                    })();
+    
+                    v1.GetDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IGetDatasetRequest
+                         * @property {string|null} [name] GetDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a GetDatasetRequest.
+                         * @implements IGetDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest=} [properties] Properties to set
+                         */
+                        function GetDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @instance
+                         */
+                        GetDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.GetDatasetRequest} GetDatasetRequest instance
+                         */
+                        GetDatasetRequest.create = function create(properties) {
+                            return new GetDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message. Does not implicitly {@link google.cloud.automl.v1.GetDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.GetDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.GetDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.GetDatasetRequest} GetDatasetRequest
+                         */
+                        GetDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.GetDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.GetDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.GetDatasetRequest} message GetDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.GetDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetDatasetRequest;
+                    })();
+    
+                    v1.ListDatasetsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListDatasetsRequest
+                         * @property {string|null} [parent] ListDatasetsRequest parent
+                         * @property {string|null} [filter] ListDatasetsRequest filter
+                         * @property {number|null} [pageSize] ListDatasetsRequest pageSize
+                         * @property {string|null} [pageToken] ListDatasetsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListDatasetsRequest.
+                         * @implements IListDatasetsRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest=} [properties] Properties to set
+                         */
+                        function ListDatasetsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDatasetsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListDatasetsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDatasetsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListDatasetsRequest} ListDatasetsRequest instance
+                         */
+                        ListDatasetsRequest.create = function create(properties) {
+                            return new ListDatasetsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message. Does not implicitly {@link google.cloud.automl.v1.ListDatasetsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListDatasetsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListDatasetsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 6:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListDatasetsRequest} ListDatasetsRequest
+                         */
+                        ListDatasetsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListDatasetsRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListDatasetsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ListDatasetsRequest} message ListDatasetsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListDatasetsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDatasetsRequest;
+                    })();
+    
+                    v1.ListDatasetsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListDatasetsResponse
+                         * @property {Array.<google.cloud.automl.v1.IDataset>|null} [datasets] ListDatasetsResponse datasets
+                         * @property {string|null} [nextPageToken] ListDatasetsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListDatasetsResponse.
+                         * @implements IListDatasetsResponse
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListDatasetsResponse=} [properties] Properties to set
+                         */
+                        function ListDatasetsResponse(properties) {
+                            this.datasets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsResponse datasets.
+                         * @member {Array.<google.cloud.automl.v1.IDataset>} datasets
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.datasets = $util.emptyArray;
+    
+                        /**
+                         * ListDatasetsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListDatasetsResponse} ListDatasetsResponse instance
+                         */
+                        ListDatasetsResponse.create = function create(properties) {
+                            return new ListDatasetsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message. Does not implicitly {@link google.cloud.automl.v1.ListDatasetsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasets != null && message.datasets.length)
+                                for (var i = 0; i < message.datasets.length; ++i)
+                                    $root.google.cloud.automl.v1.Dataset.encode(message.datasets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListDatasetsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListDatasetsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.datasets && message.datasets.length))
+                                        message.datasets = [];
+                                    message.datasets.push($root.google.cloud.automl.v1.Dataset.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasets != null && message.hasOwnProperty("datasets")) {
+                                if (!Array.isArray(message.datasets))
+                                    return "datasets: array expected";
+                                for (var i = 0; i < message.datasets.length; ++i) {
+                                    var error = $root.google.cloud.automl.v1.Dataset.verify(message.datasets[i]);
+                                    if (error)
+                                        return "datasets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListDatasetsResponse} ListDatasetsResponse
+                         */
+                        ListDatasetsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListDatasetsResponse)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListDatasetsResponse();
+                            if (object.datasets) {
+                                if (!Array.isArray(object.datasets))
+                                    throw TypeError(".google.cloud.automl.v1.ListDatasetsResponse.datasets: array expected");
+                                message.datasets = [];
+                                for (var i = 0; i < object.datasets.length; ++i) {
+                                    if (typeof object.datasets[i] !== "object")
+                                        throw TypeError(".google.cloud.automl.v1.ListDatasetsResponse.datasets: object expected");
+                                    message.datasets[i] = $root.google.cloud.automl.v1.Dataset.fromObject(object.datasets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.ListDatasetsResponse} message ListDatasetsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.datasets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.datasets && message.datasets.length) {
+                                object.datasets = [];
+                                for (var j = 0; j < message.datasets.length; ++j)
+                                    object.datasets[j] = $root.google.cloud.automl.v1.Dataset.toObject(message.datasets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListDatasetsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDatasetsResponse;
+                    })();
+    
+                    v1.UpdateDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IUpdateDatasetRequest
+                         * @property {google.cloud.automl.v1.IDataset|null} [dataset] UpdateDatasetRequest dataset
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDatasetRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an UpdateDatasetRequest.
+                         * @implements IUpdateDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest=} [properties] Properties to set
+                         */
+                        function UpdateDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDatasetRequest dataset.
+                         * @member {google.cloud.automl.v1.IDataset|null|undefined} dataset
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @instance
+                         */
+                        UpdateDatasetRequest.prototype.dataset = null;
+    
+                        /**
+                         * UpdateDatasetRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @instance
+                         */
+                        UpdateDatasetRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.UpdateDatasetRequest} UpdateDatasetRequest instance
+                         */
+                        UpdateDatasetRequest.create = function create(properties) {
+                            return new UpdateDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetRequest message. Does not implicitly {@link google.cloud.automl.v1.UpdateDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest} message UpdateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                $root.google.cloud.automl.v1.Dataset.encode(message.dataset, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.UpdateDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateDatasetRequest} message UpdateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.UpdateDatasetRequest} UpdateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.UpdateDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataset = $root.google.cloud.automl.v1.Dataset.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.UpdateDatasetRequest} UpdateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset")) {
+                                var error = $root.google.cloud.automl.v1.Dataset.verify(message.dataset);
+                                if (error)
+                                    return "dataset." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.UpdateDatasetRequest} UpdateDatasetRequest
+                         */
+                        UpdateDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.UpdateDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.UpdateDatasetRequest();
+                            if (object.dataset != null) {
+                                if (typeof object.dataset !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.UpdateDatasetRequest.dataset: object expected");
+                                message.dataset = $root.google.cloud.automl.v1.Dataset.fromObject(object.dataset);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.UpdateDatasetRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.UpdateDatasetRequest} message UpdateDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = null;
+                                object.updateMask = null;
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = $root.google.cloud.automl.v1.Dataset.toObject(message.dataset, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.UpdateDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateDatasetRequest;
+                    })();
+    
+                    v1.DeleteDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IDeleteDatasetRequest
+                         * @property {string|null} [name] DeleteDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDatasetRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a DeleteDatasetRequest.
+                         * @implements IDeleteDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest=} [properties] Properties to set
+                         */
+                        function DeleteDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @instance
+                         */
+                        DeleteDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.DeleteDatasetRequest} DeleteDatasetRequest instance
+                         */
+                        DeleteDatasetRequest.create = function create(properties) {
+                            return new DeleteDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message. Does not implicitly {@link google.cloud.automl.v1.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.DeleteDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.DeleteDatasetRequest} DeleteDatasetRequest
+                         */
+                        DeleteDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.DeleteDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.DeleteDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.DeleteDatasetRequest} message DeleteDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.DeleteDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteDatasetRequest;
+                    })();
+    
+                    v1.ImportDataRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportDataRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IImportDataRequest
+                         * @property {string|null} [name] ImportDataRequest name
+                         * @property {google.cloud.automl.v1.IInputConfig|null} [inputConfig] ImportDataRequest inputConfig
+                         */
+    
+                        /**
+                         * Constructs a new ImportDataRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an ImportDataRequest.
+                         * @implements IImportDataRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IImportDataRequest=} [properties] Properties to set
+                         */
+                        function ImportDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportDataRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.name = "";
+    
+                        /**
+                         * ImportDataRequest inputConfig.
+                         * @member {google.cloud.automl.v1.IInputConfig|null|undefined} inputConfig
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.inputConfig = null;
+    
+                        /**
+                         * Creates a new ImportDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IImportDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ImportDataRequest} ImportDataRequest instance
+                         */
+                        ImportDataRequest.create = function create(properties) {
+                            return new ImportDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataRequest message. Does not implicitly {@link google.cloud.automl.v1.ImportDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IImportDataRequest} message ImportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.inputConfig != null && message.hasOwnProperty("inputConfig"))
+                                $root.google.cloud.automl.v1.InputConfig.encode(message.inputConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ImportDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IImportDataRequest} message ImportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ImportDataRequest} ImportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ImportDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.inputConfig = $root.google.cloud.automl.v1.InputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ImportDataRequest} ImportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportDataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.inputConfig != null && message.hasOwnProperty("inputConfig")) {
+                                var error = $root.google.cloud.automl.v1.InputConfig.verify(message.inputConfig);
+                                if (error)
+                                    return "inputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ImportDataRequest} ImportDataRequest
+                         */
+                        ImportDataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ImportDataRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ImportDataRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.inputConfig != null) {
+                                if (typeof object.inputConfig !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.ImportDataRequest.inputConfig: object expected");
+                                message.inputConfig = $root.google.cloud.automl.v1.InputConfig.fromObject(object.inputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ImportDataRequest} message ImportDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.inputConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.inputConfig != null && message.hasOwnProperty("inputConfig"))
+                                object.inputConfig = $root.google.cloud.automl.v1.InputConfig.toObject(message.inputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ImportDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportDataRequest;
+                    })();
+    
+                    v1.ExportDataRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportDataRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IExportDataRequest
+                         * @property {string|null} [name] ExportDataRequest name
+                         * @property {google.cloud.automl.v1.IOutputConfig|null} [outputConfig] ExportDataRequest outputConfig
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an ExportDataRequest.
+                         * @implements IExportDataRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IExportDataRequest=} [properties] Properties to set
+                         */
+                        function ExportDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportDataRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.name = "";
+    
+                        /**
+                         * ExportDataRequest outputConfig.
+                         * @member {google.cloud.automl.v1.IOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.outputConfig = null;
+    
+                        /**
+                         * Creates a new ExportDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IExportDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ExportDataRequest} ExportDataRequest instance
+                         */
+                        ExportDataRequest.create = function create(properties) {
+                            return new ExportDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataRequest message. Does not implicitly {@link google.cloud.automl.v1.ExportDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IExportDataRequest} message ExportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                $root.google.cloud.automl.v1.OutputConfig.encode(message.outputConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ExportDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IExportDataRequest} message ExportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ExportDataRequest} ExportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ExportDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.outputConfig = $root.google.cloud.automl.v1.OutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ExportDataRequest} ExportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.automl.v1.OutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ExportDataRequest} ExportDataRequest
+                         */
+                        ExportDataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ExportDataRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ExportDataRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.ExportDataRequest.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.automl.v1.OutputConfig.fromObject(object.outputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ExportDataRequest} message ExportDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.outputConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.automl.v1.OutputConfig.toObject(message.outputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ExportDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportDataRequest;
+                    })();
+    
+                    v1.CreateModelRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ICreateModelRequest
+                         * @property {string|null} [parent] CreateModelRequest parent
+                         * @property {google.cloud.automl.v1.IModel|null} [model] CreateModelRequest model
+                         */
+    
+                        /**
+                         * Constructs a new CreateModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a CreateModelRequest.
+                         * @implements ICreateModelRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ICreateModelRequest=} [properties] Properties to set
+                         */
+                        function CreateModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateModelRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @instance
+                         */
+                        CreateModelRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateModelRequest model.
+                         * @member {google.cloud.automl.v1.IModel|null|undefined} model
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @instance
+                         */
+                        CreateModelRequest.prototype.model = null;
+    
+                        /**
+                         * Creates a new CreateModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.CreateModelRequest} CreateModelRequest instance
+                         */
+                        CreateModelRequest.create = function create(properties) {
+                            return new CreateModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelRequest message. Does not implicitly {@link google.cloud.automl.v1.CreateModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelRequest} message CreateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                $root.google.cloud.automl.v1.Model.encode(message.model, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.CreateModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelRequest} message CreateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.CreateModelRequest} CreateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.CreateModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 4:
+                                    message.model = $root.google.cloud.automl.v1.Model.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.CreateModelRequest} CreateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                var error = $root.google.cloud.automl.v1.Model.verify(message.model);
+                                if (error)
+                                    return "model." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.CreateModelRequest} CreateModelRequest
+                         */
+                        CreateModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.CreateModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.CreateModelRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.model != null) {
+                                if (typeof object.model !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.CreateModelRequest.model: object expected");
+                                message.model = $root.google.cloud.automl.v1.Model.fromObject(object.model);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.CreateModelRequest} message CreateModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.model = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = $root.google.cloud.automl.v1.Model.toObject(message.model, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.CreateModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateModelRequest;
+                    })();
+    
+                    v1.GetModelRequest = (function() {
+    
+                        /**
+                         * Properties of a GetModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IGetModelRequest
+                         * @property {string|null} [name] GetModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a GetModelRequest.
+                         * @implements IGetModelRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IGetModelRequest=} [properties] Properties to set
+                         */
+                        function GetModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @instance
+                         */
+                        GetModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.GetModelRequest} GetModelRequest instance
+                         */
+                        GetModelRequest.create = function create(properties) {
+                            return new GetModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.automl.v1.GetModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelRequest} message GetModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.GetModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelRequest} message GetModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.GetModelRequest} GetModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.GetModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.GetModelRequest} GetModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.GetModelRequest} GetModelRequest
+                         */
+                        GetModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.GetModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.GetModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.GetModelRequest} message GetModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.GetModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetModelRequest;
+                    })();
+    
+                    v1.ListModelsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListModelsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListModelsRequest
+                         * @property {string|null} [parent] ListModelsRequest parent
+                         * @property {string|null} [filter] ListModelsRequest filter
+                         * @property {number|null} [pageSize] ListModelsRequest pageSize
+                         * @property {string|null} [pageToken] ListModelsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListModelsRequest.
+                         * @implements IListModelsRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListModelsRequest=} [properties] Properties to set
+                         */
+                        function ListModelsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListModelsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListModelsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListModelsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListModelsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListModelsRequest} ListModelsRequest instance
+                         */
+                        ListModelsRequest.create = function create(properties) {
+                            return new ListModelsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsRequest message. Does not implicitly {@link google.cloud.automl.v1.ListModelsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsRequest} message ListModelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListModelsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsRequest} message ListModelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListModelsRequest} ListModelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListModelsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 6:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListModelsRequest} ListModelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListModelsRequest} ListModelsRequest
+                         */
+                        ListModelsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListModelsRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListModelsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ListModelsRequest} message ListModelsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListModelsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListModelsRequest;
+                    })();
+    
+                    v1.ListModelsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListModelsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListModelsResponse
+                         * @property {Array.<google.cloud.automl.v1.IModel>|null} [model] ListModelsResponse model
+                         * @property {string|null} [nextPageToken] ListModelsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListModelsResponse.
+                         * @implements IListModelsResponse
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListModelsResponse=} [properties] Properties to set
+                         */
+                        function ListModelsResponse(properties) {
+                            this.model = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelsResponse model.
+                         * @member {Array.<google.cloud.automl.v1.IModel>} model
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @instance
+                         */
+                        ListModelsResponse.prototype.model = $util.emptyArray;
+    
+                        /**
+                         * ListModelsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @instance
+                         */
+                        ListModelsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListModelsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListModelsResponse} ListModelsResponse instance
+                         */
+                        ListModelsResponse.create = function create(properties) {
+                            return new ListModelsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsResponse message. Does not implicitly {@link google.cloud.automl.v1.ListModelsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsResponse} message ListModelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && message.model.length)
+                                for (var i = 0; i < message.model.length; ++i)
+                                    $root.google.cloud.automl.v1.Model.encode(message.model[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsResponse message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListModelsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelsResponse} message ListModelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListModelsResponse} ListModelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListModelsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.model && message.model.length))
+                                        message.model = [];
+                                    message.model.push($root.google.cloud.automl.v1.Model.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListModelsResponse} ListModelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                if (!Array.isArray(message.model))
+                                    return "model: array expected";
+                                for (var i = 0; i < message.model.length; ++i) {
+                                    var error = $root.google.cloud.automl.v1.Model.verify(message.model[i]);
+                                    if (error)
+                                        return "model." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListModelsResponse} ListModelsResponse
+                         */
+                        ListModelsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListModelsResponse)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListModelsResponse();
+                            if (object.model) {
+                                if (!Array.isArray(object.model))
+                                    throw TypeError(".google.cloud.automl.v1.ListModelsResponse.model: array expected");
+                                message.model = [];
+                                for (var i = 0; i < object.model.length; ++i) {
+                                    if (typeof object.model[i] !== "object")
+                                        throw TypeError(".google.cloud.automl.v1.ListModelsResponse.model: object expected");
+                                    message.model[i] = $root.google.cloud.automl.v1.Model.fromObject(object.model[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.ListModelsResponse} message ListModelsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.model = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.model && message.model.length) {
+                                object.model = [];
+                                for (var j = 0; j < message.model.length; ++j)
+                                    object.model[j] = $root.google.cloud.automl.v1.Model.toObject(message.model[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListModelsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListModelsResponse;
+                    })();
+    
+                    v1.DeleteModelRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IDeleteModelRequest
+                         * @property {string|null} [name] DeleteModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a DeleteModelRequest.
+                         * @implements IDeleteModelRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest=} [properties] Properties to set
+                         */
+                        function DeleteModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @instance
+                         */
+                        DeleteModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.DeleteModelRequest} DeleteModelRequest instance
+                         */
+                        DeleteModelRequest.create = function create(properties) {
+                            return new DeleteModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelRequest message. Does not implicitly {@link google.cloud.automl.v1.DeleteModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest} message DeleteModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.DeleteModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteModelRequest} message DeleteModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.DeleteModelRequest} DeleteModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.DeleteModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.DeleteModelRequest} DeleteModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.DeleteModelRequest} DeleteModelRequest
+                         */
+                        DeleteModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.DeleteModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.DeleteModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.DeleteModelRequest} message DeleteModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.DeleteModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteModelRequest;
+                    })();
+    
+                    v1.UpdateModelRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IUpdateModelRequest
+                         * @property {google.cloud.automl.v1.IModel|null} [model] UpdateModelRequest model
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateModelRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateModelRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an UpdateModelRequest.
+                         * @implements IUpdateModelRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest=} [properties] Properties to set
+                         */
+                        function UpdateModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateModelRequest model.
+                         * @member {google.cloud.automl.v1.IModel|null|undefined} model
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @instance
+                         */
+                        UpdateModelRequest.prototype.model = null;
+    
+                        /**
+                         * UpdateModelRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @instance
+                         */
+                        UpdateModelRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.UpdateModelRequest} UpdateModelRequest instance
+                         */
+                        UpdateModelRequest.create = function create(properties) {
+                            return new UpdateModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateModelRequest message. Does not implicitly {@link google.cloud.automl.v1.UpdateModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest} message UpdateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                $root.google.cloud.automl.v1.Model.encode(message.model, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateModelRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.UpdateModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IUpdateModelRequest} message UpdateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.UpdateModelRequest} UpdateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.UpdateModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.model = $root.google.cloud.automl.v1.Model.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.UpdateModelRequest} UpdateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                var error = $root.google.cloud.automl.v1.Model.verify(message.model);
+                                if (error)
+                                    return "model." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.UpdateModelRequest} UpdateModelRequest
+                         */
+                        UpdateModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.UpdateModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.UpdateModelRequest();
+                            if (object.model != null) {
+                                if (typeof object.model !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.UpdateModelRequest.model: object expected");
+                                message.model = $root.google.cloud.automl.v1.Model.fromObject(object.model);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.UpdateModelRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.UpdateModelRequest} message UpdateModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.model = null;
+                                object.updateMask = null;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = $root.google.cloud.automl.v1.Model.toObject(message.model, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.UpdateModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateModelRequest;
+                    })();
+    
+                    v1.GetModelEvaluationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetModelEvaluationRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IGetModelEvaluationRequest
+                         * @property {string|null} [name] GetModelEvaluationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetModelEvaluationRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a GetModelEvaluationRequest.
+                         * @implements IGetModelEvaluationRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest=} [properties] Properties to set
+                         */
+                        function GetModelEvaluationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetModelEvaluationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @instance
+                         */
+                        GetModelEvaluationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetModelEvaluationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.GetModelEvaluationRequest} GetModelEvaluationRequest instance
+                         */
+                        GetModelEvaluationRequest.create = function create(properties) {
+                            return new GetModelEvaluationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelEvaluationRequest message. Does not implicitly {@link google.cloud.automl.v1.GetModelEvaluationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest} message GetModelEvaluationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelEvaluationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelEvaluationRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.GetModelEvaluationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IGetModelEvaluationRequest} message GetModelEvaluationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelEvaluationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetModelEvaluationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.GetModelEvaluationRequest} GetModelEvaluationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelEvaluationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.GetModelEvaluationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetModelEvaluationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.GetModelEvaluationRequest} GetModelEvaluationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelEvaluationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetModelEvaluationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetModelEvaluationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetModelEvaluationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.GetModelEvaluationRequest} GetModelEvaluationRequest
+                         */
+                        GetModelEvaluationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.GetModelEvaluationRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.GetModelEvaluationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetModelEvaluationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.GetModelEvaluationRequest} message GetModelEvaluationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetModelEvaluationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetModelEvaluationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.GetModelEvaluationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetModelEvaluationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetModelEvaluationRequest;
+                    })();
+    
+                    v1.ListModelEvaluationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListModelEvaluationsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListModelEvaluationsRequest
+                         * @property {string|null} [parent] ListModelEvaluationsRequest parent
+                         * @property {string|null} [filter] ListModelEvaluationsRequest filter
+                         * @property {number|null} [pageSize] ListModelEvaluationsRequest pageSize
+                         * @property {string|null} [pageToken] ListModelEvaluationsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelEvaluationsRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListModelEvaluationsRequest.
+                         * @implements IListModelEvaluationsRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest=} [properties] Properties to set
+                         */
+                        function ListModelEvaluationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelEvaluationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @instance
+                         */
+                        ListModelEvaluationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListModelEvaluationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @instance
+                         */
+                        ListModelEvaluationsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListModelEvaluationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @instance
+                         */
+                        ListModelEvaluationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListModelEvaluationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @instance
+                         */
+                        ListModelEvaluationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListModelEvaluationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsRequest} ListModelEvaluationsRequest instance
+                         */
+                        ListModelEvaluationsRequest.create = function create(properties) {
+                            return new ListModelEvaluationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelEvaluationsRequest message. Does not implicitly {@link google.cloud.automl.v1.ListModelEvaluationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest} message ListModelEvaluationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelEvaluationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.pageSize);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelEvaluationsRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListModelEvaluationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsRequest} message ListModelEvaluationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelEvaluationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelEvaluationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsRequest} ListModelEvaluationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelEvaluationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListModelEvaluationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 6:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelEvaluationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsRequest} ListModelEvaluationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelEvaluationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelEvaluationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelEvaluationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelEvaluationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsRequest} ListModelEvaluationsRequest
+                         */
+                        ListModelEvaluationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListModelEvaluationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListModelEvaluationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelEvaluationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.ListModelEvaluationsRequest} message ListModelEvaluationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelEvaluationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelEvaluationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelEvaluationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListModelEvaluationsRequest;
+                    })();
+    
+                    v1.ListModelEvaluationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListModelEvaluationsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IListModelEvaluationsResponse
+                         * @property {Array.<google.cloud.automl.v1.IModelEvaluation>|null} [modelEvaluation] ListModelEvaluationsResponse modelEvaluation
+                         * @property {string|null} [nextPageToken] ListModelEvaluationsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelEvaluationsResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ListModelEvaluationsResponse.
+                         * @implements IListModelEvaluationsResponse
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsResponse=} [properties] Properties to set
+                         */
+                        function ListModelEvaluationsResponse(properties) {
+                            this.modelEvaluation = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelEvaluationsResponse modelEvaluation.
+                         * @member {Array.<google.cloud.automl.v1.IModelEvaluation>} modelEvaluation
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @instance
+                         */
+                        ListModelEvaluationsResponse.prototype.modelEvaluation = $util.emptyArray;
+    
+                        /**
+                         * ListModelEvaluationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @instance
+                         */
+                        ListModelEvaluationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListModelEvaluationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsResponse} ListModelEvaluationsResponse instance
+                         */
+                        ListModelEvaluationsResponse.create = function create(properties) {
+                            return new ListModelEvaluationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelEvaluationsResponse message. Does not implicitly {@link google.cloud.automl.v1.ListModelEvaluationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsResponse} message ListModelEvaluationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelEvaluationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modelEvaluation != null && message.modelEvaluation.length)
+                                for (var i = 0; i < message.modelEvaluation.length; ++i)
+                                    $root.google.cloud.automl.v1.ModelEvaluation.encode(message.modelEvaluation[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelEvaluationsResponse message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ListModelEvaluationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IListModelEvaluationsResponse} message ListModelEvaluationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelEvaluationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelEvaluationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsResponse} ListModelEvaluationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelEvaluationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ListModelEvaluationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.modelEvaluation && message.modelEvaluation.length))
+                                        message.modelEvaluation = [];
+                                    message.modelEvaluation.push($root.google.cloud.automl.v1.ModelEvaluation.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelEvaluationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsResponse} ListModelEvaluationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelEvaluationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelEvaluationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelEvaluationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modelEvaluation != null && message.hasOwnProperty("modelEvaluation")) {
+                                if (!Array.isArray(message.modelEvaluation))
+                                    return "modelEvaluation: array expected";
+                                for (var i = 0; i < message.modelEvaluation.length; ++i) {
+                                    var error = $root.google.cloud.automl.v1.ModelEvaluation.verify(message.modelEvaluation[i]);
+                                    if (error)
+                                        return "modelEvaluation." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelEvaluationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ListModelEvaluationsResponse} ListModelEvaluationsResponse
+                         */
+                        ListModelEvaluationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ListModelEvaluationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ListModelEvaluationsResponse();
+                            if (object.modelEvaluation) {
+                                if (!Array.isArray(object.modelEvaluation))
+                                    throw TypeError(".google.cloud.automl.v1.ListModelEvaluationsResponse.modelEvaluation: array expected");
+                                message.modelEvaluation = [];
+                                for (var i = 0; i < object.modelEvaluation.length; ++i) {
+                                    if (typeof object.modelEvaluation[i] !== "object")
+                                        throw TypeError(".google.cloud.automl.v1.ListModelEvaluationsResponse.modelEvaluation: object expected");
+                                    message.modelEvaluation[i] = $root.google.cloud.automl.v1.ModelEvaluation.fromObject(object.modelEvaluation[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelEvaluationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.ListModelEvaluationsResponse} message ListModelEvaluationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelEvaluationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.modelEvaluation = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.modelEvaluation && message.modelEvaluation.length) {
+                                object.modelEvaluation = [];
+                                for (var j = 0; j < message.modelEvaluation.length; ++j)
+                                    object.modelEvaluation[j] = $root.google.cloud.automl.v1.ModelEvaluation.toObject(message.modelEvaluation[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelEvaluationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ListModelEvaluationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelEvaluationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListModelEvaluationsResponse;
+                    })();
+    
+                    v1.AnnotationPayload = (function() {
+    
+                        /**
+                         * Properties of an AnnotationPayload.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IAnnotationPayload
+                         * @property {google.cloud.automl.v1.ITranslationAnnotation|null} [translation] AnnotationPayload translation
+                         */
+    
+                        /**
+                         * Constructs a new AnnotationPayload.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an AnnotationPayload.
+                         * @implements IAnnotationPayload
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IAnnotationPayload=} [properties] Properties to set
+                         */
+                        function AnnotationPayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnnotationPayload translation.
+                         * @member {google.cloud.automl.v1.ITranslationAnnotation|null|undefined} translation
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @instance
+                         */
+                        AnnotationPayload.prototype.translation = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AnnotationPayload detail.
+                         * @member {"translation"|undefined} detail
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @instance
+                         */
+                        Object.defineProperty(AnnotationPayload.prototype, "detail", {
+                            get: $util.oneOfGetter($oneOfFields = ["translation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AnnotationPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IAnnotationPayload=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.AnnotationPayload} AnnotationPayload instance
+                         */
+                        AnnotationPayload.create = function create(properties) {
+                            return new AnnotationPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnnotationPayload message. Does not implicitly {@link google.cloud.automl.v1.AnnotationPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IAnnotationPayload} message AnnotationPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnnotationPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.translation != null && message.hasOwnProperty("translation"))
+                                $root.google.cloud.automl.v1.TranslationAnnotation.encode(message.translation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnnotationPayload message, length delimited. Does not implicitly {@link google.cloud.automl.v1.AnnotationPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IAnnotationPayload} message AnnotationPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnnotationPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnnotationPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.AnnotationPayload} AnnotationPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnnotationPayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.AnnotationPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.translation = $root.google.cloud.automl.v1.TranslationAnnotation.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnnotationPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.AnnotationPayload} AnnotationPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnnotationPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnnotationPayload message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnnotationPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.translation != null && message.hasOwnProperty("translation")) {
+                                properties.detail = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.TranslationAnnotation.verify(message.translation);
+                                    if (error)
+                                        return "translation." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnnotationPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.AnnotationPayload} AnnotationPayload
+                         */
+                        AnnotationPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.AnnotationPayload)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.AnnotationPayload();
+                            if (object.translation != null) {
+                                if (typeof object.translation !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.AnnotationPayload.translation: object expected");
+                                message.translation = $root.google.cloud.automl.v1.TranslationAnnotation.fromObject(object.translation);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnnotationPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @static
+                         * @param {google.cloud.automl.v1.AnnotationPayload} message AnnotationPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnnotationPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.translation != null && message.hasOwnProperty("translation")) {
+                                object.translation = $root.google.cloud.automl.v1.TranslationAnnotation.toObject(message.translation, options);
+                                if (options.oneofs)
+                                    object.detail = "translation";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnnotationPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.AnnotationPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnnotationPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AnnotationPayload;
+                    })();
+    
+                    v1.TranslationDatasetMetadata = (function() {
+    
+                        /**
+                         * Properties of a TranslationDatasetMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ITranslationDatasetMetadata
+                         * @property {string|null} [sourceLanguageCode] TranslationDatasetMetadata sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] TranslationDatasetMetadata targetLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new TranslationDatasetMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a TranslationDatasetMetadata.
+                         * @implements ITranslationDatasetMetadata
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ITranslationDatasetMetadata=} [properties] Properties to set
+                         */
+                        function TranslationDatasetMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslationDatasetMetadata sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @instance
+                         */
+                        TranslationDatasetMetadata.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * TranslationDatasetMetadata targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @instance
+                         */
+                        TranslationDatasetMetadata.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * Creates a new TranslationDatasetMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationDatasetMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.TranslationDatasetMetadata} TranslationDatasetMetadata instance
+                         */
+                        TranslationDatasetMetadata.create = function create(properties) {
+                            return new TranslationDatasetMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationDatasetMetadata message. Does not implicitly {@link google.cloud.automl.v1.TranslationDatasetMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationDatasetMetadata} message TranslationDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationDatasetMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetLanguageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationDatasetMetadata message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TranslationDatasetMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationDatasetMetadata} message TranslationDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationDatasetMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslationDatasetMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.TranslationDatasetMetadata} TranslationDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationDatasetMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.TranslationDatasetMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.sourceLanguageCode = reader.string();
+                                    break;
+                                case 2:
+                                    message.targetLanguageCode = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslationDatasetMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.TranslationDatasetMetadata} TranslationDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationDatasetMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslationDatasetMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslationDatasetMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslationDatasetMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.TranslationDatasetMetadata} TranslationDatasetMetadata
+                         */
+                        TranslationDatasetMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.TranslationDatasetMetadata)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.TranslationDatasetMetadata();
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslationDatasetMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.TranslationDatasetMetadata} message TranslationDatasetMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslationDatasetMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                            }
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslationDatasetMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.TranslationDatasetMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslationDatasetMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslationDatasetMetadata;
+                    })();
+    
+                    v1.TranslationEvaluationMetrics = (function() {
+    
+                        /**
+                         * Properties of a TranslationEvaluationMetrics.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ITranslationEvaluationMetrics
+                         * @property {number|null} [bleuScore] TranslationEvaluationMetrics bleuScore
+                         * @property {number|null} [baseBleuScore] TranslationEvaluationMetrics baseBleuScore
+                         */
+    
+                        /**
+                         * Constructs a new TranslationEvaluationMetrics.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a TranslationEvaluationMetrics.
+                         * @implements ITranslationEvaluationMetrics
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ITranslationEvaluationMetrics=} [properties] Properties to set
+                         */
+                        function TranslationEvaluationMetrics(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslationEvaluationMetrics bleuScore.
+                         * @member {number} bleuScore
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @instance
+                         */
+                        TranslationEvaluationMetrics.prototype.bleuScore = 0;
+    
+                        /**
+                         * TranslationEvaluationMetrics baseBleuScore.
+                         * @member {number} baseBleuScore
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @instance
+                         */
+                        TranslationEvaluationMetrics.prototype.baseBleuScore = 0;
+    
+                        /**
+                         * Creates a new TranslationEvaluationMetrics instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationEvaluationMetrics=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.TranslationEvaluationMetrics} TranslationEvaluationMetrics instance
+                         */
+                        TranslationEvaluationMetrics.create = function create(properties) {
+                            return new TranslationEvaluationMetrics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationEvaluationMetrics message. Does not implicitly {@link google.cloud.automl.v1.TranslationEvaluationMetrics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationEvaluationMetrics} message TranslationEvaluationMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationEvaluationMetrics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bleuScore != null && message.hasOwnProperty("bleuScore"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.bleuScore);
+                            if (message.baseBleuScore != null && message.hasOwnProperty("baseBleuScore"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.baseBleuScore);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationEvaluationMetrics message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TranslationEvaluationMetrics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationEvaluationMetrics} message TranslationEvaluationMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationEvaluationMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslationEvaluationMetrics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.TranslationEvaluationMetrics} TranslationEvaluationMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationEvaluationMetrics.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.TranslationEvaluationMetrics();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.bleuScore = reader.double();
+                                    break;
+                                case 2:
+                                    message.baseBleuScore = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslationEvaluationMetrics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.TranslationEvaluationMetrics} TranslationEvaluationMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationEvaluationMetrics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslationEvaluationMetrics message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslationEvaluationMetrics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bleuScore != null && message.hasOwnProperty("bleuScore"))
+                                if (typeof message.bleuScore !== "number")
+                                    return "bleuScore: number expected";
+                            if (message.baseBleuScore != null && message.hasOwnProperty("baseBleuScore"))
+                                if (typeof message.baseBleuScore !== "number")
+                                    return "baseBleuScore: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslationEvaluationMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.TranslationEvaluationMetrics} TranslationEvaluationMetrics
+                         */
+                        TranslationEvaluationMetrics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.TranslationEvaluationMetrics)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.TranslationEvaluationMetrics();
+                            if (object.bleuScore != null)
+                                message.bleuScore = Number(object.bleuScore);
+                            if (object.baseBleuScore != null)
+                                message.baseBleuScore = Number(object.baseBleuScore);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslationEvaluationMetrics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @static
+                         * @param {google.cloud.automl.v1.TranslationEvaluationMetrics} message TranslationEvaluationMetrics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslationEvaluationMetrics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.bleuScore = 0;
+                                object.baseBleuScore = 0;
+                            }
+                            if (message.bleuScore != null && message.hasOwnProperty("bleuScore"))
+                                object.bleuScore = options.json && !isFinite(message.bleuScore) ? String(message.bleuScore) : message.bleuScore;
+                            if (message.baseBleuScore != null && message.hasOwnProperty("baseBleuScore"))
+                                object.baseBleuScore = options.json && !isFinite(message.baseBleuScore) ? String(message.baseBleuScore) : message.baseBleuScore;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslationEvaluationMetrics to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.TranslationEvaluationMetrics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslationEvaluationMetrics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslationEvaluationMetrics;
+                    })();
+    
+                    v1.TranslationModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a TranslationModelMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ITranslationModelMetadata
+                         * @property {string|null} [baseModel] TranslationModelMetadata baseModel
+                         * @property {string|null} [sourceLanguageCode] TranslationModelMetadata sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] TranslationModelMetadata targetLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new TranslationModelMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a TranslationModelMetadata.
+                         * @implements ITranslationModelMetadata
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ITranslationModelMetadata=} [properties] Properties to set
+                         */
+                        function TranslationModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslationModelMetadata baseModel.
+                         * @member {string} baseModel
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @instance
+                         */
+                        TranslationModelMetadata.prototype.baseModel = "";
+    
+                        /**
+                         * TranslationModelMetadata sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @instance
+                         */
+                        TranslationModelMetadata.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * TranslationModelMetadata targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @instance
+                         */
+                        TranslationModelMetadata.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * Creates a new TranslationModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.TranslationModelMetadata} TranslationModelMetadata instance
+                         */
+                        TranslationModelMetadata.create = function create(properties) {
+                            return new TranslationModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationModelMetadata message. Does not implicitly {@link google.cloud.automl.v1.TranslationModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationModelMetadata} message TranslationModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.baseModel != null && message.hasOwnProperty("baseModel"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.baseModel);
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetLanguageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationModelMetadata message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TranslationModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationModelMetadata} message TranslationModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslationModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.TranslationModelMetadata} TranslationModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.TranslationModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.baseModel = reader.string();
+                                    break;
+                                case 2:
+                                    message.sourceLanguageCode = reader.string();
+                                    break;
+                                case 3:
+                                    message.targetLanguageCode = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslationModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.TranslationModelMetadata} TranslationModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslationModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslationModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.baseModel != null && message.hasOwnProperty("baseModel"))
+                                if (!$util.isString(message.baseModel))
+                                    return "baseModel: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslationModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.TranslationModelMetadata} TranslationModelMetadata
+                         */
+                        TranslationModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.TranslationModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.TranslationModelMetadata();
+                            if (object.baseModel != null)
+                                message.baseModel = String(object.baseModel);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslationModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.TranslationModelMetadata} message TranslationModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslationModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.baseModel = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                            }
+                            if (message.baseModel != null && message.hasOwnProperty("baseModel"))
+                                object.baseModel = message.baseModel;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslationModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.TranslationModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslationModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslationModelMetadata;
+                    })();
+    
+                    v1.TranslationAnnotation = (function() {
+    
+                        /**
+                         * Properties of a TranslationAnnotation.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ITranslationAnnotation
+                         * @property {google.cloud.automl.v1.ITextSnippet|null} [translatedContent] TranslationAnnotation translatedContent
+                         */
+    
+                        /**
+                         * Constructs a new TranslationAnnotation.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a TranslationAnnotation.
+                         * @implements ITranslationAnnotation
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ITranslationAnnotation=} [properties] Properties to set
+                         */
+                        function TranslationAnnotation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslationAnnotation translatedContent.
+                         * @member {google.cloud.automl.v1.ITextSnippet|null|undefined} translatedContent
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @instance
+                         */
+                        TranslationAnnotation.prototype.translatedContent = null;
+    
+                        /**
+                         * Creates a new TranslationAnnotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationAnnotation=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.TranslationAnnotation} TranslationAnnotation instance
+                         */
+                        TranslationAnnotation.create = function create(properties) {
+                            return new TranslationAnnotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationAnnotation message. Does not implicitly {@link google.cloud.automl.v1.TranslationAnnotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationAnnotation} message TranslationAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationAnnotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.translatedContent != null && message.hasOwnProperty("translatedContent"))
+                                $root.google.cloud.automl.v1.TextSnippet.encode(message.translatedContent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslationAnnotation message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TranslationAnnotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {google.cloud.automl.v1.ITranslationAnnotation} message TranslationAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslationAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslationAnnotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.TranslationAnnotation} TranslationAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationAnnotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.TranslationAnnotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.translatedContent = $root.google.cloud.automl.v1.TextSnippet.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslationAnnotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.TranslationAnnotation} TranslationAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslationAnnotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslationAnnotation message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslationAnnotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.translatedContent != null && message.hasOwnProperty("translatedContent")) {
+                                var error = $root.google.cloud.automl.v1.TextSnippet.verify(message.translatedContent);
+                                if (error)
+                                    return "translatedContent." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslationAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.TranslationAnnotation} TranslationAnnotation
+                         */
+                        TranslationAnnotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.TranslationAnnotation)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.TranslationAnnotation();
+                            if (object.translatedContent != null) {
+                                if (typeof object.translatedContent !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.TranslationAnnotation.translatedContent: object expected");
+                                message.translatedContent = $root.google.cloud.automl.v1.TextSnippet.fromObject(object.translatedContent);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslationAnnotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @static
+                         * @param {google.cloud.automl.v1.TranslationAnnotation} message TranslationAnnotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslationAnnotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.translatedContent = null;
+                            if (message.translatedContent != null && message.hasOwnProperty("translatedContent"))
+                                object.translatedContent = $root.google.cloud.automl.v1.TextSnippet.toObject(message.translatedContent, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslationAnnotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.TranslationAnnotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslationAnnotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslationAnnotation;
+                    })();
+    
+                    v1.TextSnippet = (function() {
+    
+                        /**
+                         * Properties of a TextSnippet.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ITextSnippet
+                         * @property {string|null} [content] TextSnippet content
+                         * @property {string|null} [mimeType] TextSnippet mimeType
+                         * @property {string|null} [contentUri] TextSnippet contentUri
+                         */
+    
+                        /**
+                         * Constructs a new TextSnippet.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a TextSnippet.
+                         * @implements ITextSnippet
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ITextSnippet=} [properties] Properties to set
+                         */
+                        function TextSnippet(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TextSnippet content.
+                         * @member {string} content
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @instance
+                         */
+                        TextSnippet.prototype.content = "";
+    
+                        /**
+                         * TextSnippet mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @instance
+                         */
+                        TextSnippet.prototype.mimeType = "";
+    
+                        /**
+                         * TextSnippet contentUri.
+                         * @member {string} contentUri
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @instance
+                         */
+                        TextSnippet.prototype.contentUri = "";
+    
+                        /**
+                         * Creates a new TextSnippet instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {google.cloud.automl.v1.ITextSnippet=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.TextSnippet} TextSnippet instance
+                         */
+                        TextSnippet.create = function create(properties) {
+                            return new TextSnippet(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TextSnippet message. Does not implicitly {@link google.cloud.automl.v1.TextSnippet.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {google.cloud.automl.v1.ITextSnippet} message TextSnippet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TextSnippet.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                            if (message.contentUri != null && message.hasOwnProperty("contentUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.contentUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TextSnippet message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TextSnippet.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {google.cloud.automl.v1.ITextSnippet} message TextSnippet message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TextSnippet.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TextSnippet message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.TextSnippet} TextSnippet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TextSnippet.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.TextSnippet();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.content = reader.string();
+                                    break;
+                                case 2:
+                                    message.mimeType = reader.string();
+                                    break;
+                                case 4:
+                                    message.contentUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TextSnippet message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.TextSnippet} TextSnippet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TextSnippet.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TextSnippet message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TextSnippet.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!$util.isString(message.content))
+                                    return "content: string expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.contentUri != null && message.hasOwnProperty("contentUri"))
+                                if (!$util.isString(message.contentUri))
+                                    return "contentUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TextSnippet message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.TextSnippet} TextSnippet
+                         */
+                        TextSnippet.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.TextSnippet)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.TextSnippet();
+                            if (object.content != null)
+                                message.content = String(object.content);
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.contentUri != null)
+                                message.contentUri = String(object.contentUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TextSnippet message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @static
+                         * @param {google.cloud.automl.v1.TextSnippet} message TextSnippet
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TextSnippet.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.content = "";
+                                object.mimeType = "";
+                                object.contentUri = "";
+                            }
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = message.content;
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.contentUri != null && message.hasOwnProperty("contentUri"))
+                                object.contentUri = message.contentUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TextSnippet to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.TextSnippet
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TextSnippet.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TextSnippet;
+                    })();
+    
+                    v1.ExamplePayload = (function() {
+    
+                        /**
+                         * Properties of an ExamplePayload.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IExamplePayload
+                         * @property {google.cloud.automl.v1.ITextSnippet|null} [textSnippet] ExamplePayload textSnippet
+                         */
+    
+                        /**
+                         * Constructs a new ExamplePayload.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an ExamplePayload.
+                         * @implements IExamplePayload
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IExamplePayload=} [properties] Properties to set
+                         */
+                        function ExamplePayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExamplePayload textSnippet.
+                         * @member {google.cloud.automl.v1.ITextSnippet|null|undefined} textSnippet
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @instance
+                         */
+                        ExamplePayload.prototype.textSnippet = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExamplePayload payload.
+                         * @member {"textSnippet"|undefined} payload
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @instance
+                         */
+                        Object.defineProperty(ExamplePayload.prototype, "payload", {
+                            get: $util.oneOfGetter($oneOfFields = ["textSnippet"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExamplePayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IExamplePayload=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ExamplePayload} ExamplePayload instance
+                         */
+                        ExamplePayload.create = function create(properties) {
+                            return new ExamplePayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExamplePayload message. Does not implicitly {@link google.cloud.automl.v1.ExamplePayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IExamplePayload} message ExamplePayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExamplePayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.textSnippet != null && message.hasOwnProperty("textSnippet"))
+                                $root.google.cloud.automl.v1.TextSnippet.encode(message.textSnippet, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExamplePayload message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ExamplePayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {google.cloud.automl.v1.IExamplePayload} message ExamplePayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExamplePayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExamplePayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ExamplePayload} ExamplePayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExamplePayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ExamplePayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.textSnippet = $root.google.cloud.automl.v1.TextSnippet.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExamplePayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ExamplePayload} ExamplePayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExamplePayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExamplePayload message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExamplePayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.textSnippet != null && message.hasOwnProperty("textSnippet")) {
+                                properties.payload = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.TextSnippet.verify(message.textSnippet);
+                                    if (error)
+                                        return "textSnippet." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExamplePayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ExamplePayload} ExamplePayload
+                         */
+                        ExamplePayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ExamplePayload)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ExamplePayload();
+                            if (object.textSnippet != null) {
+                                if (typeof object.textSnippet !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.ExamplePayload.textSnippet: object expected");
+                                message.textSnippet = $root.google.cloud.automl.v1.TextSnippet.fromObject(object.textSnippet);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExamplePayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @static
+                         * @param {google.cloud.automl.v1.ExamplePayload} message ExamplePayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExamplePayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.textSnippet != null && message.hasOwnProperty("textSnippet")) {
+                                object.textSnippet = $root.google.cloud.automl.v1.TextSnippet.toObject(message.textSnippet, options);
+                                if (options.oneofs)
+                                    object.payload = "textSnippet";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExamplePayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ExamplePayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExamplePayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExamplePayload;
+                    })();
+    
+                    v1.InputConfig = (function() {
+    
+                        /**
+                         * Properties of an InputConfig.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IInputConfig
+                         * @property {google.cloud.automl.v1.IGcsSource|null} [gcsSource] InputConfig gcsSource
+                         * @property {Object.<string,string>|null} [params] InputConfig params
+                         */
+    
+                        /**
+                         * Constructs a new InputConfig.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an InputConfig.
+                         * @implements IInputConfig
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IInputConfig=} [properties] Properties to set
+                         */
+                        function InputConfig(properties) {
+                            this.params = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InputConfig gcsSource.
+                         * @member {google.cloud.automl.v1.IGcsSource|null|undefined} gcsSource
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @instance
+                         */
+                        InputConfig.prototype.gcsSource = null;
+    
+                        /**
+                         * InputConfig params.
+                         * @member {Object.<string,string>} params
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @instance
+                         */
+                        InputConfig.prototype.params = $util.emptyObject;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * InputConfig source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(InputConfig.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new InputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IInputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.InputConfig} InputConfig instance
+                         */
+                        InputConfig.create = function create(properties) {
+                            return new InputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InputConfig message. Does not implicitly {@link google.cloud.automl.v1.InputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IInputConfig} message InputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource"))
+                                $root.google.cloud.automl.v1.GcsSource.encode(message.gcsSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.params != null && message.hasOwnProperty("params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.params[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InputConfig message, length delimited. Does not implicitly {@link google.cloud.automl.v1.InputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IInputConfig} message InputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.InputConfig} InputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.InputConfig(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsSource = $root.google.cloud.automl.v1.GcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    reader.skip().pos++;
+                                    if (message.params === $util.emptyObject)
+                                        message.params = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.params[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.InputConfig} InputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.GcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.params[key[i]]))
+                                        return "params: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.InputConfig} InputConfig
+                         */
+                        InputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.InputConfig)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.InputConfig();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.InputConfig.gcsSource: object expected");
+                                message.gcsSource = $root.google.cloud.automl.v1.GcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.InputConfig.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i)
+                                    message.params[keys[i]] = String(object.params[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.InputConfig} message InputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.cloud.automl.v1.GcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = message.params[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.InputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return InputConfig;
+                    })();
+    
+                    v1.OutputConfig = (function() {
+    
+                        /**
+                         * Properties of an OutputConfig.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IOutputConfig
+                         * @property {google.cloud.automl.v1.IGcsDestination|null} [gcsDestination] OutputConfig gcsDestination
+                         */
+    
+                        /**
+                         * Constructs a new OutputConfig.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an OutputConfig.
+                         * @implements IOutputConfig
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IOutputConfig=} [properties] Properties to set
+                         */
+                        function OutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OutputConfig gcsDestination.
+                         * @member {google.cloud.automl.v1.IGcsDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @instance
+                         */
+                        OutputConfig.prototype.gcsDestination = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OutputConfig destination.
+                         * @member {"gcsDestination"|undefined} destination
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(OutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new OutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.OutputConfig} OutputConfig instance
+                         */
+                        OutputConfig.create = function create(properties) {
+                            return new OutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OutputConfig message. Does not implicitly {@link google.cloud.automl.v1.OutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IOutputConfig} message OutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination"))
+                                $root.google.cloud.automl.v1.GcsDestination.encode(message.gcsDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OutputConfig message, length delimited. Does not implicitly {@link google.cloud.automl.v1.OutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.IOutputConfig} message OutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.OutputConfig} OutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.OutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsDestination = $root.google.cloud.automl.v1.GcsDestination.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.OutputConfig} OutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.GcsDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.OutputConfig} OutputConfig
+                         */
+                        OutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.OutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.OutputConfig();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.OutputConfig.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.automl.v1.GcsDestination.fromObject(object.gcsDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @static
+                         * @param {google.cloud.automl.v1.OutputConfig} message OutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.automl.v1.GcsDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.OutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OutputConfig;
+                    })();
+    
+                    v1.GcsSource = (function() {
+    
+                        /**
+                         * Properties of a GcsSource.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IGcsSource
+                         * @property {Array.<string>|null} [inputUris] GcsSource inputUris
+                         */
+    
+                        /**
+                         * Constructs a new GcsSource.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a GcsSource.
+                         * @implements IGcsSource
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IGcsSource=} [properties] Properties to set
+                         */
+                        function GcsSource(properties) {
+                            this.inputUris = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsSource inputUris.
+                         * @member {Array.<string>} inputUris
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @instance
+                         */
+                        GcsSource.prototype.inputUris = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsSource=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.GcsSource} GcsSource instance
+                         */
+                        GcsSource.create = function create(properties) {
+                            return new GcsSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.automl.v1.GcsSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsSource} message GcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inputUris != null && message.inputUris.length)
+                                for (var i = 0; i < message.inputUris.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUris[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.automl.v1.GcsSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsSource} message GcsSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.GcsSource} GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.GcsSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.inputUris && message.inputUris.length))
+                                        message.inputUris = [];
+                                    message.inputUris.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.GcsSource} GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsSource message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inputUris != null && message.hasOwnProperty("inputUris")) {
+                                if (!Array.isArray(message.inputUris))
+                                    return "inputUris: array expected";
+                                for (var i = 0; i < message.inputUris.length; ++i)
+                                    if (!$util.isString(message.inputUris[i]))
+                                        return "inputUris: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.GcsSource} GcsSource
+                         */
+                        GcsSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.GcsSource)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.GcsSource();
+                            if (object.inputUris) {
+                                if (!Array.isArray(object.inputUris))
+                                    throw TypeError(".google.cloud.automl.v1.GcsSource.inputUris: array expected");
+                                message.inputUris = [];
+                                for (var i = 0; i < object.inputUris.length; ++i)
+                                    message.inputUris[i] = String(object.inputUris[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @static
+                         * @param {google.cloud.automl.v1.GcsSource} message GcsSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.inputUris = [];
+                            if (message.inputUris && message.inputUris.length) {
+                                object.inputUris = [];
+                                for (var j = 0; j < message.inputUris.length; ++j)
+                                    object.inputUris[j] = message.inputUris[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.GcsSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsSource;
+                    })();
+    
+                    v1.GcsDestination = (function() {
+    
+                        /**
+                         * Properties of a GcsDestination.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IGcsDestination
+                         * @property {string|null} [outputUriPrefix] GcsDestination outputUriPrefix
+                         */
+    
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a GcsDestination.
+                         * @implements IGcsDestination
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IGcsDestination=} [properties] Properties to set
+                         */
+                        function GcsDestination(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsDestination outputUriPrefix.
+                         * @member {string} outputUriPrefix
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @instance
+                         */
+                        GcsDestination.prototype.outputUriPrefix = "";
+    
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsDestination=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.GcsDestination} GcsDestination instance
+                         */
+                        GcsDestination.create = function create(properties) {
+                            return new GcsDestination(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.automl.v1.GcsDestination.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsDestination} message GcsDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDestination.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.outputUriPrefix != null && message.hasOwnProperty("outputUriPrefix"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.outputUriPrefix);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.automl.v1.GcsDestination.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {google.cloud.automl.v1.IGcsDestination} message GcsDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.GcsDestination} GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDestination.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.GcsDestination();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.outputUriPrefix = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.GcsDestination} GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsDestination.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsDestination.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.outputUriPrefix != null && message.hasOwnProperty("outputUriPrefix"))
+                                if (!$util.isString(message.outputUriPrefix))
+                                    return "outputUriPrefix: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.GcsDestination} GcsDestination
+                         */
+                        GcsDestination.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.GcsDestination)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.GcsDestination();
+                            if (object.outputUriPrefix != null)
+                                message.outputUriPrefix = String(object.outputUriPrefix);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @static
+                         * @param {google.cloud.automl.v1.GcsDestination} message GcsDestination
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsDestination.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.outputUriPrefix = "";
+                            if (message.outputUriPrefix != null && message.hasOwnProperty("outputUriPrefix"))
+                                object.outputUriPrefix = message.outputUriPrefix;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.GcsDestination
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsDestination.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsDestination;
+                    })();
+    
+                    v1.Dataset = (function() {
+    
+                        /**
+                         * Properties of a Dataset.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IDataset
+                         * @property {google.cloud.automl.v1.ITranslationDatasetMetadata|null} [translationDatasetMetadata] Dataset translationDatasetMetadata
+                         * @property {string|null} [name] Dataset name
+                         * @property {string|null} [displayName] Dataset displayName
+                         * @property {string|null} [description] Dataset description
+                         * @property {number|null} [exampleCount] Dataset exampleCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Dataset createTime
+                         * @property {string|null} [etag] Dataset etag
+                         * @property {Object.<string,string>|null} [labels] Dataset labels
+                         */
+    
+                        /**
+                         * Constructs a new Dataset.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a Dataset.
+                         * @implements IDataset
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IDataset=} [properties] Properties to set
+                         */
+                        function Dataset(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Dataset translationDatasetMetadata.
+                         * @member {google.cloud.automl.v1.ITranslationDatasetMetadata|null|undefined} translationDatasetMetadata
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.translationDatasetMetadata = null;
+    
+                        /**
+                         * Dataset name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.name = "";
+    
+                        /**
+                         * Dataset displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.displayName = "";
+    
+                        /**
+                         * Dataset description.
+                         * @member {string} description
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.description = "";
+    
+                        /**
+                         * Dataset exampleCount.
+                         * @member {number} exampleCount
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.exampleCount = 0;
+    
+                        /**
+                         * Dataset createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.createTime = null;
+    
+                        /**
+                         * Dataset etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.etag = "";
+    
+                        /**
+                         * Dataset labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.labels = $util.emptyObject;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Dataset datasetMetadata.
+                         * @member {"translationDatasetMetadata"|undefined} datasetMetadata
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         */
+                        Object.defineProperty(Dataset.prototype, "datasetMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["translationDatasetMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Dataset instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {google.cloud.automl.v1.IDataset=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.Dataset} Dataset instance
+                         */
+                        Dataset.create = function create(properties) {
+                            return new Dataset(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message. Does not implicitly {@link google.cloud.automl.v1.Dataset.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {google.cloud.automl.v1.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                writer.uint32(/* id 17, wireType 2 =*/138).string(message.etag);
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.exampleCount);
+                            if (message.translationDatasetMetadata != null && message.hasOwnProperty("translationDatasetMetadata"))
+                                $root.google.cloud.automl.v1.TranslationDatasetMetadata.encode(message.translationDatasetMetadata, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.labels != null && message.hasOwnProperty("labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 39, wireType 2 =*/314).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.cloud.automl.v1.Dataset.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {google.cloud.automl.v1.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.Dataset(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 23:
+                                    message.translationDatasetMetadata = $root.google.cloud.automl.v1.TranslationDatasetMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 21:
+                                    message.exampleCount = reader.int32();
+                                    break;
+                                case 14:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 17:
+                                    message.etag = reader.string();
+                                    break;
+                                case 39:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Dataset message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Dataset.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.translationDatasetMetadata != null && message.hasOwnProperty("translationDatasetMetadata")) {
+                                properties.datasetMetadata = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.TranslationDatasetMetadata.verify(message.translationDatasetMetadata);
+                                    if (error)
+                                        return "translationDatasetMetadata." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                if (!$util.isInteger(message.exampleCount))
+                                    return "exampleCount: integer expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.Dataset} Dataset
+                         */
+                        Dataset.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.Dataset)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.Dataset();
+                            if (object.translationDatasetMetadata != null) {
+                                if (typeof object.translationDatasetMetadata !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Dataset.translationDatasetMetadata: object expected");
+                                message.translationDatasetMetadata = $root.google.cloud.automl.v1.TranslationDatasetMetadata.fromObject(object.translationDatasetMetadata);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.exampleCount != null)
+                                message.exampleCount = object.exampleCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Dataset.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Dataset.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @static
+                         * @param {google.cloud.automl.v1.Dataset} message Dataset
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Dataset.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.createTime = null;
+                                object.etag = "";
+                                object.exampleCount = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                object.exampleCount = message.exampleCount;
+                            if (message.translationDatasetMetadata != null && message.hasOwnProperty("translationDatasetMetadata")) {
+                                object.translationDatasetMetadata = $root.google.cloud.automl.v1.TranslationDatasetMetadata.toObject(message.translationDatasetMetadata, options);
+                                if (options.oneofs)
+                                    object.datasetMetadata = "translationDatasetMetadata";
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Dataset to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.Dataset
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Dataset.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Dataset;
+                    })();
+    
+                    v1.Model = (function() {
+    
+                        /**
+                         * Properties of a Model.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IModel
+                         * @property {google.cloud.automl.v1.ITranslationModelMetadata|null} [translationModelMetadata] Model translationModelMetadata
+                         * @property {string|null} [name] Model name
+                         * @property {string|null} [displayName] Model displayName
+                         * @property {string|null} [datasetId] Model datasetId
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Model createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Model updateTime
+                         * @property {google.cloud.automl.v1.Model.DeploymentState|null} [deploymentState] Model deploymentState
+                         * @property {Object.<string,string>|null} [labels] Model labels
+                         */
+    
+                        /**
+                         * Constructs a new Model.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a Model.
+                         * @implements IModel
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IModel=} [properties] Properties to set
+                         */
+                        function Model(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Model translationModelMetadata.
+                         * @member {google.cloud.automl.v1.ITranslationModelMetadata|null|undefined} translationModelMetadata
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.translationModelMetadata = null;
+    
+                        /**
+                         * Model name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.name = "";
+    
+                        /**
+                         * Model displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.displayName = "";
+    
+                        /**
+                         * Model datasetId.
+                         * @member {string} datasetId
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.datasetId = "";
+    
+                        /**
+                         * Model createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.createTime = null;
+    
+                        /**
+                         * Model updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.updateTime = null;
+    
+                        /**
+                         * Model deploymentState.
+                         * @member {google.cloud.automl.v1.Model.DeploymentState} deploymentState
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.deploymentState = 0;
+    
+                        /**
+                         * Model labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.labels = $util.emptyObject;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Model modelMetadata.
+                         * @member {"translationModelMetadata"|undefined} modelMetadata
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         */
+                        Object.defineProperty(Model.prototype, "modelMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["translationModelMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Model instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {google.cloud.automl.v1.IModel=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.Model} Model instance
+                         */
+                        Model.create = function create(properties) {
+                            return new Model(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Model message. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {google.cloud.automl.v1.IModel} message Model message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Model.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.datasetId);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.deploymentState != null && message.hasOwnProperty("deploymentState"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.deploymentState);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.translationModelMetadata != null && message.hasOwnProperty("translationModelMetadata"))
+                                $root.google.cloud.automl.v1.TranslationModelMetadata.encode(message.translationModelMetadata, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.labels != null && message.hasOwnProperty("labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 34, wireType 2 =*/274).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {google.cloud.automl.v1.IModel} message Model message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Model.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Model message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.Model} Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Model.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.Model(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 15:
+                                    message.translationModelMetadata = $root.google.cloud.automl.v1.TranslationModelMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.datasetId = reader.string();
+                                    break;
+                                case 7:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.deploymentState = reader.int32();
+                                    break;
+                                case 34:
+                                    reader.skip().pos++;
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.labels[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Model message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.Model} Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Model.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Model message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Model.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.translationModelMetadata != null && message.hasOwnProperty("translationModelMetadata")) {
+                                properties.modelMetadata = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.TranslationModelMetadata.verify(message.translationModelMetadata);
+                                    if (error)
+                                        return "translationModelMetadata." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                if (!$util.isString(message.datasetId))
+                                    return "datasetId: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deploymentState != null && message.hasOwnProperty("deploymentState"))
+                                switch (message.deploymentState) {
+                                default:
+                                    return "deploymentState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.Model} Model
+                         */
+                        Model.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.Model)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.Model();
+                            if (object.translationModelMetadata != null) {
+                                if (typeof object.translationModelMetadata !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Model.translationModelMetadata: object expected");
+                                message.translationModelMetadata = $root.google.cloud.automl.v1.TranslationModelMetadata.fromObject(object.translationModelMetadata);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.datasetId != null)
+                                message.datasetId = String(object.datasetId);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Model.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Model.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            switch (object.deploymentState) {
+                            case "DEPLOYMENT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.deploymentState = 0;
+                                break;
+                            case "DEPLOYED":
+                            case 1:
+                                message.deploymentState = 1;
+                                break;
+                            case "UNDEPLOYED":
+                            case 2:
+                                message.deploymentState = 2;
+                                break;
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.Model.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Model message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.Model
+                         * @static
+                         * @param {google.cloud.automl.v1.Model} message Model
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Model.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.datasetId = "";
+                                object.createTime = null;
+                                object.deploymentState = options.enums === String ? "DEPLOYMENT_STATE_UNSPECIFIED" : 0;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.datasetId != null && message.hasOwnProperty("datasetId"))
+                                object.datasetId = message.datasetId;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.deploymentState != null && message.hasOwnProperty("deploymentState"))
+                                object.deploymentState = options.enums === String ? $root.google.cloud.automl.v1.Model.DeploymentState[message.deploymentState] : message.deploymentState;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.translationModelMetadata != null && message.hasOwnProperty("translationModelMetadata")) {
+                                object.translationModelMetadata = $root.google.cloud.automl.v1.TranslationModelMetadata.toObject(message.translationModelMetadata, options);
+                                if (options.oneofs)
+                                    object.modelMetadata = "translationModelMetadata";
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Model to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.Model
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Model.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * DeploymentState enum.
+                         * @name google.cloud.automl.v1.Model.DeploymentState
+                         * @enum {string}
+                         * @property {number} DEPLOYMENT_STATE_UNSPECIFIED=0 DEPLOYMENT_STATE_UNSPECIFIED value
+                         * @property {number} DEPLOYED=1 DEPLOYED value
+                         * @property {number} UNDEPLOYED=2 UNDEPLOYED value
+                         */
+                        Model.DeploymentState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEPLOYMENT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEPLOYED"] = 1;
+                            values[valuesById[2] = "UNDEPLOYED"] = 2;
+                            return values;
+                        })();
+    
+                        return Model;
+                    })();
+    
+                    v1.ModelEvaluation = (function() {
+    
+                        /**
+                         * Properties of a ModelEvaluation.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IModelEvaluation
+                         * @property {google.cloud.automl.v1.ITranslationEvaluationMetrics|null} [translationEvaluationMetrics] ModelEvaluation translationEvaluationMetrics
+                         * @property {string|null} [name] ModelEvaluation name
+                         * @property {string|null} [annotationSpecId] ModelEvaluation annotationSpecId
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ModelEvaluation createTime
+                         * @property {number|null} [evaluatedExampleCount] ModelEvaluation evaluatedExampleCount
+                         */
+    
+                        /**
+                         * Constructs a new ModelEvaluation.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a ModelEvaluation.
+                         * @implements IModelEvaluation
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IModelEvaluation=} [properties] Properties to set
+                         */
+                        function ModelEvaluation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModelEvaluation translationEvaluationMetrics.
+                         * @member {google.cloud.automl.v1.ITranslationEvaluationMetrics|null|undefined} translationEvaluationMetrics
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        ModelEvaluation.prototype.translationEvaluationMetrics = null;
+    
+                        /**
+                         * ModelEvaluation name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        ModelEvaluation.prototype.name = "";
+    
+                        /**
+                         * ModelEvaluation annotationSpecId.
+                         * @member {string} annotationSpecId
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        ModelEvaluation.prototype.annotationSpecId = "";
+    
+                        /**
+                         * ModelEvaluation createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        ModelEvaluation.prototype.createTime = null;
+    
+                        /**
+                         * ModelEvaluation evaluatedExampleCount.
+                         * @member {number} evaluatedExampleCount
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        ModelEvaluation.prototype.evaluatedExampleCount = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ModelEvaluation metrics.
+                         * @member {"translationEvaluationMetrics"|undefined} metrics
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         */
+                        Object.defineProperty(ModelEvaluation.prototype, "metrics", {
+                            get: $util.oneOfGetter($oneOfFields = ["translationEvaluationMetrics"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ModelEvaluation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {google.cloud.automl.v1.IModelEvaluation=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.ModelEvaluation} ModelEvaluation instance
+                         */
+                        ModelEvaluation.create = function create(properties) {
+                            return new ModelEvaluation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModelEvaluation message. Does not implicitly {@link google.cloud.automl.v1.ModelEvaluation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {google.cloud.automl.v1.IModelEvaluation} message ModelEvaluation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelEvaluation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.annotationSpecId != null && message.hasOwnProperty("annotationSpecId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.annotationSpecId);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.evaluatedExampleCount != null && message.hasOwnProperty("evaluatedExampleCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.evaluatedExampleCount);
+                            if (message.translationEvaluationMetrics != null && message.hasOwnProperty("translationEvaluationMetrics"))
+                                $root.google.cloud.automl.v1.TranslationEvaluationMetrics.encode(message.translationEvaluationMetrics, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModelEvaluation message, length delimited. Does not implicitly {@link google.cloud.automl.v1.ModelEvaluation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {google.cloud.automl.v1.IModelEvaluation} message ModelEvaluation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelEvaluation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModelEvaluation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.ModelEvaluation} ModelEvaluation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelEvaluation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.ModelEvaluation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 9:
+                                    message.translationEvaluationMetrics = $root.google.cloud.automl.v1.TranslationEvaluationMetrics.decode(reader, reader.uint32());
+                                    break;
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.annotationSpecId = reader.string();
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.evaluatedExampleCount = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModelEvaluation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.ModelEvaluation} ModelEvaluation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelEvaluation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModelEvaluation message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModelEvaluation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.translationEvaluationMetrics != null && message.hasOwnProperty("translationEvaluationMetrics")) {
+                                properties.metrics = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.TranslationEvaluationMetrics.verify(message.translationEvaluationMetrics);
+                                    if (error)
+                                        return "translationEvaluationMetrics." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.annotationSpecId != null && message.hasOwnProperty("annotationSpecId"))
+                                if (!$util.isString(message.annotationSpecId))
+                                    return "annotationSpecId: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.evaluatedExampleCount != null && message.hasOwnProperty("evaluatedExampleCount"))
+                                if (!$util.isInteger(message.evaluatedExampleCount))
+                                    return "evaluatedExampleCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModelEvaluation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.ModelEvaluation} ModelEvaluation
+                         */
+                        ModelEvaluation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.ModelEvaluation)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.ModelEvaluation();
+                            if (object.translationEvaluationMetrics != null) {
+                                if (typeof object.translationEvaluationMetrics !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.ModelEvaluation.translationEvaluationMetrics: object expected");
+                                message.translationEvaluationMetrics = $root.google.cloud.automl.v1.TranslationEvaluationMetrics.fromObject(object.translationEvaluationMetrics);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.annotationSpecId != null)
+                                message.annotationSpecId = String(object.annotationSpecId);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.ModelEvaluation.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.evaluatedExampleCount != null)
+                                message.evaluatedExampleCount = object.evaluatedExampleCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModelEvaluation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @static
+                         * @param {google.cloud.automl.v1.ModelEvaluation} message ModelEvaluation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModelEvaluation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.annotationSpecId = "";
+                                object.createTime = null;
+                                object.evaluatedExampleCount = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.annotationSpecId != null && message.hasOwnProperty("annotationSpecId"))
+                                object.annotationSpecId = message.annotationSpecId;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.evaluatedExampleCount != null && message.hasOwnProperty("evaluatedExampleCount"))
+                                object.evaluatedExampleCount = message.evaluatedExampleCount;
+                            if (message.translationEvaluationMetrics != null && message.hasOwnProperty("translationEvaluationMetrics")) {
+                                object.translationEvaluationMetrics = $root.google.cloud.automl.v1.TranslationEvaluationMetrics.toObject(message.translationEvaluationMetrics, options);
+                                if (options.oneofs)
+                                    object.metrics = "translationEvaluationMetrics";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModelEvaluation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.ModelEvaluation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModelEvaluation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ModelEvaluation;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IOperationMetadata
+                         * @property {google.cloud.automl.v1.IDeleteOperationMetadata|null} [deleteDetails] OperationMetadata deleteDetails
+                         * @property {google.cloud.automl.v1.ICreateModelOperationMetadata|null} [createModelDetails] OperationMetadata createModelDetails
+                         * @property {number|null} [progressPercent] OperationMetadata progressPercent
+                         * @property {Array.<google.rpc.IStatus>|null} [partialFailures] OperationMetadata partialFailures
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] OperationMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            this.partialFailures = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata deleteDetails.
+                         * @member {google.cloud.automl.v1.IDeleteOperationMetadata|null|undefined} deleteDetails
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.deleteDetails = null;
+    
+                        /**
+                         * OperationMetadata createModelDetails.
+                         * @member {google.cloud.automl.v1.ICreateModelOperationMetadata|null|undefined} createModelDetails
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createModelDetails = null;
+    
+                        /**
+                         * OperationMetadata progressPercent.
+                         * @member {number} progressPercent
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.progressPercent = 0;
+    
+                        /**
+                         * OperationMetadata partialFailures.
+                         * @member {Array.<google.rpc.IStatus>} partialFailures
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.partialFailures = $util.emptyArray;
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.updateTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OperationMetadata details.
+                         * @member {"deleteDetails"|"createModelDetails"|undefined} details
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(OperationMetadata.prototype, "details", {
+                            get: $util.oneOfGetter($oneOfFields = ["deleteDetails", "createModelDetails"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.automl.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.partialFailures != null && message.partialFailures.length)
+                                for (var i = 0; i < message.partialFailures.length; ++i)
+                                    $root.google.rpc.Status.encode(message.partialFailures[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.deleteDetails != null && message.hasOwnProperty("deleteDetails"))
+                                $root.google.cloud.automl.v1.DeleteOperationMetadata.encode(message.deleteDetails, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.createModelDetails != null && message.hasOwnProperty("createModelDetails"))
+                                $root.google.cloud.automl.v1.CreateModelOperationMetadata.encode(message.createModelDetails, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.progressPercent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.automl.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 8:
+                                    message.deleteDetails = $root.google.cloud.automl.v1.DeleteOperationMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.createModelDetails = $root.google.cloud.automl.v1.CreateModelOperationMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.progressPercent = reader.int32();
+                                    break;
+                                case 2:
+                                    if (!(message.partialFailures && message.partialFailures.length))
+                                        message.partialFailures = [];
+                                    message.partialFailures.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.deleteDetails != null && message.hasOwnProperty("deleteDetails")) {
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.DeleteOperationMetadata.verify(message.deleteDetails);
+                                    if (error)
+                                        return "deleteDetails." + error;
+                                }
+                            }
+                            if (message.createModelDetails != null && message.hasOwnProperty("createModelDetails")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.automl.v1.CreateModelOperationMetadata.verify(message.createModelDetails);
+                                    if (error)
+                                        return "createModelDetails." + error;
+                                }
+                            }
+                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
+                                if (!$util.isInteger(message.progressPercent))
+                                    return "progressPercent: integer expected";
+                            if (message.partialFailures != null && message.hasOwnProperty("partialFailures")) {
+                                if (!Array.isArray(message.partialFailures))
+                                    return "partialFailures: array expected";
+                                for (var i = 0; i < message.partialFailures.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.partialFailures[i]);
+                                    if (error)
+                                        return "partialFailures." + error;
+                                }
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.OperationMetadata();
+                            if (object.deleteDetails != null) {
+                                if (typeof object.deleteDetails !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.OperationMetadata.deleteDetails: object expected");
+                                message.deleteDetails = $root.google.cloud.automl.v1.DeleteOperationMetadata.fromObject(object.deleteDetails);
+                            }
+                            if (object.createModelDetails != null) {
+                                if (typeof object.createModelDetails !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.OperationMetadata.createModelDetails: object expected");
+                                message.createModelDetails = $root.google.cloud.automl.v1.CreateModelOperationMetadata.fromObject(object.createModelDetails);
+                            }
+                            if (object.progressPercent != null)
+                                message.progressPercent = object.progressPercent | 0;
+                            if (object.partialFailures) {
+                                if (!Array.isArray(object.partialFailures))
+                                    throw TypeError(".google.cloud.automl.v1.OperationMetadata.partialFailures: array expected");
+                                message.partialFailures = [];
+                                for (var i = 0; i < object.partialFailures.length; ++i) {
+                                    if (typeof object.partialFailures[i] !== "object")
+                                        throw TypeError(".google.cloud.automl.v1.OperationMetadata.partialFailures: object expected");
+                                    message.partialFailures[i] = $root.google.rpc.Status.fromObject(object.partialFailures[i]);
+                                }
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.OperationMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partialFailures = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.progressPercent = 0;
+                            }
+                            if (message.partialFailures && message.partialFailures.length) {
+                                object.partialFailures = [];
+                                for (var j = 0; j < message.partialFailures.length; ++j)
+                                    object.partialFailures[j] = $root.google.rpc.Status.toObject(message.partialFailures[j], options);
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteDetails != null && message.hasOwnProperty("deleteDetails")) {
+                                object.deleteDetails = $root.google.cloud.automl.v1.DeleteOperationMetadata.toObject(message.deleteDetails, options);
+                                if (options.oneofs)
+                                    object.details = "deleteDetails";
+                            }
+                            if (message.createModelDetails != null && message.hasOwnProperty("createModelDetails")) {
+                                object.createModelDetails = $root.google.cloud.automl.v1.CreateModelOperationMetadata.toObject(message.createModelDetails, options);
+                                if (options.oneofs)
+                                    object.details = "createModelDetails";
+                            }
+                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
+                                object.progressPercent = message.progressPercent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    v1.DeleteOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteOperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IDeleteOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new DeleteOperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a DeleteOperationMetadata.
+                         * @implements IDeleteOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IDeleteOperationMetadata=} [properties] Properties to set
+                         */
+                        function DeleteOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeleteOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.DeleteOperationMetadata} DeleteOperationMetadata instance
+                         */
+                        DeleteOperationMetadata.create = function create(properties) {
+                            return new DeleteOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteOperationMetadata message. Does not implicitly {@link google.cloud.automl.v1.DeleteOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteOperationMetadata} message DeleteOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.automl.v1.DeleteOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.IDeleteOperationMetadata} message DeleteOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.DeleteOperationMetadata} DeleteOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.DeleteOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.DeleteOperationMetadata} DeleteOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.DeleteOperationMetadata} DeleteOperationMetadata
+                         */
+                        DeleteOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.DeleteOperationMetadata)
+                                return object;
+                            return new $root.google.cloud.automl.v1.DeleteOperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.DeleteOperationMetadata} message DeleteOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteOperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeleteOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.DeleteOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteOperationMetadata;
+                    })();
+    
+                    v1.CreateModelOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateModelOperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @interface ICreateModelOperationMetadata
+                         */
+    
+                        /**
+                         * Constructs a new CreateModelOperationMetadata.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a CreateModelOperationMetadata.
+                         * @implements ICreateModelOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.automl.v1.ICreateModelOperationMetadata=} [properties] Properties to set
+                         */
+                        function CreateModelOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CreateModelOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.CreateModelOperationMetadata} CreateModelOperationMetadata instance
+                         */
+                        CreateModelOperationMetadata.create = function create(properties) {
+                            return new CreateModelOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelOperationMetadata message. Does not implicitly {@link google.cloud.automl.v1.CreateModelOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelOperationMetadata} message CreateModelOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.automl.v1.CreateModelOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.ICreateModelOperationMetadata} message CreateModelOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateModelOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.CreateModelOperationMetadata} CreateModelOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.CreateModelOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateModelOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.CreateModelOperationMetadata} CreateModelOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateModelOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateModelOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateModelOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.CreateModelOperationMetadata} CreateModelOperationMetadata
+                         */
+                        CreateModelOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.CreateModelOperationMetadata)
+                                return object;
+                            return new $root.google.cloud.automl.v1.CreateModelOperationMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateModelOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @static
+                         * @param {google.cloud.automl.v1.CreateModelOperationMetadata} message CreateModelOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateModelOperationMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CreateModelOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.CreateModelOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateModelOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateModelOperationMetadata;
+                    })();
+    
+                    v1.PredictionService = (function() {
+    
+                        /**
+                         * Constructs a new PredictionService service.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a PredictionService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function PredictionService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (PredictionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PredictionService;
+    
+                        /**
+                         * Creates new PredictionService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.PredictionService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {PredictionService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        PredictionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.automl.v1.PredictionService#predict}.
+                         * @memberof google.cloud.automl.v1.PredictionService
+                         * @typedef PredictCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.automl.v1.PredictResponse} [response] PredictResponse
+                         */
+    
+                        /**
+                         * Calls Predict.
+                         * @function predict
+                         * @memberof google.cloud.automl.v1.PredictionService
+                         * @instance
+                         * @param {google.cloud.automl.v1.IPredictRequest} request PredictRequest message or plain object
+                         * @param {google.cloud.automl.v1.PredictionService.PredictCallback} callback Node-style callback called with the error, if any, and PredictResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PredictionService.prototype.predict = function predict(request, callback) {
+                            return this.rpcCall(predict, $root.google.cloud.automl.v1.PredictRequest, $root.google.cloud.automl.v1.PredictResponse, request, callback);
+                        }, "name", { value: "Predict" });
+    
+                        /**
+                         * Calls Predict.
+                         * @function predict
+                         * @memberof google.cloud.automl.v1.PredictionService
+                         * @instance
+                         * @param {google.cloud.automl.v1.IPredictRequest} request PredictRequest message or plain object
+                         * @returns {Promise<google.cloud.automl.v1.PredictResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return PredictionService;
+                    })();
+    
+                    v1.PredictRequest = (function() {
+    
+                        /**
+                         * Properties of a PredictRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IPredictRequest
+                         * @property {string|null} [name] PredictRequest name
+                         * @property {google.cloud.automl.v1.IExamplePayload|null} [payload] PredictRequest payload
+                         * @property {Object.<string,string>|null} [params] PredictRequest params
+                         */
+    
+                        /**
+                         * Constructs a new PredictRequest.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a PredictRequest.
+                         * @implements IPredictRequest
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IPredictRequest=} [properties] Properties to set
+                         */
+                        function PredictRequest(properties) {
+                            this.params = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredictRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @instance
+                         */
+                        PredictRequest.prototype.name = "";
+    
+                        /**
+                         * PredictRequest payload.
+                         * @member {google.cloud.automl.v1.IExamplePayload|null|undefined} payload
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @instance
+                         */
+                        PredictRequest.prototype.payload = null;
+    
+                        /**
+                         * PredictRequest params.
+                         * @member {Object.<string,string>} params
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @instance
+                         */
+                        PredictRequest.prototype.params = $util.emptyObject;
+    
+                        /**
+                         * Creates a new PredictRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictRequest=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.PredictRequest} PredictRequest instance
+                         */
+                        PredictRequest.create = function create(properties) {
+                            return new PredictRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredictRequest message. Does not implicitly {@link google.cloud.automl.v1.PredictRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictRequest} message PredictRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                $root.google.cloud.automl.v1.ExamplePayload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.params != null && message.hasOwnProperty("params"))
+                                for (var keys = Object.keys(message.params), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.params[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredictRequest message, length delimited. Does not implicitly {@link google.cloud.automl.v1.PredictRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictRequest} message PredictRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredictRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.PredictRequest} PredictRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.PredictRequest(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.payload = $root.google.cloud.automl.v1.ExamplePayload.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.params === $util.emptyObject)
+                                        message.params = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.params[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredictRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.PredictRequest} PredictRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredictRequest message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredictRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.payload != null && message.hasOwnProperty("payload")) {
+                                var error = $root.google.cloud.automl.v1.ExamplePayload.verify(message.payload);
+                                if (error)
+                                    return "payload." + error;
+                            }
+                            if (message.params != null && message.hasOwnProperty("params")) {
+                                if (!$util.isObject(message.params))
+                                    return "params: object expected";
+                                var key = Object.keys(message.params);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.params[key[i]]))
+                                        return "params: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredictRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.PredictRequest} PredictRequest
+                         */
+                        PredictRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.PredictRequest)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.PredictRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.payload != null) {
+                                if (typeof object.payload !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.PredictRequest.payload: object expected");
+                                message.payload = $root.google.cloud.automl.v1.ExamplePayload.fromObject(object.payload);
+                            }
+                            if (object.params) {
+                                if (typeof object.params !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.PredictRequest.params: object expected");
+                                message.params = {};
+                                for (var keys = Object.keys(object.params), i = 0; i < keys.length; ++i)
+                                    message.params[keys[i]] = String(object.params[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredictRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @static
+                         * @param {google.cloud.automl.v1.PredictRequest} message PredictRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredictRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.params = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.payload = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.payload != null && message.hasOwnProperty("payload"))
+                                object.payload = $root.google.cloud.automl.v1.ExamplePayload.toObject(message.payload, options);
+                            var keys2;
+                            if (message.params && (keys2 = Object.keys(message.params)).length) {
+                                object.params = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.params[keys2[j]] = message.params[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredictRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.PredictRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredictRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PredictRequest;
+                    })();
+    
+                    v1.PredictResponse = (function() {
+    
+                        /**
+                         * Properties of a PredictResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @interface IPredictResponse
+                         * @property {Array.<google.cloud.automl.v1.IAnnotationPayload>|null} [payload] PredictResponse payload
+                         * @property {Object.<string,string>|null} [metadata] PredictResponse metadata
+                         */
+    
+                        /**
+                         * Constructs a new PredictResponse.
+                         * @memberof google.cloud.automl.v1
+                         * @classdesc Represents a PredictResponse.
+                         * @implements IPredictResponse
+                         * @constructor
+                         * @param {google.cloud.automl.v1.IPredictResponse=} [properties] Properties to set
+                         */
+                        function PredictResponse(properties) {
+                            this.payload = [];
+                            this.metadata = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PredictResponse payload.
+                         * @member {Array.<google.cloud.automl.v1.IAnnotationPayload>} payload
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @instance
+                         */
+                        PredictResponse.prototype.payload = $util.emptyArray;
+    
+                        /**
+                         * PredictResponse metadata.
+                         * @member {Object.<string,string>} metadata
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @instance
+                         */
+                        PredictResponse.prototype.metadata = $util.emptyObject;
+    
+                        /**
+                         * Creates a new PredictResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictResponse=} [properties] Properties to set
+                         * @returns {google.cloud.automl.v1.PredictResponse} PredictResponse instance
+                         */
+                        PredictResponse.create = function create(properties) {
+                            return new PredictResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PredictResponse message. Does not implicitly {@link google.cloud.automl.v1.PredictResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictResponse} message PredictResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.payload != null && message.payload.length)
+                                for (var i = 0; i < message.payload.length; ++i)
+                                    $root.google.cloud.automl.v1.AnnotationPayload.encode(message.payload[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PredictResponse message, length delimited. Does not implicitly {@link google.cloud.automl.v1.PredictResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.IPredictResponse} message PredictResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PredictResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PredictResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.automl.v1.PredictResponse} PredictResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.automl.v1.PredictResponse(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.payload && message.payload.length))
+                                        message.payload = [];
+                                    message.payload.push($root.google.cloud.automl.v1.AnnotationPayload.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    reader.skip().pos++;
+                                    if (message.metadata === $util.emptyObject)
+                                        message.metadata = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.metadata[key] = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PredictResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.automl.v1.PredictResponse} PredictResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PredictResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PredictResponse message.
+                         * @function verify
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PredictResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.payload != null && message.hasOwnProperty("payload")) {
+                                if (!Array.isArray(message.payload))
+                                    return "payload: array expected";
+                                for (var i = 0; i < message.payload.length; ++i) {
+                                    var error = $root.google.cloud.automl.v1.AnnotationPayload.verify(message.payload[i]);
+                                    if (error)
+                                        return "payload." + error;
+                                }
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                if (!$util.isObject(message.metadata))
+                                    return "metadata: object expected";
+                                var key = Object.keys(message.metadata);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.metadata[key[i]]))
+                                        return "metadata: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PredictResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.automl.v1.PredictResponse} PredictResponse
+                         */
+                        PredictResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.automl.v1.PredictResponse)
+                                return object;
+                            var message = new $root.google.cloud.automl.v1.PredictResponse();
+                            if (object.payload) {
+                                if (!Array.isArray(object.payload))
+                                    throw TypeError(".google.cloud.automl.v1.PredictResponse.payload: array expected");
+                                message.payload = [];
+                                for (var i = 0; i < object.payload.length; ++i) {
+                                    if (typeof object.payload[i] !== "object")
+                                        throw TypeError(".google.cloud.automl.v1.PredictResponse.payload: object expected");
+                                    message.payload[i] = $root.google.cloud.automl.v1.AnnotationPayload.fromObject(object.payload[i]);
+                                }
+                            }
+                            if (object.metadata) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.automl.v1.PredictResponse.metadata: object expected");
+                                message.metadata = {};
+                                for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
+                                    message.metadata[keys[i]] = String(object.metadata[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PredictResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @static
+                         * @param {google.cloud.automl.v1.PredictResponse} message PredictResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PredictResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.payload = [];
+                            if (options.objects || options.defaults)
+                                object.metadata = {};
+                            if (message.payload && message.payload.length) {
+                                object.payload = [];
+                                for (var j = 0; j < message.payload.length; ++j)
+                                    object.payload[j] = $root.google.cloud.automl.v1.AnnotationPayload.toObject(message.payload[j], options);
+                            }
+                            var keys2;
+                            if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
+                                object.metadata = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.metadata[keys2[j]] = message.metadata[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PredictResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.automl.v1.PredictResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PredictResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PredictResponse;
+                    })();
+    
+                    return v1;
+                })();
+    
                 automl.v1beta1 = (function() {
     
                     /**
@@ -41808,8 +50760,8 @@
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
-                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+                 * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
                 /**
@@ -41862,20 +50814,20 @@
                 MethodOptions.prototype[".google.api.http"] = null;
     
                 /**
-                 * MethodOptions .google.longrunning.operationInfo.
-                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
-                 * @memberof google.protobuf.MethodOptions
-                 * @instance
-                 */
-                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
-    
-                /**
                  * MethodOptions .google.api.methodSignature.
                  * @member {Array.<string>} .google.api.methodSignature
                  * @memberof google.protobuf.MethodOptions
                  * @instance
                  */
                 MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
+    
+                /**
+                 * MethodOptions .google.longrunning.operationInfo.
+                 * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
     
                 /**
                  * Creates a new MethodOptions instance using the specified properties.
@@ -41963,13 +50915,13 @@
                         case 72295728:
                             message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
                             break;
-                        case 1049:
-                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
-                            break;
                         case 1051:
                             if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                 message[".google.api.methodSignature"] = [];
                             message[".google.api.methodSignature"].push(reader.string());
+                            break;
+                        case 1049:
+                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -42032,17 +50984,17 @@
                         if (error)
                             return ".google.api.http." + error;
                     }
-                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
-                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
-                        if (error)
-                            return ".google.longrunning.operationInfo." + error;
-                    }
                     if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
                         if (!Array.isArray(message[".google.api.methodSignature"]))
                             return ".google.api.methodSignature: array expected";
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
+                    }
+                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        if (error)
+                            return ".google.longrunning.operationInfo." + error;
                     }
                     return null;
                 };
@@ -42090,17 +51042,17 @@
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
                     }
-                    if (object[".google.longrunning.operationInfo"] != null) {
-                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
-                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
-                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
-                    }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
                             throw TypeError(".google.protobuf.MethodOptions..google.api.methodSignature: array expected");
                         message[".google.api.methodSignature"] = [];
                         for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
                             message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
+                    }
+                    if (object[".google.longrunning.operationInfo"] != null) {
+                        if (typeof object[".google.longrunning.operationInfo"] !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
                     }
                     return message;
                 };
@@ -43805,6 +52757,225 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -44027,225 +53198,6 @@
                 };
     
                 return Duration;
-            })();
-    
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Any;
             })();
     
             protobuf.Struct = (function() {

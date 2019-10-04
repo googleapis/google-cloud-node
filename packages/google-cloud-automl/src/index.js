@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,59 +16,63 @@
  * @namespace google
  */
 /**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.longrunning
+ */
+/**
  * @namespace google.cloud
  */
 /**
  * @namespace google.cloud.automl
  */
 /**
+ * @namespace google.cloud.automl.v1
+ */
+/**
  * @namespace google.cloud.automl.v1beta1
- */
-/**
- * @namespace google.longrunning
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.rpc
  */
 
 'use strict';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
+  v1: require('./v1'),
   v1beta1: require('./v1beta1'),
 });
 
 /**
  * The `automl` package has the following named exports:
  *
- * - `PredictionServiceClient` - Reference to
- *   {@link v1beta1.PredictionServiceClient}
  * - `AutoMlClient` - Reference to
- *   {@link v1beta1.AutoMlClient}
- * - `v1beta1` - This is used for selecting or pinning a
+ *   {@link v1.AutoMlClient}
+ * - `PredictionServiceClient` - Reference to
+ *   {@link v1.PredictionServiceClient}
+ * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
- *     - `PredictionServiceClient` - Reference to
- *       {@link v1beta1.PredictionServiceClient}
  *     - `AutoMlClient` - Reference to
- *       {@link v1beta1.AutoMlClient}
+ *       {@link v1.AutoMlClient}
+ *     - `PredictionServiceClient` - Reference to
+ *       {@link v1.PredictionServiceClient}
  *
- * @module {object} @google-cloud/automl
+ * @module {object} automl
  * @alias nodejs-automl
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save automl
  *
  * @example <caption>Import the client library:</caption>
- * const automl = require('@google-cloud/automl');
+ * const automl = require('automl');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new automl.PredictionServiceClient();
+ * const client = new automl.AutoMlClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new automl.PredictionServiceClient({
+ * const client = new automl.AutoMlClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
@@ -76,21 +80,30 @@ const gapic = Object.freeze({
 
 /**
  * @type {object}
- * @property {constructor} PredictionServiceClient
- *   Reference to {@link v1beta1.PredictionServiceClient}
  * @property {constructor} AutoMlClient
- *   Reference to {@link v1beta1.AutoMlClient}
+ *   Reference to {@link v1.AutoMlClient}
+ * @property {constructor} PredictionServiceClient
+ *   Reference to {@link v1.PredictionServiceClient}
  */
 module.exports = gapic.v1beta1;
 
 /**
  * @type {object}
- * @property {constructor} PredictionServiceClient
- *   Reference to {@link v1beta1.PredictionServiceClient}
  * @property {constructor} AutoMlClient
- *   Reference to {@link v1beta1.AutoMlClient}
+ *   Reference to {@link v1.AutoMlClient}
+ * @property {constructor} PredictionServiceClient
+ *   Reference to {@link v1.PredictionServiceClient}
  */
 module.exports.v1beta1 = gapic.v1beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} AutoMlClient
+ *   Reference to {@link v1.AutoMlClient}
+ * @property {constructor} PredictionServiceClient
+ *   Reference to {@link v1.PredictionServiceClient}
+ */
+module.exports.v1 = gapic.v1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);

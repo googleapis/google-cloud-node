@@ -6,6 +6,706 @@
           "nested": {
             "automl": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1;automl",
+                    "csharp_namespace": "Google.Cloud.AutoML.V1",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "PredictionServiceProto",
+                    "java_package": "com.google.cloud.automl.v1",
+                    "php_namespace": "Google\\Cloud\\AutoML\\V1",
+                    "ruby_package": "Google::Cloud::AutoML::V1"
+                  },
+                  "nested": {
+                    "AutoMl": {
+                      "options": {
+                        "(google.api.default_host)": "automl.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateDataset": {
+                          "requestType": "CreateDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/datasets",
+                            "(google.api.http).body": "dataset"
+                          }
+                        },
+                        "GetDataset": {
+                          "requestType": "GetDatasetRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/datasets/*}"
+                          }
+                        },
+                        "ListDatasets": {
+                          "requestType": "ListDatasetsRequest",
+                          "responseType": "ListDatasetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/datasets"
+                          }
+                        },
+                        "UpdateDataset": {
+                          "requestType": "UpdateDatasetRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{dataset.name=projects/*/locations/*/datasets/*}",
+                            "(google.api.http).body": "dataset"
+                          }
+                        },
+                        "DeleteDataset": {
+                          "requestType": "DeleteDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/datasets/*}"
+                          }
+                        },
+                        "ImportData": {
+                          "requestType": "ImportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/datasets/*}:importData",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "ExportData": {
+                          "requestType": "ExportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/datasets/*}:exportData",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "CreateModel": {
+                          "requestType": "CreateModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/models",
+                            "(google.api.http).body": "model"
+                          }
+                        },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*}"
+                          }
+                        },
+                        "ListModels": {
+                          "requestType": "ListModelsRequest",
+                          "responseType": "ListModelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/models"
+                          }
+                        },
+                        "DeleteModel": {
+                          "requestType": "DeleteModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/models/*}"
+                          }
+                        },
+                        "UpdateModel": {
+                          "requestType": "UpdateModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{model.name=projects/*/locations/*/models/*}",
+                            "(google.api.http).body": "model"
+                          }
+                        },
+                        "GetModelEvaluation": {
+                          "requestType": "GetModelEvaluationRequest",
+                          "responseType": "ModelEvaluation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*/modelEvaluations/*}"
+                          }
+                        },
+                        "ListModelEvaluations": {
+                          "requestType": "ListModelEvaluationsRequest",
+                          "responseType": "ListModelEvaluationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/models/*}/modelEvaluations"
+                          }
+                        }
+                      }
+                    },
+                    "CreateDatasetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListDatasetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListDatasetsResponse": {
+                      "fields": {
+                        "datasets": {
+                          "rule": "repeated",
+                          "type": "Dataset",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateDatasetRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImportDataRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "inputConfig": {
+                          "type": "InputConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportDataRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateModelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "model": {
+                          "type": "Model",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListModelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListModelsResponse": {
+                      "fields": {
+                        "model": {
+                          "rule": "repeated",
+                          "type": "Model",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateModelRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "Model",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetModelEvaluationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListModelEvaluationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListModelEvaluationsResponse": {
+                      "fields": {
+                        "modelEvaluation": {
+                          "rule": "repeated",
+                          "type": "ModelEvaluation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AnnotationPayload": {
+                      "oneofs": {
+                        "detail": {
+                          "oneof": [
+                            "translation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translation": {
+                          "type": "TranslationAnnotation",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TranslationDatasetMetadata": {
+                      "fields": {
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TranslationEvaluationMetrics": {
+                      "fields": {
+                        "bleuScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "baseBleuScore": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TranslationModelMetadata": {
+                      "fields": {
+                        "baseModel": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TranslationAnnotation": {
+                      "fields": {
+                        "translatedContent": {
+                          "type": "TextSnippet",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextSnippet": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "contentUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ExamplePayload": {
+                      "oneofs": {
+                        "payload": {
+                          "oneof": [
+                            "textSnippet"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textSnippet": {
+                          "type": "TextSnippet",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "inputUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "outputUriPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Dataset": {
+                      "oneofs": {
+                        "datasetMetadata": {
+                          "oneof": [
+                            "translationDatasetMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationDatasetMetadata": {
+                          "type": "TranslationDatasetMetadata",
+                          "id": 23
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "exampleCount": {
+                          "type": "int32",
+                          "id": 21
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 39
+                        }
+                      }
+                    },
+                    "Model": {
+                      "oneofs": {
+                        "modelMetadata": {
+                          "oneof": [
+                            "translationModelMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationModelMetadata": {
+                          "type": "TranslationModelMetadata",
+                          "id": 15
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "datasetId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "deploymentState": {
+                          "type": "DeploymentState",
+                          "id": 8
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 34
+                        }
+                      },
+                      "nested": {
+                        "DeploymentState": {
+                          "values": {
+                            "DEPLOYMENT_STATE_UNSPECIFIED": 0,
+                            "DEPLOYED": 1,
+                            "UNDEPLOYED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ModelEvaluation": {
+                      "oneofs": {
+                        "metrics": {
+                          "oneof": [
+                            "translationEvaluationMetrics"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationEvaluationMetrics": {
+                          "type": "TranslationEvaluationMetrics",
+                          "id": 9
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotationSpecId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "evaluatedExampleCount": {
+                          "type": "int32",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "deleteDetails",
+                            "createModelDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "deleteDetails": {
+                          "type": "DeleteOperationMetadata",
+                          "id": 8
+                        },
+                        "createModelDetails": {
+                          "type": "CreateModelOperationMetadata",
+                          "id": 10
+                        },
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 13
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteOperationMetadata": {
+                      "fields": {}
+                    },
+                    "CreateModelOperationMetadata": {
+                      "fields": {}
+                    },
+                    "PredictionService": {
+                      "options": {
+                        "(google.api.default_host)": "automl.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Predict": {
+                          "requestType": "PredictRequest",
+                          "responseType": "PredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/models/*}:predict",
+                            "(google.api.http).body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "PredictRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "payload": {
+                          "type": "ExamplePayload",
+                          "id": 2
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PredictResponse": {
+                      "fields": {
+                        "payload": {
+                          "rule": "repeated",
+                          "type": "AnnotationPayload",
+                          "id": 1
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1beta1;automl",
@@ -3572,18 +4272,6 @@
                 }
               }
             },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -3592,6 +4280,18 @@
                 },
                 "value": {
                   "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
                   "id": 2
                 }
               }
