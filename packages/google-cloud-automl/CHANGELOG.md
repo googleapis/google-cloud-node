@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.6.0...v1.7.0) (2019-10-04)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([754467c](https://www.github.com/googleapis/nodejs-automl/commit/754467c))
+
+
+### Features
+
+* v1 API surface added ([#245](https://www.github.com/googleapis/nodejs-automl/issues/245)) ([dea9d08](https://www.github.com/googleapis/nodejs-automl/commit/dea9d08))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.5.0...v1.6.0) (2019-10-01)
 
 
