@@ -220,7 +220,7 @@ class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {number} [request.encodingType]
@@ -276,7 +276,7 @@ class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {number} [request.encodingType]
@@ -324,15 +324,13 @@ class LanguageServiceClient {
   }
 
   /**
-   * Finds entities, similar to
-   * AnalyzeEntities
-   * in the text and analyzes sentiment associated with each entity and its
-   * mentions.
+   * Finds entities, similar to AnalyzeEntities in the text and analyzes
+   * sentiment associated with each entity and its mentions.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {number} [request.encodingType]
@@ -391,7 +389,7 @@ class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {number} [request.encodingType]
@@ -444,7 +442,7 @@ class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {Object} [options]
@@ -494,11 +492,11 @@ class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.document
-   *   Input document.
+   *   Required. Input document.
    *
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1beta2.Document}
    * @param {Object} request.features
-   *   The enabled features.
+   *   Required. The enabled features.
    *
    *   This object should have the same structure as [Features]{@link google.cloud.language.v1beta2.Features}
    * @param {number} [request.encodingType]
