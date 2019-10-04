@@ -247,6 +247,7 @@ class AgentsClient {
       'exportAgent',
       'importAgent',
       'restoreAgent',
+      'getValidationResult',
     ];
     for (const methodName of agentsStubMethods) {
       const innerCallPromise = agentsStub.then(
@@ -868,20 +869,7 @@ class AgentsClient {
    *   The URI to a Google Cloud Storage file containing the agent to import.
    *   Note: The URI must start with "gs://".
    * @param {Buffer} [request.agentContent]
-   *   The agent to import.
-   *
-   *   Example for how to import an agent via the command line:
-   *   <pre>curl \
-   *     'https://dialogflow.googleapis.com/v2beta1/projects/&lt;project_name&gt;/agent:import\
-   *      -X POST \
-   *      -H 'Authorization: Bearer '$(gcloud auth application-default
-   *      print-access-token) \
-   *      -H 'Accept: application/json' \
-   *      -H 'Content-Type: application/json' \
-   *      --compressed \
-   *      --data-binary "{
-   *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-   *      }"</pre>
+   *   Zip compressed raw byte content for agent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -991,20 +979,7 @@ class AgentsClient {
    *   The URI to a Google Cloud Storage file containing the agent to restore.
    *   Note: The URI must start with "gs://".
    * @param {Buffer} [request.agentContent]
-   *   The agent to restore.
-   *
-   *   Example for how to restore an agent via the command line:
-   *   <pre>curl \
-   *     'https://dialogflow.googleapis.com/v2beta1/projects/&lt;project_name&gt;/agent:restore\
-   *      -X POST \
-   *      -H 'Authorization: Bearer '$(gcloud auth application-default
-   *      print-access-token) \
-   *      -H 'Accept: application/json' \
-   *      -H 'Content-Type: application/json' \
-   *      --compressed \
-   *      --data-binary "{
-   *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-   *      }"</pre>
+   *   Zip compressed raw byte content for agent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1094,6 +1069,68 @@ class AgentsClient {
     });
 
     return this._innerApiCalls.restoreAgent(request, options, callback);
+  }
+
+  /**
+   * Gets agent validation result. Agent validation is performed during
+   * training time and is updated automatically when training is completed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.parent]
+   *   Required. The project that the agent is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language for which you want a validation result. If not
+   *   specified, the agent's default language is used. [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ValidationResult]{@link google.cloud.dialogflow.v2beta1.ValidationResult}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ValidationResult]{@link google.cloud.dialogflow.v2beta1.ValidationResult}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dialogflow = require('dialogflow');
+   *
+   * const client = new dialogflow.v2beta1.AgentsClient({
+   *   // optional auth parameters.
+   * });
+   *
+   *
+   * client.getValidationResult({})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getValidationResult(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.getValidationResult(request, options, callback);
   }
 
   // --------------------

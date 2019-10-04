@@ -312,18 +312,7 @@ const ExportAgentRequest = {
  *   only if `agent_uri` is specified in `ExportAgentRequest`.
  *
  * @property {Buffer} agentContent
- *   The exported agent.
- *
- *   Example for how to export an agent to a zip file via a command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:export'\
- *     -X POST \
- *     -H 'Authorization: Bearer' \
- *     $(gcloud auth application-default print-access-token) \
- *     -H 'Accept: application/json'
- *     --compressed \
- *     | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".* /\1/' \
- *     | base64 --decode > &lt;agent zip file&gt;</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef ExportAgentResponse
  * @memberof google.cloud.dialogflow.v2
@@ -345,19 +334,7 @@ const ExportAgentResponse = {
  *   Note: The URI must start with "gs://".
  *
  * @property {Buffer} agentContent
- *   The agent to import.
- *
- *   Example for how to import an agent via the command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:import'\
- *      -X POST \
- *      -H 'Authorization: Bearer'\
- *      $(gcloud auth application-default print-access-token) \
- *      -H 'Accept: application/json' \
- *      -H 'Content-Type: application/json' \
- *      --data-binary "{
- *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
- *      }"</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef ImportAgentRequest
  * @memberof google.cloud.dialogflow.v2
@@ -379,19 +356,7 @@ const ImportAgentRequest = {
  *   Note: The URI must start with "gs://".
  *
  * @property {Buffer} agentContent
- *   The agent to restore.
- *
- *   Example for how to restore an agent via the command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:restore'\
- *      -X POST \
- *      -H 'Authorization: Bearer' \
- *      $(gcloud auth application-default print-access-token) \
- *      -H 'Accept: application/json' \
- *      -H 'Content-Type: application/json' \
- *      --data-binary "{
- *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
- *      }"</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef RestoreAgentRequest
  * @memberof google.cloud.dialogflow.v2

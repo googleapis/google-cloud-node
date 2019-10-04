@@ -2912,10 +2912,21 @@
                             "(google.api.http).additional_bindings.post": "/v2beta1/{parent=projects/*/locations/*}/agent:restore",
                             "(google.api.http).additional_bindings.body": "*"
                           }
+                        },
+                        "GetValidationResult": {
+                          "requestType": "GetValidationResultRequest",
+                          "responseType": "ValidationResult",
+                          "options": {
+                            "(google.api.http).get": "/v2beta1/{parent=projects/*}/agent/validationResult"
+                          }
                         }
                       }
                     },
                     "Agent": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Agent",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/agent"
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -3135,6 +3146,55 @@
                         "agentContent": {
                           "type": "bytes",
                           "id": 3
+                        }
+                      }
+                    },
+                    "GetValidationResultRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ValidationError": {
+                      "fields": {
+                        "severity": {
+                          "type": "Severity",
+                          "id": 1
+                        },
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "INFO": 1,
+                            "WARNING": 2,
+                            "ERROR": 3,
+                            "CRITICAL": 4
+                          }
+                        }
+                      }
+                    },
+                    "ValidationResult": {
+                      "fields": {
+                        "validationErrors": {
+                          "rule": "repeated",
+                          "type": "ValidationError",
+                          "id": 1
                         }
                       }
                     },
@@ -3495,8 +3555,27 @@
                       }
                     },
                     "ReloadDocumentRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "uri": {
                           "type": "string",
                           "id": 1
                         }
@@ -3626,6 +3705,10 @@
                           "rule": "repeated",
                           "type": "Entity",
                           "id": 6
+                        },
+                        "enableFuzzyExtraction": {
+                          "type": "bool",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -3646,7 +3729,8 @@
                           "values": {
                             "KIND_UNSPECIFIED": 0,
                             "KIND_MAP": 1,
-                            "KIND_LIST": 2
+                            "KIND_LIST": 2,
+                            "KIND_REGEXP": 3
                           }
                         },
                         "AutoExpansionMode": {
@@ -3933,6 +4017,10 @@
                       }
                     },
                     "Intent": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Intent",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/agent/intents/{intent}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -4134,7 +4222,10 @@
                                 "telephonyTransferCall",
                                 "rbmText",
                                 "rbmStandaloneRichCard",
-                                "rbmCarouselRichCard"
+                                "rbmCarouselRichCard",
+                                "browseCarouselCard",
+                                "tableCard",
+                                "mediaContent"
                               ]
                             }
                           },
@@ -4206,6 +4297,18 @@
                             "rbmCarouselRichCard": {
                               "type": "RbmCarouselCard",
                               "id": 20
+                            },
+                            "browseCarouselCard": {
+                              "type": "BrowseCarouselCard",
+                              "id": 22
+                            },
+                            "tableCard": {
+                              "type": "TableCard",
+                              "id": 23
+                            },
+                            "mediaContent": {
+                              "type": "MediaContent",
+                              "id": 24
                             },
                             "platform": {
                               "type": "Platform",
@@ -4699,6 +4802,204 @@
                                 },
                                 "RbmSuggestedActionShareLocation": {
                                   "fields": {}
+                                }
+                              }
+                            },
+                            "MediaContent": {
+                              "fields": {
+                                "mediaType": {
+                                  "type": "ResponseMediaType",
+                                  "id": 1
+                                },
+                                "mediaObjects": {
+                                  "rule": "repeated",
+                                  "type": "ResponseMediaObject",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ResponseMediaObject": {
+                                  "oneofs": {
+                                    "image": {
+                                      "oneof": [
+                                        "largeImage",
+                                        "icon"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "largeImage": {
+                                      "type": "Image",
+                                      "id": 3
+                                    },
+                                    "icon": {
+                                      "type": "Image",
+                                      "id": 4
+                                    },
+                                    "contentUrl": {
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  }
+                                },
+                                "ResponseMediaType": {
+                                  "values": {
+                                    "RESPONSE_MEDIA_TYPE_UNSPECIFIED": 0,
+                                    "AUDIO": 1
+                                  }
+                                }
+                              }
+                            },
+                            "BrowseCarouselCard": {
+                              "fields": {
+                                "items": {
+                                  "rule": "repeated",
+                                  "type": "BrowseCarouselCardItem",
+                                  "id": 1
+                                },
+                                "imageDisplayOptions": {
+                                  "type": "ImageDisplayOptions",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "BrowseCarouselCardItem": {
+                                  "fields": {
+                                    "openUriAction": {
+                                      "type": "OpenUrlAction",
+                                      "id": 1
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "image": {
+                                      "type": "Image",
+                                      "id": 4
+                                    },
+                                    "footer": {
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  },
+                                  "nested": {
+                                    "OpenUrlAction": {
+                                      "fields": {
+                                        "url": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "urlTypeHint": {
+                                          "type": "UrlTypeHint",
+                                          "id": 3
+                                        }
+                                      },
+                                      "nested": {
+                                        "UrlTypeHint": {
+                                          "values": {
+                                            "URL_TYPE_HINT_UNSPECIFIED": 0,
+                                            "AMP_ACTION": 1,
+                                            "AMP_CONTENT": 2
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "ImageDisplayOptions": {
+                                  "values": {
+                                    "IMAGE_DISPLAY_OPTIONS_UNSPECIFIED": 0,
+                                    "GRAY": 1,
+                                    "WHITE": 2,
+                                    "CROPPED": 3,
+                                    "BLURRED_BACKGROUND": 4
+                                  }
+                                }
+                              }
+                            },
+                            "TableCard": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "subtitle": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "image": {
+                                  "type": "Image",
+                                  "id": 3
+                                },
+                                "columnProperties": {
+                                  "rule": "repeated",
+                                  "type": "ColumnProperties",
+                                  "id": 4
+                                },
+                                "rows": {
+                                  "rule": "repeated",
+                                  "type": "TableCardRow",
+                                  "id": 5
+                                },
+                                "buttons": {
+                                  "rule": "repeated",
+                                  "type": "BasicCard.Button",
+                                  "id": 6
+                                }
+                              }
+                            },
+                            "ColumnProperties": {
+                              "fields": {
+                                "header": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "horizontalAlignment": {
+                                  "type": "HorizontalAlignment",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "HorizontalAlignment": {
+                                  "values": {
+                                    "HORIZONTAL_ALIGNMENT_UNSPECIFIED": 0,
+                                    "LEADING": 1,
+                                    "CENTER": 2,
+                                    "TRAILING": 3
+                                  }
+                                }
+                              }
+                            },
+                            "TableCardRow": {
+                              "fields": {
+                                "cells": {
+                                  "rule": "repeated",
+                                  "type": "TableCardCell",
+                                  "id": 1
+                                },
+                                "dividerAfter": {
+                                  "type": "bool",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "TableCardCell": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1
                                 }
                               }
                             },
@@ -5390,7 +5691,10 @@
                       "fields": {
                         "session": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
+                          }
                         },
                         "queryParams": {
                           "type": "QueryParameters",
@@ -5586,7 +5890,10 @@
                           "fields": {
                             "source": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Document"
+                              }
                             },
                             "faqQuestion": {
                               "type": "string",

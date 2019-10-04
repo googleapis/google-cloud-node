@@ -269,6 +269,11 @@ const KnowledgeOperationMetadata = {
  *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
  *   ID>/documents/<Document ID>`
  *
+ * @property {Object} gcsSource
+ *   The path of gcs source file for reloading document content.
+ *
+ *   This object should have the same structure as [GcsSource]{@link google.cloud.dialogflow.v2beta1.GcsSource}
+ *
  * @typedef ReloadDocumentRequest
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ReloadDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}

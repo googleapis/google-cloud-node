@@ -313,20 +313,7 @@ const ExportAgentRequest = {
  *   only if `agent_uri` is specified in `ExportAgentRequest`.
  *
  * @property {Buffer} agentContent
- *   The exported agent.
- *
- *   Example for how to export an agent to a zip file via a command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2beta1/projects/&lt;project_name&gt;/agent:export'\
- *     -X POST \
- *     -H 'Authorization: Bearer '$(gcloud auth application-default
- *     print-access-token) \
- *     -H 'Accept: application/json' \
- *     -H 'Content-Type: application/json' \
- *     --compressed \
- *     --data-binary '{}' \
- *   | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".* /\1/' \
- *   | base64 --decode > &lt;agent zip file&gt;</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef ExportAgentResponse
  * @memberof google.cloud.dialogflow.v2beta1
@@ -348,20 +335,7 @@ const ExportAgentResponse = {
  *   Note: The URI must start with "gs://".
  *
  * @property {Buffer} agentContent
- *   The agent to import.
- *
- *   Example for how to import an agent via the command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2beta1/projects/&lt;project_name&gt;/agent:import\
- *      -X POST \
- *      -H 'Authorization: Bearer '$(gcloud auth application-default
- *      print-access-token) \
- *      -H 'Accept: application/json' \
- *      -H 'Content-Type: application/json' \
- *      --compressed \
- *      --data-binary "{
- *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
- *      }"</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef ImportAgentRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -383,25 +357,34 @@ const ImportAgentRequest = {
  *   Note: The URI must start with "gs://".
  *
  * @property {Buffer} agentContent
- *   The agent to restore.
- *
- *   Example for how to restore an agent via the command line:
- *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2beta1/projects/&lt;project_name&gt;/agent:restore\
- *      -X POST \
- *      -H 'Authorization: Bearer '$(gcloud auth application-default
- *      print-access-token) \
- *      -H 'Accept: application/json' \
- *      -H 'Content-Type: application/json' \
- *      --compressed \
- *      --data-binary "{
- *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
- *      }"</pre>
+ *   Zip compressed raw byte content for agent.
  *
  * @typedef RestoreAgentRequest
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.RestoreAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/agent.proto}
  */
 const RestoreAgentRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The request message for Agents.GetValidationResult.
+ *
+ * @property {string} parent
+ *   Required. The project that the agent is associated with.
+ *   Format: `projects/<Project ID>`.
+ *
+ * @property {string} languageCode
+ *   Optional. The language for which you want a validation result. If not
+ *   specified, the agent's default language is used. [Many
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
+ *
+ * @typedef GetValidationResultRequest
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.GetValidationResultRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/agent.proto}
+ */
+const GetValidationResultRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

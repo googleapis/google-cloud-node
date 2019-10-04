@@ -394,6 +394,21 @@ const Intent = {
    *
    *   This object should have the same structure as [RbmCarouselCard]{@link google.cloud.dialogflow.v2beta1.RbmCarouselCard}
    *
+   * @property {Object} browseCarouselCard
+   *   Browse carousel card for Actions on Google.
+   *
+   *   This object should have the same structure as [BrowseCarouselCard]{@link google.cloud.dialogflow.v2beta1.BrowseCarouselCard}
+   *
+   * @property {Object} tableCard
+   *   Table card for Actions on Google.
+   *
+   *   This object should have the same structure as [TableCard]{@link google.cloud.dialogflow.v2beta1.TableCard}
+   *
+   * @property {Object} mediaContent
+   *   The media content card for Actions on Google.
+   *
+   *   This object should have the same structure as [MediaContent]{@link google.cloud.dialogflow.v2beta1.MediaContent}
+   *
    * @property {number} platform
    *   Optional. The platform that this message is intended for.
    *
@@ -1218,6 +1233,340 @@ const Intent = {
       RbmSuggestedActionShareLocation: {
         // This is for documentation. Actual contents will be loaded by gRPC.
       }
+    },
+
+    /**
+     * The media content card for Actions on Google.
+     *
+     * @property {number} mediaType
+     *   Optional. What type of media is the content (ie "audio").
+     *
+     *   The number should be among the values of [ResponseMediaType]{@link google.cloud.dialogflow.v2beta1.ResponseMediaType}
+     *
+     * @property {Object[]} mediaObjects
+     *   Required. List of media objects.
+     *
+     *   This object should have the same structure as [ResponseMediaObject]{@link google.cloud.dialogflow.v2beta1.ResponseMediaObject}
+     *
+     * @typedef MediaContent
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    MediaContent: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Response media object for media content card.
+       *
+       * @property {string} name
+       *   Required. Name of media card.
+       *
+       * @property {string} description
+       *   Optional. Description of media card.
+       *
+       * @property {Object} largeImage
+       *   Optional. Image to display above media content.
+       *
+       *   This object should have the same structure as [Image]{@link google.cloud.dialogflow.v2beta1.Image}
+       *
+       * @property {Object} icon
+       *   Optional. Icon to display above media content.
+       *
+       *   This object should have the same structure as [Image]{@link google.cloud.dialogflow.v2beta1.Image}
+       *
+       * @property {string} contentUrl
+       *   Required. Url where the media is stored.
+       *
+       * @typedef ResponseMediaObject
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaObject definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      ResponseMediaObject: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+      },
+
+      /**
+       * Format of response media type.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      ResponseMediaType: {
+
+        /**
+         * Unspecified.
+         */
+        RESPONSE_MEDIA_TYPE_UNSPECIFIED: 0,
+
+        /**
+         * Response media type is audio.
+         */
+        AUDIO: 1
+      }
+    },
+
+    /**
+     * Browse Carousel Card for Actions on Google.
+     * https://developers.google.com/actions/assistant/responses#browsing_carousel
+     *
+     * @property {Object[]} items
+     *   Required. List of items in the Browse Carousel Card. Minimum of two
+     *   items, maximum of ten.
+     *
+     *   This object should have the same structure as [BrowseCarouselCardItem]{@link google.cloud.dialogflow.v2beta1.BrowseCarouselCardItem}
+     *
+     * @property {number} imageDisplayOptions
+     *   Optional. Settings for displaying the image. Applies to every image in
+     *   items.
+     *
+     *   The number should be among the values of [ImageDisplayOptions]{@link google.cloud.dialogflow.v2beta1.ImageDisplayOptions}
+     *
+     * @typedef BrowseCarouselCard
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    BrowseCarouselCard: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Browsing carousel tile
+       *
+       * @property {Object} openUriAction
+       *   Required. Action to present to the user.
+       *
+       *   This object should have the same structure as [OpenUrlAction]{@link google.cloud.dialogflow.v2beta1.OpenUrlAction}
+       *
+       * @property {string} title
+       *   Required. Title of the carousel item. Maximum of two lines of text.
+       *
+       * @property {string} description
+       *   Optional. Description of the carousel item. Maximum of four lines of
+       *   text.
+       *
+       * @property {Object} image
+       *   Optional. Hero image for the carousel item.
+       *
+       *   This object should have the same structure as [Image]{@link google.cloud.dialogflow.v2beta1.Image}
+       *
+       * @property {string} footer
+       *   Optional. Text that appears at the bottom of the Browse Carousel
+       *   Card. Maximum of one line of text.
+       *
+       * @typedef BrowseCarouselCardItem
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      BrowseCarouselCardItem: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+
+        /**
+         * Actions on Google action to open a given url.
+         *
+         * @property {string} url
+         *   Required. URL
+         *
+         * @property {number} urlTypeHint
+         *   Optional. Specifies the type of viewer that is used when opening
+         *   the URL. Defaults to opening via web browser.
+         *
+         *   The number should be among the values of [UrlTypeHint]{@link google.cloud.dialogflow.v2beta1.UrlTypeHint}
+         *
+         * @typedef OpenUrlAction
+         * @memberof google.cloud.dialogflow.v2beta1
+         * @see [google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+         */
+        OpenUrlAction: {
+          // This is for documentation. Actual contents will be loaded by gRPC.
+
+          /**
+           * Type of the URI.
+           *
+           * @enum {number}
+           * @memberof google.cloud.dialogflow.v2beta1
+           */
+          UrlTypeHint: {
+
+            /**
+             * Unspecified
+             */
+            URL_TYPE_HINT_UNSPECIFIED: 0,
+
+            /**
+             * Url would be an amp action
+             */
+            AMP_ACTION: 1,
+
+            /**
+             * URL that points directly to AMP content, or to a canonical URL
+             * which refers to AMP content via <link rel="amphtml">.
+             */
+            AMP_CONTENT: 2
+          }
+        }
+      },
+
+      /**
+       * Image display options for Actions on Google. This should be used for
+       * when the image's aspect ratio does not match the image container's
+       * aspect ratio.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      ImageDisplayOptions: {
+
+        /**
+         * Fill the gaps between the image and the image container with gray
+         * bars.
+         */
+        IMAGE_DISPLAY_OPTIONS_UNSPECIFIED: 0,
+
+        /**
+         * Fill the gaps between the image and the image container with gray
+         * bars.
+         */
+        GRAY: 1,
+
+        /**
+         * Fill the gaps between the image and the image container with white
+         * bars.
+         */
+        WHITE: 2,
+
+        /**
+         * Image is scaled such that the image width and height match or exceed
+         * the container dimensions. This may crop the top and bottom of the
+         * image if the scaled image height is greater than the container
+         * height, or crop the left and right of the image if the scaled image
+         * width is greater than the container width. This is similar to "Zoom
+         * Mode" on a widescreen TV when playing a 4:3 video.
+         */
+        CROPPED: 3,
+
+        /**
+         * Pad the gaps between image and image frame with a blurred copy of the
+         * same image.
+         */
+        BLURRED_BACKGROUND: 4
+      }
+    },
+
+    /**
+     * Table card for Actions on Google.
+     *
+     * @property {string} title
+     *   Required. Title of the card.
+     *
+     * @property {string} subtitle
+     *   Optional. Subtitle to the title.
+     *
+     * @property {Object} image
+     *   Optional. Image which should be displayed on the card.
+     *
+     *   This object should have the same structure as [Image]{@link google.cloud.dialogflow.v2beta1.Image}
+     *
+     * @property {Object[]} columnProperties
+     *   Optional. Display properties for the columns in this table.
+     *
+     *   This object should have the same structure as [ColumnProperties]{@link google.cloud.dialogflow.v2beta1.ColumnProperties}
+     *
+     * @property {Object[]} rows
+     *   Optional. Rows in this table of data.
+     *
+     *   This object should have the same structure as [TableCardRow]{@link google.cloud.dialogflow.v2beta1.TableCardRow}
+     *
+     * @property {Object[]} buttons
+     *   Optional. List of buttons for the card.
+     *
+     *   This object should have the same structure as [Button]{@link google.cloud.dialogflow.v2beta1.Button}
+     *
+     * @typedef TableCard
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TableCard definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TableCard: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Column properties for TableCard.
+     *
+     * @property {string} header
+     *   Required. Column heading.
+     *
+     * @property {number} horizontalAlignment
+     *   Optional. Defines text alignment for all cells in this column.
+     *
+     *   The number should be among the values of [HorizontalAlignment]{@link google.cloud.dialogflow.v2beta1.HorizontalAlignment}
+     *
+     * @typedef ColumnProperties
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    ColumnProperties: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Text alignments within a cell.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      HorizontalAlignment: {
+
+        /**
+         * Text is aligned to the leading edge of the column.
+         */
+        HORIZONTAL_ALIGNMENT_UNSPECIFIED: 0,
+
+        /**
+         * Text is aligned to the leading edge of the column.
+         */
+        LEADING: 1,
+
+        /**
+         * Text is centered in the column.
+         */
+        CENTER: 2,
+
+        /**
+         * Text is aligned to the trailing edge of the column.
+         */
+        TRAILING: 3
+      }
+    },
+
+    /**
+     * Row of TableCard.
+     *
+     * @property {Object[]} cells
+     *   Optional. List of cells that make up this row.
+     *
+     *   This object should have the same structure as [TableCardCell]{@link google.cloud.dialogflow.v2beta1.TableCardCell}
+     *
+     * @property {boolean} dividerAfter
+     *   Optional. Whether to add a visual divider after this row.
+     *
+     * @typedef TableCardRow
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TableCardRow definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TableCardRow: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Cell of TableCardRow.
+     *
+     * @property {string} text
+     *   Required. Text in this cell.
+     *
+     * @typedef TableCardCell
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.TableCardCell definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    TableCardCell: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
     },
 
     /**

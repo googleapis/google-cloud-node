@@ -870,6 +870,10 @@ class DocumentsClient {
    *   The name of the document to reload.
    *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
    *   ID>/documents/<Document ID>`
+   * @param {Object} [request.gcsSource]
+   *   The path of gcs source file for reloading document content.
+   *
+   *   This object should have the same structure as [GcsSource]{@link google.cloud.dialogflow.v2beta1.GcsSource}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

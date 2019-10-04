@@ -864,19 +864,7 @@ class AgentsClient {
    *   The URI to a Google Cloud Storage file containing the agent to import.
    *   Note: The URI must start with "gs://".
    * @param {Buffer} [request.agentContent]
-   *   The agent to import.
-   *
-   *   Example for how to import an agent via the command line:
-   *   <pre>curl \
-   *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:import'\
-   *      -X POST \
-   *      -H 'Authorization: Bearer'\
-   *      $(gcloud auth application-default print-access-token) \
-   *      -H 'Accept: application/json' \
-   *      -H 'Content-Type: application/json' \
-   *      --data-binary "{
-   *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-   *      }"</pre>
+   *   Zip compressed raw byte content for agent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -985,19 +973,7 @@ class AgentsClient {
    *   The URI to a Google Cloud Storage file containing the agent to restore.
    *   Note: The URI must start with "gs://".
    * @param {Buffer} [request.agentContent]
-   *   The agent to restore.
-   *
-   *   Example for how to restore an agent via the command line:
-   *   <pre>curl \
-   *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:restore'\
-   *      -X POST \
-   *      -H 'Authorization: Bearer' \
-   *      $(gcloud auth application-default print-access-token) \
-   *      -H 'Accept: application/json' \
-   *      -H 'Content-Type: application/json' \
-   *      --data-binary "{
-   *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
-   *      }"</pre>
+   *   Zip compressed raw byte content for agent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

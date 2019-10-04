@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-09-14T11:14:12.015448Z",
+  "updateTime": "2019-10-04T11:11:47.960975Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.36.2",
-        "dockerImage": "googleapis/artman@sha256:0e6f3a668cd68afc768ecbe08817cf6e56a0e64fcbdb1c58c3b97492d12418a1"
+        "version": "0.38.0",
+        "dockerImage": "googleapis/artman@sha256:0d2f8d429110aeb8d82df6550ef4ede59d40df9062d260a1580fce688b0512bf"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6b2ba2ae3124c22ecb56af7102c78110b8576671",
-        "internalRef": "268974829"
+        "sha": "d9576d95b44f64fb0e3da4760adfc4a24fa1faab",
+        "internalRef": "272741510"
       }
     },
     {
@@ -32,7 +32,7 @@
         "apiVersion": "v2",
         "language": "nodejs",
         "generator": "gapic",
-        "config": "google/cloud/dialogflow/artman_dialogflow_v2.yaml"
+        "config": "google/cloud/dialogflow/v2/artman_dialogflow_v2.yaml"
       }
     },
     {
@@ -42,7 +42,7 @@
         "apiVersion": "v2beta1",
         "language": "nodejs",
         "generator": "gapic",
-        "config": "google/cloud/dialogflow/artman_dialogflow_v2beta1.yaml"
+        "config": "google/cloud/dialogflow/v2beta1/artman_dialogflow_v2beta1.yaml"
       }
     }
   ]

@@ -668,6 +668,57 @@ describe('AgentsClient', () => {
       );
     });
   });
+
+  describe('getValidationResult', () => {
+    it('invokes getValidationResult without error', done => {
+      const client = new dialogflowModule.v2beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.getValidationResult = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getValidationResult(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getValidationResult with error', done => {
+      const client = new dialogflowModule.v2beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.getValidationResult = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getValidationResult(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
 });
 describe('ContextsClient', () => {
   it('has servicePath', () => {
@@ -1713,9 +1764,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name2,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer
@@ -1777,9 +1830,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer
@@ -1841,9 +1896,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer
