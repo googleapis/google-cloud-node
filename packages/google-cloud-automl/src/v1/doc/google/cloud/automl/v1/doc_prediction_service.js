@@ -16,7 +16,8 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for PredictionService.Predict.
+ * Request message for
+ * PredictionService.Predict.
  *
  * @property {string} name
  *   Name of the model requested to serve the prediction.
@@ -40,7 +41,8 @@ const PredictRequest = {
 };
 
 /**
- * Response message for PredictionService.Predict.
+ * Response message for
+ * PredictionService.Predict.
  *
  * @property {Object[]} payload
  *   Prediction result.
