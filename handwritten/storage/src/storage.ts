@@ -71,6 +71,7 @@ export interface CreateBucketRequest {
   regional?: boolean;
   requesterPays?: boolean;
   retentionPolicy?: object;
+  standard?: boolean;
   userProject?: string;
   location?: string;
 }
@@ -485,6 +486,7 @@ export class Storage extends Service {
    * @property {boolean} [requesterPays=false] **Early Access Testers Only**
    *     Force the use of the User Project metadata field to assign operational
    *     costs when an operation is made on a Bucket and its objects.
+   * @property {boolean} [standard=true] Specify the storage class as Standard.
    * @property {string} [userProject] The ID of the project which will be billed
    *     for the request.
    */
@@ -590,6 +592,7 @@ export class Storage extends Service {
       multiRegional: 'MULTI_REGIONAL',
       nearline: 'NEARLINE',
       regional: 'REGIONAL',
+      standard: 'STANDARD',
     } as {[index: string]: string};
 
     Object.keys(storageClasses).forEach(storageClass => {
