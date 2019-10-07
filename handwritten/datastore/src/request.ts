@@ -48,6 +48,7 @@ import {
   RunQueryCallback,
 } from './query';
 import {Datastore} from '.';
+import {ServiceError} from '@grpc/grpc-js';
 
 /**
  * A map of read consistency values to proto codes.
@@ -1235,6 +1236,65 @@ class DatastoreRequest {
     this.save(entities, callback!);
   }
 
+  merge(entities: Entities): Promise<CommitResponse>;
+  merge(entities: Entities, callback: SaveCallback): void;
+  /**
+   * Merge the specified object(s). If a key is incomplete, its associated object
+   * is inserted and the original Key object is updated to contain the generated ID.
+   * For example, if you provide an incomplete key (one without an ID),
+   * the request will create a new entity and have its ID automatically assigned.
+   * If you provide a complete key, the entity will be get the data from datastore
+   * and merge with the data specified.
+   * By default, all properties are indexed. To prevent a property from being
+   * included in *all* indexes, you must supply an `excludeFromIndexes` array.
+   *
+   * Maps to {@link Datastore#save}, forcing the method to be `merge`.
+   *
+   * @param {object|object[]} entities Datastore key object(s).
+   * @param {Key} entities.key Datastore key object.
+   * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
+   *     indexing using a simple JSON path notation. See the examples in
+   *     {@link Datastore#save} to see how to target properties at different
+   *     levels of nesting within your entity.
+   * @param {object} entities.data Data to merge to the same for provided key.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {object} callback.apiResponse The full API response.
+   */
+  merge(
+    entities: Entities,
+    callback?: SaveCallback
+  ): void | Promise<CommitResponse> {
+    const transaction = this.datastore.transaction();
+    transaction.run(async err => {
+      if (err) {
+        transaction.rollback();
+        callback!(err);
+        return;
+      }
+      try {
+        await Promise.all(
+          arrify(entities).map(async (objEntity: Entity) => {
+            const obj: Entity = DatastoreRequest.prepareEntityObject_(
+              objEntity
+            );
+            const [data] = await transaction.get(obj.key);
+            obj.method = 'upsert';
+            obj.data = Object.assign({}, data, obj.data);
+            transaction.save(obj);
+          })
+        );
+
+        const [response] = await transaction.commit();
+        callback!(null, response);
+      } catch (err) {
+        transaction.rollback();
+        callback!(err);
+      }
+    });
+  }
+
+  request_(config: RequestConfig, callback: RequestCallback): void;
   /**
    * Make a request to the API endpoint. Properties to indicate a transactional
    * or non-transactional operation are added automatically.

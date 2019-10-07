@@ -119,6 +119,24 @@ async function markDone(taskId) {
 }
 // [END datastore_update_entity]
 
+// [START datastore_merge_entity]
+async function merge(taskId, description) {
+  const taskKey = datastore.key(['Task', taskId]);
+  const task = {
+    description,
+  };
+  try {
+    await datastore.merge({
+      key: taskKey,
+      data: task,
+    });
+    console.log(`Task ${taskId} description updated successfully.`);
+  } catch (err) {
+    console.error('ERROR:', err);
+  }
+}
+// [END datastore_merge_entity]
+
 // [START datastore_retrieve_entities]
 async function listTasks() {
   const query = datastore.createQuery('Task').order('created');
@@ -151,12 +169,19 @@ require(`yargs`) // eslint-disable-line
   .command(`done <taskId>`, `Marks the specified task as done.`, {}, opts =>
     markDone(opts.taskId)
   )
+  .command(`merge <taskId>`, `Marks the specified task as done.`, {}, opts =>
+    merge(opts.taskId, opts.description)
+  )
   .command(`list`, `Lists all tasks ordered by creation time.`, {}, listTasks)
   .command(`delete <taskId>`, `Deletes a task.`, {}, opts =>
     deleteTask(opts.taskId)
   )
   .example(`node $0 new "Buy milk"`, `Adds a task with description "Buy milk".`)
   .example(`node $0 done 12345`, `Marks task 12345 as Done.`)
+  .example(
+    `node $0 merge 12345`,
+    `update task 12345 with description "Buy food".`
+  )
   .example(`node $0 list`, `Lists all tasks ordered by creation time`)
   .example(`node $0 delete 12345`, `Deletes task 12345.`)
   .wrap(120)

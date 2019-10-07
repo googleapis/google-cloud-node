@@ -31,6 +31,9 @@ import {
   AllocateIdsResponse,
   RequestConfig,
   RequestOptions,
+  PrepareEntityObjectResponse,
+  CommitResponse,
+  GetResponse,
 } from '../src/request';
 
 // tslint:disable-next-line no-any
@@ -1844,6 +1847,138 @@ describe('Request', () => {
 
       const key = new entity.Key({namespace: 'ns', path: ['Company']});
       request.upsert({key, data: {}}, done);
+    });
+  });
+
+  describe('merge', () => {
+    // tslint:disable-next-line: variable-name
+    let Transaction: typeof ds.Transaction;
+    let transaction: ds.Transaction;
+    const PROJECT_ID = 'project-id';
+    const NAMESPACE = 'a-namespace';
+
+    const DATASTORE = ({
+      request_() {},
+      projectId: PROJECT_ID,
+      namespace: NAMESPACE,
+    } as {}) as ds.Datastore;
+
+    const key = {
+      namespace: 'ns',
+      kind: 'Company',
+      path: ['Company', null],
+    };
+    const entityObject = {};
+
+    before(() => {
+      Transaction = proxyquire('../src/transaction.js', {
+        '@google-cloud/promisify': fakePfy,
+      }).Transaction;
+    });
+
+    beforeEach(() => {
+      transaction = new Transaction(DATASTORE);
+
+      transaction.request_ = () => {};
+
+      transaction.commit = async () => {
+        return [{}] as CommitResponse;
+      };
+      request.datastore = {
+        transaction: () => transaction,
+      };
+      // tslint:disable-next-line: no-any
+      (transaction as any).run = (callback?: Function) => {
+        callback!(null);
+      };
+
+      transaction.get = async () => {
+        return [entityObject] as GetResponse;
+      };
+
+      transaction.commit = async () => {
+        return [{}] as CommitResponse;
+      };
+    });
+
+    afterEach(() => sandbox.restore());
+
+    it('should return merge object for entity', done => {
+      const updatedEntityObject = {
+        status: 'merged',
+      };
+
+      transaction.save = (modifiedData: PrepareEntityObjectResponse) => {
+        assert.deepStrictEqual(
+          modifiedData.data,
+          Object.assign({}, entityObject, updatedEntityObject)
+        );
+      };
+
+      request.merge({key, data: updatedEntityObject}, done);
+    });
+
+    it('should return merge objects for entities', done => {
+      const updatedEntityObject = [
+        {
+          id: 1,
+          status: 'merged',
+        },
+        {
+          id: 2,
+          status: 'merged',
+        },
+      ];
+
+      transaction.commit = async () => {
+        transaction.modifiedEntities_.forEach((entity, index) => {
+          assert.deepStrictEqual(
+            entity.args[0].data,
+            Object.assign({}, entityObject, updatedEntityObject[index])
+          );
+        });
+        return [{}] as CommitResponse;
+      };
+
+      request.merge(
+        [
+          {key, data: updatedEntityObject[0]},
+          {key, data: updatedEntityObject[1]},
+        ],
+        done
+      );
+    });
+
+    it('transaction should rollback if error on transaction run!', done => {
+      sandbox
+        .stub(transaction, 'run')
+        .callsFake((gaxOption, callback?: Function) => {
+          callback = typeof gaxOption === 'function' ? gaxOption : callback!;
+          callback(new Error('Error'));
+        });
+
+      request.merge({key, data: null}, (err: Error) => {
+        assert.strictEqual(err.message, 'Error');
+        done();
+      });
+    });
+
+    it('transaction should rollback if error for for transaction get!', done => {
+      sandbox.stub(transaction, 'get').rejects(new Error('Error'));
+
+      request.merge({key, data: null}, (err: Error) => {
+        assert.strictEqual(err.message, 'Error');
+        done();
+      });
+    });
+
+    it('transaction should rollback if error for for transaction commit!', done => {
+      sandbox.stub(transaction, 'commit').rejects(new Error('Error'));
+
+      request.merge({key, data: null}, (err: Error) => {
+        assert.strictEqual(err.message, 'Error');
+        done();
+      });
     });
   });
 
