@@ -323,6 +323,7 @@ interface CopyQuery {
   rewriteToken?: string;
   userProject?: string;
   destinationKmsKeyName?: string;
+  destinationPredefinedAcl?: string;
 }
 
 interface FileQuery {
@@ -833,7 +834,10 @@ class File extends ServiceObject<File> {
     });
   }
 
-  copy(destination: string | Bucket | File): Promise<CopyResponse>;
+  copy(
+    destination: string | Bucket | File,
+    options?: CopyOptions
+  ): Promise<CopyResponse>;
   copy(destination: string | Bucket | File, callback: CopyCallback): void;
   copy(
     destination: string | Bucket | File,
@@ -1030,6 +1034,10 @@ class File extends ServiceObject<File> {
     if (options.userProject !== undefined) {
       query.userProject = options.userProject;
       delete options.userProject;
+    }
+    if (options.predefinedAcl !== undefined) {
+      query.destinationPredefinedAcl = options.predefinedAcl;
+      delete options.predefinedAcl;
     }
 
     newFile = newFile! || destBucket.file(destName);

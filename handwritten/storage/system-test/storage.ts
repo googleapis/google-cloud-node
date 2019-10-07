@@ -2597,6 +2597,16 @@ describe('storage', () => {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
+    it('should respect predefined Acl at file#copy', async () => {
+      const opts = {destination: 'CloudLogo'};
+      const [file] = await bucket.upload(FILES.logo.path, opts);
+      const copyOpts = {predefinedAcl: 'publicRead'};
+      const [copiedFile] = await file.copy('CloudLogoCopy', copyOpts);
+      const publicAcl = await isFilePublicAsync(copiedFile);
+      assert.strictEqual(publicAcl, true);
+      await Promise.all([file.delete, copiedFile.delete()]);
+    });
+
     it('should copy a large file', async () => {
       const otherBucket = storage.bucket(generateName());
       const file = bucket.file('Big');

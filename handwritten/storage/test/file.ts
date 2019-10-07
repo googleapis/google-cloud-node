@@ -550,6 +550,23 @@ describe('File', () => {
       file.copy(newFile, {destinationKmsKeyName}, assert.ifError);
     });
 
+    it('should accept predefined Acl', done => {
+      const options = {
+        predefinedAcl: 'authenticatedRead',
+      };
+      const newFile = new File(BUCKET, 'new-file');
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.qs.destinationPredefinedAcl,
+          options.predefinedAcl
+        );
+        assert.strictEqual(reqOpts.json.destinationPredefinedAcl, undefined);
+        done();
+      };
+
+      file.copy(newFile, options, assert.ifError);
+    });
+
     it('should favor the option over the File KMS name', done => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'incorrect-kms-key-name';
