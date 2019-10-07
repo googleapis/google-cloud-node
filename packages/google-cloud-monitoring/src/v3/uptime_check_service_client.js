@@ -22,7 +22,7 @@ const VERSION = require('../../package.json').version;
 
 /**
  * The UptimeCheckService API is used to manage (list, create, delete, edit)
- * uptime check configurations in the Stackdriver Monitoring product. An uptime
+ * Uptime check configurations in the Stackdriver Monitoring product. An Uptime
  * check is a piece of configuration that determines which resources and
  * services to monitor for availability. These configurations can also be
  * configured interactively by navigating to the [Cloud Console]
@@ -252,13 +252,13 @@ class UptimeCheckServiceClient {
   // -------------------
 
   /**
-   * Lists the existing valid uptime check configurations for the project,
-   * leaving out any invalid configurations.
+   * Lists the existing valid Uptime check configurations for the project
+   * (leaving out any invalid configurations).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose uptime check configurations are listed. The format
+   *   The project whose Uptime check configurations are listed. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -375,7 +375,7 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose uptime check configurations are listed. The format
+   *   The project whose Uptime check configurations are listed. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -416,12 +416,12 @@ class UptimeCheckServiceClient {
   }
 
   /**
-   * Gets a single uptime check configuration.
+   * Gets a single Uptime check configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The uptime check configuration to retrieve. The format
+   *   The Uptime check configuration to retrieve. The format
    *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -471,15 +471,15 @@ class UptimeCheckServiceClient {
   }
 
   /**
-   * Creates a new uptime check configuration.
+   * Creates a new Uptime check configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which to create the uptime check. The format
+   *   The project in which to create the Uptime check. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {Object} request.uptimeCheckConfig
-   *   The new uptime check configuration.
+   *   The new Uptime check configuration.
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
    * @param {Object} [options]
@@ -539,19 +539,19 @@ class UptimeCheckServiceClient {
   }
 
   /**
-   * Updates an uptime check configuration. You can either replace the entire
+   * Updates an Uptime check configuration. You can either replace the entire
    * configuration with a new one or replace only certain fields in the current
-   * configuration by specifying the fields to be updated via `"updateMask"`.
+   * configuration by specifying the fields to be updated via `updateMask`.
    * Returns the updated configuration.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.uptimeCheckConfig
-   *   Required. If an `"updateMask"` has been specified, this field gives
-   *   the values for the set of fields mentioned in the `"updateMask"`. If an
-   *   `"updateMask"` has not been given, this uptime check configuration replaces
-   *   the current configuration. If a field is mentioned in `"updateMask"` but
-   *   the corresonding field is omitted in this partial uptime check
+   *   Required. If an `updateMask` has been specified, this field gives
+   *   the values for the set of fields mentioned in the `updateMask`. If an
+   *   `updateMask` has not been given, this Uptime check configuration replaces
+   *   the current configuration. If a field is mentioned in `updateMask` but
+   *   the corresonding field is omitted in this partial Uptime check
    *   configuration, it has the effect of deleting/clearing the field from the
    *   configuration on the server.
    *
@@ -561,7 +561,7 @@ class UptimeCheckServiceClient {
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
    * @param {Object} [request.updateMask]
-   *   Optional. If present, only the listed fields in the current uptime check
+   *   Optional. If present, only the listed fields in the current Uptime check
    *   configuration are updated with values from the new configuration. If this
    *   field is empty, then the current configuration is completely replaced with
    *   the new configuration.
@@ -619,14 +619,14 @@ class UptimeCheckServiceClient {
   }
 
   /**
-   * Deletes an uptime check configuration. Note that this method will fail
-   * if the uptime check configuration is referenced by an alert policy or
+   * Deletes an Uptime check configuration. Note that this method will fail
+   * if the Uptime check configuration is referenced by an alert policy or
    * other dependent configs that would be rendered invalid by the deletion.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The uptime check configuration to delete. The format
+   *   The Uptime check configuration to delete. The format
    *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -672,7 +672,7 @@ class UptimeCheckServiceClient {
   }
 
   /**
-   * Returns the list of IPs that checkers run from
+   * Returns the list of IP addresses that checkers run from
    *
    * @param {Object} request
    *   The request object that will be sent.
