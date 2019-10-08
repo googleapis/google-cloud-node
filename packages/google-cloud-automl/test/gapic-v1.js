@@ -49,7 +49,7 @@ describe('AutoMlClient', () => {
     assert(client);
   });
 
-  describe('createDataset', () => {
+  describe('createDataset', function() {
     it('invokes createDataset without error', done => {
       const client = new automlModule.v1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -66,23 +66,37 @@ describe('AutoMlClient', () => {
 
       // Mock response
       const name = 'name3373707';
-      const done_ = true;
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const exampleCount = 1517063674;
+      const etag = 'etag3123477';
       const expectedResponse = {
         name: name,
-        done: done_,
+        displayName: displayName,
+        description: description,
+        exampleCount: exampleCount,
+        etag: etag,
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createDataset = mockSimpleGrpcMethod(
+      client._innerApiCalls.createDataset = mockLongRunningGrpcMethod(
         request,
         expectedResponse
       );
 
-      client.createDataset(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
+      client
+        .createDataset(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
     });
 
     it('invokes createDataset with error', done => {
@@ -100,18 +114,41 @@ describe('AutoMlClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.createDataset = mockSimpleGrpcMethod(
+      client._innerApiCalls.createDataset = mockLongRunningGrpcMethod(
         request,
         null,
         error
       );
 
-      client.createDataset(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
+      client
+        .createDataset(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
+      assert(
+        client._descriptors.longrunning.createDataset.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.createDataset.metadataDecoder instanceof
+          Function
+      );
     });
   });
 

@@ -185,6 +185,12 @@ class AutoMlClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
+    const createDatasetResponse = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.Dataset'
+    );
+    const createDatasetMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.OperationMetadata'
+    );
     const deleteDatasetResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
@@ -211,6 +217,11 @@ class AutoMlClient {
     );
 
     this._descriptors.longrunning = {
+      createDataset: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDatasetResponse.decode.bind(createDatasetResponse),
+        createDatasetMetadata.decode.bind(createDatasetMetadata)
+      ),
       deleteDataset: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetResponse.decode.bind(deleteDatasetResponse),
@@ -356,9 +367,9 @@ class AutoMlClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -375,14 +386,68 @@ class AutoMlClient {
    *   parent: formattedParent,
    *   dataset: dataset,
    * };
+   *
+   * // Handle the operation using the promise pattern.
    * client.createDataset(request)
    *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const dataset = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   dataset: dataset,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.createDataset(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const dataset = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   dataset: dataset,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createDataset(request);
+   *
+   * const [response] = await operation.promise();
    */
   createDataset(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
