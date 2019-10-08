@@ -3450,8 +3450,9 @@ describe('File', () => {
 
     describe('delete original file', () => {
       it('should delete if copy is successful', done => {
+        const destinationFile = {bucket: {}};
         file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback(null);
+          callback(null, destinationFile);
         };
         Object.assign(file, {
           delete() {
@@ -3476,11 +3477,34 @@ describe('File', () => {
         });
       });
 
+      it('should not delete the destination is same as origin', done => {
+        file.request = (config: {}, callback: Function) => {
+          callback(null, {});
+        };
+        const stub = sinon.stub(file, 'delete');
+        // destination is same bucket as object
+        file.move(BUCKET, (err: Error) => {
+          assert.ifError(err);
+          // destination is same file as object
+          file.move(file, (err: Error) => {
+            assert.ifError(err);
+            // destination is same file name as string
+            file.move(file.name, (err: Error) => {
+              assert.ifError(err);
+              assert.ok(stub.notCalled);
+              stub.reset();
+              done();
+            });
+          });
+        });
+      });
+
       it('should pass options to delete', done => {
         const options = {};
+        const destinationFile = {bucket: {}};
 
         file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback();
+          callback(null, destinationFile);
         };
 
         file.delete = (options_: {}) => {
@@ -3493,8 +3517,9 @@ describe('File', () => {
 
       it('should fail if delete fails', done => {
         const error = new Error('Error.');
+        const destinationFile = {bucket: {}};
         file.copy = (destination: {}, options: {}, callback: Function) => {
-          callback();
+          callback(null, destinationFile);
         };
         file.delete = (options: {}, callback: Function) => {
           callback(error);
