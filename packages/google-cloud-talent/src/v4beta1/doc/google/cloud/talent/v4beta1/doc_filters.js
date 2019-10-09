@@ -209,15 +209,18 @@ const JobQuery = {
  *
  *   The following logic is used to determine which locations in
  *   the profile to filter against:
+ *
  *   1. All of the profile's geocoded
  *   Profile.addresses where
  *   Address.usage is PERSONAL and
  *   Address.current is true.
+ *
  *   2. If the above set of locations is empty, all of the profile's geocoded
  *   Profile.addresses where
  *   Address.usage is
  *   CONTACT_INFO_USAGE_UNSPECIFIED and
  *   Address.current is true.
+ *
  *   3. If the above set of locations is empty, all of the profile's geocoded
  *   Profile.addresses where
  *   Address.usage is PERSONAL or
