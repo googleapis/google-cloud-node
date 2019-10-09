@@ -19,7 +19,7 @@
  * Describes an API diff request.
  *
  * @property {number} threatType
- *   Required. The ThreatList to update.
+ *   The ThreatList to update.
  *
  *   The number should be among the values of [ThreatType]{@link google.cloud.webrisk.v1beta1.ThreatType}
  *
@@ -28,7 +28,7 @@
  *   client version that was received from the last successful diff).
  *
  * @property {Object} constraints
- *   The constraints associated with this request.
+ *   Required. The constraints associated with this request.
  *
  *   This object should have the same structure as [Constraints]{@link google.cloud.webrisk.v1beta1.Constraints}
  *
@@ -68,7 +68,7 @@ const ComputeThreatListDiffRequest = {
 
 /**
  * @property {number} responseType
- *   The type of response. This may indicate that an action is required by the
+ *   The type of response. This may indicate that an action must be taken by the
  *   client when the response is received.
  *
  *   The number should be among the values of [ResponseType]{@link google.cloud.webrisk.v1beta1.ResponseType}
@@ -156,7 +156,7 @@ const ComputeThreatListDiffResponse = {
  * Request to check URI entries against threatLists.
  *
  * @property {string} uri
- *   The URI to be checked for matches.
+ *   Required. The URI to be checked for matches.
  *
  * @property {number[]} threatTypes
  *   Required. The ThreatLists to search in.

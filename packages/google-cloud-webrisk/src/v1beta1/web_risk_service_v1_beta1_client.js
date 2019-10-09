@@ -219,11 +219,11 @@ class WebRiskServiceV1Beta1Client {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.threatType
-   *   Required. The ThreatList to update.
+   *   The ThreatList to update.
    *
    *   The number should be among the values of [ThreatType]{@link google.cloud.webrisk.v1beta1.ThreatType}
    * @param {Object} request.constraints
-   *   The constraints associated with this request.
+   *   Required. The constraints associated with this request.
    *
    *   This object should have the same structure as [Constraints]{@link google.cloud.webrisk.v1beta1.Constraints}
    * @param {Buffer} [request.versionToken]
@@ -284,7 +284,7 @@ class WebRiskServiceV1Beta1Client {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.uri
-   *   The URI to be checked for matches.
+   *   Required. The URI to be checked for matches.
    * @param {number[]} request.threatTypes
    *   Required. The ThreatLists to search in.
    *
