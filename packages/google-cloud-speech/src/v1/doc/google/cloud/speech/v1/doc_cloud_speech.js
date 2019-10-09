@@ -19,13 +19,13 @@
  * The top-level message sent by the client for the `Recognize` method.
  *
  * @property {Object} config
- *   *Required* Provides information to the recognizer that specifies how to
+ *   Required. Provides information to the recognizer that specifies how to
  *   process the request.
  *
  *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {Object} audio
- *   *Required* The audio data to be recognized.
+ *   Required. The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1.RecognitionAudio}
  *
@@ -42,13 +42,13 @@ const RecognizeRequest = {
  * method.
  *
  * @property {Object} config
- *   *Required* Provides information to the recognizer that specifies how to
+ *   Required. Provides information to the recognizer that specifies how to
  *   process the request.
  *
  *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {Object} audio
- *   *Required* The audio data to be recognized.
+ *   Required. The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1.RecognitionAudio}
  *
@@ -63,9 +63,9 @@ const LongRunningRecognizeRequest = {
 /**
  * The top-level message sent by the client for the `StreamingRecognize` method.
  * Multiple `StreamingRecognizeRequest` messages are sent. The first message
- * must contain a `streaming_config` message and must not contain `audio` data.
- * All subsequent messages must contain `audio` data and must not contain a
- * `streaming_config` message.
+ * must contain a `streaming_config` message and must not contain
+ * `audio_content`. All subsequent messages must contain `audio_content` and
+ * must not contain a `streaming_config` message.
  *
  * @property {Object} streamingConfig
  *   Provides information to the recognizer that specifies how to process the
@@ -80,7 +80,7 @@ const LongRunningRecognizeRequest = {
  *   `StreamingRecognizeRequest` message must not contain `audio_content` data
  *   and all subsequent `StreamingRecognizeRequest` messages must contain
  *   `audio_content` data. The audio bytes must be encoded as specified in
- *   `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
+ *   `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
  *   pure binary representation (not base64). See
  *   [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
@@ -97,13 +97,13 @@ const StreamingRecognizeRequest = {
  * request.
  *
  * @property {Object} config
- *   *Required* Provides information to the recognizer that specifies how to
+ *   Required. Provides information to the recognizer that specifies how to
  *   process the request.
  *
  *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1.RecognitionConfig}
  *
  * @property {boolean} singleUtterance
- *   *Optional* If `false` or omitted, the recognizer will perform continuous
+ *   If `false` or omitted, the recognizer will perform continuous
  *   recognition (continuing to wait for and process audio even if the user
  *   pauses speaking) until the client closes the input stream (gRPC API) or
  *   until the maximum time limit has been reached. May return multiple
@@ -116,7 +116,7 @@ const StreamingRecognizeRequest = {
  *   `true`.
  *
  * @property {boolean} interimResults
- *   *Optional* If `true`, interim results (tentative hypotheses) may be
+ *   If `true`, interim results (tentative hypotheses) may be
  *   returned as they become available (these interim results are indicated with
  *   the `is_final=false` flag).
  *   If `false` or omitted, only `is_final=true` result(s) are returned.
@@ -136,8 +136,7 @@ const StreamingRecognitionConfig = {
  * @property {number} encoding
  *   Encoding of audio data sent in all `RecognitionAudio` messages.
  *   This field is optional for `FLAC` and `WAV` audio files and required
- *   for all other audio formats. For details, see
- *   AudioEncoding.
+ *   for all other audio formats. For details, see AudioEncoding.
  *
  *   The number should be among the values of [AudioEncoding]{@link google.cloud.speech.v1.AudioEncoding}
  *
@@ -147,12 +146,11 @@ const StreamingRecognitionConfig = {
  *   16000 is optimal. For best results, set the sampling rate of the audio
  *   source to 16000 Hz. If that's not possible, use the native sample rate of
  *   the audio source (instead of re-sampling).
- *   This field is optional for `FLAC` and `WAV` audio files and required
- *   for all other audio formats. For details, see
- *   AudioEncoding.
+ *   This field is optional for FLAC and WAV audio files, but is
+ *   required for all other audio formats. For details, see AudioEncoding.
  *
  * @property {number} audioChannelCount
- *   *Optional* The number of channels in the input audio data.
+ *   The number of channels in the input audio data.
  *   ONLY set this for MULTI-CHANNEL recognition.
  *   Valid values for LINEAR16 and FLAC are `1`-`8`.
  *   Valid values for OGG_OPUS are '1'-'254'.
@@ -171,14 +169,15 @@ const StreamingRecognitionConfig = {
  *   `audio_channel_count` multiplied by the length of the audio.
  *
  * @property {string} languageCode
- *   *Required* The language of the supplied audio as a
+ *   Required. The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
- *   See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
- *   for a list of the currently supported language codes.
+ *   See [Language
+ *   Support](https://cloud.google.com/speech-to-text/docs/languages) for a list
+ *   of the currently supported language codes.
  *
  * @property {number} maxAlternatives
- *   *Optional* Maximum number of recognition hypotheses to be returned.
+ *   Maximum number of recognition hypotheses to be returned.
  *   Specifically, the maximum number of `SpeechRecognitionAlternative` messages
  *   within each `SpeechRecognitionResult`.
  *   The server may return fewer than `max_alternatives`.
@@ -186,26 +185,28 @@ const StreamingRecognitionConfig = {
  *   one. If omitted, will return a maximum of one.
  *
  * @property {boolean} profanityFilter
- *   *Optional* If set to `true`, the server will attempt to filter out
+ *   If set to `true`, the server will attempt to filter out
  *   profanities, replacing all but the initial character in each filtered word
  *   with asterisks, e.g. "f***". If set to `false` or omitted, profanities
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* array of SpeechContext.
+ *   Array of SpeechContext.
  *   A means to provide context to assist the speech recognition. For more
- *   information, see [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
+ *   information, see
+ *   [speech
+ *   adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.speech.v1.SpeechContext}
  *
  * @property {boolean} enableWordTimeOffsets
- *   *Optional* If `true`, the top result includes a list of words and
+ *   If `true`, the top result includes a list of words and
  *   the start and end time offsets (timestamps) for those words. If
  *   `false`, no word-level time offset information is returned. The default is
  *   `false`.
  *
  * @property {boolean} enableAutomaticPunctuation
- *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   If 'true', adds punctuation to recognition result hypotheses.
  *   This feature is only available in select languages. Setting this for
  *   requests in other languages has no effect at all.
  *   The default 'false' value does not add punctuation to result hypotheses.
@@ -214,7 +215,7 @@ const StreamingRecognitionConfig = {
  *   premium feature.
  *
  * @property {Object} diarizationConfig
- *   *Optional* Config to enable speaker diarization and set additional
+ *   Config to enable speaker diarization and set additional
  *   parameters to make diarization better suited for your application.
  *   Note: When this is enabled, we send all the words from the beginning of the
  *   audio for the top alternative in every consecutive STREAMING responses.
@@ -226,12 +227,12 @@ const StreamingRecognitionConfig = {
  *   This object should have the same structure as [SpeakerDiarizationConfig]{@link google.cloud.speech.v1.SpeakerDiarizationConfig}
  *
  * @property {Object} metadata
- *   *Optional* Metadata regarding this request.
+ *   Metadata regarding this request.
  *
  *   This object should have the same structure as [RecognitionMetadata]{@link google.cloud.speech.v1.RecognitionMetadata}
  *
  * @property {string} model
- *   *Optional* Which model to select for the given request. Select the model
+ *   Which model to select for the given request. Select the model
  *   best suited to your domain to get best results. If a model is not
  *   explicitly specified, then we auto-select a model based on the parameters
  *   in the RecognitionConfig.
@@ -265,7 +266,7 @@ const StreamingRecognitionConfig = {
  *   </table>
  *
  * @property {boolean} useEnhanced
- *   *Optional* Set to true to use an enhanced model for speech recognition.
+ *   Set to true to use an enhanced model for speech recognition.
  *   If `use_enhanced` is set to true and the `model` field is not set, then
  *   an appropriate enhanced model is chosen if an enhanced model exists for
  *   the audio.
@@ -284,13 +285,15 @@ const RecognitionConfig = {
   /**
    * The encoding of the audio data sent in the request.
    *
-   * All encodings support only 1 channel (mono) audio.
+   * All encodings support only 1 channel (mono) audio, unless the
+   * `audio_channel_count` and `enable_separate_recognition_per_channel` fields
+   * are set.
    *
    * For best results, the audio source should be captured and transmitted using
    * a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
    * recognition can be reduced if lossy codecs are used to capture or transmit
    * audio, particularly if background noise is present. Lossy codecs include
-   * `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, and `SPEEX_WITH_HEADER_BYTE`.
+   * `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, and `MP3`.
    *
    * The `FLAC` and `WAV` audio file formats include a header that describes the
    * included audio content. You can request recognition for `WAV` files that
@@ -301,8 +304,7 @@ const RecognitionConfig = {
    * an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
    * encoding configuration must match the encoding described in the audio
    * header; otherwise the request returns an
-   * google.rpc.Code.INVALID_ARGUMENT error
-   * code.
+   * google.rpc.Code.INVALID_ARGUMENT error code.
    *
    * @enum {number}
    * @memberof google.cloud.speech.v1
@@ -371,27 +373,25 @@ const RecognitionConfig = {
 };
 
 /**
- * *Optional* Config to enable speaker diarization.
+ * Config to enable speaker diarization.
  *
  * @property {boolean} enableSpeakerDiarization
- *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   If 'true', enables speaker detection for each recognized word in
  *   the top alternative of the recognition result using a speaker_tag provided
  *   in the WordInfo.
  *
  * @property {number} minSpeakerCount
- *   *Optional*
  *   Minimum number of speakers in the conversation. This range gives you more
  *   flexibility by allowing the system to automatically determine the correct
  *   number of speakers. If not set, the default value is 2.
  *
  * @property {number} maxSpeakerCount
- *   *Optional*
  *   Maximum number of speakers in the conversation. This range gives you more
  *   flexibility by allowing the system to automatically determine the correct
  *   number of speakers. If not set, the default value is 6.
  *
  * @property {number} speakerTag
- *   Output only. A distinct integer value is assigned for every speaker within
+ *   A distinct integer value is assigned for every speaker within
  *   the audio. This field specifies which one of those speakers was detected to
  *   have spoken this word. Value ranges from '1' to diarization_speaker_count.
  *   speaker_tag is set if enable_speaker_diarization = 'true' and only in the
@@ -623,12 +623,18 @@ const RecognitionMetadata = {
  * in the results.
  *
  * @property {string[]} phrases
- *   *Optional* A list of strings containing words and phrases "hints" so that
+ *   A list of strings containing words and phrases "hints" so that
  *   the speech recognition is more likely to recognize them. This can be used
  *   to improve the accuracy for specific words and phrases, for example, if
  *   specific commands are typically spoken by the user. This can also be used
  *   to add additional words to the vocabulary of the recognizer. See
  *   [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
+ *
+ *   List items can also be set to classes for groups of words that represent
+ *   common concepts that occur in natural language. For example, rather than
+ *   providing phrase hints for every month of the year, using the $MONTH class
+ *   improves the likelihood of correctly transcribing audio that includes
+ *   months.
  *
  * @typedef SpeechContext
  * @memberof google.cloud.speech.v1
@@ -641,12 +647,12 @@ const SpeechContext = {
 /**
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
- * returns google.rpc.Code.INVALID_ARGUMENT.
- * See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+ * returns google.rpc.Code.INVALID_ARGUMENT. See
+ * [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @property {Buffer} content
  *   The audio data bytes encoded as specified in
- *   `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
+ *   `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
  *   pure binary representation, whereas JSON representations use base64.
  *
  * @property {string} uri
@@ -655,9 +661,8 @@ const SpeechContext = {
  *   Currently, only Google Cloud Storage URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket_name/object_name` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT).
- *   For more information, see [Request
- *   URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+ *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @typedef RecognitionAudio
  * @memberof google.cloud.speech.v1
@@ -673,7 +678,7 @@ const RecognitionAudio = {
  * messages.
  *
  * @property {Object[]} results
- *   Output only. Sequential list of transcription results corresponding to
+ *   Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
  *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
@@ -694,7 +699,7 @@ const RecognizeResponse = {
  * service.
  *
  * @property {Object[]} results
- *   Output only. Sequential list of transcription results corresponding to
+ *   Sequential list of transcription results corresponding to
  *   sequential portions of audio.
  *
  *   This object should have the same structure as [SpeechRecognitionResult]{@link google.cloud.speech.v1.SpeechRecognitionResult}
@@ -786,13 +791,13 @@ const LongRunningRecognizeMetadata = {
  *     one or more (repeated) `results`.
  *
  * @property {Object} error
- *   Output only. If set, returns a google.rpc.Status
- *   message that specifies the error for the operation.
+ *   If set, returns a google.rpc.Status message that
+ *   specifies the error for the operation.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {Object[]} results
- *   Output only. This repeated list contains zero or more results that
+ *   This repeated list contains zero or more results that
  *   correspond to consecutive portions of the audio currently being processed.
  *   It contains zero or one `is_final=true` result (the newly settled portion),
  *   followed by zero or more `is_final=false` results (the interim results).
@@ -800,7 +805,7 @@ const LongRunningRecognizeMetadata = {
  *   This object should have the same structure as [StreamingRecognitionResult]{@link google.cloud.speech.v1.StreamingRecognitionResult}
  *
  * @property {number} speechEventType
- *   Output only. Indicates the type of speech event.
+ *   Indicates the type of speech event.
  *
  *   The number should be among the values of [SpeechEventType]{@link google.cloud.speech.v1.SpeechEventType}
  *
@@ -842,7 +847,7 @@ const StreamingRecognizeResponse = {
  * that is currently being processed.
  *
  * @property {Object[]} alternatives
- *   Output only. May contain one or more recognition hypotheses (up to the
+ *   May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
  *   These alternatives are ordered in terms of accuracy, with the top (first)
  *   alternative being the most probable, as ranked by the recognizer.
@@ -850,21 +855,21 @@ const StreamingRecognizeResponse = {
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1.SpeechRecognitionAlternative}
  *
  * @property {boolean} isFinal
- *   Output only. If `false`, this `StreamingRecognitionResult` represents an
+ *   If `false`, this `StreamingRecognitionResult` represents an
  *   interim result that may change. If `true`, this is the final time the
  *   speech service will return this particular `StreamingRecognitionResult`,
  *   the recognizer will not return any further hypotheses for this portion of
  *   the transcript and corresponding audio.
  *
  * @property {number} stability
- *   Output only. An estimate of the likelihood that the recognizer will not
+ *   An estimate of the likelihood that the recognizer will not
  *   change its guess about this interim result. Values range from 0.0
  *   (completely unstable) to 1.0 (completely stable).
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
  * @property {Object} resultEndTime
- *   Output only. Time offset of the end of this result relative to the
+ *   Time offset of the end of this result relative to the
  *   beginning of the audio.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
@@ -875,10 +880,9 @@ const StreamingRecognizeResponse = {
  *   For audio_channel_count = N, its output values can range from '1' to 'N'.
  *
  * @property {string} languageCode
- *   Output only. The
- *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
- *   language in this result. This language code was detected to have the most
- *   likelihood of being spoken in the audio.
+ *   The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+ *   the language in this result. This language code was detected to have the
+ *   most likelihood of being spoken in the audio.
  *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.speech.v1
@@ -892,7 +896,7 @@ const StreamingRecognitionResult = {
  * A speech recognition result corresponding to a portion of the audio.
  *
  * @property {Object[]} alternatives
- *   Output only. May contain one or more recognition hypotheses (up to the
+ *   May contain one or more recognition hypotheses (up to the
  *   maximum specified in `max_alternatives`).
  *   These alternatives are ordered in terms of accuracy, with the top (first)
  *   alternative being the most probable, as ranked by the recognizer.
@@ -916,10 +920,10 @@ const SpeechRecognitionResult = {
  * Alternative hypotheses (a.k.a. n-best list).
  *
  * @property {string} transcript
- *   Output only. Transcript text representing the words that the user spoke.
+ *   Transcript text representing the words that the user spoke.
  *
  * @property {number} confidence
- *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
+ *   The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
  *   correct. This field is set only for the top alternative of a non-streaming
  *   result or, of a streaming result where `is_final=true`.
@@ -928,7 +932,7 @@ const SpeechRecognitionResult = {
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
  * @property {Object[]} words
- *   Output only. A list of word-specific information for each recognized word.
+ *   A list of word-specific information for each recognized word.
  *   Note: When `enable_speaker_diarization` is true, you will see all the words
  *   from the beginning of the audio.
  *
@@ -946,7 +950,7 @@ const SpeechRecognitionAlternative = {
  * Word-specific information for recognized words.
  *
  * @property {Object} startTime
- *   Output only. Time offset relative to the beginning of the audio,
+ *   Time offset relative to the beginning of the audio,
  *   and corresponding to the start of the spoken word.
  *   This field is only set if `enable_word_time_offsets=true` and only
  *   in the top hypothesis.
@@ -956,7 +960,7 @@ const SpeechRecognitionAlternative = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} endTime
- *   Output only. Time offset relative to the beginning of the audio,
+ *   Time offset relative to the beginning of the audio,
  *   and corresponding to the end of the spoken word.
  *   This field is only set if `enable_word_time_offsets=true` and only
  *   in the top hypothesis.
@@ -966,7 +970,7 @@ const SpeechRecognitionAlternative = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {string} word
- *   Output only. The word corresponding to this set of information.
+ *   The word corresponding to this set of information.
  *
  * @typedef WordInfo
  * @memberof google.cloud.speech.v1

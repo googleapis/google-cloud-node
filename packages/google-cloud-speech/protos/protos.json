@@ -12,17 +12,23 @@
                     "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1;speech",
                     "java_multiple_files": true,
                     "java_outer_classname": "SpeechProto",
-                    "java_package": "com.google.cloud.speech.v1"
+                    "java_package": "com.google.cloud.speech.v1",
+                    "objc_class_prefix": "GCS"
                   },
                   "nested": {
                     "Speech": {
+                      "options": {
+                        "(google.api.default_host)": "speech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "Recognize": {
                           "requestType": "RecognizeRequest",
                           "responseType": "RecognizeResponse",
                           "options": {
                             "(google.api.http).post": "/v1/speech:recognize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "config,audio"
                           }
                         },
                         "LongRunningRecognize": {
@@ -30,7 +36,10 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1/speech:longrunningrecognize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "config,audio",
+                            "(google.longrunning.operation_info).response_type": "LongRunningRecognizeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "LongRunningRecognizeMetadata"
                           }
                         },
                         "StreamingRecognize": {
@@ -45,11 +54,17 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audio": {
                           "type": "RecognitionAudio",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -57,11 +72,17 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audio": {
                           "type": "RecognitionAudio",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -89,7 +110,10 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "singleUtterance": {
                           "type": "bool",
@@ -121,7 +145,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxAlternatives": {
                           "type": "int32",
@@ -192,7 +219,10 @@
                         },
                         "speakerTag": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -386,7 +416,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -444,17 +477,23 @@
                     "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1p1beta1;speech",
                     "java_multiple_files": true,
                     "java_outer_classname": "SpeechProto",
-                    "java_package": "com.google.cloud.speech.v1p1beta1"
+                    "java_package": "com.google.cloud.speech.v1p1beta1",
+                    "objc_class_prefix": "GCS"
                   },
                   "nested": {
                     "Speech": {
+                      "options": {
+                        "(google.api.default_host)": "speech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "Recognize": {
                           "requestType": "RecognizeRequest",
                           "responseType": "RecognizeResponse",
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/speech:recognize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "config,audio"
                           }
                         },
                         "LongRunningRecognize": {
@@ -462,7 +501,10 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/speech:longrunningrecognize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "config,audio",
+                            "(google.longrunning.operation_info).response_type": "LongRunningRecognizeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "LongRunningRecognizeMetadata"
                           }
                         },
                         "StreamingRecognize": {
@@ -477,11 +519,17 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audio": {
                           "type": "RecognitionAudio",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -489,11 +537,17 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audio": {
                           "type": "RecognitionAudio",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -521,7 +575,10 @@
                       "fields": {
                         "config": {
                           "type": "RecognitionConfig",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "singleUtterance": {
                           "type": "bool",
@@ -553,7 +610,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "alternativeLanguageCodes": {
                           "rule": "repeated",
@@ -680,7 +740,10 @@
                         },
                         "obfuscatedId": {
                           "type": "int64",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "audioTopic": {
                           "type": "string",
@@ -918,7 +981,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1009,6 +1072,38 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             }
           }

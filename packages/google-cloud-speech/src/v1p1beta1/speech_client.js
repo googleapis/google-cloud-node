@@ -253,12 +253,12 @@ class SpeechClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.config
-   *   *Required* Provides information to the recognizer that specifies how to
+   *   Required. Provides information to the recognizer that specifies how to
    *   process the request.
    *
    *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1p1beta1.RecognitionConfig}
    * @param {Object} request.audio
-   *   *Required* The audio data to be recognized.
+   *   Required. The audio data to be recognized.
    *
    *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1p1beta1.RecognitionAudio}
    * @param {Object} [options]
@@ -321,16 +321,18 @@ class SpeechClient {
    * google.longrunning.Operations interface. Returns either an
    * `Operation.error` or an `Operation.response` which contains
    * a `LongRunningRecognizeResponse` message.
+   * For more information on asynchronous speech recognition, see the
+   * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.config
-   *   *Required* Provides information to the recognizer that specifies how to
+   *   Required. Provides information to the recognizer that specifies how to
    *   process the request.
    *
    *   This object should have the same structure as [RecognitionConfig]{@link google.cloud.speech.v1p1beta1.RecognitionConfig}
    * @param {Object} request.audio
-   *   *Required* The audio data to be recognized.
+   *   Required. The audio data to be recognized.
    *
    *   This object should have the same structure as [RecognitionAudio]{@link google.cloud.speech.v1p1beta1.RecognitionAudio}
    * @param {Object} [options]
