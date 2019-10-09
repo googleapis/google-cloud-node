@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.7.0...v1.7.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* createDataset now correctly returns operation ([770b572](https://www.github.com/googleapis/nodejs-automl/commit/770b572))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.6.0...v1.7.0) (2019-10-04)
 
 
