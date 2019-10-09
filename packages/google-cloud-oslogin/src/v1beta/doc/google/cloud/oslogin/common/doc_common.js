@@ -46,6 +46,14 @@
  * @property {string} accountId
  *   Output only. A POSIX account identifier.
  *
+ * @property {number} operatingSystemType
+ *   The operating system type where this account applies.
+ *
+ *   The number should be among the values of [OperatingSystemType]{@link google.cloud.oslogin.common.OperatingSystemType}
+ *
+ * @property {string} name
+ *   Output only. The canonical resource name.
+ *
  * @typedef PosixAccount
  * @memberof google.cloud.oslogin.common
  * @see [google.cloud.oslogin.common.PosixAccount definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/common/common.proto}
@@ -68,10 +76,38 @@ const PosixAccount = {
  * @property {string} fingerprint
  *   Output only. The SHA-256 fingerprint of the SSH public key.
  *
+ * @property {string} name
+ *   Output only. The canonical resource name.
+ *
  * @typedef SshPublicKey
  * @memberof google.cloud.oslogin.common
  * @see [google.cloud.oslogin.common.SshPublicKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/common/common.proto}
  */
 const SshPublicKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The operating system options for account entries.
+ *
+ * @enum {number}
+ * @memberof google.cloud.oslogin.common
+ */
+const OperatingSystemType = {
+
+  /**
+   * The operating system type associated with the user account information is
+   * unspecified.
+   */
+  OPERATING_SYSTEM_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Linux user account information.
+   */
+  LINUX: 1,
+
+  /**
+   * Windows user account information.
+   */
+  WINDOWS: 2
 };

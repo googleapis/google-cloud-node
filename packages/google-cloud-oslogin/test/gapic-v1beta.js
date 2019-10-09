@@ -228,10 +228,12 @@ describe('OsLoginServiceClient', () => {
       const key = 'key106079';
       const expirationTimeUsec = 2058878882;
       const fingerprint = 'fingerprint-1375934236';
+      const name2 = 'name2-1052831874';
       const expectedResponse = {
         key: key,
         expirationTimeUsec: expirationTimeUsec,
         fingerprint: fingerprint,
+        name: name2,
       };
 
       // Mock Grpc layer
@@ -355,10 +357,12 @@ describe('OsLoginServiceClient', () => {
       const key = 'key106079';
       const expirationTimeUsec = 2058878882;
       const fingerprint = 'fingerprint-1375934236';
+      const name2 = 'name2-1052831874';
       const expectedResponse = {
         key: key,
         expirationTimeUsec: expirationTimeUsec,
         fingerprint: fingerprint,
+        name: name2,
       };
 
       // Mock Grpc layer
