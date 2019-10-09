@@ -241,16 +241,6 @@ export namespace google {
                     }
                 }
 
-                /** Likelihood enum. */
-                enum Likelihood {
-                    UNKNOWN = 0,
-                    VERY_UNLIKELY = 1,
-                    UNLIKELY = 2,
-                    POSSIBLE = 3,
-                    LIKELY = 4,
-                    VERY_LIKELY = 5
-                }
-
                 /** Properties of an ImageSource. */
                 interface IImageSource {
 
@@ -441,6 +431,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Likelihood enum. */
+                enum Likelihood {
+                    UNKNOWN = 0,
+                    VERY_UNLIKELY = 1,
+                    UNLIKELY = 2,
+                    POSSIBLE = 3,
+                    LIKELY = 4,
+                    VERY_LIKELY = 5
                 }
 
                 /** Properties of a FaceAnnotation. */

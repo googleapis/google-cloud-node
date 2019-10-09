@@ -107,16 +107,6 @@
                         }
                       }
                     },
-                    "Likelihood": {
-                      "values": {
-                        "UNKNOWN": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
-                      }
-                    },
                     "ImageSource": {
                       "fields": {
                         "gcsImageUri": {
@@ -139,6 +129,16 @@
                           "type": "ImageSource",
                           "id": 2
                         }
+                      }
+                    },
+                    "Likelihood": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
                       }
                     },
                     "FaceAnnotation": {
