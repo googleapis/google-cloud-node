@@ -265,10 +265,10 @@ class CloudRedisClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const cloudRedisStubMethods = [
-      'createInstance',
-      'updateInstance',
       'listInstances',
       'getInstance',
+      'createInstance',
+      'updateInstance',
       'importInstance',
       'exportInstance',
       'failoverInstance',
@@ -334,6 +334,230 @@ class CloudRedisClient {
   // -------------------
   // -- Service calls --
   // -------------------
+
+  /**
+   * Lists all Redis instances owned by a project in either the specified
+   * location (region) or all locations.
+   *
+   * The location should have the following format:
+   * * `projects/{project_id}/locations/{location_id}`
+   *
+   * If `location_id` is specified as `-` (wildcard), then all regions
+   * available to the project are queried, and the results are aggregated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the instance location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [Instance]{@link google.cloud.redis.v1.Instance}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListInstancesResponse]{@link google.cloud.redis.v1.ListInstancesResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Instance]{@link google.cloud.redis.v1.Instance}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Instance]{@link google.cloud.redis.v1.Instance} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListInstancesResponse]{@link google.cloud.redis.v1.ListInstancesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('@google-cloud/redis');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
+   * client.listInstances({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listInstances(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listInstances({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listInstances(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listInstances(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listInstances}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listInstances} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the instance location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Instance]{@link google.cloud.redis.v1.Instance} on 'data' event.
+   *
+   * @example
+   *
+   * const redis = require('@google-cloud/redis');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * client.listInstancesStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listInstancesStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listInstances.createStream(
+      this._innerApiCalls.listInstances,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Gets the details of a specific Redis instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Instance]{@link google.cloud.redis.v1.Instance}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Instance]{@link google.cloud.redis.v1.Instance}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('@google-cloud/redis');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * client.getInstance({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getInstance(request, options, callback);
+  }
 
   /**
    * Creates a Redis instance based on the specified tier and memory size.
@@ -648,230 +872,6 @@ class CloudRedisClient {
     });
 
     return this._innerApiCalls.updateInstance(request, options, callback);
-  }
-
-  /**
-   * Lists all Redis instances owned by a project in either the specified
-   * location (region) or all locations.
-   *
-   * The location should have the following format:
-   * * `projects/{project_id}/locations/{location_id}`
-   *
-   * If `location_id` is specified as `-` (wildcard), then all regions
-   * available to the project are queried, and the results are aggregated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the instance location using the form:
-   *       `projects/{project_id}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is Array of [Instance]{@link google.cloud.redis.v1.Instance}.
-   *
-   *   When autoPaginate: false is specified through options, it contains the result
-   *   in a single response. If the response indicates the next page exists, the third
-   *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListInstancesResponse]{@link google.cloud.redis.v1.ListInstancesResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Instance]{@link google.cloud.redis.v1.Instance}.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Instance]{@link google.cloud.redis.v1.Instance} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListInstancesResponse]{@link google.cloud.redis.v1.ListInstancesResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const redis = require('@google-cloud/redis');
-   *
-   * const client = new redis.v1.CloudRedisClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * // Iterate over all elements.
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   *
-   * client.listInstances({parent: formattedParent})
-   *   .then(responses => {
-   *     const resources = responses[0];
-   *     for (const resource of resources) {
-   *       // doThingsWith(resource)
-   *     }
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   *
-   * // Or obtain the paged response.
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   *
-   *
-   * const options = {autoPaginate: false};
-   * const callback = responses => {
-   *   // The actual resources in a response.
-   *   const resources = responses[0];
-   *   // The next request if the response shows that there are more responses.
-   *   const nextRequest = responses[1];
-   *   // The actual response object, if necessary.
-   *   // const rawResponse = responses[2];
-   *   for (const resource of resources) {
-   *     // doThingsWith(resource);
-   *   }
-   *   if (nextRequest) {
-   *     // Fetch the next page.
-   *     return client.listInstances(nextRequest, options).then(callback);
-   *   }
-   * }
-   * client.listInstances({parent: formattedParent}, options)
-   *   .then(callback)
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  listInstances(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });
-
-    return this._innerApiCalls.listInstances(request, options, callback);
-  }
-
-  /**
-   * Equivalent to {@link listInstances}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listInstances} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the instance location using the form:
-   *       `projects/{project_id}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Instance]{@link google.cloud.redis.v1.Instance} on 'data' event.
-   *
-   * @example
-   *
-   * const redis = require('@google-cloud/redis');
-   *
-   * const client = new redis.v1.CloudRedisClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * client.listInstancesStream({parent: formattedParent})
-   *   .on('data', element => {
-   *     // doThingsWith(element)
-   *   }).on('error', err => {
-   *     console.log(err);
-   *   });
-   */
-  listInstancesStream(request, options) {
-    options = options || {};
-
-    return this._descriptors.page.listInstances.createStream(
-      this._innerApiCalls.listInstances,
-      request,
-      options
-    );
-  }
-
-  /**
-   * Gets the details of a specific Redis instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Redis instance resource name using the form:
-   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-   *   where `location_id` refers to a GCP region.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [Instance]{@link google.cloud.redis.v1.Instance}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Instance]{@link google.cloud.redis.v1.Instance}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const redis = require('@google-cloud/redis');
-   *
-   * const client = new redis.v1.CloudRedisClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
-   * client.getInstance({name: formattedName})
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  getInstance(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.getInstance(request, options, callback);
   }
 
   /**
