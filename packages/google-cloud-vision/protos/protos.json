@@ -920,7 +920,10 @@
                         },
                         "productSet": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         },
                         "productCategories": {
                           "rule": "repeated",
@@ -1126,7 +1129,8 @@
                           "requestType": "GetReferenceImageRequest",
                           "responseType": "ReferenceImage",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/products/*/referenceImages/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/products/*/referenceImages/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "AddProductToProductSet": {
