@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.4.0...v1.5.0) (2019-10-10)
+
+
+### Bug Fixes
+
+* update protobuf options for product sets ([#462](https://www.github.com/googleapis/nodejs-vision/issues/462)) ([32b3fa9](https://www.github.com/googleapis/nodejs-vision/commit/32b3fa9))
+* use compatible version of google-gax ([a4f2863](https://www.github.com/googleapis/nodejs-vision/commit/a4f2863))
+
+
+### Features
+
+* .d.ts for protos ([#451](https://www.github.com/googleapis/nodejs-vision/issues/451)) ([15f4329](https://www.github.com/googleapis/nodejs-vision/commit/15f4329))
+* additional safe search confidence fields ([#444](https://www.github.com/googleapis/nodejs-vision/issues/444)) ([31735a7](https://www.github.com/googleapis/nodejs-vision/commit/31735a7))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.3.0...v1.4.0) (2019-09-14)
 
 
