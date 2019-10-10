@@ -80,7 +80,7 @@
                           "responseType": "ListGlossariesResponse",
                           "options": {
                             "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/glossaries",
-                            "(google.api.method_signature)": "parent"
+                            "(google.api.method_signature)": "parent,filter"
                           }
                         },
                         "GetGlossary": {
