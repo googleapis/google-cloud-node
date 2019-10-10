@@ -2926,7 +2926,8 @@ class File extends ServiceObject<File> {
    * location) and {@link File#delete} (from the old location). While
    * unlikely, it is possible that an error returned to your callback could be
    * triggered from either one of these API calls failing, which could leave a
-   * duplicate file lingering.
+   * duplicate file lingering. The error message will indicate what operation
+   * has failed.
    *
    * @see [Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}
    *
@@ -3036,9 +3037,10 @@ class File extends ServiceObject<File> {
 
     callback = callback || util.noop;
 
-    this.copy(destination, options, (err, destinationFile, apiResponse) => {
+    this.copy(destination, options, (err, destinationFile, copyApiResponse) => {
       if (err) {
-        callback!(err, null, apiResponse);
+        err.message = 'file#copy failed with an error - ' + err.message;
+        callback!(err, null, copyApiResponse);
         return;
       }
 
@@ -3047,10 +3049,15 @@ class File extends ServiceObject<File> {
         this.bucket.name !== destinationFile!.bucket.name
       ) {
         this.delete(options, (err, apiResponse) => {
-          callback!(err, destinationFile, apiResponse);
+          if (err) {
+            err.message = 'file#delete failed with an error - ' + err.message;
+            callback!(err, destinationFile, apiResponse);
+            return;
+          }
+          callback!(null, destinationFile, copyApiResponse);
         });
       } else {
-        callback!(null, destinationFile, apiResponse);
+        callback!(null, destinationFile, copyApiResponse);
       }
     });
   }

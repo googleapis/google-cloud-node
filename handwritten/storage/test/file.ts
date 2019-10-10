@@ -3437,18 +3437,44 @@ describe('File', () => {
       });
 
       it('should fail if copy fails', done => {
-        const error = new Error('Error.');
+        const originalErrorMessage = 'Original error message.';
+        const error = new Error(originalErrorMessage);
         file.copy = (destination: {}, options: {}, callback: Function) => {
           callback(error);
         };
         file.move('new-filename', (err: Error) => {
           assert.strictEqual(err, error);
+          assert.strictEqual(
+            err.message,
+            `file#copy failed with an error - ${originalErrorMessage}`
+          );
           done();
         });
       });
     });
 
     describe('delete original file', () => {
+      it('should call the callback with destinationFile and copyApiResponse', done => {
+        const copyApiResponse = {};
+        const newFile = new File(BUCKET, 'new-filename');
+        file.copy = (destination: {}, options: {}, callback: Function) => {
+          callback(null, newFile, copyApiResponse);
+        };
+        file.delete = ({}, callback: Function) => {
+          callback();
+        };
+
+        file.move(
+          'new-filename',
+          (err: Error, destinationFile: File, apiResponse: {}) => {
+            assert.ifError(err);
+            assert.strictEqual(destinationFile, newFile);
+            assert.strictEqual(apiResponse, copyApiResponse);
+            done();
+          }
+        );
+      });
+
       it('should delete if copy is successful', done => {
         const destinationFile = {bucket: {}};
         file.copy = (destination: {}, options: {}, callback: Function) => {
@@ -3516,7 +3542,8 @@ describe('File', () => {
       });
 
       it('should fail if delete fails', done => {
-        const error = new Error('Error.');
+        const originalErrorMessage = 'Original error message.';
+        const error = new Error(originalErrorMessage);
         const destinationFile = {bucket: {}};
         file.copy = (destination: {}, options: {}, callback: Function) => {
           callback(null, destinationFile);
@@ -3526,6 +3553,10 @@ describe('File', () => {
         };
         file.move('new-filename', (err: Error) => {
           assert.strictEqual(err, error);
+          assert.strictEqual(
+            err.message,
+            `file#delete failed with an error - ${originalErrorMessage}`
+          );
           done();
         });
       });
