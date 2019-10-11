@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.4.0...v2.5.0) (2019-10-11)
+
+
+### Features
+
+* remove v1beta1 API support ([d8ffe44](https://www.github.com/googleapis/nodejs-video-intelligence/commit/d8ffe443ec7a967c4fef802b0b32b7c3a616f23d))
+
+
+### Bug Fixes
+
+* remove tests for the removed API ([#306](https://www.github.com/googleapis/nodejs-video-intelligence/issues/306)) ([4d2792c](https://www.github.com/googleapis/nodejs-video-intelligence/commit/4d2792ca820b64aee4803cd3c34163ea3294739f))
+* use compatible version of google-gax ([82f7021](https://www.github.com/googleapis/nodejs-video-intelligence/commit/82f70216edc7e022f2d5c0589bcd7aee9b2293e9))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.3.0...v2.4.0) (2019-09-30)
 
 
