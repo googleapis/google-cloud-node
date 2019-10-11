@@ -31,9 +31,6 @@
  * @namespace google.cloud.videointelligence.v1beta2
  */
 /**
- * @namespace google.cloud.videointelligence.v1beta1
- */
-/**
  * @namespace google.cloud.videointelligence.v1p1beta1
  */
 /**
@@ -49,7 +46,6 @@
 const gapic = Object.freeze({
   v1: require('./v1'),
   v1beta2: require('./v1beta2'),
-  v1beta1: require('./v1beta1'),
   v1p1beta1: require('./v1p1beta1'),
   v1p2beta1: require('./v1p2beta1'),
   v1p3beta1: require('./v1p3beta1'),
@@ -68,10 +64,6 @@ const gapic = Object.freeze({
  *   particular backend service version. It exports:
  *     - `VideoIntelligenceServiceClient` - Reference to
  *       {@link v1beta2.VideoIntelligenceServiceClient}
- * - `v1beta1` - This is used for selecting or pinning a
- *   particular backend service version. It exports:
- *     - `VideoIntelligenceServiceClient` - Reference to
- *       {@link v1beta1.VideoIntelligenceServiceClient}
  * - `v1p1beta1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `VideoIntelligenceServiceClient` - Reference to
@@ -128,13 +120,6 @@ module.exports.v1 = gapic.v1;
  *   Reference to {@link v1beta2.VideoIntelligenceServiceClient}
  */
 module.exports.v1beta2 = gapic.v1beta2;
-
-/**
- * @type {object}
- * @property {constructor} VideoIntelligenceServiceClient
- *   Reference to {@link v1beta1.VideoIntelligenceServiceClient}
- */
-module.exports.v1beta1 = gapic.v1beta1;
 
 /**
  * @type {object}
