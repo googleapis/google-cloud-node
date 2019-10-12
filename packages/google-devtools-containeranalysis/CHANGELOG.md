@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.4.0...v1.5.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v1 ([#84](https://www.github.com/googleapis/nodejs-containeranalysis/issues/84)) ([3592d57](https://www.github.com/googleapis/nodejs-containeranalysis/commit/3592d57))
+* use compatible version of google-gax ([894a286](https://www.github.com/googleapis/nodejs-containeranalysis/commit/894a286))
+
+
+### Features
+
+* .d.ts for protos ([#86](https://www.github.com/googleapis/nodejs-containeranalysis/issues/86)) ([0c2c19c](https://www.github.com/googleapis/nodejs-containeranalysis/commit/0c2c19c))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.3.3...v1.4.0) (2019-09-16)
 
 
