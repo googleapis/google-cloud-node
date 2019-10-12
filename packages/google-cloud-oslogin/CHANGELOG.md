@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.2.0...v1.3.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([ffd6424](https://www.github.com/googleapis/nodejs-os-login/commit/ffd6424))
+
+
+### Features
+
+* .d.ts for protos ([#231](https://www.github.com/googleapis/nodejs-os-login/issues/231)) ([233dbbe](https://www.github.com/googleapis/nodejs-os-login/commit/233dbbe))
+* add name and operating system type fields ([#241](https://www.github.com/googleapis/nodejs-os-login/issues/241)) ([b40e175](https://www.github.com/googleapis/nodejs-os-login/commit/b40e175))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.4...v1.2.0) (2019-09-09)
 
 
