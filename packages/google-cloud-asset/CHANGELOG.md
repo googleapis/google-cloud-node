@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.3.0...v1.4.0) (2019-10-12)
+
+
+### Features
+
+* .d.ts for protos ([#197](https://www.github.com/googleapis/nodejs-asset/issues/197)) ([8f639cc](https://www.github.com/googleapis/nodejs-asset/commit/8f639cc1243bda24a83dd1005370a52eecd48654))
+* add BigQuery destination and proto types ([#206](https://www.github.com/googleapis/nodejs-asset/issues/206)) ([3834c36](https://www.github.com/googleapis/nodejs-asset/commit/3834c36ae39f4f0d98b03c2163ea92fccd51fc2f))
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([332323f](https://www.github.com/googleapis/nodejs-asset/commit/332323ff561c8d7fa23b3344e00226defb51d435))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.2.1...v1.3.0) (2019-09-16)
 
 
