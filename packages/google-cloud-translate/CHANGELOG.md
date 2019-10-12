@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.3...v4.2.0) (2019-10-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([3d6b18d](https://www.github.com/googleapis/nodejs-translate/commit/3d6b18d))
+* **deps:** use the latest extend ([#316](https://www.github.com/googleapis/nodejs-translate/issues/316)) ([f7ca873](https://www.github.com/googleapis/nodejs-translate/commit/f7ca873))
+* **docs:** stop linking reference documents to anchor ([f935f91](https://www.github.com/googleapis/nodejs-translate/commit/f935f91))
+* **samples:** use us-central1 region (not global) ([#322](https://www.github.com/googleapis/nodejs-translate/issues/322)) ([8500423](https://www.github.com/googleapis/nodejs-translate/commit/8500423))
+* add filter to method signature ([f6fb81e](https://www.github.com/googleapis/nodejs-translate/commit/f6fb81e))
+* hybrid glossaries  ([#338](https://www.github.com/googleapis/nodejs-translate/issues/338)) ([d37671a](https://www.github.com/googleapis/nodejs-translate/commit/d37671a))
+* hybrid glossary tutorial region tag ([#334](https://www.github.com/googleapis/nodejs-translate/issues/334)) ([d61836d](https://www.github.com/googleapis/nodejs-translate/commit/d61836d))
+* use compatible version of google-gax ([620304e](https://www.github.com/googleapis/nodejs-translate/commit/620304e))
+* use correct version for x-goog-api-client header ([50950c9](https://www.github.com/googleapis/nodejs-translate/commit/50950c9))
+
+
+### Features
+
+* add label support ([#331](https://www.github.com/googleapis/nodejs-translate/issues/331)) ([c912f71](https://www.github.com/googleapis/nodejs-translate/commit/c912f71))
+* load protos from JSON, grpc-fallback support ([423c336](https://www.github.com/googleapis/nodejs-translate/commit/423c336))
+* samples for hybrid glossaries tutorial ([#327](https://www.github.com/googleapis/nodejs-translate/issues/327)) ([96ec12f](https://www.github.com/googleapis/nodejs-translate/commit/96ec12f))
+
 ### [4.1.3](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.2...v4.1.3) (2019-08-05)
 
 
