@@ -16,19 +16,25 @@
                   },
                   "nested": {
                     "CloudScheduler": {
+                      "options": {
+                        "(google.api.default_host)": "cloudscheduler.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
                           "responseType": "ListJobsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateJob": {
@@ -36,7 +42,8 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobs",
-                            "(google.api.http).body": "job"
+                            "(google.api.http).body": "job",
+                            "(google.api.method_signature)": "parent,job"
                           }
                         },
                         "UpdateJob": {
@@ -44,14 +51,16 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).patch": "/v1/{job.name=projects/*/locations/*/jobs/*}",
-                            "(google.api.http).body": "job"
+                            "(google.api.http).body": "job",
+                            "(google.api.method_signature)": "job,update_mask"
                           }
                         },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "PauseJob": {
@@ -59,7 +68,8 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:pause",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ResumeJob": {
@@ -67,7 +77,8 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:resume",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "RunJob": {
@@ -75,7 +86,8 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:run",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         }
                       }
@@ -84,7 +96,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -113,7 +129,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
+                          }
                         }
                       }
                     },
@@ -121,11 +141,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                          }
                         },
                         "job": {
                           "type": "Job",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -133,11 +160,17 @@
                       "fields": {
                         "job": {
                           "type": "Job",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -145,7 +178,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
+                          }
                         }
                       }
                     },
@@ -153,7 +190,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
+                          }
                         }
                       }
                     },
@@ -161,7 +202,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
+                          }
                         }
                       }
                     },
@@ -169,11 +214,19 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudscheduler.googleapis.com/Job"
+                          }
                         }
                       }
                     },
                     "Job": {
+                      "options": {
+                        "(google.api.resource).type": "cloudscheduler.googleapis.com/Job",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/jobs/{job}"
+                      },
                       "oneofs": {
                         "target": {
                           "oneof": [
@@ -343,7 +396,10 @@
                       "fields": {
                         "topicName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
+                          }
                         },
                         "data": {
                           "type": "bytes",
@@ -921,6 +977,38 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             },
             "resourceReference": {
@@ -1868,6 +1956,18 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -1901,18 +2001,6 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
-                }
-              }
-            },
-            "Empty": {
-              "fields": {}
-            },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
                 }
               }
             }

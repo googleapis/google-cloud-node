@@ -246,9 +246,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -361,9 +359,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -409,9 +405,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -466,14 +460,10 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The job to add. The user can optionally specify a name for the
+   *   Required. The job to add. The user can optionally specify a name for the
    *   job in name. name cannot be the same as an
    *   existing job. If a name is not specified then the system will
    *   generate a random unique name that will be returned
@@ -546,9 +536,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The new job properties. name must be specified.
+   *   Required. The new job properties. name must be specified.
    *
    *   Output only fields cannot be modified using UpdateJob.
    *   Any value specified for an output only field will be ignored.
@@ -616,9 +604,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -671,9 +657,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -733,9 +717,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -793,9 +775,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,

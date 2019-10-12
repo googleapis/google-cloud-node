@@ -24,9 +24,7 @@
  * returned by the redirected request is considered.
  *
  * @property {string} uri
- *   Required.
- *
- *   The full URI path that the request will be sent to. This string
+ *   Required. The full URI path that the request will be sent to. This string
  *   must begin with either "http://" or "https://". Some examples of
  *   valid values for uri are:
  *   `http://acme.com` and `https://acme.com/sales:8080`. Cloud Scheduler will
@@ -66,8 +64,8 @@
  *   will be generated and attached as an `Authorization` header in the HTTP
  *   request.
  *
- *   This type of authorization should be used when sending requests to a GCP
- *   endpoint.
+ *   This type of authorization should generally only be used when calling
+ *   Google APIs hosted on *.googleapis.com.
  *
  *   This object should have the same structure as [OAuthToken]{@link google.cloud.scheduler.v1.OAuthToken}
  *
@@ -77,8 +75,9 @@
  *   token will be generated and attached as an `Authorization` header in the
  *   HTTP request.
  *
- *   This type of authorization should be used when sending requests to third
- *   party endpoints or Cloud Run.
+ *   This type of authorization can be used for many scenarios, including
+ *   calling Cloud Run, or endpoints where you intend to validate the token
+ *   yourself.
  *
  *   This object should have the same structure as [OidcToken]{@link google.cloud.scheduler.v1.OidcToken}
  *
@@ -174,9 +173,7 @@ const AppEngineHttpTarget = {
  * the given Pub/Sub topic.
  *
  * @property {string} topicName
- *   Required.
- *
- *   The name of the Cloud Pub/Sub topic to which messages will
+ *   Required. The name of the Cloud Pub/Sub topic to which messages will
  *   be published when a job is delivered. The topic name must be in the
  *   same format as required by PubSub's
  *   [PublishRequest.name](https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#publishrequest),
@@ -315,8 +312,8 @@ const AppEngineRouting = {
 /**
  * Contains information needed for generating an
  * [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
- * This type of authorization should be used when sending requests to a GCP
- * endpoint.
+ * This type of authorization should generally only be used when calling Google
+ * APIs hosted on *.googleapis.com.
  *
  * @property {string} serviceAccountEmail
  *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
@@ -340,9 +337,10 @@ const OAuthToken = {
 /**
  * Contains information needed for generating an
  * [OpenID Connect
- * token](https://developers.google.com/identity/protocols/OpenIDConnect). This
- * type of authorization should be used when sending requests to third party
- * endpoints or Cloud Run.
+ * token](https://developers.google.com/identity/protocols/OpenIDConnect).
+ * This type of authorization can be used for many scenarios, including
+ * calling Cloud Run, or endpoints where you intend to validate the token
+ * yourself.
  *
  * @property {string} serviceAccountEmail
  *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
