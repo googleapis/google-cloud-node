@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.1.0...v2.2.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([e85bac4](https://www.github.com/googleapis/nodejs-security-center/commit/e85bac4))
+
+
+### Features
+
+* .d.ts for protos ([#148](https://www.github.com/googleapis/nodejs-security-center/issues/148)) ([f10a7ab](https://www.github.com/googleapis/nodejs-security-center/commit/f10a7ab))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.0.1...v2.1.0) (2019-09-06)
 
 
