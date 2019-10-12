@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.3.0...v1.4.0) (2019-10-08)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([0bacf46](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/0bacf46))
+
+
+### Features
+
+* support new proto field options ([#252](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/252)) ([261e075](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/261e075))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.2.5...v1.3.0) (2019-09-06)
 
 
