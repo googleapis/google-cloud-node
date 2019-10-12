@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.2.0...v1.3.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* re-order create and update instance methods ([#217](https://www.github.com/googleapis/nodejs-redis/issues/217)) ([87bc51e](https://www.github.com/googleapis/nodejs-redis/commit/87bc51e))
+* use compatible version of google-gax ([1ce0eab](https://www.github.com/googleapis/nodejs-redis/commit/1ce0eab))
+
+
+### Features
+
+* .d.ts for protos ([#208](https://www.github.com/googleapis/nodejs-redis/issues/208)) ([7305237](https://www.github.com/googleapis/nodejs-redis/commit/7305237))
+* support new field options ([#210](https://www.github.com/googleapis/nodejs-redis/issues/210)) ([b81babd](https://www.github.com/googleapis/nodejs-redis/commit/b81babd))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.4...v1.2.0) (2019-09-16)
 
 
