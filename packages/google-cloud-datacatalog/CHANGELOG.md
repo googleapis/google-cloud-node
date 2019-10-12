@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.1.0...v1.2.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([c854efc](https://www.github.com/googleapis/nodejs-datacatalog/commit/c854efc))
+
+
+### Features
+
+* .d.ts for protos ([26e81a4](https://www.github.com/googleapis/nodejs-datacatalog/commit/26e81a4))
+* .d.ts for protos ([#39](https://www.github.com/googleapis/nodejs-datacatalog/issues/39)) ([8090b3e](https://www.github.com/googleapis/nodejs-datacatalog/commit/8090b3e))
+* introduces new proto annotations ([9e03bc7](https://www.github.com/googleapis/nodejs-datacatalog/commit/9e03bc7))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.0.2...v1.1.0) (2019-09-15)
 
 
