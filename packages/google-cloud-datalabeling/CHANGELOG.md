@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.2.0...v1.3.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([716b9f6](https://www.github.com/googleapis/nodejs-datalabeling/commit/716b9f6))
+
+
+### Features
+
+* .d.ts for protos ([#72](https://www.github.com/googleapis/nodejs-datalabeling/issues/72)) ([f6b4d28](https://www.github.com/googleapis/nodejs-datalabeling/commit/f6b4d28))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.1.3...v1.2.0) (2019-09-16)
 
 
