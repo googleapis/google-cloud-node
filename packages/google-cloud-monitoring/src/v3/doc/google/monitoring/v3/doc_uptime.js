@@ -169,6 +169,12 @@ const InternalChecker = {
  *
  *   The number should be among the values of [UptimeCheckRegion]{@link google.monitoring.v3.UptimeCheckRegion}
  *
+ * @property {boolean} isInternal
+ *   If this is `true`, then checks are made only from the 'internal_checkers'.
+ *   If it is `false`, then checks are made only from the 'selected_regions'.
+ *   It is an error to provide 'selected_regions' when is_internal is `true`,
+ *   or to provide 'internal_checkers' when is_internal is `false`.
+ *
  * @property {Object[]} internalCheckers
  *   The internal checkers that this check will egress from. If `is_internal` is
  *   `true` and this list is empty, the check will egress from all the

@@ -2183,9 +2183,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
+      const isInternal = true;
       const expectedResponse = {
         name: name2,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer
@@ -2250,9 +2252,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const isInternal = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer
@@ -2314,9 +2318,11 @@ describe('UptimeCheckServiceClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const isInternal = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        isInternal: isInternal,
       };
 
       // Mock Grpc layer
