@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-language/compare/v3.4.0...v3.5.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* update analyze.v1.js ([#306](https://www.github.com/googleapis/nodejs-language/issues/306)) ([1624e83](https://www.github.com/googleapis/nodejs-language/commit/1624e83))
+* use compatible version of google-gax ([2edf66e](https://www.github.com/googleapis/nodejs-language/commit/2edf66e))
+
+
+### Features
+
+* introduces additional message types ([#302](https://www.github.com/googleapis/nodejs-language/issues/302)) ([b094572](https://www.github.com/googleapis/nodejs-language/commit/b094572))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-language/compare/v3.3.0...v3.4.0) (2019-09-26)
 
 
