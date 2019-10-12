@@ -268,9 +268,9 @@ class AssetServiceClient {
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
    * @param {string[]} [request.assetTypes]
    *   A list of asset types of which to take a snapshot for. For example:
-   *   "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
-   *   See [Introduction to Cloud Asset
-   *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+   *   "compute.googleapis.com/Disk". If specified, only matching assets will be
+   *   returned. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
    *   for all supported asset types.
    * @param {number} [request.contentType]
    *   Asset content type. If not specified, no content but the asset name will be
@@ -399,7 +399,7 @@ class AssetServiceClient {
    *   organization number (such as "organizations/123"), a project ID (such as
    *   "projects/my-project-id")", or a project number (such as "projects/12345").
    * @param {number} request.contentType
-   *   Required. The content type.
+   *   Optional. The content type.
    *
    *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1.ContentType}
    * @param {Object} request.readTimeWindow
@@ -416,7 +416,8 @@ class AssetServiceClient {
    *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
    *   See [Resource
    *   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
-   *   and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
+   *   and [Resource Name
+   *   Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
    *   for more info.
    *
    *   The request becomes a no-op if the asset name list is empty, and the max

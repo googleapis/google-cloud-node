@@ -35,9 +35,9 @@
  *
  * @property {string[]} assetTypes
  *   A list of asset types of which to take a snapshot for. For example:
- *   "compute.googleapis.com/Disk". If specified, only matching assets will be returned.
- *   See [Introduction to Cloud Asset
- *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+ *   "compute.googleapis.com/Disk". If specified, only matching assets will be
+ *   returned. See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
  *   for all supported asset types.
  *
  * @property {number} contentType
@@ -97,14 +97,15 @@ const ExportAssetsResponse = {
  *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
  *   See [Resource
  *   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
- *   and [Resource Name Format](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/resource-name-format)
+ *   and [Resource Name
+ *   Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
  *   for more info.
  *
  *   The request becomes a no-op if the asset name list is empty, and the max
  *   size of the asset name list is 100 in one request.
  *
  * @property {number} contentType
- *   Required. The content type.
+ *   Optional. The content type.
  *
  *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1.ContentType}
  *
@@ -150,6 +151,14 @@ const BatchGetAssetsHistoryResponse = {
  *
  *   This object should have the same structure as [GcsDestination]{@link google.cloud.asset.v1.GcsDestination}
  *
+ * @property {Object} bigqueryDestination
+ *   Destination on BigQuery. The output table stores the fields in asset
+ *   proto as columns in BigQuery. The resource/iam_policy field is converted
+ *   to a record with each field to a column, except metadata to a single JSON
+ *   string.
+ *
+ *   This object should have the same structure as [BigQueryDestination]{@link google.cloud.asset.v1.BigQueryDestination}
+ *
  * @typedef OutputConfig
  * @memberof google.cloud.asset.v1
  * @see [google.cloud.asset.v1.OutputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
@@ -168,11 +177,50 @@ const OutputConfig = {
  *   Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
  *   for more information.
  *
+ * @property {string} uriPrefix
+ *   The uri prefix of all generated Cloud Storage objects. For example:
+ *   "gs://bucket_name/object_name_prefix". Each object uri is in format:
+ *   "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
+ *   contains assets for that type. <shard number> starts from 0. For example:
+ *   "gs://bucket_name/object_name_prefix/compute.googleapis.com/Disk/0" is
+ *   the first shard of output objects containing all
+ *   compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error will be
+ *   returned if file with the same name "gs://bucket_name/object_name_prefix"
+ *   already exists.
+ *
  * @typedef GcsDestination
  * @memberof google.cloud.asset.v1
  * @see [google.cloud.asset.v1.GcsDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
  */
 const GcsDestination = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A BigQuery destination.
+ *
+ * @property {string} dataset
+ *   Required. The BigQuery dataset in format
+ *   "projects/projectId/datasets/datasetId", to which the snapshot result
+ *   should be exported. If this dataset does not exist, the export call returns
+ *   an error.
+ *
+ * @property {string} table
+ *   Required. The BigQuery table to which the snapshot result should be
+ *   written. If this table does not exist, a new table with the given name
+ *   will be created.
+ *
+ * @property {boolean} force
+ *   If the destination table already exists and this flag is `TRUE`, the
+ *   table will be overwritten by the contents of assets snapshot. If the flag
+ *   is not set and the destination table already exists, the export call
+ *   returns an error.
+ *
+ * @typedef BigQueryDestination
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.BigQueryDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const BigQueryDestination = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -197,5 +245,15 @@ const ContentType = {
   /**
    * The actual IAM policy set on a resource.
    */
-  IAM_POLICY: 2
+  IAM_POLICY: 2,
+
+  /**
+   * The Cloud Organization Policy set on an asset.
+   */
+  ORG_POLICY: 4,
+
+  /**
+   * The Cloud Access context mananger Policy set on an asset.
+   */
+  ACCESS_POLICY: 5
 };
