@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.3.0...v1.4.0) (2019-10-12)
+
+
+### Features
+
+* .d.ts for protos ([#298](https://www.github.com/googleapis/nodejs-monitoring/issues/298)) ([dc6e8a1](https://www.github.com/googleapis/nodejs-monitoring/commit/dc6e8a1b82b41638ad873ec35007415f602c8b0b))
+
+
+### Bug Fixes
+
+* update sample for enabling or disabling a policy ([#305](https://www.github.com/googleapis/nodejs-monitoring/issues/305)) ([fd84c71](https://www.github.com/googleapis/nodejs-monitoring/commit/fd84c71ab4511c11963c8480cda70117f78f8651))
+* use compatible version of google-gax ([c210d32](https://www.github.com/googleapis/nodejs-monitoring/commit/c210d320a392fb33e6a6779ae4d727a6970326da))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.3...v1.3.0) (2019-09-16)
 
 
