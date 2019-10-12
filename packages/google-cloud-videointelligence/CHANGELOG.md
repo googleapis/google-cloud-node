@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.5.0...v2.5.1) (2019-10-12)
+
+
+### Bug Fixes
+
+* update retry logic and remove unused protos ([#307](https://www.github.com/googleapis/nodejs-video-intelligence/issues/307)) ([c42afbc](https://www.github.com/googleapis/nodejs-video-intelligence/commit/c42afbc327958f515ad5589ed03271490fd3b4fc))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.4.0...v2.5.0) (2019-10-11)
 
 
