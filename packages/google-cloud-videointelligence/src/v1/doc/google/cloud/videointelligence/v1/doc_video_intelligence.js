@@ -23,10 +23,10 @@
  *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT). For
- *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
- *   URI may include wildcards in `object-id`, and thus identify multiple
- *   videos. Supported wildcards: '*' to match 0 or more characters;
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+ *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   A video URI may include wildcards in `object-id`, and thus identify
+ *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
  *   '?' to match 1 character. If unset, the input video should be embedded
  *   in the request as `input_content`. If set, `input_content` should be unset.
  *
@@ -36,7 +36,7 @@
  *   If set, `input_uri` should be unset.
  *
  * @property {number[]} features
- *   Requested video annotation features.
+ *   Required. Requested video annotation features.
  *
  *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1.Feature}
  *
@@ -46,15 +46,15 @@
  *   This object should have the same structure as [VideoContext]{@link google.cloud.videointelligence.v1.VideoContext}
  *
  * @property {string} outputUri
- *   Optional location where the output (in JSON format) should be stored.
+ *   Optional. Location where the output (in JSON format) should be stored.
  *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
  *   URIs are supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT). For
- *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+ *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @property {string} locationId
- *   Optional cloud region where annotation should take place. Supported cloud
+ *   Optional. Cloud region where annotation should take place. Supported cloud
  *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
  *   is specified, a region will be determined based on video file location.
  *
@@ -180,18 +180,18 @@ const ShotChangeDetectionConfig = {
 };
 
 /**
- * Config for EXPLICIT_CONTENT_DETECTION.
+ * Config for OBJECT_TRACKING.
  *
  * @property {string} model
- *   Model to use for explicit content detection.
+ *   Model to use for object tracking.
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
- * @typedef ExplicitContentDetectionConfig
+ * @typedef ObjectTrackingConfig
  * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ * @see [google.cloud.videointelligence.v1.ObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
  */
-const ExplicitContentDetectionConfig = {
+const ObjectTrackingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -215,18 +215,18 @@ const FaceDetectionConfig = {
 };
 
 /**
- * Config for OBJECT_TRACKING.
+ * Config for EXPLICIT_CONTENT_DETECTION.
  *
  * @property {string} model
- *   Model to use for object tracking.
+ *   Model to use for explicit content detection.
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
- * @typedef ObjectTrackingConfig
+ * @typedef ExplicitContentDetectionConfig
  * @memberof google.cloud.videointelligence.v1
- * @see [google.cloud.videointelligence.v1.ObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ * @see [google.cloud.videointelligence.v1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
  */
-const ObjectTrackingConfig = {
+const ExplicitContentDetectionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -520,8 +520,11 @@ const FaceAnnotation = {
  *
  * @property {Object[]} segmentPresenceLabelAnnotations
  *   Presence label annotations on video level or user specified segment level.
- *   There is exactly one element for each unique label. This will eventually
- *   get publicly exposed and the restriction will be removed.
+ *   There is exactly one element for each unique label. Compared to the
+ *   existing topical `segment_label_annotations`, this field presents more
+ *   fine-grained, segment-level labels detected in video content and is made
+ *   available only when the client sets `LabelDetectionConfig.model` to
+ *   "builtin/latest" in the request.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
@@ -533,8 +536,10 @@ const FaceAnnotation = {
  *
  * @property {Object[]} shotPresenceLabelAnnotations
  *   Presence label annotations on shot level. There is exactly one element for
- *   each unique label. This will eventually get publicly exposed and the
- *   restriction will be removed.
+ *   each unique label. Compared to the existing topical
+ *   `shot_label_annotations`, this field presents more fine-grained, shot-level
+ *   labels detected in video content and is made available only when the client
+ *   sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
@@ -671,32 +676,32 @@ const AnnotateVideoProgress = {
  * Config for SPEECH_TRANSCRIPTION.
  *
  * @property {string} languageCode
- *   *Required* The language of the supplied audio as a
+ *   Required. *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
  *   See [Language Support](https://cloud.google.com/speech/docs/languages)
  *   for a list of the currently supported language codes.
  *
  * @property {number} maxAlternatives
- *   *Optional* Maximum number of recognition hypotheses to be returned.
+ *   Optional. Maximum number of recognition hypotheses to be returned.
  *   Specifically, the maximum number of `SpeechRecognitionAlternative` messages
  *   within each `SpeechTranscription`. The server may return fewer than
  *   `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
  *   return a maximum of one. If omitted, will return a maximum of one.
  *
  * @property {boolean} filterProfanity
- *   *Optional* If set to `true`, the server will attempt to filter out
+ *   Optional. If set to `true`, the server will attempt to filter out
  *   profanities, replacing all but the initial character in each filtered word
  *   with asterisks, e.g. "f***". If set to `false` or omitted, profanities
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* A means to provide context to assist the speech recognition.
+ *   Optional. A means to provide context to assist the speech recognition.
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.videointelligence.v1.SpeechContext}
  *
  * @property {boolean} enableAutomaticPunctuation
- *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   Optional. If 'true', adds punctuation to recognition result hypotheses.
  *   This feature is only available in select languages. Setting this for
  *   requests in other languages has no effect at all. The default 'false' value
  *   does not add punctuation to result hypotheses. NOTE: "This is currently
@@ -704,11 +709,11 @@ const AnnotateVideoProgress = {
  *   future this may be exclusively available as a premium feature."
  *
  * @property {number[]} audioTracks
- *   *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+ *   Optional. For file formats, such as MXF or MKV, supporting multiple audio
  *   tracks, specify up to two tracks. Default: track 0.
  *
  * @property {boolean} enableSpeakerDiarization
- *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   Optional. If 'true', enables speaker detection for each recognized word in
  *   the top alternative of the recognition result using a speaker_tag provided
  *   in the WordInfo.
  *   Note: When this is true, we send all the words from the beginning of the
@@ -717,13 +722,12 @@ const AnnotateVideoProgress = {
  *   identify the speakers in the conversation over time.
  *
  * @property {number} diarizationSpeakerCount
- *   *Optional*
- *   If set, specifies the estimated number of speakers in the conversation.
+ *   Optional. If set, specifies the estimated number of speakers in the conversation.
  *   If not set, defaults to '2'.
  *   Ignored unless enable_speaker_diarization is set to true.
  *
  * @property {boolean} enableWordConfidence
- *   *Optional* If `true`, the top result includes a list of words and the
+ *   Optional. If `true`, the top result includes a list of words and the
  *   confidence for those words. If `false`, no word-level confidence
  *   information is returned. The default is `false`.
  *
@@ -740,7 +744,7 @@ const SpeechTranscriptionConfig = {
  * in the results.
  *
  * @property {string[]} phrases
- *   *Optional* A list of strings containing words and phrases "hints" so that
+ *   Optional. A list of strings containing words and phrases "hints" so that
  *   the speech recognition is more likely to recognize them. This can be used
  *   to improve the accuracy for specific words and phrases, for example, if
  *   specific commands are typically spoken by the user. This can also be used
@@ -767,10 +771,9 @@ const SpeechContext = {
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.videointelligence.v1.SpeechRecognitionAlternative}
  *
  * @property {string} languageCode
- *   Output only. The
- *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
- *   language in this result. This language code was detected to have the most
- *   likelihood of being spoken in the audio.
+ *   Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of
+ *   the language in this result. This language code was detected to have the
+ *   most likelihood of being spoken in the audio.
  *
  * @typedef SpeechTranscription
  * @memberof google.cloud.videointelligence.v1

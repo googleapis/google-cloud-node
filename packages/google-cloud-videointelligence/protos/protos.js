@@ -901,6 +901,72 @@
                         return VideoContext;
                     })();
     
+                    /**
+                     * Feature enum.
+                     * @name google.cloud.videointelligence.v1.Feature
+                     * @enum {string}
+                     * @property {number} FEATURE_UNSPECIFIED=0 FEATURE_UNSPECIFIED value
+                     * @property {number} LABEL_DETECTION=1 LABEL_DETECTION value
+                     * @property {number} SHOT_CHANGE_DETECTION=2 SHOT_CHANGE_DETECTION value
+                     * @property {number} EXPLICIT_CONTENT_DETECTION=3 EXPLICIT_CONTENT_DETECTION value
+                     * @property {number} FACE_DETECTION=4 FACE_DETECTION value
+                     * @property {number} SPEECH_TRANSCRIPTION=6 SPEECH_TRANSCRIPTION value
+                     * @property {number} TEXT_DETECTION=7 TEXT_DETECTION value
+                     * @property {number} OBJECT_TRACKING=9 OBJECT_TRACKING value
+                     */
+                    v1.Feature = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FEATURE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LABEL_DETECTION"] = 1;
+                        values[valuesById[2] = "SHOT_CHANGE_DETECTION"] = 2;
+                        values[valuesById[3] = "EXPLICIT_CONTENT_DETECTION"] = 3;
+                        values[valuesById[4] = "FACE_DETECTION"] = 4;
+                        values[valuesById[6] = "SPEECH_TRANSCRIPTION"] = 6;
+                        values[valuesById[7] = "TEXT_DETECTION"] = 7;
+                        values[valuesById[9] = "OBJECT_TRACKING"] = 9;
+                        return values;
+                    })();
+    
+                    /**
+                     * LabelDetectionMode enum.
+                     * @name google.cloud.videointelligence.v1.LabelDetectionMode
+                     * @enum {string}
+                     * @property {number} LABEL_DETECTION_MODE_UNSPECIFIED=0 LABEL_DETECTION_MODE_UNSPECIFIED value
+                     * @property {number} SHOT_MODE=1 SHOT_MODE value
+                     * @property {number} FRAME_MODE=2 FRAME_MODE value
+                     * @property {number} SHOT_AND_FRAME_MODE=3 SHOT_AND_FRAME_MODE value
+                     */
+                    v1.LabelDetectionMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LABEL_DETECTION_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SHOT_MODE"] = 1;
+                        values[valuesById[2] = "FRAME_MODE"] = 2;
+                        values[valuesById[3] = "SHOT_AND_FRAME_MODE"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * Likelihood enum.
+                     * @name google.cloud.videointelligence.v1.Likelihood
+                     * @enum {string}
+                     * @property {number} LIKELIHOOD_UNSPECIFIED=0 LIKELIHOOD_UNSPECIFIED value
+                     * @property {number} VERY_UNLIKELY=1 VERY_UNLIKELY value
+                     * @property {number} UNLIKELY=2 UNLIKELY value
+                     * @property {number} POSSIBLE=3 POSSIBLE value
+                     * @property {number} LIKELY=4 LIKELY value
+                     * @property {number} VERY_LIKELY=5 VERY_LIKELY value
+                     */
+                    v1.Likelihood = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LIKELIHOOD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VERY_UNLIKELY"] = 1;
+                        values[valuesById[2] = "UNLIKELY"] = 2;
+                        values[valuesById[3] = "POSSIBLE"] = 3;
+                        values[valuesById[4] = "LIKELY"] = 4;
+                        values[valuesById[5] = "VERY_LIKELY"] = 5;
+                        return values;
+                    })();
+    
                     v1.LabelDetectionConfig = (function() {
     
                         /**
@@ -1387,24 +1453,24 @@
                         return ShotChangeDetectionConfig;
                     })();
     
-                    v1.ExplicitContentDetectionConfig = (function() {
+                    v1.ObjectTrackingConfig = (function() {
     
                         /**
-                         * Properties of an ExplicitContentDetectionConfig.
+                         * Properties of an ObjectTrackingConfig.
                          * @memberof google.cloud.videointelligence.v1
-                         * @interface IExplicitContentDetectionConfig
-                         * @property {string|null} [model] ExplicitContentDetectionConfig model
+                         * @interface IObjectTrackingConfig
+                         * @property {string|null} [model] ObjectTrackingConfig model
                          */
     
                         /**
-                         * Constructs a new ExplicitContentDetectionConfig.
+                         * Constructs a new ObjectTrackingConfig.
                          * @memberof google.cloud.videointelligence.v1
-                         * @classdesc Represents an ExplicitContentDetectionConfig.
-                         * @implements IExplicitContentDetectionConfig
+                         * @classdesc Represents an ObjectTrackingConfig.
+                         * @implements IObjectTrackingConfig
                          * @constructor
-                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig=} [properties] Properties to set
+                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig=} [properties] Properties to set
                          */
-                        function ExplicitContentDetectionConfig(properties) {
+                        function ObjectTrackingConfig(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1412,35 +1478,35 @@
                         }
     
                         /**
-                         * ExplicitContentDetectionConfig model.
+                         * ObjectTrackingConfig model.
                          * @member {string} model
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @instance
                          */
-                        ExplicitContentDetectionConfig.prototype.model = "";
+                        ObjectTrackingConfig.prototype.model = "";
     
                         /**
-                         * Creates a new ExplicitContentDetectionConfig instance using the specified properties.
+                         * Creates a new ObjectTrackingConfig instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig instance
+                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig instance
                          */
-                        ExplicitContentDetectionConfig.create = function create(properties) {
-                            return new ExplicitContentDetectionConfig(properties);
+                        ObjectTrackingConfig.create = function create(properties) {
+                            return new ObjectTrackingConfig(properties);
                         };
     
                         /**
-                         * Encodes the specified ExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
+                         * Encodes the specified ObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig} message ExplicitContentDetectionConfig message or plain object to encode
+                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig} message ObjectTrackingConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ExplicitContentDetectionConfig.encode = function encode(message, writer) {
+                        ObjectTrackingConfig.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -1449,33 +1515,33 @@
                         };
     
                         /**
-                         * Encodes the specified ExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
+                         * Encodes the specified ObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig} message ExplicitContentDetectionConfig message or plain object to encode
+                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig} message ObjectTrackingConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ExplicitContentDetectionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        ObjectTrackingConfig.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer.
+                         * Decodes an ObjectTrackingConfig message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
+                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExplicitContentDetectionConfig.decode = function decode(reader, length) {
+                        ObjectTrackingConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1.ObjectTrackingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1491,30 +1557,30 @@
                         };
     
                         /**
-                         * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
+                         * Decodes an ObjectTrackingConfig message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
+                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExplicitContentDetectionConfig.decodeDelimited = function decodeDelimited(reader) {
+                        ObjectTrackingConfig.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies an ExplicitContentDetectionConfig message.
+                         * Verifies an ObjectTrackingConfig message.
                          * @function verify
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ExplicitContentDetectionConfig.verify = function verify(message) {
+                        ObjectTrackingConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -1524,32 +1590,32 @@
                         };
     
                         /**
-                         * Creates an ExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                         * Creates an ObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
+                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
                          */
-                        ExplicitContentDetectionConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig)
+                        ObjectTrackingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1.ObjectTrackingConfig)
                                 return object;
-                            var message = new $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig();
+                            var message = new $root.google.cloud.videointelligence.v1.ObjectTrackingConfig();
                             if (object.model != null)
                                 message.model = String(object.model);
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from an ExplicitContentDetectionConfig message. Also converts values to other types if specified.
+                         * Creates a plain object from an ObjectTrackingConfig message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} message ExplicitContentDetectionConfig
+                         * @param {google.cloud.videointelligence.v1.ObjectTrackingConfig} message ObjectTrackingConfig
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ExplicitContentDetectionConfig.toObject = function toObject(message, options) {
+                        ObjectTrackingConfig.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -1561,17 +1627,17 @@
                         };
     
                         /**
-                         * Converts this ExplicitContentDetectionConfig to JSON.
+                         * Converts this ObjectTrackingConfig to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        ExplicitContentDetectionConfig.prototype.toJSON = function toJSON() {
+                        ObjectTrackingConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return ExplicitContentDetectionConfig;
+                        return ObjectTrackingConfig;
                     })();
     
                     v1.FaceDetectionConfig = (function() {
@@ -1784,24 +1850,24 @@
                         return FaceDetectionConfig;
                     })();
     
-                    v1.ObjectTrackingConfig = (function() {
+                    v1.ExplicitContentDetectionConfig = (function() {
     
                         /**
-                         * Properties of an ObjectTrackingConfig.
+                         * Properties of an ExplicitContentDetectionConfig.
                          * @memberof google.cloud.videointelligence.v1
-                         * @interface IObjectTrackingConfig
-                         * @property {string|null} [model] ObjectTrackingConfig model
+                         * @interface IExplicitContentDetectionConfig
+                         * @property {string|null} [model] ExplicitContentDetectionConfig model
                          */
     
                         /**
-                         * Constructs a new ObjectTrackingConfig.
+                         * Constructs a new ExplicitContentDetectionConfig.
                          * @memberof google.cloud.videointelligence.v1
-                         * @classdesc Represents an ObjectTrackingConfig.
-                         * @implements IObjectTrackingConfig
+                         * @classdesc Represents an ExplicitContentDetectionConfig.
+                         * @implements IExplicitContentDetectionConfig
                          * @constructor
-                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig=} [properties] Properties to set
+                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig=} [properties] Properties to set
                          */
-                        function ObjectTrackingConfig(properties) {
+                        function ExplicitContentDetectionConfig(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1809,35 +1875,35 @@
                         }
     
                         /**
-                         * ObjectTrackingConfig model.
+                         * ExplicitContentDetectionConfig model.
                          * @member {string} model
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @instance
                          */
-                        ObjectTrackingConfig.prototype.model = "";
+                        ExplicitContentDetectionConfig.prototype.model = "";
     
                         /**
-                         * Creates a new ObjectTrackingConfig instance using the specified properties.
+                         * Creates a new ExplicitContentDetectionConfig instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig instance
+                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig instance
                          */
-                        ObjectTrackingConfig.create = function create(properties) {
-                            return new ObjectTrackingConfig(properties);
+                        ExplicitContentDetectionConfig.create = function create(properties) {
+                            return new ExplicitContentDetectionConfig(properties);
                         };
     
                         /**
-                         * Encodes the specified ObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
+                         * Encodes the specified ExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig} message ObjectTrackingConfig message or plain object to encode
+                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig} message ExplicitContentDetectionConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ObjectTrackingConfig.encode = function encode(message, writer) {
+                        ExplicitContentDetectionConfig.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -1846,33 +1912,33 @@
                         };
     
                         /**
-                         * Encodes the specified ObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
+                         * Encodes the specified ExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.IObjectTrackingConfig} message ObjectTrackingConfig message or plain object to encode
+                         * @param {google.cloud.videointelligence.v1.IExplicitContentDetectionConfig} message ExplicitContentDetectionConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ObjectTrackingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        ExplicitContentDetectionConfig.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes an ObjectTrackingConfig message from the specified reader or buffer.
+                         * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
+                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ObjectTrackingConfig.decode = function decode(reader, length) {
+                        ExplicitContentDetectionConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1.ObjectTrackingConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -1888,30 +1954,30 @@
                         };
     
                         /**
-                         * Decodes an ObjectTrackingConfig message from the specified reader or buffer, length delimited.
+                         * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
+                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ObjectTrackingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        ExplicitContentDetectionConfig.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies an ObjectTrackingConfig message.
+                         * Verifies an ExplicitContentDetectionConfig message.
                          * @function verify
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ObjectTrackingConfig.verify = function verify(message) {
+                        ExplicitContentDetectionConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -1921,32 +1987,32 @@
                         };
     
                         /**
-                         * Creates an ObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
+                         * Creates an ExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1.ObjectTrackingConfig} ObjectTrackingConfig
+                         * @returns {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} ExplicitContentDetectionConfig
                          */
-                        ObjectTrackingConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1.ObjectTrackingConfig)
+                        ExplicitContentDetectionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig)
                                 return object;
-                            var message = new $root.google.cloud.videointelligence.v1.ObjectTrackingConfig();
+                            var message = new $root.google.cloud.videointelligence.v1.ExplicitContentDetectionConfig();
                             if (object.model != null)
                                 message.model = String(object.model);
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from an ObjectTrackingConfig message. Also converts values to other types if specified.
+                         * Creates a plain object from an ExplicitContentDetectionConfig message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @static
-                         * @param {google.cloud.videointelligence.v1.ObjectTrackingConfig} message ObjectTrackingConfig
+                         * @param {google.cloud.videointelligence.v1.ExplicitContentDetectionConfig} message ExplicitContentDetectionConfig
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        ObjectTrackingConfig.toObject = function toObject(message, options) {
+                        ExplicitContentDetectionConfig.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -1958,17 +2024,17 @@
                         };
     
                         /**
-                         * Converts this ObjectTrackingConfig to JSON.
+                         * Converts this ExplicitContentDetectionConfig to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1.ObjectTrackingConfig
+                         * @memberof google.cloud.videointelligence.v1.ExplicitContentDetectionConfig
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        ObjectTrackingConfig.prototype.toJSON = function toJSON() {
+                        ExplicitContentDetectionConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return ObjectTrackingConfig;
+                        return ExplicitContentDetectionConfig;
                     })();
     
                     v1.TextDetectionConfig = (function() {
@@ -9374,4017 +9440,7 @@
                         return ObjectTrackingAnnotation;
                     })();
     
-                    /**
-                     * Feature enum.
-                     * @name google.cloud.videointelligence.v1.Feature
-                     * @enum {string}
-                     * @property {number} FEATURE_UNSPECIFIED=0 FEATURE_UNSPECIFIED value
-                     * @property {number} LABEL_DETECTION=1 LABEL_DETECTION value
-                     * @property {number} SHOT_CHANGE_DETECTION=2 SHOT_CHANGE_DETECTION value
-                     * @property {number} EXPLICIT_CONTENT_DETECTION=3 EXPLICIT_CONTENT_DETECTION value
-                     * @property {number} FACE_DETECTION=4 FACE_DETECTION value
-                     * @property {number} SPEECH_TRANSCRIPTION=6 SPEECH_TRANSCRIPTION value
-                     * @property {number} TEXT_DETECTION=7 TEXT_DETECTION value
-                     * @property {number} OBJECT_TRACKING=9 OBJECT_TRACKING value
-                     */
-                    v1.Feature = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "FEATURE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LABEL_DETECTION"] = 1;
-                        values[valuesById[2] = "SHOT_CHANGE_DETECTION"] = 2;
-                        values[valuesById[3] = "EXPLICIT_CONTENT_DETECTION"] = 3;
-                        values[valuesById[4] = "FACE_DETECTION"] = 4;
-                        values[valuesById[6] = "SPEECH_TRANSCRIPTION"] = 6;
-                        values[valuesById[7] = "TEXT_DETECTION"] = 7;
-                        values[valuesById[9] = "OBJECT_TRACKING"] = 9;
-                        return values;
-                    })();
-    
-                    /**
-                     * LabelDetectionMode enum.
-                     * @name google.cloud.videointelligence.v1.LabelDetectionMode
-                     * @enum {string}
-                     * @property {number} LABEL_DETECTION_MODE_UNSPECIFIED=0 LABEL_DETECTION_MODE_UNSPECIFIED value
-                     * @property {number} SHOT_MODE=1 SHOT_MODE value
-                     * @property {number} FRAME_MODE=2 FRAME_MODE value
-                     * @property {number} SHOT_AND_FRAME_MODE=3 SHOT_AND_FRAME_MODE value
-                     */
-                    v1.LabelDetectionMode = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LABEL_DETECTION_MODE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SHOT_MODE"] = 1;
-                        values[valuesById[2] = "FRAME_MODE"] = 2;
-                        values[valuesById[3] = "SHOT_AND_FRAME_MODE"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * Likelihood enum.
-                     * @name google.cloud.videointelligence.v1.Likelihood
-                     * @enum {string}
-                     * @property {number} LIKELIHOOD_UNSPECIFIED=0 LIKELIHOOD_UNSPECIFIED value
-                     * @property {number} VERY_UNLIKELY=1 VERY_UNLIKELY value
-                     * @property {number} UNLIKELY=2 UNLIKELY value
-                     * @property {number} POSSIBLE=3 POSSIBLE value
-                     * @property {number} LIKELY=4 LIKELY value
-                     * @property {number} VERY_LIKELY=5 VERY_LIKELY value
-                     */
-                    v1.Likelihood = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LIKELIHOOD_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "VERY_UNLIKELY"] = 1;
-                        values[valuesById[2] = "UNLIKELY"] = 2;
-                        values[valuesById[3] = "POSSIBLE"] = 3;
-                        values[valuesById[4] = "LIKELY"] = 4;
-                        values[valuesById[5] = "VERY_LIKELY"] = 5;
-                        return values;
-                    })();
-    
                     return v1;
-                })();
-    
-                videointelligence.v1beta1 = (function() {
-    
-                    /**
-                     * Namespace v1beta1.
-                     * @memberof google.cloud.videointelligence
-                     * @namespace
-                     */
-                    var v1beta1 = {};
-    
-                    v1beta1.VideoIntelligenceService = (function() {
-    
-                        /**
-                         * Constructs a new VideoIntelligenceService service.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a VideoIntelligenceService
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function VideoIntelligenceService(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (VideoIntelligenceService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = VideoIntelligenceService;
-    
-                        /**
-                         * Creates new VideoIntelligenceService service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoIntelligenceService
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {VideoIntelligenceService} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        VideoIntelligenceService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.videointelligence.v1beta1.VideoIntelligenceService#annotateVideo}.
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoIntelligenceService
-                         * @typedef AnnotateVideoCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.longrunning.Operation} [response] Operation
-                         */
-    
-                        /**
-                         * Calls AnnotateVideo.
-                         * @function annotateVideo
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoIntelligenceService
-                         * @instance
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest} request AnnotateVideoRequest message or plain object
-                         * @param {google.cloud.videointelligence.v1beta1.VideoIntelligenceService.AnnotateVideoCallback} callback Node-style callback called with the error, if any, and Operation
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(VideoIntelligenceService.prototype.annotateVideo = function annotateVideo(request, callback) {
-                            return this.rpcCall(annotateVideo, $root.google.cloud.videointelligence.v1beta1.AnnotateVideoRequest, $root.google.longrunning.Operation, request, callback);
-                        }, "name", { value: "AnnotateVideo" });
-    
-                        /**
-                         * Calls AnnotateVideo.
-                         * @function annotateVideo
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoIntelligenceService
-                         * @instance
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest} request AnnotateVideoRequest message or plain object
-                         * @returns {Promise<google.longrunning.Operation>} Promise
-                         * @variation 2
-                         */
-    
-                        return VideoIntelligenceService;
-                    })();
-    
-                    v1beta1.AnnotateVideoRequest = (function() {
-    
-                        /**
-                         * Properties of an AnnotateVideoRequest.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IAnnotateVideoRequest
-                         * @property {string|null} [inputUri] AnnotateVideoRequest inputUri
-                         * @property {string|null} [inputContent] AnnotateVideoRequest inputContent
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.Feature>|null} [features] AnnotateVideoRequest features
-                         * @property {google.cloud.videointelligence.v1beta1.IVideoContext|null} [videoContext] AnnotateVideoRequest videoContext
-                         * @property {string|null} [outputUri] AnnotateVideoRequest outputUri
-                         * @property {string|null} [locationId] AnnotateVideoRequest locationId
-                         */
-    
-                        /**
-                         * Constructs a new AnnotateVideoRequest.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents an AnnotateVideoRequest.
-                         * @implements IAnnotateVideoRequest
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest=} [properties] Properties to set
-                         */
-                        function AnnotateVideoRequest(properties) {
-                            this.features = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AnnotateVideoRequest inputUri.
-                         * @member {string} inputUri
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.inputUri = "";
-    
-                        /**
-                         * AnnotateVideoRequest inputContent.
-                         * @member {string} inputContent
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.inputContent = "";
-    
-                        /**
-                         * AnnotateVideoRequest features.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.Feature>} features
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.features = $util.emptyArray;
-    
-                        /**
-                         * AnnotateVideoRequest videoContext.
-                         * @member {google.cloud.videointelligence.v1beta1.IVideoContext|null|undefined} videoContext
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.videoContext = null;
-    
-                        /**
-                         * AnnotateVideoRequest outputUri.
-                         * @member {string} outputUri
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.outputUri = "";
-    
-                        /**
-                         * AnnotateVideoRequest locationId.
-                         * @member {string} locationId
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         */
-                        AnnotateVideoRequest.prototype.locationId = "";
-    
-                        /**
-                         * Creates a new AnnotateVideoRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoRequest} AnnotateVideoRequest instance
-                         */
-                        AnnotateVideoRequest.create = function create(properties) {
-                            return new AnnotateVideoRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoRequest message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest} message AnnotateVideoRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUri);
-                            if (message.features != null && message.features.length) {
-                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
-                                for (var i = 0; i < message.features.length; ++i)
-                                    writer.int32(message.features[i]);
-                                writer.ldelim();
-                            }
-                            if (message.videoContext != null && message.hasOwnProperty("videoContext"))
-                                $root.google.cloud.videointelligence.v1beta1.VideoContext.encode(message.videoContext, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.outputUri != null && message.hasOwnProperty("outputUri"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.outputUri);
-                            if (message.locationId != null && message.hasOwnProperty("locationId"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
-                            if (message.inputContent != null && message.hasOwnProperty("inputContent"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.inputContent);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoRequest message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest} message AnnotateVideoRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoRequest} AnnotateVideoRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.inputUri = reader.string();
-                                    break;
-                                case 6:
-                                    message.inputContent = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.features && message.features.length))
-                                        message.features = [];
-                                    if ((tag & 7) === 2) {
-                                        var end2 = reader.uint32() + reader.pos;
-                                        while (reader.pos < end2)
-                                            message.features.push(reader.int32());
-                                    } else
-                                        message.features.push(reader.int32());
-                                    break;
-                                case 3:
-                                    message.videoContext = $root.google.cloud.videointelligence.v1beta1.VideoContext.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.outputUri = reader.string();
-                                    break;
-                                case 5:
-                                    message.locationId = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoRequest} AnnotateVideoRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AnnotateVideoRequest message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AnnotateVideoRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                if (!$util.isString(message.inputUri))
-                                    return "inputUri: string expected";
-                            if (message.inputContent != null && message.hasOwnProperty("inputContent"))
-                                if (!$util.isString(message.inputContent))
-                                    return "inputContent: string expected";
-                            if (message.features != null && message.hasOwnProperty("features")) {
-                                if (!Array.isArray(message.features))
-                                    return "features: array expected";
-                                for (var i = 0; i < message.features.length; ++i)
-                                    switch (message.features[i]) {
-                                    default:
-                                        return "features: enum value[] expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                        break;
-                                    }
-                            }
-                            if (message.videoContext != null && message.hasOwnProperty("videoContext")) {
-                                var error = $root.google.cloud.videointelligence.v1beta1.VideoContext.verify(message.videoContext);
-                                if (error)
-                                    return "videoContext." + error;
-                            }
-                            if (message.outputUri != null && message.hasOwnProperty("outputUri"))
-                                if (!$util.isString(message.outputUri))
-                                    return "outputUri: string expected";
-                            if (message.locationId != null && message.hasOwnProperty("locationId"))
-                                if (!$util.isString(message.locationId))
-                                    return "locationId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AnnotateVideoRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoRequest} AnnotateVideoRequest
-                         */
-                        AnnotateVideoRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.AnnotateVideoRequest)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoRequest();
-                            if (object.inputUri != null)
-                                message.inputUri = String(object.inputUri);
-                            if (object.inputContent != null)
-                                message.inputContent = String(object.inputContent);
-                            if (object.features) {
-                                if (!Array.isArray(object.features))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.features: array expected");
-                                message.features = [];
-                                for (var i = 0; i < object.features.length; ++i)
-                                    switch (object.features[i]) {
-                                    default:
-                                    case "FEATURE_UNSPECIFIED":
-                                    case 0:
-                                        message.features[i] = 0;
-                                        break;
-                                    case "LABEL_DETECTION":
-                                    case 1:
-                                        message.features[i] = 1;
-                                        break;
-                                    case "FACE_DETECTION":
-                                    case 2:
-                                        message.features[i] = 2;
-                                        break;
-                                    case "SHOT_CHANGE_DETECTION":
-                                    case 3:
-                                        message.features[i] = 3;
-                                        break;
-                                    case "SAFE_SEARCH_DETECTION":
-                                    case 4:
-                                        message.features[i] = 4;
-                                        break;
-                                    }
-                            }
-                            if (object.videoContext != null) {
-                                if (typeof object.videoContext !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.videoContext: object expected");
-                                message.videoContext = $root.google.cloud.videointelligence.v1beta1.VideoContext.fromObject(object.videoContext);
-                            }
-                            if (object.outputUri != null)
-                                message.outputUri = String(object.outputUri);
-                            if (object.locationId != null)
-                                message.locationId = String(object.locationId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AnnotateVideoRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.AnnotateVideoRequest} message AnnotateVideoRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AnnotateVideoRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.features = [];
-                            if (options.defaults) {
-                                object.inputUri = "";
-                                object.videoContext = null;
-                                object.outputUri = "";
-                                object.locationId = "";
-                                object.inputContent = "";
-                            }
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                object.inputUri = message.inputUri;
-                            if (message.features && message.features.length) {
-                                object.features = [];
-                                for (var j = 0; j < message.features.length; ++j)
-                                    object.features[j] = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Feature[message.features[j]] : message.features[j];
-                            }
-                            if (message.videoContext != null && message.hasOwnProperty("videoContext"))
-                                object.videoContext = $root.google.cloud.videointelligence.v1beta1.VideoContext.toObject(message.videoContext, options);
-                            if (message.outputUri != null && message.hasOwnProperty("outputUri"))
-                                object.outputUri = message.outputUri;
-                            if (message.locationId != null && message.hasOwnProperty("locationId"))
-                                object.locationId = message.locationId;
-                            if (message.inputContent != null && message.hasOwnProperty("inputContent"))
-                                object.inputContent = message.inputContent;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AnnotateVideoRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AnnotateVideoRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return AnnotateVideoRequest;
-                    })();
-    
-                    v1beta1.VideoContext = (function() {
-    
-                        /**
-                         * Properties of a VideoContext.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IVideoContext
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>|null} [segments] VideoContext segments
-                         * @property {google.cloud.videointelligence.v1beta1.LabelDetectionMode|null} [labelDetectionMode] VideoContext labelDetectionMode
-                         * @property {boolean|null} [stationaryCamera] VideoContext stationaryCamera
-                         * @property {string|null} [labelDetectionModel] VideoContext labelDetectionModel
-                         * @property {string|null} [faceDetectionModel] VideoContext faceDetectionModel
-                         * @property {string|null} [shotChangeDetectionModel] VideoContext shotChangeDetectionModel
-                         * @property {string|null} [safeSearchDetectionModel] VideoContext safeSearchDetectionModel
-                         */
-    
-                        /**
-                         * Constructs a new VideoContext.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a VideoContext.
-                         * @implements IVideoContext
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoContext=} [properties] Properties to set
-                         */
-                        function VideoContext(properties) {
-                            this.segments = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoContext segments.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>} segments
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.segments = $util.emptyArray;
-    
-                        /**
-                         * VideoContext labelDetectionMode.
-                         * @member {google.cloud.videointelligence.v1beta1.LabelDetectionMode} labelDetectionMode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.labelDetectionMode = 0;
-    
-                        /**
-                         * VideoContext stationaryCamera.
-                         * @member {boolean} stationaryCamera
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.stationaryCamera = false;
-    
-                        /**
-                         * VideoContext labelDetectionModel.
-                         * @member {string} labelDetectionModel
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.labelDetectionModel = "";
-    
-                        /**
-                         * VideoContext faceDetectionModel.
-                         * @member {string} faceDetectionModel
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.faceDetectionModel = "";
-    
-                        /**
-                         * VideoContext shotChangeDetectionModel.
-                         * @member {string} shotChangeDetectionModel
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.shotChangeDetectionModel = "";
-    
-                        /**
-                         * VideoContext safeSearchDetectionModel.
-                         * @member {string} safeSearchDetectionModel
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         */
-                        VideoContext.prototype.safeSearchDetectionModel = "";
-    
-                        /**
-                         * Creates a new VideoContext instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoContext=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoContext} VideoContext instance
-                         */
-                        VideoContext.create = function create(properties) {
-                            return new VideoContext(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoContext message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoContext.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoContext} message VideoContext message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoContext.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.segments != null && message.segments.length)
-                                for (var i = 0; i < message.segments.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.VideoSegment.encode(message.segments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.labelDetectionMode);
-                            if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.stationaryCamera);
-                            if (message.labelDetectionModel != null && message.hasOwnProperty("labelDetectionModel"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.labelDetectionModel);
-                            if (message.faceDetectionModel != null && message.hasOwnProperty("faceDetectionModel"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.faceDetectionModel);
-                            if (message.shotChangeDetectionModel != null && message.hasOwnProperty("shotChangeDetectionModel"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.shotChangeDetectionModel);
-                            if (message.safeSearchDetectionModel != null && message.hasOwnProperty("safeSearchDetectionModel"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.safeSearchDetectionModel);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoContext message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoContext.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoContext} message VideoContext message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoContext.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoContext message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoContext} VideoContext
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoContext.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.VideoContext();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.segments && message.segments.length))
-                                        message.segments = [];
-                                    message.segments.push($root.google.cloud.videointelligence.v1beta1.VideoSegment.decode(reader, reader.uint32()));
-                                    break;
-                                case 2:
-                                    message.labelDetectionMode = reader.int32();
-                                    break;
-                                case 3:
-                                    message.stationaryCamera = reader.bool();
-                                    break;
-                                case 4:
-                                    message.labelDetectionModel = reader.string();
-                                    break;
-                                case 5:
-                                    message.faceDetectionModel = reader.string();
-                                    break;
-                                case 6:
-                                    message.shotChangeDetectionModel = reader.string();
-                                    break;
-                                case 7:
-                                    message.safeSearchDetectionModel = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoContext message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoContext} VideoContext
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoContext.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoContext message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoContext.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.segments != null && message.hasOwnProperty("segments")) {
-                                if (!Array.isArray(message.segments))
-                                    return "segments: array expected";
-                                for (var i = 0; i < message.segments.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.VideoSegment.verify(message.segments[i]);
-                                    if (error)
-                                        return "segments." + error;
-                                }
-                            }
-                            if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                switch (message.labelDetectionMode) {
-                                default:
-                                    return "labelDetectionMode: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
-                                if (typeof message.stationaryCamera !== "boolean")
-                                    return "stationaryCamera: boolean expected";
-                            if (message.labelDetectionModel != null && message.hasOwnProperty("labelDetectionModel"))
-                                if (!$util.isString(message.labelDetectionModel))
-                                    return "labelDetectionModel: string expected";
-                            if (message.faceDetectionModel != null && message.hasOwnProperty("faceDetectionModel"))
-                                if (!$util.isString(message.faceDetectionModel))
-                                    return "faceDetectionModel: string expected";
-                            if (message.shotChangeDetectionModel != null && message.hasOwnProperty("shotChangeDetectionModel"))
-                                if (!$util.isString(message.shotChangeDetectionModel))
-                                    return "shotChangeDetectionModel: string expected";
-                            if (message.safeSearchDetectionModel != null && message.hasOwnProperty("safeSearchDetectionModel"))
-                                if (!$util.isString(message.safeSearchDetectionModel))
-                                    return "safeSearchDetectionModel: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoContext message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoContext} VideoContext
-                         */
-                        VideoContext.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.VideoContext)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.VideoContext();
-                            if (object.segments) {
-                                if (!Array.isArray(object.segments))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoContext.segments: array expected");
-                                message.segments = [];
-                                for (var i = 0; i < object.segments.length; ++i) {
-                                    if (typeof object.segments[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.VideoContext.segments: object expected");
-                                    message.segments[i] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.fromObject(object.segments[i]);
-                                }
-                            }
-                            switch (object.labelDetectionMode) {
-                            case "LABEL_DETECTION_MODE_UNSPECIFIED":
-                            case 0:
-                                message.labelDetectionMode = 0;
-                                break;
-                            case "SHOT_MODE":
-                            case 1:
-                                message.labelDetectionMode = 1;
-                                break;
-                            case "FRAME_MODE":
-                            case 2:
-                                message.labelDetectionMode = 2;
-                                break;
-                            case "SHOT_AND_FRAME_MODE":
-                            case 3:
-                                message.labelDetectionMode = 3;
-                                break;
-                            }
-                            if (object.stationaryCamera != null)
-                                message.stationaryCamera = Boolean(object.stationaryCamera);
-                            if (object.labelDetectionModel != null)
-                                message.labelDetectionModel = String(object.labelDetectionModel);
-                            if (object.faceDetectionModel != null)
-                                message.faceDetectionModel = String(object.faceDetectionModel);
-                            if (object.shotChangeDetectionModel != null)
-                                message.shotChangeDetectionModel = String(object.shotChangeDetectionModel);
-                            if (object.safeSearchDetectionModel != null)
-                                message.safeSearchDetectionModel = String(object.safeSearchDetectionModel);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoContext message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.VideoContext} message VideoContext
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoContext.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.segments = [];
-                            if (options.defaults) {
-                                object.labelDetectionMode = options.enums === String ? "LABEL_DETECTION_MODE_UNSPECIFIED" : 0;
-                                object.stationaryCamera = false;
-                                object.labelDetectionModel = "";
-                                object.faceDetectionModel = "";
-                                object.shotChangeDetectionModel = "";
-                                object.safeSearchDetectionModel = "";
-                            }
-                            if (message.segments && message.segments.length) {
-                                object.segments = [];
-                                for (var j = 0; j < message.segments.length; ++j)
-                                    object.segments[j] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.toObject(message.segments[j], options);
-                            }
-                            if (message.labelDetectionMode != null && message.hasOwnProperty("labelDetectionMode"))
-                                object.labelDetectionMode = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.LabelDetectionMode[message.labelDetectionMode] : message.labelDetectionMode;
-                            if (message.stationaryCamera != null && message.hasOwnProperty("stationaryCamera"))
-                                object.stationaryCamera = message.stationaryCamera;
-                            if (message.labelDetectionModel != null && message.hasOwnProperty("labelDetectionModel"))
-                                object.labelDetectionModel = message.labelDetectionModel;
-                            if (message.faceDetectionModel != null && message.hasOwnProperty("faceDetectionModel"))
-                                object.faceDetectionModel = message.faceDetectionModel;
-                            if (message.shotChangeDetectionModel != null && message.hasOwnProperty("shotChangeDetectionModel"))
-                                object.shotChangeDetectionModel = message.shotChangeDetectionModel;
-                            if (message.safeSearchDetectionModel != null && message.hasOwnProperty("safeSearchDetectionModel"))
-                                object.safeSearchDetectionModel = message.safeSearchDetectionModel;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoContext to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoContext
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoContext.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoContext;
-                    })();
-    
-                    v1beta1.VideoSegment = (function() {
-    
-                        /**
-                         * Properties of a VideoSegment.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IVideoSegment
-                         * @property {number|Long|null} [startTimeOffset] VideoSegment startTimeOffset
-                         * @property {number|Long|null} [endTimeOffset] VideoSegment endTimeOffset
-                         */
-    
-                        /**
-                         * Constructs a new VideoSegment.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a VideoSegment.
-                         * @implements IVideoSegment
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoSegment=} [properties] Properties to set
-                         */
-                        function VideoSegment(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoSegment startTimeOffset.
-                         * @member {number|Long} startTimeOffset
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @instance
-                         */
-                        VideoSegment.prototype.startTimeOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * VideoSegment endTimeOffset.
-                         * @member {number|Long} endTimeOffset
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @instance
-                         */
-                        VideoSegment.prototype.endTimeOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new VideoSegment instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoSegment=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoSegment} VideoSegment instance
-                         */
-                        VideoSegment.create = function create(properties) {
-                            return new VideoSegment(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoSegment message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoSegment.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoSegment} message VideoSegment message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoSegment.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.startTimeOffset != null && message.hasOwnProperty("startTimeOffset"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.startTimeOffset);
-                            if (message.endTimeOffset != null && message.hasOwnProperty("endTimeOffset"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.endTimeOffset);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoSegment message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoSegment.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoSegment} message VideoSegment message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoSegment.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoSegment message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoSegment} VideoSegment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoSegment.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.VideoSegment();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.startTimeOffset = reader.int64();
-                                    break;
-                                case 2:
-                                    message.endTimeOffset = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoSegment message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoSegment} VideoSegment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoSegment.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoSegment message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoSegment.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.startTimeOffset != null && message.hasOwnProperty("startTimeOffset"))
-                                if (!$util.isInteger(message.startTimeOffset) && !(message.startTimeOffset && $util.isInteger(message.startTimeOffset.low) && $util.isInteger(message.startTimeOffset.high)))
-                                    return "startTimeOffset: integer|Long expected";
-                            if (message.endTimeOffset != null && message.hasOwnProperty("endTimeOffset"))
-                                if (!$util.isInteger(message.endTimeOffset) && !(message.endTimeOffset && $util.isInteger(message.endTimeOffset.low) && $util.isInteger(message.endTimeOffset.high)))
-                                    return "endTimeOffset: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoSegment message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoSegment} VideoSegment
-                         */
-                        VideoSegment.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.VideoSegment)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.VideoSegment();
-                            if (object.startTimeOffset != null)
-                                if ($util.Long)
-                                    (message.startTimeOffset = $util.Long.fromValue(object.startTimeOffset)).unsigned = false;
-                                else if (typeof object.startTimeOffset === "string")
-                                    message.startTimeOffset = parseInt(object.startTimeOffset, 10);
-                                else if (typeof object.startTimeOffset === "number")
-                                    message.startTimeOffset = object.startTimeOffset;
-                                else if (typeof object.startTimeOffset === "object")
-                                    message.startTimeOffset = new $util.LongBits(object.startTimeOffset.low >>> 0, object.startTimeOffset.high >>> 0).toNumber();
-                            if (object.endTimeOffset != null)
-                                if ($util.Long)
-                                    (message.endTimeOffset = $util.Long.fromValue(object.endTimeOffset)).unsigned = false;
-                                else if (typeof object.endTimeOffset === "string")
-                                    message.endTimeOffset = parseInt(object.endTimeOffset, 10);
-                                else if (typeof object.endTimeOffset === "number")
-                                    message.endTimeOffset = object.endTimeOffset;
-                                else if (typeof object.endTimeOffset === "object")
-                                    message.endTimeOffset = new $util.LongBits(object.endTimeOffset.low >>> 0, object.endTimeOffset.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoSegment message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.VideoSegment} message VideoSegment
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoSegment.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.startTimeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.startTimeOffset = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.endTimeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.endTimeOffset = options.longs === String ? "0" : 0;
-                            }
-                            if (message.startTimeOffset != null && message.hasOwnProperty("startTimeOffset"))
-                                if (typeof message.startTimeOffset === "number")
-                                    object.startTimeOffset = options.longs === String ? String(message.startTimeOffset) : message.startTimeOffset;
-                                else
-                                    object.startTimeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.startTimeOffset) : options.longs === Number ? new $util.LongBits(message.startTimeOffset.low >>> 0, message.startTimeOffset.high >>> 0).toNumber() : message.startTimeOffset;
-                            if (message.endTimeOffset != null && message.hasOwnProperty("endTimeOffset"))
-                                if (typeof message.endTimeOffset === "number")
-                                    object.endTimeOffset = options.longs === String ? String(message.endTimeOffset) : message.endTimeOffset;
-                                else
-                                    object.endTimeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.endTimeOffset) : options.longs === Number ? new $util.LongBits(message.endTimeOffset.low >>> 0, message.endTimeOffset.high >>> 0).toNumber() : message.endTimeOffset;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoSegment to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoSegment
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoSegment.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoSegment;
-                    })();
-    
-                    v1beta1.LabelLocation = (function() {
-    
-                        /**
-                         * Properties of a LabelLocation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface ILabelLocation
-                         * @property {google.cloud.videointelligence.v1beta1.IVideoSegment|null} [segment] LabelLocation segment
-                         * @property {number|null} [confidence] LabelLocation confidence
-                         * @property {google.cloud.videointelligence.v1beta1.LabelLevel|null} [level] LabelLocation level
-                         */
-    
-                        /**
-                         * Constructs a new LabelLocation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a LabelLocation.
-                         * @implements ILabelLocation
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelLocation=} [properties] Properties to set
-                         */
-                        function LabelLocation(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LabelLocation segment.
-                         * @member {google.cloud.videointelligence.v1beta1.IVideoSegment|null|undefined} segment
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @instance
-                         */
-                        LabelLocation.prototype.segment = null;
-    
-                        /**
-                         * LabelLocation confidence.
-                         * @member {number} confidence
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @instance
-                         */
-                        LabelLocation.prototype.confidence = 0;
-    
-                        /**
-                         * LabelLocation level.
-                         * @member {google.cloud.videointelligence.v1beta1.LabelLevel} level
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @instance
-                         */
-                        LabelLocation.prototype.level = 0;
-    
-                        /**
-                         * Creates a new LabelLocation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelLocation=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelLocation} LabelLocation instance
-                         */
-                        LabelLocation.create = function create(properties) {
-                            return new LabelLocation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LabelLocation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelLocation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelLocation} message LabelLocation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LabelLocation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.segment != null && message.hasOwnProperty("segment"))
-                                $root.google.cloud.videointelligence.v1beta1.VideoSegment.encode(message.segment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.confidence != null && message.hasOwnProperty("confidence"))
-                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
-                            if (message.level != null && message.hasOwnProperty("level"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.level);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LabelLocation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelLocation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelLocation} message LabelLocation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LabelLocation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LabelLocation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelLocation} LabelLocation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LabelLocation.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.LabelLocation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.segment = $root.google.cloud.videointelligence.v1beta1.VideoSegment.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.confidence = reader.float();
-                                    break;
-                                case 3:
-                                    message.level = reader.int32();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LabelLocation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelLocation} LabelLocation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LabelLocation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LabelLocation message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LabelLocation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.segment != null && message.hasOwnProperty("segment")) {
-                                var error = $root.google.cloud.videointelligence.v1beta1.VideoSegment.verify(message.segment);
-                                if (error)
-                                    return "segment." + error;
-                            }
-                            if (message.confidence != null && message.hasOwnProperty("confidence"))
-                                if (typeof message.confidence !== "number")
-                                    return "confidence: number expected";
-                            if (message.level != null && message.hasOwnProperty("level"))
-                                switch (message.level) {
-                                default:
-                                    return "level: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LabelLocation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelLocation} LabelLocation
-                         */
-                        LabelLocation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.LabelLocation)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.LabelLocation();
-                            if (object.segment != null) {
-                                if (typeof object.segment !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.LabelLocation.segment: object expected");
-                                message.segment = $root.google.cloud.videointelligence.v1beta1.VideoSegment.fromObject(object.segment);
-                            }
-                            if (object.confidence != null)
-                                message.confidence = Number(object.confidence);
-                            switch (object.level) {
-                            case "LABEL_LEVEL_UNSPECIFIED":
-                            case 0:
-                                message.level = 0;
-                                break;
-                            case "VIDEO_LEVEL":
-                            case 1:
-                                message.level = 1;
-                                break;
-                            case "SEGMENT_LEVEL":
-                            case 2:
-                                message.level = 2;
-                                break;
-                            case "SHOT_LEVEL":
-                            case 3:
-                                message.level = 3;
-                                break;
-                            case "FRAME_LEVEL":
-                            case 4:
-                                message.level = 4;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LabelLocation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.LabelLocation} message LabelLocation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LabelLocation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.segment = null;
-                                object.confidence = 0;
-                                object.level = options.enums === String ? "LABEL_LEVEL_UNSPECIFIED" : 0;
-                            }
-                            if (message.segment != null && message.hasOwnProperty("segment"))
-                                object.segment = $root.google.cloud.videointelligence.v1beta1.VideoSegment.toObject(message.segment, options);
-                            if (message.confidence != null && message.hasOwnProperty("confidence"))
-                                object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
-                            if (message.level != null && message.hasOwnProperty("level"))
-                                object.level = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.LabelLevel[message.level] : message.level;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LabelLocation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelLocation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LabelLocation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return LabelLocation;
-                    })();
-    
-                    v1beta1.LabelAnnotation = (function() {
-    
-                        /**
-                         * Properties of a LabelAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface ILabelAnnotation
-                         * @property {string|null} [description] LabelAnnotation description
-                         * @property {string|null} [languageCode] LabelAnnotation languageCode
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.ILabelLocation>|null} [locations] LabelAnnotation locations
-                         */
-    
-                        /**
-                         * Constructs a new LabelAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a LabelAnnotation.
-                         * @implements ILabelAnnotation
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelAnnotation=} [properties] Properties to set
-                         */
-                        function LabelAnnotation(properties) {
-                            this.locations = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * LabelAnnotation description.
-                         * @member {string} description
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @instance
-                         */
-                        LabelAnnotation.prototype.description = "";
-    
-                        /**
-                         * LabelAnnotation languageCode.
-                         * @member {string} languageCode
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @instance
-                         */
-                        LabelAnnotation.prototype.languageCode = "";
-    
-                        /**
-                         * LabelAnnotation locations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.ILabelLocation>} locations
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @instance
-                         */
-                        LabelAnnotation.prototype.locations = $util.emptyArray;
-    
-                        /**
-                         * Creates a new LabelAnnotation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelAnnotation=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelAnnotation} LabelAnnotation instance
-                         */
-                        LabelAnnotation.create = function create(properties) {
-                            return new LabelAnnotation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified LabelAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelAnnotation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelAnnotation} message LabelAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LabelAnnotation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
-                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
-                            if (message.locations != null && message.locations.length)
-                                for (var i = 0; i < message.locations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.LabelLocation.encode(message.locations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified LabelAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelAnnotation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ILabelAnnotation} message LabelAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        LabelAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a LabelAnnotation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelAnnotation} LabelAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LabelAnnotation.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.LabelAnnotation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.description = reader.string();
-                                    break;
-                                case 2:
-                                    message.languageCode = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.locations && message.locations.length))
-                                        message.locations = [];
-                                    message.locations.push($root.google.cloud.videointelligence.v1beta1.LabelLocation.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a LabelAnnotation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelAnnotation} LabelAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        LabelAnnotation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a LabelAnnotation message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        LabelAnnotation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                if (!$util.isString(message.description))
-                                    return "description: string expected";
-                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                if (!$util.isString(message.languageCode))
-                                    return "languageCode: string expected";
-                            if (message.locations != null && message.hasOwnProperty("locations")) {
-                                if (!Array.isArray(message.locations))
-                                    return "locations: array expected";
-                                for (var i = 0; i < message.locations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.LabelLocation.verify(message.locations[i]);
-                                    if (error)
-                                        return "locations." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a LabelAnnotation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.LabelAnnotation} LabelAnnotation
-                         */
-                        LabelAnnotation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.LabelAnnotation)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.LabelAnnotation();
-                            if (object.description != null)
-                                message.description = String(object.description);
-                            if (object.languageCode != null)
-                                message.languageCode = String(object.languageCode);
-                            if (object.locations) {
-                                if (!Array.isArray(object.locations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.LabelAnnotation.locations: array expected");
-                                message.locations = [];
-                                for (var i = 0; i < object.locations.length; ++i) {
-                                    if (typeof object.locations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.LabelAnnotation.locations: object expected");
-                                    message.locations[i] = $root.google.cloud.videointelligence.v1beta1.LabelLocation.fromObject(object.locations[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a LabelAnnotation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.LabelAnnotation} message LabelAnnotation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        LabelAnnotation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.locations = [];
-                            if (options.defaults) {
-                                object.description = "";
-                                object.languageCode = "";
-                            }
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                object.description = message.description;
-                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
-                                object.languageCode = message.languageCode;
-                            if (message.locations && message.locations.length) {
-                                object.locations = [];
-                                for (var j = 0; j < message.locations.length; ++j)
-                                    object.locations[j] = $root.google.cloud.videointelligence.v1beta1.LabelLocation.toObject(message.locations[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this LabelAnnotation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.LabelAnnotation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        LabelAnnotation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return LabelAnnotation;
-                    })();
-    
-                    v1beta1.SafeSearchAnnotation = (function() {
-    
-                        /**
-                         * Properties of a SafeSearchAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface ISafeSearchAnnotation
-                         * @property {google.cloud.videointelligence.v1beta1.Likelihood|null} [adult] SafeSearchAnnotation adult
-                         * @property {google.cloud.videointelligence.v1beta1.Likelihood|null} [spoof] SafeSearchAnnotation spoof
-                         * @property {google.cloud.videointelligence.v1beta1.Likelihood|null} [medical] SafeSearchAnnotation medical
-                         * @property {google.cloud.videointelligence.v1beta1.Likelihood|null} [violent] SafeSearchAnnotation violent
-                         * @property {google.cloud.videointelligence.v1beta1.Likelihood|null} [racy] SafeSearchAnnotation racy
-                         * @property {number|Long|null} [timeOffset] SafeSearchAnnotation timeOffset
-                         */
-    
-                        /**
-                         * Constructs a new SafeSearchAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a SafeSearchAnnotation.
-                         * @implements ISafeSearchAnnotation
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation=} [properties] Properties to set
-                         */
-                        function SafeSearchAnnotation(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SafeSearchAnnotation adult.
-                         * @member {google.cloud.videointelligence.v1beta1.Likelihood} adult
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.adult = 0;
-    
-                        /**
-                         * SafeSearchAnnotation spoof.
-                         * @member {google.cloud.videointelligence.v1beta1.Likelihood} spoof
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.spoof = 0;
-    
-                        /**
-                         * SafeSearchAnnotation medical.
-                         * @member {google.cloud.videointelligence.v1beta1.Likelihood} medical
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.medical = 0;
-    
-                        /**
-                         * SafeSearchAnnotation violent.
-                         * @member {google.cloud.videointelligence.v1beta1.Likelihood} violent
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.violent = 0;
-    
-                        /**
-                         * SafeSearchAnnotation racy.
-                         * @member {google.cloud.videointelligence.v1beta1.Likelihood} racy
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.racy = 0;
-    
-                        /**
-                         * SafeSearchAnnotation timeOffset.
-                         * @member {number|Long} timeOffset
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         */
-                        SafeSearchAnnotation.prototype.timeOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new SafeSearchAnnotation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.SafeSearchAnnotation} SafeSearchAnnotation instance
-                         */
-                        SafeSearchAnnotation.create = function create(properties) {
-                            return new SafeSearchAnnotation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SafeSearchAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation} message SafeSearchAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SafeSearchAnnotation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.adult != null && message.hasOwnProperty("adult"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.adult);
-                            if (message.spoof != null && message.hasOwnProperty("spoof"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.spoof);
-                            if (message.medical != null && message.hasOwnProperty("medical"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.medical);
-                            if (message.violent != null && message.hasOwnProperty("violent"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.violent);
-                            if (message.racy != null && message.hasOwnProperty("racy"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.racy);
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.timeOffset);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SafeSearchAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation} message SafeSearchAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SafeSearchAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SafeSearchAnnotation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.SafeSearchAnnotation} SafeSearchAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SafeSearchAnnotation.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.adult = reader.int32();
-                                    break;
-                                case 2:
-                                    message.spoof = reader.int32();
-                                    break;
-                                case 3:
-                                    message.medical = reader.int32();
-                                    break;
-                                case 4:
-                                    message.violent = reader.int32();
-                                    break;
-                                case 5:
-                                    message.racy = reader.int32();
-                                    break;
-                                case 6:
-                                    message.timeOffset = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SafeSearchAnnotation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.SafeSearchAnnotation} SafeSearchAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SafeSearchAnnotation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SafeSearchAnnotation message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SafeSearchAnnotation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.adult != null && message.hasOwnProperty("adult"))
-                                switch (message.adult) {
-                                default:
-                                    return "adult: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.spoof != null && message.hasOwnProperty("spoof"))
-                                switch (message.spoof) {
-                                default:
-                                    return "spoof: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.medical != null && message.hasOwnProperty("medical"))
-                                switch (message.medical) {
-                                default:
-                                    return "medical: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.violent != null && message.hasOwnProperty("violent"))
-                                switch (message.violent) {
-                                default:
-                                    return "violent: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.racy != null && message.hasOwnProperty("racy"))
-                                switch (message.racy) {
-                                default:
-                                    return "racy: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                    break;
-                                }
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                if (!$util.isInteger(message.timeOffset) && !(message.timeOffset && $util.isInteger(message.timeOffset.low) && $util.isInteger(message.timeOffset.high)))
-                                    return "timeOffset: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SafeSearchAnnotation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.SafeSearchAnnotation} SafeSearchAnnotation
-                         */
-                        SafeSearchAnnotation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation();
-                            switch (object.adult) {
-                            case "UNKNOWN":
-                            case 0:
-                                message.adult = 0;
-                                break;
-                            case "VERY_UNLIKELY":
-                            case 1:
-                                message.adult = 1;
-                                break;
-                            case "UNLIKELY":
-                            case 2:
-                                message.adult = 2;
-                                break;
-                            case "POSSIBLE":
-                            case 3:
-                                message.adult = 3;
-                                break;
-                            case "LIKELY":
-                            case 4:
-                                message.adult = 4;
-                                break;
-                            case "VERY_LIKELY":
-                            case 5:
-                                message.adult = 5;
-                                break;
-                            }
-                            switch (object.spoof) {
-                            case "UNKNOWN":
-                            case 0:
-                                message.spoof = 0;
-                                break;
-                            case "VERY_UNLIKELY":
-                            case 1:
-                                message.spoof = 1;
-                                break;
-                            case "UNLIKELY":
-                            case 2:
-                                message.spoof = 2;
-                                break;
-                            case "POSSIBLE":
-                            case 3:
-                                message.spoof = 3;
-                                break;
-                            case "LIKELY":
-                            case 4:
-                                message.spoof = 4;
-                                break;
-                            case "VERY_LIKELY":
-                            case 5:
-                                message.spoof = 5;
-                                break;
-                            }
-                            switch (object.medical) {
-                            case "UNKNOWN":
-                            case 0:
-                                message.medical = 0;
-                                break;
-                            case "VERY_UNLIKELY":
-                            case 1:
-                                message.medical = 1;
-                                break;
-                            case "UNLIKELY":
-                            case 2:
-                                message.medical = 2;
-                                break;
-                            case "POSSIBLE":
-                            case 3:
-                                message.medical = 3;
-                                break;
-                            case "LIKELY":
-                            case 4:
-                                message.medical = 4;
-                                break;
-                            case "VERY_LIKELY":
-                            case 5:
-                                message.medical = 5;
-                                break;
-                            }
-                            switch (object.violent) {
-                            case "UNKNOWN":
-                            case 0:
-                                message.violent = 0;
-                                break;
-                            case "VERY_UNLIKELY":
-                            case 1:
-                                message.violent = 1;
-                                break;
-                            case "UNLIKELY":
-                            case 2:
-                                message.violent = 2;
-                                break;
-                            case "POSSIBLE":
-                            case 3:
-                                message.violent = 3;
-                                break;
-                            case "LIKELY":
-                            case 4:
-                                message.violent = 4;
-                                break;
-                            case "VERY_LIKELY":
-                            case 5:
-                                message.violent = 5;
-                                break;
-                            }
-                            switch (object.racy) {
-                            case "UNKNOWN":
-                            case 0:
-                                message.racy = 0;
-                                break;
-                            case "VERY_UNLIKELY":
-                            case 1:
-                                message.racy = 1;
-                                break;
-                            case "UNLIKELY":
-                            case 2:
-                                message.racy = 2;
-                                break;
-                            case "POSSIBLE":
-                            case 3:
-                                message.racy = 3;
-                                break;
-                            case "LIKELY":
-                            case 4:
-                                message.racy = 4;
-                                break;
-                            case "VERY_LIKELY":
-                            case 5:
-                                message.racy = 5;
-                                break;
-                            }
-                            if (object.timeOffset != null)
-                                if ($util.Long)
-                                    (message.timeOffset = $util.Long.fromValue(object.timeOffset)).unsigned = false;
-                                else if (typeof object.timeOffset === "string")
-                                    message.timeOffset = parseInt(object.timeOffset, 10);
-                                else if (typeof object.timeOffset === "number")
-                                    message.timeOffset = object.timeOffset;
-                                else if (typeof object.timeOffset === "object")
-                                    message.timeOffset = new $util.LongBits(object.timeOffset.low >>> 0, object.timeOffset.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SafeSearchAnnotation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.SafeSearchAnnotation} message SafeSearchAnnotation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SafeSearchAnnotation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.adult = options.enums === String ? "UNKNOWN" : 0;
-                                object.spoof = options.enums === String ? "UNKNOWN" : 0;
-                                object.medical = options.enums === String ? "UNKNOWN" : 0;
-                                object.violent = options.enums === String ? "UNKNOWN" : 0;
-                                object.racy = options.enums === String ? "UNKNOWN" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.timeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.timeOffset = options.longs === String ? "0" : 0;
-                            }
-                            if (message.adult != null && message.hasOwnProperty("adult"))
-                                object.adult = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Likelihood[message.adult] : message.adult;
-                            if (message.spoof != null && message.hasOwnProperty("spoof"))
-                                object.spoof = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Likelihood[message.spoof] : message.spoof;
-                            if (message.medical != null && message.hasOwnProperty("medical"))
-                                object.medical = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Likelihood[message.medical] : message.medical;
-                            if (message.violent != null && message.hasOwnProperty("violent"))
-                                object.violent = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Likelihood[message.violent] : message.violent;
-                            if (message.racy != null && message.hasOwnProperty("racy"))
-                                object.racy = options.enums === String ? $root.google.cloud.videointelligence.v1beta1.Likelihood[message.racy] : message.racy;
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                if (typeof message.timeOffset === "number")
-                                    object.timeOffset = options.longs === String ? String(message.timeOffset) : message.timeOffset;
-                                else
-                                    object.timeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.timeOffset) : options.longs === Number ? new $util.LongBits(message.timeOffset.low >>> 0, message.timeOffset.high >>> 0).toNumber() : message.timeOffset;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SafeSearchAnnotation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.SafeSearchAnnotation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SafeSearchAnnotation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return SafeSearchAnnotation;
-                    })();
-    
-                    v1beta1.BoundingBox = (function() {
-    
-                        /**
-                         * Properties of a BoundingBox.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IBoundingBox
-                         * @property {number|null} [left] BoundingBox left
-                         * @property {number|null} [right] BoundingBox right
-                         * @property {number|null} [bottom] BoundingBox bottom
-                         * @property {number|null} [top] BoundingBox top
-                         */
-    
-                        /**
-                         * Constructs a new BoundingBox.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a BoundingBox.
-                         * @implements IBoundingBox
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IBoundingBox=} [properties] Properties to set
-                         */
-                        function BoundingBox(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * BoundingBox left.
-                         * @member {number} left
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @instance
-                         */
-                        BoundingBox.prototype.left = 0;
-    
-                        /**
-                         * BoundingBox right.
-                         * @member {number} right
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @instance
-                         */
-                        BoundingBox.prototype.right = 0;
-    
-                        /**
-                         * BoundingBox bottom.
-                         * @member {number} bottom
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @instance
-                         */
-                        BoundingBox.prototype.bottom = 0;
-    
-                        /**
-                         * BoundingBox top.
-                         * @member {number} top
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @instance
-                         */
-                        BoundingBox.prototype.top = 0;
-    
-                        /**
-                         * Creates a new BoundingBox instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IBoundingBox=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.BoundingBox} BoundingBox instance
-                         */
-                        BoundingBox.create = function create(properties) {
-                            return new BoundingBox(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified BoundingBox message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.BoundingBox.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IBoundingBox} message BoundingBox message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BoundingBox.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.left != null && message.hasOwnProperty("left"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.left);
-                            if (message.right != null && message.hasOwnProperty("right"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.right);
-                            if (message.bottom != null && message.hasOwnProperty("bottom"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.bottom);
-                            if (message.top != null && message.hasOwnProperty("top"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.top);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified BoundingBox message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.BoundingBox.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IBoundingBox} message BoundingBox message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BoundingBox.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a BoundingBox message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.BoundingBox} BoundingBox
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BoundingBox.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.BoundingBox();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.left = reader.int32();
-                                    break;
-                                case 2:
-                                    message.right = reader.int32();
-                                    break;
-                                case 3:
-                                    message.bottom = reader.int32();
-                                    break;
-                                case 4:
-                                    message.top = reader.int32();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a BoundingBox message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.BoundingBox} BoundingBox
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BoundingBox.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a BoundingBox message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        BoundingBox.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.left != null && message.hasOwnProperty("left"))
-                                if (!$util.isInteger(message.left))
-                                    return "left: integer expected";
-                            if (message.right != null && message.hasOwnProperty("right"))
-                                if (!$util.isInteger(message.right))
-                                    return "right: integer expected";
-                            if (message.bottom != null && message.hasOwnProperty("bottom"))
-                                if (!$util.isInteger(message.bottom))
-                                    return "bottom: integer expected";
-                            if (message.top != null && message.hasOwnProperty("top"))
-                                if (!$util.isInteger(message.top))
-                                    return "top: integer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a BoundingBox message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.BoundingBox} BoundingBox
-                         */
-                        BoundingBox.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.BoundingBox)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.BoundingBox();
-                            if (object.left != null)
-                                message.left = object.left | 0;
-                            if (object.right != null)
-                                message.right = object.right | 0;
-                            if (object.bottom != null)
-                                message.bottom = object.bottom | 0;
-                            if (object.top != null)
-                                message.top = object.top | 0;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a BoundingBox message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.BoundingBox} message BoundingBox
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        BoundingBox.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.left = 0;
-                                object.right = 0;
-                                object.bottom = 0;
-                                object.top = 0;
-                            }
-                            if (message.left != null && message.hasOwnProperty("left"))
-                                object.left = message.left;
-                            if (message.right != null && message.hasOwnProperty("right"))
-                                object.right = message.right;
-                            if (message.bottom != null && message.hasOwnProperty("bottom"))
-                                object.bottom = message.bottom;
-                            if (message.top != null && message.hasOwnProperty("top"))
-                                object.top = message.top;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this BoundingBox to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.BoundingBox
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        BoundingBox.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return BoundingBox;
-                    })();
-    
-                    v1beta1.FaceLocation = (function() {
-    
-                        /**
-                         * Properties of a FaceLocation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IFaceLocation
-                         * @property {google.cloud.videointelligence.v1beta1.IBoundingBox|null} [boundingBox] FaceLocation boundingBox
-                         * @property {number|Long|null} [timeOffset] FaceLocation timeOffset
-                         */
-    
-                        /**
-                         * Constructs a new FaceLocation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a FaceLocation.
-                         * @implements IFaceLocation
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceLocation=} [properties] Properties to set
-                         */
-                        function FaceLocation(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FaceLocation boundingBox.
-                         * @member {google.cloud.videointelligence.v1beta1.IBoundingBox|null|undefined} boundingBox
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @instance
-                         */
-                        FaceLocation.prototype.boundingBox = null;
-    
-                        /**
-                         * FaceLocation timeOffset.
-                         * @member {number|Long} timeOffset
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @instance
-                         */
-                        FaceLocation.prototype.timeOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new FaceLocation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceLocation=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceLocation} FaceLocation instance
-                         */
-                        FaceLocation.create = function create(properties) {
-                            return new FaceLocation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FaceLocation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceLocation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceLocation} message FaceLocation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FaceLocation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.boundingBox != null && message.hasOwnProperty("boundingBox"))
-                                $root.google.cloud.videointelligence.v1beta1.BoundingBox.encode(message.boundingBox, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.timeOffset);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FaceLocation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceLocation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceLocation} message FaceLocation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FaceLocation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FaceLocation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceLocation} FaceLocation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FaceLocation.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.FaceLocation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.boundingBox = $root.google.cloud.videointelligence.v1beta1.BoundingBox.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.timeOffset = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FaceLocation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceLocation} FaceLocation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FaceLocation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FaceLocation message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FaceLocation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.boundingBox != null && message.hasOwnProperty("boundingBox")) {
-                                var error = $root.google.cloud.videointelligence.v1beta1.BoundingBox.verify(message.boundingBox);
-                                if (error)
-                                    return "boundingBox." + error;
-                            }
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                if (!$util.isInteger(message.timeOffset) && !(message.timeOffset && $util.isInteger(message.timeOffset.low) && $util.isInteger(message.timeOffset.high)))
-                                    return "timeOffset: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FaceLocation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceLocation} FaceLocation
-                         */
-                        FaceLocation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.FaceLocation)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.FaceLocation();
-                            if (object.boundingBox != null) {
-                                if (typeof object.boundingBox !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.FaceLocation.boundingBox: object expected");
-                                message.boundingBox = $root.google.cloud.videointelligence.v1beta1.BoundingBox.fromObject(object.boundingBox);
-                            }
-                            if (object.timeOffset != null)
-                                if ($util.Long)
-                                    (message.timeOffset = $util.Long.fromValue(object.timeOffset)).unsigned = false;
-                                else if (typeof object.timeOffset === "string")
-                                    message.timeOffset = parseInt(object.timeOffset, 10);
-                                else if (typeof object.timeOffset === "number")
-                                    message.timeOffset = object.timeOffset;
-                                else if (typeof object.timeOffset === "object")
-                                    message.timeOffset = new $util.LongBits(object.timeOffset.low >>> 0, object.timeOffset.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FaceLocation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.FaceLocation} message FaceLocation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FaceLocation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.boundingBox = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.timeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.timeOffset = options.longs === String ? "0" : 0;
-                            }
-                            if (message.boundingBox != null && message.hasOwnProperty("boundingBox"))
-                                object.boundingBox = $root.google.cloud.videointelligence.v1beta1.BoundingBox.toObject(message.boundingBox, options);
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                if (typeof message.timeOffset === "number")
-                                    object.timeOffset = options.longs === String ? String(message.timeOffset) : message.timeOffset;
-                                else
-                                    object.timeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.timeOffset) : options.longs === Number ? new $util.LongBits(message.timeOffset.low >>> 0, message.timeOffset.high >>> 0).toNumber() : message.timeOffset;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FaceLocation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceLocation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FaceLocation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return FaceLocation;
-                    })();
-    
-                    v1beta1.FaceAnnotation = (function() {
-    
-                        /**
-                         * Properties of a FaceAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IFaceAnnotation
-                         * @property {string|null} [thumbnail] FaceAnnotation thumbnail
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>|null} [segments] FaceAnnotation segments
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IFaceLocation>|null} [locations] FaceAnnotation locations
-                         */
-    
-                        /**
-                         * Constructs a new FaceAnnotation.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a FaceAnnotation.
-                         * @implements IFaceAnnotation
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceAnnotation=} [properties] Properties to set
-                         */
-                        function FaceAnnotation(properties) {
-                            this.segments = [];
-                            this.locations = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FaceAnnotation thumbnail.
-                         * @member {string} thumbnail
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @instance
-                         */
-                        FaceAnnotation.prototype.thumbnail = "";
-    
-                        /**
-                         * FaceAnnotation segments.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>} segments
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @instance
-                         */
-                        FaceAnnotation.prototype.segments = $util.emptyArray;
-    
-                        /**
-                         * FaceAnnotation locations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IFaceLocation>} locations
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @instance
-                         */
-                        FaceAnnotation.prototype.locations = $util.emptyArray;
-    
-                        /**
-                         * Creates a new FaceAnnotation instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceAnnotation=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceAnnotation} FaceAnnotation instance
-                         */
-                        FaceAnnotation.create = function create(properties) {
-                            return new FaceAnnotation(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FaceAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceAnnotation.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceAnnotation} message FaceAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FaceAnnotation.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.thumbnail);
-                            if (message.segments != null && message.segments.length)
-                                for (var i = 0; i < message.segments.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.VideoSegment.encode(message.segments[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.locations != null && message.locations.length)
-                                for (var i = 0; i < message.locations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.FaceLocation.encode(message.locations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FaceAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceAnnotation.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IFaceAnnotation} message FaceAnnotation message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FaceAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FaceAnnotation message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceAnnotation} FaceAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FaceAnnotation.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.FaceAnnotation();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.thumbnail = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.segments && message.segments.length))
-                                        message.segments = [];
-                                    message.segments.push($root.google.cloud.videointelligence.v1beta1.VideoSegment.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.locations && message.locations.length))
-                                        message.locations = [];
-                                    message.locations.push($root.google.cloud.videointelligence.v1beta1.FaceLocation.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FaceAnnotation message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceAnnotation} FaceAnnotation
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FaceAnnotation.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FaceAnnotation message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FaceAnnotation.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                if (!$util.isString(message.thumbnail))
-                                    return "thumbnail: string expected";
-                            if (message.segments != null && message.hasOwnProperty("segments")) {
-                                if (!Array.isArray(message.segments))
-                                    return "segments: array expected";
-                                for (var i = 0; i < message.segments.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.VideoSegment.verify(message.segments[i]);
-                                    if (error)
-                                        return "segments." + error;
-                                }
-                            }
-                            if (message.locations != null && message.hasOwnProperty("locations")) {
-                                if (!Array.isArray(message.locations))
-                                    return "locations: array expected";
-                                for (var i = 0; i < message.locations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.FaceLocation.verify(message.locations[i]);
-                                    if (error)
-                                        return "locations." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FaceAnnotation message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.FaceAnnotation} FaceAnnotation
-                         */
-                        FaceAnnotation.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.FaceAnnotation)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.FaceAnnotation();
-                            if (object.thumbnail != null)
-                                message.thumbnail = String(object.thumbnail);
-                            if (object.segments) {
-                                if (!Array.isArray(object.segments))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.FaceAnnotation.segments: array expected");
-                                message.segments = [];
-                                for (var i = 0; i < object.segments.length; ++i) {
-                                    if (typeof object.segments[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.FaceAnnotation.segments: object expected");
-                                    message.segments[i] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.fromObject(object.segments[i]);
-                                }
-                            }
-                            if (object.locations) {
-                                if (!Array.isArray(object.locations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.FaceAnnotation.locations: array expected");
-                                message.locations = [];
-                                for (var i = 0; i < object.locations.length; ++i) {
-                                    if (typeof object.locations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.FaceAnnotation.locations: object expected");
-                                    message.locations[i] = $root.google.cloud.videointelligence.v1beta1.FaceLocation.fromObject(object.locations[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FaceAnnotation message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.FaceAnnotation} message FaceAnnotation
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FaceAnnotation.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.segments = [];
-                                object.locations = [];
-                            }
-                            if (options.defaults)
-                                object.thumbnail = "";
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                object.thumbnail = message.thumbnail;
-                            if (message.segments && message.segments.length) {
-                                object.segments = [];
-                                for (var j = 0; j < message.segments.length; ++j)
-                                    object.segments[j] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.toObject(message.segments[j], options);
-                            }
-                            if (message.locations && message.locations.length) {
-                                object.locations = [];
-                                for (var j = 0; j < message.locations.length; ++j)
-                                    object.locations[j] = $root.google.cloud.videointelligence.v1beta1.FaceLocation.toObject(message.locations[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FaceAnnotation to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.FaceAnnotation
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FaceAnnotation.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return FaceAnnotation;
-                    })();
-    
-                    v1beta1.VideoAnnotationResults = (function() {
-    
-                        /**
-                         * Properties of a VideoAnnotationResults.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IVideoAnnotationResults
-                         * @property {string|null} [inputUri] VideoAnnotationResults inputUri
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.ILabelAnnotation>|null} [labelAnnotations] VideoAnnotationResults labelAnnotations
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IFaceAnnotation>|null} [faceAnnotations] VideoAnnotationResults faceAnnotations
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>|null} [shotAnnotations] VideoAnnotationResults shotAnnotations
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation>|null} [safeSearchAnnotations] VideoAnnotationResults safeSearchAnnotations
-                         * @property {google.rpc.IStatus|null} [error] VideoAnnotationResults error
-                         */
-    
-                        /**
-                         * Constructs a new VideoAnnotationResults.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a VideoAnnotationResults.
-                         * @implements IVideoAnnotationResults
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationResults=} [properties] Properties to set
-                         */
-                        function VideoAnnotationResults(properties) {
-                            this.labelAnnotations = [];
-                            this.faceAnnotations = [];
-                            this.shotAnnotations = [];
-                            this.safeSearchAnnotations = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoAnnotationResults inputUri.
-                         * @member {string} inputUri
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.inputUri = "";
-    
-                        /**
-                         * VideoAnnotationResults labelAnnotations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.ILabelAnnotation>} labelAnnotations
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.labelAnnotations = $util.emptyArray;
-    
-                        /**
-                         * VideoAnnotationResults faceAnnotations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IFaceAnnotation>} faceAnnotations
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.faceAnnotations = $util.emptyArray;
-    
-                        /**
-                         * VideoAnnotationResults shotAnnotations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IVideoSegment>} shotAnnotations
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.shotAnnotations = $util.emptyArray;
-    
-                        /**
-                         * VideoAnnotationResults safeSearchAnnotations.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation>} safeSearchAnnotations
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.safeSearchAnnotations = $util.emptyArray;
-    
-                        /**
-                         * VideoAnnotationResults error.
-                         * @member {google.rpc.IStatus|null|undefined} error
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         */
-                        VideoAnnotationResults.prototype.error = null;
-    
-                        /**
-                         * Creates a new VideoAnnotationResults instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationResults=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationResults} VideoAnnotationResults instance
-                         */
-                        VideoAnnotationResults.create = function create(properties) {
-                            return new VideoAnnotationResults(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoAnnotationResults message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationResults.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationResults} message VideoAnnotationResults message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoAnnotationResults.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUri);
-                            if (message.labelAnnotations != null && message.labelAnnotations.length)
-                                for (var i = 0; i < message.labelAnnotations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.LabelAnnotation.encode(message.labelAnnotations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.faceAnnotations != null && message.faceAnnotations.length)
-                                for (var i = 0; i < message.faceAnnotations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.FaceAnnotation.encode(message.faceAnnotations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.shotAnnotations != null && message.shotAnnotations.length)
-                                for (var i = 0; i < message.shotAnnotations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.VideoSegment.encode(message.shotAnnotations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.error != null && message.hasOwnProperty("error"))
-                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.safeSearchAnnotations != null && message.safeSearchAnnotations.length)
-                                for (var i = 0; i < message.safeSearchAnnotations.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.encode(message.safeSearchAnnotations[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoAnnotationResults message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationResults.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationResults} message VideoAnnotationResults message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoAnnotationResults.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoAnnotationResults message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationResults} VideoAnnotationResults
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoAnnotationResults.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.inputUri = reader.string();
-                                    break;
-                                case 2:
-                                    if (!(message.labelAnnotations && message.labelAnnotations.length))
-                                        message.labelAnnotations = [];
-                                    message.labelAnnotations.push($root.google.cloud.videointelligence.v1beta1.LabelAnnotation.decode(reader, reader.uint32()));
-                                    break;
-                                case 3:
-                                    if (!(message.faceAnnotations && message.faceAnnotations.length))
-                                        message.faceAnnotations = [];
-                                    message.faceAnnotations.push($root.google.cloud.videointelligence.v1beta1.FaceAnnotation.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    if (!(message.shotAnnotations && message.shotAnnotations.length))
-                                        message.shotAnnotations = [];
-                                    message.shotAnnotations.push($root.google.cloud.videointelligence.v1beta1.VideoSegment.decode(reader, reader.uint32()));
-                                    break;
-                                case 6:
-                                    if (!(message.safeSearchAnnotations && message.safeSearchAnnotations.length))
-                                        message.safeSearchAnnotations = [];
-                                    message.safeSearchAnnotations.push($root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.decode(reader, reader.uint32()));
-                                    break;
-                                case 5:
-                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoAnnotationResults message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationResults} VideoAnnotationResults
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoAnnotationResults.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoAnnotationResults message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoAnnotationResults.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                if (!$util.isString(message.inputUri))
-                                    return "inputUri: string expected";
-                            if (message.labelAnnotations != null && message.hasOwnProperty("labelAnnotations")) {
-                                if (!Array.isArray(message.labelAnnotations))
-                                    return "labelAnnotations: array expected";
-                                for (var i = 0; i < message.labelAnnotations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.LabelAnnotation.verify(message.labelAnnotations[i]);
-                                    if (error)
-                                        return "labelAnnotations." + error;
-                                }
-                            }
-                            if (message.faceAnnotations != null && message.hasOwnProperty("faceAnnotations")) {
-                                if (!Array.isArray(message.faceAnnotations))
-                                    return "faceAnnotations: array expected";
-                                for (var i = 0; i < message.faceAnnotations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.FaceAnnotation.verify(message.faceAnnotations[i]);
-                                    if (error)
-                                        return "faceAnnotations." + error;
-                                }
-                            }
-                            if (message.shotAnnotations != null && message.hasOwnProperty("shotAnnotations")) {
-                                if (!Array.isArray(message.shotAnnotations))
-                                    return "shotAnnotations: array expected";
-                                for (var i = 0; i < message.shotAnnotations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.VideoSegment.verify(message.shotAnnotations[i]);
-                                    if (error)
-                                        return "shotAnnotations." + error;
-                                }
-                            }
-                            if (message.safeSearchAnnotations != null && message.hasOwnProperty("safeSearchAnnotations")) {
-                                if (!Array.isArray(message.safeSearchAnnotations))
-                                    return "safeSearchAnnotations: array expected";
-                                for (var i = 0; i < message.safeSearchAnnotations.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.verify(message.safeSearchAnnotations[i]);
-                                    if (error)
-                                        return "safeSearchAnnotations." + error;
-                                }
-                            }
-                            if (message.error != null && message.hasOwnProperty("error")) {
-                                var error = $root.google.rpc.Status.verify(message.error);
-                                if (error)
-                                    return "error." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoAnnotationResults message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationResults} VideoAnnotationResults
-                         */
-                        VideoAnnotationResults.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults();
-                            if (object.inputUri != null)
-                                message.inputUri = String(object.inputUri);
-                            if (object.labelAnnotations) {
-                                if (!Array.isArray(object.labelAnnotations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.labelAnnotations: array expected");
-                                message.labelAnnotations = [];
-                                for (var i = 0; i < object.labelAnnotations.length; ++i) {
-                                    if (typeof object.labelAnnotations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.labelAnnotations: object expected");
-                                    message.labelAnnotations[i] = $root.google.cloud.videointelligence.v1beta1.LabelAnnotation.fromObject(object.labelAnnotations[i]);
-                                }
-                            }
-                            if (object.faceAnnotations) {
-                                if (!Array.isArray(object.faceAnnotations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.faceAnnotations: array expected");
-                                message.faceAnnotations = [];
-                                for (var i = 0; i < object.faceAnnotations.length; ++i) {
-                                    if (typeof object.faceAnnotations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.faceAnnotations: object expected");
-                                    message.faceAnnotations[i] = $root.google.cloud.videointelligence.v1beta1.FaceAnnotation.fromObject(object.faceAnnotations[i]);
-                                }
-                            }
-                            if (object.shotAnnotations) {
-                                if (!Array.isArray(object.shotAnnotations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.shotAnnotations: array expected");
-                                message.shotAnnotations = [];
-                                for (var i = 0; i < object.shotAnnotations.length; ++i) {
-                                    if (typeof object.shotAnnotations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.shotAnnotations: object expected");
-                                    message.shotAnnotations[i] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.fromObject(object.shotAnnotations[i]);
-                                }
-                            }
-                            if (object.safeSearchAnnotations) {
-                                if (!Array.isArray(object.safeSearchAnnotations))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.safeSearchAnnotations: array expected");
-                                message.safeSearchAnnotations = [];
-                                for (var i = 0; i < object.safeSearchAnnotations.length; ++i) {
-                                    if (typeof object.safeSearchAnnotations[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.safeSearchAnnotations: object expected");
-                                    message.safeSearchAnnotations[i] = $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.fromObject(object.safeSearchAnnotations[i]);
-                                }
-                            }
-                            if (object.error != null) {
-                                if (typeof object.error !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationResults.error: object expected");
-                                message.error = $root.google.rpc.Status.fromObject(object.error);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoAnnotationResults message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.VideoAnnotationResults} message VideoAnnotationResults
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoAnnotationResults.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.labelAnnotations = [];
-                                object.faceAnnotations = [];
-                                object.shotAnnotations = [];
-                                object.safeSearchAnnotations = [];
-                            }
-                            if (options.defaults) {
-                                object.inputUri = "";
-                                object.error = null;
-                            }
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                object.inputUri = message.inputUri;
-                            if (message.labelAnnotations && message.labelAnnotations.length) {
-                                object.labelAnnotations = [];
-                                for (var j = 0; j < message.labelAnnotations.length; ++j)
-                                    object.labelAnnotations[j] = $root.google.cloud.videointelligence.v1beta1.LabelAnnotation.toObject(message.labelAnnotations[j], options);
-                            }
-                            if (message.faceAnnotations && message.faceAnnotations.length) {
-                                object.faceAnnotations = [];
-                                for (var j = 0; j < message.faceAnnotations.length; ++j)
-                                    object.faceAnnotations[j] = $root.google.cloud.videointelligence.v1beta1.FaceAnnotation.toObject(message.faceAnnotations[j], options);
-                            }
-                            if (message.shotAnnotations && message.shotAnnotations.length) {
-                                object.shotAnnotations = [];
-                                for (var j = 0; j < message.shotAnnotations.length; ++j)
-                                    object.shotAnnotations[j] = $root.google.cloud.videointelligence.v1beta1.VideoSegment.toObject(message.shotAnnotations[j], options);
-                            }
-                            if (message.error != null && message.hasOwnProperty("error"))
-                                object.error = $root.google.rpc.Status.toObject(message.error, options);
-                            if (message.safeSearchAnnotations && message.safeSearchAnnotations.length) {
-                                object.safeSearchAnnotations = [];
-                                for (var j = 0; j < message.safeSearchAnnotations.length; ++j)
-                                    object.safeSearchAnnotations[j] = $root.google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.toObject(message.safeSearchAnnotations[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoAnnotationResults to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationResults
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoAnnotationResults.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoAnnotationResults;
-                    })();
-    
-                    v1beta1.AnnotateVideoResponse = (function() {
-    
-                        /**
-                         * Properties of an AnnotateVideoResponse.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IAnnotateVideoResponse
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IVideoAnnotationResults>|null} [annotationResults] AnnotateVideoResponse annotationResults
-                         */
-    
-                        /**
-                         * Constructs a new AnnotateVideoResponse.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents an AnnotateVideoResponse.
-                         * @implements IAnnotateVideoResponse
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse=} [properties] Properties to set
-                         */
-                        function AnnotateVideoResponse(properties) {
-                            this.annotationResults = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AnnotateVideoResponse annotationResults.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IVideoAnnotationResults>} annotationResults
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @instance
-                         */
-                        AnnotateVideoResponse.prototype.annotationResults = $util.emptyArray;
-    
-                        /**
-                         * Creates a new AnnotateVideoResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoResponse} AnnotateVideoResponse instance
-                         */
-                        AnnotateVideoResponse.create = function create(properties) {
-                            return new AnnotateVideoResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoResponse message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse} message AnnotateVideoResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.annotationResults != null && message.annotationResults.length)
-                                for (var i = 0; i < message.annotationResults.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults.encode(message.annotationResults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoResponse message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse} message AnnotateVideoResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoResponse} AnnotateVideoResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.annotationResults && message.annotationResults.length))
-                                        message.annotationResults = [];
-                                    message.annotationResults.push($root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoResponse} AnnotateVideoResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AnnotateVideoResponse message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AnnotateVideoResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.annotationResults != null && message.hasOwnProperty("annotationResults")) {
-                                if (!Array.isArray(message.annotationResults))
-                                    return "annotationResults: array expected";
-                                for (var i = 0; i < message.annotationResults.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults.verify(message.annotationResults[i]);
-                                    if (error)
-                                        return "annotationResults." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AnnotateVideoResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoResponse} AnnotateVideoResponse
-                         */
-                        AnnotateVideoResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoResponse();
-                            if (object.annotationResults) {
-                                if (!Array.isArray(object.annotationResults))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.annotationResults: array expected");
-                                message.annotationResults = [];
-                                for (var i = 0; i < object.annotationResults.length; ++i) {
-                                    if (typeof object.annotationResults[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.annotationResults: object expected");
-                                    message.annotationResults[i] = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults.fromObject(object.annotationResults[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AnnotateVideoResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.AnnotateVideoResponse} message AnnotateVideoResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AnnotateVideoResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.annotationResults = [];
-                            if (message.annotationResults && message.annotationResults.length) {
-                                object.annotationResults = [];
-                                for (var j = 0; j < message.annotationResults.length; ++j)
-                                    object.annotationResults[j] = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationResults.toObject(message.annotationResults[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AnnotateVideoResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AnnotateVideoResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return AnnotateVideoResponse;
-                    })();
-    
-                    v1beta1.VideoAnnotationProgress = (function() {
-    
-                        /**
-                         * Properties of a VideoAnnotationProgress.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IVideoAnnotationProgress
-                         * @property {string|null} [inputUri] VideoAnnotationProgress inputUri
-                         * @property {number|null} [progressPercent] VideoAnnotationProgress progressPercent
-                         * @property {google.protobuf.ITimestamp|null} [startTime] VideoAnnotationProgress startTime
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] VideoAnnotationProgress updateTime
-                         */
-    
-                        /**
-                         * Constructs a new VideoAnnotationProgress.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents a VideoAnnotationProgress.
-                         * @implements IVideoAnnotationProgress
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress=} [properties] Properties to set
-                         */
-                        function VideoAnnotationProgress(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoAnnotationProgress inputUri.
-                         * @member {string} inputUri
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @instance
-                         */
-                        VideoAnnotationProgress.prototype.inputUri = "";
-    
-                        /**
-                         * VideoAnnotationProgress progressPercent.
-                         * @member {number} progressPercent
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @instance
-                         */
-                        VideoAnnotationProgress.prototype.progressPercent = 0;
-    
-                        /**
-                         * VideoAnnotationProgress startTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @instance
-                         */
-                        VideoAnnotationProgress.prototype.startTime = null;
-    
-                        /**
-                         * VideoAnnotationProgress updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @instance
-                         */
-                        VideoAnnotationProgress.prototype.updateTime = null;
-    
-                        /**
-                         * Creates a new VideoAnnotationProgress instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationProgress} VideoAnnotationProgress instance
-                         */
-                        VideoAnnotationProgress.create = function create(properties) {
-                            return new VideoAnnotationProgress(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoAnnotationProgress message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress} message VideoAnnotationProgress message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoAnnotationProgress.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputUri);
-                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.progressPercent);
-                            if (message.startTime != null && message.hasOwnProperty("startTime"))
-                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoAnnotationProgress message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress} message VideoAnnotationProgress message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoAnnotationProgress.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoAnnotationProgress message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationProgress} VideoAnnotationProgress
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoAnnotationProgress.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.inputUri = reader.string();
-                                    break;
-                                case 2:
-                                    message.progressPercent = reader.int32();
-                                    break;
-                                case 3:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoAnnotationProgress message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationProgress} VideoAnnotationProgress
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoAnnotationProgress.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoAnnotationProgress message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoAnnotationProgress.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                if (!$util.isString(message.inputUri))
-                                    return "inputUri: string expected";
-                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
-                                if (!$util.isInteger(message.progressPercent))
-                                    return "progressPercent: integer expected";
-                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
-                                if (error)
-                                    return "startTime." + error;
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoAnnotationProgress message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.VideoAnnotationProgress} VideoAnnotationProgress
-                         */
-                        VideoAnnotationProgress.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress();
-                            if (object.inputUri != null)
-                                message.inputUri = String(object.inputUri);
-                            if (object.progressPercent != null)
-                                message.progressPercent = object.progressPercent | 0;
-                            if (object.startTime != null) {
-                                if (typeof object.startTime !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.startTime: object expected");
-                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
-                            }
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoAnnotationProgress message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.VideoAnnotationProgress} message VideoAnnotationProgress
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoAnnotationProgress.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.inputUri = "";
-                                object.progressPercent = 0;
-                                object.startTime = null;
-                                object.updateTime = null;
-                            }
-                            if (message.inputUri != null && message.hasOwnProperty("inputUri"))
-                                object.inputUri = message.inputUri;
-                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
-                                object.progressPercent = message.progressPercent;
-                            if (message.startTime != null && message.hasOwnProperty("startTime"))
-                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoAnnotationProgress to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.VideoAnnotationProgress
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoAnnotationProgress.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoAnnotationProgress;
-                    })();
-    
-                    v1beta1.AnnotateVideoProgress = (function() {
-    
-                        /**
-                         * Properties of an AnnotateVideoProgress.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @interface IAnnotateVideoProgress
-                         * @property {Array.<google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress>|null} [annotationProgress] AnnotateVideoProgress annotationProgress
-                         */
-    
-                        /**
-                         * Constructs a new AnnotateVideoProgress.
-                         * @memberof google.cloud.videointelligence.v1beta1
-                         * @classdesc Represents an AnnotateVideoProgress.
-                         * @implements IAnnotateVideoProgress
-                         * @constructor
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress=} [properties] Properties to set
-                         */
-                        function AnnotateVideoProgress(properties) {
-                            this.annotationProgress = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AnnotateVideoProgress annotationProgress.
-                         * @member {Array.<google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress>} annotationProgress
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @instance
-                         */
-                        AnnotateVideoProgress.prototype.annotationProgress = $util.emptyArray;
-    
-                        /**
-                         * Creates a new AnnotateVideoProgress instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress=} [properties] Properties to set
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoProgress} AnnotateVideoProgress instance
-                         */
-                        AnnotateVideoProgress.create = function create(properties) {
-                            return new AnnotateVideoProgress(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoProgress message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress} message AnnotateVideoProgress message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoProgress.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.annotationProgress != null && message.annotationProgress.length)
-                                for (var i = 0; i < message.annotationProgress.length; ++i)
-                                    $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.encode(message.annotationProgress[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AnnotateVideoProgress message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress} message AnnotateVideoProgress message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnnotateVideoProgress.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoProgress message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoProgress} AnnotateVideoProgress
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoProgress.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.annotationProgress && message.annotationProgress.length))
-                                        message.annotationProgress = [];
-                                    message.annotationProgress.push($root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AnnotateVideoProgress message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoProgress} AnnotateVideoProgress
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnnotateVideoProgress.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AnnotateVideoProgress message.
-                         * @function verify
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AnnotateVideoProgress.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.annotationProgress != null && message.hasOwnProperty("annotationProgress")) {
-                                if (!Array.isArray(message.annotationProgress))
-                                    return "annotationProgress: array expected";
-                                for (var i = 0; i < message.annotationProgress.length; ++i) {
-                                    var error = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.verify(message.annotationProgress[i]);
-                                    if (error)
-                                        return "annotationProgress." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AnnotateVideoProgress message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.videointelligence.v1beta1.AnnotateVideoProgress} AnnotateVideoProgress
-                         */
-                        AnnotateVideoProgress.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress)
-                                return object;
-                            var message = new $root.google.cloud.videointelligence.v1beta1.AnnotateVideoProgress();
-                            if (object.annotationProgress) {
-                                if (!Array.isArray(object.annotationProgress))
-                                    throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.annotationProgress: array expected");
-                                message.annotationProgress = [];
-                                for (var i = 0; i < object.annotationProgress.length; ++i) {
-                                    if (typeof object.annotationProgress[i] !== "object")
-                                        throw TypeError(".google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.annotationProgress: object expected");
-                                    message.annotationProgress[i] = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.fromObject(object.annotationProgress[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AnnotateVideoProgress message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @static
-                         * @param {google.cloud.videointelligence.v1beta1.AnnotateVideoProgress} message AnnotateVideoProgress
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AnnotateVideoProgress.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.annotationProgress = [];
-                            if (message.annotationProgress && message.annotationProgress.length) {
-                                object.annotationProgress = [];
-                                for (var j = 0; j < message.annotationProgress.length; ++j)
-                                    object.annotationProgress[j] = $root.google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.toObject(message.annotationProgress[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AnnotateVideoProgress to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.videointelligence.v1beta1.AnnotateVideoProgress
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AnnotateVideoProgress.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return AnnotateVideoProgress;
-                    })();
-    
-                    /**
-                     * Feature enum.
-                     * @name google.cloud.videointelligence.v1beta1.Feature
-                     * @enum {string}
-                     * @property {number} FEATURE_UNSPECIFIED=0 FEATURE_UNSPECIFIED value
-                     * @property {number} LABEL_DETECTION=1 LABEL_DETECTION value
-                     * @property {number} FACE_DETECTION=2 FACE_DETECTION value
-                     * @property {number} SHOT_CHANGE_DETECTION=3 SHOT_CHANGE_DETECTION value
-                     * @property {number} SAFE_SEARCH_DETECTION=4 SAFE_SEARCH_DETECTION value
-                     */
-                    v1beta1.Feature = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "FEATURE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LABEL_DETECTION"] = 1;
-                        values[valuesById[2] = "FACE_DETECTION"] = 2;
-                        values[valuesById[3] = "SHOT_CHANGE_DETECTION"] = 3;
-                        values[valuesById[4] = "SAFE_SEARCH_DETECTION"] = 4;
-                        return values;
-                    })();
-    
-                    /**
-                     * LabelLevel enum.
-                     * @name google.cloud.videointelligence.v1beta1.LabelLevel
-                     * @enum {string}
-                     * @property {number} LABEL_LEVEL_UNSPECIFIED=0 LABEL_LEVEL_UNSPECIFIED value
-                     * @property {number} VIDEO_LEVEL=1 VIDEO_LEVEL value
-                     * @property {number} SEGMENT_LEVEL=2 SEGMENT_LEVEL value
-                     * @property {number} SHOT_LEVEL=3 SHOT_LEVEL value
-                     * @property {number} FRAME_LEVEL=4 FRAME_LEVEL value
-                     */
-                    v1beta1.LabelLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LABEL_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "VIDEO_LEVEL"] = 1;
-                        values[valuesById[2] = "SEGMENT_LEVEL"] = 2;
-                        values[valuesById[3] = "SHOT_LEVEL"] = 3;
-                        values[valuesById[4] = "FRAME_LEVEL"] = 4;
-                        return values;
-                    })();
-    
-                    /**
-                     * LabelDetectionMode enum.
-                     * @name google.cloud.videointelligence.v1beta1.LabelDetectionMode
-                     * @enum {string}
-                     * @property {number} LABEL_DETECTION_MODE_UNSPECIFIED=0 LABEL_DETECTION_MODE_UNSPECIFIED value
-                     * @property {number} SHOT_MODE=1 SHOT_MODE value
-                     * @property {number} FRAME_MODE=2 FRAME_MODE value
-                     * @property {number} SHOT_AND_FRAME_MODE=3 SHOT_AND_FRAME_MODE value
-                     */
-                    v1beta1.LabelDetectionMode = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LABEL_DETECTION_MODE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SHOT_MODE"] = 1;
-                        values[valuesById[2] = "FRAME_MODE"] = 2;
-                        values[valuesById[3] = "SHOT_AND_FRAME_MODE"] = 3;
-                        return values;
-                    })();
-    
-                    /**
-                     * Likelihood enum.
-                     * @name google.cloud.videointelligence.v1beta1.Likelihood
-                     * @enum {string}
-                     * @property {number} UNKNOWN=0 UNKNOWN value
-                     * @property {number} VERY_UNLIKELY=1 VERY_UNLIKELY value
-                     * @property {number} UNLIKELY=2 UNLIKELY value
-                     * @property {number} POSSIBLE=3 POSSIBLE value
-                     * @property {number} LIKELY=4 LIKELY value
-                     * @property {number} VERY_LIKELY=5 VERY_LIKELY value
-                     */
-                    v1beta1.Likelihood = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UNKNOWN"] = 0;
-                        values[valuesById[1] = "VERY_UNLIKELY"] = 1;
-                        values[valuesById[2] = "UNLIKELY"] = 2;
-                        values[valuesById[3] = "POSSIBLE"] = 3;
-                        values[valuesById[4] = "LIKELY"] = 4;
-                        values[valuesById[5] = "VERY_LIKELY"] = 5;
-                        return values;
-                    })();
-    
-                    return v1beta1;
                 })();
     
                 videointelligence.v1beta2 = (function() {
@@ -43582,6 +39638,28 @@
                 return CustomHttpPattern;
             })();
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
             return api;
         })();
     
@@ -48721,6 +44799,7 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  */
     
                 /**
@@ -48733,6 +44812,7 @@
                  */
                 function FieldOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -48796,6 +44876,14 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -48834,6 +44922,12 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
                     return writer;
                 };
     
@@ -48890,6 +44984,16 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1052:
+                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                message[".google.api.fieldBehavior"] = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message[".google.api.fieldBehavior"].push(reader.int32());
+                            } else
+                                message[".google.api.fieldBehavior"].push(reader.int32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -48965,6 +45069,22 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                        if (!Array.isArray(message[".google.api.fieldBehavior"]))
+                            return ".google.api.fieldBehavior: array expected";
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            switch (message[".google.api.fieldBehavior"][i]) {
+                            default:
+                                return ".google.api.fieldBehavior: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                break;
+                            }
+                    }
                     return null;
                 };
     
@@ -49026,6 +45146,39 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.fieldBehavior"]) {
+                        if (!Array.isArray(object[".google.api.fieldBehavior"]))
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
+                        message[".google.api.fieldBehavior"] = [];
+                        for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
+                            switch (object[".google.api.fieldBehavior"][i]) {
+                            default:
+                            case "FIELD_BEHAVIOR_UNSPECIFIED":
+                            case 0:
+                                message[".google.api.fieldBehavior"][i] = 0;
+                                break;
+                            case "OPTIONAL":
+                            case 1:
+                                message[".google.api.fieldBehavior"][i] = 1;
+                                break;
+                            case "REQUIRED":
+                            case 2:
+                                message[".google.api.fieldBehavior"][i] = 2;
+                                break;
+                            case "OUTPUT_ONLY":
+                            case 3:
+                                message[".google.api.fieldBehavior"][i] = 3;
+                                break;
+                            case "INPUT_ONLY":
+                            case 4:
+                                message[".google.api.fieldBehavior"][i] = 4;
+                                break;
+                            case "IMMUTABLE":
+                            case 5:
+                                message[".google.api.fieldBehavior"][i] = 5;
+                                break;
+                            }
+                    }
                     return message;
                 };
     
@@ -49042,8 +45195,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.fieldBehavior"] = [];
+                    }
                     if (options.defaults) {
                         object.ctype = options.enums === String ? "STRING" : 0;
                         object.packed = false;
@@ -49068,6 +45223,11 @@
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                    }
+                    if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
+                        object[".google.api.fieldBehavior"] = [];
+                        for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     return object;
                 };

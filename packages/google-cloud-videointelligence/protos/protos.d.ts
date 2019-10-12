@@ -308,6 +308,36 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Feature enum. */
+                enum Feature {
+                    FEATURE_UNSPECIFIED = 0,
+                    LABEL_DETECTION = 1,
+                    SHOT_CHANGE_DETECTION = 2,
+                    EXPLICIT_CONTENT_DETECTION = 3,
+                    FACE_DETECTION = 4,
+                    SPEECH_TRANSCRIPTION = 6,
+                    TEXT_DETECTION = 7,
+                    OBJECT_TRACKING = 9
+                }
+
+                /** LabelDetectionMode enum. */
+                enum LabelDetectionMode {
+                    LABEL_DETECTION_MODE_UNSPECIFIED = 0,
+                    SHOT_MODE = 1,
+                    FRAME_MODE = 2,
+                    SHOT_AND_FRAME_MODE = 3
+                }
+
+                /** Likelihood enum. */
+                enum Likelihood {
+                    LIKELIHOOD_UNSPECIFIED = 0,
+                    VERY_UNLIKELY = 1,
+                    UNLIKELY = 2,
+                    POSSIBLE = 3,
+                    LIKELY = 4,
+                    VERY_LIKELY = 5
+                }
+
                 /** Properties of a LabelDetectionConfig. */
                 interface ILabelDetectionConfig {
 
@@ -512,91 +542,91 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an ExplicitContentDetectionConfig. */
-                interface IExplicitContentDetectionConfig {
+                /** Properties of an ObjectTrackingConfig. */
+                interface IObjectTrackingConfig {
 
-                    /** ExplicitContentDetectionConfig model */
+                    /** ObjectTrackingConfig model */
                     model?: (string|null);
                 }
 
-                /** Represents an ExplicitContentDetectionConfig. */
-                class ExplicitContentDetectionConfig implements IExplicitContentDetectionConfig {
+                /** Represents an ObjectTrackingConfig. */
+                class ObjectTrackingConfig implements IObjectTrackingConfig {
 
                     /**
-                     * Constructs a new ExplicitContentDetectionConfig.
+                     * Constructs a new ObjectTrackingConfig.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig);
+                    constructor(properties?: google.cloud.videointelligence.v1.IObjectTrackingConfig);
 
-                    /** ExplicitContentDetectionConfig model. */
+                    /** ObjectTrackingConfig model. */
                     public model: string;
 
                     /**
-                     * Creates a new ExplicitContentDetectionConfig instance using the specified properties.
+                     * Creates a new ObjectTrackingConfig instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ExplicitContentDetectionConfig instance
+                     * @returns ObjectTrackingConfig instance
                      */
-                    public static create(properties?: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
+                    public static create(properties?: google.cloud.videointelligence.v1.IObjectTrackingConfig): google.cloud.videointelligence.v1.ObjectTrackingConfig;
 
                     /**
-                     * Encodes the specified ExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
-                     * @param message ExplicitContentDetectionConfig message or plain object to encode
+                     * Encodes the specified ObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
+                     * @param message ObjectTrackingConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.videointelligence.v1.IObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
-                     * @param message ExplicitContentDetectionConfig message or plain object to encode
+                     * Encodes the specified ObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
+                     * @param message ObjectTrackingConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer.
+                     * Decodes an ObjectTrackingConfig message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ExplicitContentDetectionConfig
+                     * @returns ObjectTrackingConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.ObjectTrackingConfig;
 
                     /**
-                     * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
+                     * Decodes an ObjectTrackingConfig message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ExplicitContentDetectionConfig
+                     * @returns ObjectTrackingConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.ObjectTrackingConfig;
 
                     /**
-                     * Verifies an ExplicitContentDetectionConfig message.
+                     * Verifies an ObjectTrackingConfig message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an ExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * Creates an ObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ExplicitContentDetectionConfig
+                     * @returns ObjectTrackingConfig
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.ObjectTrackingConfig;
 
                     /**
-                     * Creates a plain object from an ExplicitContentDetectionConfig message. Also converts values to other types if specified.
-                     * @param message ExplicitContentDetectionConfig
+                     * Creates a plain object from an ObjectTrackingConfig message. Also converts values to other types if specified.
+                     * @param message ObjectTrackingConfig
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.videointelligence.v1.ExplicitContentDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.videointelligence.v1.ObjectTrackingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ExplicitContentDetectionConfig to JSON.
+                     * Converts this ObjectTrackingConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -698,91 +728,91 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an ObjectTrackingConfig. */
-                interface IObjectTrackingConfig {
+                /** Properties of an ExplicitContentDetectionConfig. */
+                interface IExplicitContentDetectionConfig {
 
-                    /** ObjectTrackingConfig model */
+                    /** ExplicitContentDetectionConfig model */
                     model?: (string|null);
                 }
 
-                /** Represents an ObjectTrackingConfig. */
-                class ObjectTrackingConfig implements IObjectTrackingConfig {
+                /** Represents an ExplicitContentDetectionConfig. */
+                class ExplicitContentDetectionConfig implements IExplicitContentDetectionConfig {
 
                     /**
-                     * Constructs a new ObjectTrackingConfig.
+                     * Constructs a new ExplicitContentDetectionConfig.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.videointelligence.v1.IObjectTrackingConfig);
+                    constructor(properties?: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig);
 
-                    /** ObjectTrackingConfig model. */
+                    /** ExplicitContentDetectionConfig model. */
                     public model: string;
 
                     /**
-                     * Creates a new ObjectTrackingConfig instance using the specified properties.
+                     * Creates a new ExplicitContentDetectionConfig instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns ObjectTrackingConfig instance
+                     * @returns ExplicitContentDetectionConfig instance
                      */
-                    public static create(properties?: google.cloud.videointelligence.v1.IObjectTrackingConfig): google.cloud.videointelligence.v1.ObjectTrackingConfig;
+                    public static create(properties?: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
 
                     /**
-                     * Encodes the specified ObjectTrackingConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
-                     * @param message ObjectTrackingConfig message or plain object to encode
+                     * Encodes the specified ExplicitContentDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
+                     * @param message ExplicitContentDetectionConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.videointelligence.v1.IObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ObjectTrackingConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ObjectTrackingConfig.verify|verify} messages.
-                     * @param message ObjectTrackingConfig message or plain object to encode
+                     * Encodes the specified ExplicitContentDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1.ExplicitContentDetectionConfig.verify|verify} messages.
+                     * @param message ExplicitContentDetectionConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IObjectTrackingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1.IExplicitContentDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes an ObjectTrackingConfig message from the specified reader or buffer.
+                     * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns ObjectTrackingConfig
+                     * @returns ExplicitContentDetectionConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.ObjectTrackingConfig;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
 
                     /**
-                     * Decodes an ObjectTrackingConfig message from the specified reader or buffer, length delimited.
+                     * Decodes an ExplicitContentDetectionConfig message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns ObjectTrackingConfig
+                     * @returns ExplicitContentDetectionConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.ObjectTrackingConfig;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
 
                     /**
-                     * Verifies an ObjectTrackingConfig message.
+                     * Verifies an ExplicitContentDetectionConfig message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates an ObjectTrackingConfig message from a plain object. Also converts values to their respective internal types.
+                     * Creates an ExplicitContentDetectionConfig message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns ObjectTrackingConfig
+                     * @returns ExplicitContentDetectionConfig
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.ObjectTrackingConfig;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1.ExplicitContentDetectionConfig;
 
                     /**
-                     * Creates a plain object from an ObjectTrackingConfig message. Also converts values to other types if specified.
-                     * @param message ObjectTrackingConfig
+                     * Creates a plain object from an ExplicitContentDetectionConfig message. Also converts values to other types if specified.
+                     * @param message ExplicitContentDetectionConfig
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.videointelligence.v1.ObjectTrackingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.videointelligence.v1.ExplicitContentDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this ObjectTrackingConfig to JSON.
+                     * Converts this ExplicitContentDetectionConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3663,1501 +3693,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** Feature enum. */
-                enum Feature {
-                    FEATURE_UNSPECIFIED = 0,
-                    LABEL_DETECTION = 1,
-                    SHOT_CHANGE_DETECTION = 2,
-                    EXPLICIT_CONTENT_DETECTION = 3,
-                    FACE_DETECTION = 4,
-                    SPEECH_TRANSCRIPTION = 6,
-                    TEXT_DETECTION = 7,
-                    OBJECT_TRACKING = 9
-                }
-
-                /** LabelDetectionMode enum. */
-                enum LabelDetectionMode {
-                    LABEL_DETECTION_MODE_UNSPECIFIED = 0,
-                    SHOT_MODE = 1,
-                    FRAME_MODE = 2,
-                    SHOT_AND_FRAME_MODE = 3
-                }
-
-                /** Likelihood enum. */
-                enum Likelihood {
-                    LIKELIHOOD_UNSPECIFIED = 0,
-                    VERY_UNLIKELY = 1,
-                    UNLIKELY = 2,
-                    POSSIBLE = 3,
-                    LIKELY = 4,
-                    VERY_LIKELY = 5
-                }
-            }
-
-            /** Namespace v1beta1. */
-            namespace v1beta1 {
-
-                /** Represents a VideoIntelligenceService */
-                class VideoIntelligenceService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new VideoIntelligenceService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new VideoIntelligenceService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): VideoIntelligenceService;
-
-                    /**
-                     * Calls AnnotateVideo.
-                     * @param request AnnotateVideoRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public annotateVideo(request: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest, callback: google.cloud.videointelligence.v1beta1.VideoIntelligenceService.AnnotateVideoCallback): void;
-
-                    /**
-                     * Calls AnnotateVideo.
-                     * @param request AnnotateVideoRequest message or plain object
-                     * @returns Promise
-                     */
-                    public annotateVideo(request: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest): Promise<google.longrunning.Operation>;
-                }
-
-                namespace VideoIntelligenceService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.videointelligence.v1beta1.VideoIntelligenceService#annotateVideo}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type AnnotateVideoCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-                }
-
-                /** Properties of an AnnotateVideoRequest. */
-                interface IAnnotateVideoRequest {
-
-                    /** AnnotateVideoRequest inputUri */
-                    inputUri?: (string|null);
-
-                    /** AnnotateVideoRequest inputContent */
-                    inputContent?: (string|null);
-
-                    /** AnnotateVideoRequest features */
-                    features?: (google.cloud.videointelligence.v1beta1.Feature[]|null);
-
-                    /** AnnotateVideoRequest videoContext */
-                    videoContext?: (google.cloud.videointelligence.v1beta1.IVideoContext|null);
-
-                    /** AnnotateVideoRequest outputUri */
-                    outputUri?: (string|null);
-
-                    /** AnnotateVideoRequest locationId */
-                    locationId?: (string|null);
-                }
-
-                /** Represents an AnnotateVideoRequest. */
-                class AnnotateVideoRequest implements IAnnotateVideoRequest {
-
-                    /**
-                     * Constructs a new AnnotateVideoRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest);
-
-                    /** AnnotateVideoRequest inputUri. */
-                    public inputUri: string;
-
-                    /** AnnotateVideoRequest inputContent. */
-                    public inputContent: string;
-
-                    /** AnnotateVideoRequest features. */
-                    public features: google.cloud.videointelligence.v1beta1.Feature[];
-
-                    /** AnnotateVideoRequest videoContext. */
-                    public videoContext?: (google.cloud.videointelligence.v1beta1.IVideoContext|null);
-
-                    /** AnnotateVideoRequest outputUri. */
-                    public outputUri: string;
-
-                    /** AnnotateVideoRequest locationId. */
-                    public locationId: string;
-
-                    /**
-                     * Creates a new AnnotateVideoRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AnnotateVideoRequest instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest): google.cloud.videointelligence.v1beta1.AnnotateVideoRequest;
-
-                    /**
-                     * Encodes the specified AnnotateVideoRequest message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.verify|verify} messages.
-                     * @param message AnnotateVideoRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AnnotateVideoRequest message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoRequest.verify|verify} messages.
-                     * @param message AnnotateVideoRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AnnotateVideoRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AnnotateVideoRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.AnnotateVideoRequest;
-
-                    /**
-                     * Decodes an AnnotateVideoRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AnnotateVideoRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.AnnotateVideoRequest;
-
-                    /**
-                     * Verifies an AnnotateVideoRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AnnotateVideoRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AnnotateVideoRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.AnnotateVideoRequest;
-
-                    /**
-                     * Creates a plain object from an AnnotateVideoRequest message. Also converts values to other types if specified.
-                     * @param message AnnotateVideoRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.AnnotateVideoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AnnotateVideoRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoContext. */
-                interface IVideoContext {
-
-                    /** VideoContext segments */
-                    segments?: (google.cloud.videointelligence.v1beta1.IVideoSegment[]|null);
-
-                    /** VideoContext labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1beta1.LabelDetectionMode|null);
-
-                    /** VideoContext stationaryCamera */
-                    stationaryCamera?: (boolean|null);
-
-                    /** VideoContext labelDetectionModel */
-                    labelDetectionModel?: (string|null);
-
-                    /** VideoContext faceDetectionModel */
-                    faceDetectionModel?: (string|null);
-
-                    /** VideoContext shotChangeDetectionModel */
-                    shotChangeDetectionModel?: (string|null);
-
-                    /** VideoContext safeSearchDetectionModel */
-                    safeSearchDetectionModel?: (string|null);
-                }
-
-                /** Represents a VideoContext. */
-                class VideoContext implements IVideoContext {
-
-                    /**
-                     * Constructs a new VideoContext.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IVideoContext);
-
-                    /** VideoContext segments. */
-                    public segments: google.cloud.videointelligence.v1beta1.IVideoSegment[];
-
-                    /** VideoContext labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1beta1.LabelDetectionMode;
-
-                    /** VideoContext stationaryCamera. */
-                    public stationaryCamera: boolean;
-
-                    /** VideoContext labelDetectionModel. */
-                    public labelDetectionModel: string;
-
-                    /** VideoContext faceDetectionModel. */
-                    public faceDetectionModel: string;
-
-                    /** VideoContext shotChangeDetectionModel. */
-                    public shotChangeDetectionModel: string;
-
-                    /** VideoContext safeSearchDetectionModel. */
-                    public safeSearchDetectionModel: string;
-
-                    /**
-                     * Creates a new VideoContext instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoContext instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IVideoContext): google.cloud.videointelligence.v1beta1.VideoContext;
-
-                    /**
-                     * Encodes the specified VideoContext message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoContext.verify|verify} messages.
-                     * @param message VideoContext message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IVideoContext, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoContext message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoContext.verify|verify} messages.
-                     * @param message VideoContext message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IVideoContext, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoContext message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoContext
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.VideoContext;
-
-                    /**
-                     * Decodes a VideoContext message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoContext
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.VideoContext;
-
-                    /**
-                     * Verifies a VideoContext message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoContext message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoContext
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.VideoContext;
-
-                    /**
-                     * Creates a plain object from a VideoContext message. Also converts values to other types if specified.
-                     * @param message VideoContext
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.VideoContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoContext to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoSegment. */
-                interface IVideoSegment {
-
-                    /** VideoSegment startTimeOffset */
-                    startTimeOffset?: (number|Long|null);
-
-                    /** VideoSegment endTimeOffset */
-                    endTimeOffset?: (number|Long|null);
-                }
-
-                /** Represents a VideoSegment. */
-                class VideoSegment implements IVideoSegment {
-
-                    /**
-                     * Constructs a new VideoSegment.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IVideoSegment);
-
-                    /** VideoSegment startTimeOffset. */
-                    public startTimeOffset: (number|Long);
-
-                    /** VideoSegment endTimeOffset. */
-                    public endTimeOffset: (number|Long);
-
-                    /**
-                     * Creates a new VideoSegment instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoSegment instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IVideoSegment): google.cloud.videointelligence.v1beta1.VideoSegment;
-
-                    /**
-                     * Encodes the specified VideoSegment message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoSegment.verify|verify} messages.
-                     * @param message VideoSegment message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IVideoSegment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoSegment message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoSegment.verify|verify} messages.
-                     * @param message VideoSegment message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IVideoSegment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoSegment message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoSegment
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.VideoSegment;
-
-                    /**
-                     * Decodes a VideoSegment message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoSegment
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.VideoSegment;
-
-                    /**
-                     * Verifies a VideoSegment message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoSegment message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoSegment
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.VideoSegment;
-
-                    /**
-                     * Creates a plain object from a VideoSegment message. Also converts values to other types if specified.
-                     * @param message VideoSegment
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.VideoSegment, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoSegment to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a LabelLocation. */
-                interface ILabelLocation {
-
-                    /** LabelLocation segment */
-                    segment?: (google.cloud.videointelligence.v1beta1.IVideoSegment|null);
-
-                    /** LabelLocation confidence */
-                    confidence?: (number|null);
-
-                    /** LabelLocation level */
-                    level?: (google.cloud.videointelligence.v1beta1.LabelLevel|null);
-                }
-
-                /** Represents a LabelLocation. */
-                class LabelLocation implements ILabelLocation {
-
-                    /**
-                     * Constructs a new LabelLocation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.ILabelLocation);
-
-                    /** LabelLocation segment. */
-                    public segment?: (google.cloud.videointelligence.v1beta1.IVideoSegment|null);
-
-                    /** LabelLocation confidence. */
-                    public confidence: number;
-
-                    /** LabelLocation level. */
-                    public level: google.cloud.videointelligence.v1beta1.LabelLevel;
-
-                    /**
-                     * Creates a new LabelLocation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns LabelLocation instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.ILabelLocation): google.cloud.videointelligence.v1beta1.LabelLocation;
-
-                    /**
-                     * Encodes the specified LabelLocation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelLocation.verify|verify} messages.
-                     * @param message LabelLocation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.ILabelLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified LabelLocation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelLocation.verify|verify} messages.
-                     * @param message LabelLocation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.ILabelLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a LabelLocation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns LabelLocation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.LabelLocation;
-
-                    /**
-                     * Decodes a LabelLocation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns LabelLocation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.LabelLocation;
-
-                    /**
-                     * Verifies a LabelLocation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a LabelLocation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns LabelLocation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.LabelLocation;
-
-                    /**
-                     * Creates a plain object from a LabelLocation message. Also converts values to other types if specified.
-                     * @param message LabelLocation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.LabelLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this LabelLocation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a LabelAnnotation. */
-                interface ILabelAnnotation {
-
-                    /** LabelAnnotation description */
-                    description?: (string|null);
-
-                    /** LabelAnnotation languageCode */
-                    languageCode?: (string|null);
-
-                    /** LabelAnnotation locations */
-                    locations?: (google.cloud.videointelligence.v1beta1.ILabelLocation[]|null);
-                }
-
-                /** Represents a LabelAnnotation. */
-                class LabelAnnotation implements ILabelAnnotation {
-
-                    /**
-                     * Constructs a new LabelAnnotation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.ILabelAnnotation);
-
-                    /** LabelAnnotation description. */
-                    public description: string;
-
-                    /** LabelAnnotation languageCode. */
-                    public languageCode: string;
-
-                    /** LabelAnnotation locations. */
-                    public locations: google.cloud.videointelligence.v1beta1.ILabelLocation[];
-
-                    /**
-                     * Creates a new LabelAnnotation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns LabelAnnotation instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.ILabelAnnotation): google.cloud.videointelligence.v1beta1.LabelAnnotation;
-
-                    /**
-                     * Encodes the specified LabelAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelAnnotation.verify|verify} messages.
-                     * @param message LabelAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.ILabelAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified LabelAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.LabelAnnotation.verify|verify} messages.
-                     * @param message LabelAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.ILabelAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a LabelAnnotation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns LabelAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.LabelAnnotation;
-
-                    /**
-                     * Decodes a LabelAnnotation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns LabelAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.LabelAnnotation;
-
-                    /**
-                     * Verifies a LabelAnnotation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a LabelAnnotation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns LabelAnnotation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.LabelAnnotation;
-
-                    /**
-                     * Creates a plain object from a LabelAnnotation message. Also converts values to other types if specified.
-                     * @param message LabelAnnotation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.LabelAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this LabelAnnotation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a SafeSearchAnnotation. */
-                interface ISafeSearchAnnotation {
-
-                    /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.videointelligence.v1beta1.Likelihood|null);
-
-                    /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.videointelligence.v1beta1.Likelihood|null);
-
-                    /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.videointelligence.v1beta1.Likelihood|null);
-
-                    /** SafeSearchAnnotation violent */
-                    violent?: (google.cloud.videointelligence.v1beta1.Likelihood|null);
-
-                    /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.videointelligence.v1beta1.Likelihood|null);
-
-                    /** SafeSearchAnnotation timeOffset */
-                    timeOffset?: (number|Long|null);
-                }
-
-                /** Represents a SafeSearchAnnotation. */
-                class SafeSearchAnnotation implements ISafeSearchAnnotation {
-
-                    /**
-                     * Constructs a new SafeSearchAnnotation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation);
-
-                    /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.videointelligence.v1beta1.Likelihood;
-
-                    /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.videointelligence.v1beta1.Likelihood;
-
-                    /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.videointelligence.v1beta1.Likelihood;
-
-                    /** SafeSearchAnnotation violent. */
-                    public violent: google.cloud.videointelligence.v1beta1.Likelihood;
-
-                    /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.videointelligence.v1beta1.Likelihood;
-
-                    /** SafeSearchAnnotation timeOffset. */
-                    public timeOffset: (number|Long);
-
-                    /**
-                     * Creates a new SafeSearchAnnotation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SafeSearchAnnotation instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation): google.cloud.videointelligence.v1beta1.SafeSearchAnnotation;
-
-                    /**
-                     * Encodes the specified SafeSearchAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.verify|verify} messages.
-                     * @param message SafeSearchAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SafeSearchAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.SafeSearchAnnotation.verify|verify} messages.
-                     * @param message SafeSearchAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SafeSearchAnnotation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SafeSearchAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.SafeSearchAnnotation;
-
-                    /**
-                     * Decodes a SafeSearchAnnotation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SafeSearchAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.SafeSearchAnnotation;
-
-                    /**
-                     * Verifies a SafeSearchAnnotation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SafeSearchAnnotation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SafeSearchAnnotation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.SafeSearchAnnotation;
-
-                    /**
-                     * Creates a plain object from a SafeSearchAnnotation message. Also converts values to other types if specified.
-                     * @param message SafeSearchAnnotation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.SafeSearchAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SafeSearchAnnotation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a BoundingBox. */
-                interface IBoundingBox {
-
-                    /** BoundingBox left */
-                    left?: (number|null);
-
-                    /** BoundingBox right */
-                    right?: (number|null);
-
-                    /** BoundingBox bottom */
-                    bottom?: (number|null);
-
-                    /** BoundingBox top */
-                    top?: (number|null);
-                }
-
-                /** Represents a BoundingBox. */
-                class BoundingBox implements IBoundingBox {
-
-                    /**
-                     * Constructs a new BoundingBox.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IBoundingBox);
-
-                    /** BoundingBox left. */
-                    public left: number;
-
-                    /** BoundingBox right. */
-                    public right: number;
-
-                    /** BoundingBox bottom. */
-                    public bottom: number;
-
-                    /** BoundingBox top. */
-                    public top: number;
-
-                    /**
-                     * Creates a new BoundingBox instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BoundingBox instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IBoundingBox): google.cloud.videointelligence.v1beta1.BoundingBox;
-
-                    /**
-                     * Encodes the specified BoundingBox message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.BoundingBox.verify|verify} messages.
-                     * @param message BoundingBox message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IBoundingBox, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BoundingBox message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.BoundingBox.verify|verify} messages.
-                     * @param message BoundingBox message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IBoundingBox, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BoundingBox message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BoundingBox
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.BoundingBox;
-
-                    /**
-                     * Decodes a BoundingBox message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BoundingBox
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.BoundingBox;
-
-                    /**
-                     * Verifies a BoundingBox message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BoundingBox message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BoundingBox
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.BoundingBox;
-
-                    /**
-                     * Creates a plain object from a BoundingBox message. Also converts values to other types if specified.
-                     * @param message BoundingBox
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.BoundingBox, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BoundingBox to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a FaceLocation. */
-                interface IFaceLocation {
-
-                    /** FaceLocation boundingBox */
-                    boundingBox?: (google.cloud.videointelligence.v1beta1.IBoundingBox|null);
-
-                    /** FaceLocation timeOffset */
-                    timeOffset?: (number|Long|null);
-                }
-
-                /** Represents a FaceLocation. */
-                class FaceLocation implements IFaceLocation {
-
-                    /**
-                     * Constructs a new FaceLocation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IFaceLocation);
-
-                    /** FaceLocation boundingBox. */
-                    public boundingBox?: (google.cloud.videointelligence.v1beta1.IBoundingBox|null);
-
-                    /** FaceLocation timeOffset. */
-                    public timeOffset: (number|Long);
-
-                    /**
-                     * Creates a new FaceLocation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FaceLocation instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IFaceLocation): google.cloud.videointelligence.v1beta1.FaceLocation;
-
-                    /**
-                     * Encodes the specified FaceLocation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceLocation.verify|verify} messages.
-                     * @param message FaceLocation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IFaceLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FaceLocation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceLocation.verify|verify} messages.
-                     * @param message FaceLocation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IFaceLocation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FaceLocation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FaceLocation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.FaceLocation;
-
-                    /**
-                     * Decodes a FaceLocation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FaceLocation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.FaceLocation;
-
-                    /**
-                     * Verifies a FaceLocation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FaceLocation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FaceLocation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.FaceLocation;
-
-                    /**
-                     * Creates a plain object from a FaceLocation message. Also converts values to other types if specified.
-                     * @param message FaceLocation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.FaceLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FaceLocation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a FaceAnnotation. */
-                interface IFaceAnnotation {
-
-                    /** FaceAnnotation thumbnail */
-                    thumbnail?: (string|null);
-
-                    /** FaceAnnotation segments */
-                    segments?: (google.cloud.videointelligence.v1beta1.IVideoSegment[]|null);
-
-                    /** FaceAnnotation locations */
-                    locations?: (google.cloud.videointelligence.v1beta1.IFaceLocation[]|null);
-                }
-
-                /** Represents a FaceAnnotation. */
-                class FaceAnnotation implements IFaceAnnotation {
-
-                    /**
-                     * Constructs a new FaceAnnotation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IFaceAnnotation);
-
-                    /** FaceAnnotation thumbnail. */
-                    public thumbnail: string;
-
-                    /** FaceAnnotation segments. */
-                    public segments: google.cloud.videointelligence.v1beta1.IVideoSegment[];
-
-                    /** FaceAnnotation locations. */
-                    public locations: google.cloud.videointelligence.v1beta1.IFaceLocation[];
-
-                    /**
-                     * Creates a new FaceAnnotation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FaceAnnotation instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IFaceAnnotation): google.cloud.videointelligence.v1beta1.FaceAnnotation;
-
-                    /**
-                     * Encodes the specified FaceAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceAnnotation.verify|verify} messages.
-                     * @param message FaceAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IFaceAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FaceAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.FaceAnnotation.verify|verify} messages.
-                     * @param message FaceAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IFaceAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FaceAnnotation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FaceAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.FaceAnnotation;
-
-                    /**
-                     * Decodes a FaceAnnotation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FaceAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.FaceAnnotation;
-
-                    /**
-                     * Verifies a FaceAnnotation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FaceAnnotation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FaceAnnotation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.FaceAnnotation;
-
-                    /**
-                     * Creates a plain object from a FaceAnnotation message. Also converts values to other types if specified.
-                     * @param message FaceAnnotation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.FaceAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FaceAnnotation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoAnnotationResults. */
-                interface IVideoAnnotationResults {
-
-                    /** VideoAnnotationResults inputUri */
-                    inputUri?: (string|null);
-
-                    /** VideoAnnotationResults labelAnnotations */
-                    labelAnnotations?: (google.cloud.videointelligence.v1beta1.ILabelAnnotation[]|null);
-
-                    /** VideoAnnotationResults faceAnnotations */
-                    faceAnnotations?: (google.cloud.videointelligence.v1beta1.IFaceAnnotation[]|null);
-
-                    /** VideoAnnotationResults shotAnnotations */
-                    shotAnnotations?: (google.cloud.videointelligence.v1beta1.IVideoSegment[]|null);
-
-                    /** VideoAnnotationResults safeSearchAnnotations */
-                    safeSearchAnnotations?: (google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation[]|null);
-
-                    /** VideoAnnotationResults error */
-                    error?: (google.rpc.IStatus|null);
-                }
-
-                /** Represents a VideoAnnotationResults. */
-                class VideoAnnotationResults implements IVideoAnnotationResults {
-
-                    /**
-                     * Constructs a new VideoAnnotationResults.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IVideoAnnotationResults);
-
-                    /** VideoAnnotationResults inputUri. */
-                    public inputUri: string;
-
-                    /** VideoAnnotationResults labelAnnotations. */
-                    public labelAnnotations: google.cloud.videointelligence.v1beta1.ILabelAnnotation[];
-
-                    /** VideoAnnotationResults faceAnnotations. */
-                    public faceAnnotations: google.cloud.videointelligence.v1beta1.IFaceAnnotation[];
-
-                    /** VideoAnnotationResults shotAnnotations. */
-                    public shotAnnotations: google.cloud.videointelligence.v1beta1.IVideoSegment[];
-
-                    /** VideoAnnotationResults safeSearchAnnotations. */
-                    public safeSearchAnnotations: google.cloud.videointelligence.v1beta1.ISafeSearchAnnotation[];
-
-                    /** VideoAnnotationResults error. */
-                    public error?: (google.rpc.IStatus|null);
-
-                    /**
-                     * Creates a new VideoAnnotationResults instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoAnnotationResults instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IVideoAnnotationResults): google.cloud.videointelligence.v1beta1.VideoAnnotationResults;
-
-                    /**
-                     * Encodes the specified VideoAnnotationResults message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationResults.verify|verify} messages.
-                     * @param message VideoAnnotationResults message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoAnnotationResults message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationResults.verify|verify} messages.
-                     * @param message VideoAnnotationResults message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IVideoAnnotationResults, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoAnnotationResults message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoAnnotationResults
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.VideoAnnotationResults;
-
-                    /**
-                     * Decodes a VideoAnnotationResults message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoAnnotationResults
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.VideoAnnotationResults;
-
-                    /**
-                     * Verifies a VideoAnnotationResults message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoAnnotationResults message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoAnnotationResults
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.VideoAnnotationResults;
-
-                    /**
-                     * Creates a plain object from a VideoAnnotationResults message. Also converts values to other types if specified.
-                     * @param message VideoAnnotationResults
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.VideoAnnotationResults, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoAnnotationResults to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an AnnotateVideoResponse. */
-                interface IAnnotateVideoResponse {
-
-                    /** AnnotateVideoResponse annotationResults */
-                    annotationResults?: (google.cloud.videointelligence.v1beta1.IVideoAnnotationResults[]|null);
-                }
-
-                /** Represents an AnnotateVideoResponse. */
-                class AnnotateVideoResponse implements IAnnotateVideoResponse {
-
-                    /**
-                     * Constructs a new AnnotateVideoResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse);
-
-                    /** AnnotateVideoResponse annotationResults. */
-                    public annotationResults: google.cloud.videointelligence.v1beta1.IVideoAnnotationResults[];
-
-                    /**
-                     * Creates a new AnnotateVideoResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AnnotateVideoResponse instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse): google.cloud.videointelligence.v1beta1.AnnotateVideoResponse;
-
-                    /**
-                     * Encodes the specified AnnotateVideoResponse message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.verify|verify} messages.
-                     * @param message AnnotateVideoResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AnnotateVideoResponse message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoResponse.verify|verify} messages.
-                     * @param message AnnotateVideoResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AnnotateVideoResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AnnotateVideoResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.AnnotateVideoResponse;
-
-                    /**
-                     * Decodes an AnnotateVideoResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AnnotateVideoResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.AnnotateVideoResponse;
-
-                    /**
-                     * Verifies an AnnotateVideoResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AnnotateVideoResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AnnotateVideoResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.AnnotateVideoResponse;
-
-                    /**
-                     * Creates a plain object from an AnnotateVideoResponse message. Also converts values to other types if specified.
-                     * @param message AnnotateVideoResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.AnnotateVideoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AnnotateVideoResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoAnnotationProgress. */
-                interface IVideoAnnotationProgress {
-
-                    /** VideoAnnotationProgress inputUri */
-                    inputUri?: (string|null);
-
-                    /** VideoAnnotationProgress progressPercent */
-                    progressPercent?: (number|null);
-
-                    /** VideoAnnotationProgress startTime */
-                    startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VideoAnnotationProgress updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a VideoAnnotationProgress. */
-                class VideoAnnotationProgress implements IVideoAnnotationProgress {
-
-                    /**
-                     * Constructs a new VideoAnnotationProgress.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress);
-
-                    /** VideoAnnotationProgress inputUri. */
-                    public inputUri: string;
-
-                    /** VideoAnnotationProgress progressPercent. */
-                    public progressPercent: number;
-
-                    /** VideoAnnotationProgress startTime. */
-                    public startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** VideoAnnotationProgress updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new VideoAnnotationProgress instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoAnnotationProgress instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress): google.cloud.videointelligence.v1beta1.VideoAnnotationProgress;
-
-                    /**
-                     * Encodes the specified VideoAnnotationProgress message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.verify|verify} messages.
-                     * @param message VideoAnnotationProgress message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoAnnotationProgress message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.VideoAnnotationProgress.verify|verify} messages.
-                     * @param message VideoAnnotationProgress message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoAnnotationProgress message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoAnnotationProgress
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.VideoAnnotationProgress;
-
-                    /**
-                     * Decodes a VideoAnnotationProgress message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoAnnotationProgress
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.VideoAnnotationProgress;
-
-                    /**
-                     * Verifies a VideoAnnotationProgress message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoAnnotationProgress message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoAnnotationProgress
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.VideoAnnotationProgress;
-
-                    /**
-                     * Creates a plain object from a VideoAnnotationProgress message. Also converts values to other types if specified.
-                     * @param message VideoAnnotationProgress
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.VideoAnnotationProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoAnnotationProgress to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an AnnotateVideoProgress. */
-                interface IAnnotateVideoProgress {
-
-                    /** AnnotateVideoProgress annotationProgress */
-                    annotationProgress?: (google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress[]|null);
-                }
-
-                /** Represents an AnnotateVideoProgress. */
-                class AnnotateVideoProgress implements IAnnotateVideoProgress {
-
-                    /**
-                     * Constructs a new AnnotateVideoProgress.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress);
-
-                    /** AnnotateVideoProgress annotationProgress. */
-                    public annotationProgress: google.cloud.videointelligence.v1beta1.IVideoAnnotationProgress[];
-
-                    /**
-                     * Creates a new AnnotateVideoProgress instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AnnotateVideoProgress instance
-                     */
-                    public static create(properties?: google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress): google.cloud.videointelligence.v1beta1.AnnotateVideoProgress;
-
-                    /**
-                     * Encodes the specified AnnotateVideoProgress message. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.verify|verify} messages.
-                     * @param message AnnotateVideoProgress message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AnnotateVideoProgress message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1beta1.AnnotateVideoProgress.verify|verify} messages.
-                     * @param message AnnotateVideoProgress message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.videointelligence.v1beta1.IAnnotateVideoProgress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AnnotateVideoProgress message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AnnotateVideoProgress
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1beta1.AnnotateVideoProgress;
-
-                    /**
-                     * Decodes an AnnotateVideoProgress message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AnnotateVideoProgress
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1beta1.AnnotateVideoProgress;
-
-                    /**
-                     * Verifies an AnnotateVideoProgress message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AnnotateVideoProgress message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AnnotateVideoProgress
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1beta1.AnnotateVideoProgress;
-
-                    /**
-                     * Creates a plain object from an AnnotateVideoProgress message. Also converts values to other types if specified.
-                     * @param message AnnotateVideoProgress
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.videointelligence.v1beta1.AnnotateVideoProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AnnotateVideoProgress to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Feature enum. */
-                enum Feature {
-                    FEATURE_UNSPECIFIED = 0,
-                    LABEL_DETECTION = 1,
-                    FACE_DETECTION = 2,
-                    SHOT_CHANGE_DETECTION = 3,
-                    SAFE_SEARCH_DETECTION = 4
-                }
-
-                /** LabelLevel enum. */
-                enum LabelLevel {
-                    LABEL_LEVEL_UNSPECIFIED = 0,
-                    VIDEO_LEVEL = 1,
-                    SEGMENT_LEVEL = 2,
-                    SHOT_LEVEL = 3,
-                    FRAME_LEVEL = 4
-                }
-
-                /** LabelDetectionMode enum. */
-                enum LabelDetectionMode {
-                    LABEL_DETECTION_MODE_UNSPECIFIED = 0,
-                    SHOT_MODE = 1,
-                    FRAME_MODE = 2,
-                    SHOT_AND_FRAME_MODE = 3
-                }
-
-                /** Likelihood enum. */
-                enum Likelihood {
-                    UNKNOWN = 0,
-                    VERY_UNLIKELY = 1,
-                    UNLIKELY = 2,
-                    POSSIBLE = 3,
-                    LIKELY = 4,
-                    VERY_LIKELY = 5
                 }
             }
 
@@ -17277,6 +15812,16 @@ export namespace google {
              */
             public toJSON(): { [k: string]: any };
         }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
     }
 
     /** Namespace protobuf. */
@@ -19129,6 +17674,9 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
         }
 
         /** Represents a FieldOptions. */

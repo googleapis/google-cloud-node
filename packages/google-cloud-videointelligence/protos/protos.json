@@ -28,7 +28,10 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
@@ -46,7 +49,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -54,11 +60,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -99,6 +111,36 @@
                         }
                       }
                     },
+                    "Feature": {
+                      "values": {
+                        "FEATURE_UNSPECIFIED": 0,
+                        "LABEL_DETECTION": 1,
+                        "SHOT_CHANGE_DETECTION": 2,
+                        "EXPLICIT_CONTENT_DETECTION": 3,
+                        "FACE_DETECTION": 4,
+                        "SPEECH_TRANSCRIPTION": 6,
+                        "TEXT_DETECTION": 7,
+                        "OBJECT_TRACKING": 9
+                      }
+                    },
+                    "LabelDetectionMode": {
+                      "values": {
+                        "LABEL_DETECTION_MODE_UNSPECIFIED": 0,
+                        "SHOT_MODE": 1,
+                        "FRAME_MODE": 2,
+                        "SHOT_AND_FRAME_MODE": 3
+                      }
+                    },
+                    "Likelihood": {
+                      "values": {
+                        "LIKELIHOOD_UNSPECIFIED": 0,
+                        "VERY_UNLIKELY": 1,
+                        "UNLIKELY": 2,
+                        "POSSIBLE": 3,
+                        "LIKELY": 4,
+                        "VERY_LIKELY": 5
+                      }
+                    },
                     "LabelDetectionConfig": {
                       "fields": {
                         "labelDetectionMode": {
@@ -131,7 +173,7 @@
                         }
                       }
                     },
-                    "ExplicitContentDetectionConfig": {
+                    "ObjectTrackingConfig": {
                       "fields": {
                         "model": {
                           "type": "string",
@@ -151,7 +193,7 @@
                         }
                       }
                     },
-                    "ObjectTrackingConfig": {
+                    "ExplicitContentDetectionConfig": {
                       "fields": {
                         "model": {
                           "type": "string",
@@ -447,41 +489,68 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxAlternatives": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filterProfanity": {
                           "type": "bool",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableAutomaticPunctuation": {
                           "type": "bool",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "audioTracks": {
                           "rule": "repeated",
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableSpeakerDiarization": {
                           "type": "bool",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "diarizationSpeakerCount": {
                           "type": "int32",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableWordConfidence": {
                           "type": "bool",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -490,7 +559,10 @@
                         "phrases": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -503,7 +575,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -515,12 +590,18 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "words": {
                           "rule": "repeated",
                           "type": "WordInfo",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -540,11 +621,17 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "speakerTag": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -654,352 +741,6 @@
                           "type": "ObjectTrackingFrame",
                           "id": 2
                         }
-                      }
-                    },
-                    "Feature": {
-                      "values": {
-                        "FEATURE_UNSPECIFIED": 0,
-                        "LABEL_DETECTION": 1,
-                        "SHOT_CHANGE_DETECTION": 2,
-                        "EXPLICIT_CONTENT_DETECTION": 3,
-                        "FACE_DETECTION": 4,
-                        "SPEECH_TRANSCRIPTION": 6,
-                        "TEXT_DETECTION": 7,
-                        "OBJECT_TRACKING": 9
-                      }
-                    },
-                    "LabelDetectionMode": {
-                      "values": {
-                        "LABEL_DETECTION_MODE_UNSPECIFIED": 0,
-                        "SHOT_MODE": 1,
-                        "FRAME_MODE": 2,
-                        "SHOT_AND_FRAME_MODE": 3
-                      }
-                    },
-                    "Likelihood": {
-                      "values": {
-                        "LIKELIHOOD_UNSPECIFIED": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
-                      }
-                    }
-                  }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.VideoIntelligence.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/videointelligence/v1beta1;videointelligence",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "VideoIntelligenceServiceProto",
-                    "java_package": "com.google.cloud.videointelligence.v1beta1",
-                    "php_namespace": "Google\\Cloud\\VideoIntelligence\\V1beta1",
-                    "ruby_package": "Google::Cloud::VideoIntelligence::V1beta1"
-                  },
-                  "nested": {
-                    "VideoIntelligenceService": {
-                      "methods": {
-                        "AnnotateVideo": {
-                          "requestType": "AnnotateVideoRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/videos:annotate",
-                            "(google.api.http).body": "*"
-                          }
-                        }
-                      }
-                    },
-                    "AnnotateVideoRequest": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "inputContent": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "features": {
-                          "rule": "repeated",
-                          "type": "Feature",
-                          "id": 2
-                        },
-                        "videoContext": {
-                          "type": "VideoContext",
-                          "id": 3
-                        },
-                        "outputUri": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "locationId": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "VideoContext": {
-                      "fields": {
-                        "segments": {
-                          "rule": "repeated",
-                          "type": "VideoSegment",
-                          "id": 1
-                        },
-                        "labelDetectionMode": {
-                          "type": "LabelDetectionMode",
-                          "id": 2
-                        },
-                        "stationaryCamera": {
-                          "type": "bool",
-                          "id": 3
-                        },
-                        "labelDetectionModel": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "faceDetectionModel": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "shotChangeDetectionModel": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "safeSearchDetectionModel": {
-                          "type": "string",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "VideoSegment": {
-                      "fields": {
-                        "startTimeOffset": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "endTimeOffset": {
-                          "type": "int64",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "LabelLocation": {
-                      "fields": {
-                        "segment": {
-                          "type": "VideoSegment",
-                          "id": 1
-                        },
-                        "confidence": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "level": {
-                          "type": "LabelLevel",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "LabelAnnotation": {
-                      "fields": {
-                        "description": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "locations": {
-                          "rule": "repeated",
-                          "type": "LabelLocation",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "SafeSearchAnnotation": {
-                      "fields": {
-                        "adult": {
-                          "type": "Likelihood",
-                          "id": 1
-                        },
-                        "spoof": {
-                          "type": "Likelihood",
-                          "id": 2
-                        },
-                        "medical": {
-                          "type": "Likelihood",
-                          "id": 3
-                        },
-                        "violent": {
-                          "type": "Likelihood",
-                          "id": 4
-                        },
-                        "racy": {
-                          "type": "Likelihood",
-                          "id": 5
-                        },
-                        "timeOffset": {
-                          "type": "int64",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "BoundingBox": {
-                      "fields": {
-                        "left": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "right": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "bottom": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "top": {
-                          "type": "int32",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "FaceLocation": {
-                      "fields": {
-                        "boundingBox": {
-                          "type": "BoundingBox",
-                          "id": 1
-                        },
-                        "timeOffset": {
-                          "type": "int64",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "FaceAnnotation": {
-                      "fields": {
-                        "thumbnail": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "segments": {
-                          "rule": "repeated",
-                          "type": "VideoSegment",
-                          "id": 2
-                        },
-                        "locations": {
-                          "rule": "repeated",
-                          "type": "FaceLocation",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "VideoAnnotationResults": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "labelAnnotations": {
-                          "rule": "repeated",
-                          "type": "LabelAnnotation",
-                          "id": 2
-                        },
-                        "faceAnnotations": {
-                          "rule": "repeated",
-                          "type": "FaceAnnotation",
-                          "id": 3
-                        },
-                        "shotAnnotations": {
-                          "rule": "repeated",
-                          "type": "VideoSegment",
-                          "id": 4
-                        },
-                        "safeSearchAnnotations": {
-                          "rule": "repeated",
-                          "type": "SafeSearchAnnotation",
-                          "id": 6
-                        },
-                        "error": {
-                          "type": "google.rpc.Status",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "AnnotateVideoResponse": {
-                      "fields": {
-                        "annotationResults": {
-                          "rule": "repeated",
-                          "type": "VideoAnnotationResults",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VideoAnnotationProgress": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "progressPercent": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "AnnotateVideoProgress": {
-                      "fields": {
-                        "annotationProgress": {
-                          "rule": "repeated",
-                          "type": "VideoAnnotationProgress",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Feature": {
-                      "values": {
-                        "FEATURE_UNSPECIFIED": 0,
-                        "LABEL_DETECTION": 1,
-                        "FACE_DETECTION": 2,
-                        "SHOT_CHANGE_DETECTION": 3,
-                        "SAFE_SEARCH_DETECTION": 4
-                      }
-                    },
-                    "LabelLevel": {
-                      "values": {
-                        "LABEL_LEVEL_UNSPECIFIED": 0,
-                        "VIDEO_LEVEL": 1,
-                        "SEGMENT_LEVEL": 2,
-                        "SHOT_LEVEL": 3,
-                        "FRAME_LEVEL": 4
-                      }
-                    },
-                    "LabelDetectionMode": {
-                      "values": {
-                        "LABEL_DETECTION_MODE_UNSPECIFIED": 0,
-                        "SHOT_MODE": 1,
-                        "FRAME_MODE": 2,
-                        "SHOT_AND_FRAME_MODE": 3
-                      }
-                    },
-                    "Likelihood": {
-                      "values": {
-                        "UNKNOWN": 0,
-                        "VERY_UNLIKELY": 1,
-                        "UNLIKELY": 2,
-                        "POSSIBLE": 3,
-                        "LIKELY": 4,
-                        "VERY_LIKELY": 5
                       }
                     }
                   }
@@ -3081,7 +2822,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3189,6 +2930,22 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
             }
           }
         },
