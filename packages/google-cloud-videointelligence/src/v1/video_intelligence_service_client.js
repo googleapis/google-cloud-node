@@ -243,38 +243,38 @@ class VideoIntelligenceServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {number[]} request.features
+   *   Required. Requested video annotation features.
+   *
+   *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1.Feature}
    * @param {string} [request.inputUri]
    *   Input video location. Currently, only
    *   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
    *   supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
-   *   google.rpc.Code.INVALID_ARGUMENT). For
-   *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
-   *   URI may include wildcards in `object-id`, and thus identify multiple
-   *   videos. Supported wildcards: '*' to match 0 or more characters;
+   *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+   *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+   *   A video URI may include wildcards in `object-id`, and thus identify
+   *   multiple videos. Supported wildcards: '*' to match 0 or more characters;
    *   '?' to match 1 character. If unset, the input video should be embedded
    *   in the request as `input_content`. If set, `input_content` should be unset.
    * @param {Buffer} [request.inputContent]
    *   The video data bytes.
    *   If unset, the input video(s) should be specified via `input_uri`.
    *   If set, `input_uri` should be unset.
-   * @param {number[]} [request.features]
-   *   Requested video annotation features.
-   *
-   *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1.Feature}
    * @param {Object} [request.videoContext]
    *   Additional video context and/or feature-specific parameters.
    *
    *   This object should have the same structure as [VideoContext]{@link google.cloud.videointelligence.v1.VideoContext}
    * @param {string} [request.outputUri]
-   *   Optional location where the output (in JSON format) should be stored.
+   *   Optional. Location where the output (in JSON format) should be stored.
    *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
    *   URIs are supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
-   *   google.rpc.Code.INVALID_ARGUMENT). For
-   *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+   *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
+   *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
    * @param {string} [request.locationId]
-   *   Optional cloud region where annotation should take place. Supported cloud
+   *   Optional. Cloud region where annotation should take place. Supported cloud
    *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
    *   is specified, a region will be determined based on video file location.
    * @param {Object} [options]
@@ -296,12 +296,12 @@ class VideoIntelligenceServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const request = {
-   *   inputUri: inputUri,
    *   features: features,
+   *   inputUri: inputUri,
    * };
    *
    * // Handle the operation using the promise pattern.
@@ -321,12 +321,12 @@ class VideoIntelligenceServiceClient {
    *     console.error(err);
    *   });
    *
-   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const request = {
-   *   inputUri: inputUri,
    *   features: features,
+   *   inputUri: inputUri,
    * };
    *
    * // Handle the operation using the event emitter pattern.
@@ -355,12 +355,12 @@ class VideoIntelligenceServiceClient {
    *     console.error(err);
    *   });
    *
-   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const request = {
-   *   inputUri: inputUri,
    *   features: features,
+   *   inputUri: inputUri,
    * };
    *
    * // Handle the operation using the await pattern.

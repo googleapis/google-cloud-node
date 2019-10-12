@@ -63,12 +63,12 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const featuresElement = 'LABEL_DETECTION';
       const features = [featuresElement];
+      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const request = {
-        inputUri: inputUri,
         features: features,
+        inputUri: inputUri,
       };
 
       // Mock response
@@ -104,12 +104,12 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const featuresElement = 'LABEL_DETECTION';
       const features = [featuresElement];
+      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const request = {
-        inputUri: inputUri,
         features: features,
+        inputUri: inputUri,
       };
 
       // Mock Grpc layer
