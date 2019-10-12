@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.4.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.3.0...v4.4.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* transaction#run overloads' param types correction ([#501](https://www.github.com/googleapis/nodejs-datastore/issues/501)) ([c88e66e](https://www.github.com/googleapis/nodejs-datastore/commit/c88e66e))
+* **deps:** update dependency @grpc/grpc-js to ^0.6.0 ([#503](https://www.github.com/googleapis/nodejs-datastore/issues/503)) ([7c3c213](https://www.github.com/googleapis/nodejs-datastore/commit/7c3c213))
+* use compatible version of google-gax ([567e9dd](https://www.github.com/googleapis/nodejs-datastore/commit/567e9dd))
+
+
+### Features
+
+* .d.ts for protos ([#506](https://www.github.com/googleapis/nodejs-datastore/issues/506)) ([869e673](https://www.github.com/googleapis/nodejs-datastore/commit/869e673))
+* add merge method for merging an object into an existing entity ([#452](https://www.github.com/googleapis/nodejs-datastore/issues/452)) ([8e026af](https://www.github.com/googleapis/nodejs-datastore/commit/8e026af))
+
 ## [4.3.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.2.0...v4.3.0) (2019-09-12)
 
 
