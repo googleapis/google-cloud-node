@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.3.1...v3.4.0) (2019-10-10)
+
+
+### Bug Fixes
+
+* file#move do not delete origin file if same as destination ([#874](https://www.github.com/googleapis/nodejs-storage/issues/874)) ([dcaba8a](https://www.github.com/googleapis/nodejs-storage/commit/dcaba8a))
+* pass predefined acl as destinationPredefinedAcl to qs ([#872](https://www.github.com/googleapis/nodejs-storage/issues/872)) ([09b8fa4](https://www.github.com/googleapis/nodejs-storage/commit/09b8fa4))
+
+
+### Features
+
+* add flag to allow disabling auto decompression by client ([#850](https://www.github.com/googleapis/nodejs-storage/issues/850)) ([9ebface](https://www.github.com/googleapis/nodejs-storage/commit/9ebface))
+* allow setting standard Bucket storage class ([#873](https://www.github.com/googleapis/nodejs-storage/issues/873)) ([12a99e9](https://www.github.com/googleapis/nodejs-storage/commit/12a99e9))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.3.0...v3.3.1) (2019-09-30)
 
 
