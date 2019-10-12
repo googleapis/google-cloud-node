@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.4.0...v1.5.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* use compatible version of google-gax ([1100369](https://www.github.com/googleapis/nodejs-talent/commit/1100369))
+
+
+### Features
+
+* .d.ts for protos ([fa78385](https://www.github.com/googleapis/nodejs-talent/commit/fa78385))
+* .d.ts for protos ([#104](https://www.github.com/googleapis/nodejs-talent/issues/104)) ([cda77b7](https://www.github.com/googleapis/nodejs-talent/commit/cda77b7))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.3.0...v1.4.0) (2019-09-16)
 
 
