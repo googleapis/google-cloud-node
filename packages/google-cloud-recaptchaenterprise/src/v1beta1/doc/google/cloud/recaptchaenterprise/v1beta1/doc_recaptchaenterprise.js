@@ -23,7 +23,7 @@
  *   in the format "projects/{project_number}".
  *
  * @property {Object} assessment
- *   The asessment details.
+ *   Required. The assessment details.
  *
  *   This object should have the same structure as [Assessment]{@link google.cloud.recaptchaenterprise.v1beta1.Assessment}
  *
@@ -43,7 +43,7 @@ const CreateAssessmentRequest = {
  *   "projects/{project_number}/assessments/{assessment_id}".
  *
  * @property {number} annotation
- *   The annotation that will be assigned to the Event.
+ *   Required. The annotation that will be assigned to the Event.
  *
  *   The number should be among the values of [Annotation]{@link google.cloud.recaptchaenterprise.v1beta1.Annotation}
  *
@@ -138,18 +138,23 @@ const Assessment = {
     CLASSIFICATION_REASON_UNSPECIFIED: 0,
 
     /**
-     * The event appeared to be automated.
+     * Interactions matched the behavior of an automated agent.
      */
     AUTOMATION: 1,
 
     /**
-     * The event was not made from the proper context on the real site.
+     * The event originated from an illegitimate environment.
      */
     UNEXPECTED_ENVIRONMENT: 2,
 
     /**
-     * Browsing behavior leading up to the event was generated was out of the
-     * ordinary.
+     * Traffic volume from the event source is higher than normal.
+     */
+    TOO_MUCH_TRAFFIC: 3,
+
+    /**
+     * Interactions with the site were significantly different than expected
+     * patterns.
      */
     UNEXPECTED_USAGE_PATTERNS: 4,
 
@@ -157,17 +162,17 @@ const Assessment = {
      * Too little traffic has been received from this site thus far to generate
      * quality risk analysis.
      */
-    PROVISIONAL_RISK_ANALYSIS: 5
+    LOW_CONFIDENCE_SCORE: 5
   }
 };
 
 /**
  * @property {string} token
- *   The user response token provided by the reCAPTCHA client-side integration
+ *   Required. The user response token provided by the reCAPTCHA client-side integration
  *   on your site.
  *
  * @property {string} siteKey
- *   The site key that was used to invoke reCAPTCHA on your site and generate
+ *   Required. The site key that was used to invoke reCAPTCHA on your site and generate
  *   the token.
  *
  * @typedef Event
@@ -180,23 +185,23 @@ const Event = {
 
 /**
  * @property {boolean} valid
- *   Output only. Whether the provided user response token is valid.
+ *   Whether the provided user response token is valid.
  *
  * @property {number} invalidReason
- *   Output only. Reason associated with the response when valid = false.
+ *   Reason associated with the response when valid = false.
  *
  *   The number should be among the values of [InvalidReason]{@link google.cloud.recaptchaenterprise.v1beta1.InvalidReason}
  *
  * @property {Object} createTime
- *   Output only. The timestamp corresponding to the generation of the token.
+ *   The timestamp corresponding to the generation of the token.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string} hostname
- *   Output only. The hostname of the page on which the token was generated.
+ *   The hostname of the page on which the token was generated.
  *
  * @property {string} action
- *   Output only. Action name provided at token generation.
+ *   Action name provided at token generation.
  *
  * @typedef TokenProperties
  * @memberof google.cloud.recaptchaenterprise.v1beta1
@@ -206,6 +211,7 @@ const TokenProperties = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * LINT.IfChange
    * Enum that represents the types of invalid token reasons.
    *
    * @enum {number}
@@ -239,7 +245,7 @@ const TokenProperties = {
     DUPE: 4,
 
     /**
-     * The user verification token did not match the provided site secret.
+     * The user verification token did not match the provided site key.
      * This may be a configuration error (e.g. development keys used in
      * production) or end users trying to use verification tokens from other
      * sites.

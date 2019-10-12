@@ -231,7 +231,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    *   Required. The name of the project in which the assessment will be created,
    *   in the format "projects/{project_number}".
    * @param {Object} request.assessment
-   *   The asessment details.
+   *   Required. The assessment details.
    *
    *   This object should have the same structure as [Assessment]{@link google.cloud.recaptchaenterprise.v1beta1.Assessment}
    * @param {Object} [options]
@@ -296,7 +296,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    *   Required. The resource name of the Assessment, in the format
    *   "projects/{project_number}/assessments/{assessment_id}".
    * @param {number} request.annotation
-   *   The annotation that will be assigned to the Event.
+   *   Required. The annotation that will be assigned to the Event.
    *
    *   The number should be among the values of [Annotation]{@link google.cloud.recaptchaenterprise.v1beta1.Annotation}
    * @param {Object} [options]
