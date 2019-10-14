@@ -44,8 +44,10 @@ import {
   GetFilesOptions,
   MakeAllFilesPublicPrivateOptions,
   SetBucketMetadataCallback,
+  SetBucketMetadataResponse,
 } from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
+import {Policy} from '../src/iam';
 
 class FakeFile {
   calledWith_: IArguments;
@@ -1169,6 +1171,167 @@ describe('Bucket', () => {
       };
 
       bucket.disableRequesterPays();
+    });
+  });
+
+  describe('enableLogging', () => {
+    const PREFIX = 'prefix';
+
+    beforeEach(() => {
+      bucket.iam = {
+        getPolicy: () => Promise.resolve([{bindings: []}]),
+        setPolicy: () => Promise.resolve(),
+      };
+      bucket.setMetadata = () => Promise.resolve([]);
+    });
+
+    it('should throw if a config object is not provided', () => {
+      assert.throws(() => {
+        bucket.enableLogging();
+      }, /A configuration object with a prefix is required\./);
+    });
+
+    it('should throw if config is a function', () => {
+      assert.throws(() => {
+        bucket.enableLogging(assert.ifError);
+      }, /A configuration object with a prefix is required\./);
+    });
+
+    it('should throw if a prefix is not provided', () => {
+      assert.throws(() => {
+        bucket.enableLogging(
+          {
+            bucket: 'bucket-name',
+          },
+          assert.ifError
+        );
+      }, /A configuration object with a prefix is required\./);
+    });
+
+    it('should add IAM permissions', done => {
+      const policy = {
+        bindings: [{}],
+      };
+      bucket.iam = {
+        getPolicy: () => Promise.resolve([policy]),
+        setPolicy: (policy_: Policy) => {
+          assert.deepStrictEqual(policy, policy_);
+          assert.deepStrictEqual(policy_.bindings, [
+            policy.bindings[0],
+            {
+              members: ['group:cloud-storage-analytics@google.com'],
+              role: 'roles/storage.objectCreator',
+            },
+          ]);
+          setImmediate(done);
+          return Promise.resolve();
+        },
+      };
+
+      bucket.enableLogging({prefix: PREFIX}, assert.ifError);
+    });
+
+    it('should return an error from getting the IAM policy', done => {
+      const error = new Error('Error.');
+
+      bucket.iam.getPolicy = () => {
+        throw error;
+      };
+
+      bucket.enableLogging({prefix: PREFIX}, (err: Error | null) => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should return an error from setting the IAM policy', done => {
+      const error = new Error('Error.');
+
+      bucket.iam.setPolicy = () => {
+        throw error;
+      };
+
+      bucket.enableLogging({prefix: PREFIX}, (err: Error | null) => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should update the logging metadata configuration', done => {
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.logging, {
+          logBucket: bucket.id,
+          logObjectPrefix: PREFIX,
+        });
+        setImmediate(done);
+        return Promise.resolve([]);
+      };
+
+      bucket.enableLogging({prefix: PREFIX}, assert.ifError);
+    });
+
+    it('should allow a custom bucket to be provided', done => {
+      const bucketName = 'bucket-name';
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.logging.logBucket, bucketName);
+        setImmediate(done);
+        return Promise.resolve([]);
+      };
+
+      bucket.enableLogging(
+        {
+          prefix: PREFIX,
+          bucket: bucketName,
+        },
+        assert.ifError
+      );
+    });
+
+    it('should accept a Bucket object', done => {
+      const bucketForLogging = new Bucket(STORAGE, 'bucket-name');
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.logging.logBucket, bucketForLogging.id);
+        setImmediate(done);
+        return Promise.resolve([]);
+      };
+
+      bucket.enableLogging(
+        {
+          prefix: PREFIX,
+          bucket: bucketForLogging,
+        },
+        assert.ifError
+      );
+    });
+
+    it('should execute the callback with the setMetadata response', done => {
+      const setMetadataResponse = {};
+
+      bucket.setMetadata = () => Promise.resolve([setMetadataResponse]);
+
+      bucket.enableLogging(
+        {prefix: PREFIX},
+        (err: Error | null, response: SetBucketMetadataResponse) => {
+          assert.ifError(err);
+          assert.strictEqual(response, setMetadataResponse);
+          done();
+        }
+      );
+    });
+
+    it('should return an error from the setMetadata call failing', done => {
+      const error = new Error('Error.');
+
+      bucket.setMetadata = () => {
+        throw error;
+      };
+
+      bucket.enableLogging({prefix: PREFIX}, (err: Error | null) => {
+        assert.strictEqual(err, error);
+        done();
+      });
     });
   });
 

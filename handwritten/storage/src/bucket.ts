@@ -99,6 +99,11 @@ export interface LifecycleRule {
   storageClass?: string;
 }
 
+export interface EnableLoggingOptions {
+  bucket?: string | Bucket;
+  prefix: string;
+}
+
 export interface GetFilesOptions {
   autoPaginate?: boolean;
   delimiter?: string;
@@ -1787,6 +1792,99 @@ class Bucket extends ServiceObject {
       },
       callback || util.noop
     );
+  }
+
+  enableLogging(
+    config: EnableLoggingOptions
+  ): Promise<SetBucketMetadataResponse>;
+  enableLogging(
+    config: EnableLoggingOptions,
+    callback: SetBucketMetadataCallback
+  ): void;
+  /**
+   * Configuration object for enabling logging.
+   *
+   * @typedef {object} EnableLoggingOptions
+   * @property {string|Bucket} [bucket] The bucket for the log entries. By
+   *     default, the current bucket is used.
+   * @property {string} prefix A unique prefix for log object names.
+   */
+  /**
+   * Enable logging functionality for this bucket. This will make two API
+   * requests, first to grant Cloud Storage WRITE permission to the bucket, then
+   * to set the appropriate configuration on the Bucket's metadata.
+   *
+   * @param {EnableLoggingOptions} config Configuration options.
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('albums');
+   *
+   * const config = {
+   *   prefix: 'log'
+   * };
+   *
+   * bucket.enableLogging(config, function(err, apiResponse) {
+   *   if (!err) {
+   *     // Logging functionality enabled successfully.
+   *   }
+   * });
+   *
+   * @example <caption>Optionally, provide a destination bucket.</caption>
+   * const config = {
+   *   prefix: 'log',
+   *   bucket: 'destination-bucket'
+   * };
+   *
+   * bucket.enableLogging(config, function(err, apiResponse) {});
+   *
+   * @example <caption>If the callback is omitted, we'll return a Promise.</caption>
+   * bucket.enableLogging(config).then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  enableLogging(
+    config: EnableLoggingOptions,
+    callback?: SetBucketMetadataCallback
+  ): Promise<SetBucketMetadataResponse> | void {
+    if (
+      !config ||
+      typeof config === 'function' ||
+      typeof config.prefix === 'undefined'
+    ) {
+      throw new Error('A configuration object with a prefix is required.');
+    }
+
+    const logBucket = config.bucket
+      ? (config.bucket as Bucket).id || config.bucket
+      : this.id;
+
+    (async () => {
+      let setMetadataResponse;
+
+      try {
+        const [policy] = await this.iam.getPolicy();
+        policy.bindings.push({
+          members: ['group:cloud-storage-analytics@google.com'],
+          role: 'roles/storage.objectCreator',
+        });
+        await this.iam.setPolicy(policy);
+        [setMetadataResponse] = await this.setMetadata({
+          logging: {
+            logBucket,
+            logObjectPrefix: config.prefix,
+          },
+        });
+      } catch (e) {
+        callback!(e);
+        return;
+      }
+
+      callback!(null, setMetadataResponse);
+    })();
   }
 
   enableRequesterPays(): Promise<EnableRequesterPaysResponse>;

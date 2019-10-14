@@ -1367,6 +1367,32 @@ describe('storage', () => {
     });
   });
 
+  describe('bucket logging', () => {
+    const PREFIX = 'sys-test';
+
+    it('should enable logging on current bucket by default', async () => {
+      const [metadata] = await bucket.enableLogging({prefix: PREFIX});
+      assert.deepStrictEqual(metadata.logging, {
+        logBucket: bucket.id,
+        logObjectPrefix: PREFIX,
+      });
+    });
+
+    it('should enable logging on another bucket', async () => {
+      const bucketForLogging = storage.bucket(generateName());
+      await bucketForLogging.create();
+
+      const [metadata] = await bucket.enableLogging({
+        bucket: bucketForLogging,
+        prefix: PREFIX,
+      });
+      assert.deepStrictEqual(metadata.logging, {
+        logBucket: bucketForLogging.id,
+        logObjectPrefix: PREFIX,
+      });
+    });
+  });
+
   describe('requester pays', () => {
     const HAS_2ND_PROJECT =
       process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
