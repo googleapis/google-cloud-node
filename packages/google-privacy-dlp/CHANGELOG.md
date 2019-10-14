@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.5.0...v1.6.0) (2019-10-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to v1 ([#339](https://www.github.com/googleapis/nodejs-dlp/issues/339)) ([7b44459](https://www.github.com/googleapis/nodejs-dlp/commit/7b44459))
+* use compatible version of google-gax ([37f3b5b](https://www.github.com/googleapis/nodejs-dlp/commit/37f3b5b))
+
+
+### Features
+
+* .d.ts for protos ([#342](https://www.github.com/googleapis/nodejs-dlp/issues/342)) ([1eea5f5](https://www.github.com/googleapis/nodejs-dlp/commit/1eea5f5))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.4.0...v1.5.0) (2019-09-12)
 
 
