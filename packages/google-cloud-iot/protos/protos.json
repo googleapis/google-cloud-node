@@ -16,20 +16,26 @@
                   },
                   "nested": {
                     "DeviceManager": {
+                      "options": {
+                        "(google.api.default_host)": "cloudiot.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudiot"
+                      },
                       "methods": {
                         "CreateDeviceRegistry": {
                           "requestType": "CreateDeviceRegistryRequest",
                           "responseType": "DeviceRegistry",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/registries",
-                            "(google.api.http).body": "device_registry"
+                            "(google.api.http).body": "device_registry",
+                            "(google.api.method_signature)": "parent,device_registry"
                           }
                         },
                         "GetDeviceRegistry": {
                           "requestType": "GetDeviceRegistryRequest",
                           "responseType": "DeviceRegistry",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateDeviceRegistry": {
@@ -37,21 +43,24 @@
                           "responseType": "DeviceRegistry",
                           "options": {
                             "(google.api.http).patch": "/v1/{device_registry.name=projects/*/locations/*/registries/*}",
-                            "(google.api.http).body": "device_registry"
+                            "(google.api.http).body": "device_registry",
+                            "(google.api.method_signature)": "device_registry,update_mask"
                           }
                         },
                         "DeleteDeviceRegistry": {
                           "requestType": "DeleteDeviceRegistryRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListDeviceRegistries": {
                           "requestType": "ListDeviceRegistriesRequest",
                           "responseType": "ListDeviceRegistriesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/registries"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/registries",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "CreateDevice": {
@@ -59,7 +68,8 @@
                           "responseType": "Device",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
-                            "(google.api.http).body": "device"
+                            "(google.api.http).body": "device",
+                            "(google.api.method_signature)": "parent,device"
                           }
                         },
                         "GetDevice": {
@@ -67,7 +77,8 @@
                           "responseType": "Device",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}"
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateDevice": {
@@ -77,14 +88,16 @@
                             "(google.api.http).patch": "/v1/{device.name=projects/*/locations/*/registries/*/devices/*}",
                             "(google.api.http).body": "device",
                             "(google.api.http).additional_bindings.patch": "/v1/{device.name=projects/*/locations/*/registries/*/groups/*/devices/*}",
-                            "(google.api.http).additional_bindings.body": "device"
+                            "(google.api.http).additional_bindings.body": "device",
+                            "(google.api.method_signature)": "device,update_mask"
                           }
                         },
                         "DeleteDevice": {
                           "requestType": "DeleteDeviceRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*/devices/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registries/*/devices/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListDevices": {
@@ -92,7 +105,8 @@
                           "responseType": "ListDevicesResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=projects/*/locations/*/registries/*}/devices",
-                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}/devices"
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}/devices",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "ModifyCloudToDeviceConfig": {
@@ -102,7 +116,8 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/registries/*/devices/*}:modifyCloudToDeviceConfig",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:modifyCloudToDeviceConfig",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,binary_data"
                           }
                         },
                         "ListDeviceConfigVersions": {
@@ -110,7 +125,8 @@
                           "responseType": "ListDeviceConfigVersionsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/configVersions",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/configVersions"
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/configVersions",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListDeviceStates": {
@@ -118,7 +134,8 @@
                           "responseType": "ListDeviceStatesResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/registries/*/devices/*}/states",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/states"
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}/states",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "SetIamPolicy": {
@@ -128,7 +145,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/locations/*/registries/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:setIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,policy"
                           }
                         },
                         "GetIamPolicy": {
@@ -138,7 +156,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/locations/*/registries/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:getIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource"
                           }
                         },
                         "TestIamPermissions": {
@@ -148,7 +167,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/locations/*/registries/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/locations/*/registries/*/groups/*}:testIamPermissions",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,permissions"
                           }
                         },
                         "SendCommandToDevice": {
@@ -158,7 +178,8 @@
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/registries/*/devices/*}:sendCommandToDevice",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/registries/*/groups/*/devices/*}:sendCommandToDevice",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,binary_data,subfolder"
                           }
                         },
                         "BindDeviceToGateway": {
@@ -168,7 +189,8 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/registries/*}:bindDeviceToGateway",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:bindDeviceToGateway",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,gateway_id,device_id"
                           }
                         },
                         "UnbindDeviceFromGateway": {
@@ -178,7 +200,8 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/registries/*}:unbindDeviceFromGateway",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/registries/*/groups/*}:unbindDeviceFromGateway",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,gateway_id,device_id"
                           }
                         }
                       }
@@ -187,11 +210,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "deviceRegistry": {
                           "type": "DeviceRegistry",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -199,7 +229,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         }
                       }
                     },
@@ -207,7 +241,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         }
                       }
                     },
@@ -215,11 +253,17 @@
                       "fields": {
                         "deviceRegistry": {
                           "type": "DeviceRegistry",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -227,7 +271,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -256,11 +304,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         },
                         "device": {
                           "type": "Device",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -268,7 +323,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
@@ -280,11 +339,17 @@
                       "fields": {
                         "device": {
                           "type": "Device",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -292,7 +357,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         }
                       }
                     },
@@ -300,7 +369,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         },
                         "deviceNumIds": {
                           "rule": "repeated",
@@ -372,7 +445,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         },
                         "versionToUpdate": {
                           "type": "int64",
@@ -380,7 +457,10 @@
                         },
                         "binaryData": {
                           "type": "bytes",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -388,7 +468,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         },
                         "numVersions": {
                           "type": "int32",
@@ -409,7 +493,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         },
                         "numStates": {
                           "type": "int32",
@@ -430,11 +518,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Device"
+                          }
                         },
                         "binaryData": {
                           "type": "bytes",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "subfolder": {
                           "type": "string",
@@ -449,15 +544,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         },
                         "gatewayId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "deviceId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -468,15 +573,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                          }
                         },
                         "gatewayId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "deviceId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -484,6 +599,10 @@
                       "fields": {}
                     },
                     "Device": {
+                      "options": {
+                        "(google.api.resource).type": "cloudiot.googleapis.com/Device",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}/devices/{device}"
+                      },
                       "fields": {
                         "id": {
                           "type": "string",
@@ -578,6 +697,10 @@
                       }
                     },
                     "DeviceRegistry": {
+                      "options": {
+                        "(google.api.resource).type": "cloudiot.googleapis.com/DeviceRegistry",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}"
+                      },
                       "fields": {
                         "id": {
                           "type": "string",
@@ -623,12 +746,50 @@
                         }
                       }
                     },
+                    "MqttState": {
+                      "values": {
+                        "MQTT_STATE_UNSPECIFIED": 0,
+                        "MQTT_ENABLED": 1,
+                        "MQTT_DISABLED": 2
+                      }
+                    },
                     "HttpConfig": {
                       "fields": {
                         "httpEnabledState": {
                           "type": "HttpState",
                           "id": 1
                         }
+                      }
+                    },
+                    "HttpState": {
+                      "values": {
+                        "HTTP_STATE_UNSPECIFIED": 0,
+                        "HTTP_ENABLED": 1,
+                        "HTTP_DISABLED": 2
+                      }
+                    },
+                    "LogLevel": {
+                      "values": {
+                        "LOG_LEVEL_UNSPECIFIED": 0,
+                        "NONE": 10,
+                        "ERROR": 20,
+                        "INFO": 30,
+                        "DEBUG": 40
+                      }
+                    },
+                    "GatewayType": {
+                      "values": {
+                        "GATEWAY_TYPE_UNSPECIFIED": 0,
+                        "GATEWAY": 1,
+                        "NON_GATEWAY": 2
+                      }
+                    },
+                    "GatewayAuthMethod": {
+                      "values": {
+                        "GATEWAY_AUTH_METHOD_UNSPECIFIED": 0,
+                        "ASSOCIATION_ONLY": 1,
+                        "DEVICE_AUTH_TOKEN_ONLY": 2,
+                        "ASSOCIATION_AND_DEVICE_AUTH_TOKEN": 3
                       }
                     },
                     "EventNotificationConfig": {
@@ -710,6 +871,12 @@
                         }
                       }
                     },
+                    "PublicKeyCertificateFormat": {
+                      "values": {
+                        "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT": 0,
+                        "X509_CERTIFICATE_PEM": 1
+                      }
+                    },
                     "DeviceCredential": {
                       "oneofs": {
                         "credential": {
@@ -739,6 +906,15 @@
                           "type": "string",
                           "id": 2
                         }
+                      }
+                    },
+                    "PublicKeyFormat": {
+                      "values": {
+                        "UNSPECIFIED_PUBLIC_KEY_FORMAT": 0,
+                        "RSA_PEM": 3,
+                        "RSA_X509_PEM": 1,
+                        "ES256_PEM": 2,
+                        "ES256_X509_PEM": 4
                       }
                     },
                     "DeviceConfig": {
@@ -772,59 +948,6 @@
                           "id": 2
                         }
                       }
-                    },
-                    "MqttState": {
-                      "values": {
-                        "MQTT_STATE_UNSPECIFIED": 0,
-                        "MQTT_ENABLED": 1,
-                        "MQTT_DISABLED": 2
-                      }
-                    },
-                    "HttpState": {
-                      "values": {
-                        "HTTP_STATE_UNSPECIFIED": 0,
-                        "HTTP_ENABLED": 1,
-                        "HTTP_DISABLED": 2
-                      }
-                    },
-                    "LogLevel": {
-                      "values": {
-                        "LOG_LEVEL_UNSPECIFIED": 0,
-                        "NONE": 10,
-                        "ERROR": 20,
-                        "INFO": 30,
-                        "DEBUG": 40
-                      }
-                    },
-                    "GatewayType": {
-                      "values": {
-                        "GATEWAY_TYPE_UNSPECIFIED": 0,
-                        "GATEWAY": 1,
-                        "NON_GATEWAY": 2
-                      }
-                    },
-                    "GatewayAuthMethod": {
-                      "values": {
-                        "GATEWAY_AUTH_METHOD_UNSPECIFIED": 0,
-                        "ASSOCIATION_ONLY": 1,
-                        "DEVICE_AUTH_TOKEN_ONLY": 2,
-                        "ASSOCIATION_AND_DEVICE_AUTH_TOKEN": 3
-                      }
-                    },
-                    "PublicKeyCertificateFormat": {
-                      "values": {
-                        "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT": 0,
-                        "X509_CERTIFICATE_PEM": 1
-                      }
-                    },
-                    "PublicKeyFormat": {
-                      "values": {
-                        "UNSPECIFIED_PUBLIC_KEY_FORMAT": 0,
-                        "RSA_PEM": 3,
-                        "RSA_X509_PEM": 1,
-                        "ES256_PEM": 2,
-                        "ES256_X509_PEM": 4
-                      }
                     }
                   }
                 }
@@ -836,7 +959,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -944,6 +1067,74 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -1858,18 +2049,6 @@
                 },
                 "value": {
                   "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
                   "id": 2
                 }
               }

@@ -3257,6 +3257,13 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** MqttState enum. */
+                enum MqttState {
+                    MQTT_STATE_UNSPECIFIED = 0,
+                    MQTT_ENABLED = 1,
+                    MQTT_DISABLED = 2
+                }
+
                 /** Properties of a HttpConfig. */
                 interface IHttpConfig {
 
@@ -3345,6 +3352,37 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** HttpState enum. */
+                enum HttpState {
+                    HTTP_STATE_UNSPECIFIED = 0,
+                    HTTP_ENABLED = 1,
+                    HTTP_DISABLED = 2
+                }
+
+                /** LogLevel enum. */
+                enum LogLevel {
+                    LOG_LEVEL_UNSPECIFIED = 0,
+                    NONE = 10,
+                    ERROR = 20,
+                    INFO = 30,
+                    DEBUG = 40
+                }
+
+                /** GatewayType enum. */
+                enum GatewayType {
+                    GATEWAY_TYPE_UNSPECIFIED = 0,
+                    GATEWAY = 1,
+                    NON_GATEWAY = 2
+                }
+
+                /** GatewayAuthMethod enum. */
+                enum GatewayAuthMethod {
+                    GATEWAY_AUTH_METHOD_UNSPECIFIED = 0,
+                    ASSOCIATION_ONLY = 1,
+                    DEVICE_AUTH_TOKEN_ONLY = 2,
+                    ASSOCIATION_AND_DEVICE_AUTH_TOKEN = 3
                 }
 
                 /** Properties of an EventNotificationConfig. */
@@ -3848,6 +3886,12 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** PublicKeyCertificateFormat enum. */
+                enum PublicKeyCertificateFormat {
+                    UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT = 0,
+                    X509_CERTIFICATE_PEM = 1
+                }
+
                 /** Properties of a DeviceCredential. */
                 interface IDeviceCredential {
 
@@ -4041,6 +4085,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** PublicKeyFormat enum. */
+                enum PublicKeyFormat {
+                    UNSPECIFIED_PUBLIC_KEY_FORMAT = 0,
+                    RSA_PEM = 3,
+                    RSA_X509_PEM = 1,
+                    ES256_PEM = 2,
+                    ES256_X509_PEM = 4
                 }
 
                 /** Properties of a DeviceConfig. */
@@ -4245,59 +4298,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** MqttState enum. */
-                enum MqttState {
-                    MQTT_STATE_UNSPECIFIED = 0,
-                    MQTT_ENABLED = 1,
-                    MQTT_DISABLED = 2
-                }
-
-                /** HttpState enum. */
-                enum HttpState {
-                    HTTP_STATE_UNSPECIFIED = 0,
-                    HTTP_ENABLED = 1,
-                    HTTP_DISABLED = 2
-                }
-
-                /** LogLevel enum. */
-                enum LogLevel {
-                    LOG_LEVEL_UNSPECIFIED = 0,
-                    NONE = 10,
-                    ERROR = 20,
-                    INFO = 30,
-                    DEBUG = 40
-                }
-
-                /** GatewayType enum. */
-                enum GatewayType {
-                    GATEWAY_TYPE_UNSPECIFIED = 0,
-                    GATEWAY = 1,
-                    NON_GATEWAY = 2
-                }
-
-                /** GatewayAuthMethod enum. */
-                enum GatewayAuthMethod {
-                    GATEWAY_AUTH_METHOD_UNSPECIFIED = 0,
-                    ASSOCIATION_ONLY = 1,
-                    DEVICE_AUTH_TOKEN_ONLY = 2,
-                    ASSOCIATION_AND_DEVICE_AUTH_TOKEN = 3
-                }
-
-                /** PublicKeyCertificateFormat enum. */
-                enum PublicKeyCertificateFormat {
-                    UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT = 0,
-                    X509_CERTIFICATE_PEM = 1
-                }
-
-                /** PublicKeyFormat enum. */
-                enum PublicKeyFormat {
-                    UNSPECIFIED_PUBLIC_KEY_FORMAT = 0,
-                    RSA_PEM = 3,
-                    RSA_X509_PEM = 1,
-                    ES256_PEM = 2,
-                    ES256_X509_PEM = 4
                 }
             }
         }
@@ -4640,6 +4640,230 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: google.api.ResourceDescriptor.History;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -6376,6 +6600,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -6496,6 +6723,12 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
@@ -7944,102 +8177,6 @@ export namespace google {
 
             /**
              * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

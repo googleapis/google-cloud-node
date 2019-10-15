@@ -128,11 +128,11 @@ class DeviceManagerClient {
       devicePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/registries/{registry}/devices/{device}'
       ),
+      deviceRegistryPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/registries/{registry}'
+      ),
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
-      ),
-      registryPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/registries/{registry}'
       ),
     };
 
@@ -266,10 +266,10 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and cloud region where this device registry must be created.
+   *   Required. The project and cloud region where this device registry must be created.
    *   For example, `projects/example-project/locations/us-central1`.
    * @param {Object} request.deviceRegistry
-   *   The device registry. The field `name` must be empty. The server will
+   *   Required. The device registry. The field `name` must be empty. The server will
    *   generate that field from the device registry `id` provided and the
    *   `parent` field.
    *
@@ -332,7 +332,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device registry. For example,
+   *   Required. The name of the device registry. For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -353,7 +353,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedName = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.getDeviceRegistry({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -387,13 +387,13 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.deviceRegistry
-   *   The new values for the device registry. The `id` field must be empty, and
+   *   Required. The new values for the device registry. The `id` field must be empty, and
    *   the `name` field must indicate the path of the resource. For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    *
    *   This object should have the same structure as [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}
    * @param {Object} request.updateMask
-   *   Only updates the `device_registry` fields indicated by this mask.
+   *   Required. Only updates the `device_registry` fields indicated by this mask.
    *   The field mask must not be empty, and it must not contain fields that
    *   are immutable or only set by the server.
    *   Mutable top-level fields: `event_notification_config`, `http_config`,
@@ -458,7 +458,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device registry. For example,
+   *   Required. The name of the device registry. For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -476,7 +476,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedName = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.deleteDeviceRegistry({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -505,7 +505,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and cloud region path. For example,
+   *   Required. The project and cloud region path. For example,
    *   `projects/example-project/locations/us-central1`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -618,7 +618,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project and cloud region path. For example,
+   *   Required. The project and cloud region path. For example,
    *   `projects/example-project/locations/us-central1`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -671,11 +671,11 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the device registry where this device should be created.
+   *   Required. The name of the device registry where this device should be created.
    *   For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {Object} request.device
-   *   The device registration details. The field `name` must be empty. The server
+   *   Required. The device registration details. The field `name` must be empty. The server
    *   generates `name` from the device registry `id` and the
    *   `parent` field.
    *
@@ -699,7 +699,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const device = {};
    * const request = {
    *   parent: formattedParent,
@@ -738,7 +738,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {Object} [request.fieldMask]
@@ -799,14 +799,14 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.device
-   *   The new values for the device. The `id` and `num_id` fields must
+   *   Required. The new values for the device. The `id` and `num_id` fields must
    *   be empty, and the field `name` must specify the name path. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    *
    *   This object should have the same structure as [Device]{@link google.cloud.iot.v1.Device}
    * @param {Object} request.updateMask
-   *   Only updates the `device` fields indicated by this mask.
+   *   Required. Only updates the `device` fields indicated by this mask.
    *   The field mask must not be empty, and it must not contain fields that
    *   are immutable or only set by the server.
    *   Mutable top-level fields: `credentials`, `blocked`, and `metadata`
@@ -870,7 +870,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {Object} [options]
@@ -918,7 +918,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The device registry path. Required. For example,
+   *   Required. The device registry path. Required. For example,
    *   `projects/my-project/locations/us-central1/registries/my-registry`.
    * @param {number[]} [request.deviceNumIds]
    *   A list of device numeric IDs. If empty, this field is ignored. Maximum
@@ -974,7 +974,7 @@ class DeviceManagerClient {
    * });
    *
    * // Iterate over all elements.
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    *
    * client.listDevices({parent: formattedParent})
    *   .then(responses => {
@@ -988,7 +988,7 @@ class DeviceManagerClient {
    *   });
    *
    * // Or obtain the paged response.
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    *
    *
    * const options = {autoPaginate: false};
@@ -1047,7 +1047,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The device registry path. Required. For example,
+   *   Required. The device registry path. Required. For example,
    *   `projects/my-project/locations/us-central1/registries/my-registry`.
    * @param {number[]} [request.deviceNumIds]
    *   A list of device numeric IDs. If empty, this field is ignored. Maximum
@@ -1085,7 +1085,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.listDevicesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1111,11 +1111,11 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {Buffer} request.binaryData
-   *   The configuration data for the device.
+   *   Required. The configuration data for the device.
    * @param {number} [request.versionToUpdate]
    *   The version number to update. If this value is zero, it will not check the
    *   version number of the server and will always update the current version;
@@ -1185,7 +1185,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {number} [request.numVersions]
@@ -1250,7 +1250,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {number} [request.numStates]
@@ -1339,10 +1339,10 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const resource = '';
    * const policy = {};
    * const request = {
-   *   resource: formattedResource,
+   *   resource: resource,
    *   policy: policy,
    * };
    * client.setIamPolicy(request)
@@ -1406,8 +1406,8 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
-   * client.getIamPolicy({resource: formattedResource})
+   * const resource = '';
+   * client.getIamPolicy({resource: resource})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -1444,7 +1444,7 @@ class DeviceManagerClient {
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy detail is being requested.
    *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
+   * @param {string[]} [request.permissions]
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
    *   information see
@@ -1468,13 +1468,8 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedResource = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
-   * const permissions = [];
-   * const request = {
-   *   resource: formattedResource,
-   *   permissions: permissions,
-   * };
-   * client.testIamPermissions(request)
+   * const resource = '';
+   * client.testIamPermissions({resource: resource})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -1519,11 +1514,11 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the device. For example,
+   *   Required. The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    * @param {Buffer} request.binaryData
-   *   The command data to send to the device.
+   *   Required. The command data to send to the device.
    * @param {string} [request.subfolder]
    *   Optional subfolder for the command. If empty, the command will be delivered
    *   to the /devices/{device-id}/commands topic, otherwise it will be delivered
@@ -1588,13 +1583,13 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the registry. For example,
+   *   Required. The name of the registry. For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {string} request.gatewayId
-   *   The value of `gateway_id` can be either the device numeric ID or the
+   *   Required. The value of `gateway_id` can be either the device numeric ID or the
    *   user-defined device identifier.
    * @param {string} request.deviceId
-   *   The device to associate with the specified gateway. The value of
+   *   Required. The device to associate with the specified gateway. The value of
    *   `device_id` can be either the device numeric ID or the user-defined device
    *   identifier.
    * @param {Object} [options]
@@ -1616,7 +1611,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const gatewayId = '';
    * const deviceId = '';
    * const request = {
@@ -1657,13 +1652,13 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The name of the registry. For example,
+   *   Required. The name of the registry. For example,
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {string} request.gatewayId
-   *   The value of `gateway_id` can be either the device numeric ID or the
+   *   Required. The value of `gateway_id` can be either the device numeric ID or the
    *   user-defined device identifier.
    * @param {string} request.deviceId
-   *   The device to disassociate from the specified gateway. The value of
+   *   Required. The device to disassociate from the specified gateway. The value of
    *   `device_id` can be either the device numeric ID or the user-defined device
    *   identifier.
    * @param {Object} [options]
@@ -1685,7 +1680,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const gatewayId = '';
    * const deviceId = '';
    * const request = {
@@ -1747,6 +1742,22 @@ class DeviceManagerClient {
   }
 
   /**
+   * Return a fully-qualified device_registry resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} registry
+   * @returns {String}
+   */
+  deviceRegistryPath(project, location, registry) {
+    return this._pathTemplates.deviceRegistryPathTemplate.render({
+      project: project,
+      location: location,
+      registry: registry,
+    });
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {String} project
@@ -1757,22 +1768,6 @@ class DeviceManagerClient {
     return this._pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
-    });
-  }
-
-  /**
-   * Return a fully-qualified registry resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} registry
-   * @returns {String}
-   */
-  registryPath(project, location, registry) {
-    return this._pathTemplates.registryPathTemplate.render({
-      project: project,
-      location: location,
-      registry: registry,
     });
   }
 
@@ -1821,6 +1816,45 @@ class DeviceManagerClient {
   }
 
   /**
+   * Parse the deviceRegistryName from a device_registry resource.
+   *
+   * @param {String} deviceRegistryName
+   *   A fully-qualified path representing a device_registry resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromDeviceRegistryName(deviceRegistryName) {
+    return this._pathTemplates.deviceRegistryPathTemplate.match(
+      deviceRegistryName
+    ).project;
+  }
+
+  /**
+   * Parse the deviceRegistryName from a device_registry resource.
+   *
+   * @param {String} deviceRegistryName
+   *   A fully-qualified path representing a device_registry resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromDeviceRegistryName(deviceRegistryName) {
+    return this._pathTemplates.deviceRegistryPathTemplate.match(
+      deviceRegistryName
+    ).location;
+  }
+
+  /**
+   * Parse the deviceRegistryName from a device_registry resource.
+   *
+   * @param {String} deviceRegistryName
+   *   A fully-qualified path representing a device_registry resources.
+   * @returns {String} - A string representing the registry.
+   */
+  matchRegistryFromDeviceRegistryName(deviceRegistryName) {
+    return this._pathTemplates.deviceRegistryPathTemplate.match(
+      deviceRegistryName
+    ).registry;
+  }
+
+  /**
    * Parse the locationName from a location resource.
    *
    * @param {String} locationName
@@ -1841,41 +1875,6 @@ class DeviceManagerClient {
   matchLocationFromLocationName(locationName) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
-  }
-
-  /**
-   * Parse the registryName from a registry resource.
-   *
-   * @param {String} registryName
-   *   A fully-qualified path representing a registry resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromRegistryName(registryName) {
-    return this._pathTemplates.registryPathTemplate.match(registryName).project;
-  }
-
-  /**
-   * Parse the registryName from a registry resource.
-   *
-   * @param {String} registryName
-   *   A fully-qualified path representing a registry resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromRegistryName(registryName) {
-    return this._pathTemplates.registryPathTemplate.match(registryName)
-      .location;
-  }
-
-  /**
-   * Parse the registryName from a registry resource.
-   *
-   * @param {String} registryName
-   *   A fully-qualified path representing a registry resources.
-   * @returns {String} - A string representing the registry.
-   */
-  matchRegistryFromRegistryName(registryName) {
-    return this._pathTemplates.registryPathTemplate.match(registryName)
-      .registry;
   }
 }
 
