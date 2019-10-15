@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.4.0...v3.5.0) (2019-10-14)
+
+
+### Features
+
+* **bucket:** add enableLogging method ([#876](https://www.github.com/googleapis/nodejs-storage/issues/876)) ([b09ecac](https://www.github.com/googleapis/nodejs-storage/commit/b09ecac79b70bf99e19f0f23ffcecd17e34516bb))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.3.1...v3.4.0) (2019-10-10)
 
 
