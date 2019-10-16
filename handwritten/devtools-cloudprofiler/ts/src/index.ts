@@ -20,7 +20,6 @@ import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
 import {heap as heapProfiler} from 'pprof';
 import * as semver from 'semver';
-import {SemVer} from 'semver';
 
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {createLogger} from './logger';
@@ -123,7 +122,7 @@ async function initConfigMetadata(
     const [instance, zone] = (await Promise.all([
       getMetadataInstanceField('name'),
       getMetadataInstanceField('zone'),
-    ]).catch((err: Error) => {
+    ]).catch((_: Error) => {
       // ignore errors, which will occur when not on GCE.
     })) || [undefined, undefined];
     if (!config.zone && zone) {
@@ -142,7 +141,7 @@ async function initConfigMetadata(
  *
  * Exported for testing.
  */
-export function nodeVersionOkay(version: string | SemVer): boolean {
+export function nodeVersionOkay(version: string | semver.SemVer): boolean {
   // Coerce version if possible, to remove any pre-release, alpha, beta, etc
   // tags.
   version = semver.coerce(version) || version;
@@ -260,7 +259,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
   // Periodic profiling
   setInterval(async () => {
     if (!config.disableHeap) {
-      const heap = await profiler.profile({
+      await profiler.profile({
         name: 'Heap-Profile' + new Date(),
         profileType: 'HEAP',
       });
@@ -268,7 +267,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
     }
     await delay(profiler.config.localProfilingPeriodMillis / 2);
     if (!config.disableTime) {
-      const wall = await profiler.profile({
+      await profiler.profile({
         name: 'Time-Profile' + new Date(),
         profileType: 'WALL',
         duration: profiler.config.localTimeDurationMillis.toString() + 'ms',

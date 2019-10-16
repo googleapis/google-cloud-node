@@ -20,7 +20,6 @@ import {
   ServiceObject,
   ApiError,
 } from '@google-cloud/common';
-import * as http from 'http';
 import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
 import * as msToStr from 'pretty-ms';
 import {promisify} from 'util';
