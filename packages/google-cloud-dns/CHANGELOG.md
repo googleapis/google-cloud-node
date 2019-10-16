@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.3...v1.2.4) (2019-10-16)
+
+
+### Bug Fixes
+
+* **typescript:** add correct type safety to zone#create ([#307](https://www.github.com/googleapis/nodejs-dns/issues/307)) ([d5b78b8](https://www.github.com/googleapis/nodejs-dns/commit/d5b78b836d02e7c990b9ae51c932a8b93b451520))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.2...v1.2.3) (2019-09-11)
 
 
