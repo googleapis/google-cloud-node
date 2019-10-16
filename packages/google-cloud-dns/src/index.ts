@@ -58,6 +58,7 @@ export interface CreateZoneRequest {
 }
 
 export type CreateZoneResponse = [Zone, Metadata];
+export type CreateZoneCallback = GetZoneCallback;
 
 export interface DNSOptions extends GoogleAuthOptions {
   /**

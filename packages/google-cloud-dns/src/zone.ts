@@ -19,6 +19,7 @@ import {
   GetConfig,
   Metadata,
   ServiceObject,
+  ServiceObjectConfig,
 } from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
@@ -30,7 +31,12 @@ const zonefile = require('dns-zonefile');
 
 import {Change, CreateChangeCallback, CreateChangeRequest} from './change';
 import {Record, RecordMetadata, RecordObject} from './record';
-import {DNS, CreateZoneRequest} from '.';
+import {
+  DNS,
+  CreateZoneRequest,
+  CreateZoneResponse,
+  CreateZoneCallback,
+} from '.';
 import {Readable} from 'stream';
 import {InstanceResponseCallback} from '@google-cloud/common';
 import {GetResponse} from '@google-cloud/common/build/src/service-object';
@@ -166,6 +172,26 @@ export interface ZoneExportCallback {
   (err: Error | null): void;
 }
 
+// This type essentially just clones a class but allows us to exclude methods
+// from the type itself. In this case it is useful because we want to override
+// the Zone#create signature that is defined in the common library.
+type Without<T, K> = {
+  [P in Exclude<keyof T, K>]: T[P];
+};
+
+// Using the Without type, we essentially make a new ServiceObject type that
+// doesn't contain any of the methods that have signatures we wish to override.
+type ZoneServiceObject = new (config: ServiceObjectConfig) => Without<
+  ServiceObject<Zone>,
+  'create' | 'delete' | 'get'
+>;
+
+// This is used purely for making TypeScript think that the object we are
+// subclassing does not contain a signature mismatch for methods we are
+// overriding.
+// tslint:disable-next-line variable-name
+const ZoneServiceObject = ServiceObject as ZoneServiceObject;
+
 /**
  * A Zone object is used to interact with your project's managed zone. It will
  * help you add or delete records, delete your zone, and many other convenience
@@ -179,7 +205,7 @@ export interface ZoneExportCallback {
  *
  * const zone = dns.zone('zone-id');
  */
-class Zone extends ServiceObject<Zone> {
+class Zone extends ZoneServiceObject {
   name: string;
   getRecordsStream: (query?: GetRecordsRequest | string | string[]) => Readable;
   getChangesStream: (query?: GetChangesRequest) => Readable;
@@ -358,6 +384,17 @@ class Zone extends ServiceObject<Zone> {
     this.getChangesStream = paginator.streamify('getChanges');
   }
 
+  create(config: CreateZoneRequest): Promise<CreateZoneResponse>;
+  create(config: CreateZoneRequest, callback: CreateZoneCallback): void;
+  create(
+    config: CreateZoneRequest,
+    callback?: CreateZoneCallback
+  ): void | Promise<CreateZoneResponse> {
+    // tslint:disable-next-line no-any
+    const args = [config, callback!] as any;
+    ServiceObject.prototype.create.apply(this, args);
+  }
+
   get(config?: GetZoneRequest): Promise<GetResponse<Zone>>;
   get(callback: InstanceResponseCallback<Zone>): void;
   get(config: GetZoneRequest, callback: InstanceResponseCallback<Zone>): void;
@@ -368,7 +405,7 @@ class Zone extends ServiceObject<Zone> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =
       typeof configOrCallback === 'function' ? configOrCallback : callback;
-    super.get(config, callback!);
+    ServiceObject.prototype.get.call(this, config, callback!);
   }
 
   addRecords(records: Record | Record[]): Promise<CreateChangeResponse>;
@@ -579,7 +616,8 @@ class Zone extends ServiceObject<Zone> {
       });
       return;
     }
-    super.delete(callback!);
+
+    ServiceObject.prototype.delete.call(this, callback!);
   }
 
   deleteRecords(
