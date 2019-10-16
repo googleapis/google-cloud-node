@@ -435,8 +435,6 @@ describe('Profiler', () => {
       }
     });
     it('should successfully create wall profile', async () => {
-      const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
       const response = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
@@ -446,7 +444,7 @@ describe('Profiler', () => {
           projectId: 'test-projectId',
           target: 'test-service',
         },
-        labels: {version: config.serviceContext.version},
+        labels: {version: testConfig.serviceContext.version},
       };
       nockOauth2();
       const requestProfileMock = nock(FULL_API)
@@ -460,7 +458,6 @@ describe('Profiler', () => {
     });
     it('should successfully create profile using non-default api', async () => {
       const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
       config.apiEndpoint = TEST_API;
       const response = {
         name: 'projects/12345678901/test-projectId',
@@ -484,8 +481,6 @@ describe('Profiler', () => {
       assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
     });
     it('should successfully create heap profile', async () => {
-      const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
       const response = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'HEAP',
@@ -494,7 +489,7 @@ describe('Profiler', () => {
           projectId: 'test-projectId',
           target: 'test-service',
         },
-        labels: {version: config.serviceContext.version},
+        labels: {version: testConfig.serviceContext.version},
       };
       nockOauth2();
       const requestProfileMock = nock(FULL_API)
@@ -507,11 +502,9 @@ describe('Profiler', () => {
       assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
     });
     it('should throw error when invalid profile created', async () => {
-      const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
       const response = {name: 'projects/12345678901/test-projectId'};
       nockOauth2();
-      const requestProfileMock = nock(FULL_API)
+      nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -594,17 +587,15 @@ describe('Profiler', () => {
       }
     );
     it('should keep additional fields in request profile.', async () => {
-      const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
       const response = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
         duration: '10s',
-        labels: {version: config.serviceContext.version},
+        labels: {version: testConfig.serviceContext.version},
         additionalField: 'additionalField',
       };
       nockOauth2();
-      const requestProfileMock = nock(FULL_API)
+      nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -613,14 +604,6 @@ describe('Profiler', () => {
       assert.deepStrictEqual(response, actualResponse);
     });
     it('should throw error when error thrown by http request.', async () => {
-      const config = extend(true, {}, testConfig);
-      config.disableHeap = true;
-      const response = {
-        name: 'projects/12345678901/test-projectId',
-        profileType: 'WALL',
-        duration: '10s',
-        labels: {version: config.serviceContext.version},
-      };
       requestStub = sinon
         .stub(common.ServiceObject.prototype, 'request')
         .onCall(0)
@@ -634,13 +617,6 @@ describe('Profiler', () => {
       }
     });
     it('should throw status message when response has non-200 status.', async () => {
-      const config = extend(true, {}, testConfig);
-      const response = {
-        name: 'projects/12345678901/test-projectId',
-        profileType: 'WALL',
-        duration: '10s',
-        labels: {version: config.serviceContext.version},
-      };
       requestStub = sinon
         .stub(common.ServiceObject.prototype, 'request')
         .onCall(0)
@@ -661,13 +637,6 @@ describe('Profiler', () => {
       'should throw error with server-specified backoff when non-200 error' +
         ' and backoff specified',
       async () => {
-        const config = extend(true, {}, testConfig);
-        const requestProfileResponseBody = {
-          name: 'projects/12345678901/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-          labels: {version: config.serviceContext.version},
-        };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')
           .onCall(0)
@@ -688,13 +657,6 @@ describe('Profiler', () => {
       }
     );
     it('should throw error when response undefined', async () => {
-      const config = extend(true, {}, testConfig);
-      const requestProfileResponseBody = {
-        name: 'projects/12345678901/test-projectId',
-        profileType: 'WALL',
-        duration: '10s',
-        labels: {version: config.serviceContext.version},
-      };
       requestStub = sinon
         .stub(common.ServiceObject.prototype, 'request')
         .onCall(0)
@@ -728,12 +690,11 @@ describe('Profiler', () => {
       }
     });
     it('should indicate collectProfile should be called immediately when no errors', async () => {
-      const config = extend(true, {}, testConfig);
       const requestProfileResponseBody = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
         duration: '10s',
-        labels: {version: config.serviceContext.version},
+        labels: {version: testConfig.serviceContext.version},
       };
       requestStub = sinon
         .stub(common.ServiceObject.prototype, 'request')
@@ -756,13 +717,6 @@ describe('Profiler', () => {
       'should return expect backoff when non-200 response and no backoff' +
         ' indicated',
       async () => {
-        const config = extend(true, {}, testConfig);
-        const requestProfileResponseBody = {
-          name: 'projects/12345678901/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-          labels: {version: config.serviceContext.version},
-        };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')
           .onCall(0)
@@ -774,19 +728,11 @@ describe('Profiler', () => {
       }
     );
     it('should reset backoff after success', async () => {
-      const config = extend(true, {}, testConfig);
-      const requestProfileResponseBody = {
-        name: 'projects/12345678901/test-projectId',
-        profileType: 'WALL',
-        duration: '10s',
-        labels: {instance: config.instance},
-      };
-
       const createProfileResponseBody = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
         duration: '10s',
-        labels: {instance: config.instance},
+        labels: {instance: testConfig.instance},
       };
       requestStub = sinon
         .stub(common.ServiceObject.prototype, 'request')
@@ -816,7 +762,7 @@ describe('Profiler', () => {
           undefined,
           undefined
         );
-      const profiler = new Profiler(config);
+      const profiler = new Profiler(testConfig);
       let delayMillis = await profiler.collectProfile();
       assert.deepStrictEqual(500, delayMillis);
       delayMillis = await profiler.collectProfile();
@@ -832,13 +778,6 @@ describe('Profiler', () => {
       'should return server-specified backoff when non-200 error and backoff' +
         ' specified',
       async () => {
-        const config = extend(true, {}, testConfig);
-        const requestProfileResponseBody = {
-          name: 'projects/12345678901/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-          labels: {instance: config.instance},
-        };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')
           .onCall(0)
@@ -857,13 +796,6 @@ describe('Profiler', () => {
       'should return expected backoff when non-200 error and invalid server backoff' +
         ' specified',
       async () => {
-        const config = extend(true, {}, testConfig);
-        const requestProfileResponseBody = {
-          name: 'projects/12345678901/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-          labels: {instance: config.instance},
-        };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')
           .onCall(0)
@@ -885,13 +817,6 @@ describe('Profiler', () => {
       'should return backoff limit, when server specified backoff is greater' +
         ' then backoff limit',
       async () => {
-        const config = extend(true, {}, testConfig);
-        const requestProfileResponseBody = {
-          name: 'projects/12345678901/test-projectId',
-          profileType: 'WALL',
-          duration: '10s',
-          labels: {version: config.serviceContext.version},
-        };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')
           .onCall(0)
@@ -910,12 +835,11 @@ describe('Profiler', () => {
       'should indicate collectProfile should be called immediately if there' +
         ' is an error when collecting and uploading profile.',
       async () => {
-        const config = extend(true, {}, testConfig);
         const createProfileResponseBody = {
           name: 'projects/12345678901/test-projectId',
           profileType: 'WALL',
           duration: '10s',
-          labels: {instance: config.instance},
+          labels: {instance: testConfig.instance},
         };
         requestStub = sinon
           .stub(common.ServiceObject.prototype, 'request')

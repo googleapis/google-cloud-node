@@ -88,7 +88,7 @@ describe('createProfiler', () => {
   };
   let defaultConfig: {};
 
-  before(async () => {
+  before(() => {
     process.env = {};
     defaultConfig = internalConfigParams || {};
     startStub = sinon.stub(heapProfiler, 'start');
@@ -235,14 +235,14 @@ describe('createProfiler', () => {
       },
       disableSourceMapParams
     );
-    createProfiler(config)
+    await createProfiler(config)
       .then(() => {
         assert.fail('expected error because no service in config');
       })
       .catch((e: Error) => {
         assert.strictEqual(
           e.message,
-          'Could not start profiler: Error: Service must be specified in the configuration'
+          'Service must be specified in the configuration'
         );
       });
   });
@@ -503,7 +503,7 @@ describe('createProfiler', () => {
       },
       disableSourceMapParams
     );
-    const profiler: Profiler = await createProfiler(config);
+    await createProfiler(config);
     assert.ok(
       startStub.calledWith(1024 * 512, 64),
       'expected heap profiler to be started'
@@ -520,7 +520,7 @@ describe('createProfiler', () => {
       },
       disableSourceMapParams
     );
-    const profiler: Profiler = await createProfiler(config);
+    await createProfiler(config);
     assert.ok(!startStub.called, 'expected heap profiler to not be started');
   });
 });

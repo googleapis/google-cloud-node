@@ -451,9 +451,6 @@ export const heapProfileWithExternal: perftools.profiles.IProfile = Object.freez
 
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
-const encodedHeapProfileWithExternal = perftools.profiles.Profile.encode(
-  heapProfile
-).finish();
 export const decodedHeapProfileWithExternal = Object.freeze(
   perftools.profiles.Profile.decode(encodedHeapProfile)
 );
@@ -489,7 +486,10 @@ const anonymousFunctionHeapFunctions = [
 ];
 
 const anonymousFunctionHeapLocations = [
-  new perftools.profiles.Location({line: [heapLines[0]], id: 1}),
+  new perftools.profiles.Location({
+    line: [anonymousFunctionHeapLines[0]],
+    id: 1,
+  }),
 ];
 
 export const anonymousFunctionHeapProfile: perftools.profiles.IProfile = Object.freeze(
@@ -560,7 +560,7 @@ const anonymousFunctionTimeFunctions = [
 
 const anonymousFunctionTimeLocations = [
   new perftools.profiles.Location({
-    line: [timeLines[0]],
+    line: [anonymousFunctionTimeLines[0]],
     id: 1,
   }),
 ];

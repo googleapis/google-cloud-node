@@ -70,7 +70,7 @@ before(async () => {
   nock(API)
     .persist()
     .patch('/projects/X/test-projectId')
-    .reply(200, (request: RequestProfile, body: RequestProfile) => {
+    .reply(200, (_: RequestProfile, body: RequestProfile) => {
       if (typeof body === 'string') {
         body = JSON.parse(body);
       }

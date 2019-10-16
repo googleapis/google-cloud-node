@@ -41,8 +41,7 @@
     "pprof": "1.1.0",
     "pretty-ms": "^5.0.0",
     "protobufjs": "~6.8.6",
-    "semver": "^6.0.0",
-    "source-map": "^0.7.0"
+    "semver": "^6.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
@@ -55,7 +54,6 @@
     "@types/tmp": "0.1.0",
     "codecov": "^3.0.0",
     "gts": "^1.0.0",
-    "intelli-espower-loader": "^1.0.1",
     "js-green-licenses": "^1.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
@@ -64,8 +62,7 @@
     "nock": "^11.0.0",
     "nyc": "^14.1.0",
     "sinon": "^7.3.2",
-    "source-map-support": "^0.5.6",
-    "teeny-request": "^5.2.0",
+    "source-map": "^0.7.0",
     "tmp": "0.1.0",
     "typescript": "~3.6.0"
   },
