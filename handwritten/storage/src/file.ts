@@ -499,8 +499,6 @@ class File extends ServiceObject<File> {
    * const file = myBucket.file('my-file');
    */
   constructor(bucket: Bucket, name: string, options: FileOptions = {}) {
-    name = name.replace(/^\/+/, '');
-
     const requestQueryObject: {generation?: number; userProject?: string} = {};
 
     let generation: number;

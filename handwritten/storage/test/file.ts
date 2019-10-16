@@ -239,9 +239,9 @@ describe('File', () => {
       assert.strictEqual(file.storage, BUCKET.storage);
     });
 
-    it('should strip a single leading slash', () => {
+    it('should not strip leading slashes', () => {
       const file = new File(BUCKET, '/name');
-      assert.strictEqual(file.name, 'name');
+      assert.strictEqual(file.name, '/name');
     });
 
     it('should assign KMS key name', () => {
@@ -302,11 +302,11 @@ describe('File', () => {
       });
     });
 
-    it('should use stripped leading slash name in ServiceObject', () => {
+    it('should not strip leading slash name in ServiceObject', () => {
       const file = new File(BUCKET, '/name');
       const calledWith = file.calledWith_[0];
 
-      assert.strictEqual(calledWith.id, 'name');
+      assert.strictEqual(calledWith.id, encodeURIComponent('/name'));
     });
 
     it('should set a custom encryption key', done => {
@@ -614,9 +614,20 @@ describe('File', () => {
       }
 
       it('should allow a string', done => {
-        const newFileName = '/new-file-name.png';
+        const newFileName = 'new-file-name.png';
         const newFile = new File(BUCKET, newFileName);
         const expectedPath = `/rewriteTo/b/${file.bucket.name}/o/${newFile.name}`;
+        assertPathEquals(file, expectedPath, done);
+        file.copy(newFileName);
+      });
+
+      it('should allow a string with leading slash.', done => {
+        const newFileName = '/new-file-name.png';
+        const newFile = new File(BUCKET, newFileName);
+        // File uri encodes file name when calling this.request during copy
+        const expectedPath = `/rewriteTo/b/${
+          file.bucket.name
+        }/o/${encodeURIComponent(newFile.name)}`;
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
