@@ -390,6 +390,29 @@ describe('Profiler', () => {
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
     });
+    it('should not retry on non-200 status codes', async () => {
+      const requestProf = {
+        name: 'projects/12345678901/test-projectId',
+        duration: '10s',
+        profileType: 'WALL',
+        labels: {instance: 'test-instance'},
+      };
+      nockOauth2();
+      const apiMock = nock(FULL_API)
+        .patch('/' + requestProf.name)
+        .once()
+        .reply(500)
+        .patch('/' + requestProf.name)
+        .once()
+        .reply(200);
+      const profiler = new Profiler(testConfig);
+      await profiler.profileAndUpload(requestProf);
+      assert.strictEqual(
+        apiMock.isDone(),
+        false,
+        'call to upload profile should not be retried'
+      );
+    });
     it('should send request to upload profile to default API without error.', async () => {
       const requestProf = {
         name: 'projects/12345678901/test-projectId',
@@ -519,6 +542,31 @@ describe('Profiler', () => {
             '{"name":"projects/12345678901/test-projectId"}.'
         );
       }
+    });
+    it('should not retry on non-200 status codes', async () => {
+      const response = {
+        name: 'projects/12345678901/test-projectId',
+        profileType: 'HEAP',
+        deployment: {
+          labels: {version: 'test-version', language: 'nodejs'},
+          projectId: 'test-projectId',
+          target: 'test-service',
+        },
+        labels: {version: testConfig.serviceContext.version},
+      };
+      nockOauth2();
+      nock(FULL_API)
+        .post('/projects/' + testConfig.projectId + '/profiles')
+        .once()
+        .reply(503, {})
+        .post('/projects/' + testConfig.projectId + '/profiles')
+        .once()
+        .reply(200, response);
+      const profiler = new Profiler(testConfig);
+      try {
+        await profiler.createProfile();
+        assert.fail('expected error, no error thrown');
+      } catch (_) {}
     });
     it(
       'should not have instance and zone in request body when instance and' +

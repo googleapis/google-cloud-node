@@ -441,6 +441,7 @@ export class Profiler extends ServiceObject {
       uri: '/profiles',
       body: reqBody,
       json: true,
+      maxRetries: 0,
 
       // Default timeout for for a request is 1 minute, but request to create
       // profile is designed to hang until it is time to collect a profile
@@ -490,6 +491,7 @@ export class Profiler extends ServiceObject {
       uri: this.baseApiUrl + '/' + prof.name,
       body: prof,
       json: true,
+      maxRetries: 0,
     };
 
     try {
