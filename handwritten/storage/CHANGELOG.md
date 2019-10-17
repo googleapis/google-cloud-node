@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.5.0...v4.0.0) (2019-10-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* allow leading slashes in file name (#820)
+
+### Bug Fixes
+
+* **deps:** update hash-stream-validation ([#884](https://www.github.com/googleapis/nodejs-storage/issues/884)) ([96a7fc2](https://www.github.com/googleapis/nodejs-storage/commit/96a7fc297a563819b09727990eb9ee15a421310b))
+* allow leading slashes in file name ([#820](https://www.github.com/googleapis/nodejs-storage/issues/820)) ([92e115d](https://www.github.com/googleapis/nodejs-storage/commit/92e115dca81604909fc34e983abcf47409d3f417))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.4.0...v3.5.0) (2019-10-14)
 
 
