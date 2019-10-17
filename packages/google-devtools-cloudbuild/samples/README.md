@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [List Triggers.](#list-triggers.)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -20,6 +21,25 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-cloudbuild#using-the-client-library).
 
 ## Samples
+
+
+
+### List Triggers.
+
+List available build triggers.
+
+View the [source code](https://github.com/googleapis/nodejs-cloudbuild/blob/master/samples/listBuildTriggers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloudbuild&page=editor&open_in_editor=samples/listBuildTriggers.js,samples/README.md)
+
+__Usage:__
+
+
+`node list-build-triggers.js <PROJECT_ID>`
+
+
+-----
+
 
 
 
