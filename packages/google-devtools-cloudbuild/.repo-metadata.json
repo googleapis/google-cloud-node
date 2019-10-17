@@ -1,0 +1,13 @@
+{
+  "name": "cloudbuild",
+  "name_pretty": "Cloud Build",
+  "product_documentation": "https://cloud.google.com/cloud-build/docs/",
+  "client_documentation": "https://googleapis.dev/nodejs/cloudbuild/latest/index.html",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5226584",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-cloudbuild",
+  "distribution_name": "@google-cloud/cloudbuild",
+  "api_id": "cloudbuild.googleapis.com",
+  "requires_billing": true
+}

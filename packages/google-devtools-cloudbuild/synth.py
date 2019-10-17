@@ -28,7 +28,7 @@ for version in versions:
    'cloudbuild',
    config_path='/google/devtools/cloudbuild/artman_cloudbuild.yaml',
    version=version)
- s.copy(library, excludes=[])
+ s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
@@ -38,3 +38,24 @@ s.copy(templates, excludes=[])
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+
+# Add missing jsdoc annotations:
+s.replace("src/index.js",
+r"""\/\*\*
+ \* @namespace google
+ \*/""",
+r"""/**
+ * @namespace google
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.longrunning
+ */""")
+s.replace("src/index.js",
+r"namespace google.cloud.cloudbuild",
+r"namespace google.devtools.cloudbuild")

@@ -1,0 +1,58 @@
+{
+  "repository": "googleapis/nodejs-cloudbuild",
+  "name": "@google-cloud/cloudbuild",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "Cloud Build API client for Node.js",
+  "main": "src/index.js",
+  "browser": "src/browser.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google cloudbuild",
+    "cloudbuild",
+    "Cloud Build API"
+  ],
+  "devDependencies": {
+    "c8": "^5.0.4",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jsdoc": "^3.6.2",
+    "jsdoc-fresh": "^1.0.2",
+    "linkinator": "^1.4.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.17.0"
+  },
+  "scripts": {
+    "docs": "jsdoc -c .jsdoc.js",
+    "fix": "eslint . --fix",
+    "lint": "eslint .",
+    "test": "c8 mocha test/*.js",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/cloudbuild|googleapis.dev.*|github.com.*'",
+    "samples-test": "c8 mocha --timeout=30000 samples/system-test/*.js",
+    "system-test": "c8 mocha --timeout=15000 system-test/*.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "dependencies": {
+    "google-gax": "^1.6.3"
+  }
+}
