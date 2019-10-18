@@ -21,7 +21,7 @@
     "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^2.0.0",
+    "@google-cloud/storage": "^4.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.0.0",
     "uuid": "^3.2.1"

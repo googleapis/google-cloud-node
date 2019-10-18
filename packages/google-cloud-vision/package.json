@@ -45,7 +45,7 @@
     "is": "^3.2.1"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^3.0.0",
+    "@google-cloud/storage": "^4.0.0",
     "codecov": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
