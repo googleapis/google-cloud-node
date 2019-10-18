@@ -98,6 +98,10 @@ export class LoggingCommon {
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
     this.stackdriverLog = new Logging(options).log(this.logName, {
       removeCircular: true,
+      // See: https://cloud.google.com/logging/quotas, a log size of
+      // 250,000 has been chosen to keep us comfortably within the
+      // 256,000 limit.
+      maxEntrySize: options.maxEntrySize || 250000,
     });
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
