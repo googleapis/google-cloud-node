@@ -157,7 +157,10 @@ describe('logging-common', () => {
     it('should set removeCircular to true', () => {
       const loggingCommon = new loggingCommonLib.LoggingCommon(OPTIONS);
 
-      assert.deepStrictEqual(fakeLogOptions_, {removeCircular: true});
+      assert.deepStrictEqual(fakeLogOptions_, {
+        removeCircular: true,
+        maxEntrySize: 250000,
+      });
     });
 
     it('should localize the provided resource', () => {

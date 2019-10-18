@@ -105,6 +105,9 @@ export interface Options {
   labels?: {[key: string]: string};
 
   apiEndpoint?: string;
+
+  // An attempt will be made to truncate messages larger than maxEntrySize.
+  maxEntrySize?: number;
 }
 
 export interface MonitoredResource {
