@@ -152,7 +152,10 @@ describe('logging-bunyan', () => {
 
       assert.strictEqual(fakeLoggingOptions_, optionsWithoutLogName);
       assert.strictEqual(fakeLogName_, 'bunyan_log');
-      assert.deepStrictEqual(fakeLogOptions_, {removeCircular: true});
+      assert.deepStrictEqual(fakeLogOptions_, {
+        removeCircular: true,
+        maxEntrySize: 250000,
+      });
     });
 
     it('should not throw if a serviceContext is not specified', () => {

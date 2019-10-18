@@ -148,6 +148,10 @@ export class LoggingBunyan extends Writable {
     this.serviceContext = options.serviceContext;
     this.stackdriverLog = new Logging(options).log(this.logName, {
       removeCircular: true,
+      // See: https://cloud.google.com/logging/quotas, a log size of
+      // 250,000 has been chosen to keep us comfortably within the
+      // 256,000 limit.
+      maxEntrySize: options.maxEntrySize || 250000,
     });
 
     // serviceContext.service is required by the Error Reporting
