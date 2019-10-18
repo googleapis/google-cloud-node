@@ -31,8 +31,8 @@
  *    * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`
  *
  * @property {Object[]} sampleGcsFileSpecs
- *   Output only. Sample files contained in this fileset, not all files contained in this
- *   fileset are represented here.
+ *   Output only. Sample files contained in this fileset, not all files
+ *   contained in this fileset are represented here.
  *
  *   This object should have the same structure as [GcsFileSpec]{@link google.cloud.datacatalog.v1beta1.GcsFileSpec}
  *

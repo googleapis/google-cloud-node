@@ -47,7 +47,7 @@ const BigQueryTableSpec = {
  * Table view specification.
  *
  * @property {string} viewQuery
- *   Required. Output only. The query that defines the table view.
+ *   Output only. The query that defines the table view.
  *
  * @typedef ViewSpec
  * @memberof google.cloud.datacatalog.v1beta1
@@ -87,8 +87,9 @@ const TableSpec = {
  *
  * @property {string} tablePrefix
  *   Output only. The table name prefix of the shards. The name of any given
- *   shard is `[table_prefix]YYYYMMDD`, for example, for shard
- *   `MyTable20180101`, the `table_prefix` is `MyTable`.
+ *   shard is
+ *   `[table_prefix]YYYYMMDD`, for example, for shard `MyTable20180101`, the
+ *   `table_prefix` is `MyTable`.
  *
  * @property {number} shardCount
  *   Output only. Total number of shards.

@@ -1979,14 +1979,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** EntryType enum. */
-                enum EntryType {
-                    ENTRY_TYPE_UNSPECIFIED = 0,
-                    TABLE = 2,
-                    DATA_STREAM = 3,
-                    FILESET = 4
-                }
-
                 /** Properties of a GetTagTemplateRequest. */
                 interface IGetTagTemplateRequest {
 
@@ -2075,6 +2067,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** EntryType enum. */
+                enum EntryType {
+                    ENTRY_TYPE_UNSPECIFIED = 0,
+                    TABLE = 2,
+                    DATA_STREAM = 3,
+                    FILESET = 4
                 }
 
                 /** Properties of an UpdateTagTemplateRequest. */

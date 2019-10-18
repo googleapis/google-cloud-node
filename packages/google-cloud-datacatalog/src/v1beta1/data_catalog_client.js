@@ -528,7 +528,7 @@ class DataCatalogClient {
    * @param {string} request.entryGroupId
    *   Required. The id of the entry group to create.
    * @param {Object} request.entryGroup
-   *   Optional. The entry group to create. Defaults to an empty entry group.
+   *   The entry group to create. Defaults to an empty entry group.
    *
    *   This object should have the same structure as [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}
    * @param {Object} [options]
@@ -595,8 +595,7 @@ class DataCatalogClient {
    *   Required. The name of the entry group. For example,
    *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
    * @param {Object} [request.readMask]
-   *   Optional. The fields to return. If not set or empty, all fields are
-   *   returned.
+   *   The fields to return. If not set or empty, all fields are returned.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -782,14 +781,22 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.entry
-   *   Required. The updated entry.
+   *   Required. The updated entry. The "name" field must be set.
    *
    *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
    * @param {Object} [request.updateMask]
-   *   Optional. The fields to update on the entry. If absent or empty, all
-   *   modifiable fields are updated.
+   *   The fields to update on the entry. If absent or empty, all modifiable
+   *   fields are updated.
    *
-   *   Currently only `schema` field in Cloud Pub/Sub topic entries is modifiable.
+   *   The following fields are modifiable:
+   *   * For entries with type `DATA_STREAM`:
+   *      * `schema`
+   *   * For entries with type `FILESET`
+   *      * `schema`
+   *      * `display_name`
+   *      * `description`
+   *      * `gcs_fileset_spec`
+   *      * `gcs_fileset_spec.file_patterns`
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -1166,11 +1173,11 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.tagTemplate
-   *   Required. The template to update.
+   *   Required. The template to update. The "name" field must be set.
    *
    *   This object should have the same structure as [TagTemplate]{@link google.cloud.datacatalog.v1beta1.TagTemplate}
    * @param {Object} [request.updateMask]
-   *   Optional. The field mask specifies the parts of the template to overwrite.
+   *   The field mask specifies the parts of the template to overwrite.
    *
    *   Allowed fields:
    *
@@ -1387,7 +1394,7 @@ class DataCatalogClient {
    *
    *   This object should have the same structure as [TagTemplateField]{@link google.cloud.datacatalog.v1beta1.TagTemplateField}
    * @param {Object} [request.updateMask]
-   *   Optional. The field mask specifies the parts of the template to be updated.
+   *   The field mask specifies the parts of the template to be updated.
    *   Allowed fields:
    *
    *     * `display_name`
@@ -1604,8 +1611,8 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the resource to attach this tag to. Tags can be attached to
-   *   Entries. Example:
+   *   Required. The name of the resource to attach this tag to. Tags can be
+   *   attached to Entries. Example:
    *
    *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
    *
@@ -1673,13 +1680,12 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.tag
-   *   Required. The updated tag.
+   *   Required. The updated tag. The "name" field must be set.
    *
    *   This object should have the same structure as [Tag]{@link google.cloud.datacatalog.v1beta1.Tag}
    * @param {Object} [request.updateMask]
-   *   Optional. The fields to update on the Tag. If absent or empty, all
-   *   modifiable fields are updated. Currently the only modifiable field is the
-   *   field `fields`.
+   *   The fields to update on the Tag. If absent or empty, all modifiable fields
+   *   are updated. Currently the only modifiable field is the field `fields`.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]

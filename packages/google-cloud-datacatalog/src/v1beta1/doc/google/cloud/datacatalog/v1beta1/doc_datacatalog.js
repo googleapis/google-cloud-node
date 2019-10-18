@@ -43,9 +43,9 @@
  *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
  *
  * @property {string} pageToken
- *   Optional pagination token returned in an earlier
- *   SearchCatalogResponse.next_page_token, which
- *   indicates that this is a continuation of a prior
+ *   Optional. Pagination token returned in an earlier
+ *   SearchCatalogResponse.next_page_token,
+ *   which indicates that this is a continuation of a prior
  *   SearchCatalogRequest
  *   call, and that the system should return the next page of data. If empty,
  *   the first page is returned.
@@ -137,7 +137,7 @@ const SearchCatalogResponse = {
  *   Required. The id of the entry group to create.
  *
  * @property {Object} entryGroup
- *   Optional. The entry group to create. Defaults to an empty entry group.
+ *   The entry group to create. Defaults to an empty entry group.
  *
  *   This object should have the same structure as [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}
  *
@@ -158,8 +158,7 @@ const CreateEntryGroupRequest = {
  *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
  *
  * @property {Object} readMask
- *   Optional. The fields to return. If not set or empty, all fields are
- *   returned.
+ *   The fields to return. If not set or empty, all fields are returned.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -220,15 +219,23 @@ const CreateEntryRequest = {
  * UpdateEntry.
  *
  * @property {Object} entry
- *   Required. The updated entry.
+ *   Required. The updated entry. The "name" field must be set.
  *
  *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
  *
  * @property {Object} updateMask
- *   Optional. The fields to update on the entry. If absent or empty, all
- *   modifiable fields are updated.
+ *   The fields to update on the entry. If absent or empty, all modifiable
+ *   fields are updated.
  *
- *   Currently only `schema` field in Cloud Pub/Sub topic entries is modifiable.
+ *   The following fields are modifiable:
+ *   * For entries with type `DATA_STREAM`:
+ *      * `schema`
+ *   * For entries with type `FILESET`
+ *      * `schema`
+ *      * `display_name`
+ *      * `description`
+ *      * `gcs_fileset_spec`
+ *      * `gcs_fileset_spec.file_patterns`
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -327,8 +334,6 @@ const LookupEntryRequest = {
  * Tag.
  *
  * @property {string} name
- *   Required when used in
- *   UpdateEntryRequest.
  *   The Data Catalog resource name of the entry in URL format. Example:
  *
  *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
@@ -371,17 +376,16 @@ const LookupEntryRequest = {
  *   This object should have the same structure as [BigQueryDateShardedSpec]{@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec}
  *
  * @property {string} displayName
- *   Optional. Display information such as title and description. A short name
- *   to identify the entry, for example, "Analytics Data - Jan 2011". Default
- *   value is an empty string.
+ *   Display information such as title and description. A short name to identify
+ *   the entry, for example, "Analytics Data - Jan 2011". Default value is an
+ *   empty string.
  *
  * @property {string} description
- *   Optional. Entry description, which can consist of several sentences or
- *   paragraphs that describe entry contents. Default value is an empty string.
+ *   Entry description, which can consist of several sentences or paragraphs
+ *   that describe entry contents. Default value is an empty string.
  *
  * @property {Object} schema
- *   Optional. Schema of the entry. An entry might not have any schema attached
- *   to it.
+ *   Schema of the entry. An entry might not have any schema attached to it.
  *
  *   This object should have the same structure as [Schema]{@link google.cloud.datacatalog.v1beta1.Schema}
  *
@@ -405,8 +409,6 @@ const Entry = {
  * Data Catalog Entry resources.
  *
  * @property {string} name
- *   Required when used in
- *   UpdateEntryGroupRequest.
  *   The resource name of the entry group in URL format. Example:
  *
  *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
@@ -415,12 +417,12 @@ const Entry = {
  *   stored in the location in this name.
  *
  * @property {string} displayName
- *   Optional. A short name to identify the entry group, for example,
+ *   A short name to identify the entry group, for example,
  *   "analytics data - jan 2011". Default value is an empty string.
  *
  * @property {string} description
- *   Optional. Entry group description, which can consist of several sentences
- *   or paragraphs that describe entry group contents. Default value is an empty
+ *   Entry group description, which can consist of several sentences or
+ *   paragraphs that describe entry group contents. Default value is an empty
  *   string.
  *
  * @property {Object} dataCatalogTimestamps
@@ -488,12 +490,12 @@ const GetTagTemplateRequest = {
  * UpdateTagTemplate.
  *
  * @property {Object} tagTemplate
- *   Required. The template to update.
+ *   Required. The template to update. The "name" field must be set.
  *
  *   This object should have the same structure as [TagTemplate]{@link google.cloud.datacatalog.v1beta1.TagTemplate}
  *
  * @property {Object} updateMask
- *   Optional. The field mask specifies the parts of the template to overwrite.
+ *   The field mask specifies the parts of the template to overwrite.
  *
  *   Allowed fields:
  *
@@ -538,8 +540,8 @@ const DeleteTagTemplateRequest = {
  * CreateTag.
  *
  * @property {string} parent
- *   Required. The name of the resource to attach this tag to. Tags can be attached to
- *   Entries. Example:
+ *   Required. The name of the resource to attach this tag to. Tags can be
+ *   attached to Entries. Example:
  *
  *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
  *
@@ -564,14 +566,13 @@ const CreateTagRequest = {
  * UpdateTag.
  *
  * @property {Object} tag
- *   Required. The updated tag.
+ *   Required. The updated tag. The "name" field must be set.
  *
  *   This object should have the same structure as [Tag]{@link google.cloud.datacatalog.v1beta1.Tag}
  *
  * @property {Object} updateMask
- *   Optional. The fields to update on the Tag. If absent or empty, all
- *   modifiable fields are updated. Currently the only modifiable field is the
- *   field `fields`.
+ *   The fields to update on the Tag. If absent or empty, all modifiable fields
+ *   are updated. Currently the only modifiable field is the field `fields`.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -647,7 +648,7 @@ const CreateTagTemplateFieldRequest = {
  *   This object should have the same structure as [TagTemplateField]{@link google.cloud.datacatalog.v1beta1.TagTemplateField}
  *
  * @property {Object} updateMask
- *   Optional. The field mask specifies the parts of the template to be updated.
+ *   The field mask specifies the parts of the template to be updated.
  *   Allowed fields:
  *
  *     * `display_name`
@@ -722,12 +723,11 @@ const DeleteTagTemplateFieldRequest = {
  *   resource could be an Entry.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of tags to return. Default is 10. Max limit is
- *   1000.
+ *   The maximum number of tags to return. Default is 10. Max limit is 1000.
  *
  * @property {string} pageToken
- *   Optional. Token that specifies which page is requested. If empty, the first
- *   page is returned.
+ *   Token that specifies which page is requested. If empty, the first page is
+ *   returned.
  *
  * @typedef ListTagsRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -786,8 +786,8 @@ const EntryType = {
   DATA_STREAM: 3,
 
   /**
-   * An entry type which is a set of files or objects. Example: Cloud Storage
-   * fileset.
+   * Alpha feature. An entry type which is a set of files or objects. Example:
+   * Cloud Storage fileset.
    */
   FILESET: 4
 };

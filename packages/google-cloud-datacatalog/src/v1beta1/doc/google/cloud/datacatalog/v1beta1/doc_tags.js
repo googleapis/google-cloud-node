@@ -20,9 +20,7 @@
  * conform to the specifications within their tag template.
  *
  * @property {string} name
- *   Required when used in
- *   UpdateTagRequest. The
- *   resource name of the tag in URL format. Example:
+ *   The resource name of the tag in URL format. Example:
  *
  *   * projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
  *
@@ -117,8 +115,6 @@ const TagField = {
  * be used within the tag. The tag template also controls the access to the tag.
  *
  * @property {string} name
- *   Required when used in
- *   UpdateTagTemplateRequest.
  *   The resource name of the tag template in URL format. Example:
  *
  *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
@@ -127,7 +123,7 @@ const TagField = {
  *   stored in the location in this name.
  *
  * @property {string} displayName
- *   Optional. The display name for this template. Defaults to an empty string.
+ *   The display name for this template. Defaults to an empty string.
  *
  * @property {Object.<string, Object>} fields
  *   Required. Map of tag template field IDs to the settings for the field.
@@ -160,7 +156,7 @@ const TagTemplate = {
  *   in this name.
  *
  * @property {string} displayName
- *   Optional. The display name for this field. Defaults to an empty string.
+ *   The display name for this field. Defaults to an empty string.
  *
  * @property {Object} type
  *   Required. The type of value this tag field can contain.

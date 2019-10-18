@@ -26,7 +26,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/catalog:search",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "scope,query,order_by"
+                            "(google.api.method_signature)": "scope,query"
                           }
                         },
                         "CreateEntryGroup": {
@@ -252,7 +252,10 @@
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
@@ -458,7 +461,10 @@
                         },
                         "linkedResource": {
                           "type": "string",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "type": {
                           "type": "EntryType",
@@ -490,7 +496,10 @@
                         },
                         "sourceSystemTimestamps": {
                           "type": "SystemTimestamps",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -547,14 +556,6 @@
                         }
                       }
                     },
-                    "EntryType": {
-                      "values": {
-                        "ENTRY_TYPE_UNSPECIFIED": 0,
-                        "TABLE": 2,
-                        "DATA_STREAM": 3,
-                        "FILESET": 4
-                      }
-                    },
                     "GetTagTemplateRequest": {
                       "fields": {
                         "name": {
@@ -565,6 +566,14 @@
                             "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
                           }
                         }
+                      }
+                    },
+                    "EntryType": {
+                      "values": {
+                        "ENTRY_TYPE_UNSPECIFIED": 0,
+                        "TABLE": 2,
+                        "DATA_STREAM": 3,
+                        "FILESET": 4
                       }
                     },
                     "UpdateTagTemplateRequest": {
@@ -861,16 +870,25 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "mode": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "subcolumns": {
                           "rule": "repeated",
                           "type": "ColumnSchema",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -942,7 +960,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -971,11 +989,17 @@
                         },
                         "tablePrefix": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "shardCount": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1108,7 +1132,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "displayName": {
                           "type": "string",

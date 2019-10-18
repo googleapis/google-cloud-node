@@ -4338,24 +4338,6 @@
                         return CreateTagTemplateRequest;
                     })();
     
-                    /**
-                     * EntryType enum.
-                     * @name google.cloud.datacatalog.v1beta1.EntryType
-                     * @enum {string}
-                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
-                     * @property {number} TABLE=2 TABLE value
-                     * @property {number} DATA_STREAM=3 DATA_STREAM value
-                     * @property {number} FILESET=4 FILESET value
-                     */
-                    v1beta1.EntryType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[2] = "TABLE"] = 2;
-                        values[valuesById[3] = "DATA_STREAM"] = 3;
-                        values[valuesById[4] = "FILESET"] = 4;
-                        return values;
-                    })();
-    
                     v1beta1.GetTagTemplateRequest = (function() {
     
                         /**
@@ -4541,6 +4523,24 @@
                         };
     
                         return GetTagTemplateRequest;
+                    })();
+    
+                    /**
+                     * EntryType enum.
+                     * @name google.cloud.datacatalog.v1beta1.EntryType
+                     * @enum {string}
+                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
+                     * @property {number} TABLE=2 TABLE value
+                     * @property {number} DATA_STREAM=3 DATA_STREAM value
+                     * @property {number} FILESET=4 FILESET value
+                     */
+                    v1beta1.EntryType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "TABLE"] = 2;
+                        values[valuesById[3] = "DATA_STREAM"] = 3;
+                        values[valuesById[4] = "FILESET"] = 4;
+                        return values;
                     })();
     
                     v1beta1.UpdateTagTemplateRequest = (function() {
