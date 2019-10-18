@@ -76,6 +76,8 @@ export interface Options {
    * Defaults to `logging.googleapis.com`.
    */
   apiEndpoint?: string;
+  // An attempt will be made to truncate messages larger than maxEntrySize.
+  maxEntrySize?: number;
 }
 
 export interface MonitoredResource {
