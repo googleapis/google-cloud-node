@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.5](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.4...v1.2.5) (2019-10-21)
+
+
+### Bug Fixes
+
+* **typescript:** make dnsName a required field ([#310](https://www.github.com/googleapis/nodejs-dns/issues/310)) ([887f42a](https://www.github.com/googleapis/nodejs-dns/commit/887f42a7a9389460cc566293d7525b94eccb39e4))
+
 ### [1.2.4](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.3...v1.2.4) (2019-10-16)
 
 
