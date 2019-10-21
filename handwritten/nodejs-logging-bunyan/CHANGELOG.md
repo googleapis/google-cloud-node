@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.2.3...v2.0.0) (2019-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* truncate log messages > 250,000 bytes (#365)
+
+### Features
+
+* truncate log messages > 250,000 bytes ([#365](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/365)) ([b712f12](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/b712f123e975b94cd3f096a0cdaf05951320ffac))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.2.2...v1.2.3) (2019-09-03)
 
 
