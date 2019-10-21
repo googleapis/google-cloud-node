@@ -52,7 +52,7 @@ export interface GetZoneCallback {
 }
 
 export interface CreateZoneRequest {
-  dnsName?: string;
+  dnsName: string;
   description?: string;
   name?: string;
 }
