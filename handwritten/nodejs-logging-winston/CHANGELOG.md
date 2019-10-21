@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v2.1.0...v3.0.0) (2019-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* logs now truncate to 256,000ish bytes by default (#404)
+
+### Features
+
+* logs now truncate to 256,000ish bytes by default ([#404](https://www.github.com/googleapis/nodejs-logging-winston/issues/404)) ([bea68ae](https://www.github.com/googleapis/nodejs-logging-winston/commit/bea68ae5fd22b2d1cf52b12832bb6288ac8d3570))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v2.0.1...v2.1.0) (2019-09-19)
 
 
