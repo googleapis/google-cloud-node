@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.4.0...v1.5.0) (2019-10-22)
+
+
+### Features
+
+* add is_internal option ([#312](https://www.github.com/googleapis/nodejs-monitoring/issues/312)) ([a2dbb0b](https://www.github.com/googleapis/nodejs-monitoring/commit/a2dbb0b8df925317f01a193038ad520f0c8c43e7))
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#313](https://www.github.com/googleapis/nodejs-monitoring/issues/313)) ([faf0efa](https://www.github.com/googleapis/nodejs-monitoring/commit/faf0efa5caa535d0cf16d10143a48a0c545e2074))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.3.0...v1.4.0) (2019-10-12)
 
 
