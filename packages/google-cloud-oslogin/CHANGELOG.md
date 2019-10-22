@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.0...v1.3.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#242](https://www.github.com/googleapis/nodejs-os-login/issues/242)) ([9fdab76](https://www.github.com/googleapis/nodejs-os-login/commit/9fdab764c004c047ce5c58d6014b8c55637acba7))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.2.0...v1.3.0) (2019-10-09)
 
 
