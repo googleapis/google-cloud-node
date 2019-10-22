@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.5.1](https://www.github.com/googleapis/nodejs-language/compare/v3.5.0...v3.5.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#313](https://www.github.com/googleapis/nodejs-language/issues/313)) ([8aeff90](https://www.github.com/googleapis/nodejs-language/commit/8aeff908bb5a1315d9e46f4b057bee3d20dc4f61))
+* **deps:** update dependency @google-cloud/storage to v4 ([#311](https://www.github.com/googleapis/nodejs-language/issues/311)) ([7178243](https://www.github.com/googleapis/nodejs-language/commit/71782436efbb3e987d8a3b31f2e5b3a485b777b2))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-language/compare/v3.4.0...v3.5.0) (2019-10-09)
 
 
