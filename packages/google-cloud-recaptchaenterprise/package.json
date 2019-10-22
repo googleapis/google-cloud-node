@@ -25,7 +25,7 @@
     "reCAPTCHA Enterprise API"
   ],
   "dependencies": {
-    "google-gax": "^1.6.3"
+    "google-gax": "^1.7.5"
   },
   "devDependencies": {
     "eslint": "^6.0.0",
