@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.0...v1.3.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#218](https://www.github.com/googleapis/nodejs-redis/issues/218)) ([6573f6b](https://www.github.com/googleapis/nodejs-redis/commit/6573f6b8ceed5bebfb595074cbc5af653bd0060e))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.2.0...v1.3.0) (2019-10-09)
 
 
