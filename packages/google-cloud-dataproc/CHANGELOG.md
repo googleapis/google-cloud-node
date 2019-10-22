@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.0...v1.4.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#261](https://www.github.com/googleapis/nodejs-dataproc/issues/261)) ([a22811c](https://www.github.com/googleapis/nodejs-dataproc/commit/a22811c5b742010b015d820588bc0c3510b08317))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.3.0...v1.4.0) (2019-10-09)
 
 
