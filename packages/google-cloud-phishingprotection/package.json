@@ -25,7 +25,7 @@
     "Phishing Protection API"
   ],
   "dependencies": {
-    "google-gax": "^1.6.3"
+    "google-gax": "^1.7.5"
   },
   "devDependencies": {
     "c8": "^5.0.1",
