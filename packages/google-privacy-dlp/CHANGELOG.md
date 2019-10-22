@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.6.0...v1.6.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#351](https://www.github.com/googleapis/nodejs-dlp/issues/351)) ([bd3d7de](https://www.github.com/googleapis/nodejs-dlp/commit/bd3d7de8bbaa8d3ce88420fd6ecf7d0483283bf8))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.5.0...v1.6.0) (2019-10-08)
 
 
