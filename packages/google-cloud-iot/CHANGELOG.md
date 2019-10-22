@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.2.0...v1.3.0) (2019-10-22)
+
+
+### Features
+
+* .d.ts for protos ([653713e](https://www.github.com/googleapis/nodejs-iot/commit/653713e2694a82db67a0bf2c810a70d761b65e29))
+* .d.ts for protos ([#207](https://www.github.com/googleapis/nodejs-iot/issues/207)) ([6bf34f4](https://www.github.com/googleapis/nodejs-iot/commit/6bf34f4445c7624235e0b83c3ef4423168467b89))
+
+
+### Bug Fixes
+
+* changes to retry logic ([68a1d6e](https://www.github.com/googleapis/nodejs-iot/commit/68a1d6ecb61c6c1af74e3890e7eee302d01db370))
+* use compatible version of google-gax ([b3a96bb](https://www.github.com/googleapis/nodejs-iot/commit/b3a96bb6afd654844e52953b2409fcc3f48148f5))
+* **deps:** bump google-gax to 1.7.5 ([#217](https://www.github.com/googleapis/nodejs-iot/issues/217)) ([7a6442e](https://www.github.com/googleapis/nodejs-iot/commit/7a6442ee0f8959ff10a9a8d646bb10e1c042c135))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.1.3...v1.2.0) (2019-09-16)
 
 
