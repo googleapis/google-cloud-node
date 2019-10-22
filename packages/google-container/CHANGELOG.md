@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.3.0...v1.3.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#240](https://www.github.com/googleapis/nodejs-cloud-container/issues/240)) ([fefaf21](https://www.github.com/googleapis/nodejs-cloud-container/commit/fefaf21f74c817f6b8b6b0ed7a19346c44878d96))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.2.0...v1.3.0) (2019-10-09)
 
 
