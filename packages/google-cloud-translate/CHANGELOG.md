@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [4.2.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.2.0...v4.2.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#345](https://www.github.com/googleapis/nodejs-translate/issues/345)) ([2c89fd0](https://www.github.com/googleapis/nodejs-translate/commit/2c89fd090d6557d0387c442eaef59069371e4095))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.3...v4.2.0) (2019-10-10)
 
 
