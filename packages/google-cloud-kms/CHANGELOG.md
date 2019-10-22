@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.5.0...v1.5.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#220](https://www.github.com/googleapis/nodejs-kms/issues/220)) ([f409971](https://www.github.com/googleapis/nodejs-kms/commit/f409971f331438c01316ef8536904d0e72d18243))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.4.0...v1.5.0) (2019-10-09)
 
 
