@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.5.0...v1.5.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#114](https://www.github.com/googleapis/nodejs-talent/issues/114)) ([2ea4371](https://www.github.com/googleapis/nodejs-talent/commit/2ea43715fff4d9a0704c8629b0ba04269834db0a))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.4.0...v1.5.0) (2019-10-09)
 
 
