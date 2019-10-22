@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.3.2](https://www.github.com/googleapis/nodejs-speech/compare/v3.3.1...v3.3.2) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#452](https://www.github.com/googleapis/nodejs-speech/issues/452)) ([3444982](https://www.github.com/googleapis/nodejs-speech/commit/3444982632cea8db967a189c2f88abba59cc6987))
+* **deps:** update dependency @google-cloud/storage to v4 ([#449](https://www.github.com/googleapis/nodejs-speech/issues/449)) ([98f5d6b](https://www.github.com/googleapis/nodejs-speech/commit/98f5d6b6962877b5c821accf199346fd48c4056f))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-speech/compare/v3.3.0...v3.3.1) (2019-10-09)
 
 
