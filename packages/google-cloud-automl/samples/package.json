@@ -18,7 +18,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/automl": "^1.5.0",
+    "@google-cloud/automl": "^1.7.3",
     "chai": "^4.2.0",
     "csv": "^5.1.1",
     "execa": "^3.0.0",
