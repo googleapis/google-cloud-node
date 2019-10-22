@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.5.0...v1.5.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#96](https://www.github.com/googleapis/nodejs-containeranalysis/issues/96)) ([4d03e9a](https://www.github.com/googleapis/nodejs-containeranalysis/commit/4d03e9a4b116753b28029d7e171b8dc4409938ac))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.4.0...v1.5.0) (2019-10-09)
 
 
