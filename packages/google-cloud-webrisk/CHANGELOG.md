@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.0...v1.3.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#68](https://www.github.com/googleapis/nodejs-web-risk/issues/68)) ([ecc7f6d](https://www.github.com/googleapis/nodejs-web-risk/commit/ecc7f6d7488f443b1edff545deac8a88ac730bbf))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.2.0...v1.3.0) (2019-10-09)
 
 
