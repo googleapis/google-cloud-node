@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.0...v2.2.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#158](https://www.github.com/googleapis/nodejs-security-center/issues/158)) ([16d27c8](https://www.github.com/googleapis/nodejs-security-center/commit/16d27c87ce951546163dd1e8a16e57daf2877093))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.1.0...v2.2.0) (2019-10-09)
 
 
