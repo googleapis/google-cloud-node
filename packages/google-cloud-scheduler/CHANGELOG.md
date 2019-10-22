@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.1...v1.3.2) (2019-10-22)
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#147](https://www.github.com/googleapis/nodejs-scheduler/issues/147)) ([9a7f9e7](https://www.github.com/googleapis/nodejs-scheduler/commit/9a7f9e7677d7c1384c1f6cc49e7700986c5a3301))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.0...v1.3.1) (2019-10-14)
 
 
