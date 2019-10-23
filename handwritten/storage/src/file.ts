@@ -2363,7 +2363,7 @@ class File extends ServiceObject<File> {
    *     When using "resumable", the header `X-Goog-Resumable: start` has
    *     to be sent when making a request with the signed URL.
    * @param {string} [config.version='v2'] The signing version to use, either
-   *     'v2' or 'v4.
+   *     'v2' or 'v4'.
    * @param {string} [config.cname] The cname for this bucket, i.e.,
    *     "https://cdn.example.com".
    * @param {string} [config.contentMd5] The MD5 digest value in base64. Just like
