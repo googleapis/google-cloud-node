@@ -35,8 +35,8 @@ async function main(
   const [translation] = await translate.translate(text, target);
   console.log(`Text: ${text}`);
   console.log(`Translation: ${translation}`);
+  // [END translate_quickstart]
 }
-// [END translate_quickstart]
 
 const args = process.argv.slice(2);
 main(...args).catch(console.error);
