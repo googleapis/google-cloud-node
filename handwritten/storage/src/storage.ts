@@ -53,7 +53,7 @@ export interface StorageOptions extends GoogleAuthOptions {
   promise?: typeof Promise;
   /**
    * The API endpoint of the service used to make requests.
-   * Defaults to `www.googleapis.com`.
+   * Defaults to `storage.googleapis.com`.
    */
   apiEndpoint?: string;
 }
@@ -373,7 +373,7 @@ export class Storage extends Service {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'www.googleapis.com';
+    options.apiEndpoint = options.apiEndpoint || 'storage.googleapis.com';
     const url =
       process.env.STORAGE_EMULATOR_HOST ||
       `https://${options.apiEndpoint}/storage/v1`;
