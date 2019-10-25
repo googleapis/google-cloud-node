@@ -76,7 +76,6 @@ npm install @google-cloud/translate
   const [translation] = await translate.translate(text, target);
   console.log(`Text: ${text}`);
   console.log(`Translation: ${translation}`);
-}
 
 ```
 
