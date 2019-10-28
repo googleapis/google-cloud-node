@@ -6,6 +6,773 @@
           "nested": {
             "translation": {
               "nested": {
+                "v3": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Translate.V3",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/translate/v3;translate",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TranslationServiceProto",
+                    "java_package": "com.google.cloud.translate.v3",
+                    "php_namespace": "Google\\Cloud\\Translate\\V3",
+                    "ruby_package": "Google::Cloud::Translate::V3"
+                  },
+                  "nested": {
+                    "TranslationService": {
+                      "options": {
+                        "(google.api.default_host)": "translate.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-translation"
+                      },
+                      "methods": {
+                        "TranslateText": {
+                          "requestType": "TranslateTextRequest",
+                          "responseType": "TranslateTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:translateText",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*}:translateText",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,model,mime_type,source_language_code,target_language_code,contents"
+                          }
+                        },
+                        "DetectLanguage": {
+                          "requestType": "DetectLanguageRequest",
+                          "responseType": "DetectLanguageResponse",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:detectLanguage",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*}:detectLanguage",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,model,mime_type,content"
+                          }
+                        },
+                        "GetSupportedLanguages": {
+                          "requestType": "GetSupportedLanguagesRequest",
+                          "responseType": "SupportedLanguages",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/supportedLanguages",
+                            "(google.api.http).additional_bindings.get": "/v3/{parent=projects/*}/supportedLanguages",
+                            "(google.api.method_signature)": "parent,model,display_language_code"
+                          }
+                        },
+                        "BatchTranslateText": {
+                          "requestType": "BatchTranslateTextRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:batchTranslateText",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "BatchTranslateResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchTranslateMetadata"
+                          }
+                        },
+                        "CreateGlossary": {
+                          "requestType": "CreateGlossaryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/glossaries",
+                            "(google.api.http).body": "glossary",
+                            "(google.api.method_signature)": "parent,glossary",
+                            "(google.longrunning.operation_info).response_type": "Glossary",
+                            "(google.longrunning.operation_info).metadata_type": "CreateGlossaryMetadata"
+                          }
+                        },
+                        "ListGlossaries": {
+                          "requestType": "ListGlossariesRequest",
+                          "responseType": "ListGlossariesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/glossaries",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetGlossary": {
+                          "requestType": "GetGlossaryRequest",
+                          "responseType": "Glossary",
+                          "options": {
+                            "(google.api.http).get": "/v3/{name=projects/*/locations/*/glossaries/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "DeleteGlossary": {
+                          "requestType": "DeleteGlossaryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v3/{name=projects/*/locations/*/glossaries/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DeleteGlossaryResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteGlossaryMetadata"
+                          }
+                        }
+                      }
+                    },
+                    "TranslateTextGlossaryConfig": {
+                      "fields": {
+                        "glossary": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ignoreCase": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TranslateTextRequest": {
+                      "fields": {
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "glossaryConfig": {
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TranslateTextResponse": {
+                      "fields": {
+                        "translations": {
+                          "rule": "repeated",
+                          "type": "Translation",
+                          "id": 1
+                        },
+                        "glossaryTranslations": {
+                          "rule": "repeated",
+                          "type": "Translation",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Translation": {
+                      "fields": {
+                        "translatedText": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "detectedLanguageCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "glossaryConfig": {
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DetectLanguageRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "content"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DetectedLanguage": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DetectLanguageResponse": {
+                      "fields": {
+                        "languages": {
+                          "rule": "repeated",
+                          "type": "DetectedLanguage",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetSupportedLanguagesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "displayLanguageCode": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SupportedLanguages": {
+                      "fields": {
+                        "languages": {
+                          "rule": "repeated",
+                          "type": "SupportedLanguage",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SupportedLanguage": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "supportSource": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "supportTarget": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "inputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "InputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "outputUriPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchTranslateTextRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetLanguageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "models": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputConfigs": {
+                          "rule": "repeated",
+                          "type": "InputConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "glossaries": {
+                          "keyType": "string",
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchTranslateMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "translatedCharacters": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "failedCharacters": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "totalCharacters": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLING": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "BatchTranslateResponse": {
+                      "fields": {
+                        "totalCharacters": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "translatedCharacters": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "failedCharacters": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "GlossaryInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Glossary": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/Glossary",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/glossaries/{glossary}"
+                      },
+                      "oneofs": {
+                        "languages": {
+                          "oneof": [
+                            "languagePair",
+                            "languageCodesSet"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "languagePair": {
+                          "type": "LanguageCodePair",
+                          "id": 3
+                        },
+                        "languageCodesSet": {
+                          "type": "LanguageCodesSet",
+                          "id": 4
+                        },
+                        "inputConfig": {
+                          "type": "GlossaryInputConfig",
+                          "id": 5
+                        },
+                        "entryCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "LanguageCodePair": {
+                          "fields": {
+                            "sourceLanguageCode": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "targetLanguageCode": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "LanguageCodesSet": {
+                          "fields": {
+                            "languageCodes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CreateGlossaryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "glossary": {
+                          "type": "Glossary",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetGlossaryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGlossaryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
+                        }
+                      }
+                    },
+                    "ListGlossariesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListGlossariesResponse": {
+                      "fields": {
+                        "glossaries": {
+                          "rule": "repeated",
+                          "type": "Glossary",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateGlossaryMetadata": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLING": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGlossaryMetadata": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLING": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGlossaryResponse": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
                 "v3beta1": {
                   "options": {
                     "cc_enable_arenas": true,

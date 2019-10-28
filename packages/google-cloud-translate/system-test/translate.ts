@@ -15,41 +15,48 @@
  */
 
 import * as assert from 'assert';
-import {Translate} from '../src';
+import {TranslationServiceClient} from '../src';
 
 const API_KEY = process.env.TRANSLATE_API_KEY;
 
 describe('translate', () => {
-  let translate = new Translate();
+  const translate = new TranslationServiceClient();
 
   describe('detecting language from input', () => {
     const INPUT = [
       {
-        input: 'Hello!',
+        content: 'Hello!',
         expectedLanguage: 'en',
       },
       {
-        input: '¡Hola!',
+        content: '¡Hola!',
         expectedLanguage: 'es',
       },
     ];
 
     it('should detect a langauge', async () => {
-      const input = INPUT.map(x => x.input);
-      const [results] = await translate.detect(input);
-      assert.strictEqual(results[0].language, INPUT[0].expectedLanguage);
-      assert.strictEqual(results[1].language, INPUT[1].expectedLanguage);
+      const projectId = await translate.getProjectId();
+      for (const input of INPUT) {
+        const [result] = await translate.detectLanguage({
+          content: input.content,
+          parent: `projects/${projectId}`,
+        });
+        assert.strictEqual(
+          result.languages![0].languageCode,
+          input.expectedLanguage
+        );
+      }
     });
   });
 
   describe('translations', () => {
     const INPUT = [
       {
-        input: 'Hello!',
+        content: 'Hello!',
         expectedTranslation: 'Hola',
       },
       {
-        input: 'How are you today?',
+        content: 'How are you today?',
         expectedTranslation: 'Cómo estás hoy',
       },
     ];
@@ -62,33 +69,32 @@ describe('translate', () => {
     }
 
     it('should translate input', async () => {
-      const input = INPUT.map(x => x.input);
-      let [results] = await translate.translate(input, 'es');
-      results = results.map(removeSymbols);
-      assert.strictEqual(results[0], INPUT[0].expectedTranslation);
-      assert.strictEqual(results[1], INPUT[1].expectedTranslation);
-    });
-
-    it('should translate input with from and to options', async () => {
-      const input = INPUT.map(x => x.input);
-      const opts = {
-        from: 'en',
-        to: 'es',
-      };
-      let [results] = await translate.translate(input, opts);
-      results = results.map(removeSymbols);
-      assert.strictEqual(results[0], INPUT[0].expectedTranslation);
-      assert.strictEqual(results[1], INPUT[1].expectedTranslation);
+      const projectId = await translate.getProjectId();
+      const [results] = await translate.translateText({
+        contents: INPUT.map(intput => intput.content),
+        sourceLanguageCode: 'en',
+        targetLanguageCode: 'es',
+        parent: `projects/${projectId}`,
+      });
+      const translations = results.translations!.map(translation =>
+        removeSymbols(translation.translatedText as string)
+      );
+      assert.strictEqual(translations[0], INPUT[0].expectedTranslation);
+      assert.strictEqual(translations[1], INPUT[1].expectedTranslation);
     });
 
     it('should autodetect HTML', async () => {
-      const input = '<body>' + INPUT[0].input + '</body>';
-      const opts = {
-        from: 'en',
-        to: 'es',
-      };
-      const [results] = await translate.translate(input, opts);
-      const translation = results.split(/<\/*body>/g)[1].trim();
+      const input = '<body>' + INPUT[0].content + '</body>';
+      const projectId = await translate.getProjectId();
+      const [results] = await translate.translateText({
+        contents: [input],
+        sourceLanguageCode: 'en',
+        targetLanguageCode: 'es',
+        parent: `projects/${projectId}`,
+      });
+      const translation = (results.translations![0].translatedText as string)
+        .split(/<\/*body>/g)[1]
+        .trim();
       assert.strictEqual(
         removeSymbols(translation),
         INPUT[0].expectedTranslation
@@ -98,38 +104,36 @@ describe('translate', () => {
 
   describe('supported languages', () => {
     it('should get a list of supported languages', async () => {
-      const [languages] = await translate.getLanguages();
-      const englishResult = languages.filter(l => l.code === 'en')[0];
+      const projectId = await translate.getProjectId();
+      const [result] = await translate.getSupportedLanguages({
+        parent: `projects/${projectId}`,
+      });
+      const englishResult = result.languages!.filter(
+        l => l.languageCode === 'en'
+      )[0];
       assert.deepStrictEqual(englishResult, {
-        code: 'en',
-        name: 'English',
+        languageCode: 'en',
+        displayName: '',
+        supportSource: true,
+        supportTarget: true,
       });
     });
 
-    it('should accept a target language', async () => {
-      const [languages] = await translate.getLanguages('es');
-      const englishResult = languages.filter(language => {
-        return language.code === 'en';
-      })[0];
-      assert.deepStrictEqual(englishResult, {
-        code: 'en',
-        name: 'inglés',
+    it('should accept displayLanguageCode, and show appropriate displayName', async () => {
+      const projectId = await translate.getProjectId();
+      const [result] = await translate.getSupportedLanguages({
+        parent: `projects/${projectId}`,
+        displayLanguageCode: 'es',
       });
-    });
-  });
-
-  describe('authentication', () => {
-    beforeEach(() => {
-      if (!API_KEY) {
-        throw new Error(
-          'The `TRANSLATE_API_KEY` environment variable is required!'
-        );
-      }
-      translate = new Translate({key: API_KEY});
-    });
-
-    it('should use an API key to authenticate', done => {
-      translate.getLanguages(done);
+      const englishResult = result.languages!.filter(
+        l => l.languageCode === 'en'
+      )[0];
+      assert.deepStrictEqual(englishResult, {
+        languageCode: 'en',
+        displayName: 'inglés',
+        supportSource: true,
+        supportTarget: true,
+      });
     });
   });
 });

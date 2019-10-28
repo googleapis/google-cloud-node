@@ -68,7 +68,7 @@ describe('Translate v2', () => {
   };
 
   // tslint:disable-next-line variable-name
-  let Translate: typeof orig.Translate;
+  let Translate: typeof orig.v2.Translate;
   // tslint:disable-next-line no-any
   let translate: any;
 

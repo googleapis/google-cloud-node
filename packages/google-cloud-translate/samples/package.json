@@ -11,7 +11,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha --recursive --timeout 90000"
+    "test": "mocha --recursive --timeout 150000"
   },
   "dependencies": {
     "@google-cloud/automl": "^1.0.0",
