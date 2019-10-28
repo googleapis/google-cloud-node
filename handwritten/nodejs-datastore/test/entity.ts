@@ -59,6 +59,19 @@ describe('entity', () => {
     });
   });
 
+  describe('isDsDoubleLike', () => {
+    it('should correctly identify a Double', () => {
+      const double = new entity.Double(0.42);
+      assert.strictEqual(entity.isDsDoubleLike(double), true);
+    });
+
+    it('should correctly identify a POJO Double', () => {
+      const double = new entity.Double(0.42);
+      const pojoDouble = JSON.parse(JSON.stringify(double));
+      assert.strictEqual(entity.isDsDoubleLike(pojoDouble), true);
+    });
+  });
+
   describe('Int', () => {
     it('should store the stringified value', () => {
       const value = 8;
@@ -82,6 +95,19 @@ describe('entity', () => {
     it('should correctly identify a primitive', () => {
       const primitiveInt = 42;
       assert.strictEqual(entity.isDsInt(primitiveInt), false);
+    });
+  });
+
+  describe('isDsIntLike', () => {
+    it('should correctly identify an Int', () => {
+      const int = new entity.Int(42);
+      assert.strictEqual(entity.isDsIntLike(int), true);
+    });
+
+    it('should correctly identify a POJO Int', () => {
+      const int = new entity.Int(42);
+      const pojoInt = JSON.parse(JSON.stringify(int));
+      assert.strictEqual(entity.isDsIntLike(pojoInt), true);
     });
   });
 
@@ -185,6 +211,15 @@ describe('entity', () => {
         path: ['ParentKind', 'name', 'Kind', 1, 'SubKind', new entity.Int('1')],
       });
       const key2 = new entity.Key(key.serialized);
+      assert.deepStrictEqual(key.serialized, key2.serialized);
+    });
+
+    it('should allow re-creating a Key from the JSON serialized path', () => {
+      const key = new entity.Key({
+        path: ['ParentKind', 'name', 'Kind', 1, 'SubKind', new entity.Int('1')],
+      });
+      const toPOJO = (v: object) => JSON.parse(JSON.stringify(v));
+      const key2 = new entity.Key(toPOJO(key.serialized));
       assert.deepStrictEqual(key.serialized, key2.serialized);
     });
   });

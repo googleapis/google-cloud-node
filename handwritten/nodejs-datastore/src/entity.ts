@@ -63,8 +63,14 @@ export namespace entity {
    * const aDouble = datastore.double(7.3);
    */
   export class Double {
+    type: string;
     value: number;
     constructor(value: number) {
+      /**
+       * @name Double#type
+       * @type {string}
+       */
+      this.type = 'DatastoreDouble';
       /**
        * @name Double#value
        * @type {number}
@@ -85,6 +91,23 @@ export namespace entity {
   }
 
   /**
+   * Check if a value is a Datastore Double object converted from JSON.
+   *
+   * @private
+   * @param {*} value
+   * @returns {boolean}
+   */
+  export function isDsDoubleLike(value: unknown) {
+    const maybeDsDouble = value as Double;
+    return (
+      isDsDouble(maybeDsDouble) ||
+      (is.object(maybeDsDouble) &&
+        is.number(maybeDsDouble.value) &&
+        maybeDsDouble.type === 'DatastoreDouble')
+    );
+  }
+
+  /**
    * Build a Datastore Int object. For long integers, a string can be provided.
    *
    * @class
@@ -96,8 +119,14 @@ export namespace entity {
    * const anInt = datastore.int(7);
    */
   export class Int {
+    type: string;
     value: string;
     constructor(value: number | string) {
+      /**
+       * @name Int#type
+       * @type {string}
+       */
+      this.type = 'DatastoreInt';
       /**
        * @name Int#value
        * @type {string}
@@ -115,6 +144,23 @@ export namespace entity {
    */
   export function isDsInt(value?: {}) {
     return value instanceof entity.Int;
+  }
+
+  /**
+   * Check if a value is a Datastore Int object converted from JSON.
+   *
+   * @private
+   * @param {*} value
+   * @returns {boolean}
+   */
+  export function isDsIntLike(value: unknown) {
+    const maybeDsInt = value as Int;
+    return (
+      isDsInt(maybeDsInt) ||
+      (is.object(maybeDsInt) &&
+        is.string(maybeDsInt.value) &&
+        maybeDsInt.type === 'DatastoreInt')
+    );
   }
 
   export interface Coordinates {
@@ -255,7 +301,11 @@ export namespace entity {
       if (options.path.length % 2 === 0) {
         const identifier = options.path.pop();
 
-        if (is.number(identifier) || isDsInt(identifier)) {
+        if (
+          is.number(identifier) ||
+          isDsInt(identifier) ||
+          isDsIntLike(identifier)
+        ) {
           this.id = (((identifier as {}) as Int).value || identifier) as string;
         } else if (is.string(identifier)) {
           this.name = identifier as string;
