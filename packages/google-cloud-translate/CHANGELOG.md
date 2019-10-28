@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [5.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.2.1...v5.0.0) (2019-10-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* this significantly changes TypeScript types and API surface from the v2 API. Reference samples/ for help making the migration from v2 to v3.
+
+### Features
+
+* v3 is now the default API surface ([#355](https://www.github.com/googleapis/nodejs-translate/issues/355)) ([91169b4](https://www.github.com/googleapis/nodejs-translate/commit/91169b4b141289a6890e1da1ba04765fbfdfd617))
+
+
+### Bug Fixes
+
+* remove extra brace in snippet ([#347](https://www.github.com/googleapis/nodejs-translate/issues/347)) ([6c1e95b](https://www.github.com/googleapis/nodejs-translate/commit/6c1e95bd99ec84c48e73b85203562b5f1cfa46d9))
+
 ### [4.2.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.2.0...v4.2.1) (2019-10-22)
 
 
