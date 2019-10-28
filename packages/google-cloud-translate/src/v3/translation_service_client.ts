@@ -19,11 +19,10 @@
 import * as gax from 'google-gax';
 import * as path from 'path';
 
-import * as packageJson from '../../package.json';
 import * as protosTypes from '../../protos/protos';
 import * as gapicConfig from './translation_service_client_config.json';
 
-const version = packageJson.version;
+const version = require('../../../package.json').version;
 
 export interface ClientOptions extends gax.GrpcClientOptions,
                                        gax.GoogleAuthOptions {
