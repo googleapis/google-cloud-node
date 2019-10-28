@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.0...v5.0.1) (2019-10-28)
+
+
+### Bug Fixes
+
+* package.json in build/ caused bad publish ([#361](https://www.github.com/googleapis/nodejs-translate/issues/361)) ([e9c8955](https://www.github.com/googleapis/nodejs-translate/commit/e9c8955f68d18562cab50b8d0500dd62005887f8))
+
 ## [5.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.2.1...v5.0.0) (2019-10-28)
 
 
