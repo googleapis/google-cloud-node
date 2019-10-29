@@ -98,6 +98,7 @@ has instructions for running the samples.
 | Automl Natural Language Model | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/automlNaturalLanguageModel.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/automlNaturalLanguageModel.js,samples/README.md) |
 | Automl Natural Language Predict | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/automlNaturalLanguagePredict.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/automlNaturalLanguagePredict.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Set Endpoint | [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
 
 
 

@@ -20,6 +20,7 @@ analysis, and syntax analysis. This API is part of the larger Cloud Machine Lear
   * [Automl Natural Language Model](#automl-natural-language-model)
   * [Automl Natural Language Predict](#automl-natural-language-predict)
   * [Quickstart](#quickstart)
+  * [Set Endpoint](#set-endpoint)
 
 ## Before you begin
 
@@ -125,6 +126,23 @@ __Usage:__
 
 
 `node quickstart.js`
+
+-----
+
+
+
+
+### Set Endpoint
+
+View the [source code]https://github.com/googleapis/nodejs-language/blob/master/samples/setEndpoint.js)
+
+[![Open in Cloud shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md)
+
+__Usage:__
+
+`node setEndpoint.js`
+
+-----
 
 
 
