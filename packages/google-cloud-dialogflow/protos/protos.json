@@ -5440,6 +5440,10 @@
                         "displayName": {
                           "type": "string",
                           "id": 2
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

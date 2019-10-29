@@ -23186,6 +23186,9 @@ export namespace google {
 
                     /** KnowledgeBase displayName */
                     displayName?: (string|null);
+
+                    /** KnowledgeBase languageCode */
+                    languageCode?: (string|null);
                 }
 
                 /** Represents a KnowledgeBase. */
@@ -23202,6 +23205,9 @@ export namespace google {
 
                     /** KnowledgeBase displayName. */
                     public displayName: string;
+
+                    /** KnowledgeBase languageCode. */
+                    public languageCode: string;
 
                     /**
                      * Creates a new KnowledgeBase instance using the specified properties.

@@ -30,6 +30,11 @@
  *   Required. The display name of the knowledge base. The name must be 1024
  *   bytes or less; otherwise, the creation request fails.
  *
+ * @property {string} languageCode
+ *   Language which represents the KnowledgeBase. When the KnowledgeBase is
+ *   created/updated, this is populated for all non en-us languages. If not
+ *   populated, the default language en-us applies.
+ *
  * @typedef KnowledgeBase
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.KnowledgeBase definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}

@@ -3159,9 +3159,11 @@ describe('KnowledgeBasesClient', () => {
       // Mock response
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
+      const languageCode = 'languageCode-412800396';
       const expectedResponse = {
         name: name2,
         displayName: displayName,
+        languageCode: languageCode,
       };
 
       // Mock Grpc layer
@@ -3226,9 +3228,11 @@ describe('KnowledgeBasesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const languageCode = 'languageCode-412800396';
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        languageCode: languageCode,
       };
 
       // Mock Grpc layer
@@ -3345,9 +3349,11 @@ describe('KnowledgeBasesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const languageCode = 'languageCode-412800396';
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        languageCode: languageCode,
       };
 
       // Mock Grpc layer
