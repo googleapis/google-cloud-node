@@ -17,7 +17,6 @@
   * [Detect.v1p3beta1](#detect.v1p3beta1)
   * [Face Detection](#face-detection)
   * [Quickstart](#quickstart)
-  * [Set Endpoint](#set-endpoint)
   * [Text Detection](#text-detection)
 
 ## Before you begin
@@ -110,22 +109,6 @@ __Usage:__
 
 
 -----
-
-
-
-
-### Set Endpoint
-
-View the [source code]https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js)
-
-[![Open in Cloud shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md)
-
-__Usage:__
-
-`node setEndpoint.js`
-
------
-
 
 
 
