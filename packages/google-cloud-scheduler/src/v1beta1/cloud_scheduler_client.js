@@ -132,7 +132,6 @@ class CloudSchedulerClient {
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -246,9 +245,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -361,9 +358,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -409,9 +404,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -466,14 +459,10 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name. For example:
+   *   Required. The location name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID`.
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The job to add. The user can optionally specify a name for the
+   *   Required. The job to add. The user can optionally specify a name for the
    *   job in name. name cannot be the same as an
    *   existing job. If a name is not specified then the system will
    *   generate a random unique name that will be returned
@@ -546,9 +535,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The new job properties. name must be specified.
+   *   Required. The new job properties. name must be specified.
    *
    *   Output only fields cannot be modified using UpdateJob.
    *   Any value specified for an output only field will be ignored.
@@ -611,9 +598,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -666,9 +651,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -728,9 +711,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -788,9 +769,7 @@ class CloudSchedulerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The job name. For example:
+   *   Required. The job name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -874,18 +853,6 @@ class CloudSchedulerClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Parse the jobName from a job resource.
    *
    * @param {String} jobName
@@ -939,17 +906,6 @@ class CloudSchedulerClient {
   matchLocationFromLocationName(locationName) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
-  }
-
-  /**
-   * Parse the projectName from a project resource.
-   *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

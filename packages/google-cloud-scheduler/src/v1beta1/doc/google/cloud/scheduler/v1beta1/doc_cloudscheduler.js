@@ -19,9 +19,7 @@
  * Request message for listing jobs using ListJobs.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name. For example:
+ *   Required. The location name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID`.
  *
  * @property {number} pageSize
@@ -78,9 +76,7 @@ const ListJobsResponse = {
  * Request message for GetJob.
  *
  * @property {string} name
- *   Required.
- *
- *   The job name. For example:
+ *   Required. The job name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
  *
  * @typedef GetJobRequest
@@ -95,15 +91,11 @@ const GetJobRequest = {
  * Request message for CreateJob.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name. For example:
+ *   Required. The location name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID`.
  *
  * @property {Object} job
- *   Required.
- *
- *   The job to add. The user can optionally specify a name for the
+ *   Required. The job to add. The user can optionally specify a name for the
  *   job in name. name cannot be the same as an
  *   existing job. If a name is not specified then the system will
  *   generate a random unique name that will be returned
@@ -123,9 +115,7 @@ const CreateJobRequest = {
  * Request message for UpdateJob.
  *
  * @property {Object} job
- *   Required.
- *
- *   The new job properties. name must be specified.
+ *   Required. The new job properties. name must be specified.
  *
  *   Output only fields cannot be modified using UpdateJob.
  *   Any value specified for an output only field will be ignored.
@@ -150,9 +140,7 @@ const UpdateJobRequest = {
  * DeleteJob.
  *
  * @property {string} name
- *   Required.
- *
- *   The job name. For example:
+ *   Required. The job name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
  *
  * @typedef DeleteJobRequest
@@ -167,9 +155,7 @@ const DeleteJobRequest = {
  * Request message for PauseJob.
  *
  * @property {string} name
- *   Required.
- *
- *   The job name. For example:
+ *   Required. The job name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
  *
  * @typedef PauseJobRequest
@@ -184,9 +170,7 @@ const PauseJobRequest = {
  * Request message for ResumeJob.
  *
  * @property {string} name
- *   Required.
- *
- *   The job name. For example:
+ *   Required. The job name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
  *
  * @typedef ResumeJobRequest
@@ -202,9 +186,7 @@ const ResumeJobRequest = {
  * RunJob.
  *
  * @property {string} name
- *   Required.
- *
- *   The job name. For example:
+ *   Required. The job name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
  *
  * @typedef RunJobRequest

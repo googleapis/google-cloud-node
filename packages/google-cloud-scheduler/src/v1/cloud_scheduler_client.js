@@ -132,7 +132,6 @@ class CloudSchedulerClient {
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -859,18 +858,6 @@ class CloudSchedulerClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Parse the jobName from a job resource.
    *
    * @param {String} jobName
@@ -924,17 +911,6 @@ class CloudSchedulerClient {
   matchLocationFromLocationName(locationName) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
-  }
-
-  /**
-   * Parse the projectName from a project resource.
-   *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 
