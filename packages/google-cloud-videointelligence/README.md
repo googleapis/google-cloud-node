@@ -62,7 +62,7 @@ npm install @google-cloud/video-intelligence
   const client = new videoIntelligence.VideoIntelligenceServiceClient();
 
   // The GCS uri of the video to analyze
-  const gcsUri = 'gs://nodejs-docs-samples-video/quickstart_short.mp4';
+  const gcsUri = 'gs://cloud-samples-data/video/cat.mp4';
 
   // Construct request
   const request = {
