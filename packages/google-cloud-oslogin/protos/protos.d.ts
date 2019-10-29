@@ -172,9 +172,6 @@ export namespace google {
 
                     /** LoginProfile sshPublicKeys */
                     sshPublicKeys?: ({ [k: string]: google.cloud.oslogin.common.ISshPublicKey }|null);
-
-                    /** LoginProfile suspended */
-                    suspended?: (boolean|null);
                 }
 
                 /** Represents a LoginProfile. */
@@ -194,9 +191,6 @@ export namespace google {
 
                     /** LoginProfile sshPublicKeys. */
                     public sshPublicKeys: { [k: string]: google.cloud.oslogin.common.ISshPublicKey };
-
-                    /** LoginProfile suspended. */
-                    public suspended: boolean;
 
                     /**
                      * Creates a new LoginProfile instance using the specified properties.
@@ -454,6 +448,12 @@ export namespace google {
 
                     /** GetLoginProfileRequest name */
                     name?: (string|null);
+
+                    /** GetLoginProfileRequest projectId */
+                    projectId?: (string|null);
+
+                    /** GetLoginProfileRequest systemId */
+                    systemId?: (string|null);
                 }
 
                 /** Represents a GetLoginProfileRequest. */
@@ -467,6 +467,12 @@ export namespace google {
 
                     /** GetLoginProfileRequest name. */
                     public name: string;
+
+                    /** GetLoginProfileRequest projectId. */
+                    public projectId: string;
+
+                    /** GetLoginProfileRequest systemId. */
+                    public systemId: string;
 
                     /**
                      * Creates a new GetLoginProfileRequest instance using the specified properties.
@@ -4037,6 +4043,12 @@ export namespace google {
 
             /** ServiceOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ServiceOptions .google.api.defaultHost */
+            ".google.api.defaultHost"?: (string|null);
+
+            /** ServiceOptions .google.api.oauthScopes */
+            ".google.api.oauthScopes"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -4139,6 +4151,9 @@ export namespace google {
 
             /** MethodOptions .google.api.http */
             ".google.api.http"?: (google.api.IHttpRule|null);
+
+            /** MethodOptions .google.api.methodSignature */
+            ".google.api.methodSignature"?: (string[]|null);
         }
 
         /** Represents a MethodOptions. */

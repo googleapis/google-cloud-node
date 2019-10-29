@@ -294,7 +294,6 @@
                          * @property {string|null} [name] LoginProfile name
                          * @property {Array.<google.cloud.oslogin.common.IPosixAccount>|null} [posixAccounts] LoginProfile posixAccounts
                          * @property {Object.<string,google.cloud.oslogin.common.ISshPublicKey>|null} [sshPublicKeys] LoginProfile sshPublicKeys
-                         * @property {boolean|null} [suspended] LoginProfile suspended
                          */
     
                         /**
@@ -339,14 +338,6 @@
                         LoginProfile.prototype.sshPublicKeys = $util.emptyObject;
     
                         /**
-                         * LoginProfile suspended.
-                         * @member {boolean} suspended
-                         * @memberof google.cloud.oslogin.v1beta.LoginProfile
-                         * @instance
-                         */
-                        LoginProfile.prototype.suspended = false;
-    
-                        /**
                          * Creates a new LoginProfile instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.oslogin.v1beta.LoginProfile
@@ -380,8 +371,6 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.oslogin.common.SshPublicKey.encode(message.sshPublicKeys[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
-                            if (message.suspended != null && message.hasOwnProperty("suspended"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.suspended);
                             return writer;
                         };
     
@@ -431,9 +420,6 @@
                                     key = reader.string();
                                     reader.pos++;
                                     message.sshPublicKeys[key] = $root.google.cloud.oslogin.common.SshPublicKey.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.suspended = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -492,9 +478,6 @@
                                         return "sshPublicKeys." + error;
                                 }
                             }
-                            if (message.suspended != null && message.hasOwnProperty("suspended"))
-                                if (typeof message.suspended !== "boolean")
-                                    return "suspended: boolean expected";
                             return null;
                         };
     
@@ -532,8 +515,6 @@
                                     message.sshPublicKeys[keys[i]] = $root.google.cloud.oslogin.common.SshPublicKey.fromObject(object.sshPublicKeys[keys[i]]);
                                 }
                             }
-                            if (object.suspended != null)
-                                message.suspended = Boolean(object.suspended);
                             return message;
                         };
     
@@ -554,10 +535,8 @@
                                 object.posixAccounts = [];
                             if (options.objects || options.defaults)
                                 object.sshPublicKeys = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.name = "";
-                                object.suspended = false;
-                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.posixAccounts && message.posixAccounts.length) {
@@ -571,8 +550,6 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.sshPublicKeys[keys2[j]] = $root.google.cloud.oslogin.common.SshPublicKey.toObject(message.sshPublicKeys[keys2[j]], options);
                             }
-                            if (message.suspended != null && message.hasOwnProperty("suspended"))
-                                object.suspended = message.suspended;
                             return object;
                         };
     
@@ -971,6 +948,8 @@
                          * @memberof google.cloud.oslogin.v1beta
                          * @interface IGetLoginProfileRequest
                          * @property {string|null} [name] GetLoginProfileRequest name
+                         * @property {string|null} [projectId] GetLoginProfileRequest projectId
+                         * @property {string|null} [systemId] GetLoginProfileRequest systemId
                          */
     
                         /**
@@ -995,6 +974,22 @@
                          * @instance
                          */
                         GetLoginProfileRequest.prototype.name = "";
+    
+                        /**
+                         * GetLoginProfileRequest projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.projectId = "";
+    
+                        /**
+                         * GetLoginProfileRequest systemId.
+                         * @member {string} systemId
+                         * @memberof google.cloud.oslogin.v1beta.GetLoginProfileRequest
+                         * @instance
+                         */
+                        GetLoginProfileRequest.prototype.systemId = "";
     
                         /**
                          * Creates a new GetLoginProfileRequest instance using the specified properties.
@@ -1022,6 +1017,10 @@
                                 writer = $Writer.create();
                             if (message.name != null && message.hasOwnProperty("name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.systemId);
                             return writer;
                         };
     
@@ -1058,6 +1057,12 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.systemId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1097,6 +1102,12 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                if (!$util.isString(message.systemId))
+                                    return "systemId: string expected";
                             return null;
                         };
     
@@ -1114,6 +1125,10 @@
                             var message = new $root.google.cloud.oslogin.v1beta.GetLoginProfileRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.systemId != null)
+                                message.systemId = String(object.systemId);
                             return message;
                         };
     
@@ -1130,10 +1145,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.projectId = "";
+                                object.systemId = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                object.systemId = message.systemId;
                             return object;
                         };
     
@@ -10591,6 +10613,8 @@
                  * @interface IServiceOptions
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
+                 * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
+                 * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
                  */
     
                 /**
@@ -10626,6 +10650,22 @@
                 ServiceOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * ServiceOptions .google.api.defaultHost.
+                 * @member {string} .google.api.defaultHost
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.defaultHost"] = "";
+    
+                /**
+                 * ServiceOptions .google.api.oauthScopes.
+                 * @member {string} .google.api.oauthScopes
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.oauthScopes"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -10654,6 +10694,10 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
                     return writer;
                 };
     
@@ -10695,6 +10739,12 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1049:
+                            message[".google.api.defaultHost"] = reader.string();
+                            break;
+                        case 1050:
+                            message[".google.api.oauthScopes"] = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -10743,6 +10793,12 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        if (!$util.isString(message[".google.api.defaultHost"]))
+                            return ".google.api.defaultHost: string expected";
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        if (!$util.isString(message[".google.api.oauthScopes"]))
+                            return ".google.api.oauthScopes: string expected";
                     return null;
                 };
     
@@ -10770,6 +10826,10 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.defaultHost"] != null)
+                        message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
+                    if (object[".google.api.oauthScopes"] != null)
+                        message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
                     return message;
                 };
     
@@ -10788,8 +10848,11 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object[".google.api.defaultHost"] = "";
+                        object[".google.api.oauthScopes"] = "";
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
@@ -10797,6 +10860,10 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
                     return object;
                 };
     
@@ -10824,6 +10891,7 @@
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
+                 * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
                  */
     
                 /**
@@ -10836,6 +10904,7 @@
                  */
                 function MethodOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -10875,6 +10944,14 @@
                 MethodOptions.prototype[".google.api.http"] = null;
     
                 /**
+                 * MethodOptions .google.api.methodSignature.
+                 * @member {Array.<string>} .google.api.methodSignature
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -10905,6 +10982,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork()).ldelim();
                     return writer;
@@ -10954,6 +11034,11 @@
                             break;
                         case 72295728:
                             message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                            break;
+                        case 1051:
+                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                message[".google.api.methodSignature"] = [];
+                            message[".google.api.methodSignature"].push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -11016,6 +11101,13 @@
                         if (error)
                             return ".google.api.http." + error;
                     }
+                    if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
+                        if (!Array.isArray(message[".google.api.methodSignature"]))
+                            return ".google.api.methodSignature: array expected";
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            if (!$util.isString(message[".google.api.methodSignature"][i]))
+                                return ".google.api.methodSignature: string[] expected";
+                    }
                     return null;
                 };
     
@@ -11062,6 +11154,13 @@
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
                     }
+                    if (object[".google.api.methodSignature"]) {
+                        if (!Array.isArray(object[".google.api.methodSignature"]))
+                            throw TypeError(".google.protobuf.MethodOptions..google.api.methodSignature: array expected");
+                        message[".google.api.methodSignature"] = [];
+                        for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
+                            message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
+                    }
                     return message;
                 };
     
@@ -11078,8 +11177,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.methodSignature"] = [];
+                    }
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
@@ -11093,6 +11194,11 @@
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                    }
+                    if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
+                        object[".google.api.methodSignature"] = [];
+                        for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
+                            object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options);

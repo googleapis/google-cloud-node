@@ -17,33 +17,41 @@
                   },
                   "nested": {
                     "OsLoginService": {
+                      "options": {
+                        "(google.api.default_host)": "oslogin.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly"
+                      },
                       "methods": {
                         "DeletePosixAccount": {
                           "requestType": "DeletePosixAccountRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta/{name=users/*/projects/*}"
+                            "(google.api.http).delete": "/v1beta/{name=users/*/projects/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "DeleteSshPublicKey": {
                           "requestType": "DeleteSshPublicKeyRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta/{name=users/*/sshPublicKeys/*}"
+                            "(google.api.http).delete": "/v1beta/{name=users/*/sshPublicKeys/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetLoginProfile": {
                           "requestType": "GetLoginProfileRequest",
                           "responseType": "LoginProfile",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{name=users/*}/loginProfile"
+                            "(google.api.http).get": "/v1beta/{name=users/*}/loginProfile",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetSshPublicKey": {
                           "requestType": "GetSshPublicKeyRequest",
                           "responseType": "google.cloud.oslogin.common.SshPublicKey",
                           "options": {
-                            "(google.api.http).get": "/v1beta/{name=users/*/sshPublicKeys/*}"
+                            "(google.api.http).get": "/v1beta/{name=users/*/sshPublicKeys/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ImportSshPublicKey": {
@@ -51,7 +59,8 @@
                           "responseType": "ImportSshPublicKeyResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta/{parent=users/*}:importSshPublicKey",
-                            "(google.api.http).body": "ssh_public_key"
+                            "(google.api.http).body": "ssh_public_key",
+                            "(google.api.method_signature)": "parent,ssh_public_key,project_id"
                           }
                         },
                         "UpdateSshPublicKey": {
@@ -59,7 +68,8 @@
                           "responseType": "google.cloud.oslogin.common.SshPublicKey",
                           "options": {
                             "(google.api.http).patch": "/v1beta/{name=users/*/sshPublicKeys/*}",
-                            "(google.api.http).body": "ssh_public_key"
+                            "(google.api.http).body": "ssh_public_key",
+                            "(google.api.method_signature)": "name,ssh_public_key,update_mask"
                           }
                         }
                       }
@@ -68,7 +78,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "posixAccounts": {
                           "rule": "repeated",
@@ -79,10 +92,6 @@
                           "keyType": "string",
                           "type": "google.cloud.oslogin.common.SshPublicKey",
                           "id": 3
-                        },
-                        "suspended": {
-                          "type": "bool",
-                          "id": 4
                         }
                       }
                     },
@@ -90,7 +99,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oslogin.googleapis.com/PosixAccount"
+                          }
                         }
                       }
                     },
@@ -98,7 +111,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oslogin.googleapis.com/SshPublicKey"
+                          }
                         }
                       }
                     },
@@ -106,7 +123,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "systemId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -114,7 +142,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oslogin.googleapis.com/SshPublicKey"
+                          }
                         }
                       }
                     },
@@ -122,11 +154,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "oslogin.googleapis.com/SshPublicKey"
+                          }
                         },
                         "sshPublicKey": {
                           "type": "google.cloud.oslogin.common.SshPublicKey",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "projectId": {
                           "type": "string",
@@ -146,11 +184,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oslogin.googleapis.com/SshPublicKey"
+                          }
                         },
                         "sshPublicKey": {
                           "type": "google.cloud.oslogin.common.SshPublicKey",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -366,6 +411,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             },
             "fieldBehavior": {
               "rule": "repeated",
