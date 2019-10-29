@@ -240,7 +240,7 @@ class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   A reference to the POSIX account to update. POSIX accounts are identified
+   *   Required. A reference to the POSIX account to update. POSIX accounts are identified
    *   by the project ID they are associated with. A reference to the POSIX
    *   account is in format `users/{user}/projects/{project}`.
    * @param {Object} [options]
@@ -288,7 +288,7 @@ class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The fingerprint of the public key to update. Public keys are identified by
+   *   Required. The fingerprint of the public key to update. Public keys are identified by
    *   their SHA-256 fingerprint. The fingerprint of the public key is in format
    *   `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {Object} [options]
@@ -337,7 +337,11 @@ class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The unique ID for the user in format `users/{user}`.
+   *   Required. The unique ID for the user in format `users/{user}`.
+   * @param {string} [request.projectId]
+   *   The project ID of the Google Cloud Platform project.
+   * @param {string} [request.systemId]
+   *   A system ID for filtering the results of the request.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -391,7 +395,7 @@ class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The fingerprint of the public key to retrieve. Public keys are identified
+   *   Required. The fingerprint of the public key to retrieve. Public keys are identified
    *   by their SHA-256 fingerprint. The fingerprint of the public key is in
    *   format `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {Object} [options]
@@ -451,7 +455,7 @@ class OsLoginServiceClient {
    * @param {string} request.parent
    *   The unique ID for the user in format `users/{user}`.
    * @param {Object} request.sshPublicKey
-   *   The SSH public key and expiration time.
+   *   Required. The SSH public key and expiration time.
    *
    *   This object should have the same structure as [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}
    * @param {string} [request.projectId]
@@ -515,11 +519,11 @@ class OsLoginServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The fingerprint of the public key to update. Public keys are identified by
+   *   Required. The fingerprint of the public key to update. Public keys are identified by
    *   their SHA-256 fingerprint. The fingerprint of the public key is in format
    *   `users/{user}/sshPublicKeys/{fingerprint}`.
    * @param {Object} request.sshPublicKey
-   *   The SSH public key and expiration time.
+   *   Required. The SSH public key and expiration time.
    *
    *   This object should have the same structure as [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}
    * @param {Object} [request.updateMask]

@@ -164,10 +164,8 @@ describe('OsLoginServiceClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
-      const suspended = false;
       const expectedResponse = {
         name: name2,
-        suspended: suspended,
       };
 
       // Mock Grpc layer

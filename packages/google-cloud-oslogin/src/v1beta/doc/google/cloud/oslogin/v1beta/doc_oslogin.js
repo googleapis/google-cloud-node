@@ -20,7 +20,7 @@
  * Google Compute Engine.
  *
  * @property {string} name
- *   The primary email address that uniquely identifies the user.
+ *   Required. A unique user ID.
  *
  * @property {Object[]} posixAccounts
  *   The list of POSIX accounts associated with the user.
@@ -29,10 +29,6 @@
  *
  * @property {Object.<string, Object>} sshPublicKeys
  *   A map from SSH public key fingerprint to the associated key object.
- *
- * @property {boolean} suspended
- *   Indicates if the user is suspended. A suspended user cannot log in but
- *   their profile information is retained.
  *
  * @typedef LoginProfile
  * @memberof google.cloud.oslogin.v1beta
@@ -46,7 +42,7 @@ const LoginProfile = {
  * A request message for deleting a POSIX account entry.
  *
  * @property {string} name
- *   A reference to the POSIX account to update. POSIX accounts are identified
+ *   Required. A reference to the POSIX account to update. POSIX accounts are identified
  *   by the project ID they are associated with. A reference to the POSIX
  *   account is in format `users/{user}/projects/{project}`.
  *
@@ -62,7 +58,7 @@ const DeletePosixAccountRequest = {
  * A request message for deleting an SSH public key.
  *
  * @property {string} name
- *   The fingerprint of the public key to update. Public keys are identified by
+ *   Required. The fingerprint of the public key to update. Public keys are identified by
  *   their SHA-256 fingerprint. The fingerprint of the public key is in format
  *   `users/{user}/sshPublicKeys/{fingerprint}`.
  *
@@ -78,7 +74,13 @@ const DeleteSshPublicKeyRequest = {
  * A request message for retrieving the login profile information for a user.
  *
  * @property {string} name
- *   The unique ID for the user in format `users/{user}`.
+ *   Required. The unique ID for the user in format `users/{user}`.
+ *
+ * @property {string} projectId
+ *   The project ID of the Google Cloud Platform project.
+ *
+ * @property {string} systemId
+ *   A system ID for filtering the results of the request.
  *
  * @typedef GetLoginProfileRequest
  * @memberof google.cloud.oslogin.v1beta
@@ -92,7 +94,7 @@ const GetLoginProfileRequest = {
  * A request message for retrieving an SSH public key.
  *
  * @property {string} name
- *   The fingerprint of the public key to retrieve. Public keys are identified
+ *   Required. The fingerprint of the public key to retrieve. Public keys are identified
  *   by their SHA-256 fingerprint. The fingerprint of the public key is in
  *   format `users/{user}/sshPublicKeys/{fingerprint}`.
  *
@@ -111,7 +113,7 @@ const GetSshPublicKeyRequest = {
  *   The unique ID for the user in format `users/{user}`.
  *
  * @property {Object} sshPublicKey
- *   The SSH public key and expiration time.
+ *   Required. The SSH public key and expiration time.
  *
  *   This object should have the same structure as [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}
  *
@@ -146,12 +148,12 @@ const ImportSshPublicKeyResponse = {
  * A request message for updating an SSH public key.
  *
  * @property {string} name
- *   The fingerprint of the public key to update. Public keys are identified by
+ *   Required. The fingerprint of the public key to update. Public keys are identified by
  *   their SHA-256 fingerprint. The fingerprint of the public key is in format
  *   `users/{user}/sshPublicKeys/{fingerprint}`.
  *
  * @property {Object} sshPublicKey
- *   The SSH public key and expiration time.
+ *   Required. The SSH public key and expiration time.
  *
  *   This object should have the same structure as [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}
  *
