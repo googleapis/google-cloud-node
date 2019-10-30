@@ -548,6 +548,28 @@ class Bucket extends ServiceObject {
    *   .on('data', function(file) {
    *     this.end();
    *   });
+   *
+   * //-
+   * // If you're filtering files with a delimiter, you should use
+   * // {@link Bucket#getFiles} and set `autoPaginate: false` in order to
+   * // preserve the `apiResponse` argument.
+   * //-
+   * const prefixes = [];
+   *
+   * function callback(err, files, nextQuery, apiResponse) {
+   *   prefixes = prefixes.concat(apiResponse.prefixes);
+   *
+   *   if (nextQuery) {
+   *     bucket.getFiles(nextQuery, callback);
+   *   } else {
+   *     // prefixes = The finished array of prefixes.
+   *   }
+   * }
+   *
+   * bucket.getFiles({
+   *   autoPaginate: false,
+   *   delimiter: '/'
+   * }, callback);
    */
   getFilesStream: Function;
 
@@ -2074,6 +2096,37 @@ class Bucket extends ServiceObject {
    * //-
    * bucket.getFiles().then(function(data) {
    *   const files = data[0];
+   * });
+   *
+   * @example <caption><h6>Simulating a File System</h6><p>With `autoPaginate: false`, it's possible to iterate over files which incorporate a common structure using a delimiter.</p><p>Consider the following remote objects:</p><ol><li>"a"</li><li>"a/b/c/d"</li><li>"b/d/e"</li></ol><p>Using a delimiter of `/` will return a single file, "a".</p><p>`apiResponse.prefixes` will return the "sub-directories" that were found:</p><ol><li>"a/"</li><li>"b/"</li></ol></caption>
+   * bucket.getFiles({
+   *   autoPaginate: false,
+   *   delimiter: '/'
+   * }, function(err, files, nextQuery, apiResponse) {
+   *   // files = [
+   *   //   {File} // File object for file "a"
+   *   // ]
+   *
+   *   // apiResponse.prefixes = [
+   *   //   'a/',
+   *   //   'b/'
+   *   // ]
+   * });
+   *
+   * @example <caption>Using prefixes, it's now possible to simulate a file system with follow-up requests.</caption>
+   * bucket.getFiles({
+   *   autoPaginate: false,
+   *   delimiter: '/',
+   *   prefix: 'a/'
+   * }, function(err, files, nextQuery, apiResponse) {
+   *   // No files found within "directory" a.
+   *   // files = []
+   *
+   *   // However, a "sub-directory" was found.
+   *   // This prefix can be used to continue traversing the "file system".
+   *   // apiResponse.prefixes = [
+   *   //   'a/b/'
+   *   // ]
    * });
    *
    * @example <caption>include:samples/files.js</caption>
