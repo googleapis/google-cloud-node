@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v3.0.0...v3.0.1) (2019-10-30)
+
+
+### Bug Fixes
+
+* remove @google-cloud/common retries for CreateProfile and UpdateProfile requests ([#555](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/555)) ([09ef74d](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/09ef74d9a9a84d4c3a04edd9f93013cf8c56425b))
+* **deps:** update dependency pprof to v1.2.0 ([#557](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/557)) ([664bf0e](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/664bf0e948cfb898702a2c4198e8d30f0699862c))
+
 ## v3.0.0
 
 09-17-2019 10:42 PDT
@@ -113,4 +121,3 @@
 No changes since last release.
 
 Confirming that we can use [releasetool](https://github.com/googleapis/releasetool) to release the agent going forward.
-
