@@ -747,7 +747,7 @@ describe('storage', () => {
     });
   });
 
-  describe('bucket policy only', () => {
+  describe('uniform bucket-level access', () => {
     let bucket: Bucket;
 
     const customAcl = {
@@ -760,10 +760,10 @@ describe('storage', () => {
       return bucket.create();
     };
 
-    const setBucketPolicyOnly = (bucket: Bucket, enabled: boolean) =>
+    const setUniformBucketLevelAccess = (bucket: Bucket, enabled: boolean) =>
       bucket.setMetadata({
         iamConfiguration: {
-          bucketPolicyOnly: {
+          uniformBucketLevelAccess: {
             enabled,
           },
         },
@@ -773,7 +773,7 @@ describe('storage', () => {
       before(createBucket);
 
       it('can be written to the bucket by project owner w/o configuration', async () => {
-        await setBucketPolicyOnly(bucket, true);
+        await setUniformBucketLevelAccess(bucket, true);
         const file = bucket.file('file');
         return assert.doesNotReject(() => file.save('data'));
       });
@@ -782,15 +782,14 @@ describe('storage', () => {
     describe('disables file ACL', () => {
       let file: File;
 
-      const validateBucketPolicyOnlyEnabledError = (err: ApiError) => {
-        assert(err.message.match(/Bucket Policy Only is enabled/));
+      const validateUniformBucketLevelAccessEnabledError = (err: ApiError) => {
         assert.strictEqual(err.code, 400);
         return true;
       };
 
       before(async () => {
         await createBucket();
-        await setBucketPolicyOnly(bucket, true);
+        await setUniformBucketLevelAccess(bucket, true);
 
         file = bucket.file('file');
         await file.save('data');
@@ -799,27 +798,27 @@ describe('storage', () => {
       it('should fail to get file ACL', () => {
         return assert.rejects(
           () => file.acl.get(),
-          validateBucketPolicyOnlyEnabledError
+          validateUniformBucketLevelAccessEnabledError
         );
       });
 
       it('should fail to update file ACL', () => {
         return assert.rejects(
           () => file.acl.update(customAcl),
-          validateBucketPolicyOnlyEnabledError
+          validateUniformBucketLevelAccessEnabledError
         );
       });
     });
 
-    describe('preserves bucket/file ACL over bucket policy only on/off', () => {
+    describe('preserves bucket/file ACL over uniform bucket-level access on/off', () => {
       beforeEach(createBucket);
 
       it('should preserve default bucket ACL', async () => {
         await bucket.acl.default.update(customAcl);
         const [aclBefore] = await bucket.acl.default.get();
 
-        await setBucketPolicyOnly(bucket, true);
-        await setBucketPolicyOnly(bucket, false);
+        await setUniformBucketLevelAccess(bucket, true);
+        await setUniformBucketLevelAccess(bucket, false);
 
         const [aclAfter] = await bucket.acl.default.get();
         assert.deepStrictEqual(aclAfter, aclBefore);
@@ -832,8 +831,8 @@ describe('storage', () => {
         await file.acl.update(customAcl);
         const [aclBefore] = await file.acl.get();
 
-        await setBucketPolicyOnly(bucket, true);
-        await setBucketPolicyOnly(bucket, false);
+        await setUniformBucketLevelAccess(bucket, true);
+        await setUniformBucketLevelAccess(bucket, false);
 
         const [aclAfter] = await file.acl.get();
         assert.deepStrictEqual(aclAfter, aclBefore);

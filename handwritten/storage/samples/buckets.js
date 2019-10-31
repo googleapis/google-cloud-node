@@ -115,8 +115,8 @@ async function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
   // [END storage_set_bucket_default_kms_key]
 }
 
-async function enableBucketPolicyOnly(bucketName) {
-  // [START storage_enable_bucket_policy_only]
+async function enableUniformBucketLevelAccess(bucketName) {
+  // [START storage_enable_uniform_bucket_level_access]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
@@ -128,21 +128,21 @@ async function enableBucketPolicyOnly(bucketName) {
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
-  // Enables Bucket Policy Only for the bucket
+  // Enables uniform bucket-level access for the bucket
   await storage.bucket(bucketName).setMetadata({
     iamConfiguration: {
-      bucketPolicyOnly: {
+      uniformBucketLevelAccess: {
         enabled: true,
       },
     },
   });
 
-  console.log(`Bucket Policy Only was enabled for ${bucketName}.`);
-  // [END storage_enable_bucket_policy_only]
+  console.log(`Uniform bucket-level access was enabled for ${bucketName}.`);
+  // [END storage_enable_uniform_bucket_level_access]
 }
 
-async function disableBucketPolicyOnly(bucketName) {
-  // [START storage_disable_bucket_policy_only]
+async function disableUniformBucketLevelAccess(bucketName) {
+  // [START storage_disable_uniform_bucket_level_access]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
@@ -154,21 +154,21 @@ async function disableBucketPolicyOnly(bucketName) {
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
-  // Disables Bucket Policy Only for the bucket
+  // Disables uniform bucket-level access for the bucket
   await storage.bucket(bucketName).setMetadata({
     iamConfiguration: {
-      bucketPolicyOnly: {
+      uniformBucketLevelAccess: {
         enabled: false,
       },
     },
   });
 
-  console.log(`Bucket Policy Only was disabled for ${bucketName}.`);
-  // [END storage_disable_bucket_policy_only]
+  console.log(`Uniform bucket-level access was disabled for ${bucketName}.`);
+  // [END storage_disable_uniform_bucket_level_access]
 }
 
-async function getBucketPolicyOnly(bucketName) {
-  // [START storage_get_bucket_policy_only]
+async function getUniformBucketLevelAccess(bucketName) {
+  // [START storage_get_uniform_bucket_level_access]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
@@ -180,17 +180,22 @@ async function getBucketPolicyOnly(bucketName) {
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
-  // Gets Bucket Metadata and checks if BucketPolicyOnly is enabled.
+  // Gets Bucket Metadata and checks if uniform bucket-level access is enabled.
   const [metadata] = await storage.bucket(bucketName).getMetadata();
 
   if (metadata.iamConfiguration) {
-    const bucketPolicyOnly = metadata.iamConfiguration.bucketPolicyOnly;
-    console.log(`Bucket Policy Only is enabled for ${bucketName}.`);
-    console.log(`Bucket will be locked on ${bucketPolicyOnly.lockedTime}.`);
+    const uniformBucketLevelAccess =
+      metadata.iamConfiguration.uniformBucketLevelAccess;
+    console.log(`Uniform bucket-level access is enabled for ${bucketName}.`);
+    console.log(
+      `Bucket will be locked on ${uniformBucketLevelAccess.lockedTime}.`
+    );
   } else {
-    console.log(`Bucket Policy Only is not enabled for ${bucketName}.`);
+    console.log(
+      `Uniform bucket-level access is not enabled for ${bucketName}.`
+    );
   }
-  // [END storage_get_bucket_policy_only]
+  // [END storage_get_uniform_bucket_level_access]
 }
 
 require(`yargs`)
@@ -206,22 +211,22 @@ require(`yargs`)
     opts => enableDefaultKMSKey(opts.bucket, opts.defaultKmsKeyName)
   )
   .command(
-    `enable-bucket-policy-only <bucket>`,
-    `Enables Bucket Policy Only for the specified bucket.`,
+    `enable-uniform-bucket-level-access <bucket>`,
+    `Enables uniform bucket-level access for the specified bucket.`,
     {},
-    opts => enableBucketPolicyOnly(opts.bucket)
+    opts => enableUniformBucketLevelAccess(opts.bucket)
   )
   .command(
-    `disable-bucket-policy-only <bucket>`,
-    `Disables Bucket Policy Only for the specified bucket.`,
+    `disable-uniform-bucket-level-access <bucket>`,
+    `Disables uniform bucket-level access for the specified bucket.`,
     {},
-    opts => disableBucketPolicyOnly(opts.bucket)
+    opts => disableUniformBucketLevelAccess(opts.bucket)
   )
   .command(
-    `get-bucket-policy-only <bucket>`,
-    `Get Bucket Policy Only metadata for the specified bucket.`,
+    `get-uniform-bucket-level-access <bucket>`,
+    `Get uniform bucket-level access metadata for the specified bucket.`,
     {},
-    opts => getBucketPolicyOnly(opts.bucket)
+    opts => getUniformBucketLevelAccess(opts.bucket)
   )
   .command(`delete <bucket>`, `Deletes a bucket.`, {}, opts =>
     deleteBucket(opts.bucket)
@@ -236,16 +241,16 @@ require(`yargs`)
     `Sets the default KMS key for my-bucket.`
   )
   .example(
-    `node $0 enable-bucket-policy-only my-bucket`,
-    `Enables Bucket Policy Only for my-bucket.`
+    `node $0 enable-uniform-bucket-level-access my-bucket`,
+    `Enables uniform bucket-level access for my-bucket.`
   )
   .example(
-    `node $0 disable-bucket-policy-only my-bucket`,
-    `Disables Bucket Policy Only for my-bucket.`
+    `node $0 disable-uniform-bucket-level-access my-bucket`,
+    `Disables uniform bucket-level access for my-bucket.`
   )
   .example(
-    `node $0 get-bucket-policy-only my-bucket`,
-    `Get Bucket Policy Only metadata for my-bucket.`
+    `node $0 get-uniform-bucket-level-access my-bucket`,
+    `Get uniform bucket-level access metadata for my-bucket.`
   )
   .example(`node $0 delete my-bucket`, `Deletes a bucket named "my-bucket".`)
   .wrap(120)
