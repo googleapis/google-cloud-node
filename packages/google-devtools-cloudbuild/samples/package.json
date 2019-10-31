@@ -12,12 +12,13 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha system-test --timeout=800000"
+    "test": "c8 mocha system-test --timeout=800000"
   },
   "dependencies": {
     "@google-cloud/cloudbuild": "^0.1.0"
   },
   "devDependencies": {
+    "c8": "^6.0.1",
     "chai": "^4.2.0",
     "mocha": "^6.0.0"
   }

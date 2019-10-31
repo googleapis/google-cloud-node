@@ -1,0 +1,5 @@
+body: |-
+        ### Using TypeScript
+
+        `@google-cloud/cloudbuild` provides TypeScript type definitions.
+

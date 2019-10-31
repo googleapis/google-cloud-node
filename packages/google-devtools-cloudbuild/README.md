@@ -67,21 +67,39 @@ async function quickstart(
   const cb = new CloudBuildClient();
 
   // Starts a build against the branch provided.
-  const request = {
+  const [resp] = await cb.runBuildTrigger({
     projectId,
     triggerId,
     source: {
-      projectId: projectId,
+      projectId,
       dir: './',
       branchName,
     },
-  };
-  await cb.runBuildTrigger(request);
+  });
   console.info(`triggered build for ${triggerId}`);
+  const [build] = await resp.promise();
+
+  const STATUS_LOOKUP = [
+    'UNKNOWN',
+    'Queued',
+    'Working',
+    'Success',
+    'Failure',
+    'Error',
+    'Timeout',
+    'Cancelled',
+  ];
+  for (const step of build.steps) {
+    console.info(
+      `step:\n\tname: ${step.name}\n\tstatus: ${STATUS_LOOKUP[build.status]}`
+    );
+  }
 }
 
 ```
+### Using TypeScript
 
+`@google-cloud/cloudbuild` provides TypeScript type definitions.
 
 
 ## Samples

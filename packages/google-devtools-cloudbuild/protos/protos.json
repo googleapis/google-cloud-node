@@ -26,7 +26,9 @@
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/builds",
                             "(google.api.http).body": "build",
-                            "(google.api.method_signature)": "project_id,build"
+                            "(google.api.method_signature)": "project_id,build",
+                            "(google.longrunning.operation_info).response_type": "Build",
+                            "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
                           }
                         },
                         "GetBuild": {
@@ -60,7 +62,9 @@
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/builds/{id}:retry",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "project_id,id"
+                            "(google.api.method_signature)": "project_id,id",
+                            "(google.longrunning.operation_info).response_type": "Build",
+                            "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
                           }
                         },
                         "CreateBuildTrigger": {
@@ -111,7 +115,9 @@
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/triggers/{trigger_id}:run",
                             "(google.api.http).body": "source",
-                            "(google.api.method_signature)": "project_id,trigger_id,source"
+                            "(google.api.method_signature)": "project_id,trigger_id,source",
+                            "(google.longrunning.operation_info).response_type": "Build",
+                            "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
                           }
                         },
                         "CreateWorkerPool": {
@@ -779,7 +785,10 @@
                       "fields": {
                         "installationId": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "owner": {
                           "type": "string",
