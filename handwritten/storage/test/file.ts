@@ -168,6 +168,9 @@ describe('File', () => {
   let directoryFile: any;
 
   // tslint:disable-next-line: no-any
+  let specialCharsFile: any;
+
+  // tslint:disable-next-line: no-any
   let STORAGE: any;
   // tslint:disable-next-line: no-any
   let BUCKET: any;
@@ -214,6 +217,9 @@ describe('File', () => {
 
     directoryFile = new File(BUCKET, 'directory/file.jpg');
     directoryFile.request = util.noop;
+
+    specialCharsFile = new File(BUCKET, "special/azAZ!*'()*%/file.jpg");
+    specialCharsFile.request = util.noop;
 
     createGunzipOverride = null;
     handleRespOverride = null;
@@ -2899,7 +2905,7 @@ describe('File', () => {
 
       it('should URI encode file names', done => {
         directoryFile.getSignedUrl(CONFIG, (err: Error, signedUrl: string) => {
-          assert(signedUrl.includes(encodeURIComponent(directoryFile.name)));
+          assert(signedUrl.includes(directoryFile.name));
           done();
         });
       });
@@ -3010,9 +3016,22 @@ describe('File', () => {
 
       it('should URI encode file names', done => {
         directoryFile.getSignedUrl(CONFIG, (err: Error, signedUrl: string) => {
-          assert(signedUrl.includes(encodeURIComponent(directoryFile.name)));
+          assert(signedUrl.includes(directoryFile.name));
           done();
         });
+      });
+
+      it('should URI encode file name with special characters', done => {
+        specialCharsFile.getSignedUrl(
+          CONFIG,
+          (err: Error, signedUrl: string) => {
+            assert.ifError(err);
+            assert(
+              signedUrl.includes('special/azAZ%21%2A%27%28%29%2A%25/file.jpg')
+            );
+            done();
+          }
+        );
       });
 
       it('should add response-content-type parameter', done => {

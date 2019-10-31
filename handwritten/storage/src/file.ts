@@ -41,7 +41,6 @@ import {Duplex, Writable, Readable} from 'stream';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as xdgBasedir from 'xdg-basedir';
-import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 import * as url from 'url';
 import * as http from 'http';
@@ -56,7 +55,7 @@ import {
   DuplexifyConstructor,
 } from '@google-cloud/common/build/src/util';
 const duplexify: DuplexifyConstructor = require('duplexify');
-import {normalize, objectEntries} from './util';
+import {normalize, objectEntries, encodeURI, qsStringify} from './util';
 import {GaxiosError, Headers, request as gaxiosRequest} from 'gaxios';
 
 export type GetExpirationDateResponse = [Date];
@@ -2490,7 +2489,7 @@ class File extends ServiceObject<File> {
       throw new Error('The action is not provided or invalid.');
     }
 
-    const name = encodeURIComponent(this.name);
+    const name = encodeURI(this.name, false);
     const resource = `/${this.bucket.name}/${name}`;
 
     const version = cfg.version || DEFAULT_SIGNING_VERSION;
@@ -2533,7 +2532,7 @@ class File extends ServiceObject<File> {
       const signedUrl = new url.URL(config.cname || STORAGE_DOWNLOAD_BASE_URL);
       signedUrl.pathname = config.cname ? name : `${this.bucket.name}/${name}`;
       // tslint:disable-next-line:no-any
-      signedUrl.search = querystring.stringify(query as any);
+      signedUrl.search = qsStringify(query as any);
 
       callback!(null, signedUrl.href);
     }, callback!);
@@ -2634,7 +2633,7 @@ class File extends ServiceObject<File> {
       };
 
       // tslint:disable-next-line:no-any
-      const canonicalQueryParams = querystring.stringify(queryParams as any);
+      const canonicalQueryParams = qsStringify(queryParams as any);
 
       const canonicalRequest = [
         config.method,

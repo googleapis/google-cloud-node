@@ -53,6 +53,19 @@
     },
 
     {
+        "description": "Slashes in object name should not be URL encoded",
+        "bucket": "test-bucket",
+        "object": "path/with/slashes/under_score/amper&sand/file.ext",
+        "headers": {
+          "header/name/with/slash": "should-be-encoded"
+        },
+        "method": "GET",
+        "expiration": "10",
+        "timestamp": "20190201T090000Z",
+        "expectedUrl": "https://storage.googleapis.com/test-bucket/path/with/slashes/under_score/amper%26sand/file.ext?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=test-iam-credentials%40dummy-project-id.iam.gserviceaccount.com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20190201T090000Z&X-Goog-Expires=10&X-Goog-SignedHeaders=header%2Fname%2Fwith%2Fslash%3Bhost&X-Goog-Signature=2a9a82e84e39f5d2c0d980514db17f8c3dece473c9a5743d54e8453f9811927b1b99ce548c534cababd8fa339183e75b410e12e32a4c72f5ff176e95651fabed0072e59e7e236eb7e26f52c0ce599db1c47ae07af1a98d20872b6fde23432c0a5fcf4fb2dda735169198c80cd5cc51be9904f7e5eef2cc489ff44ac5697c529e4b34ac08709a7d2e425619377212c64561ed8b4d2fcb70a26e4f9236f995ab4658d240ac85c7a353bae6b2d39d5fc0716afa435a1f6e100db5504612b5e610db370623ab4b8eba3c03c98f23dcb4b9ffd518f2212abb2f93649d25385d71603d470cff0b7631adb9d0849d38609dedb3097761c8f47ec0d57777bb063611c05b"
+    },
+
+    {
         "description": "Simple headers",
         "bucket": "test-bucket",
         "object": "test-object",
