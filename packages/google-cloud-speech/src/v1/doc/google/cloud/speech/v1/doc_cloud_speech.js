@@ -390,13 +390,6 @@ const RecognitionConfig = {
  *   flexibility by allowing the system to automatically determine the correct
  *   number of speakers. If not set, the default value is 6.
  *
- * @property {number} speakerTag
- *   A distinct integer value is assigned for every speaker within
- *   the audio. This field specifies which one of those speakers was detected to
- *   have spoken this word. Value ranges from '1' to diarization_speaker_count.
- *   speaker_tag is set if enable_speaker_diarization = 'true' and only in the
- *   top alternative.
- *
  * @typedef SpeakerDiarizationConfig
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeakerDiarizationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
@@ -971,6 +964,13 @@ const SpeechRecognitionAlternative = {
  *
  * @property {string} word
  *   The word corresponding to this set of information.
+ *
+ * @property {number} speakerTag
+ *   A distinct integer value is assigned for every speaker within
+ *   the audio. This field specifies which one of those speakers was detected to
+ *   have spoken this word. Value ranges from '1' to diarization_speaker_count.
+ *   speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+ *   top alternative.
  *
  * @typedef WordInfo
  * @memberof google.cloud.speech.v1

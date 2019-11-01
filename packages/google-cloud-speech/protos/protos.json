@@ -216,13 +216,6 @@
                         "maxSpeakerCount": {
                           "type": "int32",
                           "id": 3
-                        },
-                        "speakerTag": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     },
@@ -466,6 +459,13 @@
                         "word": {
                           "type": "string",
                           "id": 3
+                        },
+                        "speakerTag": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     }

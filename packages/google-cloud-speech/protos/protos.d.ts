@@ -685,9 +685,6 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount */
                     maxSpeakerCount?: (number|null);
-
-                    /** SpeakerDiarizationConfig speakerTag */
-                    speakerTag?: (number|null);
                 }
 
                 /** Represents a SpeakerDiarizationConfig. */
@@ -707,9 +704,6 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount. */
                     public maxSpeakerCount: number;
-
-                    /** SpeakerDiarizationConfig speakerTag. */
-                    public speakerTag: number;
 
                     /**
                      * Creates a new SpeakerDiarizationConfig instance using the specified properties.
@@ -1867,6 +1861,9 @@ export namespace google {
 
                     /** WordInfo word */
                     word?: (string|null);
+
+                    /** WordInfo speakerTag */
+                    speakerTag?: (number|null);
                 }
 
                 /** Represents a WordInfo. */
@@ -1886,6 +1883,9 @@ export namespace google {
 
                     /** WordInfo word. */
                     public word: string;
+
+                    /** WordInfo speakerTag. */
+                    public speakerTag: number;
 
                     /**
                      * Creates a new WordInfo instance using the specified properties.
