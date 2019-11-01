@@ -2152,6 +2152,129 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a HttpRequest. */
+                interface IHttpRequest {
+
+                    /** HttpRequest url */
+                    url?: (string|null);
+
+                    /** HttpRequest httpMethod */
+                    httpMethod?: (google.cloud.tasks.v2.HttpMethod|null);
+
+                    /** HttpRequest headers */
+                    headers?: ({ [k: string]: string }|null);
+
+                    /** HttpRequest body */
+                    body?: (Uint8Array|null);
+
+                    /** HttpRequest oauthToken */
+                    oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
+
+                    /** HttpRequest oidcToken */
+                    oidcToken?: (google.cloud.tasks.v2.IOidcToken|null);
+                }
+
+                /** Represents a HttpRequest. */
+                class HttpRequest implements IHttpRequest {
+
+                    /**
+                     * Constructs a new HttpRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IHttpRequest);
+
+                    /** HttpRequest url. */
+                    public url: string;
+
+                    /** HttpRequest httpMethod. */
+                    public httpMethod: google.cloud.tasks.v2.HttpMethod;
+
+                    /** HttpRequest headers. */
+                    public headers: { [k: string]: string };
+
+                    /** HttpRequest body. */
+                    public body: Uint8Array;
+
+                    /** HttpRequest oauthToken. */
+                    public oauthToken?: (google.cloud.tasks.v2.IOAuthToken|null);
+
+                    /** HttpRequest oidcToken. */
+                    public oidcToken?: (google.cloud.tasks.v2.IOidcToken|null);
+
+                    /** HttpRequest authorizationHeader. */
+                    public authorizationHeader?: ("oauthToken"|"oidcToken");
+
+                    /**
+                     * Creates a new HttpRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HttpRequest instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IHttpRequest): google.cloud.tasks.v2.HttpRequest;
+
+                    /**
+                     * Encodes the specified HttpRequest message. Does not implicitly {@link google.cloud.tasks.v2.HttpRequest.verify|verify} messages.
+                     * @param message HttpRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IHttpRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HttpRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.HttpRequest.verify|verify} messages.
+                     * @param message HttpRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IHttpRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HttpRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HttpRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.HttpRequest;
+
+                    /**
+                     * Decodes a HttpRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HttpRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.HttpRequest;
+
+                    /**
+                     * Verifies a HttpRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HttpRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HttpRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.HttpRequest;
+
+                    /**
+                     * Creates a plain object from a HttpRequest message. Also converts values to other types if specified.
+                     * @param message HttpRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.HttpRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HttpRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an AppEngineHttpRequest. */
                 interface IAppEngineHttpRequest {
 
@@ -2386,6 +2509,198 @@ export namespace google {
                     OPTIONS = 7
                 }
 
+                /** Properties of a OAuthToken. */
+                interface IOAuthToken {
+
+                    /** OAuthToken serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** OAuthToken scope */
+                    scope?: (string|null);
+                }
+
+                /** Represents a OAuthToken. */
+                class OAuthToken implements IOAuthToken {
+
+                    /**
+                     * Constructs a new OAuthToken.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IOAuthToken);
+
+                    /** OAuthToken serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** OAuthToken scope. */
+                    public scope: string;
+
+                    /**
+                     * Creates a new OAuthToken instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OAuthToken instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IOAuthToken): google.cloud.tasks.v2.OAuthToken;
+
+                    /**
+                     * Encodes the specified OAuthToken message. Does not implicitly {@link google.cloud.tasks.v2.OAuthToken.verify|verify} messages.
+                     * @param message OAuthToken message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IOAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OAuthToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.OAuthToken.verify|verify} messages.
+                     * @param message OAuthToken message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IOAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OAuthToken message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OAuthToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.OAuthToken;
+
+                    /**
+                     * Decodes a OAuthToken message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OAuthToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.OAuthToken;
+
+                    /**
+                     * Verifies a OAuthToken message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OAuthToken message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OAuthToken
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.OAuthToken;
+
+                    /**
+                     * Creates a plain object from a OAuthToken message. Also converts values to other types if specified.
+                     * @param message OAuthToken
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.OAuthToken, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OAuthToken to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OidcToken. */
+                interface IOidcToken {
+
+                    /** OidcToken serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** OidcToken audience */
+                    audience?: (string|null);
+                }
+
+                /** Represents an OidcToken. */
+                class OidcToken implements IOidcToken {
+
+                    /**
+                     * Constructs a new OidcToken.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tasks.v2.IOidcToken);
+
+                    /** OidcToken serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** OidcToken audience. */
+                    public audience: string;
+
+                    /**
+                     * Creates a new OidcToken instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OidcToken instance
+                     */
+                    public static create(properties?: google.cloud.tasks.v2.IOidcToken): google.cloud.tasks.v2.OidcToken;
+
+                    /**
+                     * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.tasks.v2.OidcToken.verify|verify} messages.
+                     * @param message OidcToken message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tasks.v2.IOidcToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.OidcToken.verify|verify} messages.
+                     * @param message OidcToken message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tasks.v2.IOidcToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OidcToken message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OidcToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tasks.v2.OidcToken;
+
+                    /**
+                     * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OidcToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tasks.v2.OidcToken;
+
+                    /**
+                     * Verifies an OidcToken message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OidcToken
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tasks.v2.OidcToken;
+
+                    /**
+                     * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                     * @param message OidcToken
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tasks.v2.OidcToken, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OidcToken to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Task. */
                 interface ITask {
 
@@ -2394,6 +2709,9 @@ export namespace google {
 
                     /** Task appEngineHttpRequest */
                     appEngineHttpRequest?: (google.cloud.tasks.v2.IAppEngineHttpRequest|null);
+
+                    /** Task httpRequest */
+                    httpRequest?: (google.cloud.tasks.v2.IHttpRequest|null);
 
                     /** Task scheduleTime */
                     scheduleTime?: (google.protobuf.ITimestamp|null);
@@ -2435,6 +2753,9 @@ export namespace google {
                     /** Task appEngineHttpRequest. */
                     public appEngineHttpRequest?: (google.cloud.tasks.v2.IAppEngineHttpRequest|null);
 
+                    /** Task httpRequest. */
+                    public httpRequest?: (google.cloud.tasks.v2.IHttpRequest|null);
+
                     /** Task scheduleTime. */
                     public scheduleTime?: (google.protobuf.ITimestamp|null);
 
@@ -2460,7 +2781,7 @@ export namespace google {
                     public view: google.cloud.tasks.v2.Task.View;
 
                     /** Task messageType. */
-                    public messageType?: "appEngineHttpRequest";
+                    public messageType?: ("appEngineHttpRequest"|"httpRequest");
 
                     /**
                      * Creates a new Task instance using the specified properties.

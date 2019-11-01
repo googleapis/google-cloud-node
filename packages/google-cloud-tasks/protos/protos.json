@@ -478,6 +478,46 @@
                         }
                       }
                     },
+                    "HttpRequest": {
+                      "oneofs": {
+                        "authorizationHeader": {
+                          "oneof": [
+                            "oauthToken",
+                            "oidcToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 2
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 4
+                        },
+                        "oauthToken": {
+                          "type": "OAuthToken",
+                          "id": 5
+                        },
+                        "oidcToken": {
+                          "type": "OidcToken",
+                          "id": 6
+                        }
+                      }
+                    },
                     "AppEngineHttpRequest": {
                       "fields": {
                         "httpMethod": {
@@ -535,6 +575,30 @@
                         "OPTIONS": 7
                       }
                     },
+                    "OAuthToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OidcToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Task": {
                       "options": {
                         "(google.api.resource).type": "cloudtasks.googleapis.com/Task",
@@ -543,7 +607,8 @@
                       "oneofs": {
                         "messageType": {
                           "oneof": [
-                            "appEngineHttpRequest"
+                            "appEngineHttpRequest",
+                            "httpRequest"
                           ]
                         }
                       },
@@ -555,6 +620,10 @@
                         "appEngineHttpRequest": {
                           "type": "AppEngineHttpRequest",
                           "id": 2
+                        },
+                        "httpRequest": {
+                          "type": "HttpRequest",
+                          "id": 3
                         },
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",

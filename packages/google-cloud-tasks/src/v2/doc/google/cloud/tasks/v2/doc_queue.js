@@ -46,6 +46,7 @@
  *   task-level app_engine_routing.
  *   These settings apply only to
  *   App Engine tasks in this queue.
+ *   Http tasks are not affected.
  *
  *   If set, `app_engine_routing_override` is used for all
  *   App Engine tasks in the queue, no matter what the

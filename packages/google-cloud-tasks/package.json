@@ -29,12 +29,12 @@
     "Cloud Tasks API"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "test": "nyc mocha",
+    "cover": "mocha test/*.js && nyc report",
+    "samples-test": "cd samples/ && npm link ../ && c8 npm test && cd ../",
+    "test": "c8 mocha",
     "lint": "eslint '**/*.js'",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
+    "system-test": "c8 mocha system-test/ smoke-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
@@ -43,6 +43,7 @@
     "google-gax": "^1.7.5"
   },
   "devDependencies": {
+    "c8": "^6.0.1",
     "codecov": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
@@ -53,7 +54,6 @@
     "jsdoc-fresh": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
-    "nyc": "^14.0.0",
     "power-assert": "^1.5.0",
     "prettier": "^1.13.5"
   }

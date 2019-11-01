@@ -4753,6 +4753,415 @@
                         return RetryConfig;
                     })();
     
+                    v2.HttpRequest = (function() {
+    
+                        /**
+                         * Properties of a HttpRequest.
+                         * @memberof google.cloud.tasks.v2
+                         * @interface IHttpRequest
+                         * @property {string|null} [url] HttpRequest url
+                         * @property {google.cloud.tasks.v2.HttpMethod|null} [httpMethod] HttpRequest httpMethod
+                         * @property {Object.<string,string>|null} [headers] HttpRequest headers
+                         * @property {Uint8Array|null} [body] HttpRequest body
+                         * @property {google.cloud.tasks.v2.IOAuthToken|null} [oauthToken] HttpRequest oauthToken
+                         * @property {google.cloud.tasks.v2.IOidcToken|null} [oidcToken] HttpRequest oidcToken
+                         */
+    
+                        /**
+                         * Constructs a new HttpRequest.
+                         * @memberof google.cloud.tasks.v2
+                         * @classdesc Represents a HttpRequest.
+                         * @implements IHttpRequest
+                         * @constructor
+                         * @param {google.cloud.tasks.v2.IHttpRequest=} [properties] Properties to set
+                         */
+                        function HttpRequest(properties) {
+                            this.headers = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpRequest url.
+                         * @member {string} url
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.url = "";
+    
+                        /**
+                         * HttpRequest httpMethod.
+                         * @member {google.cloud.tasks.v2.HttpMethod} httpMethod
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.httpMethod = 0;
+    
+                        /**
+                         * HttpRequest headers.
+                         * @member {Object.<string,string>} headers
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.headers = $util.emptyObject;
+    
+                        /**
+                         * HttpRequest body.
+                         * @member {Uint8Array} body
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.body = $util.newBuffer([]);
+    
+                        /**
+                         * HttpRequest oauthToken.
+                         * @member {google.cloud.tasks.v2.IOAuthToken|null|undefined} oauthToken
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.oauthToken = null;
+    
+                        /**
+                         * HttpRequest oidcToken.
+                         * @member {google.cloud.tasks.v2.IOidcToken|null|undefined} oidcToken
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        HttpRequest.prototype.oidcToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * HttpRequest authorizationHeader.
+                         * @member {"oauthToken"|"oidcToken"|undefined} authorizationHeader
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         */
+                        Object.defineProperty(HttpRequest.prototype, "authorizationHeader", {
+                            get: $util.oneOfGetter($oneOfFields = ["oauthToken", "oidcToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new HttpRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2.IHttpRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2.HttpRequest} HttpRequest instance
+                         */
+                        HttpRequest.create = function create(properties) {
+                            return new HttpRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpRequest message. Does not implicitly {@link google.cloud.tasks.v2.HttpRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2.IHttpRequest} message HttpRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.httpMethod);
+                            if (message.headers != null && message.hasOwnProperty("headers"))
+                                for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.body);
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken"))
+                                $root.google.cloud.tasks.v2.OAuthToken.encode(message.oauthToken, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken"))
+                                $root.google.cloud.tasks.v2.OidcToken.encode(message.oidcToken, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.HttpRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2.IHttpRequest} message HttpRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2.HttpRequest} HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2.HttpRequest(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.url = reader.string();
+                                    break;
+                                case 2:
+                                    message.httpMethod = reader.int32();
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.headers === $util.emptyObject)
+                                        message.headers = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.headers[key] = reader.string();
+                                    break;
+                                case 4:
+                                    message.body = reader.bytes();
+                                    break;
+                                case 5:
+                                    message.oauthToken = $root.google.cloud.tasks.v2.OAuthToken.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.oidcToken = $root.google.cloud.tasks.v2.OidcToken.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2.HttpRequest} HttpRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                switch (message.httpMethod) {
+                                default:
+                                    return "httpMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.headers != null && message.hasOwnProperty("headers")) {
+                                if (!$util.isObject(message.headers))
+                                    return "headers: object expected";
+                                var key = Object.keys(message.headers);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.headers[key[i]]))
+                                        return "headers: string{k:string} expected";
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                if (!(message.body && typeof message.body.length === "number" || $util.isString(message.body)))
+                                    return "body: buffer expected";
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2.OAuthToken.verify(message.oauthToken);
+                                    if (error)
+                                        return "oauthToken." + error;
+                                }
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                if (properties.authorizationHeader === 1)
+                                    return "authorizationHeader: multiple values";
+                                properties.authorizationHeader = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2.OidcToken.verify(message.oidcToken);
+                                    if (error)
+                                        return "oidcToken." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2.HttpRequest} HttpRequest
+                         */
+                        HttpRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2.HttpRequest)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2.HttpRequest();
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            switch (object.httpMethod) {
+                            case "HTTP_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.httpMethod = 0;
+                                break;
+                            case "POST":
+                            case 1:
+                                message.httpMethod = 1;
+                                break;
+                            case "GET":
+                            case 2:
+                                message.httpMethod = 2;
+                                break;
+                            case "HEAD":
+                            case 3:
+                                message.httpMethod = 3;
+                                break;
+                            case "PUT":
+                            case 4:
+                                message.httpMethod = 4;
+                                break;
+                            case "DELETE":
+                            case 5:
+                                message.httpMethod = 5;
+                                break;
+                            case "PATCH":
+                            case 6:
+                                message.httpMethod = 6;
+                                break;
+                            case "OPTIONS":
+                            case 7:
+                                message.httpMethod = 7;
+                                break;
+                            }
+                            if (object.headers) {
+                                if (typeof object.headers !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2.HttpRequest.headers: object expected");
+                                message.headers = {};
+                                for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
+                                    message.headers[keys[i]] = String(object.headers[keys[i]]);
+                            }
+                            if (object.body != null)
+                                if (typeof object.body === "string")
+                                    $util.base64.decode(object.body, message.body = $util.newBuffer($util.base64.length(object.body)), 0);
+                                else if (object.body.length)
+                                    message.body = object.body;
+                            if (object.oauthToken != null) {
+                                if (typeof object.oauthToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2.HttpRequest.oauthToken: object expected");
+                                message.oauthToken = $root.google.cloud.tasks.v2.OAuthToken.fromObject(object.oauthToken);
+                            }
+                            if (object.oidcToken != null) {
+                                if (typeof object.oidcToken !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2.HttpRequest.oidcToken: object expected");
+                                message.oidcToken = $root.google.cloud.tasks.v2.OidcToken.fromObject(object.oidcToken);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @static
+                         * @param {google.cloud.tasks.v2.HttpRequest} message HttpRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.headers = {};
+                            if (options.defaults) {
+                                object.url = "";
+                                object.httpMethod = options.enums === String ? "HTTP_METHOD_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.body = "";
+                                else {
+                                    object.body = [];
+                                    if (options.bytes !== Array)
+                                        object.body = $util.newBuffer(object.body);
+                                }
+                            }
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
+                                object.httpMethod = options.enums === String ? $root.google.cloud.tasks.v2.HttpMethod[message.httpMethod] : message.httpMethod;
+                            var keys2;
+                            if (message.headers && (keys2 = Object.keys(message.headers)).length) {
+                                object.headers = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.headers[keys2[j]] = message.headers[keys2[j]];
+                            }
+                            if (message.body != null && message.hasOwnProperty("body"))
+                                object.body = options.bytes === String ? $util.base64.encode(message.body, 0, message.body.length) : options.bytes === Array ? Array.prototype.slice.call(message.body) : message.body;
+                            if (message.oauthToken != null && message.hasOwnProperty("oauthToken")) {
+                                object.oauthToken = $root.google.cloud.tasks.v2.OAuthToken.toObject(message.oauthToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oauthToken";
+                            }
+                            if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                object.oidcToken = $root.google.cloud.tasks.v2.OidcToken.toObject(message.oidcToken, options);
+                                if (options.oneofs)
+                                    object.authorizationHeader = "oidcToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2.HttpRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HttpRequest;
+                    })();
+    
                     v2.AppEngineHttpRequest = (function() {
     
                         /**
@@ -5388,6 +5797,426 @@
                         return values;
                     })();
     
+                    v2.OAuthToken = (function() {
+    
+                        /**
+                         * Properties of a OAuthToken.
+                         * @memberof google.cloud.tasks.v2
+                         * @interface IOAuthToken
+                         * @property {string|null} [serviceAccountEmail] OAuthToken serviceAccountEmail
+                         * @property {string|null} [scope] OAuthToken scope
+                         */
+    
+                        /**
+                         * Constructs a new OAuthToken.
+                         * @memberof google.cloud.tasks.v2
+                         * @classdesc Represents a OAuthToken.
+                         * @implements IOAuthToken
+                         * @constructor
+                         * @param {google.cloud.tasks.v2.IOAuthToken=} [properties] Properties to set
+                         */
+                        function OAuthToken(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OAuthToken serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @instance
+                         */
+                        OAuthToken.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * OAuthToken scope.
+                         * @member {string} scope
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @instance
+                         */
+                        OAuthToken.prototype.scope = "";
+    
+                        /**
+                         * Creates a new OAuthToken instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOAuthToken=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2.OAuthToken} OAuthToken instance
+                         */
+                        OAuthToken.create = function create(properties) {
+                            return new OAuthToken(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OAuthToken message. Does not implicitly {@link google.cloud.tasks.v2.OAuthToken.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOAuthToken} message OAuthToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuthToken.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.scope);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OAuthToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.OAuthToken.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOAuthToken} message OAuthToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OAuthToken.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OAuthToken message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2.OAuthToken} OAuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuthToken.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2.OAuthToken();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                case 2:
+                                    message.scope = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OAuthToken message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2.OAuthToken} OAuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OAuthToken.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OAuthToken message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OAuthToken.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                if (!$util.isString(message.scope))
+                                    return "scope: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OAuthToken message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2.OAuthToken} OAuthToken
+                         */
+                        OAuthToken.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2.OAuthToken)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2.OAuthToken();
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.scope != null)
+                                message.scope = String(object.scope);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OAuthToken message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.OAuthToken} message OAuthToken
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OAuthToken.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceAccountEmail = "";
+                                object.scope = "";
+                            }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = message.scope;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OAuthToken to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2.OAuthToken
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OAuthToken.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OAuthToken;
+                    })();
+    
+                    v2.OidcToken = (function() {
+    
+                        /**
+                         * Properties of an OidcToken.
+                         * @memberof google.cloud.tasks.v2
+                         * @interface IOidcToken
+                         * @property {string|null} [serviceAccountEmail] OidcToken serviceAccountEmail
+                         * @property {string|null} [audience] OidcToken audience
+                         */
+    
+                        /**
+                         * Constructs a new OidcToken.
+                         * @memberof google.cloud.tasks.v2
+                         * @classdesc Represents an OidcToken.
+                         * @implements IOidcToken
+                         * @constructor
+                         * @param {google.cloud.tasks.v2.IOidcToken=} [properties] Properties to set
+                         */
+                        function OidcToken(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OidcToken serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @instance
+                         */
+                        OidcToken.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * OidcToken audience.
+                         * @member {string} audience
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @instance
+                         */
+                        OidcToken.prototype.audience = "";
+    
+                        /**
+                         * Creates a new OidcToken instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOidcToken=} [properties] Properties to set
+                         * @returns {google.cloud.tasks.v2.OidcToken} OidcToken instance
+                         */
+                        OidcToken.create = function create(properties) {
+                            return new OidcToken(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.tasks.v2.OidcToken.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOidcToken} message OidcToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OidcToken.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.tasks.v2.OidcToken.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.IOidcToken} message OidcToken message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OidcToken.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OidcToken message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tasks.v2.OidcToken} OidcToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OidcToken.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2.OidcToken();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.serviceAccountEmail = reader.string();
+                                    break;
+                                case 2:
+                                    message.audience = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tasks.v2.OidcToken} OidcToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OidcToken.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OidcToken message.
+                         * @function verify
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OidcToken.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tasks.v2.OidcToken} OidcToken
+                         */
+                        OidcToken.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tasks.v2.OidcToken)
+                                return object;
+                            var message = new $root.google.cloud.tasks.v2.OidcToken();
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @static
+                         * @param {google.cloud.tasks.v2.OidcToken} message OidcToken
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OidcToken.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceAccountEmail = "";
+                                object.audience = "";
+                            }
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OidcToken to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tasks.v2.OidcToken
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OidcToken.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OidcToken;
+                    })();
+    
                     v2.Task = (function() {
     
                         /**
@@ -5396,6 +6225,7 @@
                          * @interface ITask
                          * @property {string|null} [name] Task name
                          * @property {google.cloud.tasks.v2.IAppEngineHttpRequest|null} [appEngineHttpRequest] Task appEngineHttpRequest
+                         * @property {google.cloud.tasks.v2.IHttpRequest|null} [httpRequest] Task httpRequest
                          * @property {google.protobuf.ITimestamp|null} [scheduleTime] Task scheduleTime
                          * @property {google.protobuf.ITimestamp|null} [createTime] Task createTime
                          * @property {google.protobuf.IDuration|null} [dispatchDeadline] Task dispatchDeadline
@@ -5436,6 +6266,14 @@
                          * @instance
                          */
                         Task.prototype.appEngineHttpRequest = null;
+    
+                        /**
+                         * Task httpRequest.
+                         * @member {google.cloud.tasks.v2.IHttpRequest|null|undefined} httpRequest
+                         * @memberof google.cloud.tasks.v2.Task
+                         * @instance
+                         */
+                        Task.prototype.httpRequest = null;
     
                         /**
                          * Task scheduleTime.
@@ -5506,12 +6344,12 @@
     
                         /**
                          * Task messageType.
-                         * @member {"appEngineHttpRequest"|undefined} messageType
+                         * @member {"appEngineHttpRequest"|"httpRequest"|undefined} messageType
                          * @memberof google.cloud.tasks.v2.Task
                          * @instance
                          */
                         Object.defineProperty(Task.prototype, "messageType", {
-                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpRequest"]),
+                            get: $util.oneOfGetter($oneOfFields = ["appEngineHttpRequest", "httpRequest"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5543,6 +6381,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.appEngineHttpRequest != null && message.hasOwnProperty("appEngineHttpRequest"))
                                 $root.google.cloud.tasks.v2.AppEngineHttpRequest.encode(message.appEngineHttpRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.httpRequest != null && message.hasOwnProperty("httpRequest"))
+                                $root.google.cloud.tasks.v2.HttpRequest.encode(message.httpRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
                                 $root.google.protobuf.Timestamp.encode(message.scheduleTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
@@ -5598,6 +6438,9 @@
                                     break;
                                 case 2:
                                     message.appEngineHttpRequest = $root.google.cloud.tasks.v2.AppEngineHttpRequest.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.httpRequest = $root.google.cloud.tasks.v2.HttpRequest.decode(reader, reader.uint32());
                                     break;
                                 case 4:
                                     message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -5670,6 +6513,16 @@
                                         return "appEngineHttpRequest." + error;
                                 }
                             }
+                            if (message.httpRequest != null && message.hasOwnProperty("httpRequest")) {
+                                if (properties.messageType === 1)
+                                    return "messageType: multiple values";
+                                properties.messageType = 1;
+                                {
+                                    var error = $root.google.cloud.tasks.v2.HttpRequest.verify(message.httpRequest);
+                                    if (error)
+                                        return "httpRequest." + error;
+                                }
+                            }
                             if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
                                 if (error)
@@ -5731,6 +6584,11 @@
                                 if (typeof object.appEngineHttpRequest !== "object")
                                     throw TypeError(".google.cloud.tasks.v2.Task.appEngineHttpRequest: object expected");
                                 message.appEngineHttpRequest = $root.google.cloud.tasks.v2.AppEngineHttpRequest.fromObject(object.appEngineHttpRequest);
+                            }
+                            if (object.httpRequest != null) {
+                                if (typeof object.httpRequest !== "object")
+                                    throw TypeError(".google.cloud.tasks.v2.Task.httpRequest: object expected");
+                                message.httpRequest = $root.google.cloud.tasks.v2.HttpRequest.fromObject(object.httpRequest);
                             }
                             if (object.scheduleTime != null) {
                                 if (typeof object.scheduleTime !== "object")
@@ -5808,6 +6666,11 @@
                                 object.appEngineHttpRequest = $root.google.cloud.tasks.v2.AppEngineHttpRequest.toObject(message.appEngineHttpRequest, options);
                                 if (options.oneofs)
                                     object.messageType = "appEngineHttpRequest";
+                            }
+                            if (message.httpRequest != null && message.hasOwnProperty("httpRequest")) {
+                                object.httpRequest = $root.google.cloud.tasks.v2.HttpRequest.toObject(message.httpRequest, options);
+                                if (options.oneofs)
+                                    object.messageType = "httpRequest";
                             }
                             if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime"))
                                 object.scheduleTime = $root.google.protobuf.Timestamp.toObject(message.scheduleTime, options);

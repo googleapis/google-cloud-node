@@ -47,6 +47,13 @@
  *
  *   This object should have the same structure as [AppEngineHttpRequest]{@link google.cloud.tasks.v2.AppEngineHttpRequest}
  *
+ * @property {Object} httpRequest
+ *   HTTP request that is sent to the worker.
+ *
+ *   An HTTP task is a task that has HttpRequest set.
+ *
+ *   This object should have the same structure as [HttpRequest]{@link google.cloud.tasks.v2.HttpRequest}
+ *
  * @property {Object} scheduleTime
  *   The time when the task is scheduled to be attempted or retried.
  *
@@ -74,6 +81,8 @@
  *
  *   The default and maximum values depend on the type of request:
  *
+ *   * For HTTP tasks, the default is 10 minutes. The deadline
+ *     must be in the interval [15 seconds, 30 minutes].
  *
  *   * For App Engine tasks, 0 indicates that the
  *     request has the default deadline. The default deadline depends on the
