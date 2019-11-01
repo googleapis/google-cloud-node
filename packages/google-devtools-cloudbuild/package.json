@@ -37,7 +37,7 @@
     "mocha": "^6.1.4",
     "gts": "^0.9.0",
     "prettier": "^1.17.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.6.0"
   },
   "scripts": {
     "predocs": "npm run compile",
