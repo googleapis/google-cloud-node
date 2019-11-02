@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.0.1...v4.1.0) (2019-10-31)
+
+
+### Features
+
+* [Storage] Support UniformBucketLevelAccess ([#903](https://www.github.com/googleapis/nodejs-storage/issues/903)) ([35b1bd9](https://www.github.com/googleapis/nodejs-storage/commit/35b1bd9f6db351ad1e51b135a3f25cc5e1566600))
+
 ### [4.0.1](https://www.github.com/googleapis/nodejs-storage/compare/v4.0.0...v4.0.1) (2019-10-31)
 
 
