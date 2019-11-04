@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.5.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.4.1...v4.5.0) (2019-11-04)
+
+
+### Features
+
+* support DSInt / DSDouble recognition from JSON ([#480](https://www.github.com/googleapis/nodejs-datastore/issues/480)) ([9f2fb3c](https://www.github.com/googleapis/nodejs-datastore/commit/9f2fb3cf6fa0672ef2bc252c0765dd84dbbc977a))
+
+
+### Bug Fixes
+
+* **types:** removed duplicate declaration ([#524](https://www.github.com/googleapis/nodejs-datastore/issues/524)) ([26cbb67](https://www.github.com/googleapis/nodejs-datastore/commit/26cbb67dd9d81900960363e20a9df545ba0c5675))
+* upgrade and pin to @grpc/grpc-js@0.6.9 ([#526](https://www.github.com/googleapis/nodejs-datastore/issues/526)) ([3b85eab](https://www.github.com/googleapis/nodejs-datastore/commit/3b85eabec858c98f16edd5f04416495f248fc68a))
+
 ### [4.4.1](https://www.github.com/googleapis/nodejs-datastore/compare/v4.4.0...v4.4.1) (2019-10-22)
 
 
