@@ -38,6 +38,7 @@ import {
   KeyProto,
   ValueProto,
   ResponseResult,
+  Entities,
 } from './entity';
 import {
   Query,
@@ -1376,7 +1377,6 @@ export interface BooleanObject {
 export interface ConsistencyProtoCode {
   [key: string]: number;
 }
-export type Entities = Entity | Entity[];
 export interface EntityProtoReduceAccumulator {
   [key: string]: ValueProto;
 }
