@@ -19,7 +19,6 @@ import * as extend from 'extend';
 import * as is from 'is';
 import {Query, QueryProto} from './query';
 import {PathType} from '.';
-import {Entities} from './request';
 import * as Protobuf from 'protobufjs';
 import * as path from 'path';
 import * as appengine from '../proto/app_engine_key';
