@@ -30,7 +30,7 @@ describe('SpeechSmokeTest', () => {
       sampleRateHertz: sampleRateHertz,
       encoding: encoding,
     };
-    const uri = 'gs://gapic-toolkit/hello.flac';
+    const uri = 'gs://cloud-samples-data/speech/brooklyn_bridge.flac';
     const audio = {
       uri: uri,
     };

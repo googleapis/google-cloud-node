@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-11-01T19:20:43.284303Z",
+  "updateTime": "2019-11-05T12:24:30.110582Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "bba93d7148ff203d400a4929cd0fbc7dafd8dae2",
-        "internalRef": "277920288"
+        "sha": "8c6569ced063c08a48272de2e887860d0c40d388",
+        "internalRef": "278552094"
       }
     },
     {
