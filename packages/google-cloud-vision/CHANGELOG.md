@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.5.0...v1.6.0) (2019-11-05)
+
+
+### Features
+
+* added endpoint samples for vision api ([#467](https://www.github.com/googleapis/nodejs-vision/issues/467)) ([4c569b4](https://www.github.com/googleapis/nodejs-vision/commit/4c569b4ace83be63a12f85676c174a663796fa47))
+
+
+### Bug Fixes
+
+* **deps:** bump google-gax to 1.7.5 ([#464](https://www.github.com/googleapis/nodejs-vision/issues/464)) ([dcc4d62](https://www.github.com/googleapis/nodejs-vision/commit/dcc4d622f46922975d028af20aefc27446fdcad5))
+
+
+### Reverts
+
+* added endpoint samples for vision api ([ea5d421](https://www.github.com/googleapis/nodejs-vision/commit/ea5d4218816571556a2059fc977e2223678c979e))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.4.0...v1.5.0) (2019-10-10)
 
 
