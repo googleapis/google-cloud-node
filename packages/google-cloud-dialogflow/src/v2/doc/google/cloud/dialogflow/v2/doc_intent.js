@@ -36,10 +36,13 @@
  *
  * @property {number} priority
  *   Optional. The priority of this intent. Higher numbers represent higher
- *   priorities. If this is zero or unspecified, we use the default
- *   priority 500000.
+ *   priorities.
  *
- *   Negative numbers mean that the intent is disabled.
+ *   - If the supplied value is unspecified or 0, the service
+ *     translates the value to 500,000, which corresponds to the
+ *     `Normal` priority in the console.
+ *   - If the supplied value is negative, the intent is ignored
+ *     in runtime detect intent requests.
  *
  * @property {boolean} isFallback
  *   Optional. Indicates whether this is a fallback intent.
@@ -612,6 +615,9 @@ const Intent = {
      *   Required. List items.
      *
      *   This object should have the same structure as [Item]{@link google.cloud.dialogflow.v2.Item}
+     *
+     * @property {string} subtitle
+     *   Optional. Subtitle of the list.
      *
      * @typedef ListSelect
      * @memberof google.cloud.dialogflow.v2

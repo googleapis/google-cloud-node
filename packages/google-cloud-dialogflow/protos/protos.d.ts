@@ -6187,6 +6187,9 @@ export namespace google {
 
                             /** ListSelect items */
                             items?: (google.cloud.dialogflow.v2.Intent.Message.ListSelect.IItem[]|null);
+
+                            /** ListSelect subtitle */
+                            subtitle?: (string|null);
                         }
 
                         /** Represents a ListSelect. */
@@ -6203,6 +6206,9 @@ export namespace google {
 
                             /** ListSelect items. */
                             public items: google.cloud.dialogflow.v2.Intent.Message.ListSelect.IItem[];
+
+                            /** ListSelect subtitle. */
+                            public subtitle: string;
 
                             /**
                              * Creates a new ListSelect instance using the specified properties.
@@ -18351,6 +18357,9 @@ export namespace google {
 
                             /** ListSelect items */
                             items?: (google.cloud.dialogflow.v2beta1.Intent.Message.ListSelect.IItem[]|null);
+
+                            /** ListSelect subtitle */
+                            subtitle?: (string|null);
                         }
 
                         /** Represents a ListSelect. */
@@ -18367,6 +18376,9 @@ export namespace google {
 
                             /** ListSelect items. */
                             public items: google.cloud.dialogflow.v2beta1.Intent.Message.ListSelect.IItem[];
+
+                            /** ListSelect subtitle. */
+                            public subtitle: string;
 
                             /**
                              * Creates a new ListSelect instance using the specified properties.

@@ -1719,6 +1719,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
+                                },
+                                "subtitle": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -4498,6 +4505,13 @@
                                   "rule": "repeated",
                                   "type": "Item",
                                   "id": 2
+                                },
+                                "subtitle": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -5443,7 +5457,7 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 3
+                          "id": 4
                         }
                       }
                     },
