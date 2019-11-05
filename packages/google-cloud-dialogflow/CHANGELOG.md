@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.13.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.12.2...v0.13.0) (2019-11-05)
+
+
+### Features
+
+* add subtitle support ([#457](https://www.github.com/googleapis/nodejs-dialogflow/issues/457)) ([6cb00ea](https://www.github.com/googleapis/nodejs-dialogflow/commit/6cb00ea6194835045250eac5127250f1e2ea61fd))
+* introduces languageCode option ([8f3943f](https://www.github.com/googleapis/nodejs-dialogflow/commit/8f3943f8f6abb575f8b255207617a24e213bae57))
+
 ### [0.12.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.12.1...v0.12.2) (2019-10-22)
 
 
