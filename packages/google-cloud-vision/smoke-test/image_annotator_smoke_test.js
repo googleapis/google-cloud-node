@@ -22,7 +22,8 @@ describe('ImageAnnotatorSmokeTest', () => {
       // optional auth parameters.
     });
 
-    const gcsImageUri = 'gs://gapic-toolkit/President_Barack_Obama.jpg';
+    const gcsImageUri =
+      'gs://cloud-samples-data/vision/face_detection/celebrity_recognition/sergey.jpg';
     const source = {
       gcsImageUri: gcsImageUri,
     };
