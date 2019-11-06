@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2018 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/document',
+    systemName: '@google-cloud/documentai',
     theme: 'lumen'
   },
   markdown: {

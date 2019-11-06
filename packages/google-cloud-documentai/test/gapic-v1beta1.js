@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 
-const documentModule = require('../src');
+const documentaiModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 const error = new Error();
@@ -25,29 +25,30 @@ error.code = FAKE_STATUS_CODE;
 describe('DocumentUnderstandingServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      documentModule.v1beta1.DocumentUnderstandingServiceClient.servicePath;
+      documentaiModule.v1beta1.DocumentUnderstandingServiceClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      documentModule.v1beta1.DocumentUnderstandingServiceClient.apiEndpoint;
+      documentaiModule.v1beta1.DocumentUnderstandingServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = documentModule.v1beta1.DocumentUnderstandingServiceClient.port;
+    const port =
+      documentaiModule.v1beta1.DocumentUnderstandingServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no options', () => {
-    const client = new documentModule.v1beta1.DocumentUnderstandingServiceClient();
+    const client = new documentaiModule.v1beta1.DocumentUnderstandingServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new documentModule.v1beta1.DocumentUnderstandingServiceClient(
+    const client = new documentaiModule.v1beta1.DocumentUnderstandingServiceClient(
       {fallback: true}
     );
     assert(client);
@@ -55,7 +56,7 @@ describe('DocumentUnderstandingServiceClient', () => {
 
   describe('batchProcessDocuments', function() {
     it('invokes batchProcessDocuments without error', done => {
-      const client = new documentModule.v1beta1.DocumentUnderstandingServiceClient(
+      const client = new documentaiModule.v1beta1.DocumentUnderstandingServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -93,7 +94,7 @@ describe('DocumentUnderstandingServiceClient', () => {
     });
 
     it('invokes batchProcessDocuments with error', done => {
-      const client = new documentModule.v1beta1.DocumentUnderstandingServiceClient(
+      const client = new documentaiModule.v1beta1.DocumentUnderstandingServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -130,7 +131,7 @@ describe('DocumentUnderstandingServiceClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      const client = new documentModule.v1beta1.DocumentUnderstandingServiceClient(
+      const client = new documentaiModule.v1beta1.DocumentUnderstandingServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',

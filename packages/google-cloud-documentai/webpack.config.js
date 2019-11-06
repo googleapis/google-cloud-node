@@ -15,8 +15,8 @@
 module.exports = {
   entry: './src/browser.js',
   output: {
-    library: 'document',
-    filename: './document.js',
+    library: 'documentai',
+    filename: './documentai.js',
   },
   node: {
     child_process: 'empty',

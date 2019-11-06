@@ -1,0 +1,8 @@
+
+{
+  "recurse": true,
+  "skip": [
+    "googleapis.dev.*",
+    "https://www.npmjs.org/package/.*"
+  ]
+}

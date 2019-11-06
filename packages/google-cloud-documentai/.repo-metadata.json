@@ -1,13 +1,13 @@
 {
-  "name": "document",
+  "name": "documentai",
   "name_pretty": "Document AI",
-  "product_documentation": "https://cloud.google.com/document/docs/",
-  "client_documentation": "https://googleapis.dev/nodejs/document/latest/index.html",
+  "product_documentation": "https://cloud.google.com/document-understanding/docs/",
+  "client_documentation": "https://googleapis.dev/nodejs/documentai/latest/index.html",
   "issue_tracker": "",
-  "release_level": "alpha",
+  "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-document-ai",
-  "distribution_name": "@google-cloud/document",
-  "api_id": "document.googleapis.com",
+  "distribution_name": "@google-cloud/documentai",
+  "api_id": "documentai.googleapis.com",
   "requires_billing": true
 }

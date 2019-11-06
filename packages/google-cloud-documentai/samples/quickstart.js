@@ -24,7 +24,7 @@ async function main() {
   async function batchProcessDocument() {
     const {
       DocumentUnderstandingServiceClient,
-    } = require('@google-cloud/document');
+    } = require('@google-cloud/documentai');
     const client = new DocumentUnderstandingServiceClient();
     // TODO: write sample here that demonstrates batch processing of documents.
     console.info(client);

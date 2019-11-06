@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.document.v1beta1.DocumentUnderstandingService": {
+    "google.cloud.documentai.v1beta1.DocumentUnderstandingService": {
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",

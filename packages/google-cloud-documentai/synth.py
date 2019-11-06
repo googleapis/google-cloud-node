@@ -25,9 +25,8 @@ gapic = gcp.GAPICGenerator()
 versions = ['v1beta1']
 for version in versions:
  library = gapic.node_library(
-   'document',
-   version,
-   private=True)
+   'documentai',
+   version)
  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates

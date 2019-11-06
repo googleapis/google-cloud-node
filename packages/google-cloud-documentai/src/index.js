@@ -19,10 +19,10 @@
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.document
+ * @namespace google.cloud.documentai
  */
 /**
- * @namespace google.cloud.document.v1beta1
+ * @namespace google.cloud.documentai.v1beta1
  */
 
 'use strict';
@@ -33,7 +33,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `document` package has the following named exports:
+ * The `documentai` package has the following named exports:
  *
  * - `DocumentUnderstandingServiceClient` - Reference to
  *   {@link v1beta1.DocumentUnderstandingServiceClient}
@@ -42,20 +42,20 @@ const gapic = Object.freeze({
  *     - `DocumentUnderstandingServiceClient` - Reference to
  *       {@link v1beta1.DocumentUnderstandingServiceClient}
  *
- * @module {object} document
- * @alias nodejs-document
+ * @module {object} documentai
+ * @alias nodejs-documentai
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save document
+ * npm install --save documentai
  *
  * @example <caption>Import the client library:</caption>
- * const document = require('document');
+ * const documentai = require('documentai');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new document.DocumentUnderstandingServiceClient();
+ * const client = new documentai.DocumentUnderstandingServiceClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new document.DocumentUnderstandingServiceClient({
+ * const client = new documentai.DocumentUnderstandingServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });

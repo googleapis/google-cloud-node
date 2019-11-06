@@ -136,10 +136,10 @@ class DocumentUnderstandingServiceClient {
     }).operationsClient(opts);
 
     const batchProcessDocumentsResponse = protoFilesRoot.lookup(
-      'google.cloud.document.v1beta1.BatchProcessDocumentsResponse'
+      'google.cloud.documentai.v1beta1.BatchProcessDocumentsResponse'
     );
     const batchProcessDocumentsMetadata = protoFilesRoot.lookup(
-      'google.cloud.document.v1beta1.OperationMetadata'
+      'google.cloud.documentai.v1beta1.OperationMetadata'
     );
 
     this._descriptors.longrunning = {
@@ -154,7 +154,7 @@ class DocumentUnderstandingServiceClient {
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.document.v1beta1.DocumentUnderstandingService',
+      'google.cloud.documentai.v1beta1.DocumentUnderstandingService',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -166,13 +166,13 @@ class DocumentUnderstandingServiceClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.document.v1beta1.DocumentUnderstandingService.
+    // google.cloud.documentai.v1beta1.DocumentUnderstandingService.
     const documentUnderstandingServiceStub = gaxGrpc.createStub(
       opts.fallback
         ? protos.lookupService(
-            'google.cloud.document.v1beta1.DocumentUnderstandingService'
+            'google.cloud.documentai.v1beta1.DocumentUnderstandingService'
           )
-        : protos.google.cloud.document.v1beta1.DocumentUnderstandingService,
+        : protos.google.cloud.documentai.v1beta1.DocumentUnderstandingService,
       opts
     );
 
@@ -200,7 +200,7 @@ class DocumentUnderstandingServiceClient {
    * The DNS address for this API service.
    */
   static get servicePath() {
-    return 'document.googleapis.com';
+    return 'documentai.googleapis.com';
   }
 
   /**
@@ -208,7 +208,7 @@ class DocumentUnderstandingServiceClient {
    * exists for compatibility reasons.
    */
   static get apiEndpoint() {
-    return 'document.googleapis.com';
+    return 'documentai.googleapis.com';
   }
 
   /**
@@ -245,9 +245,9 @@ class DocumentUnderstandingServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object[]} request.requests
-   *   Individual requests for each document.
+   *   Required. Individual requests for each document.
    *
-   *   This object should have the same structure as [ProcessDocumentRequest]{@link google.cloud.document.v1beta1.ProcessDocumentRequest}
+   *   This object should have the same structure as [ProcessDocumentRequest]{@link google.cloud.documentai.v1beta1.ProcessDocumentRequest}
    * @param {string} [request.parent]
    *   Target project and location to make a call.
    *
@@ -267,9 +267,9 @@ class DocumentUnderstandingServiceClient {
    *
    * @example
    *
-   * const document = require('document.v1beta1');
+   * const documentai = require('documentai.v1beta1');
    *
-   * const client = new document.v1beta1.DocumentUnderstandingServiceClient({
+   * const client = new documentai.v1beta1.DocumentUnderstandingServiceClient({
    *   // optional auth parameters.
    * });
    *

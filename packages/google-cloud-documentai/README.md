@@ -4,8 +4,8 @@
 
 # [Document AI: Node.js Client](https://github.com/googleapis/nodejs-document-ai)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/document.svg)](https://www.npmjs.org/package/@google-cloud/document)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/documentai.svg)](https://www.npmjs.org/package/@google-cloud/documentai)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-document-ai/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-document-ai)
 
 
@@ -48,7 +48,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/document
+npm install @google-cloud/documentai
 ```
 
 
@@ -58,7 +58,7 @@ npm install @google-cloud/document
   async function batchProcessDocument() {
     const {
       DocumentUnderstandingServiceClient,
-    } = require('@google-cloud/document');
+    } = require('@google-cloud/documentai');
     const client = new DocumentUnderstandingServiceClient();
     // TODO: write sample here that demonstrates batch processing of documents.
     console.info(client);
@@ -88,10 +88,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
-This library is considered to be in **alpha**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 
@@ -109,10 +110,10 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-document-ai/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/document/latest/index.html
-[product-docs]: https://cloud.google.com/document/docs/
+[client-docs]: https://googleapis.dev/nodejs/documentai/latest/index.html
+[product-docs]: https://cloud.google.com/document-understanding/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=document.googleapis.com
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=documentai.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
