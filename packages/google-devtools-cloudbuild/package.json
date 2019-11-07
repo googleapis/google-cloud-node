@@ -37,7 +37,7 @@
     "linkinator": "^1.4.0",
     "mocha": "^6.1.4",
     "prettier": "^1.17.0",
-    "typescript": "~3.6.0"
+    "typescript": "~3.7.0"
   },
   "scripts": {
     "predocs": "npm run compile",
