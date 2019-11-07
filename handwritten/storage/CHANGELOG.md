@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/nodejs-storage/compare/v4.1.0...v4.1.1) (2019-11-07)
+
+
+### Bug Fixes
+
+* update format for upload sample ([#918](https://www.github.com/googleapis/nodejs-storage/issues/918)) ([d77208b](https://www.github.com/googleapis/nodejs-storage/commit/d77208bee82dc2d76c72fbe8d5db1bfeb8e392ff))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.0.1...v4.1.0) (2019-10-31)
 
 
