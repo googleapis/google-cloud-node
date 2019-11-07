@@ -36,6 +36,7 @@ objects to users via direct download.
   * [Quickstart](#quickstart)
   * [Requester Pays](#requester-pays)
   * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
+  * [Upload File](#upload-file)
 
 ## Before you begin
 
@@ -363,6 +364,23 @@ __Usage:__
 
 
 `node files.js upload-directory <bucketName> <directoryPath>`
+
+
+-----
+
+
+
+
+### Upload File
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/uploadFile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadFile.js,samples/README.md)
+
+__Usage:__
+
+
+`node uploadFile.js`
 
 
 
