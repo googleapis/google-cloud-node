@@ -94,7 +94,7 @@
     "proxyquire": "^2.1.0",
     "restify": "^8.3.3",
     "source-map-support": "^0.5.12",
-    "typescript": "~3.6.0",
+    "typescript": "~3.7.0",
     "uuid": "^3.3.2"
   }
 }
