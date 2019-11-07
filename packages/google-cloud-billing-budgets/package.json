@@ -1,0 +1,35 @@
+{
+  "repository": "googleapis/nodejs-billing-budgets",
+  "name": "@google-cloud/billing-budgets",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "Budgets client for Node.js",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src",
+    "build/protos"
+  ],
+  "dependencies": {
+    "google-gax": "^1.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/mocha": "^5.2.5",
+    "gts": "^1.0.0",
+    "mocha": "^6.0.0",
+    "typescript": "~3.6.0"
+  },
+  "scripts": {
+    "lint": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "fix": "gts fix",
+    "prepare": "npm run compile-protos && npm run compile",
+    "test": "mocha build/test"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.13.0"
+  }
+}

@@ -21,14 +21,17 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
 for version in versions:
-  library = gapic.node_library(
+  library = gapic.typescript_library(
     'billingbudgets',
-    config_path='/google/cloud/billing/budgets/artman_billingbudgets_v1beta1.yaml',
+    generator_args={
+      "grpc-service-config": f"google/cloud/billing/budgets/{version}/billingbudgets_grpc_service_config.json"
+    },
+    proto_path=f"google/cloud/billing/budgets/{version}",
     version=version)
-  s.copy(library, excludes=[])
+  s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
