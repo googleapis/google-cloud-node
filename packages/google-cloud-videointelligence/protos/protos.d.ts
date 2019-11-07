@@ -12592,17 +12592,413 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a Celebrity. */
+                interface ICelebrity {
+
+                    /** Celebrity name */
+                    name?: (string|null);
+
+                    /** Celebrity displayName */
+                    displayName?: (string|null);
+
+                    /** Celebrity description */
+                    description?: (string|null);
+                }
+
+                /** Represents a Celebrity. */
+                class Celebrity implements ICelebrity {
+
+                    /**
+                     * Constructs a new Celebrity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrity);
+
+                    /** Celebrity name. */
+                    public name: string;
+
+                    /** Celebrity displayName. */
+                    public displayName: string;
+
+                    /** Celebrity description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new Celebrity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Celebrity instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrity): google.cloud.videointelligence.v1p3beta1.Celebrity;
+
+                    /**
+                     * Encodes the specified Celebrity message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Celebrity message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.Celebrity;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.Celebrity;
+
+                    /**
+                     * Verifies a Celebrity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Celebrity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Celebrity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.Celebrity;
+
+                    /**
+                     * Creates a plain object from a Celebrity message. Also converts values to other types if specified.
+                     * @param message Celebrity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.Celebrity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Celebrity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CelebrityTrack. */
+                interface ICelebrityTrack {
+
+                    /** CelebrityTrack celebrities */
+                    celebrities?: (google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity[]|null);
+
+                    /** CelebrityTrack faceTrack */
+                    faceTrack?: (google.cloud.videointelligence.v1p3beta1.ITrack|null);
+                }
+
+                /** Represents a CelebrityTrack. */
+                class CelebrityTrack implements ICelebrityTrack {
+
+                    /**
+                     * Constructs a new CelebrityTrack.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrityTrack);
+
+                    /** CelebrityTrack celebrities. */
+                    public celebrities: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity[];
+
+                    /** CelebrityTrack faceTrack. */
+                    public faceTrack?: (google.cloud.videointelligence.v1p3beta1.ITrack|null);
+
+                    /**
+                     * Creates a new CelebrityTrack instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CelebrityTrack instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrityTrack): google.cloud.videointelligence.v1p3beta1.CelebrityTrack;
+
+                    /**
+                     * Encodes the specified CelebrityTrack message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.verify|verify} messages.
+                     * @param message CelebrityTrack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.ICelebrityTrack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CelebrityTrack message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.verify|verify} messages.
+                     * @param message CelebrityTrack message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.ICelebrityTrack, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CelebrityTrack message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CelebrityTrack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.CelebrityTrack;
+
+                    /**
+                     * Decodes a CelebrityTrack message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CelebrityTrack
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.CelebrityTrack;
+
+                    /**
+                     * Verifies a CelebrityTrack message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CelebrityTrack message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CelebrityTrack
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.CelebrityTrack;
+
+                    /**
+                     * Creates a plain object from a CelebrityTrack message. Also converts values to other types if specified.
+                     * @param message CelebrityTrack
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.CelebrityTrack, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CelebrityTrack to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CelebrityTrack {
+
+                    /** Properties of a RecognizedCelebrity. */
+                    interface IRecognizedCelebrity {
+
+                        /** RecognizedCelebrity celebrity */
+                        celebrity?: (google.cloud.videointelligence.v1p3beta1.ICelebrity|null);
+
+                        /** RecognizedCelebrity confidence */
+                        confidence?: (number|null);
+                    }
+
+                    /** Represents a RecognizedCelebrity. */
+                    class RecognizedCelebrity implements IRecognizedCelebrity {
+
+                        /**
+                         * Constructs a new RecognizedCelebrity.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity);
+
+                        /** RecognizedCelebrity celebrity. */
+                        public celebrity?: (google.cloud.videointelligence.v1p3beta1.ICelebrity|null);
+
+                        /** RecognizedCelebrity confidence. */
+                        public confidence: number;
+
+                        /**
+                         * Creates a new RecognizedCelebrity instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RecognizedCelebrity instance
+                         */
+                        public static create(properties?: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity): google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity;
+
+                        /**
+                         * Encodes the specified RecognizedCelebrity message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.verify|verify} messages.
+                         * @param message RecognizedCelebrity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RecognizedCelebrity message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.verify|verify} messages.
+                         * @param message RecognizedCelebrity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RecognizedCelebrity message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RecognizedCelebrity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity;
+
+                        /**
+                         * Decodes a RecognizedCelebrity message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RecognizedCelebrity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity;
+
+                        /**
+                         * Verifies a RecognizedCelebrity message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RecognizedCelebrity message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RecognizedCelebrity
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity;
+
+                        /**
+                         * Creates a plain object from a RecognizedCelebrity message. Also converts values to other types if specified.
+                         * @param message RecognizedCelebrity
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RecognizedCelebrity to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a CelebrityRecognitionAnnotation. */
+                interface ICelebrityRecognitionAnnotation {
+
+                    /** CelebrityRecognitionAnnotation celebrityTracks */
+                    celebrityTracks?: (google.cloud.videointelligence.v1p3beta1.ICelebrityTrack[]|null);
+                }
+
+                /** Represents a CelebrityRecognitionAnnotation. */
+                class CelebrityRecognitionAnnotation implements ICelebrityRecognitionAnnotation {
+
+                    /**
+                     * Constructs a new CelebrityRecognitionAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation);
+
+                    /** CelebrityRecognitionAnnotation celebrityTracks. */
+                    public celebrityTracks: google.cloud.videointelligence.v1p3beta1.ICelebrityTrack[];
+
+                    /**
+                     * Creates a new CelebrityRecognitionAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CelebrityRecognitionAnnotation instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation): google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation;
+
+                    /**
+                     * Encodes the specified CelebrityRecognitionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.verify|verify} messages.
+                     * @param message CelebrityRecognitionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CelebrityRecognitionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.verify|verify} messages.
+                     * @param message CelebrityRecognitionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CelebrityRecognitionAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CelebrityRecognitionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation;
+
+                    /**
+                     * Decodes a CelebrityRecognitionAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CelebrityRecognitionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation;
+
+                    /**
+                     * Verifies a CelebrityRecognitionAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CelebrityRecognitionAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CelebrityRecognitionAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation;
+
+                    /**
+                     * Creates a plain object from a CelebrityRecognitionAnnotation message. Also converts values to other types if specified.
+                     * @param message CelebrityRecognitionAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CelebrityRecognitionAnnotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a VideoAnnotationResults. */
                 interface IVideoAnnotationResults {
 
                     /** VideoAnnotationResults inputUri */
                     inputUri?: (string|null);
 
+                    /** VideoAnnotationResults segment */
+                    segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
+
                     /** VideoAnnotationResults segmentLabelAnnotations */
                     segmentLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
 
+                    /** VideoAnnotationResults segmentPresenceLabelAnnotations */
+                    segmentPresenceLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
+
                     /** VideoAnnotationResults shotLabelAnnotations */
                     shotLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
+
+                    /** VideoAnnotationResults shotPresenceLabelAnnotations */
+                    shotPresenceLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
 
                     /** VideoAnnotationResults frameLabelAnnotations */
                     frameLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
@@ -12625,6 +13021,9 @@ export namespace google {
                     /** VideoAnnotationResults logoRecognitionAnnotations */
                     logoRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation[]|null);
 
+                    /** VideoAnnotationResults celebrityRecognitionAnnotations */
+                    celebrityRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null);
+
                     /** VideoAnnotationResults error */
                     error?: (google.rpc.IStatus|null);
                 }
@@ -12641,11 +13040,20 @@ export namespace google {
                     /** VideoAnnotationResults inputUri. */
                     public inputUri: string;
 
+                    /** VideoAnnotationResults segment. */
+                    public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
+
                     /** VideoAnnotationResults segmentLabelAnnotations. */
                     public segmentLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
 
+                    /** VideoAnnotationResults segmentPresenceLabelAnnotations. */
+                    public segmentPresenceLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
+
                     /** VideoAnnotationResults shotLabelAnnotations. */
                     public shotLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
+
+                    /** VideoAnnotationResults shotPresenceLabelAnnotations. */
+                    public shotPresenceLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
 
                     /** VideoAnnotationResults frameLabelAnnotations. */
                     public frameLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
@@ -12667,6 +13075,9 @@ export namespace google {
 
                     /** VideoAnnotationResults logoRecognitionAnnotations. */
                     public logoRecognitionAnnotations: google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation[];
+
+                    /** VideoAnnotationResults celebrityRecognitionAnnotations. */
+                    public celebrityRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null);
 
                     /** VideoAnnotationResults error. */
                     public error?: (google.rpc.IStatus|null);
@@ -12846,6 +13257,12 @@ export namespace google {
 
                     /** VideoAnnotationProgress updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VideoAnnotationProgress feature */
+                    feature?: (google.cloud.videointelligence.v1p3beta1.Feature|null);
+
+                    /** VideoAnnotationProgress segment */
+                    segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
                 }
 
                 /** Represents a VideoAnnotationProgress. */
@@ -12868,6 +13285,12 @@ export namespace google {
 
                     /** VideoAnnotationProgress updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VideoAnnotationProgress feature. */
+                    public feature: google.cloud.videointelligence.v1p3beta1.Feature;
+
+                    /** VideoAnnotationProgress segment. */
+                    public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
 
                     /**
                      * Creates a new VideoAnnotationProgress instance using the specified properties.
@@ -15436,7 +15859,8 @@ export namespace google {
                     SPEECH_TRANSCRIPTION = 6,
                     TEXT_DETECTION = 7,
                     OBJECT_TRACKING = 9,
-                    LOGO_RECOGNITION = 12
+                    LOGO_RECOGNITION = 12,
+                    CELEBRITY_RECOGNITION = 13
                 }
 
                 /** LabelDetectionMode enum. */
