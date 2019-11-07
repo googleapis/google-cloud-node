@@ -21,7 +21,7 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * Service that implements Google Cloud Video Intelligence Streaming API.
+ * Service that implements streaming Google Cloud Video Intelligence API.
  *
  * @class
  * @memberof v1p3beta1

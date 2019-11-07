@@ -260,7 +260,7 @@ class VideoIntelligenceServiceClient {
    *   If unset, the input video(s) should be specified via `input_uri`.
    *   If set, `input_uri` should be unset.
    * @param {number[]} [request.features]
-   *   Requested video annotation features.
+   *   Required. Requested video annotation features.
    *
    *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1p3beta1.Feature}
    * @param {Object} [request.videoContext]
@@ -268,14 +268,14 @@ class VideoIntelligenceServiceClient {
    *
    *   This object should have the same structure as [VideoContext]{@link google.cloud.videointelligence.v1p3beta1.VideoContext}
    * @param {string} [request.outputUri]
-   *   Optional location where the output (in JSON format) should be stored.
+   *   Optional. Location where the output (in JSON format) should be stored.
    *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
    *   URIs are supported, which must be specified in the following format:
    *   `gs://bucket-id/object-id` (other URI formats return
    *   google.rpc.Code.INVALID_ARGUMENT). For
    *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
    * @param {string} [request.locationId]
-   *   Optional cloud region where annotation should take place. Supported cloud
+   *   Optional. Cloud region where annotation should take place. Supported cloud
    *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
    *   is specified, a region will be determined based on video file location.
    * @param {Object} [options]

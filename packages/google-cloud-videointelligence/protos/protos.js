@@ -27152,6 +27152,7 @@
                                     case 7:
                                     case 9:
                                     case 12:
+                                    case 13:
                                         break;
                                     }
                             }
@@ -27226,6 +27227,10 @@
                                     case "LOGO_RECOGNITION":
                                     case 12:
                                         message.features[i] = 12;
+                                        break;
+                                    case "CELEBRITY_RECOGNITION":
+                                    case 13:
+                                        message.features[i] = 13;
                                         break;
                                     }
                             }
@@ -31473,6 +31478,897 @@
                         return DetectedAttribute;
                     })();
     
+                    v1p3beta1.Celebrity = (function() {
+    
+                        /**
+                         * Properties of a Celebrity.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface ICelebrity
+                         * @property {string|null} [name] Celebrity name
+                         * @property {string|null} [displayName] Celebrity displayName
+                         * @property {string|null} [description] Celebrity description
+                         */
+    
+                        /**
+                         * Constructs a new Celebrity.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a Celebrity.
+                         * @implements ICelebrity
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrity=} [properties] Properties to set
+                         */
+                        function Celebrity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Celebrity name.
+                         * @member {string} name
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @instance
+                         */
+                        Celebrity.prototype.name = "";
+    
+                        /**
+                         * Celebrity displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @instance
+                         */
+                        Celebrity.prototype.displayName = "";
+    
+                        /**
+                         * Celebrity description.
+                         * @member {string} description
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @instance
+                         */
+                        Celebrity.prototype.description = "";
+    
+                        /**
+                         * Creates a new Celebrity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrity=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.Celebrity} Celebrity instance
+                         */
+                        Celebrity.create = function create(properties) {
+                            return new Celebrity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Celebrity message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.Celebrity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrity} message Celebrity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Celebrity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Celebrity message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.Celebrity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrity} message Celebrity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Celebrity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Celebrity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.Celebrity} Celebrity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Celebrity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.Celebrity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Celebrity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.Celebrity} Celebrity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Celebrity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Celebrity message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Celebrity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Celebrity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.Celebrity} Celebrity
+                         */
+                        Celebrity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.Celebrity)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.Celebrity();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Celebrity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.Celebrity} message Celebrity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Celebrity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Celebrity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.Celebrity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Celebrity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Celebrity;
+                    })();
+    
+                    v1p3beta1.CelebrityTrack = (function() {
+    
+                        /**
+                         * Properties of a CelebrityTrack.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface ICelebrityTrack
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity>|null} [celebrities] CelebrityTrack celebrities
+                         * @property {google.cloud.videointelligence.v1p3beta1.ITrack|null} [faceTrack] CelebrityTrack faceTrack
+                         */
+    
+                        /**
+                         * Constructs a new CelebrityTrack.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a CelebrityTrack.
+                         * @implements ICelebrityTrack
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityTrack=} [properties] Properties to set
+                         */
+                        function CelebrityTrack(properties) {
+                            this.celebrities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CelebrityTrack celebrities.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity>} celebrities
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @instance
+                         */
+                        CelebrityTrack.prototype.celebrities = $util.emptyArray;
+    
+                        /**
+                         * CelebrityTrack faceTrack.
+                         * @member {google.cloud.videointelligence.v1p3beta1.ITrack|null|undefined} faceTrack
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @instance
+                         */
+                        CelebrityTrack.prototype.faceTrack = null;
+    
+                        /**
+                         * Creates a new CelebrityTrack instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityTrack=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack} CelebrityTrack instance
+                         */
+                        CelebrityTrack.create = function create(properties) {
+                            return new CelebrityTrack(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CelebrityTrack message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityTrack} message CelebrityTrack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CelebrityTrack.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.celebrities != null && message.celebrities.length)
+                                for (var i = 0; i < message.celebrities.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.encode(message.celebrities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.faceTrack != null && message.hasOwnProperty("faceTrack"))
+                                $root.google.cloud.videointelligence.v1p3beta1.Track.encode(message.faceTrack, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CelebrityTrack message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityTrack} message CelebrityTrack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CelebrityTrack.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CelebrityTrack message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack} CelebrityTrack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CelebrityTrack.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.celebrities && message.celebrities.length))
+                                        message.celebrities = [];
+                                    message.celebrities.push($root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.faceTrack = $root.google.cloud.videointelligence.v1p3beta1.Track.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CelebrityTrack message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack} CelebrityTrack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CelebrityTrack.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CelebrityTrack message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CelebrityTrack.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.celebrities != null && message.hasOwnProperty("celebrities")) {
+                                if (!Array.isArray(message.celebrities))
+                                    return "celebrities: array expected";
+                                for (var i = 0; i < message.celebrities.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.verify(message.celebrities[i]);
+                                    if (error)
+                                        return "celebrities." + error;
+                                }
+                            }
+                            if (message.faceTrack != null && message.hasOwnProperty("faceTrack")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.Track.verify(message.faceTrack);
+                                if (error)
+                                    return "faceTrack." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CelebrityTrack message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack} CelebrityTrack
+                         */
+                        CelebrityTrack.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack();
+                            if (object.celebrities) {
+                                if (!Array.isArray(object.celebrities))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityTrack.celebrities: array expected");
+                                message.celebrities = [];
+                                for (var i = 0; i < object.celebrities.length; ++i) {
+                                    if (typeof object.celebrities[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityTrack.celebrities: object expected");
+                                    message.celebrities[i] = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.fromObject(object.celebrities[i]);
+                                }
+                            }
+                            if (object.faceTrack != null) {
+                                if (typeof object.faceTrack !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityTrack.faceTrack: object expected");
+                                message.faceTrack = $root.google.cloud.videointelligence.v1p3beta1.Track.fromObject(object.faceTrack);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CelebrityTrack message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack} message CelebrityTrack
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CelebrityTrack.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.celebrities = [];
+                            if (options.defaults)
+                                object.faceTrack = null;
+                            if (message.celebrities && message.celebrities.length) {
+                                object.celebrities = [];
+                                for (var j = 0; j < message.celebrities.length; ++j)
+                                    object.celebrities[j] = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.toObject(message.celebrities[j], options);
+                            }
+                            if (message.faceTrack != null && message.hasOwnProperty("faceTrack"))
+                                object.faceTrack = $root.google.cloud.videointelligence.v1p3beta1.Track.toObject(message.faceTrack, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CelebrityTrack to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CelebrityTrack.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        CelebrityTrack.RecognizedCelebrity = (function() {
+    
+                            /**
+                             * Properties of a RecognizedCelebrity.
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                             * @interface IRecognizedCelebrity
+                             * @property {google.cloud.videointelligence.v1p3beta1.ICelebrity|null} [celebrity] RecognizedCelebrity celebrity
+                             * @property {number|null} [confidence] RecognizedCelebrity confidence
+                             */
+    
+                            /**
+                             * Constructs a new RecognizedCelebrity.
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack
+                             * @classdesc Represents a RecognizedCelebrity.
+                             * @implements IRecognizedCelebrity
+                             * @constructor
+                             * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity=} [properties] Properties to set
+                             */
+                            function RecognizedCelebrity(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RecognizedCelebrity celebrity.
+                             * @member {google.cloud.videointelligence.v1p3beta1.ICelebrity|null|undefined} celebrity
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @instance
+                             */
+                            RecognizedCelebrity.prototype.celebrity = null;
+    
+                            /**
+                             * RecognizedCelebrity confidence.
+                             * @member {number} confidence
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @instance
+                             */
+                            RecognizedCelebrity.prototype.confidence = 0;
+    
+                            /**
+                             * Creates a new RecognizedCelebrity instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity=} [properties] Properties to set
+                             * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity} RecognizedCelebrity instance
+                             */
+                            RecognizedCelebrity.create = function create(properties) {
+                                return new RecognizedCelebrity(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RecognizedCelebrity message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity} message RecognizedCelebrity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RecognizedCelebrity.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.celebrity != null && message.hasOwnProperty("celebrity"))
+                                    $root.google.cloud.videointelligence.v1p3beta1.Celebrity.encode(message.celebrity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                    writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RecognizedCelebrity message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.IRecognizedCelebrity} message RecognizedCelebrity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RecognizedCelebrity.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RecognizedCelebrity message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity} RecognizedCelebrity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RecognizedCelebrity.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.celebrity = $root.google.cloud.videointelligence.v1p3beta1.Celebrity.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.confidence = reader.float();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RecognizedCelebrity message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity} RecognizedCelebrity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RecognizedCelebrity.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RecognizedCelebrity message.
+                             * @function verify
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RecognizedCelebrity.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.celebrity != null && message.hasOwnProperty("celebrity")) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.Celebrity.verify(message.celebrity);
+                                    if (error)
+                                        return "celebrity." + error;
+                                }
+                                if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                    if (typeof message.confidence !== "number")
+                                        return "confidence: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RecognizedCelebrity message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity} RecognizedCelebrity
+                             */
+                            RecognizedCelebrity.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity)
+                                    return object;
+                                var message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity();
+                                if (object.celebrity != null) {
+                                    if (typeof object.celebrity !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity.celebrity: object expected");
+                                    message.celebrity = $root.google.cloud.videointelligence.v1p3beta1.Celebrity.fromObject(object.celebrity);
+                                }
+                                if (object.confidence != null)
+                                    message.confidence = Number(object.confidence);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RecognizedCelebrity message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @static
+                             * @param {google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity} message RecognizedCelebrity
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RecognizedCelebrity.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.celebrity = null;
+                                    object.confidence = 0;
+                                }
+                                if (message.celebrity != null && message.hasOwnProperty("celebrity"))
+                                    object.celebrity = $root.google.cloud.videointelligence.v1p3beta1.Celebrity.toObject(message.celebrity, options);
+                                if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                    object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RecognizedCelebrity to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RecognizedCelebrity.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return RecognizedCelebrity;
+                        })();
+    
+                        return CelebrityTrack;
+                    })();
+    
+                    v1p3beta1.CelebrityRecognitionAnnotation = (function() {
+    
+                        /**
+                         * Properties of a CelebrityRecognitionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface ICelebrityRecognitionAnnotation
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.ICelebrityTrack>|null} [celebrityTracks] CelebrityRecognitionAnnotation celebrityTracks
+                         */
+    
+                        /**
+                         * Constructs a new CelebrityRecognitionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a CelebrityRecognitionAnnotation.
+                         * @implements ICelebrityRecognitionAnnotation
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation=} [properties] Properties to set
+                         */
+                        function CelebrityRecognitionAnnotation(properties) {
+                            this.celebrityTracks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CelebrityRecognitionAnnotation celebrityTracks.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.ICelebrityTrack>} celebrityTracks
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @instance
+                         */
+                        CelebrityRecognitionAnnotation.prototype.celebrityTracks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CelebrityRecognitionAnnotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation} CelebrityRecognitionAnnotation instance
+                         */
+                        CelebrityRecognitionAnnotation.create = function create(properties) {
+                            return new CelebrityRecognitionAnnotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CelebrityRecognitionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation} message CelebrityRecognitionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CelebrityRecognitionAnnotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.celebrityTracks != null && message.celebrityTracks.length)
+                                for (var i = 0; i < message.celebrityTracks.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.encode(message.celebrityTracks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CelebrityRecognitionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation} message CelebrityRecognitionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CelebrityRecognitionAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CelebrityRecognitionAnnotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation} CelebrityRecognitionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CelebrityRecognitionAnnotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.celebrityTracks && message.celebrityTracks.length))
+                                        message.celebrityTracks = [];
+                                    message.celebrityTracks.push($root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CelebrityRecognitionAnnotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation} CelebrityRecognitionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CelebrityRecognitionAnnotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CelebrityRecognitionAnnotation message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CelebrityRecognitionAnnotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.celebrityTracks != null && message.hasOwnProperty("celebrityTracks")) {
+                                if (!Array.isArray(message.celebrityTracks))
+                                    return "celebrityTracks: array expected";
+                                for (var i = 0; i < message.celebrityTracks.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.verify(message.celebrityTracks[i]);
+                                    if (error)
+                                        return "celebrityTracks." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CelebrityRecognitionAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation} CelebrityRecognitionAnnotation
+                         */
+                        CelebrityRecognitionAnnotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation();
+                            if (object.celebrityTracks) {
+                                if (!Array.isArray(object.celebrityTracks))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.celebrityTracks: array expected");
+                                message.celebrityTracks = [];
+                                for (var i = 0; i < object.celebrityTracks.length; ++i) {
+                                    if (typeof object.celebrityTracks[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.celebrityTracks: object expected");
+                                    message.celebrityTracks[i] = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.fromObject(object.celebrityTracks[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CelebrityRecognitionAnnotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation} message CelebrityRecognitionAnnotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CelebrityRecognitionAnnotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.celebrityTracks = [];
+                            if (message.celebrityTracks && message.celebrityTracks.length) {
+                                object.celebrityTracks = [];
+                                for (var j = 0; j < message.celebrityTracks.length; ++j)
+                                    object.celebrityTracks[j] = $root.google.cloud.videointelligence.v1p3beta1.CelebrityTrack.toObject(message.celebrityTracks[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CelebrityRecognitionAnnotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CelebrityRecognitionAnnotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CelebrityRecognitionAnnotation;
+                    })();
+    
                     v1p3beta1.VideoAnnotationResults = (function() {
     
                         /**
@@ -31480,8 +32376,11 @@
                          * @memberof google.cloud.videointelligence.v1p3beta1
                          * @interface IVideoAnnotationResults
                          * @property {string|null} [inputUri] VideoAnnotationResults inputUri
+                         * @property {google.cloud.videointelligence.v1p3beta1.IVideoSegment|null} [segment] VideoAnnotationResults segment
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [segmentLabelAnnotations] VideoAnnotationResults segmentLabelAnnotations
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [segmentPresenceLabelAnnotations] VideoAnnotationResults segmentPresenceLabelAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [shotLabelAnnotations] VideoAnnotationResults shotLabelAnnotations
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [shotPresenceLabelAnnotations] VideoAnnotationResults shotPresenceLabelAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [frameLabelAnnotations] VideoAnnotationResults frameLabelAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.IVideoSegment>|null} [shotAnnotations] VideoAnnotationResults shotAnnotations
                          * @property {google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null} [explicitAnnotation] VideoAnnotationResults explicitAnnotation
@@ -31489,6 +32388,7 @@
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ITextAnnotation>|null} [textAnnotations] VideoAnnotationResults textAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation>|null} [objectAnnotations] VideoAnnotationResults objectAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation>|null} [logoRecognitionAnnotations] VideoAnnotationResults logoRecognitionAnnotations
+                         * @property {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null} [celebrityRecognitionAnnotations] VideoAnnotationResults celebrityRecognitionAnnotations
                          * @property {google.rpc.IStatus|null} [error] VideoAnnotationResults error
                          */
     
@@ -31502,7 +32402,9 @@
                          */
                         function VideoAnnotationResults(properties) {
                             this.segmentLabelAnnotations = [];
+                            this.segmentPresenceLabelAnnotations = [];
                             this.shotLabelAnnotations = [];
+                            this.shotPresenceLabelAnnotations = [];
                             this.frameLabelAnnotations = [];
                             this.shotAnnotations = [];
                             this.speechTranscriptions = [];
@@ -31524,6 +32426,14 @@
                         VideoAnnotationResults.prototype.inputUri = "";
     
                         /**
+                         * VideoAnnotationResults segment.
+                         * @member {google.cloud.videointelligence.v1p3beta1.IVideoSegment|null|undefined} segment
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.segment = null;
+    
+                        /**
                          * VideoAnnotationResults segmentLabelAnnotations.
                          * @member {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>} segmentLabelAnnotations
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
@@ -31532,12 +32442,28 @@
                         VideoAnnotationResults.prototype.segmentLabelAnnotations = $util.emptyArray;
     
                         /**
+                         * VideoAnnotationResults segmentPresenceLabelAnnotations.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>} segmentPresenceLabelAnnotations
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.segmentPresenceLabelAnnotations = $util.emptyArray;
+    
+                        /**
                          * VideoAnnotationResults shotLabelAnnotations.
                          * @member {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>} shotLabelAnnotations
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
                          * @instance
                          */
                         VideoAnnotationResults.prototype.shotLabelAnnotations = $util.emptyArray;
+    
+                        /**
+                         * VideoAnnotationResults shotPresenceLabelAnnotations.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>} shotPresenceLabelAnnotations
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.shotPresenceLabelAnnotations = $util.emptyArray;
     
                         /**
                          * VideoAnnotationResults frameLabelAnnotations.
@@ -31596,6 +32522,14 @@
                         VideoAnnotationResults.prototype.logoRecognitionAnnotations = $util.emptyArray;
     
                         /**
+                         * VideoAnnotationResults celebrityRecognitionAnnotations.
+                         * @member {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null|undefined} celebrityRecognitionAnnotations
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.celebrityRecognitionAnnotations = null;
+    
+                        /**
                          * VideoAnnotationResults error.
                          * @member {google.rpc.IStatus|null|undefined} error
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
@@ -31645,6 +32579,8 @@
                                 $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentAnnotation.encode(message.explicitAnnotation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.error != null && message.hasOwnProperty("error"))
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.segment != null && message.hasOwnProperty("segment"))
+                                $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.encode(message.segment, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.speechTranscriptions != null && message.speechTranscriptions.length)
                                 for (var i = 0; i < message.speechTranscriptions.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.SpeechTranscription.encode(message.speechTranscriptions[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
@@ -31657,6 +32593,14 @@
                             if (message.logoRecognitionAnnotations != null && message.logoRecognitionAnnotations.length)
                                 for (var i = 0; i < message.logoRecognitionAnnotations.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.encode(message.logoRecognitionAnnotations[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations"))
+                                $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.encode(message.celebrityRecognitionAnnotations, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.segmentPresenceLabelAnnotations != null && message.segmentPresenceLabelAnnotations.length)
+                                for (var i = 0; i < message.segmentPresenceLabelAnnotations.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.encode(message.segmentPresenceLabelAnnotations[i], writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.shotPresenceLabelAnnotations != null && message.shotPresenceLabelAnnotations.length)
+                                for (var i = 0; i < message.shotPresenceLabelAnnotations.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.encode(message.shotPresenceLabelAnnotations[i], writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -31694,15 +32638,28 @@
                                 case 1:
                                     message.inputUri = reader.string();
                                     break;
+                                case 10:
+                                    message.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.decode(reader, reader.uint32());
+                                    break;
                                 case 2:
                                     if (!(message.segmentLabelAnnotations && message.segmentLabelAnnotations.length))
                                         message.segmentLabelAnnotations = [];
                                     message.segmentLabelAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.decode(reader, reader.uint32()));
                                     break;
+                                case 23:
+                                    if (!(message.segmentPresenceLabelAnnotations && message.segmentPresenceLabelAnnotations.length))
+                                        message.segmentPresenceLabelAnnotations = [];
+                                    message.segmentPresenceLabelAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.decode(reader, reader.uint32()));
+                                    break;
                                 case 3:
                                     if (!(message.shotLabelAnnotations && message.shotLabelAnnotations.length))
                                         message.shotLabelAnnotations = [];
                                     message.shotLabelAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.decode(reader, reader.uint32()));
+                                    break;
+                                case 24:
+                                    if (!(message.shotPresenceLabelAnnotations && message.shotPresenceLabelAnnotations.length))
+                                        message.shotPresenceLabelAnnotations = [];
+                                    message.shotPresenceLabelAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.decode(reader, reader.uint32()));
                                     break;
                                 case 4:
                                     if (!(message.frameLabelAnnotations && message.frameLabelAnnotations.length))
@@ -31736,6 +32693,9 @@
                                     if (!(message.logoRecognitionAnnotations && message.logoRecognitionAnnotations.length))
                                         message.logoRecognitionAnnotations = [];
                                     message.logoRecognitionAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.decode(reader, reader.uint32()));
+                                    break;
+                                case 21:
+                                    message.celebrityRecognitionAnnotations = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.decode(reader, reader.uint32());
                                     break;
                                 case 9:
                                     message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -31778,6 +32738,11 @@
                             if (message.inputUri != null && message.hasOwnProperty("inputUri"))
                                 if (!$util.isString(message.inputUri))
                                     return "inputUri: string expected";
+                            if (message.segment != null && message.hasOwnProperty("segment")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.verify(message.segment);
+                                if (error)
+                                    return "segment." + error;
+                            }
                             if (message.segmentLabelAnnotations != null && message.hasOwnProperty("segmentLabelAnnotations")) {
                                 if (!Array.isArray(message.segmentLabelAnnotations))
                                     return "segmentLabelAnnotations: array expected";
@@ -31787,6 +32752,15 @@
                                         return "segmentLabelAnnotations." + error;
                                 }
                             }
+                            if (message.segmentPresenceLabelAnnotations != null && message.hasOwnProperty("segmentPresenceLabelAnnotations")) {
+                                if (!Array.isArray(message.segmentPresenceLabelAnnotations))
+                                    return "segmentPresenceLabelAnnotations: array expected";
+                                for (var i = 0; i < message.segmentPresenceLabelAnnotations.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.verify(message.segmentPresenceLabelAnnotations[i]);
+                                    if (error)
+                                        return "segmentPresenceLabelAnnotations." + error;
+                                }
+                            }
                             if (message.shotLabelAnnotations != null && message.hasOwnProperty("shotLabelAnnotations")) {
                                 if (!Array.isArray(message.shotLabelAnnotations))
                                     return "shotLabelAnnotations: array expected";
@@ -31794,6 +32768,15 @@
                                     var error = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.verify(message.shotLabelAnnotations[i]);
                                     if (error)
                                         return "shotLabelAnnotations." + error;
+                                }
+                            }
+                            if (message.shotPresenceLabelAnnotations != null && message.hasOwnProperty("shotPresenceLabelAnnotations")) {
+                                if (!Array.isArray(message.shotPresenceLabelAnnotations))
+                                    return "shotPresenceLabelAnnotations: array expected";
+                                for (var i = 0; i < message.shotPresenceLabelAnnotations.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.verify(message.shotPresenceLabelAnnotations[i]);
+                                    if (error)
+                                        return "shotPresenceLabelAnnotations." + error;
                                 }
                             }
                             if (message.frameLabelAnnotations != null && message.hasOwnProperty("frameLabelAnnotations")) {
@@ -31855,6 +32838,11 @@
                                         return "logoRecognitionAnnotations." + error;
                                 }
                             }
+                            if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.verify(message.celebrityRecognitionAnnotations);
+                                if (error)
+                                    return "celebrityRecognitionAnnotations." + error;
+                            }
                             if (message.error != null && message.hasOwnProperty("error")) {
                                 var error = $root.google.rpc.Status.verify(message.error);
                                 if (error)
@@ -31877,6 +32865,11 @@
                             var message = new $root.google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults();
                             if (object.inputUri != null)
                                 message.inputUri = String(object.inputUri);
+                            if (object.segment != null) {
+                                if (typeof object.segment !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.segment: object expected");
+                                message.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.fromObject(object.segment);
+                            }
                             if (object.segmentLabelAnnotations) {
                                 if (!Array.isArray(object.segmentLabelAnnotations))
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.segmentLabelAnnotations: array expected");
@@ -31887,6 +32880,16 @@
                                     message.segmentLabelAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.fromObject(object.segmentLabelAnnotations[i]);
                                 }
                             }
+                            if (object.segmentPresenceLabelAnnotations) {
+                                if (!Array.isArray(object.segmentPresenceLabelAnnotations))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.segmentPresenceLabelAnnotations: array expected");
+                                message.segmentPresenceLabelAnnotations = [];
+                                for (var i = 0; i < object.segmentPresenceLabelAnnotations.length; ++i) {
+                                    if (typeof object.segmentPresenceLabelAnnotations[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.segmentPresenceLabelAnnotations: object expected");
+                                    message.segmentPresenceLabelAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.fromObject(object.segmentPresenceLabelAnnotations[i]);
+                                }
+                            }
                             if (object.shotLabelAnnotations) {
                                 if (!Array.isArray(object.shotLabelAnnotations))
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.shotLabelAnnotations: array expected");
@@ -31895,6 +32898,16 @@
                                     if (typeof object.shotLabelAnnotations[i] !== "object")
                                         throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.shotLabelAnnotations: object expected");
                                     message.shotLabelAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.fromObject(object.shotLabelAnnotations[i]);
+                                }
+                            }
+                            if (object.shotPresenceLabelAnnotations) {
+                                if (!Array.isArray(object.shotPresenceLabelAnnotations))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.shotPresenceLabelAnnotations: array expected");
+                                message.shotPresenceLabelAnnotations = [];
+                                for (var i = 0; i < object.shotPresenceLabelAnnotations.length; ++i) {
+                                    if (typeof object.shotPresenceLabelAnnotations[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.shotPresenceLabelAnnotations: object expected");
+                                    message.shotPresenceLabelAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.fromObject(object.shotPresenceLabelAnnotations[i]);
                                 }
                             }
                             if (object.frameLabelAnnotations) {
@@ -31962,6 +32975,11 @@
                                     message.logoRecognitionAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.fromObject(object.logoRecognitionAnnotations[i]);
                                 }
                             }
+                            if (object.celebrityRecognitionAnnotations != null) {
+                                if (typeof object.celebrityRecognitionAnnotations !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.celebrityRecognitionAnnotations: object expected");
+                                message.celebrityRecognitionAnnotations = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.fromObject(object.celebrityRecognitionAnnotations);
+                            }
                             if (object.error != null) {
                                 if (typeof object.error !== "object")
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.error: object expected");
@@ -31992,11 +33010,15 @@
                                 object.textAnnotations = [];
                                 object.objectAnnotations = [];
                                 object.logoRecognitionAnnotations = [];
+                                object.segmentPresenceLabelAnnotations = [];
+                                object.shotPresenceLabelAnnotations = [];
                             }
                             if (options.defaults) {
                                 object.inputUri = "";
                                 object.explicitAnnotation = null;
                                 object.error = null;
+                                object.segment = null;
+                                object.celebrityRecognitionAnnotations = null;
                             }
                             if (message.inputUri != null && message.hasOwnProperty("inputUri"))
                                 object.inputUri = message.inputUri;
@@ -32024,6 +33046,8 @@
                                 object.explicitAnnotation = $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentAnnotation.toObject(message.explicitAnnotation, options);
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.segment != null && message.hasOwnProperty("segment"))
+                                object.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.toObject(message.segment, options);
                             if (message.speechTranscriptions && message.speechTranscriptions.length) {
                                 object.speechTranscriptions = [];
                                 for (var j = 0; j < message.speechTranscriptions.length; ++j)
@@ -32043,6 +33067,18 @@
                                 object.logoRecognitionAnnotations = [];
                                 for (var j = 0; j < message.logoRecognitionAnnotations.length; ++j)
                                     object.logoRecognitionAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.toObject(message.logoRecognitionAnnotations[j], options);
+                            }
+                            if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations"))
+                                object.celebrityRecognitionAnnotations = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.toObject(message.celebrityRecognitionAnnotations, options);
+                            if (message.segmentPresenceLabelAnnotations && message.segmentPresenceLabelAnnotations.length) {
+                                object.segmentPresenceLabelAnnotations = [];
+                                for (var j = 0; j < message.segmentPresenceLabelAnnotations.length; ++j)
+                                    object.segmentPresenceLabelAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.toObject(message.segmentPresenceLabelAnnotations[j], options);
+                            }
+                            if (message.shotPresenceLabelAnnotations && message.shotPresenceLabelAnnotations.length) {
+                                object.shotPresenceLabelAnnotations = [];
+                                for (var j = 0; j < message.shotPresenceLabelAnnotations.length; ++j)
+                                    object.shotPresenceLabelAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.toObject(message.shotPresenceLabelAnnotations[j], options);
                             }
                             return object;
                         };
@@ -32279,6 +33315,8 @@
                          * @property {number|null} [progressPercent] VideoAnnotationProgress progressPercent
                          * @property {google.protobuf.ITimestamp|null} [startTime] VideoAnnotationProgress startTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] VideoAnnotationProgress updateTime
+                         * @property {google.cloud.videointelligence.v1p3beta1.Feature|null} [feature] VideoAnnotationProgress feature
+                         * @property {google.cloud.videointelligence.v1p3beta1.IVideoSegment|null} [segment] VideoAnnotationProgress segment
                          */
     
                         /**
@@ -32329,6 +33367,22 @@
                         VideoAnnotationProgress.prototype.updateTime = null;
     
                         /**
+                         * VideoAnnotationProgress feature.
+                         * @member {google.cloud.videointelligence.v1p3beta1.Feature} feature
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress
+                         * @instance
+                         */
+                        VideoAnnotationProgress.prototype.feature = 0;
+    
+                        /**
+                         * VideoAnnotationProgress segment.
+                         * @member {google.cloud.videointelligence.v1p3beta1.IVideoSegment|null|undefined} segment
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress
+                         * @instance
+                         */
+                        VideoAnnotationProgress.prototype.segment = null;
+    
+                        /**
                          * Creates a new VideoAnnotationProgress instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress
@@ -32360,6 +33414,10 @@
                                 $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.feature != null && message.hasOwnProperty("feature"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.feature);
+                            if (message.segment != null && message.hasOwnProperty("segment"))
+                                $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.encode(message.segment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -32405,6 +33463,12 @@
                                     break;
                                 case 4:
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.feature = reader.int32();
+                                    break;
+                                case 6:
+                                    message.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -32457,6 +33521,26 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.feature != null && message.hasOwnProperty("feature"))
+                                switch (message.feature) {
+                                default:
+                                    return "feature: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 6:
+                                case 7:
+                                case 9:
+                                case 12:
+                                case 13:
+                                    break;
+                                }
+                            if (message.segment != null && message.hasOwnProperty("segment")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.verify(message.segment);
+                                if (error)
+                                    return "segment." + error;
+                            }
                             return null;
                         };
     
@@ -32486,6 +33570,49 @@
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            switch (object.feature) {
+                            case "FEATURE_UNSPECIFIED":
+                            case 0:
+                                message.feature = 0;
+                                break;
+                            case "LABEL_DETECTION":
+                            case 1:
+                                message.feature = 1;
+                                break;
+                            case "SHOT_CHANGE_DETECTION":
+                            case 2:
+                                message.feature = 2;
+                                break;
+                            case "EXPLICIT_CONTENT_DETECTION":
+                            case 3:
+                                message.feature = 3;
+                                break;
+                            case "SPEECH_TRANSCRIPTION":
+                            case 6:
+                                message.feature = 6;
+                                break;
+                            case "TEXT_DETECTION":
+                            case 7:
+                                message.feature = 7;
+                                break;
+                            case "OBJECT_TRACKING":
+                            case 9:
+                                message.feature = 9;
+                                break;
+                            case "LOGO_RECOGNITION":
+                            case 12:
+                                message.feature = 12;
+                                break;
+                            case "CELEBRITY_RECOGNITION":
+                            case 13:
+                                message.feature = 13;
+                                break;
+                            }
+                            if (object.segment != null) {
+                                if (typeof object.segment !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress.segment: object expected");
+                                message.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.fromObject(object.segment);
+                            }
                             return message;
                         };
     
@@ -32507,6 +33634,8 @@
                                 object.progressPercent = 0;
                                 object.startTime = null;
                                 object.updateTime = null;
+                                object.feature = options.enums === String ? "FEATURE_UNSPECIFIED" : 0;
+                                object.segment = null;
                             }
                             if (message.inputUri != null && message.hasOwnProperty("inputUri"))
                                 object.inputUri = message.inputUri;
@@ -32516,6 +33645,10 @@
                                 object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.feature != null && message.hasOwnProperty("feature"))
+                                object.feature = options.enums === String ? $root.google.cloud.videointelligence.v1p3beta1.Feature[message.feature] : message.feature;
+                            if (message.segment != null && message.hasOwnProperty("segment"))
+                                object.segment = $root.google.cloud.videointelligence.v1p3beta1.VideoSegment.toObject(message.segment, options);
                             return object;
                         };
     
@@ -38638,6 +39771,7 @@
                      * @property {number} TEXT_DETECTION=7 TEXT_DETECTION value
                      * @property {number} OBJECT_TRACKING=9 OBJECT_TRACKING value
                      * @property {number} LOGO_RECOGNITION=12 LOGO_RECOGNITION value
+                     * @property {number} CELEBRITY_RECOGNITION=13 CELEBRITY_RECOGNITION value
                      */
                     v1p3beta1.Feature = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -38649,6 +39783,7 @@
                         values[valuesById[7] = "TEXT_DETECTION"] = 7;
                         values[valuesById[9] = "OBJECT_TRACKING"] = 9;
                         values[valuesById[12] = "LOGO_RECOGNITION"] = 12;
+                        values[valuesById[13] = "CELEBRITY_RECOGNITION"] = 13;
                         return values;
                     })();
     

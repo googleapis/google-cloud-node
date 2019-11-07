@@ -1974,23 +1974,33 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "VideoIntelligenceServiceProto",
                     "java_package": "com.google.cloud.videointelligence.v1p3beta1",
-                    "php_namespace": "Google\\Cloud\\VideoIntelligence\\V1p3beta1",
-                    "ruby_package": "Google::Cloud::VideoIntelligence::V1p3beta1"
+                    "php_namespace": "Google\\Cloud\\VideoIntelligence\\V1p3beta1"
                   },
                   "nested": {
                     "VideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnnotateVideo": {
                           "requestType": "AnnotateVideoRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1p3beta1/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
                     },
                     "StreamingVideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "StreamingAnnotateVideo": {
                           "requestType": "StreamingAnnotateVideoRequest",
@@ -2013,7 +2023,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -2021,11 +2034,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2252,7 +2271,10 @@
                         "attributes": {
                           "rule": "repeated",
                           "type": "DetectedAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2270,11 +2292,17 @@
                         "attributes": {
                           "rule": "repeated",
                           "type": "DetectedAttribute",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2294,21 +2322,87 @@
                         }
                       }
                     },
+                    "Celebrity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CelebrityTrack": {
+                      "fields": {
+                        "celebrities": {
+                          "rule": "repeated",
+                          "type": "RecognizedCelebrity",
+                          "id": 1
+                        },
+                        "faceTrack": {
+                          "type": "Track",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "RecognizedCelebrity": {
+                          "fields": {
+                            "celebrity": {
+                              "type": "Celebrity",
+                              "id": 1
+                            },
+                            "confidence": {
+                              "type": "float",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CelebrityRecognitionAnnotation": {
+                      "fields": {
+                        "celebrityTracks": {
+                          "rule": "repeated",
+                          "type": "CelebrityTrack",
+                          "id": 1
+                        }
+                      }
+                    },
                     "VideoAnnotationResults": {
                       "fields": {
                         "inputUri": {
                           "type": "string",
                           "id": 1
                         },
+                        "segment": {
+                          "type": "VideoSegment",
+                          "id": 10
+                        },
                         "segmentLabelAnnotations": {
                           "rule": "repeated",
                           "type": "LabelAnnotation",
                           "id": 2
                         },
+                        "segmentPresenceLabelAnnotations": {
+                          "rule": "repeated",
+                          "type": "LabelAnnotation",
+                          "id": 23
+                        },
                         "shotLabelAnnotations": {
                           "rule": "repeated",
                           "type": "LabelAnnotation",
                           "id": 3
+                        },
+                        "shotPresenceLabelAnnotations": {
+                          "rule": "repeated",
+                          "type": "LabelAnnotation",
+                          "id": 24
                         },
                         "frameLabelAnnotations": {
                           "rule": "repeated",
@@ -2344,6 +2438,10 @@
                           "type": "LogoRecognitionAnnotation",
                           "id": 19
                         },
+                        "celebrityRecognitionAnnotations": {
+                          "type": "CelebrityRecognitionAnnotation",
+                          "id": 21
+                        },
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 9
@@ -2376,6 +2474,14 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4
+                        },
+                        "feature": {
+                          "type": "Feature",
+                          "id": 5
+                        },
+                        "segment": {
+                          "type": "VideoSegment",
+                          "id": 6
                         }
                       }
                     },
@@ -2392,41 +2498,68 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxAlternatives": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filterProfanity": {
                           "type": "bool",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableAutomaticPunctuation": {
                           "type": "bool",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "audioTracks": {
                           "rule": "repeated",
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableSpeakerDiarization": {
                           "type": "bool",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "diarizationSpeakerCount": {
                           "type": "int32",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableWordConfidence": {
                           "type": "bool",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2435,7 +2568,10 @@
                         "phrases": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2448,7 +2584,10 @@
                         },
                         "languageCode": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2460,12 +2599,18 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "words": {
                           "rule": "repeated",
                           "type": "WordInfo",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2485,11 +2630,17 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "speakerTag": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2780,7 +2931,8 @@
                         "SPEECH_TRANSCRIPTION": 6,
                         "TEXT_DETECTION": 7,
                         "OBJECT_TRACKING": 9,
-                        "LOGO_RECOGNITION": 12
+                        "LOGO_RECOGNITION": 12,
+                        "CELEBRITY_RECOGNITION": 13
                       }
                     },
                     "LabelDetectionMode": {

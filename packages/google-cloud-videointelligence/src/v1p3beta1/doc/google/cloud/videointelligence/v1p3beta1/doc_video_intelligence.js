@@ -36,7 +36,7 @@
  *   If set, `input_uri` should be unset.
  *
  * @property {number[]} features
- *   Requested video annotation features.
+ *   Required. Requested video annotation features.
  *
  *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1p3beta1.Feature}
  *
@@ -46,7 +46,7 @@
  *   This object should have the same structure as [VideoContext]{@link google.cloud.videointelligence.v1p3beta1.VideoContext}
  *
  * @property {string} outputUri
- *   Optional location where the output (in JSON format) should be stored.
+ *   Optional. Location where the output (in JSON format) should be stored.
  *   Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
  *   URIs are supported, which must be specified in the following format:
  *   `gs://bucket-id/object-id` (other URI formats return
@@ -54,7 +54,7 @@
  *   more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @property {string} locationId
- *   Optional cloud region where annotation should take place. Supported cloud
+ *   Optional. Cloud region where annotation should take place. Supported cloud
  *   regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
  *   is specified, a region will be determined based on video file location.
  *
@@ -413,8 +413,7 @@ const NormalizedBoundingBox = {
 };
 
 /**
- * For tracking related features, such as LOGO_RECOGNITION, FACE_DETECTION,
- * CELEBRITY_RECOGNITION, PERSON_DETECTION.
+ * For tracking related features.
  * An object at time_offset with attributes, and located with
  * normalized_bounding_box.
  *
@@ -494,21 +493,127 @@ const DetectedAttribute = {
 };
 
 /**
+ * Celebrity definition.
+ *
+ * @property {string} name
+ *   The resource name of the celebrity. Have the format
+ *   `video-intelligence/kg-mid` indicates a celebrity from preloaded gallery.
+ *   kg-mid is the id in Google knowledge graph, which is unique for the
+ *   celebrity.
+ *
+ * @property {string} displayName
+ *   The celebrity name.
+ *
+ * @property {string} description
+ *   Textual description of additional information about the celebrity, if
+ *   applicable.
+ *
+ * @typedef Celebrity
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.Celebrity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const Celebrity = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The annotation result of a celebrity face track. RecognizedCelebrity field
+ * could be empty if the face track does not have any matched celebrities.
+ *
+ * @property {Object[]} celebrities
+ *   Top N match of the celebrities for the face in this track.
+ *
+ *   This object should have the same structure as [RecognizedCelebrity]{@link google.cloud.videointelligence.v1p3beta1.RecognizedCelebrity}
+ *
+ * @property {Object} faceTrack
+ *   A track of a person's face.
+ *
+ *   This object should have the same structure as [Track]{@link google.cloud.videointelligence.v1p3beta1.Track}
+ *
+ * @typedef CelebrityTrack
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.CelebrityTrack definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const CelebrityTrack = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * The recognized celebrity with confidence score.
+   *
+   * @property {Object} celebrity
+   *   The recognized celebrity.
+   *
+   *   This object should have the same structure as [Celebrity]{@link google.cloud.videointelligence.v1p3beta1.Celebrity}
+   *
+   * @property {number} confidence
+   *   Recognition confidence. Range [0, 1].
+   *
+   * @typedef RecognizedCelebrity
+   * @memberof google.cloud.videointelligence.v1p3beta1
+   * @see [google.cloud.videointelligence.v1p3beta1.CelebrityTrack.RecognizedCelebrity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+   */
+  RecognizedCelebrity: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
+};
+
+/**
+ * Celebrity recognition annotation per video.
+ *
+ * @property {Object[]} celebrityTracks
+ *   The tracks detected from the input video, including recognized celebrities
+ *   and other detected faces in the video.
+ *
+ *   This object should have the same structure as [CelebrityTrack]{@link google.cloud.videointelligence.v1p3beta1.CelebrityTrack}
+ *
+ * @typedef CelebrityRecognitionAnnotation
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const CelebrityRecognitionAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
  *   Video file location in
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
+ * @property {Object} segment
+ *   Video segment on which the annotation is run.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p3beta1.VideoSegment}
+ *
  * @property {Object[]} segmentLabelAnnotations
- *   Label annotations on video level or user specified segment level.
+ *   Topical label annotations on video level or user specified segment level.
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
  *
+ * @property {Object[]} segmentPresenceLabelAnnotations
+ *   Presence label annotations on video level or user specified segment level.
+ *   There is exactly one element for each unique label. Compared to the
+ *   existing topical `segment_label_annotations`, this field presents more
+ *   fine-grained, segment-level labels detected in video content and is made
+ *   available only when the client sets `LabelDetectionConfig.model` to
+ *   "builtin/latest" in the request.
+ *
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
+ *
  * @property {Object[]} shotLabelAnnotations
- *   Label annotations on shot level.
+ *   Topical label annotations on shot level.
  *   There is exactly one element for each unique label.
+ *
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
+ *
+ * @property {Object[]} shotPresenceLabelAnnotations
+ *   Presence label annotations on shot level. There is exactly one element for
+ *   each unique label. Compared to the existing topical
+ *   `shot_label_annotations`, this field presents more fine-grained, shot-level
+ *   labels detected in video content and is made available only when the client
+ *   sets `LabelDetectionConfig.model` to "builtin/latest" in the request.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
  *
@@ -549,6 +654,11 @@ const DetectedAttribute = {
  *   Annotations for list of logos detected, tracked and recognized in video.
  *
  *   This object should have the same structure as [LogoRecognitionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation}
+ *
+ * @property {Object} celebrityRecognitionAnnotations
+ *   Celebrity recognition annotations.
+ *
+ *   This object should have the same structure as [CelebrityRecognitionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation}
  *
  * @property {Object} error
  *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -603,6 +713,18 @@ const AnnotateVideoResponse = {
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
+ * @property {number} feature
+ *   Specifies which feature is being tracked if the request contains more than
+ *   one features.
+ *
+ *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1p3beta1.Feature}
+ *
+ * @property {Object} segment
+ *   Specifies which segment is being tracked if the request contains more than
+ *   one segments.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p3beta1.VideoSegment}
+ *
  * @typedef VideoAnnotationProgress
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.VideoAnnotationProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -633,32 +755,32 @@ const AnnotateVideoProgress = {
  * Config for SPEECH_TRANSCRIPTION.
  *
  * @property {string} languageCode
- *   *Required* The language of the supplied audio as a
+ *   Required. *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
  *   See [Language Support](https://cloud.google.com/speech/docs/languages)
  *   for a list of the currently supported language codes.
  *
  * @property {number} maxAlternatives
- *   *Optional* Maximum number of recognition hypotheses to be returned.
+ *   Optional. Maximum number of recognition hypotheses to be returned.
  *   Specifically, the maximum number of `SpeechRecognitionAlternative` messages
  *   within each `SpeechTranscription`. The server may return fewer than
  *   `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
  *   return a maximum of one. If omitted, will return a maximum of one.
  *
  * @property {boolean} filterProfanity
- *   *Optional* If set to `true`, the server will attempt to filter out
+ *   Optional. If set to `true`, the server will attempt to filter out
  *   profanities, replacing all but the initial character in each filtered word
  *   with asterisks, e.g. "f***". If set to `false` or omitted, profanities
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* A means to provide context to assist the speech recognition.
+ *   Optional. A means to provide context to assist the speech recognition.
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.videointelligence.v1p3beta1.SpeechContext}
  *
  * @property {boolean} enableAutomaticPunctuation
- *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   Optional. If 'true', adds punctuation to recognition result hypotheses.
  *   This feature is only available in select languages. Setting this for
  *   requests in other languages has no effect at all. The default 'false' value
  *   does not add punctuation to result hypotheses. NOTE: "This is currently
@@ -666,11 +788,11 @@ const AnnotateVideoProgress = {
  *   future this may be exclusively available as a premium feature."
  *
  * @property {number[]} audioTracks
- *   *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+ *   Optional. For file formats, such as MXF or MKV, supporting multiple audio
  *   tracks, specify up to two tracks. Default: track 0.
  *
  * @property {boolean} enableSpeakerDiarization
- *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   Optional. If 'true', enables speaker detection for each recognized word in
  *   the top alternative of the recognition result using a speaker_tag provided
  *   in the WordInfo.
  *   Note: When this is true, we send all the words from the beginning of the
@@ -679,13 +801,12 @@ const AnnotateVideoProgress = {
  *   identify the speakers in the conversation over time.
  *
  * @property {number} diarizationSpeakerCount
- *   *Optional*
- *   If set, specifies the estimated number of speakers in the conversation.
- *   If not set, defaults to '2'.
- *   Ignored unless enable_speaker_diarization is set to true.
+ *   Optional. If set, specifies the estimated number of speakers in the
+ *   conversation. If not set, defaults to '2'. Ignored unless
+ *   enable_speaker_diarization is set to true.
  *
  * @property {boolean} enableWordConfidence
- *   *Optional* If `true`, the top result includes a list of words and the
+ *   Optional. If `true`, the top result includes a list of words and the
  *   confidence for those words. If `false`, no word-level confidence
  *   information is returned. The default is `false`.
  *
@@ -702,7 +823,7 @@ const SpeechTranscriptionConfig = {
  * in the results.
  *
  * @property {string[]} phrases
- *   *Optional* A list of strings containing words and phrases "hints" so that
+ *   Optional. A list of strings containing words and phrases "hints" so that
  *   the speech recognition is more likely to recognize them. This can be used
  *   to improve the accuracy for specific words and phrases, for example, if
  *   specific commands are typically spoken by the user. This can also be used
@@ -729,10 +850,9 @@ const SpeechContext = {
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.videointelligence.v1p3beta1.SpeechRecognitionAlternative}
  *
  * @property {string} languageCode
- *   Output only. The
- *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
- *   language in this result. This language code was detected to have the most
- *   likelihood of being spoken in the audio.
+ *   Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+ *   language tag of the language in this result. This language code was
+ *   detected to have the most likelihood of being spoken in the audio.
  *
  * @typedef SpeechTranscription
  * @memberof google.cloud.videointelligence.v1p3beta1
@@ -749,15 +869,17 @@ const SpeechTranscription = {
  *   Transcript text representing the words that the user spoke.
  *
  * @property {number} confidence
- *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
- *   correct. This field is typically provided only for the top hypothesis, and
- *   only for `is_final=true` results. Clients should not rely on the
- *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   correct. This field is set only for the top alternative.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
  * @property {Object[]} words
- *   A list of word-specific information for each recognized word.
+ *   Output only. A list of word-specific information for each recognized word.
+ *   Note: When `enable_speaker_diarization` is true, you will see all the words
+ *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.videointelligence.v1p3beta1.WordInfo}
  *
@@ -1088,7 +1210,7 @@ const StreamingAnnotateVideoResponse = {
 };
 
 /**
- * Config for AUTOML_CLASSIFICATION in streaming mode.
+ * Config for STREAMING_AUTOML_CLASSIFICATION.
  *
  * @property {string} modelName
  *   Resource name of AutoML model.
@@ -1103,7 +1225,7 @@ const StreamingAutomlClassificationConfig = {
 };
 
 /**
- * Config for AUTOML_OBJECT_TRACKING in streaming mode.
+ * Config for STREAMING_AUTOML_OBJECT_TRACKING.
  *
  * @property {string} modelName
  *   Resource name of AutoML model.
@@ -1118,8 +1240,7 @@ const StreamingAutomlObjectTrackingConfig = {
 };
 
 /**
- * Config for EXPLICIT_CONTENT_DETECTION in streaming mode.
- * No customized config support.
+ * Config for STREAMING_EXPLICIT_CONTENT_DETECTION.
  * @typedef StreamingExplicitContentDetectionConfig
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.StreamingExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -1129,7 +1250,7 @@ const StreamingExplicitContentDetectionConfig = {
 };
 
 /**
- * Config for LABEL_DETECTION in streaming mode.
+ * Config for STREAMING_LABEL_DETECTION.
  *
  * @property {boolean} stationaryCamera
  *   Whether the video has been captured from a stationary (i.e. non-moving)
@@ -1146,7 +1267,6 @@ const StreamingLabelDetectionConfig = {
 
 /**
  * Config for STREAMING_OBJECT_TRACKING.
- * No customized config support.
  * @typedef StreamingObjectTrackingConfig
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -1156,8 +1276,7 @@ const StreamingObjectTrackingConfig = {
 };
 
 /**
- * Config for SHOT_CHANGE_DETECTION in streaming mode.
- * No customized config support.
+ * Config for STREAMING_SHOT_CHANGE_DETECTION.
  * @typedef StreamingShotChangeDetectionConfig
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -1322,7 +1441,12 @@ const Feature = {
   /**
    * Logo detection, tracking, and recognition.
    */
-  LOGO_RECOGNITION: 12
+  LOGO_RECOGNITION: 12,
+
+  /**
+   * Celebrity recognition.
+   */
+  CELEBRITY_RECOGNITION: 13
 };
 
 /**
