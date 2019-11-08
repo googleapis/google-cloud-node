@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.14.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.13.0...v0.14.0) (2019-11-08)
+
+
+### Features
+
+* add webhooks, BrowseCarouselCard, TableCard and MediaContent ([#458](https://www.github.com/googleapis/nodejs-dialogflow/issues/458)) ([53051a8](https://www.github.com/googleapis/nodejs-dialogflow/commit/53051a88b401a5d48844490531c3d50437a246b7))
+
 ## [0.13.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.12.2...v0.13.0) (2019-11-05)
 
 
