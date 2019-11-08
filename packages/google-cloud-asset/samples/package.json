@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/asset": "^1.4.1",
-    "@google-cloud/storage": "^3.0.0",
+    "@google-cloud/storage": "^4.0.0",
     "uuid": "^3.3.2",
     "yargs": "^14.0.0"
   },
