@@ -58,7 +58,6 @@ describe('v4 signed url', () => {
       // Remove this conditional once it is supported.
       if (!testCase.object) {
         this.skip();
-        return;
       }
 
       const NOW = dateFormat.parse(

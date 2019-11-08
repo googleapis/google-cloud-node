@@ -2822,7 +2822,6 @@ describe('storage', () => {
       before(async function() {
         if (!SECOND_SERVICE_ACCOUNT) {
           this.skip();
-          return;
         }
         await deleteHmacKeys(SECOND_SERVICE_ACCOUNT, HMAC_PROJECT!);
       });
