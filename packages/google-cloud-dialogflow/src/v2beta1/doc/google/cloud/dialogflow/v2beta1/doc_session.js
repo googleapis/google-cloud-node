@@ -167,6 +167,16 @@ const DetectIntentResponse = {
  *
  *   This object should have the same structure as [SentimentAnalysisRequestConfig]{@link google.cloud.dialogflow.v2beta1.SentimentAnalysisRequestConfig}
  *
+ * @property {Object.<string, string>} webhookHeaders
+ *   Optional. This field can be used to pass HTTP headers for a webhook
+ *   call. These headers will be sent to webhook alone with the headers that
+ *   have been configured through Dialogflow web console. The headers defined
+ *   within this field will overwrite the headers configured through Dialogflow
+ *   console if there is a conflict. Header names are case-insensitive.
+ *   Google's specified headers are not allowed. Including: "Host",
+ *   "Content-Length", "Connection", "From", "User-Agent", "Accept-Encoding",
+ *   "If-Modified-Since", "If-None-Match", "X-Forwarded-For", etc.
+ *
  * @typedef QueryParameters
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.QueryParameters definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}

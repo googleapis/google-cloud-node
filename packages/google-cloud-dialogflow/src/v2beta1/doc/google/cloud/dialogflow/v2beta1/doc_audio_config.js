@@ -176,7 +176,8 @@ const InputAudioConfig = {
  *
  * @property {string} name
  *   Optional. The name of the voice. If not set, the service will choose a
- *   voice based on the other parameters such as language_code and gender.
+ *   voice based on the other parameters such as language_code and
+ *   ssml_gender.
  *
  * @property {number} ssmlGender
  *   Optional. The preferred gender of the voice. If not set, the service will

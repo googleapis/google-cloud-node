@@ -4791,6 +4791,15 @@ export namespace google {
                         /** Message carouselSelect */
                         carouselSelect?: (google.cloud.dialogflow.v2.Intent.Message.ICarouselSelect|null);
 
+                        /** Message browseCarouselCard */
+                        browseCarouselCard?: (google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard|null);
+
+                        /** Message tableCard */
+                        tableCard?: (google.cloud.dialogflow.v2.Intent.Message.ITableCard|null);
+
+                        /** Message mediaContent */
+                        mediaContent?: (google.cloud.dialogflow.v2.Intent.Message.IMediaContent|null);
+
                         /** Message platform */
                         platform?: (google.cloud.dialogflow.v2.Intent.Message.Platform|null);
                     }
@@ -4837,11 +4846,20 @@ export namespace google {
                         /** Message carouselSelect. */
                         public carouselSelect?: (google.cloud.dialogflow.v2.Intent.Message.ICarouselSelect|null);
 
+                        /** Message browseCarouselCard. */
+                        public browseCarouselCard?: (google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard|null);
+
+                        /** Message tableCard. */
+                        public tableCard?: (google.cloud.dialogflow.v2.Intent.Message.ITableCard|null);
+
+                        /** Message mediaContent. */
+                        public mediaContent?: (google.cloud.dialogflow.v2.Intent.Message.IMediaContent|null);
+
                         /** Message platform. */
                         public platform: google.cloud.dialogflow.v2.Intent.Message.Platform;
 
                         /** Message message. */
-                        public message?: ("text"|"image"|"quickReplies"|"card"|"payload"|"simpleResponses"|"basicCard"|"suggestions"|"linkOutSuggestion"|"listSelect"|"carouselSelect");
+                        public message?: ("text"|"image"|"quickReplies"|"card"|"payload"|"simpleResponses"|"basicCard"|"suggestions"|"linkOutSuggestion"|"listSelect"|"carouselSelect"|"browseCarouselCard"|"tableCard"|"mediaContent");
 
                         /**
                          * Creates a new Message instance using the specified properties.
@@ -6684,6 +6702,972 @@ export namespace google {
 
                             /**
                              * Converts this SelectItemInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a MediaContent. */
+                        interface IMediaContent {
+
+                            /** MediaContent mediaType */
+                            mediaType?: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType|null);
+
+                            /** MediaContent mediaObjects */
+                            mediaObjects?: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject[]|null);
+                        }
+
+                        /** Represents a MediaContent. */
+                        class MediaContent implements IMediaContent {
+
+                            /**
+                             * Constructs a new MediaContent.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.IMediaContent);
+
+                            /** MediaContent mediaType. */
+                            public mediaType: google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType;
+
+                            /** MediaContent mediaObjects. */
+                            public mediaObjects: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject[];
+
+                            /**
+                             * Creates a new MediaContent instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MediaContent instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.IMediaContent): google.cloud.dialogflow.v2.Intent.Message.MediaContent;
+
+                            /**
+                             * Encodes the specified MediaContent message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.MediaContent.verify|verify} messages.
+                             * @param message MediaContent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.IMediaContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MediaContent message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.MediaContent.verify|verify} messages.
+                             * @param message MediaContent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.IMediaContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MediaContent message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MediaContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.MediaContent;
+
+                            /**
+                             * Decodes a MediaContent message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MediaContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.MediaContent;
+
+                            /**
+                             * Verifies a MediaContent message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MediaContent message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MediaContent
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.MediaContent;
+
+                            /**
+                             * Creates a plain object from a MediaContent message. Also converts values to other types if specified.
+                             * @param message MediaContent
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.MediaContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MediaContent to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace MediaContent {
+
+                            /** Properties of a ResponseMediaObject. */
+                            interface IResponseMediaObject {
+
+                                /** ResponseMediaObject name */
+                                name?: (string|null);
+
+                                /** ResponseMediaObject description */
+                                description?: (string|null);
+
+                                /** ResponseMediaObject largeImage */
+                                largeImage?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** ResponseMediaObject icon */
+                                icon?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** ResponseMediaObject contentUrl */
+                                contentUrl?: (string|null);
+                            }
+
+                            /** Represents a ResponseMediaObject. */
+                            class ResponseMediaObject implements IResponseMediaObject {
+
+                                /**
+                                 * Constructs a new ResponseMediaObject.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject);
+
+                                /** ResponseMediaObject name. */
+                                public name: string;
+
+                                /** ResponseMediaObject description. */
+                                public description: string;
+
+                                /** ResponseMediaObject largeImage. */
+                                public largeImage?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** ResponseMediaObject icon. */
+                                public icon?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** ResponseMediaObject contentUrl. */
+                                public contentUrl: string;
+
+                                /** ResponseMediaObject image. */
+                                public image?: ("largeImage"|"icon");
+
+                                /**
+                                 * Creates a new ResponseMediaObject instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ResponseMediaObject instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject): google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject;
+
+                                /**
+                                 * Encodes the specified ResponseMediaObject message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject.verify|verify} messages.
+                                 * @param message ResponseMediaObject message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ResponseMediaObject message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject.verify|verify} messages.
+                                 * @param message ResponseMediaObject message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ResponseMediaObject message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ResponseMediaObject
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject;
+
+                                /**
+                                 * Decodes a ResponseMediaObject message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ResponseMediaObject
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject;
+
+                                /**
+                                 * Verifies a ResponseMediaObject message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ResponseMediaObject message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ResponseMediaObject
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject;
+
+                                /**
+                                 * Creates a plain object from a ResponseMediaObject message. Also converts values to other types if specified.
+                                 * @param message ResponseMediaObject
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ResponseMediaObject to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** ResponseMediaType enum. */
+                            enum ResponseMediaType {
+                                RESPONSE_MEDIA_TYPE_UNSPECIFIED = 0,
+                                AUDIO = 1
+                            }
+                        }
+
+                        /** Properties of a BrowseCarouselCard. */
+                        interface IBrowseCarouselCard {
+
+                            /** BrowseCarouselCard items */
+                            items?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[]|null);
+
+                            /** BrowseCarouselCard imageDisplayOptions */
+                            imageDisplayOptions?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|null);
+                        }
+
+                        /** Represents a BrowseCarouselCard. */
+                        class BrowseCarouselCard implements IBrowseCarouselCard {
+
+                            /**
+                             * Constructs a new BrowseCarouselCard.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard);
+
+                            /** BrowseCarouselCard items. */
+                            public items: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[];
+
+                            /** BrowseCarouselCard imageDisplayOptions. */
+                            public imageDisplayOptions: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions;
+
+                            /**
+                             * Creates a new BrowseCarouselCard instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BrowseCarouselCard instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard;
+
+                            /**
+                             * Encodes the specified BrowseCarouselCard message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.verify|verify} messages.
+                             * @param message BrowseCarouselCard message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BrowseCarouselCard message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.verify|verify} messages.
+                             * @param message BrowseCarouselCard message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.IBrowseCarouselCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BrowseCarouselCard message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BrowseCarouselCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard;
+
+                            /**
+                             * Decodes a BrowseCarouselCard message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BrowseCarouselCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard;
+
+                            /**
+                             * Verifies a BrowseCarouselCard message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BrowseCarouselCard message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BrowseCarouselCard
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard;
+
+                            /**
+                             * Creates a plain object from a BrowseCarouselCard message. Also converts values to other types if specified.
+                             * @param message BrowseCarouselCard
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BrowseCarouselCard to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace BrowseCarouselCard {
+
+                            /** Properties of a BrowseCarouselCardItem. */
+                            interface IBrowseCarouselCardItem {
+
+                                /** BrowseCarouselCardItem openUriAction */
+                                openUriAction?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction|null);
+
+                                /** BrowseCarouselCardItem title */
+                                title?: (string|null);
+
+                                /** BrowseCarouselCardItem description */
+                                description?: (string|null);
+
+                                /** BrowseCarouselCardItem image */
+                                image?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** BrowseCarouselCardItem footer */
+                                footer?: (string|null);
+                            }
+
+                            /** Represents a BrowseCarouselCardItem. */
+                            class BrowseCarouselCardItem implements IBrowseCarouselCardItem {
+
+                                /**
+                                 * Constructs a new BrowseCarouselCardItem.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem);
+
+                                /** BrowseCarouselCardItem openUriAction. */
+                                public openUriAction?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction|null);
+
+                                /** BrowseCarouselCardItem title. */
+                                public title: string;
+
+                                /** BrowseCarouselCardItem description. */
+                                public description: string;
+
+                                /** BrowseCarouselCardItem image. */
+                                public image?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                                /** BrowseCarouselCardItem footer. */
+                                public footer: string;
+
+                                /**
+                                 * Creates a new BrowseCarouselCardItem instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns BrowseCarouselCardItem instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem;
+
+                                /**
+                                 * Encodes the specified BrowseCarouselCardItem message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.verify|verify} messages.
+                                 * @param message BrowseCarouselCardItem message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified BrowseCarouselCardItem message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.verify|verify} messages.
+                                 * @param message BrowseCarouselCardItem message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a BrowseCarouselCardItem message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns BrowseCarouselCardItem
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem;
+
+                                /**
+                                 * Decodes a BrowseCarouselCardItem message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns BrowseCarouselCardItem
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem;
+
+                                /**
+                                 * Verifies a BrowseCarouselCardItem message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a BrowseCarouselCardItem message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns BrowseCarouselCardItem
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem;
+
+                                /**
+                                 * Creates a plain object from a BrowseCarouselCardItem message. Also converts values to other types if specified.
+                                 * @param message BrowseCarouselCardItem
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this BrowseCarouselCardItem to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace BrowseCarouselCardItem {
+
+                                /** Properties of an OpenUrlAction. */
+                                interface IOpenUrlAction {
+
+                                    /** OpenUrlAction url */
+                                    url?: (string|null);
+
+                                    /** OpenUrlAction urlTypeHint */
+                                    urlTypeHint?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|null);
+                                }
+
+                                /** Represents an OpenUrlAction. */
+                                class OpenUrlAction implements IOpenUrlAction {
+
+                                    /**
+                                     * Constructs a new OpenUrlAction.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction);
+
+                                    /** OpenUrlAction url. */
+                                    public url: string;
+
+                                    /** OpenUrlAction urlTypeHint. */
+                                    public urlTypeHint: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint;
+
+                                    /**
+                                     * Creates a new OpenUrlAction instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns OpenUrlAction instance
+                                     */
+                                    public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction;
+
+                                    /**
+                                     * Encodes the specified OpenUrlAction message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.verify|verify} messages.
+                                     * @param message OpenUrlAction message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified OpenUrlAction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.verify|verify} messages.
+                                     * @param message OpenUrlAction message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.IOpenUrlAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes an OpenUrlAction message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns OpenUrlAction
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction;
+
+                                    /**
+                                     * Decodes an OpenUrlAction message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns OpenUrlAction
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction;
+
+                                    /**
+                                     * Verifies an OpenUrlAction message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates an OpenUrlAction message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns OpenUrlAction
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction;
+
+                                    /**
+                                     * Creates a plain object from an OpenUrlAction message. Also converts values to other types if specified.
+                                     * @param message OpenUrlAction
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this OpenUrlAction to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+                                }
+
+                                namespace OpenUrlAction {
+
+                                    /** UrlTypeHint enum. */
+                                    enum UrlTypeHint {
+                                        URL_TYPE_HINT_UNSPECIFIED = 0,
+                                        AMP_ACTION = 1,
+                                        AMP_CONTENT = 2
+                                    }
+                                }
+                            }
+
+                            /** ImageDisplayOptions enum. */
+                            enum ImageDisplayOptions {
+                                IMAGE_DISPLAY_OPTIONS_UNSPECIFIED = 0,
+                                GRAY = 1,
+                                WHITE = 2,
+                                CROPPED = 3,
+                                BLURRED_BACKGROUND = 4
+                            }
+                        }
+
+                        /** Properties of a TableCard. */
+                        interface ITableCard {
+
+                            /** TableCard title */
+                            title?: (string|null);
+
+                            /** TableCard subtitle */
+                            subtitle?: (string|null);
+
+                            /** TableCard image */
+                            image?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                            /** TableCard columnProperties */
+                            columnProperties?: (google.cloud.dialogflow.v2.Intent.Message.IColumnProperties[]|null);
+
+                            /** TableCard rows */
+                            rows?: (google.cloud.dialogflow.v2.Intent.Message.ITableCardRow[]|null);
+
+                            /** TableCard buttons */
+                            buttons?: (google.cloud.dialogflow.v2.Intent.Message.BasicCard.IButton[]|null);
+                        }
+
+                        /** Represents a TableCard. */
+                        class TableCard implements ITableCard {
+
+                            /**
+                             * Constructs a new TableCard.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCard);
+
+                            /** TableCard title. */
+                            public title: string;
+
+                            /** TableCard subtitle. */
+                            public subtitle: string;
+
+                            /** TableCard image. */
+                            public image?: (google.cloud.dialogflow.v2.Intent.Message.IImage|null);
+
+                            /** TableCard columnProperties. */
+                            public columnProperties: google.cloud.dialogflow.v2.Intent.Message.IColumnProperties[];
+
+                            /** TableCard rows. */
+                            public rows: google.cloud.dialogflow.v2.Intent.Message.ITableCardRow[];
+
+                            /** TableCard buttons. */
+                            public buttons: google.cloud.dialogflow.v2.Intent.Message.BasicCard.IButton[];
+
+                            /**
+                             * Creates a new TableCard instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TableCard instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCard): google.cloud.dialogflow.v2.Intent.Message.TableCard;
+
+                            /**
+                             * Encodes the specified TableCard message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCard.verify|verify} messages.
+                             * @param message TableCard message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.ITableCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TableCard message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCard.verify|verify} messages.
+                             * @param message TableCard message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.ITableCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TableCard message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TableCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.TableCard;
+
+                            /**
+                             * Decodes a TableCard message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TableCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.TableCard;
+
+                            /**
+                             * Verifies a TableCard message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TableCard message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TableCard
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.TableCard;
+
+                            /**
+                             * Creates a plain object from a TableCard message. Also converts values to other types if specified.
+                             * @param message TableCard
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.TableCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TableCard to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a ColumnProperties. */
+                        interface IColumnProperties {
+
+                            /** ColumnProperties header */
+                            header?: (string|null);
+
+                            /** ColumnProperties horizontalAlignment */
+                            horizontalAlignment?: (google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment|null);
+                        }
+
+                        /** Represents a ColumnProperties. */
+                        class ColumnProperties implements IColumnProperties {
+
+                            /**
+                             * Constructs a new ColumnProperties.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.IColumnProperties);
+
+                            /** ColumnProperties header. */
+                            public header: string;
+
+                            /** ColumnProperties horizontalAlignment. */
+                            public horizontalAlignment: google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment;
+
+                            /**
+                             * Creates a new ColumnProperties instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ColumnProperties instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.IColumnProperties): google.cloud.dialogflow.v2.Intent.Message.ColumnProperties;
+
+                            /**
+                             * Encodes the specified ColumnProperties message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.verify|verify} messages.
+                             * @param message ColumnProperties message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.IColumnProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ColumnProperties message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.verify|verify} messages.
+                             * @param message ColumnProperties message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.IColumnProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ColumnProperties message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ColumnProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.ColumnProperties;
+
+                            /**
+                             * Decodes a ColumnProperties message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ColumnProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.ColumnProperties;
+
+                            /**
+                             * Verifies a ColumnProperties message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ColumnProperties message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ColumnProperties
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.ColumnProperties;
+
+                            /**
+                             * Creates a plain object from a ColumnProperties message. Also converts values to other types if specified.
+                             * @param message ColumnProperties
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.ColumnProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ColumnProperties to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace ColumnProperties {
+
+                            /** HorizontalAlignment enum. */
+                            enum HorizontalAlignment {
+                                HORIZONTAL_ALIGNMENT_UNSPECIFIED = 0,
+                                LEADING = 1,
+                                CENTER = 2,
+                                TRAILING = 3
+                            }
+                        }
+
+                        /** Properties of a TableCardRow. */
+                        interface ITableCardRow {
+
+                            /** TableCardRow cells */
+                            cells?: (google.cloud.dialogflow.v2.Intent.Message.ITableCardCell[]|null);
+
+                            /** TableCardRow dividerAfter */
+                            dividerAfter?: (boolean|null);
+                        }
+
+                        /** Represents a TableCardRow. */
+                        class TableCardRow implements ITableCardRow {
+
+                            /**
+                             * Constructs a new TableCardRow.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCardRow);
+
+                            /** TableCardRow cells. */
+                            public cells: google.cloud.dialogflow.v2.Intent.Message.ITableCardCell[];
+
+                            /** TableCardRow dividerAfter. */
+                            public dividerAfter: boolean;
+
+                            /**
+                             * Creates a new TableCardRow instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TableCardRow instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCardRow): google.cloud.dialogflow.v2.Intent.Message.TableCardRow;
+
+                            /**
+                             * Encodes the specified TableCardRow message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCardRow.verify|verify} messages.
+                             * @param message TableCardRow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.ITableCardRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TableCardRow message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCardRow.verify|verify} messages.
+                             * @param message TableCardRow message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.ITableCardRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TableCardRow message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TableCardRow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.TableCardRow;
+
+                            /**
+                             * Decodes a TableCardRow message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TableCardRow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.TableCardRow;
+
+                            /**
+                             * Verifies a TableCardRow message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TableCardRow message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TableCardRow
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.TableCardRow;
+
+                            /**
+                             * Creates a plain object from a TableCardRow message. Also converts values to other types if specified.
+                             * @param message TableCardRow
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.TableCardRow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TableCardRow to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a TableCardCell. */
+                        interface ITableCardCell {
+
+                            /** TableCardCell text */
+                            text?: (string|null);
+                        }
+
+                        /** Represents a TableCardCell. */
+                        class TableCardCell implements ITableCardCell {
+
+                            /**
+                             * Constructs a new TableCardCell.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCardCell);
+
+                            /** TableCardCell text. */
+                            public text: string;
+
+                            /**
+                             * Creates a new TableCardCell instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TableCardCell instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.v2.Intent.Message.ITableCardCell): google.cloud.dialogflow.v2.Intent.Message.TableCardCell;
+
+                            /**
+                             * Encodes the specified TableCardCell message. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCardCell.verify|verify} messages.
+                             * @param message TableCardCell message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.v2.Intent.Message.ITableCardCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TableCardCell message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.Intent.Message.TableCardCell.verify|verify} messages.
+                             * @param message TableCardCell message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.v2.Intent.Message.ITableCardCell, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TableCardCell message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TableCardCell
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.Intent.Message.TableCardCell;
+
+                            /**
+                             * Decodes a TableCardCell message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TableCardCell
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.Intent.Message.TableCardCell;
+
+                            /**
+                             * Verifies a TableCardCell message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TableCardCell message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TableCardCell
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.Intent.Message.TableCardCell;
+
+                            /**
+                             * Creates a plain object from a TableCardCell message. Also converts values to other types if specified.
+                             * @param message TableCardCell
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.v2.Intent.Message.TableCardCell, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TableCardCell to JSON.
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };
@@ -25005,6 +25989,9 @@ export namespace google {
 
                     /** QueryParameters sentimentAnalysisRequestConfig */
                     sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2beta1.ISentimentAnalysisRequestConfig|null);
+
+                    /** QueryParameters webhookHeaders */
+                    webhookHeaders?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a QueryParameters. */
@@ -25039,6 +26026,9 @@ export namespace google {
 
                     /** QueryParameters sentimentAnalysisRequestConfig. */
                     public sentimentAnalysisRequestConfig?: (google.cloud.dialogflow.v2beta1.ISentimentAnalysisRequestConfig|null);
+
+                    /** QueryParameters webhookHeaders. */
+                    public webhookHeaders: { [k: string]: string };
 
                     /**
                      * Creates a new QueryParameters instance using the specified properties.

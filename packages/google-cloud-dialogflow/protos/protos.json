@@ -1407,7 +1407,10 @@
                                 "suggestions",
                                 "linkOutSuggestion",
                                 "listSelect",
-                                "carouselSelect"
+                                "carouselSelect",
+                                "browseCarouselCard",
+                                "tableCard",
+                                "mediaContent"
                               ]
                             }
                           },
@@ -1455,6 +1458,18 @@
                             "carouselSelect": {
                               "type": "CarouselSelect",
                               "id": 12
+                            },
+                            "browseCarouselCard": {
+                              "type": "BrowseCarouselCard",
+                              "id": 22
+                            },
+                            "tableCard": {
+                              "type": "TableCard",
+                              "id": 23
+                            },
+                            "mediaContent": {
+                              "type": "MediaContent",
+                              "id": 24
                             },
                             "platform": {
                               "type": "Platform",
@@ -1825,6 +1840,255 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                }
+                              }
+                            },
+                            "MediaContent": {
+                              "fields": {
+                                "mediaType": {
+                                  "type": "ResponseMediaType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "mediaObjects": {
+                                  "rule": "repeated",
+                                  "type": "ResponseMediaObject",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ResponseMediaObject": {
+                                  "oneofs": {
+                                    "image": {
+                                      "oneof": [
+                                        "largeImage",
+                                        "icon"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "largeImage": {
+                                      "type": "Image",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "icon": {
+                                      "type": "Image",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "contentUrl": {
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  }
+                                },
+                                "ResponseMediaType": {
+                                  "values": {
+                                    "RESPONSE_MEDIA_TYPE_UNSPECIFIED": 0,
+                                    "AUDIO": 1
+                                  }
+                                }
+                              }
+                            },
+                            "BrowseCarouselCard": {
+                              "fields": {
+                                "items": {
+                                  "rule": "repeated",
+                                  "type": "BrowseCarouselCardItem",
+                                  "id": 1
+                                },
+                                "imageDisplayOptions": {
+                                  "type": "ImageDisplayOptions",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "BrowseCarouselCardItem": {
+                                  "fields": {
+                                    "openUriAction": {
+                                      "type": "OpenUrlAction",
+                                      "id": 1
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "image": {
+                                      "type": "Image",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "footer": {
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "OpenUrlAction": {
+                                      "fields": {
+                                        "url": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "urlTypeHint": {
+                                          "type": "UrlTypeHint",
+                                          "id": 3,
+                                          "options": {
+                                            "(google.api.field_behavior)": "OPTIONAL"
+                                          }
+                                        }
+                                      },
+                                      "nested": {
+                                        "UrlTypeHint": {
+                                          "values": {
+                                            "URL_TYPE_HINT_UNSPECIFIED": 0,
+                                            "AMP_ACTION": 1,
+                                            "AMP_CONTENT": 2
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "ImageDisplayOptions": {
+                                  "values": {
+                                    "IMAGE_DISPLAY_OPTIONS_UNSPECIFIED": 0,
+                                    "GRAY": 1,
+                                    "WHITE": 2,
+                                    "CROPPED": 3,
+                                    "BLURRED_BACKGROUND": 4
+                                  }
+                                }
+                              }
+                            },
+                            "TableCard": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "subtitle": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "image": {
+                                  "type": "Image",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "columnProperties": {
+                                  "rule": "repeated",
+                                  "type": "ColumnProperties",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "rows": {
+                                  "rule": "repeated",
+                                  "type": "TableCardRow",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "buttons": {
+                                  "rule": "repeated",
+                                  "type": "BasicCard.Button",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ColumnProperties": {
+                              "fields": {
+                                "header": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "horizontalAlignment": {
+                                  "type": "HorizontalAlignment",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "HorizontalAlignment": {
+                                  "values": {
+                                    "HORIZONTAL_ALIGNMENT_UNSPECIFIED": 0,
+                                    "LEADING": 1,
+                                    "CENTER": 2,
+                                    "TRAILING": 3
+                                  }
+                                }
+                              }
+                            },
+                            "TableCardRow": {
+                              "fields": {
+                                "cells": {
+                                  "rule": "repeated",
+                                  "type": "TableCardCell",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "dividerAfter": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "TableCardCell": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1
                                 }
                               }
                             },
@@ -5797,6 +6061,11 @@
                         "sentimentAnalysisRequestConfig": {
                           "type": "SentimentAnalysisRequestConfig",
                           "id": 10
+                        },
+                        "webhookHeaders": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14
                         }
                       }
                     },
