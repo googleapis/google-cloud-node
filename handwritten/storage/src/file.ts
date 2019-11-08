@@ -1180,7 +1180,7 @@ class File extends ServiceObject<File> {
    *
    * //-
    * // To limit the downloaded data to only a byte range, pass an options
-   * object.
+   * // object.
    * //-
    * const logFile = myBucket.file('access_log');
    * logFile.createReadStream({
