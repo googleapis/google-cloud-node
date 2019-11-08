@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.6.0...v1.7.0) (2019-11-08)
+
+
+### Features
+
+* add celebrity face detection ([#477](https://www.github.com/googleapis/nodejs-vision/issues/477)) ([cdfa59e](https://www.github.com/googleapis/nodejs-vision/commit/cdfa59e4156c5b557651c3bf50cfc46487149a7d))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.5.0...v1.6.0) (2019-11-05)
 
 
