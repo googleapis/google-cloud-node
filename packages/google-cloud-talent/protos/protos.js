@@ -16199,6 +16199,7 @@
                          * @memberof google.cloud.talent.v4beta1
                          * @interface IJobQuery
                          * @property {string|null} [query] JobQuery query
+                         * @property {string|null} [queryLanguageCode] JobQuery queryLanguageCode
                          * @property {Array.<string>|null} [companies] JobQuery companies
                          * @property {Array.<google.cloud.talent.v4beta1.ILocationFilter>|null} [locationFilters] JobQuery locationFilters
                          * @property {Array.<google.cloud.talent.v4beta1.JobCategory>|null} [jobCategories] JobQuery jobCategories
@@ -16242,6 +16243,14 @@
                          * @instance
                          */
                         JobQuery.prototype.query = "";
+    
+                        /**
+                         * JobQuery queryLanguageCode.
+                         * @member {string} queryLanguageCode
+                         * @memberof google.cloud.talent.v4beta1.JobQuery
+                         * @instance
+                         */
+                        JobQuery.prototype.queryLanguageCode = "";
     
                         /**
                          * JobQuery companies.
@@ -16402,6 +16411,8 @@
                             if (message.excludedJobs != null && message.excludedJobs.length)
                                 for (var i = 0; i < message.excludedJobs.length; ++i)
                                     writer.uint32(/* id 13, wireType 2 =*/106).string(message.excludedJobs[i]);
+                            if (message.queryLanguageCode != null && message.hasOwnProperty("queryLanguageCode"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.queryLanguageCode);
                             return writer;
                         };
     
@@ -16438,6 +16449,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.query = reader.string();
+                                    break;
+                                case 14:
+                                    message.queryLanguageCode = reader.string();
                                     break;
                                 case 2:
                                     if (!(message.companies && message.companies.length))
@@ -16537,6 +16551,9 @@
                             if (message.query != null && message.hasOwnProperty("query"))
                                 if (!$util.isString(message.query))
                                     return "query: string expected";
+                            if (message.queryLanguageCode != null && message.hasOwnProperty("queryLanguageCode"))
+                                if (!$util.isString(message.queryLanguageCode))
+                                    return "queryLanguageCode: string expected";
                             if (message.companies != null && message.hasOwnProperty("companies")) {
                                 if (!Array.isArray(message.companies))
                                     return "companies: array expected";
@@ -16674,6 +16691,8 @@
                             var message = new $root.google.cloud.talent.v4beta1.JobQuery();
                             if (object.query != null)
                                 message.query = String(object.query);
+                            if (object.queryLanguageCode != null)
+                                message.queryLanguageCode = String(object.queryLanguageCode);
                             if (object.companies) {
                                 if (!Array.isArray(object.companies))
                                     throw TypeError(".google.cloud.talent.v4beta1.JobQuery.companies: array expected");
@@ -16949,6 +16968,7 @@
                                 object.customAttributeFilter = "";
                                 object.disableSpellCheck = false;
                                 object.publishTimeRange = null;
+                                object.queryLanguageCode = "";
                             }
                             if (message.query != null && message.hasOwnProperty("query"))
                                 object.query = message.query;
@@ -16997,6 +17017,8 @@
                                 for (var j = 0; j < message.excludedJobs.length; ++j)
                                     object.excludedJobs[j] = message.excludedJobs[j];
                             }
+                            if (message.queryLanguageCode != null && message.hasOwnProperty("queryLanguageCode"))
+                                object.queryLanguageCode = message.queryLanguageCode;
                             return object;
                         };
     

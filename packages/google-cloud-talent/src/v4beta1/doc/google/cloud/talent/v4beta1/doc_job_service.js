@@ -859,7 +859,7 @@ const BatchCreateJobsRequest = {
  *   is created. For example, "projects/foo".
  *
  * @property {Object[]} jobs
- *   The jobs to be updated.
+ *   Required. The jobs to be updated.
  *
  *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
  *

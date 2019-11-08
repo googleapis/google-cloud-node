@@ -1757,7 +1757,10 @@
                         "jobs": {
                           "rule": "repeated",
                           "type": "Job",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -1793,6 +1796,10 @@
                         "query": {
                           "type": "string",
                           "id": 1
+                        },
+                        "queryLanguageCode": {
+                          "type": "string",
+                          "id": 14
                         },
                         "companies": {
                           "rule": "repeated",

@@ -896,8 +896,8 @@ const AvailabilitySignalType = {
    * In the context of
    * Profile.availability_signals,
    * this signal is related to the candidate's most recent application.
-   * last_update_time is
-   * calculated from
+   * last_update_time
+   * is calculated from
    * max(Application.create_time)
    * from all Application records
    * where Application.source
@@ -912,7 +912,8 @@ const AvailabilitySignalType = {
    * AvailabilityFilter, the
    * filter is applied on
    * Profile.availability_signals
-   * where type is JOB_APPLICATION.
+   * where type is
+   * JOB_APPLICATION.
    */
   JOB_APPLICATION: 1,
 
@@ -921,11 +922,11 @@ const AvailabilitySignalType = {
    *
    * In the context of
    * Profile.availability_signals,
-   * this signal is related to the candidate’s most recent update to their
+   * this signal is related to the candidate's most recent update to their
    * resume. For a
    * SummarizedProfile.summary,
-   * last_update_time is
-   * calculated from
+   * last_update_time
+   * is calculated from
    * max(Profile.resume_update_time)
    * from all
    * SummarizedProfile.profiles.
@@ -934,7 +935,8 @@ const AvailabilitySignalType = {
    * AvailabilityFilter, the
    * filter is applied on
    * Profile.availability_signals
-   * where type is RESUME_UPDATE.
+   * where type is
+   * RESUME_UPDATE.
    */
   RESUME_UPDATE: 2,
 
@@ -943,11 +945,11 @@ const AvailabilitySignalType = {
    *
    * In the context of
    * Profile.availability_signals,
-   * this signal is related to the candidate’s most recent update to their
+   * this signal is related to the candidate's most recent update to their
    * profile. For a
    * SummarizedProfile.summary,
-   * last_update_time is
-   * calculated from
+   * last_update_time
+   * is calculated from
    * max(Profile.candidate_update_time)
    * from all
    * SummarizedProfile.profiles.
@@ -956,7 +958,8 @@ const AvailabilitySignalType = {
    * AvailabilityFilter, the
    * filter is applied on
    * Profile.availability_signals
-   * where type is CANDIDATE_UPDATE.
+   * where type is
+   * CANDIDATE_UPDATE.
    */
   CANDIDATE_UPDATE: 3,
 
@@ -965,9 +968,9 @@ const AvailabilitySignalType = {
    *
    * In the context of
    * Profile.availability_signals,
-   * this signal is related to the candidate’s most recent submission.
-   * last_update_time is
-   * calculated from
+   * this signal is related to the candidate's most recent submission.
+   * last_update_time
+   * is calculated from
    * max(Application.create_time)
    * from all Application records
    * where Application.stage is
@@ -982,7 +985,8 @@ const AvailabilitySignalType = {
    * AvailabilityFilter, the
    * filter is applied on
    * Profile.availability_signals
-   * where type is CLIENT_SUBMISSION.
+   * where type is
+   * CLIENT_SUBMISSION.
    */
   CLIENT_SUBMISSION: 4
 };

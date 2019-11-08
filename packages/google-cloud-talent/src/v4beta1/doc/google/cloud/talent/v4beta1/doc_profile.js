@@ -399,7 +399,7 @@ const Resume = {
 
     /**
      * The profile contents in HR-XML format.
-     * See http://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
+     * See https://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
      * information about Human Resources XML.
      */
     HRXML: 1,
@@ -634,7 +634,7 @@ const Phone = {
      * or LANDLINE number. The phone
      * usage should be set to
      * PERSONAL for these phone types. Some more information can be found here:
-     * http://en.wikipedia.org/wiki/Personal_Numbers
+     * https://en.wikipedia.org/wiki/Personal_Numbers
      */
     VIRTUAL: 7,
 

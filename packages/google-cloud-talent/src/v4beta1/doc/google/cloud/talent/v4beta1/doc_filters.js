@@ -24,6 +24,17 @@
  *
  *   The maximum number of allowed characters is 255.
  *
+ * @property {string} queryLanguageCode
+ *   The language code of query.
+ *   For example, "en-US". This field helps to better interpret the query.
+ *
+ *   If a value isn't specified, the query language code is automatically
+ *   detected, which may not be accurate.
+ *
+ *   Language code should be in BCP-47 format, such as "en-US" or "sr-Latn".
+ *   For more information, see
+ *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
+ *
  * @property {string[]} companies
  *   This filter specifies the company entities to search against.
  *
@@ -511,8 +522,8 @@ const ProfileQuery = {
  *   or territory. If this field is not set, application behavior is biased
  *   toward the United States by default.
  *
- *   See http://cldr.unicode.org/ and
- *   http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
+ *   See https://cldr.unicode.org/ and
+ *   https://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
  *   for details. Example: "CH" for Switzerland.
  *   Note that this filter is not applicable for Profile Search related queries.
  *

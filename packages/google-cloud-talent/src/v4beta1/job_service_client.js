@@ -2406,7 +2406,7 @@ class JobServiceClient {
    *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
    *   is created. For example, "projects/foo".
    * @param {Object[]} request.jobs
-   *   The jobs to be updated.
+   *   Required. The jobs to be updated.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [request.updateMask]

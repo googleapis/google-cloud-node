@@ -6588,6 +6588,9 @@ export namespace google {
                     /** JobQuery query */
                     query?: (string|null);
 
+                    /** JobQuery queryLanguageCode */
+                    queryLanguageCode?: (string|null);
+
                     /** JobQuery companies */
                     companies?: (string[]|null);
 
@@ -6636,6 +6639,9 @@ export namespace google {
 
                     /** JobQuery query. */
                     public query: string;
+
+                    /** JobQuery queryLanguageCode. */
+                    public queryLanguageCode: string;
 
                     /** JobQuery companies. */
                     public companies: string[];
