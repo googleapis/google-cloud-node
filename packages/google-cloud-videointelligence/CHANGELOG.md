@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.5.2...v2.6.0) (2019-11-07)
+
+
+### Features
+
+* support celebrity recognition ([#316](https://www.github.com/googleapis/nodejs-video-intelligence/issues/316)) ([a7235d3](https://www.github.com/googleapis/nodejs-video-intelligence/commit/a7235d301fe55936e06e7daa27daeeae341a22c2))
+
 ### [2.5.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.5.1...v2.5.2) (2019-10-29)
 
 
