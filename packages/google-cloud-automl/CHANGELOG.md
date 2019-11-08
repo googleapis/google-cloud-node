@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.7.3...v1.8.0) (2019-10-31)
+
+
+### Features
+
+* added samples for api-endpoints ([#259](https://www.github.com/googleapis/nodejs-automl/issues/259)) ([550ffb6](https://www.github.com/googleapis/nodejs-automl/commit/550ffb631a4d2516337dc85972ce4062b78e3ee2))
+
+
+### Bug Fixes
+
+* **samples:** remove extra print statement and "setEndpoint.js" from linkinator ([#261](https://www.github.com/googleapis/nodejs-automl/issues/261)) ([5fcb647](https://www.github.com/googleapis/nodejs-automl/commit/5fcb647ed8746ed34f93b01b95dbb67a518f29bb))
+
 ### [1.7.3](https://www.github.com/googleapis/nodejs-automl/compare/v1.7.2...v1.7.3) (2019-10-22)
 
 
