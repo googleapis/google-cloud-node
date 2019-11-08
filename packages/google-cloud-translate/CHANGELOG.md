@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.0.2](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.1...v5.0.2) (2019-11-08)
+
+
+### Bug Fixes
+
+* region tag ([#367](https://www.github.com/googleapis/nodejs-translate/issues/367)) ([13e75d2](https://www.github.com/googleapis/nodejs-translate/commit/13e75d2680e3c4f09e07b19cce650a91b212603f))
+
 ### [5.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.0...v5.0.1) (2019-10-28)
 
 
