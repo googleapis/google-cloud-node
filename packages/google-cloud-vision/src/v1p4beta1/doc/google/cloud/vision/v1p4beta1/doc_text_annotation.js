@@ -292,7 +292,7 @@ const Block = {
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1p4beta1.BoundingPoly}
  *
  * @property {Object[]} words
- *   List of words in this paragraph.
+ *   List of all words in this paragraph.
  *
  *   This object should have the same structure as [Word]{@link google.cloud.vision.v1p4beta1.Word}
  *
@@ -374,7 +374,7 @@ const Word = {
  *        2----3
  *        |    |
  *        1----0
- *     and the vertice order will still be (0, 1, 2, 3).
+ *     and the vertex order will still be (0, 1, 2, 3).
  *
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1p4beta1.BoundingPoly}
  *

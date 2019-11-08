@@ -29716,6 +29716,9 @@ export namespace google {
 
                     /** FaceAnnotation headwearLikelihood */
                     headwearLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+
+                    /** FaceAnnotation recognitionResult */
+                    recognitionResult?: (google.cloud.vision.v1p4beta1.IFaceRecognitionResult[]|null);
                 }
 
                 /** Represents a FaceAnnotation. */
@@ -29771,6 +29774,9 @@ export namespace google {
 
                     /** FaceAnnotation headwearLikelihood. */
                     public headwearLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+
+                    /** FaceAnnotation recognitionResult. */
+                    public recognitionResult: google.cloud.vision.v1p4beta1.IFaceRecognitionResult[];
 
                     /**
                      * Creates a new FaceAnnotation instance using the specified properties.
@@ -31304,6 +31310,9 @@ export namespace google {
                     /** ImageContext cropHintsParams */
                     cropHintsParams?: (google.cloud.vision.v1p4beta1.ICropHintsParams|null);
 
+                    /** ImageContext faceRecognitionParams */
+                    faceRecognitionParams?: (google.cloud.vision.v1p4beta1.IFaceRecognitionParams|null);
+
                     /** ImageContext productSearchParams */
                     productSearchParams?: (google.cloud.vision.v1p4beta1.IProductSearchParams|null);
 
@@ -31328,6 +31337,9 @@ export namespace google {
 
                     /** ImageContext cropHintsParams. */
                     public cropHintsParams?: (google.cloud.vision.v1p4beta1.ICropHintsParams|null);
+
+                    /** ImageContext faceRecognitionParams. */
+                    public faceRecognitionParams?: (google.cloud.vision.v1p4beta1.IFaceRecognitionParams|null);
 
                     /** ImageContext productSearchParams. */
                     public productSearchParams?: (google.cloud.vision.v1p4beta1.IProductSearchParams|null);
@@ -31772,108 +31784,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an AnnotateFileResponse. */
-                interface IAnnotateFileResponse {
-
-                    /** AnnotateFileResponse inputConfig */
-                    inputConfig?: (google.cloud.vision.v1p4beta1.IInputConfig|null);
-
-                    /** AnnotateFileResponse responses */
-                    responses?: (google.cloud.vision.v1p4beta1.IAnnotateImageResponse[]|null);
-
-                    /** AnnotateFileResponse totalPages */
-                    totalPages?: (number|null);
-                }
-
-                /** Represents an AnnotateFileResponse. */
-                class AnnotateFileResponse implements IAnnotateFileResponse {
-
-                    /**
-                     * Constructs a new AnnotateFileResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.vision.v1p4beta1.IAnnotateFileResponse);
-
-                    /** AnnotateFileResponse inputConfig. */
-                    public inputConfig?: (google.cloud.vision.v1p4beta1.IInputConfig|null);
-
-                    /** AnnotateFileResponse responses. */
-                    public responses: google.cloud.vision.v1p4beta1.IAnnotateImageResponse[];
-
-                    /** AnnotateFileResponse totalPages. */
-                    public totalPages: number;
-
-                    /**
-                     * Creates a new AnnotateFileResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns AnnotateFileResponse instance
-                     */
-                    public static create(properties?: google.cloud.vision.v1p4beta1.IAnnotateFileResponse): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
-
-                    /**
-                     * Encodes the specified AnnotateFileResponse message. Does not implicitly {@link google.cloud.vision.v1p4beta1.AnnotateFileResponse.verify|verify} messages.
-                     * @param message AnnotateFileResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.vision.v1p4beta1.IAnnotateFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified AnnotateFileResponse message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.AnnotateFileResponse.verify|verify} messages.
-                     * @param message AnnotateFileResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IAnnotateFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an AnnotateFileResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns AnnotateFileResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
-
-                    /**
-                     * Decodes an AnnotateFileResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns AnnotateFileResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
-
-                    /**
-                     * Verifies an AnnotateFileResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an AnnotateFileResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns AnnotateFileResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
-
-                    /**
-                     * Creates a plain object from an AnnotateFileResponse message. Also converts values to other types if specified.
-                     * @param message AnnotateFileResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.vision.v1p4beta1.AnnotateFileResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this AnnotateFileResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a BatchAnnotateImagesRequest. */
                 interface IBatchAnnotateImagesRequest {
 
@@ -32157,6 +32067,114 @@ export namespace google {
 
                     /**
                      * Converts this AnnotateFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AnnotateFileResponse. */
+                interface IAnnotateFileResponse {
+
+                    /** AnnotateFileResponse inputConfig */
+                    inputConfig?: (google.cloud.vision.v1p4beta1.IInputConfig|null);
+
+                    /** AnnotateFileResponse responses */
+                    responses?: (google.cloud.vision.v1p4beta1.IAnnotateImageResponse[]|null);
+
+                    /** AnnotateFileResponse totalPages */
+                    totalPages?: (number|null);
+
+                    /** AnnotateFileResponse error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an AnnotateFileResponse. */
+                class AnnotateFileResponse implements IAnnotateFileResponse {
+
+                    /**
+                     * Constructs a new AnnotateFileResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IAnnotateFileResponse);
+
+                    /** AnnotateFileResponse inputConfig. */
+                    public inputConfig?: (google.cloud.vision.v1p4beta1.IInputConfig|null);
+
+                    /** AnnotateFileResponse responses. */
+                    public responses: google.cloud.vision.v1p4beta1.IAnnotateImageResponse[];
+
+                    /** AnnotateFileResponse totalPages. */
+                    public totalPages: number;
+
+                    /** AnnotateFileResponse error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new AnnotateFileResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnnotateFileResponse instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IAnnotateFileResponse): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
+
+                    /**
+                     * Encodes the specified AnnotateFileResponse message. Does not implicitly {@link google.cloud.vision.v1p4beta1.AnnotateFileResponse.verify|verify} messages.
+                     * @param message AnnotateFileResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IAnnotateFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnnotateFileResponse message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.AnnotateFileResponse.verify|verify} messages.
+                     * @param message AnnotateFileResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IAnnotateFileResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnnotateFileResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnnotateFileResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
+
+                    /**
+                     * Decodes an AnnotateFileResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnnotateFileResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
+
+                    /**
+                     * Verifies an AnnotateFileResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnnotateFileResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnnotateFileResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.AnnotateFileResponse;
+
+                    /**
+                     * Creates a plain object from an AnnotateFileResponse message. Also converts values to other types if specified.
+                     * @param message AnnotateFileResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.AnnotateFileResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnnotateFileResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -33398,6 +33416,294 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a FaceRecognitionParams. */
+                interface IFaceRecognitionParams {
+
+                    /** FaceRecognitionParams celebritySet */
+                    celebritySet?: (string[]|null);
+                }
+
+                /** Represents a FaceRecognitionParams. */
+                class FaceRecognitionParams implements IFaceRecognitionParams {
+
+                    /**
+                     * Constructs a new FaceRecognitionParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams);
+
+                    /** FaceRecognitionParams celebritySet. */
+                    public celebritySet: string[];
+
+                    /**
+                     * Creates a new FaceRecognitionParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceRecognitionParams instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionParams): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Encodes the specified FaceRecognitionParams message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
+                     * @param message FaceRecognitionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceRecognitionParams message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionParams.verify|verify} messages.
+                     * @param message FaceRecognitionParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceRecognitionParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceRecognitionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Decodes a FaceRecognitionParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceRecognitionParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Verifies a FaceRecognitionParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceRecognitionParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceRecognitionParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionParams;
+
+                    /**
+                     * Creates a plain object from a FaceRecognitionParams message. Also converts values to other types if specified.
+                     * @param message FaceRecognitionParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceRecognitionParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Celebrity. */
+                interface ICelebrity {
+
+                    /** Celebrity name */
+                    name?: (string|null);
+
+                    /** Celebrity displayName */
+                    displayName?: (string|null);
+
+                    /** Celebrity description */
+                    description?: (string|null);
+                }
+
+                /** Represents a Celebrity. */
+                class Celebrity implements ICelebrity {
+
+                    /**
+                     * Constructs a new Celebrity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.ICelebrity);
+
+                    /** Celebrity name. */
+                    public name: string;
+
+                    /** Celebrity displayName. */
+                    public displayName: string;
+
+                    /** Celebrity description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new Celebrity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Celebrity instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.ICelebrity): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Encodes the specified Celebrity message. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Celebrity message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.Celebrity.verify|verify} messages.
+                     * @param message Celebrity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.ICelebrity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Decodes a Celebrity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Celebrity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Verifies a Celebrity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Celebrity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Celebrity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.Celebrity;
+
+                    /**
+                     * Creates a plain object from a Celebrity message. Also converts values to other types if specified.
+                     * @param message Celebrity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.Celebrity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Celebrity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FaceRecognitionResult. */
+                interface IFaceRecognitionResult {
+
+                    /** FaceRecognitionResult celebrity */
+                    celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
+
+                    /** FaceRecognitionResult confidence */
+                    confidence?: (number|null);
+                }
+
+                /** Represents a FaceRecognitionResult. */
+                class FaceRecognitionResult implements IFaceRecognitionResult {
+
+                    /**
+                     * Constructs a new FaceRecognitionResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult);
+
+                    /** FaceRecognitionResult celebrity. */
+                    public celebrity?: (google.cloud.vision.v1p4beta1.ICelebrity|null);
+
+                    /** FaceRecognitionResult confidence. */
+                    public confidence: number;
+
+                    /**
+                     * Creates a new FaceRecognitionResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceRecognitionResult instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IFaceRecognitionResult): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Encodes the specified FaceRecognitionResult message. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
+                     * @param message FaceRecognitionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceRecognitionResult message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.FaceRecognitionResult.verify|verify} messages.
+                     * @param message FaceRecognitionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IFaceRecognitionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceRecognitionResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceRecognitionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Decodes a FaceRecognitionResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceRecognitionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Verifies a FaceRecognitionResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceRecognitionResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceRecognitionResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.FaceRecognitionResult;
+
+                    /**
+                     * Creates a plain object from a FaceRecognitionResult message. Also converts values to other types if specified.
+                     * @param message FaceRecognitionResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.FaceRecognitionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceRecognitionResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Vertex. */
                 interface IVertex {
 
@@ -34102,6 +34408,114 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of an ObjectAnnotation. */
+                    interface IObjectAnnotation {
+
+                        /** ObjectAnnotation mid */
+                        mid?: (string|null);
+
+                        /** ObjectAnnotation languageCode */
+                        languageCode?: (string|null);
+
+                        /** ObjectAnnotation name */
+                        name?: (string|null);
+
+                        /** ObjectAnnotation score */
+                        score?: (number|null);
+                    }
+
+                    /** Represents an ObjectAnnotation. */
+                    class ObjectAnnotation implements IObjectAnnotation {
+
+                        /**
+                         * Constructs a new ObjectAnnotation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation);
+
+                        /** ObjectAnnotation mid. */
+                        public mid: string;
+
+                        /** ObjectAnnotation languageCode. */
+                        public languageCode: string;
+
+                        /** ObjectAnnotation name. */
+                        public name: string;
+
+                        /** ObjectAnnotation score. */
+                        public score: number;
+
+                        /**
+                         * Creates a new ObjectAnnotation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObjectAnnotation instance
+                         */
+                        public static create(properties?: google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation): google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Encodes the specified ObjectAnnotation message. Does not implicitly {@link google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation.verify|verify} messages.
+                         * @param message ObjectAnnotation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObjectAnnotation message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation.verify|verify} messages.
+                         * @param message ObjectAnnotation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObjectAnnotation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObjectAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Decodes an ObjectAnnotation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObjectAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Verifies an ObjectAnnotation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObjectAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObjectAnnotation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation;
+
+                        /**
+                         * Creates a plain object from an ObjectAnnotation message. Also converts values to other types if specified.
+                         * @param message ObjectAnnotation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObjectAnnotation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of a GroupedResult. */
                     interface IGroupedResult {
 
@@ -34110,6 +34524,9 @@ export namespace google {
 
                         /** GroupedResult results */
                         results?: (google.cloud.vision.v1p4beta1.ProductSearchResults.IResult[]|null);
+
+                        /** GroupedResult objectAnnotations */
+                        objectAnnotations?: (google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation[]|null);
                     }
 
                     /** Represents a GroupedResult. */
@@ -34126,6 +34543,9 @@ export namespace google {
 
                         /** GroupedResult results. */
                         public results: google.cloud.vision.v1p4beta1.ProductSearchResults.IResult[];
+
+                        /** GroupedResult objectAnnotations. */
+                        public objectAnnotations: google.cloud.vision.v1p4beta1.ProductSearchResults.IObjectAnnotation[];
 
                         /**
                          * Creates a new GroupedResult instance using the specified properties.
@@ -34470,6 +34890,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public importProductSets(request: google.cloud.vision.v1p4beta1.IImportProductSetsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PurgeProducts.
+                     * @param request PurgeProductsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public purgeProducts(request: google.cloud.vision.v1p4beta1.IPurgeProductsRequest, callback: google.cloud.vision.v1p4beta1.ProductSearch.PurgeProductsCallback): void;
+
+                    /**
+                     * Calls PurgeProducts.
+                     * @param request PurgeProductsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public purgeProducts(request: google.cloud.vision.v1p4beta1.IPurgeProductsRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ProductSearch {
@@ -34599,6 +35033,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportProductSetsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vision.v1p4beta1.ProductSearch#purgeProducts}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PurgeProductsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Product. */
@@ -37541,6 +37982,207 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ProductSetPurgeConfig. */
+                interface IProductSetPurgeConfig {
+
+                    /** ProductSetPurgeConfig productSetId */
+                    productSetId?: (string|null);
+                }
+
+                /** Represents a ProductSetPurgeConfig. */
+                class ProductSetPurgeConfig implements IProductSetPurgeConfig {
+
+                    /**
+                     * Constructs a new ProductSetPurgeConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IProductSetPurgeConfig);
+
+                    /** ProductSetPurgeConfig productSetId. */
+                    public productSetId: string;
+
+                    /**
+                     * Creates a new ProductSetPurgeConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProductSetPurgeConfig instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IProductSetPurgeConfig): google.cloud.vision.v1p4beta1.ProductSetPurgeConfig;
+
+                    /**
+                     * Encodes the specified ProductSetPurgeConfig message. Does not implicitly {@link google.cloud.vision.v1p4beta1.ProductSetPurgeConfig.verify|verify} messages.
+                     * @param message ProductSetPurgeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IProductSetPurgeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProductSetPurgeConfig message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.ProductSetPurgeConfig.verify|verify} messages.
+                     * @param message ProductSetPurgeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IProductSetPurgeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProductSetPurgeConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProductSetPurgeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.ProductSetPurgeConfig;
+
+                    /**
+                     * Decodes a ProductSetPurgeConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProductSetPurgeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.ProductSetPurgeConfig;
+
+                    /**
+                     * Verifies a ProductSetPurgeConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProductSetPurgeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProductSetPurgeConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.ProductSetPurgeConfig;
+
+                    /**
+                     * Creates a plain object from a ProductSetPurgeConfig message. Also converts values to other types if specified.
+                     * @param message ProductSetPurgeConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.ProductSetPurgeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProductSetPurgeConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PurgeProductsRequest. */
+                interface IPurgeProductsRequest {
+
+                    /** PurgeProductsRequest productSetPurgeConfig */
+                    productSetPurgeConfig?: (google.cloud.vision.v1p4beta1.IProductSetPurgeConfig|null);
+
+                    /** PurgeProductsRequest deleteOrphanProducts */
+                    deleteOrphanProducts?: (boolean|null);
+
+                    /** PurgeProductsRequest parent */
+                    parent?: (string|null);
+
+                    /** PurgeProductsRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a PurgeProductsRequest. */
+                class PurgeProductsRequest implements IPurgeProductsRequest {
+
+                    /**
+                     * Constructs a new PurgeProductsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vision.v1p4beta1.IPurgeProductsRequest);
+
+                    /** PurgeProductsRequest productSetPurgeConfig. */
+                    public productSetPurgeConfig?: (google.cloud.vision.v1p4beta1.IProductSetPurgeConfig|null);
+
+                    /** PurgeProductsRequest deleteOrphanProducts. */
+                    public deleteOrphanProducts: boolean;
+
+                    /** PurgeProductsRequest parent. */
+                    public parent: string;
+
+                    /** PurgeProductsRequest force. */
+                    public force: boolean;
+
+                    /** PurgeProductsRequest target. */
+                    public target?: ("productSetPurgeConfig"|"deleteOrphanProducts");
+
+                    /**
+                     * Creates a new PurgeProductsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PurgeProductsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vision.v1p4beta1.IPurgeProductsRequest): google.cloud.vision.v1p4beta1.PurgeProductsRequest;
+
+                    /**
+                     * Encodes the specified PurgeProductsRequest message. Does not implicitly {@link google.cloud.vision.v1p4beta1.PurgeProductsRequest.verify|verify} messages.
+                     * @param message PurgeProductsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vision.v1p4beta1.IPurgeProductsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PurgeProductsRequest message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.PurgeProductsRequest.verify|verify} messages.
+                     * @param message PurgeProductsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vision.v1p4beta1.IPurgeProductsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PurgeProductsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PurgeProductsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.PurgeProductsRequest;
+
+                    /**
+                     * Decodes a PurgeProductsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PurgeProductsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.PurgeProductsRequest;
+
+                    /**
+                     * Verifies a PurgeProductsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PurgeProductsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PurgeProductsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.PurgeProductsRequest;
+
+                    /**
+                     * Creates a plain object from a PurgeProductsRequest message. Also converts values to other types if specified.
+                     * @param message PurgeProductsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vision.v1p4beta1.PurgeProductsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PurgeProductsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a TextAnnotation. */
                 interface ITextAnnotation {
 
@@ -38826,102 +39468,6 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** Properties of a WebLabel. */
-                    interface IWebLabel {
-
-                        /** WebLabel label */
-                        label?: (string|null);
-
-                        /** WebLabel languageCode */
-                        languageCode?: (string|null);
-                    }
-
-                    /** Represents a WebLabel. */
-                    class WebLabel implements IWebLabel {
-
-                        /**
-                         * Constructs a new WebLabel.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel);
-
-                        /** WebLabel label. */
-                        public label: string;
-
-                        /** WebLabel languageCode. */
-                        public languageCode: string;
-
-                        /**
-                         * Creates a new WebLabel instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns WebLabel instance
-                         */
-                        public static create(properties?: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
-
-                        /**
-                         * Encodes the specified WebLabel message. Does not implicitly {@link google.cloud.vision.v1p4beta1.WebDetection.WebLabel.verify|verify} messages.
-                         * @param message WebLabel message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified WebLabel message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.WebDetection.WebLabel.verify|verify} messages.
-                         * @param message WebLabel message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a WebLabel message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns WebLabel
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
-
-                        /**
-                         * Decodes a WebLabel message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns WebLabel
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
-
-                        /**
-                         * Verifies a WebLabel message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a WebLabel message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns WebLabel
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
-
-                        /**
-                         * Creates a plain object from a WebLabel message. Also converts values to other types if specified.
-                         * @param message WebLabel
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.vision.v1p4beta1.WebDetection.WebLabel, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this WebLabel to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
                     /** Properties of a WebPage. */
                     interface IWebPage {
 
@@ -39031,6 +39577,102 @@ export namespace google {
 
                         /**
                          * Converts this WebPage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WebLabel. */
+                    interface IWebLabel {
+
+                        /** WebLabel label */
+                        label?: (string|null);
+
+                        /** WebLabel languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a WebLabel. */
+                    class WebLabel implements IWebLabel {
+
+                        /**
+                         * Constructs a new WebLabel.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel);
+
+                        /** WebLabel label. */
+                        public label: string;
+
+                        /** WebLabel languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new WebLabel instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WebLabel instance
+                         */
+                        public static create(properties?: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
+
+                        /**
+                         * Encodes the specified WebLabel message. Does not implicitly {@link google.cloud.vision.v1p4beta1.WebDetection.WebLabel.verify|verify} messages.
+                         * @param message WebLabel message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WebLabel message, length delimited. Does not implicitly {@link google.cloud.vision.v1p4beta1.WebDetection.WebLabel.verify|verify} messages.
+                         * @param message WebLabel message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vision.v1p4beta1.WebDetection.IWebLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WebLabel message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WebLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
+
+                        /**
+                         * Decodes a WebLabel message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WebLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
+
+                        /**
+                         * Verifies a WebLabel message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WebLabel message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WebLabel
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vision.v1p4beta1.WebDetection.WebLabel;
+
+                        /**
+                         * Creates a plain object from a WebLabel message. Also converts values to other types if specified.
+                         * @param message WebLabel
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vision.v1p4beta1.WebDetection.WebLabel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WebLabel to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

@@ -266,6 +266,15 @@ const Image = {
  *
  *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1p4beta1.Likelihood}
  *
+ * @property {Object[]} recognitionResult
+ *   Additional recognition information. Only computed if
+ *   image_context.face_recognition_params is provided, **and** a match is found
+ *   to a Celebrity in the input
+ *   CelebritySet. This field is
+ *   sorted in order of decreasing confidence values.
+ *
+ *   This object should have the same structure as [FaceRecognitionResult]{@link google.cloud.vision.v1p4beta1.FaceRecognitionResult}
+ *
  * @typedef FaceAnnotation
  * @memberof google.cloud.vision.v1p4beta1
  * @see [google.cloud.vision.v1p4beta1.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p4beta1/image_annotator.proto}
@@ -827,6 +836,11 @@ const WebDetectionParams = {
  *
  *   This object should have the same structure as [CropHintsParams]{@link google.cloud.vision.v1p4beta1.CropHintsParams}
  *
+ * @property {Object} faceRecognitionParams
+ *   Parameters for face recognition.
+ *
+ *   This object should have the same structure as [FaceRecognitionParams]{@link google.cloud.vision.v1p4beta1.FaceRecognitionParams}
+ *
  * @property {Object} productSearchParams
  *   Parameters for product search.
  *
@@ -980,31 +994,6 @@ const AnnotateImageResponse = {
 };
 
 /**
- * Response to a single file annotation request. A file may contain one or more
- * images, which individually have their own responses.
- *
- * @property {Object} inputConfig
- *   Information about the file for which this response is generated.
- *
- *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1p4beta1.InputConfig}
- *
- * @property {Object[]} responses
- *   Individual responses to images found within the file.
- *
- *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1p4beta1.AnnotateImageResponse}
- *
- * @property {number} totalPages
- *   This field gives the total number of pages in the file.
- *
- * @typedef AnnotateFileResponse
- * @memberof google.cloud.vision.v1p4beta1
- * @see [google.cloud.vision.v1p4beta1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p4beta1/image_annotator.proto}
- */
-const AnnotateFileResponse = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Multiple image annotation requests are batched into a single service call.
  *
  * @property {Object[]} requests
@@ -1079,11 +1068,43 @@ const AnnotateFileRequest = {
 };
 
 /**
+ * Response to a single file annotation request. A file may contain one or more
+ * images, which individually have their own responses.
+ *
+ * @property {Object} inputConfig
+ *   Information about the file for which this response is generated.
+ *
+ *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1p4beta1.InputConfig}
+ *
+ * @property {Object[]} responses
+ *   Individual responses to images found within the file. This field will be
+ *   empty if the `error` field is set.
+ *
+ *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1p4beta1.AnnotateImageResponse}
+ *
+ * @property {number} totalPages
+ *   This field gives the total number of pages in the file.
+ *
+ * @property {Object} error
+ *   If set, represents the error message for the failed request. The
+ *   `responses` field will not be set in this case.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
+ * @typedef AnnotateFileResponse
+ * @memberof google.cloud.vision.v1p4beta1
+ * @see [google.cloud.vision.v1p4beta1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p4beta1/image_annotator.proto}
+ */
+const AnnotateFileResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * A list of requests to annotate files using the BatchAnnotateFiles API.
  *
  * @property {Object[]} requests
- *   The list of file annotation requests. Right now we support only one
- *   AnnotateFileRequest in BatchAnnotateFilesRequest.
+ *   Required. The list of file annotation requests. Right now we support only
+ *   one AnnotateFileRequest in BatchAnnotateFilesRequest.
  *
  *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1p4beta1.AnnotateFileRequest}
  *
@@ -1163,7 +1184,7 @@ const AsyncAnnotateFileResponse = {
  * Request for async image annotation for a list of images.
  *
  * @property {Object[]} requests
- *   Individual image annotation requests for this batch.
+ *   Required. Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1p4beta1.AnnotateImageRequest}
  *
@@ -1201,7 +1222,7 @@ const AsyncBatchAnnotateImagesResponse = {
  * call.
  *
  * @property {Object[]} requests
- *   Individual async file annotation requests for this batch.
+ *   Required. Individual async file annotation requests for this batch.
  *
  *   This object should have the same structure as [AsyncAnnotateFileRequest]{@link google.cloud.vision.v1p4beta1.AsyncAnnotateFileRequest}
  *
@@ -1247,8 +1268,8 @@ const AsyncBatchAnnotateFilesResponse = {
  *   not work for AsyncBatchAnnotateFiles requests.
  *
  * @property {string} mimeType
- *   The type of the file. Currently only "application/pdf" and "image/tiff"
- *   are supported. Wildcards are not supported.
+ *   The type of the file. Currently only "application/pdf", "image/tiff" and
+ *   "image/gif" are supported. Wildcards are not supported.
  *
  * @typedef InputConfig
  * @memberof google.cloud.vision.v1p4beta1
@@ -1306,16 +1327,23 @@ const GcsSource = {
  * The Google Cloud Storage location where the output will be written to.
  *
  * @property {string} uri
- *   Google Cloud Storage URI where the results will be stored. Results will
- *   be in JSON format and preceded by its corresponding input URI. This field
- *   can either represent a single file, or a prefix for multiple outputs.
- *   Prefixes must end in a `/`.
+ *   Google Cloud Storage URI prefix where the results will be stored. Results
+ *   will be in JSON format and preceded by its corresponding input URI prefix.
+ *   This field can either represent a gcs file prefix or gcs directory. In
+ *   either case, the uri should be unique because in order to get all of the
+ *   output files, you will need to do a wildcard gcs search on the uri prefix
+ *   you provide.
  *
  *   Examples:
  *
- *   *    File: gs://bucket-name/filename.json
- *   *    Prefix: gs://bucket-name/prefix/here/
- *   *    File: gs://bucket-name/prefix/here
+ *   *    File Prefix: gs://bucket-name/here/filenameprefix   The output files
+ *   will be created in gs://bucket-name/here/ and the names of the
+ *   output files will begin with "filenameprefix".
+ *
+ *   *    Directory Prefix: gs://bucket-name/some/location/   The output files
+ *   will be created in gs://bucket-name/some/location/ and the names of the
+ *   output files could be anything because there was no filename prefix
+ *   specified.
  *
  *   If multiple outputs, each response is still AnnotateFileResponse, each of
  *   which contains some subset of the full list of AnnotateImageResponse.
@@ -1405,27 +1433,27 @@ const Likelihood = {
   UNKNOWN: 0,
 
   /**
-   * It is very unlikely that the image belongs to the specified vertical.
+   * It is very unlikely.
    */
   VERY_UNLIKELY: 1,
 
   /**
-   * It is unlikely that the image belongs to the specified vertical.
+   * It is unlikely.
    */
   UNLIKELY: 2,
 
   /**
-   * It is possible that the image belongs to the specified vertical.
+   * It is possible.
    */
   POSSIBLE: 3,
 
   /**
-   * It is likely that the image belongs to the specified vertical.
+   * It is likely.
    */
   LIKELY: 4,
 
   /**
-   * It is very likely that the image belongs to the specified vertical.
+   * It is very likely.
    */
   VERY_LIKELY: 5
 };

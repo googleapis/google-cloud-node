@@ -20,7 +20,7 @@
  *
  * @property {Object} boundingPoly
  *   The bounding polygon around the area of interest in the image.
- *   Optional. If it is not specified, system discretion will be applied.
+ *   If it is not specified, system discretion will be applied.
  *
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1p4beta1.BoundingPoly}
  *
@@ -44,10 +44,12 @@
  * @property {string} filter
  *   The filtering expression. This can be used to restrict search results based
  *   on Product labels. We currently support an AND of OR of key-value
- *   expressions, where each expression within an OR must have the same key.
+ *   expressions, where each expression within an OR must have the same key. An
+ *   '=' should be used to connect the key and value.
  *
  *   For example, "(color = red OR color = blue) AND brand = Google" is
- *   acceptable, but not "(color = red OR brand = Google)" or "color: red".
+ *   acceptable, but "(color = red OR brand = Google)" is not acceptable.
+ *   "color: red" is not acceptable because it uses a ':' instead of an '='.
  *
  * @typedef ProductSearchParams
  * @memberof google.cloud.vision.v1p4beta1
@@ -61,8 +63,9 @@ const ProductSearchParams = {
  * Results for a product search request.
  *
  * @property {Object} indexTime
- *   Timestamp of the index which provided these results. Changes made after
- *   this time are not reflected in the current results.
+ *   Timestamp of the index which provided these results. Products added to the
+ *   product set and products removed from the product set after this time are
+ *   not reflected in the current results.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -111,6 +114,31 @@ const ProductSearchResults = {
   },
 
   /**
+   * Prediction for what the object in the bounding box is.
+   *
+   * @property {string} mid
+   *   Object ID that should align with EntityAnnotation mid.
+   *
+   * @property {string} languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see
+   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+   *
+   * @property {string} name
+   *   Object name, expressed in its `language_code` language.
+   *
+   * @property {number} score
+   *   Score of the result. Range [0, 1].
+   *
+   * @typedef ObjectAnnotation
+   * @memberof google.cloud.vision.v1p4beta1
+   * @see [google.cloud.vision.v1p4beta1.ProductSearchResults.ObjectAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p4beta1/product_search.proto}
+   */
+  ObjectAnnotation: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
    * Information about the products similar to a single product in a query
    * image.
    *
@@ -123,6 +151,11 @@ const ProductSearchResults = {
    *   List of results, one for each product match.
    *
    *   This object should have the same structure as [Result]{@link google.cloud.vision.v1p4beta1.Result}
+   *
+   * @property {Object[]} objectAnnotations
+   *   List of generic predictions for the object in the bounding box.
+   *
+   *   This object should have the same structure as [ObjectAnnotation]{@link google.cloud.vision.v1p4beta1.ObjectAnnotation}
    *
    * @typedef GroupedResult
    * @memberof google.cloud.vision.v1p4beta1

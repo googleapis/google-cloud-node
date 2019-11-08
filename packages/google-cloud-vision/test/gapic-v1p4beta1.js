@@ -1303,6 +1303,62 @@ describe('ProductSearchClient', () => {
       );
     });
   });
+
+  describe('purgeProducts', () => {
+    it('invokes purgeProducts without error', done => {
+      const client = new visionModule.v1p4beta1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock response
+      const name = 'name3373707';
+      const done_ = true;
+      const expectedResponse = {
+        name: name,
+        done: done_,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.purgeProducts = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.purgeProducts(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes purgeProducts with error', done => {
+      const client = new visionModule.v1p4beta1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.purgeProducts = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.purgeProducts(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
 });
 describe('ImageAnnotatorClient', () => {
   it('has servicePath', () => {

@@ -252,6 +252,7 @@ class ProductSearchClient {
       'removeProductFromProductSet',
       'listProductsInProductSet',
       'importProductSets',
+      'purgeProducts',
     ];
     for (const methodName of productSearchStubMethods) {
       const innerCallPromise = productSearchStub.then(
@@ -328,11 +329,11 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the ProductSet should be created.
+   *   Required. The project in which the ProductSet should be created.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.productSet
-   *   The ProductSet to create.
+   *   Required. The ProductSet to create.
    *
    *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1p4beta1.ProductSet}
    * @param {string} request.productSetId
@@ -405,7 +406,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
+   *   Required. The project from which ProductSets should be listed.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {number} [request.pageSize]
@@ -519,7 +520,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
+   *   Required. The project from which ProductSets should be listed.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {number} [request.pageSize]
@@ -570,7 +571,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the ProductSet to get.
+   *   Required. Resource name of the ProductSet to get.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
@@ -634,7 +635,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.productSet
-   *   The ProductSet resource which replaces the one on the server.
+   *   Required. The ProductSet resource which replaces the one on the server.
    *
    *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1p4beta1.ProductSet}
    * @param {Object} request.updateMask
@@ -702,14 +703,10 @@ class ProductSearchClient {
    *
    * The actual image files are not deleted from Google Cloud Storage.
    *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the ProductSet does not exist.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the ProductSet to delete.
+   *   Required. Resource name of the ProductSet to delete.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -765,12 +762,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the Product should be created.
+   *   Required. The project in which the Product should be created.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.product
-   *   The product to create.
+   *   Required. The product to create.
    *
    *   This object should have the same structure as [Product]{@link google.cloud.vision.v1p4beta1.Product}
    * @param {string} request.productId
@@ -842,7 +839,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project OR ProductSet from which Products should be listed.
+   *   Required. The project OR ProductSet from which Products should be listed.
    *
    *   Format:
    *   `projects/PROJECT_ID/locations/LOC_ID`
@@ -957,7 +954,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project OR ProductSet from which Products should be listed.
+   *   Required. The project OR ProductSet from which Products should be listed.
    *
    *   Format:
    *   `projects/PROJECT_ID/locations/LOC_ID`
@@ -1009,7 +1006,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the Product to get.
+   *   Required. Resource name of the Product to get.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1080,7 +1077,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.product
-   *   The Product resource which replaces the one on the server.
+   *   Required. The Product resource which replaces the one on the server.
    *   product.name is immutable.
    *
    *   This object should have the same structure as [Product]{@link google.cloud.vision.v1p4beta1.Product}
@@ -1151,14 +1148,10 @@ class ProductSearchClient {
    * search queries against ProductSets containing the product may still work
    * until all related caches are refreshed.
    *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the product does not exist.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of product to delete.
+   *   Required. Resource name of product to delete.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1225,12 +1218,13 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product in which to create the reference image.
+   *   Required. Resource name of the product in which to create the reference
+   *   image.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
    * @param {Object} request.referenceImage
-   *   The reference image to create.
+   *   Required. The reference image to create.
    *   If an image ID is specified, it is ignored.
    *
    *   This object should have the same structure as [ReferenceImage]{@link google.cloud.vision.v1p4beta1.ReferenceImage}
@@ -1302,14 +1296,10 @@ class ProductSearchClient {
    *
    * The actual image files are not deleted from Google Cloud Storage.
    *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the reference image does not exist.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the reference image to delete.
+   *   Required. The resource name of the reference image to delete.
    *
    *   Format is:
    *
@@ -1365,7 +1355,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product containing the reference images.
+   *   Required. Resource name of the product containing the reference images.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1480,7 +1470,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product containing the reference images.
+   *   Required. Resource name of the product containing the reference images.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1532,7 +1522,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the ReferenceImage to get.
+   *   Required. The resource name of the ReferenceImage to get.
    *
    *   Format is:
    *
@@ -1597,12 +1587,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name for the ProductSet to modify.
+   *   Required. The resource name for the ProductSet to modify.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {string} request.product
-   *   The resource name for the Product to be added to this ProductSet.
+   *   Required. The resource name for the Product to be added to this ProductSet.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1657,19 +1647,16 @@ class ProductSearchClient {
   /**
    * Removes a Product from the specified ProductSet.
    *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND If the Product is not found under the ProductSet.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name for the ProductSet to modify.
+   *   Required. The resource name for the ProductSet to modify.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {string} request.product
-   *   The resource name for the Product to be removed from this ProductSet.
+   *   Required. The resource name for the Product to be removed from this
+   *   ProductSet.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1733,7 +1720,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The ProductSet resource for which to retrieve Products.
+   *   Required. The ProductSet resource for which to retrieve Products.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -1852,7 +1839,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The ProductSet resource for which to retrieve Products.
+   *   Required. The ProductSet resource for which to retrieve Products.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -1910,11 +1897,11 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the ProductSets should be imported.
+   *   Required. The project in which the ProductSets should be imported.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.inputConfig
-   *   The input content for the list of requests.
+   *   Required. The input content for the list of requests.
    *
    *   This object should have the same structure as [ImportProductSetsInputConfig]{@link google.cloud.vision.v1p4beta1.ImportProductSetsInputConfig}
    * @param {Object} [options]
@@ -2021,6 +2008,95 @@ class ProductSearchClient {
     });
 
     return this._innerApiCalls.importProductSets(request, options, callback);
+  }
+
+  /**
+   * Asynchronous API to delete all Products in a ProductSet or all Products
+   * that are in no ProductSet.
+   *
+   * If a Product is a member of the specified ProductSet in addition to other
+   * ProductSets, the Product will still be deleted.
+   *
+   * It is recommended to not delete the specified ProductSet until after this
+   * operation has completed. It is also recommended to not add any of the
+   * Products involved in the batch delete to a new ProductSet while this
+   * operation is running because those Products may still end up deleted.
+   *
+   * It's not possible to undo the PurgeProducts operation. Therefore, it is
+   * recommended to keep the csv files used in ImportProductSets (if that was
+   * how you originally built the Product Set) before starting PurgeProducts, in
+   * case you need to re-import the data after deletion.
+   *
+   * If the plan is to purge all of the Products from a ProductSet and then
+   * re-use the empty ProductSet to re-import new Products into the empty
+   * ProductSet, you must wait until the PurgeProducts operation has finished
+   * for that ProductSet.
+   *
+   * The google.longrunning.Operation API can be
+   * used to keep track of the progress and results of the request.
+   * `Operation.metadata` contains `BatchOperationMetadata`. (progress)
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} [request.productSetPurgeConfig]
+   *   Specify which ProductSet contains the Products to be deleted.
+   *
+   *   This object should have the same structure as [ProductSetPurgeConfig]{@link google.cloud.vision.v1p4beta1.ProductSetPurgeConfig}
+   * @param {boolean} [request.deleteOrphanProducts]
+   *   If delete_orphan_products is true, all Products that are not in any
+   *   ProductSet will be deleted.
+   * @param {string} [request.parent]
+   *   Required. The project and location in which the Products should be deleted.
+   *
+   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+   * @param {boolean} [request.force]
+   *   The default value is false. Override this value to true to actually perform
+   *   the purge.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Operation]{@link google.longrunning.Operation}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('vision.v1p4beta1');
+   *
+   * const client = new vision.v1p4beta1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   *
+   * client.purgeProducts({})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  purgeProducts(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.purgeProducts(request, options, callback);
   }
 
   // --------------------
