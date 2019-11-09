@@ -385,7 +385,10 @@ describe('Datastore', () => {
       };
       const key1 = datastore.key('Post');
       const key2 = datastore.key('Post');
-      await datastore.save([{key: key1, data: post}, {key: key2, data: post2}]);
+      await datastore.save([
+        {key: key1, data: post},
+        {key: key2, data: post2},
+      ]);
       const [entities] = await datastore.get([key1, key2]);
       assert.strictEqual(entities.length, 2);
       await datastore.delete([key1, key2]);
@@ -396,7 +399,10 @@ describe('Datastore', () => {
       const key2 = datastore.key('Post');
 
       datastore.save(
-        [{key: key1, data: post}, {key: key2, data: post}],
+        [
+          {key: key1, data: post},
+          {key: key2, data: post},
+        ],
         err => {
           assert.ifError(err);
 

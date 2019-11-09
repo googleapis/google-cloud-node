@@ -1223,7 +1223,13 @@ describe('Request', () => {
 
         callback();
       };
-      request.save([{key, data: {k: 'v'}}, {key, data: {k: 'v'}}], done);
+      request.save(
+        [
+          {key, data: {k: 'v'}},
+          {key, data: {k: 'v'}},
+        ],
+        done
+      );
     });
 
     it('should allow customization of GAX options', done => {
