@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.5.1...v1.6.0) (2019-11-08)
+
+
+### Features
+
+* add query language code parameter ([#118](https://www.github.com/googleapis/nodejs-talent/issues/118)) ([71845bf](https://www.github.com/googleapis/nodejs-talent/commit/71845bf76d677268ec1a17d926da6fb1fadef930))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.5.0...v1.5.1) (2019-10-22)
 
 
