@@ -105,6 +105,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
+    "jsdoc-region-tag": "^1.0.0",
     "linkinator": "^1.5.0",
     "mocha": "^6.0.0",
     "nock": "~11.7.0",

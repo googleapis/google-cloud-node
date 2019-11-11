@@ -1340,10 +1340,7 @@ class File extends ServiceObject<File> {
         rawResponseStream
           .on('error', onComplete)
           .on('end', onComplete)
-          .pipe(
-            throughStream,
-            {end: false}
-          );
+          .pipe(throughStream, {end: false});
       };
 
       // This is hooked to the `complete` event from the request stream. This is
