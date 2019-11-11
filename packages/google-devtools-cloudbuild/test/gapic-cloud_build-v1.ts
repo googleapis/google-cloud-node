@@ -817,6 +817,37 @@ describe('CloudBuildClient', () => {
       });
     });
   });
+  describe('listBuildsStream', () => {
+    it('invokes listBuildsStream without error', done => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest = {};
+      // Mock response
+      const expectedResponse = {};
+      // Mock Grpc layer
+      client._innerApiCalls.listBuilds = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      const stream = client
+        .listBuildsStream(request, {})
+        .on('data', (response: {}) => {
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        })
+        .on('error', (err: FakeError) => {
+          done(err);
+        });
+      stream.write(request);
+    });
+  });
   describe('listBuildTriggers', () => {
     it('invokes listBuildTriggers without error', done => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
@@ -841,6 +872,37 @@ describe('CloudBuildClient', () => {
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
+    });
+  });
+  describe('listBuildTriggersStream', () => {
+    it('invokes listBuildTriggersStream without error', done => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest = {};
+      // Mock response
+      const expectedResponse = {};
+      // Mock Grpc layer
+      client._innerApiCalls.listBuildTriggers = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      const stream = client
+        .listBuildTriggersStream(request, {})
+        .on('data', (response: {}) => {
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        })
+        .on('error', (err: FakeError) => {
+          done(err);
+        });
+      stream.write(request);
     });
   });
 });

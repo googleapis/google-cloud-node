@@ -19,6 +19,7 @@
 import * as gax from 'google-gax';
 import * as path from 'path';
 
+import {Transform} from 'stream';
 import * as protosTypes from '../../protos/protos';
 import * as gapicConfig from './cloud_build_client_config.json';
 
@@ -83,17 +84,17 @@ export interface PaginationResponse<
   rawResponse?: ResponseObject;
 }
 
+/**
+ *  Creates and manages builds on Google Cloud Platform.
+ *
+ *  The main concept used by this API is a `Build`, which describes the location
+ *  of the source to build, how to build the source, and where to store the
+ *  built artifacts, if any.
+ *
+ *  A user can list previously-requested builds or get builds by their ID to
+ *  determine the status of the build.
+ */
 export class CloudBuildClient {
-  /**
-   *  Creates and manages builds on Google Cloud Platform.
-   *
-   *  The main concept used by this API is a `Build`, which describes the location
-   *  of the source to build, how to build the source, and where to store the
-   *  built artifacts, if any.
-   *
-   *  A user can list previously-requested builds or get builds by their ID to
-   *  determine the status of the build.
-   */
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
   private _innerApiCalls: {[name: string]: Function};
   auth: gax.GoogleAuth;
@@ -118,10 +119,8 @@ export class CloudBuildClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@@link
-   * https://developers.google.com/identity/protocols/application-default-credentials
-   * Application Default Credentials}, your project ID will be detected
-   * automatically.
+   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     your project ID will be detected automatically.
    * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
    * @param {string} [options.apiEndpoint] - The domain name of the
@@ -164,13 +163,15 @@ export class CloudBuildClient {
     this.auth = gaxGrpc.auth as gax.GoogleAuth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.version}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gaxModule.version}`,
-      `gapic/${version}`,
-      `gl-web/${gaxModule.version}`,
-    ];
+    const clientHeader = [`gax/${gaxModule.version}`, `gapic/${version}`];
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    } else {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    }
+    if (!opts.fallback) {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
@@ -204,6 +205,7 @@ export class CloudBuildClient {
         'triggers'
       ),
     };
+
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -218,22 +220,22 @@ export class CloudBuildClient {
       })
       .operationsClient(opts);
     const createBuildResponse = protoFilesRoot.lookup(
-      'Build'
+      '.google.devtools.cloudbuild.v1.Build'
     ) as gax.protobuf.Type;
     const createBuildMetadata = protoFilesRoot.lookup(
-      'BuildOperationMetadata'
+      '.google.devtools.cloudbuild.v1.BuildOperationMetadata'
     ) as gax.protobuf.Type;
     const retryBuildResponse = protoFilesRoot.lookup(
-      'Build'
+      '.google.devtools.cloudbuild.v1.Build'
     ) as gax.protobuf.Type;
     const retryBuildMetadata = protoFilesRoot.lookup(
-      'BuildOperationMetadata'
+      '.google.devtools.cloudbuild.v1.BuildOperationMetadata'
     ) as gax.protobuf.Type;
     const runBuildTriggerResponse = protoFilesRoot.lookup(
-      'Build'
+      '.google.devtools.cloudbuild.v1.Build'
     ) as gax.protobuf.Type;
     const runBuildTriggerMetadata = protoFilesRoot.lookup(
-      'BuildOperationMetadata'
+      '.google.devtools.cloudbuild.v1.BuildOperationMetadata'
     ) as gax.protobuf.Type;
 
     this._descriptors.longrunning = {
@@ -268,7 +270,7 @@ export class CloudBuildClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.showcase.v1alpha2.Echo.
+    // google.devtools.cloudbuild.v1.CloudBuild.
     const cloudBuildStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
@@ -279,6 +281,8 @@ export class CloudBuildClient {
       opts
     ) as Promise<{[method: string]: Function}>;
 
+    // Iterate over each of the methods that the service provides
+    // and create an API call method for each.
     const cloudBuildStubMethods = [
       'createBuild',
       'getBuild',
@@ -308,7 +312,7 @@ export class CloudBuildClient {
         }
       );
 
-      this._innerApiCalls[methodName] = gax.createApiCall(
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
@@ -317,12 +321,14 @@ export class CloudBuildClient {
       );
     }
   }
+
   /**
    * The DNS address for this API service.
    */
   static get servicePath() {
     return 'cloudbuild.googleapis.com';
   }
+
   /**
    * The DNS address for this API service - same as servicePath(),
    * exists for compatibility reasons.
@@ -346,13 +352,13 @@ export class CloudBuildClient {
     return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
+  getProjectId(): Promise<string>;
+  getProjectId(callback: Callback<string, undefined, undefined>): void;
   /**
    * Return the project ID used by this class.
    * @param {function(Error, string)} callback - the callback to
    *   be called with the current project Id.
    */
-  getProjectId(): Promise<string>;
-  getProjectId(callback: Callback<string, undefined, undefined>): void;
   getProjectId(
     callback?: Callback<string, undefined, undefined>
   ): Promise<string> | void {
@@ -366,22 +372,6 @@ export class CloudBuildClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns information about a previously requested build.
-   *
-   * The `Build` that is returned includes its status (such as `SUCCESS`,
-   * `FAILURE`, or `WORKING`), and timing information.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project.
-   * @param {string} request.id
-   *   Required. ID of the build.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   getBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildRequest,
     options?: gax.CallOptions
@@ -401,6 +391,24 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Returns information about a previously requested build.
+   *
+   * The `Build` that is returned includes its status (such as `SUCCESS`,
+   * `FAILURE`, or `WORKING`), and timing information.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project.
+   * @param {string} request.id
+   *   Required. ID of the build.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildRequest,
     optionsOrCallback?:
@@ -434,19 +442,6 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.getBuild(request, options, callback);
   }
-  /**
-   * Cancels a build in progress.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project.
-   * @param {string} request.id
-   *   Required. ID of the build.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   cancelBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     options?: gax.CallOptions
@@ -466,6 +461,21 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Cancels a build in progress.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project.
+   * @param {string} request.id
+   *   Required. ID of the build.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   cancelBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     optionsOrCallback?:
@@ -499,31 +509,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.cancelBuild(request, options, callback);
   }
-  /**
-   * Creates a new `BuildTrigger`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project for which to configure automatic builds.
-   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
-   *   Required. `BuildTrigger` to create.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   createBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -537,6 +532,23 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Creates a new `BuildTrigger`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project for which to configure automatic builds.
+   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
+   *   Required. `BuildTrigger` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     optionsOrCallback?:
@@ -556,10 +568,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -574,31 +586,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.createBuildTrigger(request, options, callback);
   }
-  /**
-   * Returns information about a `BuildTrigger`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
-   *   Required. ID of the `BuildTrigger` to get.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   getBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -612,6 +609,23 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Returns information about a `BuildTrigger`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.trigger_id
+   *   Required. ID of the `BuildTrigger` to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     optionsOrCallback?:
@@ -631,10 +645,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -649,31 +663,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.getBuildTrigger(request, options, callback);
   }
-  /**
-   * Deletes a `BuildTrigger` by its project ID and trigger ID.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
-   *   Required. ID of the `BuildTrigger` to delete.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   deleteBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -687,6 +686,23 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Deletes a `BuildTrigger` by its project ID and trigger ID.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.trigger_id
+   *   Required. ID of the `BuildTrigger` to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   deleteBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     optionsOrCallback?:
@@ -706,10 +722,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -724,33 +740,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
-  /**
-   * Updates a `BuildTrigger` by its project ID and trigger ID.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
-   *   Required. ID of the `BuildTrigger` to update.
-   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
-   *   Required. `BuildTrigger` to update.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   updateBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -764,6 +763,25 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Updates a `BuildTrigger` by its project ID and trigger ID.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.trigger_id
+   *   Required. ID of the `BuildTrigger` to update.
+   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
+   *   Required. `BuildTrigger` to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   updateBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     optionsOrCallback?:
@@ -783,10 +801,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IBuildTrigger,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -801,31 +819,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.updateBuildTrigger(request, options, callback);
   }
-  /**
-   * Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   ID of the parent project.
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
-   *   `WorkerPool` resource to create.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   createWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -839,6 +842,23 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Creates a `WorkerPool` to run the builds, and returns the new worker pool.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   ID of the parent project.
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
+   *   `WorkerPool` resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     optionsOrCallback?:
@@ -858,10 +878,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -876,30 +896,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.createWorkerPool(request, options, callback);
   }
-  /**
-   * Returns information about a `WorkerPool`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   getWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -913,6 +919,22 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Returns information about a `WorkerPool`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The field will contain name of the resource requested, for example:
+   *   "projects/project-1/workerPools/workerpool-name"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     optionsOrCallback?:
@@ -932,10 +954,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -950,30 +972,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.getWorkerPool(request, options, callback);
   }
-  /**
-   * Deletes a `WorkerPool` by its project ID and WorkerPool name.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   deleteWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -987,6 +995,22 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Deletes a `WorkerPool` by its project ID and WorkerPool name.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The field will contain name of the resource requested, for example:
+   *   "projects/project-1/workerPools/workerpool-name"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   deleteWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     optionsOrCallback?:
@@ -1006,10 +1030,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1024,32 +1048,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.deleteWorkerPool(request, options, callback);
   }
-  /**
-   * Update a `WorkerPool`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
-   *   `WorkerPool` resource to update.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   updateWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -1063,6 +1071,24 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Update a `WorkerPool`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The field will contain name of the resource requested, for example:
+   *   "projects/project-1/workerPools/workerpool-name"
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
+   *   `WorkerPool` resource to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   updateWorkerPool(
     request: protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     optionsOrCallback?:
@@ -1082,10 +1108,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IWorkerPool,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1100,29 +1126,16 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.updateWorkerPool(request, options, callback);
   }
-  /**
-   * List project's `WorkerPool`s.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   ID of the parent project.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListWorkerPoolsResponse]{@link google.devtools.cloudbuild.v1.ListWorkerPoolsResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   listWorkerPools(
     request: protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     options?: gax.CallOptions
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -1136,6 +1149,21 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * List project's `WorkerPool`s.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   ID of the parent project.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListWorkerPoolsResponse]{@link google.devtools.cloudbuild.v1.ListWorkerPoolsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listWorkerPools(
     request: protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     optionsOrCallback?:
@@ -1155,10 +1183,10 @@ export class CloudBuildClient {
   ): Promise<
     [
       protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-
-
+      (
         | protosTypes.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1174,23 +1202,6 @@ export class CloudBuildClient {
     return this._innerApiCalls.listWorkerPools(request, options, callback);
   }
 
-  /**
-   * Starts a build with the specified configuration.
-   *
-   * This method returns a long-running `Operation`, which includes the build
-   * ID. Pass the build ID to `GetBuild` to determine the build status (such as
-   * `SUCCESS` or `FAILURE`).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project.
-   * @param {google.devtools.cloudbuild.v1.Build} request.build
-   *   Required. Build resource to create.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   createBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     options?: gax.CallOptions
@@ -1216,6 +1227,25 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Starts a build with the specified configuration.
+   *
+   * This method returns a long-running `Operation`, which includes the build
+   * ID. Pass the build ID to `GetBuild` to determine the build status (such as
+   * `SUCCESS` or `FAILURE`).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project.
+   * @param {google.devtools.cloudbuild.v1.Build} request.build
+   *   Required. Build resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   createBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     optionsOrCallback?:
@@ -1257,6 +1287,31 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.createBuild(request, options, callback);
   }
+  retryBuild(
+    request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      Operation<
+        protosTypes.google.devtools.cloudbuild.v1.IBuild,
+        protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  retryBuild(
+    request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      Operation<
+        protosTypes.google.devtools.cloudbuild.v1.IBuild,
+        protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    >
+  ): void;
   /**
    * Creates a new build based on the specified build.
    *
@@ -1292,35 +1347,12 @@ export class CloudBuildClient {
    *   Required. ID of the project.
    * @param {string} request.id
    *   Required. Build ID of the original build.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
-  retryBuild(
-    request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      Operation<
-        protosTypes.google.devtools.cloudbuild.v1.IBuild,
-        protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  retryBuild(
-    request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      Operation<
-        protosTypes.google.devtools.cloudbuild.v1.IBuild,
-        protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >,
-      protosTypes.google.longrunning.IOperation | undefined,
-      {} | undefined
-    >
-  ): void;
   retryBuild(
     request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     optionsOrCallback?:
@@ -1362,21 +1394,6 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.retryBuild(request, options, callback);
   }
-  /**
-   * Runs a `BuildTrigger` at a particular source revision.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project.
-   * @param {string} request.trigger_id
-   *   Required. ID of the trigger.
-   * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
-   *   Required. Source to build against this trigger.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   runBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     options?: gax.CallOptions
@@ -1402,6 +1419,23 @@ export class CloudBuildClient {
       {} | undefined
     >
   ): void;
+  /**
+   * Runs a `BuildTrigger` at a particular source revision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project.
+   * @param {string} request.trigger_id
+   *   Required. ID of the trigger.
+   * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
+   *   Required. Source to build against this trigger.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   runBuildTrigger(
     request: protosTypes.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     optionsOrCallback?:
@@ -1443,33 +1477,6 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.runBuildTrigger(request, options, callback);
   }
-  /**
-   * Lists previously requested builds.
-   *
-   * Previously requested builds may still be in-progress, or may have finished
-   * successfully or unsuccessfully.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project.
-   * @param {number} request.page_size
-   *   Number of results to return in the list.
-   * @param {string} request.page_token
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {string} request.filter
-   *   The raw filter text to constrain the results.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse}.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
   listBuilds(
     request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest,
     options?: gax.CallOptions
@@ -1489,6 +1496,35 @@ export class CloudBuildClient {
       protosTypes.google.devtools.cloudbuild.v1.IListBuildsResponse
     >
   ): void;
+  /**
+   * Lists previously requested builds.
+   *
+   * Previously requested builds may still be in-progress, or may have finished
+   * successfully or unsuccessfully.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project.
+   * @param {number} request.page_size
+   *   Number of results to return in the list.
+   * @param {string} request.page_token
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {string} request.filter
+   *   The raw filter text to constrain the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListBuildsResponse]{@link google.devtools.cloudbuild.v1.ListBuildsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listBuilds(
     request: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest,
     optionsOrCallback?:
@@ -1521,30 +1557,19 @@ export class CloudBuildClient {
     options = options || {};
     return this._innerApiCalls.listBuilds(request, options, callback);
   }
-  /**
-   * Lists existing `BuildTrigger`s.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project_id
-   *   Required. ID of the project for which to list BuildTriggers.
-   * @param {number} request.page_size
-   *   Number of results to return in the list.
-   * @param {string} request.page_token
-   *   Token to provide to skip to a particular spot in the list.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse}.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   */
+
+  listBuildsStream(
+    request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    options?: gax.CallOptions | {}
+  ): Transform {
+    request = request || {};
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listBuilds.createStream(
+      this._innerApiCalls.listBuilds as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
   listBuildTriggers(
     request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     options?: gax.CallOptions
@@ -1564,6 +1589,32 @@ export class CloudBuildClient {
       protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersResponse
     >
   ): void;
+  /**
+   * Lists existing `BuildTrigger`s.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project_id
+   *   Required. ID of the project for which to list BuildTriggers.
+   * @param {number} request.page_size
+   *   Number of results to return in the list.
+   * @param {string} request.page_token
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListBuildTriggersResponse]{@link google.devtools.cloudbuild.v1.ListBuildTriggersResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   listBuildTriggers(
     request: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     optionsOrCallback?:
@@ -1595,5 +1646,18 @@ export class CloudBuildClient {
     }
     options = options || {};
     return this._innerApiCalls.listBuildTriggers(request, options, callback);
+  }
+
+  listBuildTriggersStream(
+    request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
+    options?: gax.CallOptions | {}
+  ): Transform {
+    request = request || {};
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listBuildTriggers.createStream(
+      this._innerApiCalls.listBuildTriggers as gax.GaxCall,
+      request,
+      callSettings
+    );
   }
 }
