@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.0.0...v1.1.0) (2019-11-11)
+
+
+### Features
+
+* adds listBuildTriggersStream method ([59dad8a](https://www.github.com/googleapis/nodejs-cloudbuild/commit/59dad8afb351527cd7fd3348921ce30e4cd1956b))
+
 ## 1.0.0 (2019-10-31)
 
 
