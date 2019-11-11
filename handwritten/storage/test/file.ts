@@ -1709,6 +1709,21 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should start a resumable upload if configPath is provided', done => {
+      const options = {
+        metadata: METADATA,
+        configPath: '/config/path.json',
+      };
+      const writable = file.createWriteStream(options);
+
+      file.startResumableUpload_ = (stream: {}, options_: {}) => {
+        assert.deepStrictEqual(options_, options);
+        done();
+      };
+
+      writable.write('data');
+    });
+
     it('should start a resumable upload if specified', done => {
       const options = {
         metadata: METADATA,
