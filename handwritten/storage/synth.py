@@ -19,7 +19,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, exclude='.jsdoc.js')
+s.copy(templates, excludes=['.jsdoc.js'])
 
 # Create .config directory under $HOME to get around permissions issues
 # with resumable upload.
