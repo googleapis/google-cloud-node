@@ -96,6 +96,14 @@ const TablesDatasetMetadata = {
 /**
  * Model metadata specific to AutoML Tables.
  *
+ * @property {number} optimizationObjectiveRecallValue
+ *   Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
+ *   Must be between 0 and 1, inclusive.
+ *
+ * @property {number} optimizationObjectivePrecisionValue
+ *   Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
+ *   Must be between 0 and 1, inclusive.
+ *
  * @property {Object} targetColumnSpec
  *   Column spec of the dataset's primary table's column the model is
  *   predicting. Snapshotted when model creation started.

@@ -663,6 +663,80 @@ describe('AutoMlClient', () => {
     });
   });
 
+  describe('getAnnotationSpec', () => {
+    it('invokes getAnnotationSpec without error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.annotationSpecPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATASET]',
+        '[ANNOTATION_SPEC]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const exampleCount = 1517063674;
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+        exampleCount: exampleCount,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAnnotationSpec = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getAnnotationSpec(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getAnnotationSpec with error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.annotationSpecPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[DATASET]',
+        '[ANNOTATION_SPEC]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAnnotationSpec = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getAnnotationSpec(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('createModel', function() {
     it('invokes createModel without error', done => {
       const client = new automlModule.v1.AutoMlClient({
@@ -682,10 +756,12 @@ describe('AutoMlClient', () => {
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
       const datasetId = 'datasetId-2115646910';
+      const etag = 'etag3123477';
       const expectedResponse = {
         name: name,
         displayName: displayName,
         datasetId: datasetId,
+        etag: etag,
       };
 
       // Mock Grpc layer
@@ -783,10 +859,12 @@ describe('AutoMlClient', () => {
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
       const datasetId = 'datasetId-2115646910';
+      const etag = 'etag3123477';
       const expectedResponse = {
         name: name2,
         displayName: displayName,
         datasetId: datasetId,
+        etag: etag,
       };
 
       // Mock Grpc layer
@@ -853,10 +931,12 @@ describe('AutoMlClient', () => {
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
       const datasetId = 'datasetId-2115646910';
+      const etag = 'etag3123477';
       const expectedResponse = {
         name: name,
         displayName: displayName,
         datasetId: datasetId,
+        etag: etag,
       };
 
       // Mock Grpc layer
@@ -1061,6 +1141,298 @@ describe('AutoMlClient', () => {
     });
   });
 
+  describe('deployModel', function() {
+    it('invokes deployModel without error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.deployModel = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .deployModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes deployModel with error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deployModel = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .deployModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.deployModel.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.deployModel.metadataDecoder instanceof
+          Function
+      );
+    });
+  });
+
+  describe('undeployModel', function() {
+    it('invokes undeployModel without error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.undeployModel = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .undeployModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes undeployModel with error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.undeployModel = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .undeployModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.undeployModel.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.undeployModel.metadataDecoder instanceof
+          Function
+      );
+    });
+  });
+
+  describe('exportModel', function() {
+    it('invokes exportModel without error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const outputConfig = {};
+      const request = {
+        name: formattedName,
+        outputConfig: outputConfig,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.exportModel = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .exportModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes exportModel with error', done => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const outputConfig = {};
+      const request = {
+        name: formattedName,
+        outputConfig: outputConfig,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.exportModel = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .exportModel(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new automlModule.v1.AutoMlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.exportModel.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.exportModel.metadataDecoder instanceof
+          Function
+      );
+    });
+  });
+
   describe('getModelEvaluation', () => {
     it('invokes getModelEvaluation without error', done => {
       const client = new automlModule.v1.AutoMlClient({
@@ -1082,10 +1454,12 @@ describe('AutoMlClient', () => {
       // Mock response
       const name2 = 'name2-1052831874';
       const annotationSpecId = 'annotationSpecId60690191';
+      const displayName = 'displayName1615086568';
       const evaluatedExampleCount = 277565350;
       const expectedResponse = {
         name: name2,
         annotationSpecId: annotationSpecId,
+        displayName: displayName,
         evaluatedExampleCount: evaluatedExampleCount,
       };
 
@@ -1309,6 +1683,110 @@ describe('PredictionServiceClient', () => {
         assert(typeof response === 'undefined');
         done();
       });
+    });
+  });
+
+  describe('batchPredict', function() {
+    it('invokes batchPredict without error', done => {
+      const client = new automlModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const inputConfig = {};
+      const outputConfig = {};
+      const request = {
+        name: formattedName,
+        inputConfig: inputConfig,
+        outputConfig: outputConfig,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchPredict = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .batchPredict(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes batchPredict with error', done => {
+      const client = new automlModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const inputConfig = {};
+      const outputConfig = {};
+      const request = {
+        name: formattedName,
+        inputConfig: inputConfig,
+        outputConfig: outputConfig,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchPredict = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .batchPredict(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new automlModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.batchPredict.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.batchPredict.metadataDecoder instanceof
+          Function
+      );
     });
   });
 });

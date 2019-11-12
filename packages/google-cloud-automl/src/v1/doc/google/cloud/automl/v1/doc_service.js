@@ -61,8 +61,8 @@ const GetDatasetRequest = {
  *   An expression for filtering the results of the request.
  *
  *     * `dataset_metadata` - for existence of the case (e.g.
- *               image_classification_dataset_metadata:*).
- *   Some examples of using the filter are:
+ *               image_classification_dataset_metadata:*). Some examples of
+ *               using the filter are:
  *
  *     * `translation_dataset_metadata:*` --> The dataset has
  *                                            translation_dataset_metadata.
@@ -190,6 +190,21 @@ const ExportDataRequest = {
 
 /**
  * Request message for
+ * AutoMl.GetAnnotationSpec.
+ *
+ * @property {string} name
+ *   The resource name of the annotation spec to retrieve.
+ *
+ * @typedef GetAnnotationSpecRequest
+ * @memberof google.cloud.automl.v1
+ * @see [google.cloud.automl.v1.GetAnnotationSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/service.proto}
+ */
+const GetAnnotationSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for
  * AutoMl.CreateModel.
  *
  * @property {string} parent
@@ -234,7 +249,7 @@ const GetModelRequest = {
  *   An expression for filtering the results of the request.
  *
  *     * `model_metadata` - for existence of the case (e.g.
- *               video_classification_model_metadata:*).
+ *               image_classification_model_metadata:*).
  *     * `dataset_id` - for = or !=. Some examples of using the filter are:
  *
  *     * `image_classification_model_metadata:*` --> The model has
@@ -316,6 +331,67 @@ const DeleteModelRequest = {
  * @see [google.cloud.automl.v1.UpdateModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/service.proto}
  */
 const UpdateModelRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for
+ * AutoMl.DeployModel.
+ *
+ * @property {Object} imageObjectDetectionModelDeploymentMetadata
+ *   Model deployment metadata specific to Image Object Detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1.ImageObjectDetectionModelDeploymentMetadata}
+ *
+ * @property {Object} imageClassificationModelDeploymentMetadata
+ *   Model deployment metadata specific to Image Classification.
+ *
+ *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1.ImageClassificationModelDeploymentMetadata}
+ *
+ * @property {string} name
+ *   Resource name of the model to deploy.
+ *
+ * @typedef DeployModelRequest
+ * @memberof google.cloud.automl.v1
+ * @see [google.cloud.automl.v1.DeployModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/service.proto}
+ */
+const DeployModelRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for
+ * AutoMl.UndeployModel.
+ *
+ * @property {string} name
+ *   Resource name of the model to undeploy.
+ *
+ * @typedef UndeployModelRequest
+ * @memberof google.cloud.automl.v1
+ * @see [google.cloud.automl.v1.UndeployModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/service.proto}
+ */
+const UndeployModelRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for
+ * AutoMl.ExportModel. Models need
+ * to be enabled for exporting, otherwise an error code will be returned.
+ *
+ * @property {string} name
+ *   Required. The resource name of the model to export.
+ *
+ * @property {Object} outputConfig
+ *   Required. The desired output location and configuration.
+ *
+ *   This object should have the same structure as [ModelExportOutputConfig]{@link google.cloud.automl.v1.ModelExportOutputConfig}
+ *
+ * @typedef ExportModelRequest
+ * @memberof google.cloud.automl.v1
+ * @see [google.cloud.automl.v1.ExportModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/service.proto}
+ */
+const ExportModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

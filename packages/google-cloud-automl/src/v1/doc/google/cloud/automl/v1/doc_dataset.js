@@ -24,6 +24,31 @@
  *
  *   This object should have the same structure as [TranslationDatasetMetadata]{@link google.cloud.automl.v1.TranslationDatasetMetadata}
  *
+ * @property {Object} imageClassificationDatasetMetadata
+ *   Metadata for a dataset used for image classification.
+ *
+ *   This object should have the same structure as [ImageClassificationDatasetMetadata]{@link google.cloud.automl.v1.ImageClassificationDatasetMetadata}
+ *
+ * @property {Object} textClassificationDatasetMetadata
+ *   Metadata for a dataset used for text classification.
+ *
+ *   This object should have the same structure as [TextClassificationDatasetMetadata]{@link google.cloud.automl.v1.TextClassificationDatasetMetadata}
+ *
+ * @property {Object} imageObjectDetectionDatasetMetadata
+ *   Metadata for a dataset used for image object detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionDatasetMetadata]{@link google.cloud.automl.v1.ImageObjectDetectionDatasetMetadata}
+ *
+ * @property {Object} textExtractionDatasetMetadata
+ *   Metadata for a dataset used for text extraction.
+ *
+ *   This object should have the same structure as [TextExtractionDatasetMetadata]{@link google.cloud.automl.v1.TextExtractionDatasetMetadata}
+ *
+ * @property {Object} textSentimentDatasetMetadata
+ *   Metadata for a dataset used for text sentiment.
+ *
+ *   This object should have the same structure as [TextSentimentDatasetMetadata]{@link google.cloud.automl.v1.TextSentimentDatasetMetadata}
+ *
  * @property {string} name
  *   Output only. The resource name of the dataset.
  *   Form: `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`

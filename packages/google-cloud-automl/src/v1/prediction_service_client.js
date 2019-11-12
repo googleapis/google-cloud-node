@@ -133,6 +133,33 @@ class PredictionServiceClient {
       ),
     };
 
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    this.operationsClient = new gaxModule.lro({
+      auth: gaxGrpc.auth,
+      grpc: gaxGrpc.grpc,
+    }).operationsClient(opts);
+
+    const batchPredictResponse = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.BatchPredictResult'
+    );
+    const batchPredictMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.OperationMetadata'
+    );
+
+    this._descriptors.longrunning = {
+      batchPredict: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchPredictResponse.decode.bind(batchPredictResponse),
+        batchPredictMetadata.decode.bind(batchPredictMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
       'google.cloud.automl.v1.PredictionService',
@@ -157,7 +184,7 @@ class PredictionServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict'];
+    const predictionServiceStubMethods = ['predict', 'batchPredict'];
     for (const methodName of predictionServiceStubMethods) {
       const innerCallPromise = predictionServiceStub.then(
         stub => (...args) => {
@@ -170,7 +197,7 @@ class PredictionServiceClient {
       this._innerApiCalls[methodName] = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
-        null
+        this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -222,8 +249,18 @@ class PredictionServiceClient {
    * Perform an online prediction. The prediction result will be directly
    * returned in the response.
    * Available for following ML problems, and their expected request payloads:
+   * * Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+   *                          up to 30MB.
+   * * Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+   *                            up to 30MB.
+   * * Text Classification - TextSnippet, content up to 60,000 characters,
+   *                         UTF-8 encoded.
+   * * Text Extraction - TextSnippet, content up to 30,000 characters,
+   *                     UTF-8 NFC encoded.
    * * Translation - TextSnippet, content up to 25,000 characters, UTF-8
    *                 encoded.
+   * * Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+   *                     encoded.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -237,6 +274,20 @@ class PredictionServiceClient {
    * @param {Object.<string, string>} [request.params]
    *   Additional domain-specific parameters, any string must be up to 25000
    *   characters long.
+   *
+   *   *  For Image Classification:
+   *
+   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
+   *       makes predictions for an image, it will only produce results that have
+   *       at least this confidence score. The default is 0.5.
+   *
+   *    *  For Image Object Detection:
+   *      `score_threshold` - (float) When Model detects objects on the image,
+   *          it will only produce bounding boxes which have at least this
+   *          confidence score. Value in 0 to 1 range, default is 0.5.
+   *      `max_bounding_box_count` - (int64) No more than this number of bounding
+   *          boxes will be returned in the response. Default is 100, the
+   *          requested value may be limited by server.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -287,6 +338,169 @@ class PredictionServiceClient {
     });
 
     return this._innerApiCalls.predict(request, options, callback);
+  }
+
+  /**
+   * Perform a batch prediction. Unlike the online
+   * Predict, batch
+   * prediction result won't be immediately available in the response. Instead,
+   * a long running operation object is returned. User can poll the operation
+   * result via GetOperation
+   * method. Once the operation is done,
+   * BatchPredictResult is returned
+   * in the response field. Available
+   * for following ML problems:
+   * * Image Classification
+   * * Image Object Detection
+   * * Text Extraction
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the model requested to serve the batch prediction.
+   * @param {Object} request.inputConfig
+   *   Required. The input configuration for batch prediction.
+   *
+   *   This object should have the same structure as [BatchPredictInputConfig]{@link google.cloud.automl.v1.BatchPredictInputConfig}
+   * @param {Object} request.outputConfig
+   *   Required. The Configuration specifying where output predictions should
+   *   be written.
+   *
+   *   This object should have the same structure as [BatchPredictOutputConfig]{@link google.cloud.automl.v1.BatchPredictOutputConfig}
+   * @param {Object.<string, string>} [request.params]
+   *   Additional domain-specific parameters for the predictions, any string must
+   *   be up to 25000 characters long.
+   *
+   *   *  For Text Classification:
+   *
+   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
+   *           makes predictions for a text snippet, it will only produce results
+   *           that have at least this confidence score. The default is 0.5.
+   *
+   *   *  For Image Classification:
+   *
+   *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
+   *           makes predictions for an image, it will only produce results that
+   *           have at least this confidence score. The default is 0.5.
+   *
+   *   *  For Image Object Detection:
+   *
+   *      `score_threshold` - (float) When Model detects objects on the image,
+   *          it will only produce bounding boxes which have at least this
+   *          confidence score. Value in 0 to 1 range, default is 0.5.
+   *      `max_bounding_box_count` - (int64) No more than this number of bounding
+   *          boxes will be produced per image. Default is 100, the
+   *          requested value may be limited by server.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('automl.v1');
+   *
+   * const client = new automl.v1.PredictionServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const inputConfig = {};
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.batchPredict(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const inputConfig = {};
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.batchPredict(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const inputConfig = {};
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchPredict(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  batchPredict(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.batchPredict(request, options, callback);
   }
 
   // --------------------

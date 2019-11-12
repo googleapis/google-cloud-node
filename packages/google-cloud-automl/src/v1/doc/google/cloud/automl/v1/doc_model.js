@@ -23,6 +23,31 @@
  *
  *   This object should have the same structure as [TranslationModelMetadata]{@link google.cloud.automl.v1.TranslationModelMetadata}
  *
+ * @property {Object} imageClassificationModelMetadata
+ *   Metadata for image classification models.
+ *
+ *   This object should have the same structure as [ImageClassificationModelMetadata]{@link google.cloud.automl.v1.ImageClassificationModelMetadata}
+ *
+ * @property {Object} textClassificationModelMetadata
+ *   Metadata for text classification models.
+ *
+ *   This object should have the same structure as [TextClassificationModelMetadata]{@link google.cloud.automl.v1.TextClassificationModelMetadata}
+ *
+ * @property {Object} imageObjectDetectionModelMetadata
+ *   Metadata for image object detection models.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionModelMetadata]{@link google.cloud.automl.v1.ImageObjectDetectionModelMetadata}
+ *
+ * @property {Object} textExtractionModelMetadata
+ *   Metadata for text extraction models.
+ *
+ *   This object should have the same structure as [TextExtractionModelMetadata]{@link google.cloud.automl.v1.TextExtractionModelMetadata}
+ *
+ * @property {Object} textSentimentModelMetadata
+ *   Metadata for text sentiment models.
+ *
+ *   This object should have the same structure as [TextSentimentModelMetadata]{@link google.cloud.automl.v1.TextSentimentModelMetadata}
+ *
  * @property {string} name
  *   Output only. Resource name of the model.
  *   Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
@@ -52,6 +77,10 @@
  *   prediction requests after it gets deployed.
  *
  *   The number should be among the values of [DeploymentState]{@link google.cloud.automl.v1.DeploymentState}
+ *
+ * @property {string} etag
+ *   Used to perform a consistent read-modify-write updates. If not set, a blind
+ *   "overwrite" update happens.
  *
  * @property {Object.<string, string>} labels
  *   Optional. The labels with user-defined metadata to organize your model.

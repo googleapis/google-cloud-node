@@ -18,10 +18,30 @@
 /**
  * Evaluation results of a model.
  *
+ * @property {Object} classificationEvaluationMetrics
+ *   Model evaluation metrics for image, text classification.
+ *
+ *   This object should have the same structure as [ClassificationEvaluationMetrics]{@link google.cloud.automl.v1.ClassificationEvaluationMetrics}
+ *
  * @property {Object} translationEvaluationMetrics
  *   Model evaluation metrics for translation.
  *
  *   This object should have the same structure as [TranslationEvaluationMetrics]{@link google.cloud.automl.v1.TranslationEvaluationMetrics}
+ *
+ * @property {Object} imageObjectDetectionEvaluationMetrics
+ *   Model evaluation metrics for image object detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionEvaluationMetrics]{@link google.cloud.automl.v1.ImageObjectDetectionEvaluationMetrics}
+ *
+ * @property {Object} textSentimentEvaluationMetrics
+ *   Evaluation metrics for text sentiment models.
+ *
+ *   This object should have the same structure as [TextSentimentEvaluationMetrics]{@link google.cloud.automl.v1.TextSentimentEvaluationMetrics}
+ *
+ * @property {Object} textExtractionEvaluationMetrics
+ *   Evaluation metrics for text extraction models.
+ *
+ *   This object should have the same structure as [TextExtractionEvaluationMetrics]{@link google.cloud.automl.v1.TextExtractionEvaluationMetrics}
  *
  * @property {string} name
  *   Output only. Resource name of the model evaluation.
@@ -30,8 +50,16 @@
  *   `projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}`
  *
  * @property {string} annotationSpecId
- *   Output only. The ID of the annotation spec that the model evaluation applies to. The
- *   The ID is empty for the overall model evaluation.
+ *   Output only. The ID of the annotation spec that the model evaluation
+ *   applies to. The The ID is empty for the overall model evaluation.
+ *
+ * @property {string} displayName
+ *   Output only. The value of
+ *   display_name
+ *   at the moment when the model was trained. Because this field returns a
+ *   value at model training time, for different models trained from the same
+ *   dataset, the values may differ, since display names could had been changed
+ *   between the two model's trainings.
  *
  * @property {Object} createTime
  *   Output only. Timestamp when this model evaluation was created.

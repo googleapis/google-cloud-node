@@ -103,6 +103,15 @@ const ImageObjectDetectionDatasetMetadata = {
  *                 to have a higher latency, but should also have a higher
  *                 prediction quality than other models.
  *
+ * @property {number} nodeQps
+ *   Output only. An approximate number of online prediction QPS that can
+ *   be supported by this model per each node on which it is deployed.
+ *
+ * @property {number} nodeCount
+ *   Output only. The number of nodes this model is deployed on. A node is an
+ *   abstraction of a machine resource, which can handle online prediction QPS
+ *   as given in the node_qps field.
+ *
  * @typedef ImageClassificationModelMetadata
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ImageClassificationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}
@@ -145,7 +154,7 @@ const ImageClassificationModelMetadata = {
  *   full budget and the stop_reason will be `MODEL_CONVERGED`.
  *   Note, node_hour  = actual_hour * number_of_nodes_invovled.
  *   For model type `cloud-high-accuracy-1`(default) and `cloud-low-latency-1`,
- *   the train budget must be between 20,000 and 2,000,000 milli node hours,
+ *   the train budget must be between 20,000 and 900,000 milli node hours,
  *   inclusive. The default value is 216, 000 which represents one day in
  *   wall time.
  *   For model type `mobile-low-latency-1`, `mobile-versatile-1`,
@@ -174,6 +183,7 @@ const ImageObjectDetectionModelMetadata = {
  *   Input only. The number of nodes to deploy the model on. A node is an
  *   abstraction of a machine resource, which can handle online prediction QPS
  *   as given in the model's
+ *
  *   node_qps.
  *   Must be between 1 and 100, inclusive on both ends.
  *

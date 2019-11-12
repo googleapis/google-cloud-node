@@ -138,6 +138,9 @@ class AutoMlClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      annotationSpecPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
+      ),
       datasetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
@@ -215,6 +218,20 @@ class AutoMlClient {
     const deleteModelMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1.OperationMetadata'
     );
+    const deployModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const deployModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.OperationMetadata'
+    );
+    const undeployModelResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const undeployModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.OperationMetadata'
+    );
+    const exportModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const exportModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1.OperationMetadata'
+    );
 
     this._descriptors.longrunning = {
       createDataset: new gaxModule.LongrunningDescriptor(
@@ -246,6 +263,21 @@ class AutoMlClient {
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
         deleteModelMetadata.decode.bind(deleteModelMetadata)
+      ),
+      deployModel: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployModelResponse.decode.bind(deployModelResponse),
+        deployModelMetadata.decode.bind(deployModelMetadata)
+      ),
+      undeployModel: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        undeployModelResponse.decode.bind(undeployModelResponse),
+        undeployModelMetadata.decode.bind(undeployModelMetadata)
+      ),
+      exportModel: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportModelResponse.decode.bind(exportModelResponse),
+        exportModelMetadata.decode.bind(exportModelMetadata)
       ),
     };
 
@@ -281,11 +313,15 @@ class AutoMlClient {
       'deleteDataset',
       'importData',
       'exportData',
+      'getAnnotationSpec',
       'createModel',
       'getModel',
       'updateModel',
       'listModels',
       'deleteModel',
+      'deployModel',
+      'undeployModel',
+      'exportModel',
       'getModelEvaluation',
       'listModelEvaluations',
     ];
@@ -597,8 +633,8 @@ class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               image_classification_dataset_metadata:*).
-   *   Some examples of using the filter are:
+   *               image_classification_dataset_metadata:*). Some examples of
+   *               using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -718,8 +754,8 @@ class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `dataset_metadata` - for existence of the case (e.g.
-   *               image_classification_dataset_metadata:*).
-   *   Some examples of using the filter are:
+   *               image_classification_dataset_metadata:*). Some examples of
+   *               using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -1102,6 +1138,60 @@ class AutoMlClient {
   }
 
   /**
+   * Gets an annotation spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource name of the annotation spec to retrieve.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnnotationSpec]{@link google.cloud.automl.v1.AnnotationSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotationSpec]{@link google.cloud.automl.v1.AnnotationSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('automl.v1');
+   *
+   * const client = new automl.v1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.annotationSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[ANNOTATION_SPEC]');
+   * client.getAnnotationSpec({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getAnnotationSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getAnnotationSpec(request, options, callback);
+  }
+
+  /**
    * Creates a model.
    * Returns a Model in the response
    * field when it completes.
@@ -1352,7 +1442,7 @@ class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `model_metadata` - for existence of the case (e.g.
-   *               video_classification_model_metadata:*).
+   *               image_classification_model_metadata:*).
    *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
@@ -1474,7 +1564,7 @@ class AutoMlClient {
    *   An expression for filtering the results of the request.
    *
    *     * `model_metadata` - for existence of the case (e.g.
-   *               video_classification_model_metadata:*).
+   *               image_classification_model_metadata:*).
    *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
@@ -1618,6 +1708,350 @@ class AutoMlClient {
     });
 
     return this._innerApiCalls.deleteModel(request, options, callback);
+  }
+
+  /**
+   * Deploys a model. If a model is already deployed, deploying it with the
+   * same parameters has no effect. Deploying with different parametrs
+   * (as e.g. changing
+   *
+   * node_number)
+   *  will reset the deployment state without pausing the model's availability.
+   *
+   * Only applicable for Text Classification, Image Object Detection; all other
+   * domains manage deployment automatically.
+   *
+   * Returns an empty response in the
+   * response field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the model to deploy.
+   * @param {Object} [request.imageObjectDetectionModelDeploymentMetadata]
+   *   Model deployment metadata specific to Image Object Detection.
+   *
+   *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1.ImageObjectDetectionModelDeploymentMetadata}
+   * @param {Object} [request.imageClassificationModelDeploymentMetadata]
+   *   Model deployment metadata specific to Image Classification.
+   *
+   *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1.ImageClassificationModelDeploymentMetadata}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('automl.v1');
+   *
+   * const client = new automl.v1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the promise pattern.
+   * client.deployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.deployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deployModel({name: formattedName});
+   *
+   * const [response] = await operation.promise();
+   */
+  deployModel(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deployModel(request, options, callback);
+  }
+
+  /**
+   * Undeploys a model. If the model is not deployed this method has no effect.
+   *
+   * Only applicable for Text Classification, Image Object Detection;
+   * all other domains manage deployment automatically.
+   *
+   * Returns an empty response in the
+   * response field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the model to undeploy.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('automl.v1');
+   *
+   * const client = new automl.v1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the promise pattern.
+   * client.undeployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.undeployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.undeployModel({name: formattedName});
+   *
+   * const [response] = await operation.promise();
+   */
+  undeployModel(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.undeployModel(request, options, callback);
+  }
+
+  /**
+   * Exports a trained, "export-able", model to a user specified Google Cloud
+   * Storage location. A model is considered export-able if and only if it has
+   * an export format defined for it in
+   * ModelExportOutputConfig.
+   *
+   * Returns an empty response in the
+   * response field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model to export.
+   * @param {Object} request.outputConfig
+   *   Required. The desired output location and configuration.
+   *
+   *   This object should have the same structure as [ModelExportOutputConfig]{@link google.cloud.automl.v1.ModelExportOutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('automl.v1');
+   *
+   * const client = new automl.v1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.exportModel(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.exportModel(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportModel(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  exportModel(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.exportModel(request, options, callback);
   }
 
   /**
@@ -1879,6 +2313,24 @@ class AutoMlClient {
   // --------------------
 
   /**
+   * Return a fully-qualified annotation_spec resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataset
+   * @param {String} annotationSpec
+   * @returns {String}
+   */
+  annotationSpecPath(project, location, dataset, annotationSpec) {
+    return this._pathTemplates.annotationSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      annotation_spec: annotationSpec,
+    });
+  }
+
+  /**
    * Return a fully-qualified dataset resource name string.
    *
    * @param {String} project
@@ -1940,6 +2392,58 @@ class AutoMlClient {
       model: model,
       model_evaluation: modelEvaluation,
     });
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the annotation_spec.
+   */
+  matchAnnotationSpecFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
   }
 
   /**

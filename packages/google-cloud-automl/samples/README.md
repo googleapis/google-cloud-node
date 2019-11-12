@@ -13,7 +13,6 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Quickstart](#quickstart)
-  * [Set Endpoint](#setEndpoint)
 
 ## Before you begin
 
@@ -34,22 +33,6 @@ __Usage:__
 
 
 `node quickstart.js`
-
------
-
-
-
-
-### Set Endpoint
-
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/beta/setEndpoint.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/beta/setEndpoint.js,samples/README.md)
-
-__Usage:__
-
-
-`node setEndpoint.js`
 
 
 

@@ -33,6 +33,12 @@ const TextClassificationDatasetMetadata = {
 
 /**
  * Model metadata that is specific to text classification.
+ *
+ * @property {number} classificationType
+ *   Output only. Classification type of the dataset used to train this model.
+ *
+ *   The number should be among the values of [ClassificationType]{@link google.cloud.automl.v1beta1.ClassificationType}
+ *
  * @typedef TextClassificationModelMetadata
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TextClassificationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/text.proto}
@@ -65,12 +71,11 @@ const TextExtractionModelMetadata = {
  * Dataset metadata for text sentiment.
  *
  * @property {number} sentimentMax
- *   Required. A sentiment is expressed as an integer ordinal, where higher value
- *   means a more positive sentiment. The range of sentiments that will be used
- *   is between 0 and sentiment_max (inclusive on both ends), and all the values
- *   in the range must be represented in the dataset before a model can be
- *   created.
- *   sentiment_max value must be between 1 and 10 (inclusive).
+ *   Required. A sentiment is expressed as an integer ordinal, where higher
+ *   value means a more positive sentiment. The range of sentiments that will be
+ *   used is between 0 and sentiment_max (inclusive on both ends), and all the
+ *   values in the range must be represented in the dataset before a model can
+ *   be created. sentiment_max value must be between 1 and 10 (inclusive).
  *
  * @typedef TextSentimentDatasetMetadata
  * @memberof google.cloud.automl.v1beta1

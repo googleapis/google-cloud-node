@@ -23,6 +23,39 @@
  *
  *   This object should have the same structure as [TranslationAnnotation]{@link google.cloud.automl.v1.TranslationAnnotation}
  *
+ * @property {Object} classification
+ *   Annotation details for content or image classification.
+ *
+ *   This object should have the same structure as [ClassificationAnnotation]{@link google.cloud.automl.v1.ClassificationAnnotation}
+ *
+ * @property {Object} imageObjectDetection
+ *   Annotation details for image object detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionAnnotation]{@link google.cloud.automl.v1.ImageObjectDetectionAnnotation}
+ *
+ * @property {Object} textExtraction
+ *   Annotation details for text extraction.
+ *
+ *   This object should have the same structure as [TextExtractionAnnotation]{@link google.cloud.automl.v1.TextExtractionAnnotation}
+ *
+ * @property {Object} textSentiment
+ *   Annotation details for text sentiment.
+ *
+ *   This object should have the same structure as [TextSentimentAnnotation]{@link google.cloud.automl.v1.TextSentimentAnnotation}
+ *
+ * @property {string} annotationSpecId
+ *   Output only . The resource ID of the annotation spec that
+ *   this annotation pertains to. The annotation spec comes from either an
+ *   ancestor dataset, or the dataset that was used to train the model in use.
+ *
+ * @property {string} displayName
+ *   Output only. The value of
+ *   display_name
+ *   when the model was trained. Because this field returns a value at model
+ *   training time, for different models trained using the same dataset, the
+ *   returned value could be different as model owner could update the
+ *   `display_name` between any two model training.
+ *
  * @typedef AnnotationPayload
  * @memberof google.cloud.automl.v1
  * @see [google.cloud.automl.v1.AnnotationPayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1/annotation_payload.proto}
