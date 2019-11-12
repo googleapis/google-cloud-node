@@ -128,11 +128,11 @@ class DeviceManagerClient {
       devicePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/registries/{registry}/devices/{device}'
       ),
-      deviceRegistryPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/registries/{registry}'
-      ),
       locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      registryPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/registries/{registry}'
       ),
     };
 
@@ -353,7 +353,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.getDeviceRegistry({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -476,7 +476,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedName = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.deleteDeviceRegistry({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -699,7 +699,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const device = {};
    * const request = {
    *   parent: formattedParent,
@@ -974,7 +974,7 @@ class DeviceManagerClient {
    * });
    *
    * // Iterate over all elements.
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    *
    * client.listDevices({parent: formattedParent})
    *   .then(responses => {
@@ -988,7 +988,7 @@ class DeviceManagerClient {
    *   });
    *
    * // Or obtain the paged response.
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    *
    *
    * const options = {autoPaginate: false};
@@ -1085,7 +1085,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * client.listDevicesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1611,7 +1611,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const gatewayId = '';
    * const deviceId = '';
    * const request = {
@@ -1680,7 +1680,7 @@ class DeviceManagerClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.deviceRegistryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
    * const gatewayId = '';
    * const deviceId = '';
    * const request = {
@@ -1742,22 +1742,6 @@ class DeviceManagerClient {
   }
 
   /**
-   * Return a fully-qualified device_registry resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} registry
-   * @returns {String}
-   */
-  deviceRegistryPath(project, location, registry) {
-    return this._pathTemplates.deviceRegistryPathTemplate.render({
-      project: project,
-      location: location,
-      registry: registry,
-    });
-  }
-
-  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {String} project
@@ -1768,6 +1752,22 @@ class DeviceManagerClient {
     return this._pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
+    });
+  }
+
+  /**
+   * Return a fully-qualified registry resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} registry
+   * @returns {String}
+   */
+  registryPath(project, location, registry) {
+    return this._pathTemplates.registryPathTemplate.render({
+      project: project,
+      location: location,
+      registry: registry,
     });
   }
 
@@ -1816,45 +1816,6 @@ class DeviceManagerClient {
   }
 
   /**
-   * Parse the deviceRegistryName from a device_registry resource.
-   *
-   * @param {String} deviceRegistryName
-   *   A fully-qualified path representing a device_registry resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromDeviceRegistryName(deviceRegistryName) {
-    return this._pathTemplates.deviceRegistryPathTemplate.match(
-      deviceRegistryName
-    ).project;
-  }
-
-  /**
-   * Parse the deviceRegistryName from a device_registry resource.
-   *
-   * @param {String} deviceRegistryName
-   *   A fully-qualified path representing a device_registry resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromDeviceRegistryName(deviceRegistryName) {
-    return this._pathTemplates.deviceRegistryPathTemplate.match(
-      deviceRegistryName
-    ).location;
-  }
-
-  /**
-   * Parse the deviceRegistryName from a device_registry resource.
-   *
-   * @param {String} deviceRegistryName
-   *   A fully-qualified path representing a device_registry resources.
-   * @returns {String} - A string representing the registry.
-   */
-  matchRegistryFromDeviceRegistryName(deviceRegistryName) {
-    return this._pathTemplates.deviceRegistryPathTemplate.match(
-      deviceRegistryName
-    ).registry;
-  }
-
-  /**
    * Parse the locationName from a location resource.
    *
    * @param {String} locationName
@@ -1875,6 +1836,41 @@ class DeviceManagerClient {
   matchLocationFromLocationName(locationName) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
+  }
+
+  /**
+   * Parse the registryName from a registry resource.
+   *
+   * @param {String} registryName
+   *   A fully-qualified path representing a registry resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromRegistryName(registryName) {
+    return this._pathTemplates.registryPathTemplate.match(registryName).project;
+  }
+
+  /**
+   * Parse the registryName from a registry resource.
+   *
+   * @param {String} registryName
+   *   A fully-qualified path representing a registry resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromRegistryName(registryName) {
+    return this._pathTemplates.registryPathTemplate.match(registryName)
+      .location;
+  }
+
+  /**
+   * Parse the registryName from a registry resource.
+   *
+   * @param {String} registryName
+   *   A fully-qualified path representing a registry resources.
+   * @returns {String} - A string representing the registry.
+   */
+  matchRegistryFromRegistryName(registryName) {
+    return this._pathTemplates.registryPathTemplate.match(registryName)
+      .registry;
   }
 }
 

@@ -232,7 +232,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         }
                       }
@@ -244,7 +244,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         }
                       }
@@ -307,7 +307,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         },
                         "device": {
@@ -372,7 +372,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         },
                         "deviceNumIds": {
@@ -547,7 +547,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         },
                         "gatewayId": {
@@ -576,7 +576,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/DeviceRegistry"
+                            "(google.api.resource_reference).type": "cloudiot.googleapis.com/Registry"
                           }
                         },
                         "gatewayId": {
@@ -698,7 +698,7 @@
                     },
                     "DeviceRegistry": {
                       "options": {
-                        "(google.api.resource).type": "cloudiot.googleapis.com/DeviceRegistry",
+                        "(google.api.resource).type": "cloudiot.googleapis.com/Registry",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}"
                       },
                       "fields": {

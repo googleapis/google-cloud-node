@@ -123,7 +123,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedName = client.deviceRegistryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -160,7 +160,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedName = client.deviceRegistryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -259,7 +259,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedName = client.deviceRegistryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -286,7 +286,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedName = client.deviceRegistryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -385,7 +385,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -428,7 +428,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -668,7 +668,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -710,7 +710,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -1209,7 +1209,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -1245,7 +1245,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -1282,7 +1282,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
@@ -1318,7 +1318,7 @@ describe('DeviceManagerClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.deviceRegistryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
