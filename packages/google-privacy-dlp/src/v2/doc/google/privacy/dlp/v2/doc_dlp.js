@@ -128,10 +128,9 @@ const InspectionRuleSet = {
  *   system may automatically choose what detectors to run. By default this may
  *   be all types, but may change over time as detectors are updated.
  *
- *   The special InfoType name "ALL_BASIC" can be used to trigger all detectors,
- *   but may change over time as new InfoTypes are added. If you need precise
- *   control and predictability as to what detectors are run you should specify
- *   specific InfoTypes listed in the reference.
+ *   If you need precise control and predictability as to what detectors are
+ *   run you should specify specific InfoTypes listed in the reference,
+ *   otherwise a default list will be used, which may change over time.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
@@ -761,7 +760,7 @@ const DeidentifyContentResponse = {
  * Request to re-identify an item.
  *
  * @property {string} parent
- *   The parent resource name.
+ *   Required. The parent resource name.
  *
  * @property {Object} reidentifyConfig
  *   Configuration for the re-identification of the content item.
@@ -772,6 +771,7 @@ const DeidentifyContentResponse = {
  *   reverse. This requires that only reversible transformations
  *   be provided here. The reversible transformations are:
  *
+ *    - `CryptoDeterministicConfig`
  *    - `CryptoReplaceFfxFpeConfig`
  *
  *   This object should have the same structure as [DeidentifyConfig]{@link google.privacy.dlp.v2.DeidentifyConfig}
@@ -2124,7 +2124,7 @@ const TimePartConfig = {
     DAY_OF_WEEK: 4,
 
     /**
-     * [1-52]
+     * [1-53]
      */
     WEEK_OF_YEAR: 5,
 
@@ -2182,6 +2182,11 @@ const CryptoHashConfig = {
  *   custom info type 'Surrogate'. This facilitates reversal of the
  *   surrogate when it occurs in free text.
  *
+ *   Note: For record transformations where the entire cell in a table is being
+ *   transformed, surrogates are optional to use. Surrogates are used to denote
+ *   the location of the token and are necessary for re-identification in free
+ *   form text.
+ *
  *   In order for inspection to work properly, the name of this info type must
  *   not occur naturally anywhere in your data; otherwise, inspection may either
  *
@@ -2194,7 +2199,7 @@ const CryptoHashConfig = {
  *   that are highly improbable to exist in your data.
  *   For example, assuming your data is entered from a regular ASCII keyboard,
  *   the symbol with the hex code point 29DD might be used like so:
- *   ⧝MY_TOKEN_TYPE
+ *   ⧝MY_TOKEN_TYPE.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
@@ -2325,10 +2330,10 @@ const CharsToIgnore = {
  * **3.
  *
  * @property {string} maskingCharacter
- *   Character to mask the sensitive values&mdash;for example, "*" for an
- *   alphabetic string such as name, or "0" for a numeric string such as ZIP
- *   code or credit card number. String must have length 1. If not supplied, we
- *   will default to "*" for strings, 0 for digits.
+ *   Character to use to mask the sensitive values&mdash;for example, `*` for an
+ *   alphabetic string such as a name, or `0` for a numeric string such as ZIP
+ *   code or credit card number. This string must have a length of 1. If not
+ *   supplied, this value defaults to `*` for strings, and `0` for digits.
  *
  * @property {number} numberToMask
  *   Number of characters to mask. If not set, all matching chars will be
@@ -2336,15 +2341,16 @@ const CharsToIgnore = {
  *
  * @property {boolean} reverseOrder
  *   Mask characters in reverse order. For example, if `masking_character` is
- *   '0', number_to_mask is 14, and `reverse_order` is false, then
- *   1234-5678-9012-3456 -> 00000000000000-3456
- *   If `masking_character` is '*', `number_to_mask` is 3, and `reverse_order`
- *   is true, then 12345 -> 12***
+ *   `0`, `number_to_mask` is `14`, and `reverse_order` is `false`, then the
+ *   input string `1234-5678-9012-3456` is masked as `00000000000000-3456`.
+ *   If `masking_character` is `*`, `number_to_mask` is `3`, and `reverse_order`
+ *   is `true`, then the string `12345` is masked as `12***`.
  *
  * @property {Object[]} charactersToIgnore
- *   When masking a string, items in this list will be skipped when replacing.
- *   For example, if your string is 555-555-5555 and you ask us to skip `-` and
- *   mask 5 chars with * we would produce ***-*55-5555.
+ *   When masking a string, items in this list will be skipped when replacing
+ *   characters. For example, if the input string is `555-555-5555` and you
+ *   instruct Cloud DLP to skip `-` and mask 5 characters with `*`, Cloud DLP
+ *   returns `***-**5-5555`.
  *
  *   This object should have the same structure as [CharsToIgnore]{@link google.privacy.dlp.v2.CharsToIgnore}
  *
@@ -2507,12 +2513,12 @@ const BucketingConfig = {
  *   that the FFX mode natively supports. This happens before/after
  *   encryption/decryption.
  *   Each character listed must appear only once.
- *   Number of characters must be in the range [2, 62].
+ *   Number of characters must be in the range [2, 95].
  *   This must be encoded as ASCII.
  *   The order of characters does not matter.
  *
  * @property {number} radix
- *   The native way to select the alphabet. Must be in the range [2, 62].
+ *   The native way to select the alphabet. Must be in the range [2, 95].
  *
  * @property {Object} surrogateInfoType
  *   The custom infoType to annotate the surrogate with.
@@ -3161,7 +3167,7 @@ const Error = {
  * @property {string} name
  *   Unique resource name for the triggeredJob, assigned by the service when the
  *   triggeredJob is created, for example
- *   `projects/dlp-test-project/triggeredJobs/53234423`.
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
  *
  * @property {string} displayName
  *   Display name (max 100 chars)
@@ -3289,6 +3295,11 @@ const JobTrigger = {
  *
  *   This object should have the same structure as [JobNotificationEmails]{@link google.privacy.dlp.v2.JobNotificationEmails}
  *
+ * @property {Object} publishToStackdriver
+ *   Enable Stackdriver metric dlp.googleapis.com/finding_count.
+ *
+ *   This object should have the same structure as [PublishToStackdriver]{@link google.privacy.dlp.v2.PublishToStackdriver}
+ *
  * @typedef Action
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Action definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3381,6 +3392,19 @@ const Action = {
    */
   JobNotificationEmails: {
     // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Enable Stackdriver metric dlp.googleapis.com/finding_count. This
+   * will publish a metric to stack driver on each infotype requested and
+   * how many findings were found for it. CustomDetectors will be bucketed
+   * as 'Custom' under the Stackdriver label 'info_type'.
+   * @typedef PublishToStackdriver
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.Action.PublishToStackdriver definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  PublishToStackdriver: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
 
@@ -3388,7 +3412,7 @@ const Action = {
  * Request message for CreateInspectTemplate.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {Object} inspectTemplate
@@ -3414,7 +3438,7 @@ const CreateInspectTemplateRequest = {
  * Request message for UpdateInspectTemplate.
  *
  * @property {string} name
- *   Resource name of organization and inspectTemplate to be updated, for
+ *   Required. Resource name of organization and inspectTemplate to be updated, for
  *   example `organizations/433245324/inspectTemplates/432452342` or
  *   projects/project-id/inspectTemplates/432452342.
  *
@@ -3440,7 +3464,7 @@ const UpdateInspectTemplateRequest = {
  * Request message for GetInspectTemplate.
  *
  * @property {string} name
- *   Resource name of the organization and inspectTemplate to be read, for
+ *   Required. Resource name of the organization and inspectTemplate to be read, for
  *   example `organizations/433245324/inspectTemplates/432452342` or
  *   projects/project-id/inspectTemplates/432452342.
  *
@@ -3456,7 +3480,7 @@ const GetInspectTemplateRequest = {
  * Request message for ListInspectTemplates.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
@@ -3514,7 +3538,7 @@ const ListInspectTemplatesResponse = {
  * Request message for DeleteInspectTemplate.
  *
  * @property {string} name
- *   Resource name of the organization and inspectTemplate to be deleted, for
+ *   Required. Resource name of the organization and inspectTemplate to be deleted, for
  *   example `organizations/433245324/inspectTemplates/432452342` or
  *   projects/project-id/inspectTemplates/432452342.
  *
@@ -3530,7 +3554,7 @@ const DeleteInspectTemplateRequest = {
  * Request message for CreateJobTrigger.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id.
+ *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {Object} jobTrigger
  *   The JobTrigger to create.
@@ -3555,7 +3579,7 @@ const CreateJobTriggerRequest = {
  * Request message for ActivateJobTrigger.
  *
  * @property {string} name
- *   Resource name of the trigger to activate, for example
+ *   Required. Resource name of the trigger to activate, for example
  *   `projects/dlp-test-project/jobTriggers/53234423`.
  *
  * @typedef ActivateJobTriggerRequest
@@ -3570,7 +3594,7 @@ const ActivateJobTriggerRequest = {
  * Request message for UpdateJobTrigger.
  *
  * @property {string} name
- *   Resource name of the project and the triggeredJob, for example
+ *   Required. Resource name of the project and the triggeredJob, for example
  *   `projects/dlp-test-project/jobTriggers/53234423`.
  *
  * @property {Object} jobTrigger
@@ -3595,7 +3619,7 @@ const UpdateJobTriggerRequest = {
  * Request message for GetJobTrigger.
  *
  * @property {string} name
- *   Resource name of the project and the triggeredJob, for example
+ *   Required. Resource name of the project and the triggeredJob, for example
  *   `projects/dlp-test-project/jobTriggers/53234423`.
  *
  * @typedef GetJobTriggerRequest
@@ -3612,7 +3636,7 @@ const GetJobTriggerRequest = {
  * Storage.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id.
+ *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {Object} inspectJob
  *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
@@ -3638,7 +3662,7 @@ const CreateDlpJobRequest = {
  * Request message for ListJobTriggers.
  *
  * @property {string} parent
- *   The parent resource name, for example `projects/my-project-id`.
+ *   Required. The parent resource name, for example `projects/my-project-id`.
  *
  * @property {string} pageToken
  *   Optional page token to continue retrieval. Comes from previous call
@@ -3723,7 +3747,7 @@ const ListJobTriggersResponse = {
  * Request message for DeleteJobTrigger.
  *
  * @property {string} name
- *   Resource name of the project and the triggeredJob, for example
+ *   Required. Resource name of the project and the triggeredJob, for example
  *   `projects/dlp-test-project/jobTriggers/53234423`.
  *
  * @typedef DeleteJobTriggerRequest
@@ -3858,7 +3882,7 @@ const DlpJob = {
  * The request message for DlpJobs.GetDlpJob.
  *
  * @property {string} name
- *   The name of the DlpJob resource.
+ *   Required. The name of the DlpJob resource.
  *
  * @typedef GetDlpJobRequest
  * @memberof google.privacy.dlp.v2
@@ -3872,7 +3896,7 @@ const GetDlpJobRequest = {
  * The request message for listing DLP jobs.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id.
+ *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {string} filter
  *   Optional. Allows filtering.
@@ -3961,7 +3985,7 @@ const ListDlpJobsResponse = {
  * The request message for canceling a DLP job.
  *
  * @property {string} name
- *   The name of the DlpJob resource to be cancelled.
+ *   Required. The name of the DlpJob resource to be cancelled.
  *
  * @typedef CancelDlpJobRequest
  * @memberof google.privacy.dlp.v2
@@ -3975,7 +3999,7 @@ const CancelDlpJobRequest = {
  * The request message for deleting a DLP job.
  *
  * @property {string} name
- *   The name of the DlpJob resource to be deleted.
+ *   Required. The name of the DlpJob resource to be deleted.
  *
  * @typedef DeleteDlpJobRequest
  * @memberof google.privacy.dlp.v2
@@ -3989,7 +4013,7 @@ const DeleteDlpJobRequest = {
  * Request message for CreateDeidentifyTemplate.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {Object} deidentifyTemplate
@@ -4015,7 +4039,7 @@ const CreateDeidentifyTemplateRequest = {
  * Request message for UpdateDeidentifyTemplate.
  *
  * @property {string} name
- *   Resource name of organization and deidentify template to be updated, for
+ *   Required. Resource name of organization and deidentify template to be updated, for
  *   example `organizations/433245324/deidentifyTemplates/432452342` or
  *   projects/project-id/deidentifyTemplates/432452342.
  *
@@ -4041,7 +4065,7 @@ const UpdateDeidentifyTemplateRequest = {
  * Request message for GetDeidentifyTemplate.
  *
  * @property {string} name
- *   Resource name of the organization and deidentify template to be read, for
+ *   Required. Resource name of the organization and deidentify template to be read, for
  *   example `organizations/433245324/deidentifyTemplates/432452342` or
  *   projects/project-id/deidentifyTemplates/432452342.
  *
@@ -4057,7 +4081,7 @@ const GetDeidentifyTemplateRequest = {
  * Request message for ListDeidentifyTemplates.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
@@ -4116,7 +4140,7 @@ const ListDeidentifyTemplatesResponse = {
  * Request message for DeleteDeidentifyTemplate.
  *
  * @property {string} name
- *   Resource name of the organization and deidentify template to be deleted,
+ *   Required. Resource name of the organization and deidentify template to be deleted,
  *   for example `organizations/433245324/deidentifyTemplates/432452342` or
  *   projects/project-id/deidentifyTemplates/432452342.
  *
@@ -4293,7 +4317,7 @@ const StoredInfoType = {
  * Request message for CreateStoredInfoType.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {Object} config
@@ -4319,7 +4343,7 @@ const CreateStoredInfoTypeRequest = {
  * Request message for UpdateStoredInfoType.
  *
  * @property {string} name
- *   Resource name of organization and storedInfoType to be updated, for
+ *   Required. Resource name of organization and storedInfoType to be updated, for
  *   example `organizations/433245324/storedInfoTypes/432452342` or
  *   projects/project-id/storedInfoTypes/432452342.
  *
@@ -4347,7 +4371,7 @@ const UpdateStoredInfoTypeRequest = {
  * Request message for GetStoredInfoType.
  *
  * @property {string} name
- *   Resource name of the organization and storedInfoType to be read, for
+ *   Required. Resource name of the organization and storedInfoType to be read, for
  *   example `organizations/433245324/storedInfoTypes/432452342` or
  *   projects/project-id/storedInfoTypes/432452342.
  *
@@ -4363,7 +4387,7 @@ const GetStoredInfoTypeRequest = {
  * Request message for ListStoredInfoTypes.
  *
  * @property {string} parent
- *   The parent resource name, for example projects/my-project-id or
+ *   Required. The parent resource name, for example projects/my-project-id or
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
@@ -4422,7 +4446,7 @@ const ListStoredInfoTypesResponse = {
  * Request message for DeleteStoredInfoType.
  *
  * @property {string} name
- *   Resource name of the organization and storedInfoType to be deleted, for
+ *   Required. Resource name of the organization and storedInfoType to be deleted, for
  *   example `organizations/433245324/storedInfoTypes/432452342` or
  *   projects/project-id/storedInfoTypes/432452342.
  *

@@ -561,7 +561,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name.
+   *   Required. The parent resource name.
    * @param {Object} [request.reidentifyConfig]
    *   Configuration for the re-identification of the content item.
    *   This field shares the same proto message type that is used for
@@ -571,6 +571,7 @@ class DlpServiceClient {
    *   reverse. This requires that only reversible transformations
    *   be provided here. The reversible transformations are:
    *
+   *    - `CryptoDeterministicConfig`
    *    - `CryptoReplaceFfxFpeConfig`
    *
    *   This object should have the same structure as [DeidentifyConfig]{@link google.privacy.dlp.v2.DeidentifyConfig}
@@ -704,7 +705,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.inspectTemplate]
    *   The InspectTemplate to create.
@@ -773,7 +774,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of organization and inspectTemplate to be updated, for
+   *   Required. Resource name of organization and inspectTemplate to be updated, for
    *   example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {Object} [request.inspectTemplate]
@@ -842,7 +843,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.name]
-   *   Resource name of the organization and inspectTemplate to be read, for
+   *   Required. Resource name of the organization and inspectTemplate to be read, for
    *   example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {Object} [options]
@@ -899,7 +900,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1026,7 +1027,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1087,7 +1088,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the organization and inspectTemplate to be deleted, for
+   *   Required. Resource name of the organization and inspectTemplate to be deleted, for
    *   example `organizations/433245324/inspectTemplates/432452342` or
    *   projects/project-id/inspectTemplates/432452342.
    * @param {Object} [options]
@@ -1142,7 +1143,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.deidentifyTemplate]
    *   The DeidentifyTemplate to create.
@@ -1212,7 +1213,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of organization and deidentify template to be updated, for
+   *   Required. Resource name of organization and deidentify template to be updated, for
    *   example `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {Object} [request.deidentifyTemplate]
@@ -1282,7 +1283,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the organization and deidentify template to be read, for
+   *   Required. Resource name of the organization and deidentify template to be read, for
    *   example `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {Object} [options]
@@ -1344,7 +1345,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1475,7 +1476,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1537,7 +1538,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the organization and deidentify template to be deleted,
+   *   Required. Resource name of the organization and deidentify template to be deleted,
    *   for example `organizations/433245324/deidentifyTemplates/432452342` or
    *   projects/project-id/deidentifyTemplates/432452342.
    * @param {Object} [options]
@@ -1595,7 +1596,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id.
    * @param {Object} [request.inspectJob]
    *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
    * @param {Object} [request.riskJob]
@@ -1660,7 +1661,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id.
    * @param {string} [request.filter]
    *   Optional. Allows filtering.
    *
@@ -1819,7 +1820,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id.
    * @param {string} [request.filter]
    *   Optional. Allows filtering.
    *
@@ -1913,7 +1914,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the DlpJob resource.
+   *   Required. The name of the DlpJob resource.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1971,7 +1972,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the DlpJob resource to be deleted.
+   *   Required. The name of the DlpJob resource to be deleted.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2021,7 +2022,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the DlpJob resource to be cancelled.
+   *   Required. The name of the DlpJob resource to be cancelled.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2068,7 +2069,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example `projects/my-project-id`.
+   *   Required. The parent resource name, for example `projects/my-project-id`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -2221,7 +2222,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example `projects/my-project-id`.
+   *   Required. The parent resource name, for example `projects/my-project-id`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -2308,7 +2309,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the project and the triggeredJob, for example
+   *   Required. Resource name of the project and the triggeredJob, for example
    *   `projects/dlp-test-project/jobTriggers/53234423`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2364,7 +2365,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the project and the triggeredJob, for example
+   *   Required. Resource name of the project and the triggeredJob, for example
    *   `projects/dlp-test-project/jobTriggers/53234423`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2412,7 +2413,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the project and the triggeredJob, for example
+   *   Required. Resource name of the project and the triggeredJob, for example
    *   `projects/dlp-test-project/jobTriggers/53234423`.
    * @param {Object} [request.jobTrigger]
    *   New JobTrigger value.
@@ -2477,7 +2478,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id.
+   *   Required. The parent resource name, for example projects/my-project-id.
    * @param {Object} [request.jobTrigger]
    *   The JobTrigger to create.
    *
@@ -2542,7 +2543,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.config]
    *   Configuration of the storedInfoType to create.
@@ -2609,7 +2610,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of organization and storedInfoType to be updated, for
+   *   Required. Resource name of organization and storedInfoType to be updated, for
    *   example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {Object} [request.config]
@@ -2677,7 +2678,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the organization and storedInfoType to be read, for
+   *   Required. Resource name of the organization and storedInfoType to be read, for
    *   example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {Object} [options]
@@ -2735,7 +2736,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -2863,7 +2864,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource name, for example projects/my-project-id or
+   *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -2926,7 +2927,7 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the organization and storedInfoType to be deleted, for
+   *   Required. Resource name of the organization and storedInfoType to be deleted, for
    *   example `organizations/433245324/storedInfoTypes/432452342` or
    *   projects/project-id/storedInfoTypes/432452342.
    * @param {Object} [options]
