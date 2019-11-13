@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-vision/compare/v1.7.0...v1.7.1) (2019-11-13)
+
+
+### Bug Fixes
+
+* import long in proto ts declaration file ([#482](https://www.github.com/googleapis/nodejs-vision/issues/482)) ([1f5258b](https://www.github.com/googleapis/nodejs-vision/commit/1f5258b65665c4813463592af32720d07e5c8de4))
+* **docs:** snippets are now replaced in jsdoc comments ([#481](https://www.github.com/googleapis/nodejs-vision/issues/481)) ([07281d6](https://www.github.com/googleapis/nodejs-vision/commit/07281d6d0acbd59a9c308308cb090b598cda53a2))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.6.0...v1.7.0) (2019-11-08)
 
 
