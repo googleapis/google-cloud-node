@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.5.1...v1.6.0) (2019-11-13)
+
+
+### Features
+
+* introduces HTTP targets to default v2 API ([#300](https://www.github.com/googleapis/nodejs-tasks/issues/300)) ([6dad421](https://www.github.com/googleapis/nodejs-tasks/commit/6dad4213f0b72e6ac1c708f98085037a48abe171))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#304](https://www.github.com/googleapis/nodejs-tasks/issues/304)) ([741e8ab](https://www.github.com/googleapis/nodejs-tasks/commit/741e8ab46cb68d63c7fca0de526354432092d415))
+* import long into proto ts declaration file ([#305](https://www.github.com/googleapis/nodejs-tasks/issues/305)) ([dd1fcd1](https://www.github.com/googleapis/nodejs-tasks/commit/dd1fcd114c9ecd4d425c405b16036cf935be4e50))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.5.0...v1.5.1) (2019-10-22)
 
 
