@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.2...v1.0.3) (2019-11-13)
+
+
+### Bug Fixes
+
+* **docs:** add jsdoc-region-tag plugin ([#146](https://www.github.com/googleapis/nodejs-promisify/issues/146)) ([ff0ee74](https://www.github.com/googleapis/nodejs-promisify/commit/ff0ee7408f50e8f7147b8ccf7e10337aa5920076))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.1...v1.0.2) (2019-06-26)
 
 
