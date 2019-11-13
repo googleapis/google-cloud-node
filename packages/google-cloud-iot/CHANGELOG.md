@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-iot/compare/v1.3.0...v1.3.1) (2019-11-12)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#222](https://www.github.com/googleapis/nodejs-iot/issues/222)) ([50e0c77](https://www.github.com/googleapis/nodejs-iot/commit/50e0c7787e480089913606818a34396a0c35725b))
+* revert incorrect deviceRegistryPath to correct registryPath in proto ([a216742](https://www.github.com/googleapis/nodejs-iot/commit/a21674225a0b8b0081a43028e3b8c7b3d497d201))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.2.0...v1.3.0) (2019-10-22)
 
 
