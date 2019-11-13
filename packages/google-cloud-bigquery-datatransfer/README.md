@@ -4,7 +4,7 @@
 
 # [Google BigQuery Data Transfer Service: Node.js Client](https://github.com/googleapis/nodejs-bigquery-data-transfer)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/bigquery-data-transfer.svg)](https://www.npmjs.org/package/@google-cloud/bigquery-data-transfer)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-bigquery-data-transfer/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-bigquery-data-transfer)
 
@@ -115,10 +115,11 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
-This library is considered to be in **alpha**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 
