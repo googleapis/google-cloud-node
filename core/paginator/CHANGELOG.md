@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.1...v2.0.2) (2019-11-13)
+
+
+### Bug Fixes
+
+* **docs:** add jsdoc-region-tag plugin ([#155](https://www.github.com/googleapis/nodejs-paginator/issues/155)) ([b983799](https://www.github.com/googleapis/nodejs-paginator/commit/b98379905848fd179c6268aff3e1cfaf2bf76663))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.0...v2.0.1) (2019-08-25)
 
 
