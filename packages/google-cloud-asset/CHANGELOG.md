@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-asset/compare/v1.4.1...v1.4.2) (2019-11-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v4 ([#207](https://www.github.com/googleapis/nodejs-asset/issues/207)) ([1b67b50](https://www.github.com/googleapis/nodejs-asset/commit/1b67b5022ee6cdf59e51614e911c5e45e00efdf2))
+* import long into proto ts declaration file ([#218](https://www.github.com/googleapis/nodejs-asset/issues/218)) ([00bc96e](https://www.github.com/googleapis/nodejs-asset/commit/00bc96e2944444b8ef5f61251202f42f5d54db72))
+* **docs:** snippets are now replaced in jsdoc comments ([#217](https://www.github.com/googleapis/nodejs-asset/issues/217)) ([bec38ad](https://www.github.com/googleapis/nodejs-asset/commit/bec38ad74dc50251cfdc5f4ab1c37e7d3ab9704f))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-asset/compare/v1.4.0...v1.4.1) (2019-10-22)
 
 

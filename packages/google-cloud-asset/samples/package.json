@@ -15,7 +15,7 @@
     "test": "mocha --timeout 180000"
   },
   "dependencies": {
-    "@google-cloud/asset": "^1.4.1",
+    "@google-cloud/asset": "^1.4.2",
     "@google-cloud/storage": "^4.0.0",
     "uuid": "^3.3.2",
     "yargs": "^14.0.0"
