@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.4.1...v1.5.0) (2019-11-13)
+
+
+### Features
+
+* **docs:** bump release level to beta ([#268](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/268)) ([90f199b](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/90f199b479e850bdf13a7e9a83e2c353866ac854))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#266](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/266)) ([cbe1699](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/cbe1699dcc26f000cb5456fd44c3259b596a84cb))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.4.0...v1.4.1) (2019-10-22)
 
 
