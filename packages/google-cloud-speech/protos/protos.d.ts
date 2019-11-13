@@ -1,3 +1,4 @@
+import * as Long from "long";
 import * as $protobuf from "protobufjs";
 /** Namespace google. */
 export namespace google {
@@ -685,6 +686,9 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount */
                     maxSpeakerCount?: (number|null);
+
+                    /** SpeakerDiarizationConfig speakerTag */
+                    speakerTag?: (number|null);
                 }
 
                 /** Represents a SpeakerDiarizationConfig. */
@@ -704,6 +708,9 @@ export namespace google {
 
                     /** SpeakerDiarizationConfig maxSpeakerCount. */
                     public maxSpeakerCount: number;
+
+                    /** SpeakerDiarizationConfig speakerTag. */
+                    public speakerTag: number;
 
                     /**
                      * Creates a new SpeakerDiarizationConfig instance using the specified properties.

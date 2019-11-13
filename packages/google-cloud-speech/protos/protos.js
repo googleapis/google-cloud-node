@@ -1689,6 +1689,7 @@
                          * @property {boolean|null} [enableSpeakerDiarization] SpeakerDiarizationConfig enableSpeakerDiarization
                          * @property {number|null} [minSpeakerCount] SpeakerDiarizationConfig minSpeakerCount
                          * @property {number|null} [maxSpeakerCount] SpeakerDiarizationConfig maxSpeakerCount
+                         * @property {number|null} [speakerTag] SpeakerDiarizationConfig speakerTag
                          */
     
                         /**
@@ -1731,6 +1732,14 @@
                         SpeakerDiarizationConfig.prototype.maxSpeakerCount = 0;
     
                         /**
+                         * SpeakerDiarizationConfig speakerTag.
+                         * @member {number} speakerTag
+                         * @memberof google.cloud.speech.v1.SpeakerDiarizationConfig
+                         * @instance
+                         */
+                        SpeakerDiarizationConfig.prototype.speakerTag = 0;
+    
+                        /**
                          * Creates a new SpeakerDiarizationConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.SpeakerDiarizationConfig
@@ -1760,6 +1769,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minSpeakerCount);
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxSpeakerCount);
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.speakerTag);
                             return writer;
                         };
     
@@ -1802,6 +1813,9 @@
                                     break;
                                 case 3:
                                     message.maxSpeakerCount = reader.int32();
+                                    break;
+                                case 5:
+                                    message.speakerTag = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1847,6 +1861,9 @@
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 if (!$util.isInteger(message.maxSpeakerCount))
                                     return "maxSpeakerCount: integer expected";
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                if (!$util.isInteger(message.speakerTag))
+                                    return "speakerTag: integer expected";
                             return null;
                         };
     
@@ -1868,6 +1885,8 @@
                                 message.minSpeakerCount = object.minSpeakerCount | 0;
                             if (object.maxSpeakerCount != null)
                                 message.maxSpeakerCount = object.maxSpeakerCount | 0;
+                            if (object.speakerTag != null)
+                                message.speakerTag = object.speakerTag | 0;
                             return message;
                         };
     
@@ -1888,6 +1907,7 @@
                                 object.enableSpeakerDiarization = false;
                                 object.minSpeakerCount = 0;
                                 object.maxSpeakerCount = 0;
+                                object.speakerTag = 0;
                             }
                             if (message.enableSpeakerDiarization != null && message.hasOwnProperty("enableSpeakerDiarization"))
                                 object.enableSpeakerDiarization = message.enableSpeakerDiarization;
@@ -1895,6 +1915,8 @@
                                 object.minSpeakerCount = message.minSpeakerCount;
                             if (message.maxSpeakerCount != null && message.hasOwnProperty("maxSpeakerCount"))
                                 object.maxSpeakerCount = message.maxSpeakerCount;
+                            if (message.speakerTag != null && message.hasOwnProperty("speakerTag"))
+                                object.speakerTag = message.speakerTag;
                             return object;
                         };
     

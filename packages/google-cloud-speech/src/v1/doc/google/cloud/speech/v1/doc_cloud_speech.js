@@ -390,6 +390,9 @@ const RecognitionConfig = {
  *   flexibility by allowing the system to automatically determine the correct
  *   number of speakers. If not set, the default value is 6.
  *
+ * @property {number} speakerTag
+ *   Unused.
+ *
  * @typedef SpeakerDiarizationConfig
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeakerDiarizationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
