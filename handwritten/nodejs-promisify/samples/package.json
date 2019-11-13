@@ -11,7 +11,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^1.0.2"
+    "@google-cloud/promisify": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
