@@ -48,6 +48,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
+    "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
