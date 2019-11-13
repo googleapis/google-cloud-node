@@ -6,22 +6,27 @@
           "nested": {
             "v1": {
               "options": {
+                "csharp_namespace": "Google.Cloud.Container.V1",
                 "go_package": "google.golang.org/genproto/googleapis/container/v1;container",
                 "java_multiple_files": true,
                 "java_outer_classname": "ClusterServiceProto",
                 "java_package": "com.google.container.v1",
-                "csharp_namespace": "Google.Cloud.Container.V1",
                 "php_namespace": "Google\\Cloud\\Container\\V1"
               },
               "nested": {
                 "ClusterManager": {
+                  "options": {
+                    "(google.api.default_host)": "container.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
                   "methods": {
                     "ListClusters": {
                       "requestType": "ListClustersRequest",
                       "responseType": "ListClustersResponse",
                       "options": {
                         "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/clusters",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters",
+                        "(google.api.method_signature)": "project_id,zone"
                       }
                     },
                     "GetCluster": {
@@ -29,7 +34,8 @@
                       "responseType": "Cluster",
                       "options": {
                         "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*}",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id"
                       }
                     },
                     "CreateCluster": {
@@ -39,7 +45,8 @@
                         "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/clusters",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster"
                       }
                     },
                     "UpdateCluster": {
@@ -49,7 +56,8 @@
                         "(google.api.http).put": "/v1/{name=projects/*/locations/*/clusters/*}",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.put": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,update"
                       }
                     },
                     "UpdateNodePool": {
@@ -79,7 +87,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setLogging",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/logging",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,logging_service"
                       }
                     },
                     "SetMonitoringService": {
@@ -89,7 +98,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setMonitoring",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/monitoring",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,monitoring_service"
                       }
                     },
                     "SetAddonsConfig": {
@@ -99,7 +109,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setAddons",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/addons",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,addons_config"
                       }
                     },
                     "SetLocations": {
@@ -109,7 +120,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setLocations",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/locations",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,locations"
                       }
                     },
                     "UpdateMaster": {
@@ -119,7 +131,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:updateMaster",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/master",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,master_version"
                       }
                     },
                     "SetMasterAuth": {
@@ -137,7 +150,8 @@
                       "responseType": "Operation",
                       "options": {
                         "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*}",
-                        "(google.api.http).additional_bindings.delete": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}"
+                        "(google.api.http).additional_bindings.delete": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id"
                       }
                     },
                     "ListOperations": {
@@ -145,7 +159,8 @@
                       "responseType": "ListOperationsResponse",
                       "options": {
                         "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/operations",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations",
+                        "(google.api.method_signature)": "project_id,zone"
                       }
                     },
                     "GetOperation": {
@@ -153,7 +168,8 @@
                       "responseType": "Operation",
                       "options": {
                         "(google.api.http).get": "/v1/{name=projects/*/locations/*/operations/*}",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations/{operation_id}"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations/{operation_id}",
+                        "(google.api.method_signature)": "project_id,zone,operation_id"
                       }
                     },
                     "CancelOperation": {
@@ -163,7 +179,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/operations/*}:cancel",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/operations/{operation_id}:cancel",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,operation_id"
                       }
                     },
                     "GetServerConfig": {
@@ -171,7 +188,8 @@
                       "responseType": "ServerConfig",
                       "options": {
                         "(google.api.http).get": "/v1/{name=projects/*/locations/*}/serverConfig",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/serverconfig"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/serverconfig",
+                        "(google.api.method_signature)": "project_id,zone"
                       }
                     },
                     "ListNodePools": {
@@ -179,7 +197,8 @@
                       "responseType": "ListNodePoolsResponse",
                       "options": {
                         "(google.api.http).get": "/v1/{parent=projects/*/locations/*/clusters/*}/nodePools",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id"
                       }
                     },
                     "GetNodePool": {
@@ -187,7 +206,8 @@
                       "responseType": "NodePool",
                       "options": {
                         "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/nodePools/*}",
-                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools/{node_pool_id}"
+                        "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools/{node_pool_id}",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,node_pool_id"
                       }
                     },
                     "CreateNodePool": {
@@ -197,7 +217,8 @@
                         "(google.api.http).post": "/v1/{parent=projects/*/locations/*/clusters/*}/nodePools",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,node_pool"
                       }
                     },
                     "DeleteNodePool": {
@@ -205,7 +226,8 @@
                       "responseType": "Operation",
                       "options": {
                         "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/nodePools/*}",
-                        "(google.api.http).additional_bindings.delete": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools/{node_pool_id}"
+                        "(google.api.http).additional_bindings.delete": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools/{node_pool_id}",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,node_pool_id"
                       }
                     },
                     "RollbackNodePoolUpgrade": {
@@ -215,7 +237,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*/nodePools/*}:rollback",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/nodePools/{node_pool_id}:rollback",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,node_pool_id"
                       }
                     },
                     "SetNodePoolManagement": {
@@ -245,7 +268,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setLegacyAbac",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}/legacyAbac",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,enabled"
                       }
                     },
                     "StartIPRotation": {
@@ -255,7 +279,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:startIpRotation",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}:startIpRotation",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id"
                       }
                     },
                     "CompleteIPRotation": {
@@ -265,7 +290,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:completeIpRotation",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}:completeIpRotation",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id"
                       }
                     },
                     "SetNodePoolSize": {
@@ -285,7 +311,8 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setNetworkPolicy",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}:setNetworkPolicy",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,network_policy"
                       }
                     },
                     "SetMaintenancePolicy": {
@@ -295,7 +322,15 @@
                         "(google.api.http).post": "/v1/{name=projects/*/locations/*/clusters/*}:setMaintenancePolicy",
                         "(google.api.http).body": "*",
                         "(google.api.http).additional_bindings.post": "/v1/projects/{project_id}/zones/{zone}/clusters/{cluster_id}:setMaintenancePolicy",
-                        "(google.api.http).additional_bindings.body": "*"
+                        "(google.api.http).additional_bindings.body": "*",
+                        "(google.api.method_signature)": "project_id,zone,cluster_id,maintenance_policy"
+                      }
+                    },
+                    "ListUsableSubnetworks": {
+                      "requestType": "ListUsableSubnetworksRequest",
+                      "responseType": "ListUsableSubnetworksResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/{parent=projects/*}/aggregated/usableSubnetworks"
                       }
                     }
                   }
@@ -358,6 +393,53 @@
                     "minCpuPlatform": {
                       "type": "string",
                       "id": 13
+                    },
+                    "taints": {
+                      "rule": "repeated",
+                      "type": "NodeTaint",
+                      "id": 15
+                    },
+                    "shieldedInstanceConfig": {
+                      "type": "ShieldedInstanceConfig",
+                      "id": 20
+                    }
+                  }
+                },
+                "ShieldedInstanceConfig": {
+                  "fields": {
+                    "enableSecureBoot": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "enableIntegrityMonitoring": {
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                },
+                "NodeTaint": {
+                  "fields": {
+                    "key": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "effect": {
+                      "type": "Effect",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Effect": {
+                      "values": {
+                        "EFFECT_UNSPECIFIED": 0,
+                        "NO_SCHEDULE": 1,
+                        "PREFER_NO_SCHEDULE": 2,
+                        "NO_EXECUTE": 3
+                      }
                     }
                   }
                 },
@@ -409,11 +491,18 @@
                     },
                     "kubernetesDashboard": {
                       "type": "KubernetesDashboard",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "networkPolicyConfig": {
                       "type": "NetworkPolicyConfig",
                       "id": 4
+                    },
+                    "cloudRunConfig": {
+                      "type": "CloudRunConfig",
+                      "id": 7
                     }
                   }
                 },
@@ -473,6 +562,26 @@
                     }
                   }
                 },
+                "AuthenticatorGroupsConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "securityGroup": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "CloudRunConfig": {
+                  "fields": {
+                    "disabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "MasterAuthorizedNetworksConfig": {
                   "fields": {
                     "enabled": {
@@ -525,6 +634,14 @@
                         "PROVIDER_UNSPECIFIED": 0,
                         "CALICO": 1
                       }
+                    }
+                  }
+                },
+                "BinaryAuthorization": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 },
@@ -582,6 +699,10 @@
                     "servicesIpv4CidrBlock": {
                       "type": "string",
                       "id": 11
+                    },
+                    "tpuIpv4CidrBlock": {
+                      "type": "string",
+                      "id": 13
                     }
                   }
                 },
@@ -597,11 +718,17 @@
                     },
                     "initialNodeCount": {
                       "type": "int32",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "nodeConfig": {
                       "type": "NodeConfig",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "masterAuth": {
                       "type": "MasterAuth",
@@ -674,13 +801,41 @@
                       "type": "MaintenancePolicy",
                       "id": 23
                     },
+                    "binaryAuthorization": {
+                      "type": "BinaryAuthorization",
+                      "id": 24
+                    },
+                    "autoscaling": {
+                      "type": "ClusterAutoscaling",
+                      "id": 26
+                    },
                     "networkConfig": {
                       "type": "NetworkConfig",
                       "id": 27
                     },
+                    "defaultMaxPodsConstraint": {
+                      "type": "MaxPodsConstraint",
+                      "id": 30
+                    },
+                    "resourceUsageExportConfig": {
+                      "type": "ResourceUsageExportConfig",
+                      "id": 33
+                    },
+                    "authenticatorGroupsConfig": {
+                      "type": "AuthenticatorGroupsConfig",
+                      "id": 34
+                    },
                     "privateClusterConfig": {
                       "type": "PrivateClusterConfig",
                       "id": 37
+                    },
+                    "databaseEncryption": {
+                      "type": "DatabaseEncryption",
+                      "id": 38
+                    },
+                    "verticalPodAutoscaling": {
+                      "type": "VerticalPodAutoscaling",
+                      "id": 39
                     },
                     "selfLink": {
                       "type": "string",
@@ -742,7 +897,10 @@
                     },
                     "currentNodeCount": {
                       "type": "int32",
-                      "id": 112
+                      "id": 112,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "expireTime": {
                       "type": "string",
@@ -751,6 +909,19 @@
                     "location": {
                       "type": "string",
                       "id": 114
+                    },
+                    "enableTpu": {
+                      "type": "bool",
+                      "id": 115
+                    },
+                    "tpuIpv4CidrBlock": {
+                      "type": "string",
+                      "id": 116
+                    },
+                    "conditions": {
+                      "rule": "repeated",
+                      "type": "StatusCondition",
+                      "id": 118
                     }
                   },
                   "nested": {
@@ -789,6 +960,10 @@
                       "type": "string",
                       "id": 8
                     },
+                    "desiredDatabaseEncryption": {
+                      "type": "DatabaseEncryption",
+                      "id": 46
+                    },
                     "desiredNodePoolAutoscaling": {
                       "type": "NodePoolAutoscaling",
                       "id": 9
@@ -801,6 +976,30 @@
                     "desiredMasterAuthorizedNetworksConfig": {
                       "type": "MasterAuthorizedNetworksConfig",
                       "id": 12
+                    },
+                    "desiredClusterAutoscaling": {
+                      "type": "ClusterAutoscaling",
+                      "id": 15
+                    },
+                    "desiredBinaryAuthorization": {
+                      "type": "BinaryAuthorization",
+                      "id": 16
+                    },
+                    "desiredLoggingService": {
+                      "type": "string",
+                      "id": 19
+                    },
+                    "desiredResourceUsageExportConfig": {
+                      "type": "ResourceUsageExportConfig",
+                      "id": 21
+                    },
+                    "desiredVerticalPodAutoscaling": {
+                      "type": "VerticalPodAutoscaling",
+                      "id": 22
+                    },
+                    "desiredIntraNodeVisibilityConfig": {
+                      "type": "IntraNodeVisibilityConfig",
+                      "id": 26
                     },
                     "desiredMasterVersion": {
                       "type": "string",
@@ -856,6 +1055,16 @@
                     "endTime": {
                       "type": "string",
                       "id": 11
+                    },
+                    "clusterConditions": {
+                      "rule": "repeated",
+                      "type": "StatusCondition",
+                      "id": 13
+                    },
+                    "nodepoolConditions": {
+                      "rule": "repeated",
+                      "type": "StatusCondition",
+                      "id": 14
                     }
                   },
                   "nested": {
@@ -897,19 +1106,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "cluster": {
                       "type": "Cluster",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "parent": {
                       "type": "string",
@@ -923,21 +1137,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -952,26 +1169,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "update": {
                       "type": "ClusterUpdate",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -985,37 +1208,47 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodeVersion": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "imageType": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1029,33 +1262,40 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "autoscaling": {
                       "type": "NodePoolAutoscaling",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1069,23 +1309,31 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "loggingService": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1099,26 +1347,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "monitoringService": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1132,26 +1386,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "addonsConfig": {
                       "type": "AddonsConfig",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1165,27 +1425,33 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "locations": {
                       "rule": "repeated",
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1199,26 +1465,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "masterVersion": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1232,30 +1504,39 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "action": {
                       "type": "Action",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "update": {
                       "type": "MasterAuth",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1279,21 +1560,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1308,14 +1592,16 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "parent": {
@@ -1344,21 +1630,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "operationId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1373,14 +1662,16 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "parent": {
@@ -1395,21 +1686,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "operationId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1438,14 +1732,16 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1487,26 +1783,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePool": {
                       "type": "NodePool",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "parent": {
                       "type": "string",
@@ -1520,28 +1822,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1556,21 +1862,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "parent": {
@@ -1585,28 +1894,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1657,6 +1970,19 @@
                     "management": {
                       "type": "NodeManagement",
                       "id": 5
+                    },
+                    "maxPodsConstraint": {
+                      "type": "MaxPodsConstraint",
+                      "id": 6
+                    },
+                    "conditions": {
+                      "rule": "repeated",
+                      "type": "StatusCondition",
+                      "id": 105
+                    },
+                    "podIpv4CidrSize": {
+                      "type": "int32",
+                      "id": 7
                     }
                   },
                   "nested": {
@@ -1706,6 +2032,10 @@
                     "window": {
                       "type": "MaintenanceWindow",
                       "id": 1
+                    },
+                    "resourceVersion": {
+                      "type": "string",
+                      "id": 3
                     }
                   }
                 },
@@ -1713,13 +2043,47 @@
                   "oneofs": {
                     "policy": {
                       "oneof": [
-                        "dailyMaintenanceWindow"
+                        "dailyMaintenanceWindow",
+                        "recurringWindow"
                       ]
                     }
                   },
                   "fields": {
                     "dailyMaintenanceWindow": {
                       "type": "DailyMaintenanceWindow",
+                      "id": 2
+                    },
+                    "recurringWindow": {
+                      "type": "RecurringTimeWindow",
+                      "id": 3
+                    },
+                    "maintenanceExclusions": {
+                      "keyType": "string",
+                      "type": "TimeWindow",
+                      "id": 4
+                    }
+                  }
+                },
+                "TimeWindow": {
+                  "fields": {
+                    "startTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "endTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    }
+                  }
+                },
+                "RecurringTimeWindow": {
+                  "fields": {
+                    "window": {
+                      "type": "TimeWindow",
+                      "id": 1
+                    },
+                    "recurrence": {
+                      "type": "string",
                       "id": 2
                     }
                   }
@@ -1742,33 +2106,40 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "management": {
                       "type": "NodeManagement",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1782,33 +2153,40 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodeCount": {
                       "type": "int32",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1822,28 +2200,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "nodePoolId": {
                       "type": "string",
                       "id": 4,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1861,6 +2243,57 @@
                     }
                   }
                 },
+                "ClusterAutoscaling": {
+                  "fields": {
+                    "enableNodeAutoprovisioning": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "resourceLimits": {
+                      "rule": "repeated",
+                      "type": "ResourceLimit",
+                      "id": 2
+                    },
+                    "autoprovisioningNodePoolDefaults": {
+                      "type": "AutoprovisioningNodePoolDefaults",
+                      "id": 4
+                    },
+                    "autoprovisioningLocations": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 5
+                    }
+                  }
+                },
+                "AutoprovisioningNodePoolDefaults": {
+                  "fields": {
+                    "oauthScopes": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "serviceAccount": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "ResourceLimit": {
+                  "fields": {
+                    "resourceType": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "minimum": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "maximum": {
+                      "type": "int64",
+                      "id": 3
+                    }
+                  }
+                },
                 "NodePoolAutoscaling": {
                   "fields": {
                     "enabled": {
@@ -1874,6 +2307,10 @@
                     "maxNodeCount": {
                       "type": "int32",
                       "id": 3
+                    },
+                    "autoprovisioned": {
+                      "type": "bool",
+                      "id": 4
                     }
                   }
                 },
@@ -1883,31 +2320,40 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "resourceLabels": {
                       "keyType": "string",
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "labelFingerprint": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1921,26 +2367,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "enabled": {
                       "type": "bool",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -1954,21 +2406,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -1987,21 +2442,24 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "name": {
@@ -2028,26 +2486,32 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "clusterId": {
                       "type": "string",
                       "id": 3,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     },
                     "networkPolicy": {
                       "type": "NetworkPolicy",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
@@ -2059,23 +2523,59 @@
                   "fields": {
                     "projectId": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "zone": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "clusterId": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "maintenancePolicy": {
                       "type": "MaintenancePolicy",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "name": {
                       "type": "string",
                       "id": 5
+                    }
+                  }
+                },
+                "StatusCondition": {
+                  "fields": {
+                    "code": {
+                      "type": "Code",
+                      "id": 1
+                    },
+                    "message": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Code": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "GCE_STOCKOUT": 1,
+                        "GKE_SERVICE_ACCOUNT_DELETED": 2,
+                        "GCE_QUOTA_EXCEEDED": 3,
+                        "SET_BY_OPERATOR": 4,
+                        "CLOUD_KMS_KEY_ERROR": 7
+                      }
                     }
                   }
                 },
@@ -2088,6 +2588,174 @@
                     "subnetwork": {
                       "type": "string",
                       "id": 2
+                    },
+                    "enableIntraNodeVisibility": {
+                      "type": "bool",
+                      "id": 5
+                    }
+                  }
+                },
+                "IntraNodeVisibilityConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "MaxPodsConstraint": {
+                  "fields": {
+                    "maxPodsPerNode": {
+                      "type": "int64",
+                      "id": 1
+                    }
+                  }
+                },
+                "DatabaseEncryption": {
+                  "fields": {
+                    "state": {
+                      "type": "State",
+                      "id": 2
+                    },
+                    "keyName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "ENCRYPTED": 1,
+                        "DECRYPTED": 2
+                      }
+                    }
+                  }
+                },
+                "ListUsableSubnetworksRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "ListUsableSubnetworksResponse": {
+                  "fields": {
+                    "subnetworks": {
+                      "rule": "repeated",
+                      "type": "UsableSubnetwork",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "UsableSubnetworkSecondaryRange": {
+                  "fields": {
+                    "rangeName": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "ipCidrRange": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "status": {
+                      "type": "Status",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Status": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "UNUSED": 1,
+                        "IN_USE_SERVICE": 2,
+                        "IN_USE_SHAREABLE_POD": 3,
+                        "IN_USE_MANAGED_POD": 4
+                      }
+                    }
+                  }
+                },
+                "UsableSubnetwork": {
+                  "fields": {
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "network": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "ipCidrRange": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "secondaryIpRanges": {
+                      "rule": "repeated",
+                      "type": "UsableSubnetworkSecondaryRange",
+                      "id": 4
+                    },
+                    "statusMessage": {
+                      "type": "string",
+                      "id": 5
+                    }
+                  }
+                },
+                "ResourceUsageExportConfig": {
+                  "fields": {
+                    "bigqueryDestination": {
+                      "type": "BigQueryDestination",
+                      "id": 1
+                    },
+                    "enableNetworkEgressMetering": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "consumptionMeteringConfig": {
+                      "type": "ConsumptionMeteringConfig",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "BigQueryDestination": {
+                      "fields": {
+                        "datasetId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ConsumptionMeteringConfig": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "VerticalPodAutoscaling": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 }
@@ -2099,7 +2767,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -2190,6 +2858,38 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             }
           }
@@ -3087,6 +3787,18 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
             }
           }
         }

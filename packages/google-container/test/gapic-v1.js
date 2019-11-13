@@ -153,6 +153,8 @@ describe('ClusterManagerClient', () => {
       const currentNodeCount = 178977560;
       const expireTime = 'expireTime-96179731';
       const location = 'location1901043637';
+      const enableTpu = false;
+      const tpuIpv4CidrBlock = 'tpuIpv4CidrBlock1137906646';
       const expectedResponse = {
         name: name,
         description: description,
@@ -177,6 +179,8 @@ describe('ClusterManagerClient', () => {
         currentNodeCount: currentNodeCount,
         expireTime: expireTime,
         location: location,
+        enableTpu: enableTpu,
+        tpuIpv4CidrBlock: tpuIpv4CidrBlock,
       };
 
       // Mock Grpc layer
@@ -1558,12 +1562,14 @@ describe('ClusterManagerClient', () => {
       const selfLink = 'selfLink-1691268851';
       const version = 'version351608024';
       const statusMessage = 'statusMessage-239442758';
+      const podIpv4CidrSize = 1098768716;
       const expectedResponse = {
         name: name,
         initialNodeCount: initialNodeCount,
         selfLink: selfLink,
         version: version,
         statusMessage: statusMessage,
+        podIpv4CidrSize: podIpv4CidrSize,
       };
 
       // Mock Grpc layer
@@ -2577,6 +2583,67 @@ describe('ClusterManagerClient', () => {
       );
 
       client.setMaintenancePolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listUsableSubnetworks', () => {
+    it('invokes listUsableSubnetworks without error', done => {
+      const client = new containerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock response
+      const nextPageToken = '';
+      const subnetworksElement = {};
+      const subnetworks = [subnetworksElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        subnetworks: subnetworks,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUsableSubnetworks = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.subnetworks);
+      };
+
+      client.listUsableSubnetworks(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.subnetworks);
+        done();
+      });
+    });
+
+    it('invokes listUsableSubnetworks with error', done => {
+      const client = new containerModule.v1.ClusterManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.listUsableSubnetworks = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listUsableSubnetworks(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');

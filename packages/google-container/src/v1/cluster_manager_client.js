@@ -121,6 +121,17 @@ class ClusterManagerClient {
       opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this._descriptors.page = {
+      listUsableSubnetworks: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'subnetworks'
+      ),
+    };
+
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
       'google.container.v1.ClusterManager',
@@ -176,6 +187,7 @@ class ClusterManagerClient {
       'setNodePoolSize',
       'setNetworkPolicy',
       'setMaintenancePolicy',
+      'listUsableSubnetworks',
     ];
     for (const methodName of clusterManagerStubMethods) {
       const innerCallPromise = clusterManagerStub.then(
@@ -189,7 +201,7 @@ class ClusterManagerClient {
       this._innerApiCalls[methodName] = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
-        null
+        this._descriptors.page[methodName]
       );
     }
   }
@@ -244,11 +256,11 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides, or "-" for all zones.
    *   This field has been deprecated and replaced by the parent field.
@@ -314,16 +326,16 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to retrieve.
+   *   Required. Deprecated. The name of the cluster to retrieve.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster) of the cluster to retrieve.
@@ -390,26 +402,26 @@ class ClusterManagerClient {
    * [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
    *
    * One firewall is added for the cluster. After cluster creation,
-   * the cluster creates routes for each node to allow the containers
+   * the Kubelet creates routes for each node to allow the containers
    * on that node to communicate with all other instances in the
    * cluster.
    *
    * Finally, an entry is added to the project's global metadata indicating
-   * which CIDR range is being used by the cluster.
+   * which CIDR range the cluster is using.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {Object} request.cluster
-   *   A [cluster
+   *   Required. A [cluster
    *   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
    *
    *   This object should have the same structure as [Cluster]{@link google.container.v1.Cluster}
@@ -476,19 +488,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object} request.update
-   *   A description of the update.
+   *   Required. A description of the update.
    *
    *   This object should have the same structure as [ClusterUpdate]{@link google.container.v1.ClusterUpdate}
    * @param {string} [request.name]
@@ -551,27 +563,27 @@ class ClusterManagerClient {
   }
 
   /**
-   * Updates the version and/or image type for a specific node pool.
+   * Updates the version and/or image type for the specified node pool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to upgrade.
+   *   Required. Deprecated. The name of the node pool to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodeVersion
-   *   The Kubernetes version to change the nodes to (typically an
+   *   Required. The Kubernetes version to change the nodes to (typically an
    *   upgrade).
    *
    *   Users may specify either explicit versions offered by Kubernetes Engine or
@@ -583,7 +595,7 @@ class ClusterManagerClient {
    *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
    *   - "-": picks the Kubernetes master version
    * @param {string} request.imageType
-   *   The desired image type for the node pool.
+   *   Required. The desired image type for the node pool.
    * @param {string} [request.name]
    *   The name (project, location, cluster, node pool) of the node pool to
    *   update. Specified in the format
@@ -649,27 +661,27 @@ class ClusterManagerClient {
   }
 
   /**
-   * Sets the autoscaling settings for a specific node pool.
+   * Sets the autoscaling settings for the specified node pool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to upgrade.
+   *   Required. Deprecated. The name of the node pool to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object} request.autoscaling
-   *   Autoscaling configuration for the node pool.
+   *   Required. Autoscaling configuration for the node pool.
    *
    *   This object should have the same structure as [NodePoolAutoscaling]{@link google.container.v1.NodePoolAutoscaling}
    * @param {string} [request.name]
@@ -744,19 +756,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.loggingService
-   *   The logging service the cluster should use to write metrics.
+   *   Required. The logging service the cluster should use to write metrics.
    *   Currently available options:
    *
    *   * "logging.googleapis.com" - the Google Cloud Logging service
@@ -826,21 +838,23 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.monitoringService
-   *   The monitoring service the cluster should use to write metrics.
+   *   Required. The monitoring service the cluster should use to write metrics.
    *   Currently available options:
    *
+   *   * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
+   *   service with Kubernetes-native resource model
    *   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
    *   * "none" - no metrics will be exported from the cluster
    * @param {string} [request.name]
@@ -908,19 +922,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object} request.addonsConfig
-   *   The desired configurations for the various addons available to run in the
+   *   Required. The desired configurations for the various addons available to run in the
    *   cluster.
    *
    *   This object should have the same structure as [AddonsConfig]{@link google.container.v1.AddonsConfig}
@@ -989,20 +1003,20 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string[]} request.locations
-   *   The desired list of Google Compute Engine
-   *   [locations](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
+   *   Required. The desired list of Google Compute Engine
+   *   [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
    *   should be located. Changing the locations a cluster is in will result
    *   in nodes being either created or removed from the cluster, depending on
    *   whether locations are being added or removed.
@@ -1073,19 +1087,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.masterVersion
-   *   The Kubernetes version to change the master to.
+   *   Required. The Kubernetes version to change the master to.
    *
    *   Users may specify either explicit versions offered by Kubernetes Engine or
    *   version aliases, which have the following behavior:
@@ -1155,30 +1169,30 @@ class ClusterManagerClient {
   }
 
   /**
-   * Used to set master auth materials. Currently supports :-
-   * Changing the admin password for a specific cluster.
-   * This can be either via password generation or explicitly set the password.
+   * Sets master auth materials. Currently supports changing the admin password
+   * or a specific cluster, either via password generation or explicitly setting
+   * the password.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to upgrade.
+   *   Required. Deprecated. The name of the cluster to upgrade.
    *   This field has been deprecated and replaced by the name field.
    * @param {number} request.action
-   *   The exact form of action to be taken on the master auth.
+   *   Required. The exact form of action to be taken on the master auth.
    *
    *   The number should be among the values of [Action]{@link google.container.v1.Action}
    * @param {Object} request.update
-   *   A description of the update.
+   *   Required. A description of the update.
    *
    *   This object should have the same structure as [MasterAuth]{@link google.container.v1.MasterAuth}
    * @param {string} [request.name]
@@ -1249,23 +1263,23 @@ class ClusterManagerClient {
    * Firewalls and routes that were configured during cluster creation
    * are also deleted.
    *
-   * Other Google Compute Engine resources that might be in use by the cluster
-   * (e.g. load balancer resources) will not be deleted if they weren't present
-   * at the initial create time.
+   * Other Google Compute Engine resources that might be in use by the cluster,
+   * such as load balancer resources, are not deleted if they weren't present
+   * when the cluster was initially created.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to delete.
+   *   Required. Deprecated. The name of the cluster to delete.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster) of the cluster to delete.
@@ -1330,11 +1344,11 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
    *   all zones. This field has been deprecated and replaced by the parent field.
    * @param {string} [request.parent]
@@ -1399,16 +1413,16 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.operationId
-   *   Deprecated. The server-assigned `name` of the operation.
+   *   Required. Deprecated. The server-assigned `name` of the operation.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, operation id) of the operation to get.
@@ -1473,15 +1487,15 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.operationId
-   *   Deprecated. The server-assigned `name` of the operation.
+   *   Required. Deprecated. The server-assigned `name` of the operation.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, operation id) of the operation to cancel.
@@ -1533,21 +1547,21 @@ class ClusterManagerClient {
   }
 
   /**
-   * Returns configuration info about the Kubernetes Engine service.
+   * Returns configuration info about the Google Kubernetes Engine service.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
-   *   The name (project and location) of the server config to get
-   *   Specified in the format 'projects/* /locations/*'.
+   *   The name (project and location) of the server config to get,
+   *   specified in the format 'projects/* /locations/*'.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1606,16 +1620,16 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} [request.parent]
    *   The parent (project, location, cluster id) where the node pools will be
@@ -1675,24 +1689,24 @@ class ClusterManagerClient {
   }
 
   /**
-   * Retrieves the node pool requested.
+   * Retrieves the requested node pool.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool.
+   *   Required. Deprecated. The name of the node pool.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster, node pool id) of the node pool to
@@ -1760,19 +1774,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the parent field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the parent field.
    * @param {Object} request.nodePool
-   *   The node pool to create.
+   *   Required. The node pool to create.
    *
    *   This object should have the same structure as [NodePool]{@link google.container.v1.NodePool}
    * @param {string} [request.parent]
@@ -1841,19 +1855,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to delete.
+   *   Required. Deprecated. The name of the node pool to delete.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster, node pool id) of the node pool to
@@ -1916,25 +1930,25 @@ class ClusterManagerClient {
   }
 
   /**
-   * Roll back the previously Aborted or Failed NodePool upgrade.
-   * This will be an no-op if the last upgrade successfully completed.
+   * Rolls back a previously Aborted or Failed NodePool upgrade.
+   * This makes no changes if the last upgrade successfully completed.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to rollback.
+   *   Required. Deprecated. The name of the cluster to rollback.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to rollback.
+   *   Required. Deprecated. The name of the node pool to rollback.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster, node pool id) of the node poll to
@@ -2006,22 +2020,22 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
+   *   Required. Deprecated. The name of the cluster to update.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to update.
+   *   Required. Deprecated. The name of the node pool to update.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object} request.management
-   *   NodeManagement configuration for the node pool.
+   *   Required. NodeManagement configuration for the node pool.
    *
    *   This object should have the same structure as [NodeManagement]{@link google.container.v1.NodeManagement}
    * @param {string} [request.name]
@@ -2096,21 +2110,21 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object.<string, string>} request.resourceLabels
-   *   The labels to set for that cluster.
+   *   Required. The labels to set for that cluster.
    * @param {string} request.labelFingerprint
-   *   The fingerprint of the previous set of labels for this resource,
+   *   Required. The fingerprint of the previous set of labels for this resource,
    *   used to detect conflicts. The fingerprint is initially generated by
    *   Kubernetes Engine and changes after every request to modify or update
    *   labels. You must always provide an up-to-date fingerprint hash when
@@ -2183,19 +2197,19 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
+   *   Required. Deprecated. The name of the cluster to update.
    *   This field has been deprecated and replaced by the name field.
    * @param {boolean} request.enabled
-   *   Whether ABAC authorization will be enabled in the cluster.
+   *   Required. Whether ABAC authorization will be enabled in the cluster.
    * @param {string} [request.name]
    *   The name (project, location, cluster id) of the cluster to set legacy abac.
    *   Specified in the format 'projects/* /locations/* /clusters/*'.
@@ -2256,21 +2270,21 @@ class ClusterManagerClient {
   }
 
   /**
-   * Start master IP rotation.
+   * Starts master IP rotation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster id) of the cluster to start IP
@@ -2337,16 +2351,16 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} [request.name]
    *   The name (project, location, cluster id) of the cluster to complete IP
@@ -2411,22 +2425,22 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster to update.
+   *   Required. Deprecated. The name of the cluster to update.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.nodePoolId
-   *   Deprecated. The name of the node pool to update.
+   *   Required. Deprecated. The name of the node pool to update.
    *   This field has been deprecated and replaced by the name field.
    * @param {number} request.nodeCount
-   *   The desired node count for the pool.
+   *   Required. The desired node count for the pool.
    * @param {string} [request.name]
    *   The name (project, location, cluster, node pool id) of the node pool to set
    *   size.
@@ -2490,24 +2504,24 @@ class ClusterManagerClient {
   }
 
   /**
-   * Enables/Disables Network Policy for a cluster.
+   * Enables or disables Network Policy for a cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
+   *   Required. Deprecated. The Google Developers Console [project ID or project
    *   number](https://developers.google.com/console/help/new/#projectnumber).
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
+   *   Required. Deprecated. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    *   This field has been deprecated and replaced by the name field.
    * @param {string} request.clusterId
-   *   Deprecated. The name of the cluster.
+   *   Required. Deprecated. The name of the cluster.
    *   This field has been deprecated and replaced by the name field.
    * @param {Object} request.networkPolicy
-   *   Configuration options for the NetworkPolicy feature.
+   *   Required. Configuration options for the NetworkPolicy feature.
    *
    *   This object should have the same structure as [NetworkPolicy]{@link google.container.v1.NetworkPolicy}
    * @param {string} [request.name]
@@ -2575,16 +2589,16 @@ class ClusterManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The Google Developers Console [project ID or project
+   *   Required. The Google Developers Console [project ID or project
    *   number](https://support.google.com/cloud/answer/6158840).
    * @param {string} request.zone
-   *   The name of the Google Compute Engine
+   *   Required. The name of the Google Compute Engine
    *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
    *   resides.
    * @param {string} request.clusterId
-   *   The name of the cluster to update.
+   *   Required. The name of the cluster to update.
    * @param {Object} request.maintenancePolicy
-   *   The maintenance policy to be set for the cluster. An empty field
+   *   Required. The maintenance policy to be set for the cluster. An empty field
    *   clears the existing maintenance policy.
    *
    *   This object should have the same structure as [MaintenancePolicy]{@link google.container.v1.MaintenancePolicy}
@@ -2646,6 +2660,175 @@ class ClusterManagerClient {
     });
 
     return this._innerApiCalls.setMaintenancePolicy(request, options, callback);
+  }
+
+  /**
+   * Lists subnetworks that are usable for creating clusters in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.parent]
+   *   The parent project where subnetworks are usable.
+   *   Specified in the format 'projects/*'.
+   * @param {string} [request.filter]
+   *   Filtering currently only supports equality on the networkProjectId and must
+   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+   *   is the project which owns the listed subnetworks. This defaults to the
+   *   parent project ID.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [UsableSubnetwork]{@link google.container.v1.UsableSubnetwork}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListUsableSubnetworksResponse]{@link google.container.v1.ListUsableSubnetworksResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [UsableSubnetwork]{@link google.container.v1.UsableSubnetwork}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [UsableSubnetwork]{@link google.container.v1.UsableSubnetwork} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListUsableSubnetworksResponse]{@link google.container.v1.ListUsableSubnetworksResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const container = require('@google-cloud/container');
+   *
+   * const client = new container.v1.ClusterManagerClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * client.listUsableSubnetworks({})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listUsableSubnetworks(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listUsableSubnetworks({}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listUsableSubnetworks(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listUsableSubnetworks(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to {@link listUsableSubnetworks}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listUsableSubnetworks} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.parent]
+   *   The parent project where subnetworks are usable.
+   *   Specified in the format 'projects/*'.
+   * @param {string} [request.filter]
+   *   Filtering currently only supports equality on the networkProjectId and must
+   *   be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
+   *   is the project which owns the listed subnetworks. This defaults to the
+   *   parent project ID.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [UsableSubnetwork]{@link google.container.v1.UsableSubnetwork} on 'data' event.
+   *
+   * @example
+   *
+   * const container = require('@google-cloud/container');
+   *
+   * const client = new container.v1.ClusterManagerClient({
+   *   // optional auth parameters.
+   * });
+   *
+   *
+   * client.listUsableSubnetworksStream({})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listUsableSubnetworksStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listUsableSubnetworks.createStream(
+      this._innerApiCalls.listUsableSubnetworks,
+      request,
+      options
+    );
   }
 }
 
