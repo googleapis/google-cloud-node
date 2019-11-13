@@ -308,7 +308,13 @@ class DataCatalogClient {
    *   Note: Query tokens need to have a minimum of 3 characters for substring
    *   matching to work correctly. See [Data Catalog Search
    *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
-   * @param {string} request.orderBy
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.orderBy]
    *   Specifies the ordering of results, currently supported case-sensitive
    *   choices are:
    *
@@ -319,12 +325,6 @@ class DataCatalogClient {
    *       specified
    *
    *   If not specified, defaults to `relevance` descending.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -359,11 +359,9 @@ class DataCatalogClient {
    * // Iterate over all elements.
    * const scope = {};
    * const query = '';
-   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
-   *   orderBy: orderBy,
    * };
    *
    * client.searchCatalog(request)
@@ -380,11 +378,9 @@ class DataCatalogClient {
    * // Or obtain the paged response.
    * const scope = {};
    * const query = '';
-   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
-   *   orderBy: orderBy,
    * };
    *
    *
@@ -453,7 +449,13 @@ class DataCatalogClient {
    *   Note: Query tokens need to have a minimum of 3 characters for substring
    *   matching to work correctly. See [Data Catalog Search
    *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
-   * @param {string} request.orderBy
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.orderBy]
    *   Specifies the ordering of results, currently supported case-sensitive
    *   choices are:
    *
@@ -464,12 +466,6 @@ class DataCatalogClient {
    *       specified
    *
    *   If not specified, defaults to `relevance` descending.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -486,11 +482,9 @@ class DataCatalogClient {
    *
    * const scope = {};
    * const query = '';
-   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
-   *   orderBy: orderBy,
    * };
    * client.searchCatalogStream(request)
    *   .on('data', element => {

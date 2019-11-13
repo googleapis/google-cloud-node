@@ -61,11 +61,9 @@ describe('DataCatalogClient', () => {
       // Mock request
       const scope = {};
       const query = 'query107944136';
-      const orderBy = 'orderBy1234304744';
       const request = {
         scope: scope,
         query: query,
-        orderBy: orderBy,
       };
 
       // Mock response
@@ -103,11 +101,9 @@ describe('DataCatalogClient', () => {
       // Mock request
       const scope = {};
       const query = 'query107944136';
-      const orderBy = 'orderBy1234304744';
       const request = {
         scope: scope,
         query: query,
-        orderBy: orderBy,
       };
 
       // Mock Grpc layer
