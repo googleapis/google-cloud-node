@@ -1,3 +1,4 @@
+import * as Long from "long";
 import * as $protobuf from "protobufjs";
 /** Namespace grafeas. */
 export namespace grafeas {
