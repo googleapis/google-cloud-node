@@ -17,7 +17,7 @@
 import arrify = require('arrify');
 import * as extend from 'extend';
 import * as is from 'is';
-import {Query, QueryProto} from './query';
+import {Query, QueryProto, IntegerTypeCastOptions} from './query';
 import {PathType} from '.';
 import * as Protobuf from 'protobufjs';
 import * as path from 'path';
@@ -111,16 +111,36 @@ export namespace entity {
    *
    * @class
    * @param {number|string} value The integer value.
+   * @param {object} [typeCastOptions] Configuration to convert
+   *     values of `integerValue` type to a custom value. Must provide an
+   *     `integerTypeCastFunction` to handle `integerValue` conversion.
+   * @param {function} typeCastOptions.integerTypeCastFunction A custom user
+   *     provided function to convert `integerValue`.
+   * @param {sting|string[]} [typeCastOptions.properties] `Entity` property
+   *     names to be converted using `integerTypeCastFunction`.
    *
    * @example
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const anInt = datastore.int(7);
    */
-  export class Int {
+  export class Int extends Number {
     type: string;
     value: string;
-    constructor(value: number | string) {
+    typeCastFunction?: Function;
+    typeCastProperties?: string[];
+    private _entityPropertyName: string | undefined;
+    constructor(
+      value: number | string | ValueProto,
+      typeCastOptions?: IntegerTypeCastOptions
+    ) {
+      super(typeof value === 'object' ? value.integerValue : value);
+      this._entityPropertyName =
+        typeof value === 'object' ? value.propertyName : undefined;
+      this.value =
+        typeof value === 'object'
+          ? value.integerValue.toString()
+          : value.toString();
       /**
        * @name Int#type
        * @type {string}
@@ -130,7 +150,46 @@ export namespace entity {
        * @name Int#value
        * @type {string}
        */
-      this.value = value.toString();
+      if (typeCastOptions) {
+        this.typeCastFunction = typeCastOptions.integerTypeCastFunction;
+        if (typeof typeCastOptions.integerTypeCastFunction !== 'function') {
+          throw new Error(
+            `integerTypeCastFunction is not a function or was not provided.`
+          );
+        }
+
+        this.typeCastProperties = typeCastOptions.properties
+          ? arrify(typeCastOptions.properties)
+          : undefined;
+      }
+    }
+    // tslint:disable-next-line no-any
+    valueOf(): any {
+      let shouldCustomCast = this.typeCastFunction ? true : false;
+      if (
+        this.typeCastProperties &&
+        !this.typeCastProperties.includes(this._entityPropertyName!)
+      ) {
+        shouldCustomCast = false;
+      }
+
+      if (shouldCustomCast) {
+        try {
+          return this.typeCastFunction!(this.value);
+        } catch (error) {
+          error.message = `integerTypeCastFunction threw an error:\n\n  - ${error.message}`;
+          throw error;
+        }
+      } else {
+        return decodeIntegerValue({
+          integerValue: this.value,
+          propertyName: this._entityPropertyName,
+        });
+      }
+    }
+
+    toJSON(): Json {
+      return {type: this.type, value: this.value};
     }
   }
 
@@ -377,10 +436,51 @@ export namespace entity {
   }
 
   /**
+   * Convert a protobuf `integerValue`.
+   *
+   * @private
+   * @param {object} value The `integerValue` to convert.
+   */
+  function decodeIntegerValue(value: ValueProto) {
+    const num = Number(value.integerValue);
+    if (!Number.isSafeInteger(num)) {
+      throw new Error(
+        'We attempted to return all of the numeric values, but ' +
+          (value.propertyName ? value.propertyName + ' ' : '') +
+          'value ' +
+          value.integerValue +
+          " is out of bounds of 'Number.MAX_SAFE_INTEGER'.\n" +
+          "To prevent this error, please consider passing 'options.wrapNumbers=true' or\n" +
+          "'options.wrapNumbers' as\n" +
+          '{\n' +
+          '  integerTypeCastFunction: provide <your_custom_function>\n' +
+          '  properties: optionally specify property name(s) to be cutom casted' +
+          '}\n'
+      );
+    }
+    return num;
+  }
+
+  /**
+   * @typedef {object} IntegerTypeCastOptions Configuration to convert
+   *     values of `integerValue` type to a custom value. Must provide an
+   *     `integerTypeCastFunction` to handle `integerValue` conversion.
+   * @property {function} integerTypeCastFunction A custom user
+   *     provided function to convert `integerValue`.
+   * @property {string | string[]} [properties] `Entity` property
+   *     names to be converted using `integerTypeCastFunction`.
+   */
+  /**
    * Convert a protobuf Value message to its native value.
    *
    * @private
    * @param {object} valueProto The protobuf Value message to convert.
+   * @param {boolean | IntegerTypeCastOptions} [wrapNumbers=false] Wrap values of integerValue type in
+   *     {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    * @returns {*}
    *
    * @example
@@ -399,13 +499,19 @@ export namespace entity {
    * });
    * // <Buffer 68 65 6c 6c 6f>
    */
-  export function decodeValueProto(valueProto: ValueProto) {
+  export function decodeValueProto(
+    valueProto: ValueProto,
+    wrapNumbers?: boolean | IntegerTypeCastOptions
+  ) {
     const valueType = valueProto.valueType!;
     const value = valueProto[valueType];
 
     switch (valueType) {
       case 'arrayValue': {
-        return value.values.map(entity.decodeValueProto);
+        // tslint:disable-next-line no-any
+        return value.values.map((val: any) =>
+          entity.decodeValueProto(val, wrapNumbers)
+        );
       }
 
       case 'blobValue': {
@@ -421,11 +527,15 @@ export namespace entity {
       }
 
       case 'integerValue': {
-        return Number(value);
+        return wrapNumbers
+          ? typeof wrapNumbers === 'object'
+            ? new entity.Int(valueProto, wrapNumbers).valueOf()
+            : new entity.Int(valueProto, undefined)
+          : decodeIntegerValue(valueProto);
       }
 
       case 'entityValue': {
-        return entity.entityFromEntityProto(value);
+        return entity.entityFromEntityProto(value, wrapNumbers);
       }
 
       case 'keyValue': {
@@ -554,6 +664,12 @@ export namespace entity {
    *
    * @private
    * @param {object} entityProto The protocol entity object to convert.
+   * @param {boolean | IntegerTypeCastOptions} [wrapNumbers=false] Wrap values of integerValue type in
+   *     {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    * @returns {object}
    *
    * @example
@@ -574,7 +690,10 @@ export namespace entity {
    * // }
    */
   // tslint:disable-next-line no-any
-  export function entityFromEntityProto(entityProto: EntityProto): any {
+  export function entityFromEntityProto(
+    entityProto: EntityProto,
+    wrapNumbers?: boolean | IntegerTypeCastOptions
+  ) {
     // tslint:disable-next-line no-any
     const entityObject: any = {};
     const properties = entityProto.properties || {};
@@ -582,7 +701,7 @@ export namespace entity {
     // tslint:disable-next-line forin
     for (const property in properties) {
       const value = properties[property];
-      entityObject[property] = entity.decodeValueProto(value);
+      entityObject[property] = entity.decodeValueProto(value, wrapNumbers);
     }
 
     return entityObject;
@@ -768,7 +887,12 @@ export namespace entity {
    * @param {object[]} results The response array.
    * @param {object} results.entity An entity object.
    * @param {object} results.entity.key The entity's key.
-   * @returns {object[]}
+   * @param {boolean | IntegerTypeCastOptions} [wrapNumbers=false] Wrap values of integerValue type in
+   *     {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    *
    * @example
    * request_('runQuery', {}, (err, response) => {
@@ -782,9 +906,12 @@ export namespace entity {
    *   //
    * });
    */
-  export function formatArray(results: ResponseResult[]) {
+  export function formatArray(
+    results: ResponseResult[],
+    wrapNumbers?: boolean | IntegerTypeCastOptions
+  ) {
     return results.map(result => {
-      const ent = entity.entityFromEntityProto(result.entity!);
+      const ent = entity.entityFromEntityProto(result.entity!, wrapNumbers);
       ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity!.key!);
       return ent;
     });
@@ -1274,6 +1401,7 @@ export interface ValueProto {
   values?: ValueProto[];
   // tslint:disable-next-line no-any
   value?: any;
+  propertyName?: string;
 }
 
 export interface EntityProto {
@@ -1304,4 +1432,8 @@ export interface ResponseResult {
 export interface EntityObject {
   data: {[k: string]: Entity};
   excludeFromIndexes: string[];
+}
+
+export interface Json {
+  [field: string]: string;
 }
