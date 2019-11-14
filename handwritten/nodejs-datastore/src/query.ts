@@ -397,6 +397,14 @@ class Query {
    *     If not specified, default values are chosen by Datastore for the
    *     operation. Learn more about strong and eventual consistency
    *     [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
+   * @param {object} [options.gaxOptions] Request configuration options, outlined
+   *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {boolean | IntegerTypeCastOptions} [options.wrapNumbers=false]
+   *     Wrap values of integerValue type in {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    * @param {function} [callback] The callback function. If omitted, a readable
    *     stream instance is returned.
    * @param {?error} callback.err An error returned while making this request
@@ -517,9 +525,15 @@ export interface QueryProto {
  */
 export {Query};
 
+export interface IntegerTypeCastOptions {
+  integerTypeCastFunction: Function;
+  properties?: string | string[];
+}
+
 export interface RunQueryOptions {
   consistency?: 'strong' | 'eventual';
   gaxOptions?: CallOptions;
+  wrapNumbers?: boolean | IntegerTypeCastOptions;
 }
 
 export interface RunQueryCallback {

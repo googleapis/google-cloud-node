@@ -290,7 +290,10 @@ class DatastoreRequest {
             return;
           }
 
-          const entities = entity.formatArray(resp!.found! as ResponseResult[]);
+          const entities = entity.formatArray(
+            resp!.found! as ResponseResult[],
+            options.wrapNumbers
+          );
           const nextKeys = (resp!.deferred || [])
             .map(entity.keyFromKeyProto)
             .map(entity.keyToKeyProto);
@@ -432,6 +435,12 @@ class DatastoreRequest {
    *     [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
    * @param {object} [options.gaxOptions] Request configuration options, outlined
    *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {boolean | IntegerTypeCastOptions} [options.wrapNumbers=false]
+   *     Wrap values of integerValue type in {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    * @param {function} callback The callback function.
    * @param {?error} callback.err An error returned while making this request
    * @param {object|object[]} callback.entity The entity object(s) which match
@@ -571,7 +580,6 @@ class DatastoreRequest {
    * that uses the end cursor from the previous query as the starting cursor for
    * the next query. You can pass that object back to this method to see if more
    * results exist.
-   *
    * @param {Query} query Query object.
    * @param {object} [options] Optional configuration.
    * @param {string} [options.consistency] Specify either `strong` or `eventual`.
@@ -580,6 +588,12 @@ class DatastoreRequest {
    *     [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
    * @param {object} [options.gaxOptions] Request configuration options, outlined
    *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
+   * @param {boolean | IntegerTypeCastOptions} [options.wrapNumbers=false]
+   *     Wrap values of integerValue type in {@link Datastore#Int} objects.
+   *     If a `boolean`, this will wrap values in {@link Datastore#Int} objects.
+   *     If an `object`, this will return a value returned by
+   *     `wrapNumbers.integerTypeCastFunction`.
+   *     Please see {@link IntegerTypeCastOptions} for options descriptions.
    * @param {function} [callback] The callback function. If omitted, a readable
    *     stream instance is returned.
    * @param {?error} callback.err An error returned while making this request
@@ -764,7 +778,10 @@ class DatastoreRequest {
       let entities: Entity[] = [];
 
       if (resp.batch.entityResults) {
-        entities = entity.formatArray(resp.batch.entityResults);
+        entities = entity.formatArray(
+          resp.batch.entityResults,
+          options.wrapNumbers
+        );
       }
 
       // Emit each result right away, then get the rest if necessary.
@@ -1400,10 +1417,7 @@ export interface AllocateIdsOptions {
   allocations?: number;
   gaxOptions?: CallOptions;
 }
-export interface CreateReadStreamOptions {
-  consistency?: string;
-  gaxOptions?: CallOptions;
-}
+export interface CreateReadStreamOptions extends RunQueryOptions {}
 export interface GetCallback {
   (err?: Error | null, entity?: Entities): void;
 }
