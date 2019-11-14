@@ -21,27 +21,32 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 common_templates = gcp.CommonTemplates()
 
 versions = ['v1', 'v1beta1']
 
 for version in versions:
-    library = gapic.node_library('texttospeech', version)
+    library = gapic.typescript_library(
+        'texttospeech', 
+        generator_args={
+            "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json"
+            },
+        proto_path=f'/google/cloud/texttospeech/{version}',
+        version=version)
 
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'README.md', 'src/index.js'],
+        excludes=['package.json', 'README.md', 'src/index.ts'],
     )
 
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# Fix dead link
-s.replace('src/v1/doc/google/cloud/texttospeech/v1/doc_cloud_tts.js',
-        "\(https:[\s\*]+(.*)\)",
-        r"(https:\1)")
+# Fix system tests
+# TODO: must be a feature of pack-n-play
+s.replace('system-test/fixtures/sample/src/index.*', "'texttospeech'", "'@google-cloud/text-to-speech'")
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
