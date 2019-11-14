@@ -34,6 +34,7 @@ import {entity} from './entity';
 import {Query} from './query';
 import {DatastoreRequest} from './request';
 import {Transaction} from './transaction';
+import {promisifyAll} from '@google-cloud/promisify';
 
 const {grpc} = new GrpcClient();
 
@@ -730,6 +731,16 @@ class Datastore extends DatastoreRequest {
     return Datastore.isKey(value);
   }
 
+  keyToLegacyUrlSafe(key: entity.Key, locationPrefix?: string): Promise<string>;
+  keyToLegacyUrlSafe(
+    key: entity.Key,
+    callback: KeyToLegacyUrlSafeCallback
+  ): void;
+  keyToLegacyUrlSafe(
+    key: entity.Key,
+    locationPrefix: string,
+    callback: KeyToLegacyUrlSafeCallback
+  ): void;
   /**
    * Helper to create a URL safe key.
    *
@@ -744,26 +755,62 @@ class Datastore extends DatastoreRequest {
    *  The location prefix of an App Engine project ID.
    *  Often this value is 's~', but may also be 'e~', or other location prefixes
    *  currently unknown.
-   * @returns {string} base64 endocded urlsafe key.
+   * @param {function} callback The callback function.
+   * @param {?error} callback.err An error returned while making this request
+   * @param {string} callback.urlSafeKey A Base64-encoded URL-safe key.
    *
    * @example
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key(['Company', 'Google']);
    *
-   * datastore.keyToLegacyUrlsafe(key) //ag9ncmFzcy1jbHVtcC00NzlyEwsSB0NvbXBhbnkiBkdvb2dsZQw
+   * datastore.keyToLegacyUrlSafe(key, (err, urlSafeKey) => {
+   *   if (err) {
+   *     // Error handling omitted.
+   *   }
+   *   console.log(urlSafeKey);
+   * });
    *
-   * @example
-   * <caption>Create a complete url safe key using location prefix </caption>
-   * const {Datastore} = require('@google-cloud/datastore');
-   * const datastore = new Datastore();
-   * const key = datastore.key(['Task', 123]);
+   * //-
+   * // Create a complete URL-safe key using a location prefix.
+   * //-
    * const locationPrefix = 's~';
    *
-   * datastore.keyToLegacyUrlsafe(key, locationPrefix) //ahFzfmdyYXNzLWNsdW1wLTQ3OXIKCxIEVGFzaxh7DA
+   * datastore.keyToLegacyUrlSafe(key, locationPrefix, (err, urlSafeKey) => {
+   *   if (err) {
+   *     // Error handling omitted.
+   *   }
+   *   console.log(urlSafeKey);
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * datastore.keyToLegacyUrlSafe(key).then((data) => {
+   *   const urlSafeKey = data[0];
+   *   console.log(urlSafeKey);
+   * });
    */
-  keyToLegacyUrlsafe(key: entity.Key, locationPrefix?: string): string {
-    return urlSafeKey.legacyEncode(this.projectId, key, locationPrefix);
+  keyToLegacyUrlSafe(
+    key: entity.Key,
+    locationPrefixOrCallback?: string | KeyToLegacyUrlSafeCallback,
+    callback?: KeyToLegacyUrlSafeCallback
+  ): Promise<string> | void {
+    const locationPrefix =
+      typeof locationPrefixOrCallback === 'string'
+        ? locationPrefixOrCallback
+        : '';
+    callback =
+      typeof locationPrefixOrCallback === 'function'
+        ? locationPrefixOrCallback
+        : callback;
+    this.auth.getProjectId((err, projectId) => {
+      if (err) {
+        callback!(err);
+        return;
+      }
+      callback!(null, urlSafeKey.legacyEncode(projectId!, key, locationPrefix));
+    });
   }
 
   /**
@@ -870,6 +917,27 @@ class Datastore extends DatastoreRequest {
   Transaction = Transaction;
 }
 
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+promisifyAll(Datastore, {
+  exclude: [
+    'double',
+    'isDouble',
+    'geoPoint',
+    'isGeoPoint',
+    'int',
+    'isInt',
+    'createQuery',
+    'key',
+    'isKey',
+    'keyFromLegacyUrlsafe',
+    'transaction',
+  ],
+});
+
 export {Datastore};
 
 /**
@@ -931,4 +999,8 @@ export interface DatastoreOptions extends GoogleAuthOptions {
   namespace?: string;
   apiEndpoint?: string;
   sslCreds?: ChannelCredentials;
+}
+
+export interface KeyToLegacyUrlSafeCallback {
+  (err?: Error | null, urlSafeKey?: string): void;
 }

@@ -625,15 +625,49 @@ describe('Datastore', () => {
     });
   });
 
-  describe('keyToLegacyUrlsafe', () => {
-    it('should convert key to url safe base64 string', () => {
+  describe('keyToLegacyUrlSafe', () => {
+    it('should convert key to URL-safe base64 string', () => {
       const key = new entity.Key({
         path: ['Task', 'Test'],
       });
-      assert.strictEqual(
-        datastore.keyToLegacyUrlsafe(key),
-        'agpwcm9qZWN0LWlkcg4LEgRUYXNrIgRUZXN0DA'
-      );
+      const base64EndocdedUrlSafeKey = 'agpwcm9qZWN0LWlkcg4LEgRUYXNrIgRUZXN0DA';
+      // tslint:disable-next-line: no-any
+      (datastore.auth as any).getProjectId = (callback: Function) => {
+        callback(null, 'project-id');
+      };
+      datastore.keyToLegacyUrlSafe(key, (err, urlSafeKey) => {
+        assert.ifError(err);
+        assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
+      });
+    });
+
+    it('should convert key to URL-safe base64 string with location prefix', () => {
+      const key = new entity.Key({
+        path: ['Task', 'Test'],
+      });
+      const locationPrefix = 's~';
+      const base64EndocdedUrlSafeKey =
+        'agxzfnByb2plY3QtaWRyDgsSBFRhc2siBFRlc3QM';
+      // tslint:disable-next-line: no-any
+      (datastore.auth as any).getProjectId = (callback: Function) => {
+        callback(null, 'project-id');
+      };
+      datastore.keyToLegacyUrlSafe(key, locationPrefix, (err, urlSafeKey) => {
+        assert.ifError(err);
+        assert.strictEqual(urlSafeKey, base64EndocdedUrlSafeKey);
+      });
+    });
+
+    it('should not return URL-safe key to user if auth.getProjectId errors', () => {
+      const error = new Error('Error.');
+      // tslint:disable-next-line: no-any
+      (datastore.auth as any).getProjectId = (callback: Function) => {
+        callback(error);
+      };
+      datastore.keyToLegacyUrlSafe({} as entity.Key, (err, urlSafeKey) => {
+        assert.strictEqual(err, error);
+        assert.strictEqual(urlSafeKey, undefined);
+      });
     });
   });
 
