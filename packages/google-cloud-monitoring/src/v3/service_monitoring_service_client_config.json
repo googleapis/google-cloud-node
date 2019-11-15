@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.monitoring.v3.NotificationChannelService": {
+    "google.monitoring.v3.ServiceMonitoringService": {
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
@@ -20,52 +20,52 @@
         }
       },
       "methods": {
-        "ListNotificationChannelDescriptors": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "GetNotificationChannelDescriptor": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "ListNotificationChannels": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "GetNotificationChannel": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "CreateNotificationChannel": {
+        "CreateService": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "UpdateNotificationChannel": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "DeleteNotificationChannel": {
+        "GetService": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "SendNotificationChannelVerificationCode": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "GetNotificationChannelVerificationCode": {
+        "ListServices": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "VerifyNotificationChannel": {
+        "UpdateService": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteService": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateServiceLevelObjective": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetServiceLevelObjective": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListServiceLevelObjectives": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateServiceLevelObjective": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteServiceLevelObjective": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"

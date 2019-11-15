@@ -1294,6 +1294,591 @@
                     }
                   }
                 },
+                "ServiceMonitoringService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
+                  "methods": {
+                    "CreateService": {
+                      "requestType": "CreateServiceRequest",
+                      "responseType": "Service",
+                      "options": {
+                        "(google.api.http).post": "/v3/{parent=*/*}/services",
+                        "(google.api.http).body": "service"
+                      }
+                    },
+                    "GetService": {
+                      "requestType": "GetServiceRequest",
+                      "responseType": "Service",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=*/*/services/*}"
+                      }
+                    },
+                    "ListServices": {
+                      "requestType": "ListServicesRequest",
+                      "responseType": "ListServicesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=*/*}/services"
+                      }
+                    },
+                    "UpdateService": {
+                      "requestType": "UpdateServiceRequest",
+                      "responseType": "Service",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{service.name=*/*/services/*}",
+                        "(google.api.http).body": "service"
+                      }
+                    },
+                    "DeleteService": {
+                      "requestType": "DeleteServiceRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v3/{name=*/*/services/*}"
+                      }
+                    },
+                    "CreateServiceLevelObjective": {
+                      "requestType": "CreateServiceLevelObjectiveRequest",
+                      "responseType": "ServiceLevelObjective",
+                      "options": {
+                        "(google.api.http).post": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
+                        "(google.api.http).body": "service_level_objective"
+                      }
+                    },
+                    "GetServiceLevelObjective": {
+                      "requestType": "GetServiceLevelObjectiveRequest",
+                      "responseType": "ServiceLevelObjective",
+                      "options": {
+                        "(google.api.http).get": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                      }
+                    },
+                    "ListServiceLevelObjectives": {
+                      "requestType": "ListServiceLevelObjectivesRequest",
+                      "responseType": "ListServiceLevelObjectivesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v3/{parent=*/*/services/*}/serviceLevelObjectives"
+                      }
+                    },
+                    "UpdateServiceLevelObjective": {
+                      "requestType": "UpdateServiceLevelObjectiveRequest",
+                      "responseType": "ServiceLevelObjective",
+                      "options": {
+                        "(google.api.http).patch": "/v3/{service_level_objective.name=*/*/services/*/serviceLevelObjectives/*}",
+                        "(google.api.http).body": "service_level_objective"
+                      }
+                    },
+                    "DeleteServiceLevelObjective": {
+                      "requestType": "DeleteServiceLevelObjectiveRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                      }
+                    }
+                  }
+                },
+                "CreateServiceRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "serviceId": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "service": {
+                      "type": "Service",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetServiceRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "ListServicesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "ListServicesResponse": {
+                  "fields": {
+                    "services": {
+                      "rule": "repeated",
+                      "type": "Service",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "UpdateServiceRequest": {
+                  "fields": {
+                    "service": {
+                      "type": "Service",
+                      "id": 1
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteServiceRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "CreateServiceLevelObjectiveRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "serviceLevelObjectiveId": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "serviceLevelObjective": {
+                      "type": "ServiceLevelObjective",
+                      "id": 2
+                    }
+                  }
+                },
+                "GetServiceLevelObjectiveRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "view": {
+                      "type": "ServiceLevelObjective.View",
+                      "id": 2
+                    }
+                  }
+                },
+                "ListServiceLevelObjectivesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "view": {
+                      "type": "ServiceLevelObjective.View",
+                      "id": 5
+                    }
+                  }
+                },
+                "ListServiceLevelObjectivesResponse": {
+                  "fields": {
+                    "serviceLevelObjectives": {
+                      "rule": "repeated",
+                      "type": "ServiceLevelObjective",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "UpdateServiceLevelObjectiveRequest": {
+                  "fields": {
+                    "serviceLevelObjective": {
+                      "type": "ServiceLevelObjective",
+                      "id": 1
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2
+                    }
+                  }
+                },
+                "DeleteServiceLevelObjectiveRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "Service": {
+                  "oneofs": {
+                    "identifier": {
+                      "oneof": [
+                        "custom",
+                        "appEngine",
+                        "cloudEndpoints",
+                        "clusterIstio"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "custom": {
+                      "type": "Custom",
+                      "id": 6
+                    },
+                    "appEngine": {
+                      "type": "AppEngine",
+                      "id": 7
+                    },
+                    "cloudEndpoints": {
+                      "type": "CloudEndpoints",
+                      "id": 8
+                    },
+                    "clusterIstio": {
+                      "type": "ClusterIstio",
+                      "id": 9
+                    },
+                    "telemetry": {
+                      "type": "Telemetry",
+                      "id": 13
+                    }
+                  },
+                  "nested": {
+                    "Custom": {
+                      "fields": {}
+                    },
+                    "AppEngine": {
+                      "fields": {
+                        "moduleId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CloudEndpoints": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ClusterIstio": {
+                      "fields": {
+                        "location": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "serviceNamespace": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "serviceName": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Telemetry": {
+                      "fields": {
+                        "resourceName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "ServiceLevelObjective": {
+                  "oneofs": {
+                    "period": {
+                      "oneof": [
+                        "rollingPeriod",
+                        "calendarPeriod"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "id": 11
+                    },
+                    "serviceLevelIndicator": {
+                      "type": "ServiceLevelIndicator",
+                      "id": 3
+                    },
+                    "goal": {
+                      "type": "double",
+                      "id": 4
+                    },
+                    "rollingPeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 5
+                    },
+                    "calendarPeriod": {
+                      "type": "google.type.CalendarPeriod",
+                      "id": 6
+                    }
+                  },
+                  "nested": {
+                    "View": {
+                      "values": {
+                        "VIEW_UNSPECIFIED": 0,
+                        "FULL": 2,
+                        "EXPLICIT": 1
+                      }
+                    }
+                  }
+                },
+                "ServiceLevelIndicator": {
+                  "oneofs": {
+                    "type": {
+                      "oneof": [
+                        "basicSli",
+                        "requestBased",
+                        "windowsBased"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "basicSli": {
+                      "type": "BasicSli",
+                      "id": 4
+                    },
+                    "requestBased": {
+                      "type": "RequestBasedSli",
+                      "id": 1
+                    },
+                    "windowsBased": {
+                      "type": "WindowsBasedSli",
+                      "id": 2
+                    }
+                  }
+                },
+                "BasicSli": {
+                  "oneofs": {
+                    "sliCriteria": {
+                      "oneof": [
+                        "availability",
+                        "latency"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "method": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 7
+                    },
+                    "location": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 8
+                    },
+                    "version": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 9
+                    },
+                    "availability": {
+                      "type": "AvailabilityCriteria",
+                      "id": 2
+                    },
+                    "latency": {
+                      "type": "LatencyCriteria",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "AvailabilityCriteria": {
+                      "fields": {}
+                    },
+                    "LatencyCriteria": {
+                      "fields": {
+                        "threshold": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "Range": {
+                  "fields": {
+                    "min": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "max": {
+                      "type": "double",
+                      "id": 2
+                    }
+                  }
+                },
+                "RequestBasedSli": {
+                  "oneofs": {
+                    "method": {
+                      "oneof": [
+                        "goodTotalRatio",
+                        "distributionCut"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "goodTotalRatio": {
+                      "type": "TimeSeriesRatio",
+                      "id": 1
+                    },
+                    "distributionCut": {
+                      "type": "DistributionCut",
+                      "id": 3
+                    }
+                  }
+                },
+                "TimeSeriesRatio": {
+                  "fields": {
+                    "goodServiceFilter": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "badServiceFilter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "totalServiceFilter": {
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                },
+                "DistributionCut": {
+                  "fields": {
+                    "distributionFilter": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "range": {
+                      "type": "Range",
+                      "id": 5
+                    }
+                  }
+                },
+                "WindowsBasedSli": {
+                  "oneofs": {
+                    "windowCriterion": {
+                      "oneof": [
+                        "goodBadMetricFilter",
+                        "goodTotalRatioThreshold",
+                        "metricMeanInRange",
+                        "metricSumInRange"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "goodBadMetricFilter": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "goodTotalRatioThreshold": {
+                      "type": "PerformanceThreshold",
+                      "id": 2
+                    },
+                    "metricMeanInRange": {
+                      "type": "MetricRange",
+                      "id": 6
+                    },
+                    "metricSumInRange": {
+                      "type": "MetricRange",
+                      "id": 7
+                    },
+                    "windowPeriod": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "PerformanceThreshold": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "performance",
+                            "basicSliPerformance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "performance": {
+                          "type": "RequestBasedSli",
+                          "id": 1
+                        },
+                        "basicSliPerformance": {
+                          "type": "BasicSli",
+                          "id": 3
+                        },
+                        "threshold": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MetricRange": {
+                      "fields": {
+                        "timeSeries": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "range": {
+                          "type": "Range",
+                          "id": 4
+                        }
+                      }
+                    }
+                  }
+                },
                 "UptimeCheckService": {
                   "options": {
                     "(google.api.default_host)": "monitoring.googleapis.com",
@@ -3182,6 +3767,29 @@
                   "type": "google.protobuf.Any",
                   "id": 3
                 }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/type/calendarperiod;calendarperiod",
+            "java_multiple_files": true,
+            "java_outer_classname": "CalendarPeriodProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "CalendarPeriod": {
+              "values": {
+                "CALENDAR_PERIOD_UNSPECIFIED": 0,
+                "DAY": 1,
+                "WEEK": 2,
+                "FORTNIGHT": 3,
+                "MONTH": 4,
+                "QUARTER": 5,
+                "HALF": 6,
+                "YEAR": 7
               }
             }
           }

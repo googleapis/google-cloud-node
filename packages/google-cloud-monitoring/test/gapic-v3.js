@@ -2064,6 +2064,676 @@ describe('NotificationChannelServiceClient', () => {
     });
   });
 });
+describe('ServiceMonitoringServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      monitoringModule.v3.ServiceMonitoringServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      monitoringModule.v3.ServiceMonitoringServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.ServiceMonitoringServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.ServiceMonitoringServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  describe('createService', () => {
+    it('invokes createService without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const service = {};
+      const request = {
+        parent: formattedParent,
+        service: service,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createService = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createService(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createService with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const service = {};
+      const request = {
+        parent: formattedParent,
+        service: service,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createService = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createService(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getService', () => {
+    it('invokes getService without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getService = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getService(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getService with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getService = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getService(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listServices', () => {
+    it('invokes listServices without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const servicesElement = {};
+      const services = [servicesElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        services: services,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listServices = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.services);
+      };
+
+      client.listServices(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.services);
+        done();
+      });
+    });
+
+    it('invokes listServices with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listServices = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listServices(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateService', () => {
+    it('invokes updateService without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const service = {};
+      const request = {
+        service: service,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateService = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateService(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateService with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const service = {};
+      const request = {
+        service: service,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateService = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateService(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteService', () => {
+    it('invokes deleteService without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteService = mockSimpleGrpcMethod(request);
+
+      client.deleteService(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteService with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteService = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteService(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('createServiceLevelObjective', () => {
+    it('invokes createServiceLevelObjective without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.servicePath('[PROJECT]', '[SERVICE]');
+      const serviceLevelObjective = {};
+      const request = {
+        parent: formattedParent,
+        serviceLevelObjective: serviceLevelObjective,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const goal = 317825.0;
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+        goal: goal,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createServiceLevelObjective(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createServiceLevelObjective with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.servicePath('[PROJECT]', '[SERVICE]');
+      const serviceLevelObjective = {};
+      const request = {
+        parent: formattedParent,
+        serviceLevelObjective: serviceLevelObjective,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createServiceLevelObjective(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getServiceLevelObjective', () => {
+    it('invokes getServiceLevelObjective without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.serviceLevelObjectivePath(
+        '[PROJECT]',
+        '[SERVICE]',
+        '[SERVICE_LEVEL_OBJECTIVE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const goal = 317825.0;
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+        goal: goal,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getServiceLevelObjective(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getServiceLevelObjective with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.serviceLevelObjectivePath(
+        '[PROJECT]',
+        '[SERVICE]',
+        '[SERVICE_LEVEL_OBJECTIVE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getServiceLevelObjective(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listServiceLevelObjectives', () => {
+    it('invokes listServiceLevelObjectives without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const serviceLevelObjectivesElement = {};
+      const serviceLevelObjectives = [serviceLevelObjectivesElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        serviceLevelObjectives: serviceLevelObjectives,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listServiceLevelObjectives = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.serviceLevelObjectives);
+      };
+
+      client.listServiceLevelObjectives(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(
+          response,
+          expectedResponse.serviceLevelObjectives
+        );
+        done();
+      });
+    });
+
+    it('invokes listServiceLevelObjectives with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.servicePath('[PROJECT]', '[SERVICE]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listServiceLevelObjectives = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listServiceLevelObjectives(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateServiceLevelObjective', () => {
+    it('invokes updateServiceLevelObjective without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const serviceLevelObjective = {};
+      const request = {
+        serviceLevelObjective: serviceLevelObjective,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const goal = 317825.0;
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+        goal: goal,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateServiceLevelObjective(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateServiceLevelObjective with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const serviceLevelObjective = {};
+      const request = {
+        serviceLevelObjective: serviceLevelObjective,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateServiceLevelObjective(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteServiceLevelObjective', () => {
+    it('invokes deleteServiceLevelObjective without error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.serviceLevelObjectivePath(
+        '[PROJECT]',
+        '[SERVICE]',
+        '[SERVICE_LEVEL_OBJECTIVE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteServiceLevelObjective = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteServiceLevelObjective(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteServiceLevelObjective with error', done => {
+      const client = new monitoringModule.v3.ServiceMonitoringServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.serviceLevelObjectivePath(
+        '[PROJECT]',
+        '[SERVICE]',
+        '[SERVICE_LEVEL_OBJECTIVE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteServiceLevelObjective = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteServiceLevelObjective(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+});
 describe('UptimeCheckServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =

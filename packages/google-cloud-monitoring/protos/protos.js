@@ -15051,6 +15051,7550 @@
                     return NotificationChannel;
                 })();
     
+                v3.ServiceMonitoringService = (function() {
+    
+                    /**
+                     * Constructs a new ServiceMonitoringService service.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ServiceMonitoringService
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function ServiceMonitoringService(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (ServiceMonitoringService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ServiceMonitoringService;
+    
+                    /**
+                     * Creates new ServiceMonitoringService service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {ServiceMonitoringService} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    ServiceMonitoringService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#createService}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef CreateServiceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Service} [response] Service
+                     */
+    
+                    /**
+                     * Calls CreateService.
+                     * @function createService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.CreateServiceCallback} callback Node-style callback called with the error, if any, and Service
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.createService = function createService(request, callback) {
+                        return this.rpcCall(createService, $root.google.monitoring.v3.CreateServiceRequest, $root.google.monitoring.v3.Service, request, callback);
+                    }, "name", { value: "CreateService" });
+    
+                    /**
+                     * Calls CreateService.
+                     * @function createService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateServiceRequest} request CreateServiceRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Service>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#getService}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef GetServiceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Service} [response] Service
+                     */
+    
+                    /**
+                     * Calls GetService.
+                     * @function getService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetServiceRequest} request GetServiceRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.GetServiceCallback} callback Node-style callback called with the error, if any, and Service
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.getService = function getService(request, callback) {
+                        return this.rpcCall(getService, $root.google.monitoring.v3.GetServiceRequest, $root.google.monitoring.v3.Service, request, callback);
+                    }, "name", { value: "GetService" });
+    
+                    /**
+                     * Calls GetService.
+                     * @function getService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetServiceRequest} request GetServiceRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Service>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#listServices}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef ListServicesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ListServicesResponse} [response] ListServicesResponse
+                     */
+    
+                    /**
+                     * Calls ListServices.
+                     * @function listServices
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IListServicesRequest} request ListServicesRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.ListServicesCallback} callback Node-style callback called with the error, if any, and ListServicesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.listServices = function listServices(request, callback) {
+                        return this.rpcCall(listServices, $root.google.monitoring.v3.ListServicesRequest, $root.google.monitoring.v3.ListServicesResponse, request, callback);
+                    }, "name", { value: "ListServices" });
+    
+                    /**
+                     * Calls ListServices.
+                     * @function listServices
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IListServicesRequest} request ListServicesRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ListServicesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#updateService}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef UpdateServiceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.Service} [response] Service
+                     */
+    
+                    /**
+                     * Calls UpdateService.
+                     * @function updateService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.UpdateServiceCallback} callback Node-style callback called with the error, if any, and Service
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.updateService = function updateService(request, callback) {
+                        return this.rpcCall(updateService, $root.google.monitoring.v3.UpdateServiceRequest, $root.google.monitoring.v3.Service, request, callback);
+                    }, "name", { value: "UpdateService" });
+    
+                    /**
+                     * Calls UpdateService.
+                     * @function updateService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateServiceRequest} request UpdateServiceRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.Service>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#deleteService}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef DeleteServiceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteService.
+                     * @function deleteService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.DeleteServiceCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.deleteService = function deleteService(request, callback) {
+                        return this.rpcCall(deleteService, $root.google.monitoring.v3.DeleteServiceRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteService" });
+    
+                    /**
+                     * Calls DeleteService.
+                     * @function deleteService
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IDeleteServiceRequest} request DeleteServiceRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#createServiceLevelObjective}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef CreateServiceLevelObjectiveCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ServiceLevelObjective} [response] ServiceLevelObjective
+                     */
+    
+                    /**
+                     * Calls CreateServiceLevelObjective.
+                     * @function createServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest} request CreateServiceLevelObjectiveRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.CreateServiceLevelObjectiveCallback} callback Node-style callback called with the error, if any, and ServiceLevelObjective
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.createServiceLevelObjective = function createServiceLevelObjective(request, callback) {
+                        return this.rpcCall(createServiceLevelObjective, $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest, $root.google.monitoring.v3.ServiceLevelObjective, request, callback);
+                    }, "name", { value: "CreateServiceLevelObjective" });
+    
+                    /**
+                     * Calls CreateServiceLevelObjective.
+                     * @function createServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest} request CreateServiceLevelObjectiveRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ServiceLevelObjective>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#getServiceLevelObjective}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef GetServiceLevelObjectiveCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ServiceLevelObjective} [response] ServiceLevelObjective
+                     */
+    
+                    /**
+                     * Calls GetServiceLevelObjective.
+                     * @function getServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest} request GetServiceLevelObjectiveRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.GetServiceLevelObjectiveCallback} callback Node-style callback called with the error, if any, and ServiceLevelObjective
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.getServiceLevelObjective = function getServiceLevelObjective(request, callback) {
+                        return this.rpcCall(getServiceLevelObjective, $root.google.monitoring.v3.GetServiceLevelObjectiveRequest, $root.google.monitoring.v3.ServiceLevelObjective, request, callback);
+                    }, "name", { value: "GetServiceLevelObjective" });
+    
+                    /**
+                     * Calls GetServiceLevelObjective.
+                     * @function getServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest} request GetServiceLevelObjectiveRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ServiceLevelObjective>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#listServiceLevelObjectives}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef ListServiceLevelObjectivesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ListServiceLevelObjectivesResponse} [response] ListServiceLevelObjectivesResponse
+                     */
+    
+                    /**
+                     * Calls ListServiceLevelObjectives.
+                     * @function listServiceLevelObjectives
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest} request ListServiceLevelObjectivesRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.ListServiceLevelObjectivesCallback} callback Node-style callback called with the error, if any, and ListServiceLevelObjectivesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.listServiceLevelObjectives = function listServiceLevelObjectives(request, callback) {
+                        return this.rpcCall(listServiceLevelObjectives, $root.google.monitoring.v3.ListServiceLevelObjectivesRequest, $root.google.monitoring.v3.ListServiceLevelObjectivesResponse, request, callback);
+                    }, "name", { value: "ListServiceLevelObjectives" });
+    
+                    /**
+                     * Calls ListServiceLevelObjectives.
+                     * @function listServiceLevelObjectives
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest} request ListServiceLevelObjectivesRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ListServiceLevelObjectivesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#updateServiceLevelObjective}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef UpdateServiceLevelObjectiveCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.monitoring.v3.ServiceLevelObjective} [response] ServiceLevelObjective
+                     */
+    
+                    /**
+                     * Calls UpdateServiceLevelObjective.
+                     * @function updateServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest} request UpdateServiceLevelObjectiveRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.UpdateServiceLevelObjectiveCallback} callback Node-style callback called with the error, if any, and ServiceLevelObjective
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.updateServiceLevelObjective = function updateServiceLevelObjective(request, callback) {
+                        return this.rpcCall(updateServiceLevelObjective, $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest, $root.google.monitoring.v3.ServiceLevelObjective, request, callback);
+                    }, "name", { value: "UpdateServiceLevelObjective" });
+    
+                    /**
+                     * Calls UpdateServiceLevelObjective.
+                     * @function updateServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest} request UpdateServiceLevelObjectiveRequest message or plain object
+                     * @returns {Promise<google.monitoring.v3.ServiceLevelObjective>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.monitoring.v3.ServiceMonitoringService#deleteServiceLevelObjective}.
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @typedef DeleteServiceLevelObjectiveCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteServiceLevelObjective.
+                     * @function deleteServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest} request DeleteServiceLevelObjectiveRequest message or plain object
+                     * @param {google.monitoring.v3.ServiceMonitoringService.DeleteServiceLevelObjectiveCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ServiceMonitoringService.prototype.deleteServiceLevelObjective = function deleteServiceLevelObjective(request, callback) {
+                        return this.rpcCall(deleteServiceLevelObjective, $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteServiceLevelObjective" });
+    
+                    /**
+                     * Calls DeleteServiceLevelObjective.
+                     * @function deleteServiceLevelObjective
+                     * @memberof google.monitoring.v3.ServiceMonitoringService
+                     * @instance
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest} request DeleteServiceLevelObjectiveRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    return ServiceMonitoringService;
+                })();
+    
+                v3.CreateServiceRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface ICreateServiceRequest
+                     * @property {string|null} [parent] CreateServiceRequest parent
+                     * @property {string|null} [serviceId] CreateServiceRequest serviceId
+                     * @property {google.monitoring.v3.IService|null} [service] CreateServiceRequest service
+                     */
+    
+                    /**
+                     * Constructs a new CreateServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a CreateServiceRequest.
+                     * @implements ICreateServiceRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.ICreateServiceRequest=} [properties] Properties to set
+                     */
+                    function CreateServiceRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateServiceRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @instance
+                     */
+                    CreateServiceRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateServiceRequest serviceId.
+                     * @member {string} serviceId
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @instance
+                     */
+                    CreateServiceRequest.prototype.serviceId = "";
+    
+                    /**
+                     * CreateServiceRequest service.
+                     * @member {google.monitoring.v3.IService|null|undefined} service
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @instance
+                     */
+                    CreateServiceRequest.prototype.service = null;
+    
+                    /**
+                     * Creates a new CreateServiceRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.CreateServiceRequest} CreateServiceRequest instance
+                     */
+                    CreateServiceRequest.create = function create(properties) {
+                        return new CreateServiceRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateServiceRequest message. Does not implicitly {@link google.monitoring.v3.CreateServiceRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateServiceRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            $root.google.monitoring.v3.Service.encode(message.service, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateServiceRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateServiceRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceRequest} message CreateServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.CreateServiceRequest} CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateServiceRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parent = reader.string();
+                                break;
+                            case 3:
+                                message.serviceId = reader.string();
+                                break;
+                            case 2:
+                                message.service = $root.google.monitoring.v3.Service.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.CreateServiceRequest} CreateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateServiceRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateServiceRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                            if (!$util.isString(message.serviceId))
+                                return "serviceId: string expected";
+                        if (message.service != null && message.hasOwnProperty("service")) {
+                            var error = $root.google.monitoring.v3.Service.verify(message.service);
+                            if (error)
+                                return "service." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.CreateServiceRequest} CreateServiceRequest
+                     */
+                    CreateServiceRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.CreateServiceRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.CreateServiceRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.serviceId != null)
+                            message.serviceId = String(object.serviceId);
+                        if (object.service != null) {
+                            if (typeof object.service !== "object")
+                                throw TypeError(".google.monitoring.v3.CreateServiceRequest.service: object expected");
+                            message.service = $root.google.monitoring.v3.Service.fromObject(object.service);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateServiceRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.CreateServiceRequest} message CreateServiceRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateServiceRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.service = null;
+                            object.serviceId = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            object.service = $root.google.monitoring.v3.Service.toObject(message.service, options);
+                        if (message.serviceId != null && message.hasOwnProperty("serviceId"))
+                            object.serviceId = message.serviceId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateServiceRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.CreateServiceRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateServiceRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return CreateServiceRequest;
+                })();
+    
+                v3.GetServiceRequest = (function() {
+    
+                    /**
+                     * Properties of a GetServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IGetServiceRequest
+                     * @property {string|null} [name] GetServiceRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a GetServiceRequest.
+                     * @implements IGetServiceRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IGetServiceRequest=} [properties] Properties to set
+                     */
+                    function GetServiceRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetServiceRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @instance
+                     */
+                    GetServiceRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetServiceRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.GetServiceRequest} GetServiceRequest instance
+                     */
+                    GetServiceRequest.create = function create(properties) {
+                        return new GetServiceRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetServiceRequest message. Does not implicitly {@link google.monitoring.v3.GetServiceRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetServiceRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetServiceRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.GetServiceRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceRequest} message GetServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.GetServiceRequest} GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetServiceRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetServiceRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.GetServiceRequest} GetServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetServiceRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetServiceRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.GetServiceRequest} GetServiceRequest
+                     */
+                    GetServiceRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.GetServiceRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.GetServiceRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetServiceRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.GetServiceRequest} message GetServiceRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetServiceRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetServiceRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.GetServiceRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetServiceRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetServiceRequest;
+                })();
+    
+                v3.ListServicesRequest = (function() {
+    
+                    /**
+                     * Properties of a ListServicesRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IListServicesRequest
+                     * @property {string|null} [parent] ListServicesRequest parent
+                     * @property {string|null} [filter] ListServicesRequest filter
+                     * @property {number|null} [pageSize] ListServicesRequest pageSize
+                     * @property {string|null} [pageToken] ListServicesRequest pageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListServicesRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListServicesRequest.
+                     * @implements IListServicesRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IListServicesRequest=} [properties] Properties to set
+                     */
+                    function ListServicesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListServicesRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @instance
+                     */
+                    ListServicesRequest.prototype.parent = "";
+    
+                    /**
+                     * ListServicesRequest filter.
+                     * @member {string} filter
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @instance
+                     */
+                    ListServicesRequest.prototype.filter = "";
+    
+                    /**
+                     * ListServicesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @instance
+                     */
+                    ListServicesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListServicesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @instance
+                     */
+                    ListServicesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * Creates a new ListServicesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListServicesRequest} ListServicesRequest instance
+                     */
+                    ListServicesRequest.create = function create(properties) {
+                        return new ListServicesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListServicesRequest message. Does not implicitly {@link google.monitoring.v3.ListServicesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServicesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListServicesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.ListServicesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesRequest} message ListServicesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListServicesRequest} ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServicesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parent = reader.string();
+                                break;
+                            case 2:
+                                message.filter = reader.string();
+                                break;
+                            case 3:
+                                message.pageSize = reader.int32();
+                                break;
+                            case 4:
+                                message.pageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListServicesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListServicesRequest} ListServicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListServicesRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListServicesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListServicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListServicesRequest} ListServicesRequest
+                     */
+                    ListServicesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListServicesRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListServicesRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListServicesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @static
+                     * @param {google.monitoring.v3.ListServicesRequest} message ListServicesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListServicesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.filter = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListServicesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListServicesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListServicesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListServicesRequest;
+                })();
+    
+                v3.ListServicesResponse = (function() {
+    
+                    /**
+                     * Properties of a ListServicesResponse.
+                     * @memberof google.monitoring.v3
+                     * @interface IListServicesResponse
+                     * @property {Array.<google.monitoring.v3.IService>|null} [services] ListServicesResponse services
+                     * @property {string|null} [nextPageToken] ListServicesResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListServicesResponse.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListServicesResponse.
+                     * @implements IListServicesResponse
+                     * @constructor
+                     * @param {google.monitoring.v3.IListServicesResponse=} [properties] Properties to set
+                     */
+                    function ListServicesResponse(properties) {
+                        this.services = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListServicesResponse services.
+                     * @member {Array.<google.monitoring.v3.IService>} services
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @instance
+                     */
+                    ListServicesResponse.prototype.services = $util.emptyArray;
+    
+                    /**
+                     * ListServicesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @instance
+                     */
+                    ListServicesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListServicesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesResponse=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListServicesResponse} ListServicesResponse instance
+                     */
+                    ListServicesResponse.create = function create(properties) {
+                        return new ListServicesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListServicesResponse message. Does not implicitly {@link google.monitoring.v3.ListServicesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServicesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.services != null && message.services.length)
+                            for (var i = 0; i < message.services.length; ++i)
+                                $root.google.monitoring.v3.Service.encode(message.services[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListServicesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.ListServicesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServicesResponse} message ListServicesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListServicesResponse} ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServicesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServicesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.services && message.services.length))
+                                    message.services = [];
+                                message.services.push($root.google.monitoring.v3.Service.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.nextPageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListServicesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListServicesResponse} ListServicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListServicesResponse message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListServicesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.services != null && message.hasOwnProperty("services")) {
+                            if (!Array.isArray(message.services))
+                                return "services: array expected";
+                            for (var i = 0; i < message.services.length; ++i) {
+                                var error = $root.google.monitoring.v3.Service.verify(message.services[i]);
+                                if (error)
+                                    return "services." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListServicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListServicesResponse} ListServicesResponse
+                     */
+                    ListServicesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListServicesResponse)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListServicesResponse();
+                        if (object.services) {
+                            if (!Array.isArray(object.services))
+                                throw TypeError(".google.monitoring.v3.ListServicesResponse.services: array expected");
+                            message.services = [];
+                            for (var i = 0; i < object.services.length; ++i) {
+                                if (typeof object.services[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.ListServicesResponse.services: object expected");
+                                message.services[i] = $root.google.monitoring.v3.Service.fromObject(object.services[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListServicesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @static
+                     * @param {google.monitoring.v3.ListServicesResponse} message ListServicesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListServicesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.services = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.services && message.services.length) {
+                            object.services = [];
+                            for (var j = 0; j < message.services.length; ++j)
+                                object.services[j] = $root.google.monitoring.v3.Service.toObject(message.services[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListServicesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListServicesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListServicesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListServicesResponse;
+                })();
+    
+                v3.UpdateServiceRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IUpdateServiceRequest
+                     * @property {google.monitoring.v3.IService|null} [service] UpdateServiceRequest service
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents an UpdateServiceRequest.
+                     * @implements IUpdateServiceRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IUpdateServiceRequest=} [properties] Properties to set
+                     */
+                    function UpdateServiceRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateServiceRequest service.
+                     * @member {google.monitoring.v3.IService|null|undefined} service
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @instance
+                     */
+                    UpdateServiceRequest.prototype.service = null;
+    
+                    /**
+                     * UpdateServiceRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @instance
+                     */
+                    UpdateServiceRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateServiceRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.UpdateServiceRequest} UpdateServiceRequest instance
+                     */
+                    UpdateServiceRequest.create = function create(properties) {
+                        return new UpdateServiceRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateServiceRequest message. Does not implicitly {@link google.monitoring.v3.UpdateServiceRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateServiceRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            $root.google.monitoring.v3.Service.encode(message.service, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateServiceRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.UpdateServiceRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceRequest} message UpdateServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.UpdateServiceRequest} UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateServiceRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.service = $root.google.monitoring.v3.Service.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateServiceRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.UpdateServiceRequest} UpdateServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateServiceRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateServiceRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.service != null && message.hasOwnProperty("service")) {
+                            var error = $root.google.monitoring.v3.Service.verify(message.service);
+                            if (error)
+                                return "service." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.UpdateServiceRequest} UpdateServiceRequest
+                     */
+                    UpdateServiceRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.UpdateServiceRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.UpdateServiceRequest();
+                        if (object.service != null) {
+                            if (typeof object.service !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateServiceRequest.service: object expected");
+                            message.service = $root.google.monitoring.v3.Service.fromObject(object.service);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateServiceRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateServiceRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.UpdateServiceRequest} message UpdateServiceRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateServiceRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.service = null;
+                            object.updateMask = null;
+                        }
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            object.service = $root.google.monitoring.v3.Service.toObject(message.service, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateServiceRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.UpdateServiceRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateServiceRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return UpdateServiceRequest;
+                })();
+    
+                v3.DeleteServiceRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IDeleteServiceRequest
+                     * @property {string|null} [name] DeleteServiceRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteServiceRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a DeleteServiceRequest.
+                     * @implements IDeleteServiceRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IDeleteServiceRequest=} [properties] Properties to set
+                     */
+                    function DeleteServiceRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteServiceRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @instance
+                     */
+                    DeleteServiceRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteServiceRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.DeleteServiceRequest} DeleteServiceRequest instance
+                     */
+                    DeleteServiceRequest.create = function create(properties) {
+                        return new DeleteServiceRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteServiceRequest message. Does not implicitly {@link google.monitoring.v3.DeleteServiceRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteServiceRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteServiceRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.DeleteServiceRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceRequest} message DeleteServiceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.DeleteServiceRequest} DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteServiceRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteServiceRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.DeleteServiceRequest} DeleteServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteServiceRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteServiceRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.DeleteServiceRequest} DeleteServiceRequest
+                     */
+                    DeleteServiceRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.DeleteServiceRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.DeleteServiceRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteServiceRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @static
+                     * @param {google.monitoring.v3.DeleteServiceRequest} message DeleteServiceRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteServiceRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteServiceRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.DeleteServiceRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteServiceRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return DeleteServiceRequest;
+                })();
+    
+                v3.CreateServiceLevelObjectiveRequest = (function() {
+    
+                    /**
+                     * Properties of a CreateServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface ICreateServiceLevelObjectiveRequest
+                     * @property {string|null} [parent] CreateServiceLevelObjectiveRequest parent
+                     * @property {string|null} [serviceLevelObjectiveId] CreateServiceLevelObjectiveRequest serviceLevelObjectiveId
+                     * @property {google.monitoring.v3.IServiceLevelObjective|null} [serviceLevelObjective] CreateServiceLevelObjectiveRequest serviceLevelObjective
+                     */
+    
+                    /**
+                     * Constructs a new CreateServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a CreateServiceLevelObjectiveRequest.
+                     * @implements ICreateServiceLevelObjectiveRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest=} [properties] Properties to set
+                     */
+                    function CreateServiceLevelObjectiveRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateServiceLevelObjectiveRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    CreateServiceLevelObjectiveRequest.prototype.parent = "";
+    
+                    /**
+                     * CreateServiceLevelObjectiveRequest serviceLevelObjectiveId.
+                     * @member {string} serviceLevelObjectiveId
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    CreateServiceLevelObjectiveRequest.prototype.serviceLevelObjectiveId = "";
+    
+                    /**
+                     * CreateServiceLevelObjectiveRequest serviceLevelObjective.
+                     * @member {google.monitoring.v3.IServiceLevelObjective|null|undefined} serviceLevelObjective
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    CreateServiceLevelObjectiveRequest.prototype.serviceLevelObjective = null;
+    
+                    /**
+                     * Creates a new CreateServiceLevelObjectiveRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.CreateServiceLevelObjectiveRequest} CreateServiceLevelObjectiveRequest instance
+                     */
+                    CreateServiceLevelObjectiveRequest.create = function create(properties) {
+                        return new CreateServiceLevelObjectiveRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateServiceLevelObjectiveRequest message. Does not implicitly {@link google.monitoring.v3.CreateServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest} message CreateServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateServiceLevelObjectiveRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective"))
+                            $root.google.monitoring.v3.ServiceLevelObjective.encode(message.serviceLevelObjective, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.serviceLevelObjectiveId != null && message.hasOwnProperty("serviceLevelObjectiveId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceLevelObjectiveId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateServiceLevelObjectiveRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.ICreateServiceLevelObjectiveRequest} message CreateServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateServiceLevelObjectiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateServiceLevelObjectiveRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.CreateServiceLevelObjectiveRequest} CreateServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parent = reader.string();
+                                break;
+                            case 3:
+                                message.serviceLevelObjectiveId = reader.string();
+                                break;
+                            case 2:
+                                message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateServiceLevelObjectiveRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.CreateServiceLevelObjectiveRequest} CreateServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateServiceLevelObjectiveRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateServiceLevelObjectiveRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateServiceLevelObjectiveRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.serviceLevelObjectiveId != null && message.hasOwnProperty("serviceLevelObjectiveId"))
+                            if (!$util.isString(message.serviceLevelObjectiveId))
+                                return "serviceLevelObjectiveId: string expected";
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective")) {
+                            var error = $root.google.monitoring.v3.ServiceLevelObjective.verify(message.serviceLevelObjective);
+                            if (error)
+                                return "serviceLevelObjective." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateServiceLevelObjectiveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.CreateServiceLevelObjectiveRequest} CreateServiceLevelObjectiveRequest
+                     */
+                    CreateServiceLevelObjectiveRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.CreateServiceLevelObjectiveRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.serviceLevelObjectiveId != null)
+                            message.serviceLevelObjectiveId = String(object.serviceLevelObjectiveId);
+                        if (object.serviceLevelObjective != null) {
+                            if (typeof object.serviceLevelObjective !== "object")
+                                throw TypeError(".google.monitoring.v3.CreateServiceLevelObjectiveRequest.serviceLevelObjective: object expected");
+                            message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.fromObject(object.serviceLevelObjective);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateServiceLevelObjectiveRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.CreateServiceLevelObjectiveRequest} message CreateServiceLevelObjectiveRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateServiceLevelObjectiveRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.serviceLevelObjective = null;
+                            object.serviceLevelObjectiveId = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective"))
+                            object.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.toObject(message.serviceLevelObjective, options);
+                        if (message.serviceLevelObjectiveId != null && message.hasOwnProperty("serviceLevelObjectiveId"))
+                            object.serviceLevelObjectiveId = message.serviceLevelObjectiveId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateServiceLevelObjectiveRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.CreateServiceLevelObjectiveRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateServiceLevelObjectiveRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return CreateServiceLevelObjectiveRequest;
+                })();
+    
+                v3.GetServiceLevelObjectiveRequest = (function() {
+    
+                    /**
+                     * Properties of a GetServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IGetServiceLevelObjectiveRequest
+                     * @property {string|null} [name] GetServiceLevelObjectiveRequest name
+                     * @property {google.monitoring.v3.ServiceLevelObjective.View|null} [view] GetServiceLevelObjectiveRequest view
+                     */
+    
+                    /**
+                     * Constructs a new GetServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a GetServiceLevelObjectiveRequest.
+                     * @implements IGetServiceLevelObjectiveRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest=} [properties] Properties to set
+                     */
+                    function GetServiceLevelObjectiveRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetServiceLevelObjectiveRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    GetServiceLevelObjectiveRequest.prototype.name = "";
+    
+                    /**
+                     * GetServiceLevelObjectiveRequest view.
+                     * @member {google.monitoring.v3.ServiceLevelObjective.View} view
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    GetServiceLevelObjectiveRequest.prototype.view = 0;
+    
+                    /**
+                     * Creates a new GetServiceLevelObjectiveRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.GetServiceLevelObjectiveRequest} GetServiceLevelObjectiveRequest instance
+                     */
+                    GetServiceLevelObjectiveRequest.create = function create(properties) {
+                        return new GetServiceLevelObjectiveRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetServiceLevelObjectiveRequest message. Does not implicitly {@link google.monitoring.v3.GetServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest} message GetServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetServiceLevelObjectiveRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.view);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetServiceLevelObjectiveRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.GetServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IGetServiceLevelObjectiveRequest} message GetServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetServiceLevelObjectiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetServiceLevelObjectiveRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.GetServiceLevelObjectiveRequest} GetServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.GetServiceLevelObjectiveRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            case 2:
+                                message.view = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetServiceLevelObjectiveRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.GetServiceLevelObjectiveRequest} GetServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetServiceLevelObjectiveRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetServiceLevelObjectiveRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetServiceLevelObjectiveRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            switch (message.view) {
+                            default:
+                                return "view: enum value expected";
+                            case 0:
+                            case 2:
+                            case 1:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetServiceLevelObjectiveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.GetServiceLevelObjectiveRequest} GetServiceLevelObjectiveRequest
+                     */
+                    GetServiceLevelObjectiveRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.GetServiceLevelObjectiveRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.GetServiceLevelObjectiveRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        switch (object.view) {
+                        case "VIEW_UNSPECIFIED":
+                        case 0:
+                            message.view = 0;
+                            break;
+                        case "FULL":
+                        case 2:
+                            message.view = 2;
+                            break;
+                        case "EXPLICIT":
+                        case 1:
+                            message.view = 1;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetServiceLevelObjectiveRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.GetServiceLevelObjectiveRequest} message GetServiceLevelObjectiveRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetServiceLevelObjectiveRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.view = options.enums === String ? "VIEW_UNSPECIFIED" : 0;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            object.view = options.enums === String ? $root.google.monitoring.v3.ServiceLevelObjective.View[message.view] : message.view;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetServiceLevelObjectiveRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.GetServiceLevelObjectiveRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetServiceLevelObjectiveRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetServiceLevelObjectiveRequest;
+                })();
+    
+                v3.ListServiceLevelObjectivesRequest = (function() {
+    
+                    /**
+                     * Properties of a ListServiceLevelObjectivesRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IListServiceLevelObjectivesRequest
+                     * @property {string|null} [parent] ListServiceLevelObjectivesRequest parent
+                     * @property {string|null} [filter] ListServiceLevelObjectivesRequest filter
+                     * @property {number|null} [pageSize] ListServiceLevelObjectivesRequest pageSize
+                     * @property {string|null} [pageToken] ListServiceLevelObjectivesRequest pageToken
+                     * @property {google.monitoring.v3.ServiceLevelObjective.View|null} [view] ListServiceLevelObjectivesRequest view
+                     */
+    
+                    /**
+                     * Constructs a new ListServiceLevelObjectivesRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListServiceLevelObjectivesRequest.
+                     * @implements IListServiceLevelObjectivesRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest=} [properties] Properties to set
+                     */
+                    function ListServiceLevelObjectivesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListServiceLevelObjectivesRequest parent.
+                     * @member {string} parent
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.parent = "";
+    
+                    /**
+                     * ListServiceLevelObjectivesRequest filter.
+                     * @member {string} filter
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.filter = "";
+    
+                    /**
+                     * ListServiceLevelObjectivesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListServiceLevelObjectivesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListServiceLevelObjectivesRequest view.
+                     * @member {google.monitoring.v3.ServiceLevelObjective.View} view
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.view = 0;
+    
+                    /**
+                     * Creates a new ListServiceLevelObjectivesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesRequest} ListServiceLevelObjectivesRequest instance
+                     */
+                    ListServiceLevelObjectivesRequest.create = function create(properties) {
+                        return new ListServiceLevelObjectivesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListServiceLevelObjectivesRequest message. Does not implicitly {@link google.monitoring.v3.ListServiceLevelObjectivesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest} message ListServiceLevelObjectivesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServiceLevelObjectivesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.view);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListServiceLevelObjectivesRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.ListServiceLevelObjectivesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesRequest} message ListServiceLevelObjectivesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServiceLevelObjectivesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListServiceLevelObjectivesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesRequest} ListServiceLevelObjectivesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServiceLevelObjectivesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.parent = reader.string();
+                                break;
+                            case 2:
+                                message.filter = reader.string();
+                                break;
+                            case 3:
+                                message.pageSize = reader.int32();
+                                break;
+                            case 4:
+                                message.pageToken = reader.string();
+                                break;
+                            case 5:
+                                message.view = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListServiceLevelObjectivesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesRequest} ListServiceLevelObjectivesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServiceLevelObjectivesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListServiceLevelObjectivesRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListServiceLevelObjectivesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            switch (message.view) {
+                            default:
+                                return "view: enum value expected";
+                            case 0:
+                            case 2:
+                            case 1:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListServiceLevelObjectivesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesRequest} ListServiceLevelObjectivesRequest
+                     */
+                    ListServiceLevelObjectivesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListServiceLevelObjectivesRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListServiceLevelObjectivesRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        switch (object.view) {
+                        case "VIEW_UNSPECIFIED":
+                        case 0:
+                            message.view = 0;
+                            break;
+                        case "FULL":
+                        case 2:
+                            message.view = 2;
+                            break;
+                        case "EXPLICIT":
+                        case 1:
+                            message.view = 1;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListServiceLevelObjectivesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @static
+                     * @param {google.monitoring.v3.ListServiceLevelObjectivesRequest} message ListServiceLevelObjectivesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListServiceLevelObjectivesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.filter = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.view = options.enums === String ? "VIEW_UNSPECIFIED" : 0;
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.view != null && message.hasOwnProperty("view"))
+                            object.view = options.enums === String ? $root.google.monitoring.v3.ServiceLevelObjective.View[message.view] : message.view;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListServiceLevelObjectivesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListServiceLevelObjectivesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListServiceLevelObjectivesRequest;
+                })();
+    
+                v3.ListServiceLevelObjectivesResponse = (function() {
+    
+                    /**
+                     * Properties of a ListServiceLevelObjectivesResponse.
+                     * @memberof google.monitoring.v3
+                     * @interface IListServiceLevelObjectivesResponse
+                     * @property {Array.<google.monitoring.v3.IServiceLevelObjective>|null} [serviceLevelObjectives] ListServiceLevelObjectivesResponse serviceLevelObjectives
+                     * @property {string|null} [nextPageToken] ListServiceLevelObjectivesResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListServiceLevelObjectivesResponse.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ListServiceLevelObjectivesResponse.
+                     * @implements IListServiceLevelObjectivesResponse
+                     * @constructor
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesResponse=} [properties] Properties to set
+                     */
+                    function ListServiceLevelObjectivesResponse(properties) {
+                        this.serviceLevelObjectives = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListServiceLevelObjectivesResponse serviceLevelObjectives.
+                     * @member {Array.<google.monitoring.v3.IServiceLevelObjective>} serviceLevelObjectives
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesResponse.prototype.serviceLevelObjectives = $util.emptyArray;
+    
+                    /**
+                     * ListServiceLevelObjectivesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @instance
+                     */
+                    ListServiceLevelObjectivesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListServiceLevelObjectivesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesResponse=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesResponse} ListServiceLevelObjectivesResponse instance
+                     */
+                    ListServiceLevelObjectivesResponse.create = function create(properties) {
+                        return new ListServiceLevelObjectivesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListServiceLevelObjectivesResponse message. Does not implicitly {@link google.monitoring.v3.ListServiceLevelObjectivesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesResponse} message ListServiceLevelObjectivesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServiceLevelObjectivesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.serviceLevelObjectives != null && message.serviceLevelObjectives.length)
+                            for (var i = 0; i < message.serviceLevelObjectives.length; ++i)
+                                $root.google.monitoring.v3.ServiceLevelObjective.encode(message.serviceLevelObjectives[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListServiceLevelObjectivesResponse message, length delimited. Does not implicitly {@link google.monitoring.v3.ListServiceLevelObjectivesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {google.monitoring.v3.IListServiceLevelObjectivesResponse} message ListServiceLevelObjectivesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListServiceLevelObjectivesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListServiceLevelObjectivesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesResponse} ListServiceLevelObjectivesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServiceLevelObjectivesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ListServiceLevelObjectivesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.serviceLevelObjectives && message.serviceLevelObjectives.length))
+                                    message.serviceLevelObjectives = [];
+                                message.serviceLevelObjectives.push($root.google.monitoring.v3.ServiceLevelObjective.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.nextPageToken = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListServiceLevelObjectivesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesResponse} ListServiceLevelObjectivesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListServiceLevelObjectivesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListServiceLevelObjectivesResponse message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListServiceLevelObjectivesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.serviceLevelObjectives != null && message.hasOwnProperty("serviceLevelObjectives")) {
+                            if (!Array.isArray(message.serviceLevelObjectives))
+                                return "serviceLevelObjectives: array expected";
+                            for (var i = 0; i < message.serviceLevelObjectives.length; ++i) {
+                                var error = $root.google.monitoring.v3.ServiceLevelObjective.verify(message.serviceLevelObjectives[i]);
+                                if (error)
+                                    return "serviceLevelObjectives." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListServiceLevelObjectivesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ListServiceLevelObjectivesResponse} ListServiceLevelObjectivesResponse
+                     */
+                    ListServiceLevelObjectivesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ListServiceLevelObjectivesResponse)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ListServiceLevelObjectivesResponse();
+                        if (object.serviceLevelObjectives) {
+                            if (!Array.isArray(object.serviceLevelObjectives))
+                                throw TypeError(".google.monitoring.v3.ListServiceLevelObjectivesResponse.serviceLevelObjectives: array expected");
+                            message.serviceLevelObjectives = [];
+                            for (var i = 0; i < object.serviceLevelObjectives.length; ++i) {
+                                if (typeof object.serviceLevelObjectives[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.ListServiceLevelObjectivesResponse.serviceLevelObjectives: object expected");
+                                message.serviceLevelObjectives[i] = $root.google.monitoring.v3.ServiceLevelObjective.fromObject(object.serviceLevelObjectives[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListServiceLevelObjectivesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @static
+                     * @param {google.monitoring.v3.ListServiceLevelObjectivesResponse} message ListServiceLevelObjectivesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListServiceLevelObjectivesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.serviceLevelObjectives = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.serviceLevelObjectives && message.serviceLevelObjectives.length) {
+                            object.serviceLevelObjectives = [];
+                            for (var j = 0; j < message.serviceLevelObjectives.length; ++j)
+                                object.serviceLevelObjectives[j] = $root.google.monitoring.v3.ServiceLevelObjective.toObject(message.serviceLevelObjectives[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListServiceLevelObjectivesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ListServiceLevelObjectivesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListServiceLevelObjectivesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ListServiceLevelObjectivesResponse;
+                })();
+    
+                v3.UpdateServiceLevelObjectiveRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IUpdateServiceLevelObjectiveRequest
+                     * @property {google.monitoring.v3.IServiceLevelObjective|null} [serviceLevelObjective] UpdateServiceLevelObjectiveRequest serviceLevelObjective
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateServiceLevelObjectiveRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents an UpdateServiceLevelObjectiveRequest.
+                     * @implements IUpdateServiceLevelObjectiveRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest=} [properties] Properties to set
+                     */
+                    function UpdateServiceLevelObjectiveRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateServiceLevelObjectiveRequest serviceLevelObjective.
+                     * @member {google.monitoring.v3.IServiceLevelObjective|null|undefined} serviceLevelObjective
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    UpdateServiceLevelObjectiveRequest.prototype.serviceLevelObjective = null;
+    
+                    /**
+                     * UpdateServiceLevelObjectiveRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    UpdateServiceLevelObjectiveRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateServiceLevelObjectiveRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.UpdateServiceLevelObjectiveRequest} UpdateServiceLevelObjectiveRequest instance
+                     */
+                    UpdateServiceLevelObjectiveRequest.create = function create(properties) {
+                        return new UpdateServiceLevelObjectiveRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateServiceLevelObjectiveRequest message. Does not implicitly {@link google.monitoring.v3.UpdateServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest} message UpdateServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateServiceLevelObjectiveRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective"))
+                            $root.google.monitoring.v3.ServiceLevelObjective.encode(message.serviceLevelObjective, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateServiceLevelObjectiveRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.UpdateServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IUpdateServiceLevelObjectiveRequest} message UpdateServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateServiceLevelObjectiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateServiceLevelObjectiveRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.UpdateServiceLevelObjectiveRequest} UpdateServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateServiceLevelObjectiveRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.UpdateServiceLevelObjectiveRequest} UpdateServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateServiceLevelObjectiveRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateServiceLevelObjectiveRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateServiceLevelObjectiveRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective")) {
+                            var error = $root.google.monitoring.v3.ServiceLevelObjective.verify(message.serviceLevelObjective);
+                            if (error)
+                                return "serviceLevelObjective." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateServiceLevelObjectiveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.UpdateServiceLevelObjectiveRequest} UpdateServiceLevelObjectiveRequest
+                     */
+                    UpdateServiceLevelObjectiveRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.UpdateServiceLevelObjectiveRequest();
+                        if (object.serviceLevelObjective != null) {
+                            if (typeof object.serviceLevelObjective !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateServiceLevelObjectiveRequest.serviceLevelObjective: object expected");
+                            message.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.fromObject(object.serviceLevelObjective);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.monitoring.v3.UpdateServiceLevelObjectiveRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateServiceLevelObjectiveRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.UpdateServiceLevelObjectiveRequest} message UpdateServiceLevelObjectiveRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateServiceLevelObjectiveRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.serviceLevelObjective = null;
+                            object.updateMask = null;
+                        }
+                        if (message.serviceLevelObjective != null && message.hasOwnProperty("serviceLevelObjective"))
+                            object.serviceLevelObjective = $root.google.monitoring.v3.ServiceLevelObjective.toObject(message.serviceLevelObjective, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateServiceLevelObjectiveRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.UpdateServiceLevelObjectiveRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateServiceLevelObjectiveRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return UpdateServiceLevelObjectiveRequest;
+                })();
+    
+                v3.DeleteServiceLevelObjectiveRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @interface IDeleteServiceLevelObjectiveRequest
+                     * @property {string|null} [name] DeleteServiceLevelObjectiveRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteServiceLevelObjectiveRequest.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a DeleteServiceLevelObjectiveRequest.
+                     * @implements IDeleteServiceLevelObjectiveRequest
+                     * @constructor
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest=} [properties] Properties to set
+                     */
+                    function DeleteServiceLevelObjectiveRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteServiceLevelObjectiveRequest name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @instance
+                     */
+                    DeleteServiceLevelObjectiveRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteServiceLevelObjectiveRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.DeleteServiceLevelObjectiveRequest} DeleteServiceLevelObjectiveRequest instance
+                     */
+                    DeleteServiceLevelObjectiveRequest.create = function create(properties) {
+                        return new DeleteServiceLevelObjectiveRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteServiceLevelObjectiveRequest message. Does not implicitly {@link google.monitoring.v3.DeleteServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest} message DeleteServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteServiceLevelObjectiveRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteServiceLevelObjectiveRequest message, length delimited. Does not implicitly {@link google.monitoring.v3.DeleteServiceLevelObjectiveRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.IDeleteServiceLevelObjectiveRequest} message DeleteServiceLevelObjectiveRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteServiceLevelObjectiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteServiceLevelObjectiveRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.DeleteServiceLevelObjectiveRequest} DeleteServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteServiceLevelObjectiveRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteServiceLevelObjectiveRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.DeleteServiceLevelObjectiveRequest} DeleteServiceLevelObjectiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteServiceLevelObjectiveRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteServiceLevelObjectiveRequest message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteServiceLevelObjectiveRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteServiceLevelObjectiveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.DeleteServiceLevelObjectiveRequest} DeleteServiceLevelObjectiveRequest
+                     */
+                    DeleteServiceLevelObjectiveRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest)
+                            return object;
+                        var message = new $root.google.monitoring.v3.DeleteServiceLevelObjectiveRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteServiceLevelObjectiveRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @static
+                     * @param {google.monitoring.v3.DeleteServiceLevelObjectiveRequest} message DeleteServiceLevelObjectiveRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteServiceLevelObjectiveRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteServiceLevelObjectiveRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.DeleteServiceLevelObjectiveRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteServiceLevelObjectiveRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return DeleteServiceLevelObjectiveRequest;
+                })();
+    
+                v3.Service = (function() {
+    
+                    /**
+                     * Properties of a Service.
+                     * @memberof google.monitoring.v3
+                     * @interface IService
+                     * @property {string|null} [name] Service name
+                     * @property {string|null} [displayName] Service displayName
+                     * @property {google.monitoring.v3.Service.ICustom|null} [custom] Service custom
+                     * @property {google.monitoring.v3.Service.IAppEngine|null} [appEngine] Service appEngine
+                     * @property {google.monitoring.v3.Service.ICloudEndpoints|null} [cloudEndpoints] Service cloudEndpoints
+                     * @property {google.monitoring.v3.Service.IClusterIstio|null} [clusterIstio] Service clusterIstio
+                     * @property {google.monitoring.v3.Service.ITelemetry|null} [telemetry] Service telemetry
+                     */
+    
+                    /**
+                     * Constructs a new Service.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a Service.
+                     * @implements IService
+                     * @constructor
+                     * @param {google.monitoring.v3.IService=} [properties] Properties to set
+                     */
+                    function Service(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Service name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.name = "";
+    
+                    /**
+                     * Service displayName.
+                     * @member {string} displayName
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.displayName = "";
+    
+                    /**
+                     * Service custom.
+                     * @member {google.monitoring.v3.Service.ICustom|null|undefined} custom
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.custom = null;
+    
+                    /**
+                     * Service appEngine.
+                     * @member {google.monitoring.v3.Service.IAppEngine|null|undefined} appEngine
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.appEngine = null;
+    
+                    /**
+                     * Service cloudEndpoints.
+                     * @member {google.monitoring.v3.Service.ICloudEndpoints|null|undefined} cloudEndpoints
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.cloudEndpoints = null;
+    
+                    /**
+                     * Service clusterIstio.
+                     * @member {google.monitoring.v3.Service.IClusterIstio|null|undefined} clusterIstio
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.clusterIstio = null;
+    
+                    /**
+                     * Service telemetry.
+                     * @member {google.monitoring.v3.Service.ITelemetry|null|undefined} telemetry
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Service.prototype.telemetry = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Service identifier.
+                     * @member {"custom"|"appEngine"|"cloudEndpoints"|"clusterIstio"|undefined} identifier
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     */
+                    Object.defineProperty(Service.prototype, "identifier", {
+                        get: $util.oneOfGetter($oneOfFields = ["custom", "appEngine", "cloudEndpoints", "clusterIstio"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Service instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {google.monitoring.v3.IService=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.Service} Service instance
+                     */
+                    Service.create = function create(properties) {
+                        return new Service(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Service message. Does not implicitly {@link google.monitoring.v3.Service.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {google.monitoring.v3.IService} message Service message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Service.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                        if (message.custom != null && message.hasOwnProperty("custom"))
+                            $root.google.monitoring.v3.Service.Custom.encode(message.custom, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.appEngine != null && message.hasOwnProperty("appEngine"))
+                            $root.google.monitoring.v3.Service.AppEngine.encode(message.appEngine, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.cloudEndpoints != null && message.hasOwnProperty("cloudEndpoints"))
+                            $root.google.monitoring.v3.Service.CloudEndpoints.encode(message.cloudEndpoints, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.clusterIstio != null && message.hasOwnProperty("clusterIstio"))
+                            $root.google.monitoring.v3.Service.ClusterIstio.encode(message.clusterIstio, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.telemetry != null && message.hasOwnProperty("telemetry"))
+                            $root.google.monitoring.v3.Service.Telemetry.encode(message.telemetry, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Service message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {google.monitoring.v3.IService} message Service message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Service.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Service message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.Service} Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Service.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            case 2:
+                                message.displayName = reader.string();
+                                break;
+                            case 6:
+                                message.custom = $root.google.monitoring.v3.Service.Custom.decode(reader, reader.uint32());
+                                break;
+                            case 7:
+                                message.appEngine = $root.google.monitoring.v3.Service.AppEngine.decode(reader, reader.uint32());
+                                break;
+                            case 8:
+                                message.cloudEndpoints = $root.google.monitoring.v3.Service.CloudEndpoints.decode(reader, reader.uint32());
+                                break;
+                            case 9:
+                                message.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.decode(reader, reader.uint32());
+                                break;
+                            case 13:
+                                message.telemetry = $root.google.monitoring.v3.Service.Telemetry.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Service message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.Service} Service
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Service.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Service message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Service.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.custom != null && message.hasOwnProperty("custom")) {
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.Custom.verify(message.custom);
+                                if (error)
+                                    return "custom." + error;
+                            }
+                        }
+                        if (message.appEngine != null && message.hasOwnProperty("appEngine")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.AppEngine.verify(message.appEngine);
+                                if (error)
+                                    return "appEngine." + error;
+                            }
+                        }
+                        if (message.cloudEndpoints != null && message.hasOwnProperty("cloudEndpoints")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.CloudEndpoints.verify(message.cloudEndpoints);
+                                if (error)
+                                    return "cloudEndpoints." + error;
+                            }
+                        }
+                        if (message.clusterIstio != null && message.hasOwnProperty("clusterIstio")) {
+                            if (properties.identifier === 1)
+                                return "identifier: multiple values";
+                            properties.identifier = 1;
+                            {
+                                var error = $root.google.monitoring.v3.Service.ClusterIstio.verify(message.clusterIstio);
+                                if (error)
+                                    return "clusterIstio." + error;
+                            }
+                        }
+                        if (message.telemetry != null && message.hasOwnProperty("telemetry")) {
+                            var error = $root.google.monitoring.v3.Service.Telemetry.verify(message.telemetry);
+                            if (error)
+                                return "telemetry." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Service message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.Service} Service
+                     */
+                    Service.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.Service)
+                            return object;
+                        var message = new $root.google.monitoring.v3.Service();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.custom != null) {
+                            if (typeof object.custom !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.custom: object expected");
+                            message.custom = $root.google.monitoring.v3.Service.Custom.fromObject(object.custom);
+                        }
+                        if (object.appEngine != null) {
+                            if (typeof object.appEngine !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.appEngine: object expected");
+                            message.appEngine = $root.google.monitoring.v3.Service.AppEngine.fromObject(object.appEngine);
+                        }
+                        if (object.cloudEndpoints != null) {
+                            if (typeof object.cloudEndpoints !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.cloudEndpoints: object expected");
+                            message.cloudEndpoints = $root.google.monitoring.v3.Service.CloudEndpoints.fromObject(object.cloudEndpoints);
+                        }
+                        if (object.clusterIstio != null) {
+                            if (typeof object.clusterIstio !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.clusterIstio: object expected");
+                            message.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.fromObject(object.clusterIstio);
+                        }
+                        if (object.telemetry != null) {
+                            if (typeof object.telemetry !== "object")
+                                throw TypeError(".google.monitoring.v3.Service.telemetry: object expected");
+                            message.telemetry = $root.google.monitoring.v3.Service.Telemetry.fromObject(object.telemetry);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Service message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.Service
+                     * @static
+                     * @param {google.monitoring.v3.Service} message Service
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Service.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.displayName = "";
+                            object.telemetry = null;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        if (message.custom != null && message.hasOwnProperty("custom")) {
+                            object.custom = $root.google.monitoring.v3.Service.Custom.toObject(message.custom, options);
+                            if (options.oneofs)
+                                object.identifier = "custom";
+                        }
+                        if (message.appEngine != null && message.hasOwnProperty("appEngine")) {
+                            object.appEngine = $root.google.monitoring.v3.Service.AppEngine.toObject(message.appEngine, options);
+                            if (options.oneofs)
+                                object.identifier = "appEngine";
+                        }
+                        if (message.cloudEndpoints != null && message.hasOwnProperty("cloudEndpoints")) {
+                            object.cloudEndpoints = $root.google.monitoring.v3.Service.CloudEndpoints.toObject(message.cloudEndpoints, options);
+                            if (options.oneofs)
+                                object.identifier = "cloudEndpoints";
+                        }
+                        if (message.clusterIstio != null && message.hasOwnProperty("clusterIstio")) {
+                            object.clusterIstio = $root.google.monitoring.v3.Service.ClusterIstio.toObject(message.clusterIstio, options);
+                            if (options.oneofs)
+                                object.identifier = "clusterIstio";
+                        }
+                        if (message.telemetry != null && message.hasOwnProperty("telemetry"))
+                            object.telemetry = $root.google.monitoring.v3.Service.Telemetry.toObject(message.telemetry, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Service to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.Service
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Service.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    Service.Custom = (function() {
+    
+                        /**
+                         * Properties of a Custom.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface ICustom
+                         */
+    
+                        /**
+                         * Constructs a new Custom.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a Custom.
+                         * @implements ICustom
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.ICustom=} [properties] Properties to set
+                         */
+                        function Custom(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Custom instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICustom=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.Custom} Custom instance
+                         */
+                        Custom.create = function create(properties) {
+                            return new Custom(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Custom message. Does not implicitly {@link google.monitoring.v3.Service.Custom.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICustom} message Custom message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Custom.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Custom message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.Custom.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICustom} message Custom message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Custom.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Custom message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.Custom} Custom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Custom.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Custom();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Custom message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.Custom} Custom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Custom.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Custom message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Custom.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Custom message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.Custom} Custom
+                         */
+                        Custom.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.Custom)
+                                return object;
+                            return new $root.google.monitoring.v3.Service.Custom();
+                        };
+    
+                        /**
+                         * Creates a plain object from a Custom message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @static
+                         * @param {google.monitoring.v3.Service.Custom} message Custom
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Custom.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Custom to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.Custom
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Custom.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Custom;
+                    })();
+    
+                    Service.AppEngine = (function() {
+    
+                        /**
+                         * Properties of an AppEngine.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IAppEngine
+                         * @property {string|null} [moduleId] AppEngine moduleId
+                         */
+    
+                        /**
+                         * Constructs a new AppEngine.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents an AppEngine.
+                         * @implements IAppEngine
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IAppEngine=} [properties] Properties to set
+                         */
+                        function AppEngine(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AppEngine moduleId.
+                         * @member {string} moduleId
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @instance
+                         */
+                        AppEngine.prototype.moduleId = "";
+    
+                        /**
+                         * Creates a new AppEngine instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {google.monitoring.v3.Service.IAppEngine=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.AppEngine} AppEngine instance
+                         */
+                        AppEngine.create = function create(properties) {
+                            return new AppEngine(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngine message. Does not implicitly {@link google.monitoring.v3.Service.AppEngine.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {google.monitoring.v3.Service.IAppEngine} message AppEngine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngine.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.moduleId != null && message.hasOwnProperty("moduleId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.moduleId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AppEngine message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.AppEngine.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {google.monitoring.v3.Service.IAppEngine} message AppEngine message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AppEngine.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AppEngine message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.AppEngine} AppEngine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngine.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.AppEngine();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.moduleId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AppEngine message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.AppEngine} AppEngine
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AppEngine.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AppEngine message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AppEngine.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.moduleId != null && message.hasOwnProperty("moduleId"))
+                                if (!$util.isString(message.moduleId))
+                                    return "moduleId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AppEngine message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.AppEngine} AppEngine
+                         */
+                        AppEngine.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.AppEngine)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.AppEngine();
+                            if (object.moduleId != null)
+                                message.moduleId = String(object.moduleId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AppEngine message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @static
+                         * @param {google.monitoring.v3.Service.AppEngine} message AppEngine
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AppEngine.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.moduleId = "";
+                            if (message.moduleId != null && message.hasOwnProperty("moduleId"))
+                                object.moduleId = message.moduleId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AppEngine to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.AppEngine
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AppEngine.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AppEngine;
+                    })();
+    
+                    Service.CloudEndpoints = (function() {
+    
+                        /**
+                         * Properties of a CloudEndpoints.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface ICloudEndpoints
+                         * @property {string|null} [service] CloudEndpoints service
+                         */
+    
+                        /**
+                         * Constructs a new CloudEndpoints.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a CloudEndpoints.
+                         * @implements ICloudEndpoints
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.ICloudEndpoints=} [properties] Properties to set
+                         */
+                        function CloudEndpoints(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudEndpoints service.
+                         * @member {string} service
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @instance
+                         */
+                        CloudEndpoints.prototype.service = "";
+    
+                        /**
+                         * Creates a new CloudEndpoints instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudEndpoints=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.CloudEndpoints} CloudEndpoints instance
+                         */
+                        CloudEndpoints.create = function create(properties) {
+                            return new CloudEndpoints(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudEndpoints message. Does not implicitly {@link google.monitoring.v3.Service.CloudEndpoints.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudEndpoints} message CloudEndpoints message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudEndpoints.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudEndpoints message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.CloudEndpoints.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {google.monitoring.v3.Service.ICloudEndpoints} message CloudEndpoints message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudEndpoints.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudEndpoints message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.CloudEndpoints} CloudEndpoints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudEndpoints.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.CloudEndpoints();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.service = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudEndpoints message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.CloudEndpoints} CloudEndpoints
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudEndpoints.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudEndpoints message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudEndpoints.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudEndpoints message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.CloudEndpoints} CloudEndpoints
+                         */
+                        CloudEndpoints.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.CloudEndpoints)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.CloudEndpoints();
+                            if (object.service != null)
+                                message.service = String(object.service);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudEndpoints message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @static
+                         * @param {google.monitoring.v3.Service.CloudEndpoints} message CloudEndpoints
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudEndpoints.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.service = "";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudEndpoints to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.CloudEndpoints
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudEndpoints.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CloudEndpoints;
+                    })();
+    
+                    Service.ClusterIstio = (function() {
+    
+                        /**
+                         * Properties of a ClusterIstio.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface IClusterIstio
+                         * @property {string|null} [location] ClusterIstio location
+                         * @property {string|null} [clusterName] ClusterIstio clusterName
+                         * @property {string|null} [serviceNamespace] ClusterIstio serviceNamespace
+                         * @property {string|null} [serviceName] ClusterIstio serviceName
+                         */
+    
+                        /**
+                         * Constructs a new ClusterIstio.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a ClusterIstio.
+                         * @implements IClusterIstio
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.IClusterIstio=} [properties] Properties to set
+                         */
+                        function ClusterIstio(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClusterIstio location.
+                         * @member {string} location
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @instance
+                         */
+                        ClusterIstio.prototype.location = "";
+    
+                        /**
+                         * ClusterIstio clusterName.
+                         * @member {string} clusterName
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @instance
+                         */
+                        ClusterIstio.prototype.clusterName = "";
+    
+                        /**
+                         * ClusterIstio serviceNamespace.
+                         * @member {string} serviceNamespace
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @instance
+                         */
+                        ClusterIstio.prototype.serviceNamespace = "";
+    
+                        /**
+                         * ClusterIstio serviceName.
+                         * @member {string} serviceName
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @instance
+                         */
+                        ClusterIstio.prototype.serviceName = "";
+    
+                        /**
+                         * Creates a new ClusterIstio instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IClusterIstio=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.ClusterIstio} ClusterIstio instance
+                         */
+                        ClusterIstio.create = function create(properties) {
+                            return new ClusterIstio(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClusterIstio message. Does not implicitly {@link google.monitoring.v3.Service.ClusterIstio.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IClusterIstio} message ClusterIstio message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClusterIstio.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.clusterName);
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceNamespace);
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClusterIstio message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.ClusterIstio.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.IClusterIstio} message ClusterIstio message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClusterIstio.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClusterIstio message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.ClusterIstio} ClusterIstio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClusterIstio.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.ClusterIstio();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.location = reader.string();
+                                    break;
+                                case 2:
+                                    message.clusterName = reader.string();
+                                    break;
+                                case 3:
+                                    message.serviceNamespace = reader.string();
+                                    break;
+                                case 4:
+                                    message.serviceName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClusterIstio message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.ClusterIstio} ClusterIstio
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClusterIstio.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClusterIstio message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClusterIstio.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                if (!$util.isString(message.clusterName))
+                                    return "clusterName: string expected";
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                if (!$util.isString(message.serviceNamespace))
+                                    return "serviceNamespace: string expected";
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                if (!$util.isString(message.serviceName))
+                                    return "serviceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClusterIstio message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.ClusterIstio} ClusterIstio
+                         */
+                        ClusterIstio.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.ClusterIstio)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.ClusterIstio();
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.clusterName != null)
+                                message.clusterName = String(object.clusterName);
+                            if (object.serviceNamespace != null)
+                                message.serviceNamespace = String(object.serviceNamespace);
+                            if (object.serviceName != null)
+                                message.serviceName = String(object.serviceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClusterIstio message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @static
+                         * @param {google.monitoring.v3.Service.ClusterIstio} message ClusterIstio
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClusterIstio.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.location = "";
+                                object.clusterName = "";
+                                object.serviceNamespace = "";
+                                object.serviceName = "";
+                            }
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.clusterName != null && message.hasOwnProperty("clusterName"))
+                                object.clusterName = message.clusterName;
+                            if (message.serviceNamespace != null && message.hasOwnProperty("serviceNamespace"))
+                                object.serviceNamespace = message.serviceNamespace;
+                            if (message.serviceName != null && message.hasOwnProperty("serviceName"))
+                                object.serviceName = message.serviceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClusterIstio to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.ClusterIstio
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClusterIstio.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ClusterIstio;
+                    })();
+    
+                    Service.Telemetry = (function() {
+    
+                        /**
+                         * Properties of a Telemetry.
+                         * @memberof google.monitoring.v3.Service
+                         * @interface ITelemetry
+                         * @property {string|null} [resourceName] Telemetry resourceName
+                         */
+    
+                        /**
+                         * Constructs a new Telemetry.
+                         * @memberof google.monitoring.v3.Service
+                         * @classdesc Represents a Telemetry.
+                         * @implements ITelemetry
+                         * @constructor
+                         * @param {google.monitoring.v3.Service.ITelemetry=} [properties] Properties to set
+                         */
+                        function Telemetry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Telemetry resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @instance
+                         */
+                        Telemetry.prototype.resourceName = "";
+    
+                        /**
+                         * Creates a new Telemetry instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {google.monitoring.v3.Service.ITelemetry=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.Service.Telemetry} Telemetry instance
+                         */
+                        Telemetry.create = function create(properties) {
+                            return new Telemetry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Telemetry message. Does not implicitly {@link google.monitoring.v3.Service.Telemetry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {google.monitoring.v3.Service.ITelemetry} message Telemetry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Telemetry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Telemetry message, length delimited. Does not implicitly {@link google.monitoring.v3.Service.Telemetry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {google.monitoring.v3.Service.ITelemetry} message Telemetry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Telemetry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Telemetry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.Service.Telemetry} Telemetry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Telemetry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Service.Telemetry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.resourceName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Telemetry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.Service.Telemetry} Telemetry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Telemetry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Telemetry message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Telemetry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Telemetry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.Service.Telemetry} Telemetry
+                         */
+                        Telemetry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.Service.Telemetry)
+                                return object;
+                            var message = new $root.google.monitoring.v3.Service.Telemetry();
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Telemetry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @static
+                         * @param {google.monitoring.v3.Service.Telemetry} message Telemetry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Telemetry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.resourceName = "";
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Telemetry to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.Service.Telemetry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Telemetry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Telemetry;
+                    })();
+    
+                    return Service;
+                })();
+    
+                v3.ServiceLevelObjective = (function() {
+    
+                    /**
+                     * Properties of a ServiceLevelObjective.
+                     * @memberof google.monitoring.v3
+                     * @interface IServiceLevelObjective
+                     * @property {string|null} [name] ServiceLevelObjective name
+                     * @property {string|null} [displayName] ServiceLevelObjective displayName
+                     * @property {google.monitoring.v3.IServiceLevelIndicator|null} [serviceLevelIndicator] ServiceLevelObjective serviceLevelIndicator
+                     * @property {number|null} [goal] ServiceLevelObjective goal
+                     * @property {google.protobuf.IDuration|null} [rollingPeriod] ServiceLevelObjective rollingPeriod
+                     * @property {google.type.CalendarPeriod|null} [calendarPeriod] ServiceLevelObjective calendarPeriod
+                     */
+    
+                    /**
+                     * Constructs a new ServiceLevelObjective.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ServiceLevelObjective.
+                     * @implements IServiceLevelObjective
+                     * @constructor
+                     * @param {google.monitoring.v3.IServiceLevelObjective=} [properties] Properties to set
+                     */
+                    function ServiceLevelObjective(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ServiceLevelObjective name.
+                     * @member {string} name
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.name = "";
+    
+                    /**
+                     * ServiceLevelObjective displayName.
+                     * @member {string} displayName
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.displayName = "";
+    
+                    /**
+                     * ServiceLevelObjective serviceLevelIndicator.
+                     * @member {google.monitoring.v3.IServiceLevelIndicator|null|undefined} serviceLevelIndicator
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.serviceLevelIndicator = null;
+    
+                    /**
+                     * ServiceLevelObjective goal.
+                     * @member {number} goal
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.goal = 0;
+    
+                    /**
+                     * ServiceLevelObjective rollingPeriod.
+                     * @member {google.protobuf.IDuration|null|undefined} rollingPeriod
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.rollingPeriod = null;
+    
+                    /**
+                     * ServiceLevelObjective calendarPeriod.
+                     * @member {google.type.CalendarPeriod} calendarPeriod
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    ServiceLevelObjective.prototype.calendarPeriod = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * ServiceLevelObjective period.
+                     * @member {"rollingPeriod"|"calendarPeriod"|undefined} period
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     */
+                    Object.defineProperty(ServiceLevelObjective.prototype, "period", {
+                        get: $util.oneOfGetter($oneOfFields = ["rollingPeriod", "calendarPeriod"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new ServiceLevelObjective instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelObjective=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ServiceLevelObjective} ServiceLevelObjective instance
+                     */
+                    ServiceLevelObjective.create = function create(properties) {
+                        return new ServiceLevelObjective(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceLevelObjective message. Does not implicitly {@link google.monitoring.v3.ServiceLevelObjective.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelObjective} message ServiceLevelObjective message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceLevelObjective.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.serviceLevelIndicator != null && message.hasOwnProperty("serviceLevelIndicator"))
+                            $root.google.monitoring.v3.ServiceLevelIndicator.encode(message.serviceLevelIndicator, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.goal != null && message.hasOwnProperty("goal"))
+                            writer.uint32(/* id 4, wireType 1 =*/33).double(message.goal);
+                        if (message.rollingPeriod != null && message.hasOwnProperty("rollingPeriod"))
+                            $root.google.protobuf.Duration.encode(message.rollingPeriod, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.calendarPeriod);
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            writer.uint32(/* id 11, wireType 2 =*/90).string(message.displayName);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceLevelObjective message, length delimited. Does not implicitly {@link google.monitoring.v3.ServiceLevelObjective.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelObjective} message ServiceLevelObjective message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceLevelObjective.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ServiceLevelObjective message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ServiceLevelObjective} ServiceLevelObjective
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceLevelObjective.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelObjective();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.name = reader.string();
+                                break;
+                            case 11:
+                                message.displayName = reader.string();
+                                break;
+                            case 3:
+                                message.serviceLevelIndicator = $root.google.monitoring.v3.ServiceLevelIndicator.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.goal = reader.double();
+                                break;
+                            case 5:
+                                message.rollingPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            case 6:
+                                message.calendarPeriod = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ServiceLevelObjective message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ServiceLevelObjective} ServiceLevelObjective
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceLevelObjective.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ServiceLevelObjective message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ServiceLevelObjective.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            if (!$util.isString(message.displayName))
+                                return "displayName: string expected";
+                        if (message.serviceLevelIndicator != null && message.hasOwnProperty("serviceLevelIndicator")) {
+                            var error = $root.google.monitoring.v3.ServiceLevelIndicator.verify(message.serviceLevelIndicator);
+                            if (error)
+                                return "serviceLevelIndicator." + error;
+                        }
+                        if (message.goal != null && message.hasOwnProperty("goal"))
+                            if (typeof message.goal !== "number")
+                                return "goal: number expected";
+                        if (message.rollingPeriod != null && message.hasOwnProperty("rollingPeriod")) {
+                            properties.period = 1;
+                            {
+                                var error = $root.google.protobuf.Duration.verify(message.rollingPeriod);
+                                if (error)
+                                    return "rollingPeriod." + error;
+                            }
+                        }
+                        if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
+                            if (properties.period === 1)
+                                return "period: multiple values";
+                            properties.period = 1;
+                            switch (message.calendarPeriod) {
+                            default:
+                                return "calendarPeriod: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ServiceLevelObjective message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ServiceLevelObjective} ServiceLevelObjective
+                     */
+                    ServiceLevelObjective.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ServiceLevelObjective)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ServiceLevelObjective();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.displayName != null)
+                            message.displayName = String(object.displayName);
+                        if (object.serviceLevelIndicator != null) {
+                            if (typeof object.serviceLevelIndicator !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelObjective.serviceLevelIndicator: object expected");
+                            message.serviceLevelIndicator = $root.google.monitoring.v3.ServiceLevelIndicator.fromObject(object.serviceLevelIndicator);
+                        }
+                        if (object.goal != null)
+                            message.goal = Number(object.goal);
+                        if (object.rollingPeriod != null) {
+                            if (typeof object.rollingPeriod !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelObjective.rollingPeriod: object expected");
+                            message.rollingPeriod = $root.google.protobuf.Duration.fromObject(object.rollingPeriod);
+                        }
+                        switch (object.calendarPeriod) {
+                        case "CALENDAR_PERIOD_UNSPECIFIED":
+                        case 0:
+                            message.calendarPeriod = 0;
+                            break;
+                        case "DAY":
+                        case 1:
+                            message.calendarPeriod = 1;
+                            break;
+                        case "WEEK":
+                        case 2:
+                            message.calendarPeriod = 2;
+                            break;
+                        case "FORTNIGHT":
+                        case 3:
+                            message.calendarPeriod = 3;
+                            break;
+                        case "MONTH":
+                        case 4:
+                            message.calendarPeriod = 4;
+                            break;
+                        case "QUARTER":
+                        case 5:
+                            message.calendarPeriod = 5;
+                            break;
+                        case "HALF":
+                        case 6:
+                            message.calendarPeriod = 6;
+                            break;
+                        case "YEAR":
+                        case 7:
+                            message.calendarPeriod = 7;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ServiceLevelObjective message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @static
+                     * @param {google.monitoring.v3.ServiceLevelObjective} message ServiceLevelObjective
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ServiceLevelObjective.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.serviceLevelIndicator = null;
+                            object.goal = 0;
+                            object.displayName = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.serviceLevelIndicator != null && message.hasOwnProperty("serviceLevelIndicator"))
+                            object.serviceLevelIndicator = $root.google.monitoring.v3.ServiceLevelIndicator.toObject(message.serviceLevelIndicator, options);
+                        if (message.goal != null && message.hasOwnProperty("goal"))
+                            object.goal = options.json && !isFinite(message.goal) ? String(message.goal) : message.goal;
+                        if (message.rollingPeriod != null && message.hasOwnProperty("rollingPeriod")) {
+                            object.rollingPeriod = $root.google.protobuf.Duration.toObject(message.rollingPeriod, options);
+                            if (options.oneofs)
+                                object.period = "rollingPeriod";
+                        }
+                        if (message.calendarPeriod != null && message.hasOwnProperty("calendarPeriod")) {
+                            object.calendarPeriod = options.enums === String ? $root.google.type.CalendarPeriod[message.calendarPeriod] : message.calendarPeriod;
+                            if (options.oneofs)
+                                object.period = "calendarPeriod";
+                        }
+                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                            object.displayName = message.displayName;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ServiceLevelObjective to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ServiceLevelObjective
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ServiceLevelObjective.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * View enum.
+                     * @name google.monitoring.v3.ServiceLevelObjective.View
+                     * @enum {string}
+                     * @property {number} VIEW_UNSPECIFIED=0 VIEW_UNSPECIFIED value
+                     * @property {number} FULL=2 FULL value
+                     * @property {number} EXPLICIT=1 EXPLICIT value
+                     */
+                    ServiceLevelObjective.View = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "FULL"] = 2;
+                        values[valuesById[1] = "EXPLICIT"] = 1;
+                        return values;
+                    })();
+    
+                    return ServiceLevelObjective;
+                })();
+    
+                v3.ServiceLevelIndicator = (function() {
+    
+                    /**
+                     * Properties of a ServiceLevelIndicator.
+                     * @memberof google.monitoring.v3
+                     * @interface IServiceLevelIndicator
+                     * @property {google.monitoring.v3.IBasicSli|null} [basicSli] ServiceLevelIndicator basicSli
+                     * @property {google.monitoring.v3.IRequestBasedSli|null} [requestBased] ServiceLevelIndicator requestBased
+                     * @property {google.monitoring.v3.IWindowsBasedSli|null} [windowsBased] ServiceLevelIndicator windowsBased
+                     */
+    
+                    /**
+                     * Constructs a new ServiceLevelIndicator.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a ServiceLevelIndicator.
+                     * @implements IServiceLevelIndicator
+                     * @constructor
+                     * @param {google.monitoring.v3.IServiceLevelIndicator=} [properties] Properties to set
+                     */
+                    function ServiceLevelIndicator(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ServiceLevelIndicator basicSli.
+                     * @member {google.monitoring.v3.IBasicSli|null|undefined} basicSli
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @instance
+                     */
+                    ServiceLevelIndicator.prototype.basicSli = null;
+    
+                    /**
+                     * ServiceLevelIndicator requestBased.
+                     * @member {google.monitoring.v3.IRequestBasedSli|null|undefined} requestBased
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @instance
+                     */
+                    ServiceLevelIndicator.prototype.requestBased = null;
+    
+                    /**
+                     * ServiceLevelIndicator windowsBased.
+                     * @member {google.monitoring.v3.IWindowsBasedSli|null|undefined} windowsBased
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @instance
+                     */
+                    ServiceLevelIndicator.prototype.windowsBased = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * ServiceLevelIndicator type.
+                     * @member {"basicSli"|"requestBased"|"windowsBased"|undefined} type
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @instance
+                     */
+                    Object.defineProperty(ServiceLevelIndicator.prototype, "type", {
+                        get: $util.oneOfGetter($oneOfFields = ["basicSli", "requestBased", "windowsBased"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new ServiceLevelIndicator instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelIndicator=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.ServiceLevelIndicator} ServiceLevelIndicator instance
+                     */
+                    ServiceLevelIndicator.create = function create(properties) {
+                        return new ServiceLevelIndicator(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceLevelIndicator message. Does not implicitly {@link google.monitoring.v3.ServiceLevelIndicator.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelIndicator} message ServiceLevelIndicator message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceLevelIndicator.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.requestBased != null && message.hasOwnProperty("requestBased"))
+                            $root.google.monitoring.v3.RequestBasedSli.encode(message.requestBased, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.windowsBased != null && message.hasOwnProperty("windowsBased"))
+                            $root.google.monitoring.v3.WindowsBasedSli.encode(message.windowsBased, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.basicSli != null && message.hasOwnProperty("basicSli"))
+                            $root.google.monitoring.v3.BasicSli.encode(message.basicSli, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ServiceLevelIndicator message, length delimited. Does not implicitly {@link google.monitoring.v3.ServiceLevelIndicator.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {google.monitoring.v3.IServiceLevelIndicator} message ServiceLevelIndicator message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ServiceLevelIndicator.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ServiceLevelIndicator message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.ServiceLevelIndicator} ServiceLevelIndicator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceLevelIndicator.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.ServiceLevelIndicator();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 4:
+                                message.basicSli = $root.google.monitoring.v3.BasicSli.decode(reader, reader.uint32());
+                                break;
+                            case 1:
+                                message.requestBased = $root.google.monitoring.v3.RequestBasedSli.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.windowsBased = $root.google.monitoring.v3.WindowsBasedSli.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ServiceLevelIndicator message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.ServiceLevelIndicator} ServiceLevelIndicator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ServiceLevelIndicator.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ServiceLevelIndicator message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ServiceLevelIndicator.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.basicSli != null && message.hasOwnProperty("basicSli")) {
+                            properties.type = 1;
+                            {
+                                var error = $root.google.monitoring.v3.BasicSli.verify(message.basicSli);
+                                if (error)
+                                    return "basicSli." + error;
+                            }
+                        }
+                        if (message.requestBased != null && message.hasOwnProperty("requestBased")) {
+                            if (properties.type === 1)
+                                return "type: multiple values";
+                            properties.type = 1;
+                            {
+                                var error = $root.google.monitoring.v3.RequestBasedSli.verify(message.requestBased);
+                                if (error)
+                                    return "requestBased." + error;
+                            }
+                        }
+                        if (message.windowsBased != null && message.hasOwnProperty("windowsBased")) {
+                            if (properties.type === 1)
+                                return "type: multiple values";
+                            properties.type = 1;
+                            {
+                                var error = $root.google.monitoring.v3.WindowsBasedSli.verify(message.windowsBased);
+                                if (error)
+                                    return "windowsBased." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ServiceLevelIndicator message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.ServiceLevelIndicator} ServiceLevelIndicator
+                     */
+                    ServiceLevelIndicator.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.ServiceLevelIndicator)
+                            return object;
+                        var message = new $root.google.monitoring.v3.ServiceLevelIndicator();
+                        if (object.basicSli != null) {
+                            if (typeof object.basicSli !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelIndicator.basicSli: object expected");
+                            message.basicSli = $root.google.monitoring.v3.BasicSli.fromObject(object.basicSli);
+                        }
+                        if (object.requestBased != null) {
+                            if (typeof object.requestBased !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelIndicator.requestBased: object expected");
+                            message.requestBased = $root.google.monitoring.v3.RequestBasedSli.fromObject(object.requestBased);
+                        }
+                        if (object.windowsBased != null) {
+                            if (typeof object.windowsBased !== "object")
+                                throw TypeError(".google.monitoring.v3.ServiceLevelIndicator.windowsBased: object expected");
+                            message.windowsBased = $root.google.monitoring.v3.WindowsBasedSli.fromObject(object.windowsBased);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ServiceLevelIndicator message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @static
+                     * @param {google.monitoring.v3.ServiceLevelIndicator} message ServiceLevelIndicator
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ServiceLevelIndicator.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.requestBased != null && message.hasOwnProperty("requestBased")) {
+                            object.requestBased = $root.google.monitoring.v3.RequestBasedSli.toObject(message.requestBased, options);
+                            if (options.oneofs)
+                                object.type = "requestBased";
+                        }
+                        if (message.windowsBased != null && message.hasOwnProperty("windowsBased")) {
+                            object.windowsBased = $root.google.monitoring.v3.WindowsBasedSli.toObject(message.windowsBased, options);
+                            if (options.oneofs)
+                                object.type = "windowsBased";
+                        }
+                        if (message.basicSli != null && message.hasOwnProperty("basicSli")) {
+                            object.basicSli = $root.google.monitoring.v3.BasicSli.toObject(message.basicSli, options);
+                            if (options.oneofs)
+                                object.type = "basicSli";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ServiceLevelIndicator to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.ServiceLevelIndicator
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ServiceLevelIndicator.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return ServiceLevelIndicator;
+                })();
+    
+                v3.BasicSli = (function() {
+    
+                    /**
+                     * Properties of a BasicSli.
+                     * @memberof google.monitoring.v3
+                     * @interface IBasicSli
+                     * @property {Array.<string>|null} [method] BasicSli method
+                     * @property {Array.<string>|null} [location] BasicSli location
+                     * @property {Array.<string>|null} [version] BasicSli version
+                     * @property {google.monitoring.v3.BasicSli.IAvailabilityCriteria|null} [availability] BasicSli availability
+                     * @property {google.monitoring.v3.BasicSli.ILatencyCriteria|null} [latency] BasicSli latency
+                     */
+    
+                    /**
+                     * Constructs a new BasicSli.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a BasicSli.
+                     * @implements IBasicSli
+                     * @constructor
+                     * @param {google.monitoring.v3.IBasicSli=} [properties] Properties to set
+                     */
+                    function BasicSli(properties) {
+                        this.method = [];
+                        this.location = [];
+                        this.version = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BasicSli method.
+                     * @member {Array.<string>} method
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    BasicSli.prototype.method = $util.emptyArray;
+    
+                    /**
+                     * BasicSli location.
+                     * @member {Array.<string>} location
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    BasicSli.prototype.location = $util.emptyArray;
+    
+                    /**
+                     * BasicSli version.
+                     * @member {Array.<string>} version
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    BasicSli.prototype.version = $util.emptyArray;
+    
+                    /**
+                     * BasicSli availability.
+                     * @member {google.monitoring.v3.BasicSli.IAvailabilityCriteria|null|undefined} availability
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    BasicSli.prototype.availability = null;
+    
+                    /**
+                     * BasicSli latency.
+                     * @member {google.monitoring.v3.BasicSli.ILatencyCriteria|null|undefined} latency
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    BasicSli.prototype.latency = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * BasicSli sliCriteria.
+                     * @member {"availability"|"latency"|undefined} sliCriteria
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     */
+                    Object.defineProperty(BasicSli.prototype, "sliCriteria", {
+                        get: $util.oneOfGetter($oneOfFields = ["availability", "latency"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new BasicSli instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {google.monitoring.v3.IBasicSli=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.BasicSli} BasicSli instance
+                     */
+                    BasicSli.create = function create(properties) {
+                        return new BasicSli(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BasicSli message. Does not implicitly {@link google.monitoring.v3.BasicSli.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {google.monitoring.v3.IBasicSli} message BasicSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BasicSli.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.availability != null && message.hasOwnProperty("availability"))
+                            $root.google.monitoring.v3.BasicSli.AvailabilityCriteria.encode(message.availability, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.latency != null && message.hasOwnProperty("latency"))
+                            $root.google.monitoring.v3.BasicSli.LatencyCriteria.encode(message.latency, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.method != null && message.method.length)
+                            for (var i = 0; i < message.method.length; ++i)
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.method[i]);
+                        if (message.location != null && message.location.length)
+                            for (var i = 0; i < message.location.length; ++i)
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.location[i]);
+                        if (message.version != null && message.version.length)
+                            for (var i = 0; i < message.version.length; ++i)
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.version[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BasicSli message, length delimited. Does not implicitly {@link google.monitoring.v3.BasicSli.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {google.monitoring.v3.IBasicSli} message BasicSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BasicSli.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BasicSli message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.BasicSli} BasicSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BasicSli.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 7:
+                                if (!(message.method && message.method.length))
+                                    message.method = [];
+                                message.method.push(reader.string());
+                                break;
+                            case 8:
+                                if (!(message.location && message.location.length))
+                                    message.location = [];
+                                message.location.push(reader.string());
+                                break;
+                            case 9:
+                                if (!(message.version && message.version.length))
+                                    message.version = [];
+                                message.version.push(reader.string());
+                                break;
+                            case 2:
+                                message.availability = $root.google.monitoring.v3.BasicSli.AvailabilityCriteria.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.latency = $root.google.monitoring.v3.BasicSli.LatencyCriteria.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BasicSli message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.BasicSli} BasicSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BasicSli.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BasicSli message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BasicSli.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.method != null && message.hasOwnProperty("method")) {
+                            if (!Array.isArray(message.method))
+                                return "method: array expected";
+                            for (var i = 0; i < message.method.length; ++i)
+                                if (!$util.isString(message.method[i]))
+                                    return "method: string[] expected";
+                        }
+                        if (message.location != null && message.hasOwnProperty("location")) {
+                            if (!Array.isArray(message.location))
+                                return "location: array expected";
+                            for (var i = 0; i < message.location.length; ++i)
+                                if (!$util.isString(message.location[i]))
+                                    return "location: string[] expected";
+                        }
+                        if (message.version != null && message.hasOwnProperty("version")) {
+                            if (!Array.isArray(message.version))
+                                return "version: array expected";
+                            for (var i = 0; i < message.version.length; ++i)
+                                if (!$util.isString(message.version[i]))
+                                    return "version: string[] expected";
+                        }
+                        if (message.availability != null && message.hasOwnProperty("availability")) {
+                            properties.sliCriteria = 1;
+                            {
+                                var error = $root.google.monitoring.v3.BasicSli.AvailabilityCriteria.verify(message.availability);
+                                if (error)
+                                    return "availability." + error;
+                            }
+                        }
+                        if (message.latency != null && message.hasOwnProperty("latency")) {
+                            if (properties.sliCriteria === 1)
+                                return "sliCriteria: multiple values";
+                            properties.sliCriteria = 1;
+                            {
+                                var error = $root.google.monitoring.v3.BasicSli.LatencyCriteria.verify(message.latency);
+                                if (error)
+                                    return "latency." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BasicSli message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.BasicSli} BasicSli
+                     */
+                    BasicSli.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.BasicSli)
+                            return object;
+                        var message = new $root.google.monitoring.v3.BasicSli();
+                        if (object.method) {
+                            if (!Array.isArray(object.method))
+                                throw TypeError(".google.monitoring.v3.BasicSli.method: array expected");
+                            message.method = [];
+                            for (var i = 0; i < object.method.length; ++i)
+                                message.method[i] = String(object.method[i]);
+                        }
+                        if (object.location) {
+                            if (!Array.isArray(object.location))
+                                throw TypeError(".google.monitoring.v3.BasicSli.location: array expected");
+                            message.location = [];
+                            for (var i = 0; i < object.location.length; ++i)
+                                message.location[i] = String(object.location[i]);
+                        }
+                        if (object.version) {
+                            if (!Array.isArray(object.version))
+                                throw TypeError(".google.monitoring.v3.BasicSli.version: array expected");
+                            message.version = [];
+                            for (var i = 0; i < object.version.length; ++i)
+                                message.version[i] = String(object.version[i]);
+                        }
+                        if (object.availability != null) {
+                            if (typeof object.availability !== "object")
+                                throw TypeError(".google.monitoring.v3.BasicSli.availability: object expected");
+                            message.availability = $root.google.monitoring.v3.BasicSli.AvailabilityCriteria.fromObject(object.availability);
+                        }
+                        if (object.latency != null) {
+                            if (typeof object.latency !== "object")
+                                throw TypeError(".google.monitoring.v3.BasicSli.latency: object expected");
+                            message.latency = $root.google.monitoring.v3.BasicSli.LatencyCriteria.fromObject(object.latency);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BasicSli message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @static
+                     * @param {google.monitoring.v3.BasicSli} message BasicSli
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BasicSli.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.method = [];
+                            object.location = [];
+                            object.version = [];
+                        }
+                        if (message.availability != null && message.hasOwnProperty("availability")) {
+                            object.availability = $root.google.monitoring.v3.BasicSli.AvailabilityCriteria.toObject(message.availability, options);
+                            if (options.oneofs)
+                                object.sliCriteria = "availability";
+                        }
+                        if (message.latency != null && message.hasOwnProperty("latency")) {
+                            object.latency = $root.google.monitoring.v3.BasicSli.LatencyCriteria.toObject(message.latency, options);
+                            if (options.oneofs)
+                                object.sliCriteria = "latency";
+                        }
+                        if (message.method && message.method.length) {
+                            object.method = [];
+                            for (var j = 0; j < message.method.length; ++j)
+                                object.method[j] = message.method[j];
+                        }
+                        if (message.location && message.location.length) {
+                            object.location = [];
+                            for (var j = 0; j < message.location.length; ++j)
+                                object.location[j] = message.location[j];
+                        }
+                        if (message.version && message.version.length) {
+                            object.version = [];
+                            for (var j = 0; j < message.version.length; ++j)
+                                object.version[j] = message.version[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BasicSli to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.BasicSli
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BasicSli.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    BasicSli.AvailabilityCriteria = (function() {
+    
+                        /**
+                         * Properties of an AvailabilityCriteria.
+                         * @memberof google.monitoring.v3.BasicSli
+                         * @interface IAvailabilityCriteria
+                         */
+    
+                        /**
+                         * Constructs a new AvailabilityCriteria.
+                         * @memberof google.monitoring.v3.BasicSli
+                         * @classdesc Represents an AvailabilityCriteria.
+                         * @implements IAvailabilityCriteria
+                         * @constructor
+                         * @param {google.monitoring.v3.BasicSli.IAvailabilityCriteria=} [properties] Properties to set
+                         */
+                        function AvailabilityCriteria(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AvailabilityCriteria instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.IAvailabilityCriteria=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.BasicSli.AvailabilityCriteria} AvailabilityCriteria instance
+                         */
+                        AvailabilityCriteria.create = function create(properties) {
+                            return new AvailabilityCriteria(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AvailabilityCriteria message. Does not implicitly {@link google.monitoring.v3.BasicSli.AvailabilityCriteria.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.IAvailabilityCriteria} message AvailabilityCriteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AvailabilityCriteria.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AvailabilityCriteria message, length delimited. Does not implicitly {@link google.monitoring.v3.BasicSli.AvailabilityCriteria.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.IAvailabilityCriteria} message AvailabilityCriteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AvailabilityCriteria.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AvailabilityCriteria message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.BasicSli.AvailabilityCriteria} AvailabilityCriteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AvailabilityCriteria.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.AvailabilityCriteria();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AvailabilityCriteria message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.BasicSli.AvailabilityCriteria} AvailabilityCriteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AvailabilityCriteria.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AvailabilityCriteria message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AvailabilityCriteria.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AvailabilityCriteria message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.BasicSli.AvailabilityCriteria} AvailabilityCriteria
+                         */
+                        AvailabilityCriteria.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.BasicSli.AvailabilityCriteria)
+                                return object;
+                            return new $root.google.monitoring.v3.BasicSli.AvailabilityCriteria();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AvailabilityCriteria message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.AvailabilityCriteria} message AvailabilityCriteria
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AvailabilityCriteria.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AvailabilityCriteria to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.BasicSli.AvailabilityCriteria
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AvailabilityCriteria.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AvailabilityCriteria;
+                    })();
+    
+                    BasicSli.LatencyCriteria = (function() {
+    
+                        /**
+                         * Properties of a LatencyCriteria.
+                         * @memberof google.monitoring.v3.BasicSli
+                         * @interface ILatencyCriteria
+                         * @property {google.protobuf.IDuration|null} [threshold] LatencyCriteria threshold
+                         */
+    
+                        /**
+                         * Constructs a new LatencyCriteria.
+                         * @memberof google.monitoring.v3.BasicSli
+                         * @classdesc Represents a LatencyCriteria.
+                         * @implements ILatencyCriteria
+                         * @constructor
+                         * @param {google.monitoring.v3.BasicSli.ILatencyCriteria=} [properties] Properties to set
+                         */
+                        function LatencyCriteria(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LatencyCriteria threshold.
+                         * @member {google.protobuf.IDuration|null|undefined} threshold
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @instance
+                         */
+                        LatencyCriteria.prototype.threshold = null;
+    
+                        /**
+                         * Creates a new LatencyCriteria instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.ILatencyCriteria=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.BasicSli.LatencyCriteria} LatencyCriteria instance
+                         */
+                        LatencyCriteria.create = function create(properties) {
+                            return new LatencyCriteria(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyCriteria message. Does not implicitly {@link google.monitoring.v3.BasicSli.LatencyCriteria.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.ILatencyCriteria} message LatencyCriteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyCriteria.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                $root.google.protobuf.Duration.encode(message.threshold, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LatencyCriteria message, length delimited. Does not implicitly {@link google.monitoring.v3.BasicSli.LatencyCriteria.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.ILatencyCriteria} message LatencyCriteria message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LatencyCriteria.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LatencyCriteria message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.BasicSli.LatencyCriteria} LatencyCriteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyCriteria.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.BasicSli.LatencyCriteria();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.threshold = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LatencyCriteria message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.BasicSli.LatencyCriteria} LatencyCriteria
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LatencyCriteria.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LatencyCriteria message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LatencyCriteria.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.threshold != null && message.hasOwnProperty("threshold")) {
+                                var error = $root.google.protobuf.Duration.verify(message.threshold);
+                                if (error)
+                                    return "threshold." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LatencyCriteria message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.BasicSli.LatencyCriteria} LatencyCriteria
+                         */
+                        LatencyCriteria.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.BasicSli.LatencyCriteria)
+                                return object;
+                            var message = new $root.google.monitoring.v3.BasicSli.LatencyCriteria();
+                            if (object.threshold != null) {
+                                if (typeof object.threshold !== "object")
+                                    throw TypeError(".google.monitoring.v3.BasicSli.LatencyCriteria.threshold: object expected");
+                                message.threshold = $root.google.protobuf.Duration.fromObject(object.threshold);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LatencyCriteria message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @static
+                         * @param {google.monitoring.v3.BasicSli.LatencyCriteria} message LatencyCriteria
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LatencyCriteria.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.threshold = null;
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                object.threshold = $root.google.protobuf.Duration.toObject(message.threshold, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LatencyCriteria to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.BasicSli.LatencyCriteria
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LatencyCriteria.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LatencyCriteria;
+                    })();
+    
+                    return BasicSli;
+                })();
+    
+                v3.Range = (function() {
+    
+                    /**
+                     * Properties of a Range.
+                     * @memberof google.monitoring.v3
+                     * @interface IRange
+                     * @property {number|null} [min] Range min
+                     * @property {number|null} [max] Range max
+                     */
+    
+                    /**
+                     * Constructs a new Range.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a Range.
+                     * @implements IRange
+                     * @constructor
+                     * @param {google.monitoring.v3.IRange=} [properties] Properties to set
+                     */
+                    function Range(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Range min.
+                     * @member {number} min
+                     * @memberof google.monitoring.v3.Range
+                     * @instance
+                     */
+                    Range.prototype.min = 0;
+    
+                    /**
+                     * Range max.
+                     * @member {number} max
+                     * @memberof google.monitoring.v3.Range
+                     * @instance
+                     */
+                    Range.prototype.max = 0;
+    
+                    /**
+                     * Creates a new Range instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {google.monitoring.v3.IRange=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.Range} Range instance
+                     */
+                    Range.create = function create(properties) {
+                        return new Range(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Range message. Does not implicitly {@link google.monitoring.v3.Range.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {google.monitoring.v3.IRange} message Range message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Range.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.min != null && message.hasOwnProperty("min"))
+                            writer.uint32(/* id 1, wireType 1 =*/9).double(message.min);
+                        if (message.max != null && message.hasOwnProperty("max"))
+                            writer.uint32(/* id 2, wireType 1 =*/17).double(message.max);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Range message, length delimited. Does not implicitly {@link google.monitoring.v3.Range.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {google.monitoring.v3.IRange} message Range message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Range.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Range message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.Range} Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Range.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.Range();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.min = reader.double();
+                                break;
+                            case 2:
+                                message.max = reader.double();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Range message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.Range} Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Range.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Range message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Range.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.min != null && message.hasOwnProperty("min"))
+                            if (typeof message.min !== "number")
+                                return "min: number expected";
+                        if (message.max != null && message.hasOwnProperty("max"))
+                            if (typeof message.max !== "number")
+                                return "max: number expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.Range} Range
+                     */
+                    Range.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.Range)
+                            return object;
+                        var message = new $root.google.monitoring.v3.Range();
+                        if (object.min != null)
+                            message.min = Number(object.min);
+                        if (object.max != null)
+                            message.max = Number(object.max);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Range message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.Range
+                     * @static
+                     * @param {google.monitoring.v3.Range} message Range
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Range.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.min = 0;
+                            object.max = 0;
+                        }
+                        if (message.min != null && message.hasOwnProperty("min"))
+                            object.min = options.json && !isFinite(message.min) ? String(message.min) : message.min;
+                        if (message.max != null && message.hasOwnProperty("max"))
+                            object.max = options.json && !isFinite(message.max) ? String(message.max) : message.max;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Range to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.Range
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Range.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Range;
+                })();
+    
+                v3.RequestBasedSli = (function() {
+    
+                    /**
+                     * Properties of a RequestBasedSli.
+                     * @memberof google.monitoring.v3
+                     * @interface IRequestBasedSli
+                     * @property {google.monitoring.v3.ITimeSeriesRatio|null} [goodTotalRatio] RequestBasedSli goodTotalRatio
+                     * @property {google.monitoring.v3.IDistributionCut|null} [distributionCut] RequestBasedSli distributionCut
+                     */
+    
+                    /**
+                     * Constructs a new RequestBasedSli.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a RequestBasedSli.
+                     * @implements IRequestBasedSli
+                     * @constructor
+                     * @param {google.monitoring.v3.IRequestBasedSli=} [properties] Properties to set
+                     */
+                    function RequestBasedSli(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RequestBasedSli goodTotalRatio.
+                     * @member {google.monitoring.v3.ITimeSeriesRatio|null|undefined} goodTotalRatio
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @instance
+                     */
+                    RequestBasedSli.prototype.goodTotalRatio = null;
+    
+                    /**
+                     * RequestBasedSli distributionCut.
+                     * @member {google.monitoring.v3.IDistributionCut|null|undefined} distributionCut
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @instance
+                     */
+                    RequestBasedSli.prototype.distributionCut = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * RequestBasedSli method.
+                     * @member {"goodTotalRatio"|"distributionCut"|undefined} method
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @instance
+                     */
+                    Object.defineProperty(RequestBasedSli.prototype, "method", {
+                        get: $util.oneOfGetter($oneOfFields = ["goodTotalRatio", "distributionCut"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new RequestBasedSli instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IRequestBasedSli=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.RequestBasedSli} RequestBasedSli instance
+                     */
+                    RequestBasedSli.create = function create(properties) {
+                        return new RequestBasedSli(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RequestBasedSli message. Does not implicitly {@link google.monitoring.v3.RequestBasedSli.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IRequestBasedSli} message RequestBasedSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RequestBasedSli.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.goodTotalRatio != null && message.hasOwnProperty("goodTotalRatio"))
+                            $root.google.monitoring.v3.TimeSeriesRatio.encode(message.goodTotalRatio, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.distributionCut != null && message.hasOwnProperty("distributionCut"))
+                            $root.google.monitoring.v3.DistributionCut.encode(message.distributionCut, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RequestBasedSli message, length delimited. Does not implicitly {@link google.monitoring.v3.RequestBasedSli.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IRequestBasedSli} message RequestBasedSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RequestBasedSli.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RequestBasedSli message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.RequestBasedSli} RequestBasedSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RequestBasedSli.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.RequestBasedSli();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.goodTotalRatio = $root.google.monitoring.v3.TimeSeriesRatio.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.distributionCut = $root.google.monitoring.v3.DistributionCut.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RequestBasedSli message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.RequestBasedSli} RequestBasedSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RequestBasedSli.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RequestBasedSli message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RequestBasedSli.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.goodTotalRatio != null && message.hasOwnProperty("goodTotalRatio")) {
+                            properties.method = 1;
+                            {
+                                var error = $root.google.monitoring.v3.TimeSeriesRatio.verify(message.goodTotalRatio);
+                                if (error)
+                                    return "goodTotalRatio." + error;
+                            }
+                        }
+                        if (message.distributionCut != null && message.hasOwnProperty("distributionCut")) {
+                            if (properties.method === 1)
+                                return "method: multiple values";
+                            properties.method = 1;
+                            {
+                                var error = $root.google.monitoring.v3.DistributionCut.verify(message.distributionCut);
+                                if (error)
+                                    return "distributionCut." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RequestBasedSli message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.RequestBasedSli} RequestBasedSli
+                     */
+                    RequestBasedSli.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.RequestBasedSli)
+                            return object;
+                        var message = new $root.google.monitoring.v3.RequestBasedSli();
+                        if (object.goodTotalRatio != null) {
+                            if (typeof object.goodTotalRatio !== "object")
+                                throw TypeError(".google.monitoring.v3.RequestBasedSli.goodTotalRatio: object expected");
+                            message.goodTotalRatio = $root.google.monitoring.v3.TimeSeriesRatio.fromObject(object.goodTotalRatio);
+                        }
+                        if (object.distributionCut != null) {
+                            if (typeof object.distributionCut !== "object")
+                                throw TypeError(".google.monitoring.v3.RequestBasedSli.distributionCut: object expected");
+                            message.distributionCut = $root.google.monitoring.v3.DistributionCut.fromObject(object.distributionCut);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RequestBasedSli message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.RequestBasedSli} message RequestBasedSli
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RequestBasedSli.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.goodTotalRatio != null && message.hasOwnProperty("goodTotalRatio")) {
+                            object.goodTotalRatio = $root.google.monitoring.v3.TimeSeriesRatio.toObject(message.goodTotalRatio, options);
+                            if (options.oneofs)
+                                object.method = "goodTotalRatio";
+                        }
+                        if (message.distributionCut != null && message.hasOwnProperty("distributionCut")) {
+                            object.distributionCut = $root.google.monitoring.v3.DistributionCut.toObject(message.distributionCut, options);
+                            if (options.oneofs)
+                                object.method = "distributionCut";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RequestBasedSli to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.RequestBasedSli
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RequestBasedSli.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return RequestBasedSli;
+                })();
+    
+                v3.TimeSeriesRatio = (function() {
+    
+                    /**
+                     * Properties of a TimeSeriesRatio.
+                     * @memberof google.monitoring.v3
+                     * @interface ITimeSeriesRatio
+                     * @property {string|null} [goodServiceFilter] TimeSeriesRatio goodServiceFilter
+                     * @property {string|null} [badServiceFilter] TimeSeriesRatio badServiceFilter
+                     * @property {string|null} [totalServiceFilter] TimeSeriesRatio totalServiceFilter
+                     */
+    
+                    /**
+                     * Constructs a new TimeSeriesRatio.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a TimeSeriesRatio.
+                     * @implements ITimeSeriesRatio
+                     * @constructor
+                     * @param {google.monitoring.v3.ITimeSeriesRatio=} [properties] Properties to set
+                     */
+                    function TimeSeriesRatio(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TimeSeriesRatio goodServiceFilter.
+                     * @member {string} goodServiceFilter
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @instance
+                     */
+                    TimeSeriesRatio.prototype.goodServiceFilter = "";
+    
+                    /**
+                     * TimeSeriesRatio badServiceFilter.
+                     * @member {string} badServiceFilter
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @instance
+                     */
+                    TimeSeriesRatio.prototype.badServiceFilter = "";
+    
+                    /**
+                     * TimeSeriesRatio totalServiceFilter.
+                     * @member {string} totalServiceFilter
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @instance
+                     */
+                    TimeSeriesRatio.prototype.totalServiceFilter = "";
+    
+                    /**
+                     * Creates a new TimeSeriesRatio instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesRatio=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.TimeSeriesRatio} TimeSeriesRatio instance
+                     */
+                    TimeSeriesRatio.create = function create(properties) {
+                        return new TimeSeriesRatio(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesRatio message. Does not implicitly {@link google.monitoring.v3.TimeSeriesRatio.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesRatio} message TimeSeriesRatio message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesRatio.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.goodServiceFilter != null && message.hasOwnProperty("goodServiceFilter"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.goodServiceFilter);
+                        if (message.badServiceFilter != null && message.hasOwnProperty("badServiceFilter"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.badServiceFilter);
+                        if (message.totalServiceFilter != null && message.hasOwnProperty("totalServiceFilter"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.totalServiceFilter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TimeSeriesRatio message, length delimited. Does not implicitly {@link google.monitoring.v3.TimeSeriesRatio.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {google.monitoring.v3.ITimeSeriesRatio} message TimeSeriesRatio message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TimeSeriesRatio.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesRatio message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.TimeSeriesRatio} TimeSeriesRatio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesRatio.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.TimeSeriesRatio();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 4:
+                                message.goodServiceFilter = reader.string();
+                                break;
+                            case 5:
+                                message.badServiceFilter = reader.string();
+                                break;
+                            case 6:
+                                message.totalServiceFilter = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TimeSeriesRatio message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.TimeSeriesRatio} TimeSeriesRatio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TimeSeriesRatio.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TimeSeriesRatio message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TimeSeriesRatio.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.goodServiceFilter != null && message.hasOwnProperty("goodServiceFilter"))
+                            if (!$util.isString(message.goodServiceFilter))
+                                return "goodServiceFilter: string expected";
+                        if (message.badServiceFilter != null && message.hasOwnProperty("badServiceFilter"))
+                            if (!$util.isString(message.badServiceFilter))
+                                return "badServiceFilter: string expected";
+                        if (message.totalServiceFilter != null && message.hasOwnProperty("totalServiceFilter"))
+                            if (!$util.isString(message.totalServiceFilter))
+                                return "totalServiceFilter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TimeSeriesRatio message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.TimeSeriesRatio} TimeSeriesRatio
+                     */
+                    TimeSeriesRatio.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.TimeSeriesRatio)
+                            return object;
+                        var message = new $root.google.monitoring.v3.TimeSeriesRatio();
+                        if (object.goodServiceFilter != null)
+                            message.goodServiceFilter = String(object.goodServiceFilter);
+                        if (object.badServiceFilter != null)
+                            message.badServiceFilter = String(object.badServiceFilter);
+                        if (object.totalServiceFilter != null)
+                            message.totalServiceFilter = String(object.totalServiceFilter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TimeSeriesRatio message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @static
+                     * @param {google.monitoring.v3.TimeSeriesRatio} message TimeSeriesRatio
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TimeSeriesRatio.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.goodServiceFilter = "";
+                            object.badServiceFilter = "";
+                            object.totalServiceFilter = "";
+                        }
+                        if (message.goodServiceFilter != null && message.hasOwnProperty("goodServiceFilter"))
+                            object.goodServiceFilter = message.goodServiceFilter;
+                        if (message.badServiceFilter != null && message.hasOwnProperty("badServiceFilter"))
+                            object.badServiceFilter = message.badServiceFilter;
+                        if (message.totalServiceFilter != null && message.hasOwnProperty("totalServiceFilter"))
+                            object.totalServiceFilter = message.totalServiceFilter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TimeSeriesRatio to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.TimeSeriesRatio
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TimeSeriesRatio.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TimeSeriesRatio;
+                })();
+    
+                v3.DistributionCut = (function() {
+    
+                    /**
+                     * Properties of a DistributionCut.
+                     * @memberof google.monitoring.v3
+                     * @interface IDistributionCut
+                     * @property {string|null} [distributionFilter] DistributionCut distributionFilter
+                     * @property {google.monitoring.v3.IRange|null} [range] DistributionCut range
+                     */
+    
+                    /**
+                     * Constructs a new DistributionCut.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a DistributionCut.
+                     * @implements IDistributionCut
+                     * @constructor
+                     * @param {google.monitoring.v3.IDistributionCut=} [properties] Properties to set
+                     */
+                    function DistributionCut(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DistributionCut distributionFilter.
+                     * @member {string} distributionFilter
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @instance
+                     */
+                    DistributionCut.prototype.distributionFilter = "";
+    
+                    /**
+                     * DistributionCut range.
+                     * @member {google.monitoring.v3.IRange|null|undefined} range
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @instance
+                     */
+                    DistributionCut.prototype.range = null;
+    
+                    /**
+                     * Creates a new DistributionCut instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {google.monitoring.v3.IDistributionCut=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.DistributionCut} DistributionCut instance
+                     */
+                    DistributionCut.create = function create(properties) {
+                        return new DistributionCut(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DistributionCut message. Does not implicitly {@link google.monitoring.v3.DistributionCut.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {google.monitoring.v3.IDistributionCut} message DistributionCut message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DistributionCut.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.distributionFilter != null && message.hasOwnProperty("distributionFilter"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.distributionFilter);
+                        if (message.range != null && message.hasOwnProperty("range"))
+                            $root.google.monitoring.v3.Range.encode(message.range, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DistributionCut message, length delimited. Does not implicitly {@link google.monitoring.v3.DistributionCut.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {google.monitoring.v3.IDistributionCut} message DistributionCut message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DistributionCut.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DistributionCut message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.DistributionCut} DistributionCut
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DistributionCut.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.DistributionCut();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 4:
+                                message.distributionFilter = reader.string();
+                                break;
+                            case 5:
+                                message.range = $root.google.monitoring.v3.Range.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DistributionCut message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.DistributionCut} DistributionCut
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DistributionCut.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DistributionCut message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DistributionCut.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.distributionFilter != null && message.hasOwnProperty("distributionFilter"))
+                            if (!$util.isString(message.distributionFilter))
+                                return "distributionFilter: string expected";
+                        if (message.range != null && message.hasOwnProperty("range")) {
+                            var error = $root.google.monitoring.v3.Range.verify(message.range);
+                            if (error)
+                                return "range." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DistributionCut message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.DistributionCut} DistributionCut
+                     */
+                    DistributionCut.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.DistributionCut)
+                            return object;
+                        var message = new $root.google.monitoring.v3.DistributionCut();
+                        if (object.distributionFilter != null)
+                            message.distributionFilter = String(object.distributionFilter);
+                        if (object.range != null) {
+                            if (typeof object.range !== "object")
+                                throw TypeError(".google.monitoring.v3.DistributionCut.range: object expected");
+                            message.range = $root.google.monitoring.v3.Range.fromObject(object.range);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DistributionCut message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @static
+                     * @param {google.monitoring.v3.DistributionCut} message DistributionCut
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DistributionCut.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.distributionFilter = "";
+                            object.range = null;
+                        }
+                        if (message.distributionFilter != null && message.hasOwnProperty("distributionFilter"))
+                            object.distributionFilter = message.distributionFilter;
+                        if (message.range != null && message.hasOwnProperty("range"))
+                            object.range = $root.google.monitoring.v3.Range.toObject(message.range, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DistributionCut to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.DistributionCut
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DistributionCut.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return DistributionCut;
+                })();
+    
+                v3.WindowsBasedSli = (function() {
+    
+                    /**
+                     * Properties of a WindowsBasedSli.
+                     * @memberof google.monitoring.v3
+                     * @interface IWindowsBasedSli
+                     * @property {string|null} [goodBadMetricFilter] WindowsBasedSli goodBadMetricFilter
+                     * @property {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold|null} [goodTotalRatioThreshold] WindowsBasedSli goodTotalRatioThreshold
+                     * @property {google.monitoring.v3.WindowsBasedSli.IMetricRange|null} [metricMeanInRange] WindowsBasedSli metricMeanInRange
+                     * @property {google.monitoring.v3.WindowsBasedSli.IMetricRange|null} [metricSumInRange] WindowsBasedSli metricSumInRange
+                     * @property {google.protobuf.IDuration|null} [windowPeriod] WindowsBasedSli windowPeriod
+                     */
+    
+                    /**
+                     * Constructs a new WindowsBasedSli.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a WindowsBasedSli.
+                     * @implements IWindowsBasedSli
+                     * @constructor
+                     * @param {google.monitoring.v3.IWindowsBasedSli=} [properties] Properties to set
+                     */
+                    function WindowsBasedSli(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * WindowsBasedSli goodBadMetricFilter.
+                     * @member {string} goodBadMetricFilter
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    WindowsBasedSli.prototype.goodBadMetricFilter = "";
+    
+                    /**
+                     * WindowsBasedSli goodTotalRatioThreshold.
+                     * @member {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold|null|undefined} goodTotalRatioThreshold
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    WindowsBasedSli.prototype.goodTotalRatioThreshold = null;
+    
+                    /**
+                     * WindowsBasedSli metricMeanInRange.
+                     * @member {google.monitoring.v3.WindowsBasedSli.IMetricRange|null|undefined} metricMeanInRange
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    WindowsBasedSli.prototype.metricMeanInRange = null;
+    
+                    /**
+                     * WindowsBasedSli metricSumInRange.
+                     * @member {google.monitoring.v3.WindowsBasedSli.IMetricRange|null|undefined} metricSumInRange
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    WindowsBasedSli.prototype.metricSumInRange = null;
+    
+                    /**
+                     * WindowsBasedSli windowPeriod.
+                     * @member {google.protobuf.IDuration|null|undefined} windowPeriod
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    WindowsBasedSli.prototype.windowPeriod = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * WindowsBasedSli windowCriterion.
+                     * @member {"goodBadMetricFilter"|"goodTotalRatioThreshold"|"metricMeanInRange"|"metricSumInRange"|undefined} windowCriterion
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     */
+                    Object.defineProperty(WindowsBasedSli.prototype, "windowCriterion", {
+                        get: $util.oneOfGetter($oneOfFields = ["goodBadMetricFilter", "goodTotalRatioThreshold", "metricMeanInRange", "metricSumInRange"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new WindowsBasedSli instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IWindowsBasedSli=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.WindowsBasedSli} WindowsBasedSli instance
+                     */
+                    WindowsBasedSli.create = function create(properties) {
+                        return new WindowsBasedSli(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified WindowsBasedSli message. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IWindowsBasedSli} message WindowsBasedSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    WindowsBasedSli.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.goodTotalRatioThreshold != null && message.hasOwnProperty("goodTotalRatioThreshold"))
+                            $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.encode(message.goodTotalRatioThreshold, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.windowPeriod != null && message.hasOwnProperty("windowPeriod"))
+                            $root.google.protobuf.Duration.encode(message.windowPeriod, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.goodBadMetricFilter != null && message.hasOwnProperty("goodBadMetricFilter"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.goodBadMetricFilter);
+                        if (message.metricMeanInRange != null && message.hasOwnProperty("metricMeanInRange"))
+                            $root.google.monitoring.v3.WindowsBasedSli.MetricRange.encode(message.metricMeanInRange, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.metricSumInRange != null && message.hasOwnProperty("metricSumInRange"))
+                            $root.google.monitoring.v3.WindowsBasedSli.MetricRange.encode(message.metricSumInRange, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified WindowsBasedSli message, length delimited. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.IWindowsBasedSli} message WindowsBasedSli message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    WindowsBasedSli.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a WindowsBasedSli message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.WindowsBasedSli} WindowsBasedSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    WindowsBasedSli.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 5:
+                                message.goodBadMetricFilter = reader.string();
+                                break;
+                            case 2:
+                                message.goodTotalRatioThreshold = $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.decode(reader, reader.uint32());
+                                break;
+                            case 6:
+                                message.metricMeanInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.decode(reader, reader.uint32());
+                                break;
+                            case 7:
+                                message.metricSumInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.decode(reader, reader.uint32());
+                                break;
+                            case 4:
+                                message.windowPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a WindowsBasedSli message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.WindowsBasedSli} WindowsBasedSli
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    WindowsBasedSli.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a WindowsBasedSli message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    WindowsBasedSli.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.goodBadMetricFilter != null && message.hasOwnProperty("goodBadMetricFilter")) {
+                            properties.windowCriterion = 1;
+                            if (!$util.isString(message.goodBadMetricFilter))
+                                return "goodBadMetricFilter: string expected";
+                        }
+                        if (message.goodTotalRatioThreshold != null && message.hasOwnProperty("goodTotalRatioThreshold")) {
+                            if (properties.windowCriterion === 1)
+                                return "windowCriterion: multiple values";
+                            properties.windowCriterion = 1;
+                            {
+                                var error = $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.verify(message.goodTotalRatioThreshold);
+                                if (error)
+                                    return "goodTotalRatioThreshold." + error;
+                            }
+                        }
+                        if (message.metricMeanInRange != null && message.hasOwnProperty("metricMeanInRange")) {
+                            if (properties.windowCriterion === 1)
+                                return "windowCriterion: multiple values";
+                            properties.windowCriterion = 1;
+                            {
+                                var error = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.verify(message.metricMeanInRange);
+                                if (error)
+                                    return "metricMeanInRange." + error;
+                            }
+                        }
+                        if (message.metricSumInRange != null && message.hasOwnProperty("metricSumInRange")) {
+                            if (properties.windowCriterion === 1)
+                                return "windowCriterion: multiple values";
+                            properties.windowCriterion = 1;
+                            {
+                                var error = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.verify(message.metricSumInRange);
+                                if (error)
+                                    return "metricSumInRange." + error;
+                            }
+                        }
+                        if (message.windowPeriod != null && message.hasOwnProperty("windowPeriod")) {
+                            var error = $root.google.protobuf.Duration.verify(message.windowPeriod);
+                            if (error)
+                                return "windowPeriod." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a WindowsBasedSli message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.WindowsBasedSli} WindowsBasedSli
+                     */
+                    WindowsBasedSli.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.WindowsBasedSli)
+                            return object;
+                        var message = new $root.google.monitoring.v3.WindowsBasedSli();
+                        if (object.goodBadMetricFilter != null)
+                            message.goodBadMetricFilter = String(object.goodBadMetricFilter);
+                        if (object.goodTotalRatioThreshold != null) {
+                            if (typeof object.goodTotalRatioThreshold !== "object")
+                                throw TypeError(".google.monitoring.v3.WindowsBasedSli.goodTotalRatioThreshold: object expected");
+                            message.goodTotalRatioThreshold = $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.fromObject(object.goodTotalRatioThreshold);
+                        }
+                        if (object.metricMeanInRange != null) {
+                            if (typeof object.metricMeanInRange !== "object")
+                                throw TypeError(".google.monitoring.v3.WindowsBasedSli.metricMeanInRange: object expected");
+                            message.metricMeanInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.fromObject(object.metricMeanInRange);
+                        }
+                        if (object.metricSumInRange != null) {
+                            if (typeof object.metricSumInRange !== "object")
+                                throw TypeError(".google.monitoring.v3.WindowsBasedSli.metricSumInRange: object expected");
+                            message.metricSumInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.fromObject(object.metricSumInRange);
+                        }
+                        if (object.windowPeriod != null) {
+                            if (typeof object.windowPeriod !== "object")
+                                throw TypeError(".google.monitoring.v3.WindowsBasedSli.windowPeriod: object expected");
+                            message.windowPeriod = $root.google.protobuf.Duration.fromObject(object.windowPeriod);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a WindowsBasedSli message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @static
+                     * @param {google.monitoring.v3.WindowsBasedSli} message WindowsBasedSli
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    WindowsBasedSli.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.windowPeriod = null;
+                        if (message.goodTotalRatioThreshold != null && message.hasOwnProperty("goodTotalRatioThreshold")) {
+                            object.goodTotalRatioThreshold = $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.toObject(message.goodTotalRatioThreshold, options);
+                            if (options.oneofs)
+                                object.windowCriterion = "goodTotalRatioThreshold";
+                        }
+                        if (message.windowPeriod != null && message.hasOwnProperty("windowPeriod"))
+                            object.windowPeriod = $root.google.protobuf.Duration.toObject(message.windowPeriod, options);
+                        if (message.goodBadMetricFilter != null && message.hasOwnProperty("goodBadMetricFilter")) {
+                            object.goodBadMetricFilter = message.goodBadMetricFilter;
+                            if (options.oneofs)
+                                object.windowCriterion = "goodBadMetricFilter";
+                        }
+                        if (message.metricMeanInRange != null && message.hasOwnProperty("metricMeanInRange")) {
+                            object.metricMeanInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.toObject(message.metricMeanInRange, options);
+                            if (options.oneofs)
+                                object.windowCriterion = "metricMeanInRange";
+                        }
+                        if (message.metricSumInRange != null && message.hasOwnProperty("metricSumInRange")) {
+                            object.metricSumInRange = $root.google.monitoring.v3.WindowsBasedSli.MetricRange.toObject(message.metricSumInRange, options);
+                            if (options.oneofs)
+                                object.windowCriterion = "metricSumInRange";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this WindowsBasedSli to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.WindowsBasedSli
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    WindowsBasedSli.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    WindowsBasedSli.PerformanceThreshold = (function() {
+    
+                        /**
+                         * Properties of a PerformanceThreshold.
+                         * @memberof google.monitoring.v3.WindowsBasedSli
+                         * @interface IPerformanceThreshold
+                         * @property {google.monitoring.v3.IRequestBasedSli|null} [performance] PerformanceThreshold performance
+                         * @property {google.monitoring.v3.IBasicSli|null} [basicSliPerformance] PerformanceThreshold basicSliPerformance
+                         * @property {number|null} [threshold] PerformanceThreshold threshold
+                         */
+    
+                        /**
+                         * Constructs a new PerformanceThreshold.
+                         * @memberof google.monitoring.v3.WindowsBasedSli
+                         * @classdesc Represents a PerformanceThreshold.
+                         * @implements IPerformanceThreshold
+                         * @constructor
+                         * @param {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold=} [properties] Properties to set
+                         */
+                        function PerformanceThreshold(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PerformanceThreshold performance.
+                         * @member {google.monitoring.v3.IRequestBasedSli|null|undefined} performance
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @instance
+                         */
+                        PerformanceThreshold.prototype.performance = null;
+    
+                        /**
+                         * PerformanceThreshold basicSliPerformance.
+                         * @member {google.monitoring.v3.IBasicSli|null|undefined} basicSliPerformance
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @instance
+                         */
+                        PerformanceThreshold.prototype.basicSliPerformance = null;
+    
+                        /**
+                         * PerformanceThreshold threshold.
+                         * @member {number} threshold
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @instance
+                         */
+                        PerformanceThreshold.prototype.threshold = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PerformanceThreshold type.
+                         * @member {"performance"|"basicSliPerformance"|undefined} type
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @instance
+                         */
+                        Object.defineProperty(PerformanceThreshold.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["performance", "basicSliPerformance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PerformanceThreshold instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.WindowsBasedSli.PerformanceThreshold} PerformanceThreshold instance
+                         */
+                        PerformanceThreshold.create = function create(properties) {
+                            return new PerformanceThreshold(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PerformanceThreshold message. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold} message PerformanceThreshold message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PerformanceThreshold.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.performance != null && message.hasOwnProperty("performance"))
+                                $root.google.monitoring.v3.RequestBasedSli.encode(message.performance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.threshold);
+                            if (message.basicSliPerformance != null && message.hasOwnProperty("basicSliPerformance"))
+                                $root.google.monitoring.v3.BasicSli.encode(message.basicSliPerformance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PerformanceThreshold message, length delimited. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IPerformanceThreshold} message PerformanceThreshold message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PerformanceThreshold.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PerformanceThreshold message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.WindowsBasedSli.PerformanceThreshold} PerformanceThreshold
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PerformanceThreshold.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.performance = $root.google.monitoring.v3.RequestBasedSli.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.basicSliPerformance = $root.google.monitoring.v3.BasicSli.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.threshold = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PerformanceThreshold message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.WindowsBasedSli.PerformanceThreshold} PerformanceThreshold
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PerformanceThreshold.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PerformanceThreshold message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PerformanceThreshold.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.performance != null && message.hasOwnProperty("performance")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.RequestBasedSli.verify(message.performance);
+                                    if (error)
+                                        return "performance." + error;
+                                }
+                            }
+                            if (message.basicSliPerformance != null && message.hasOwnProperty("basicSliPerformance")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.monitoring.v3.BasicSli.verify(message.basicSliPerformance);
+                                    if (error)
+                                        return "basicSliPerformance." + error;
+                                }
+                            }
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                if (typeof message.threshold !== "number")
+                                    return "threshold: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PerformanceThreshold message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.WindowsBasedSli.PerformanceThreshold} PerformanceThreshold
+                         */
+                        PerformanceThreshold.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold)
+                                return object;
+                            var message = new $root.google.monitoring.v3.WindowsBasedSli.PerformanceThreshold();
+                            if (object.performance != null) {
+                                if (typeof object.performance !== "object")
+                                    throw TypeError(".google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.performance: object expected");
+                                message.performance = $root.google.monitoring.v3.RequestBasedSli.fromObject(object.performance);
+                            }
+                            if (object.basicSliPerformance != null) {
+                                if (typeof object.basicSliPerformance !== "object")
+                                    throw TypeError(".google.monitoring.v3.WindowsBasedSli.PerformanceThreshold.basicSliPerformance: object expected");
+                                message.basicSliPerformance = $root.google.monitoring.v3.BasicSli.fromObject(object.basicSliPerformance);
+                            }
+                            if (object.threshold != null)
+                                message.threshold = Number(object.threshold);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PerformanceThreshold message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.PerformanceThreshold} message PerformanceThreshold
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PerformanceThreshold.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.threshold = 0;
+                            if (message.performance != null && message.hasOwnProperty("performance")) {
+                                object.performance = $root.google.monitoring.v3.RequestBasedSli.toObject(message.performance, options);
+                                if (options.oneofs)
+                                    object.type = "performance";
+                            }
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                object.threshold = options.json && !isFinite(message.threshold) ? String(message.threshold) : message.threshold;
+                            if (message.basicSliPerformance != null && message.hasOwnProperty("basicSliPerformance")) {
+                                object.basicSliPerformance = $root.google.monitoring.v3.BasicSli.toObject(message.basicSliPerformance, options);
+                                if (options.oneofs)
+                                    object.type = "basicSliPerformance";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PerformanceThreshold to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.WindowsBasedSli.PerformanceThreshold
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PerformanceThreshold.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PerformanceThreshold;
+                    })();
+    
+                    WindowsBasedSli.MetricRange = (function() {
+    
+                        /**
+                         * Properties of a MetricRange.
+                         * @memberof google.monitoring.v3.WindowsBasedSli
+                         * @interface IMetricRange
+                         * @property {string|null} [timeSeries] MetricRange timeSeries
+                         * @property {google.monitoring.v3.IRange|null} [range] MetricRange range
+                         */
+    
+                        /**
+                         * Constructs a new MetricRange.
+                         * @memberof google.monitoring.v3.WindowsBasedSli
+                         * @classdesc Represents a MetricRange.
+                         * @implements IMetricRange
+                         * @constructor
+                         * @param {google.monitoring.v3.WindowsBasedSli.IMetricRange=} [properties] Properties to set
+                         */
+                        function MetricRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetricRange timeSeries.
+                         * @member {string} timeSeries
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @instance
+                         */
+                        MetricRange.prototype.timeSeries = "";
+    
+                        /**
+                         * MetricRange range.
+                         * @member {google.monitoring.v3.IRange|null|undefined} range
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @instance
+                         */
+                        MetricRange.prototype.range = null;
+    
+                        /**
+                         * Creates a new MetricRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IMetricRange=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.WindowsBasedSli.MetricRange} MetricRange instance
+                         */
+                        MetricRange.create = function create(properties) {
+                            return new MetricRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetricRange message. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.MetricRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IMetricRange} message MetricRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.timeSeries != null && message.hasOwnProperty("timeSeries"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.timeSeries);
+                            if (message.range != null && message.hasOwnProperty("range"))
+                                $root.google.monitoring.v3.Range.encode(message.range, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetricRange message, length delimited. Does not implicitly {@link google.monitoring.v3.WindowsBasedSli.MetricRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.IMetricRange} message MetricRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetricRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.WindowsBasedSli.MetricRange} MetricRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.WindowsBasedSli.MetricRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.timeSeries = reader.string();
+                                    break;
+                                case 4:
+                                    message.range = $root.google.monitoring.v3.Range.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetricRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.WindowsBasedSli.MetricRange} MetricRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetricRange message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetricRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.timeSeries != null && message.hasOwnProperty("timeSeries"))
+                                if (!$util.isString(message.timeSeries))
+                                    return "timeSeries: string expected";
+                            if (message.range != null && message.hasOwnProperty("range")) {
+                                var error = $root.google.monitoring.v3.Range.verify(message.range);
+                                if (error)
+                                    return "range." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetricRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.WindowsBasedSli.MetricRange} MetricRange
+                         */
+                        MetricRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.WindowsBasedSli.MetricRange)
+                                return object;
+                            var message = new $root.google.monitoring.v3.WindowsBasedSli.MetricRange();
+                            if (object.timeSeries != null)
+                                message.timeSeries = String(object.timeSeries);
+                            if (object.range != null) {
+                                if (typeof object.range !== "object")
+                                    throw TypeError(".google.monitoring.v3.WindowsBasedSli.MetricRange.range: object expected");
+                                message.range = $root.google.monitoring.v3.Range.fromObject(object.range);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetricRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @static
+                         * @param {google.monitoring.v3.WindowsBasedSli.MetricRange} message MetricRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetricRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.timeSeries = "";
+                                object.range = null;
+                            }
+                            if (message.timeSeries != null && message.hasOwnProperty("timeSeries"))
+                                object.timeSeries = message.timeSeries;
+                            if (message.range != null && message.hasOwnProperty("range"))
+                                object.range = $root.google.monitoring.v3.Range.toObject(message.range, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetricRange to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.WindowsBasedSli.MetricRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetricRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetricRange;
+                    })();
+    
+                    return WindowsBasedSli;
+                })();
+    
                 v3.UptimeCheckService = (function() {
     
                     /**
@@ -36545,6 +44089,44 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            /**
+             * CalendarPeriod enum.
+             * @name google.type.CalendarPeriod
+             * @enum {string}
+             * @property {number} CALENDAR_PERIOD_UNSPECIFIED=0 CALENDAR_PERIOD_UNSPECIFIED value
+             * @property {number} DAY=1 DAY value
+             * @property {number} WEEK=2 WEEK value
+             * @property {number} FORTNIGHT=3 FORTNIGHT value
+             * @property {number} MONTH=4 MONTH value
+             * @property {number} QUARTER=5 QUARTER value
+             * @property {number} HALF=6 HALF value
+             * @property {number} YEAR=7 YEAR value
+             */
+            type.CalendarPeriod = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "CALENDAR_PERIOD_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "DAY"] = 1;
+                values[valuesById[2] = "WEEK"] = 2;
+                values[valuesById[3] = "FORTNIGHT"] = 3;
+                values[valuesById[4] = "MONTH"] = 4;
+                values[valuesById[5] = "QUARTER"] = 5;
+                values[valuesById[6] = "HALF"] = 6;
+                values[valuesById[7] = "YEAR"] = 7;
+                return values;
+            })();
+    
+            return type;
         })();
     
         return google;

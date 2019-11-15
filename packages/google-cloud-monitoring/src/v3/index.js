@@ -18,10 +18,12 @@ const AlertPolicyServiceClient = require('./alert_policy_service_client');
 const GroupServiceClient = require('./group_service_client');
 const MetricServiceClient = require('./metric_service_client');
 const NotificationChannelServiceClient = require('./notification_channel_service_client');
+const ServiceMonitoringServiceClient = require('./service_monitoring_service_client');
 const UptimeCheckServiceClient = require('./uptime_check_service_client');
 
 module.exports.AlertPolicyServiceClient = AlertPolicyServiceClient;
 module.exports.GroupServiceClient = GroupServiceClient;
 module.exports.MetricServiceClient = MetricServiceClient;
 module.exports.NotificationChannelServiceClient = NotificationChannelServiceClient;
+module.exports.ServiceMonitoringServiceClient = ServiceMonitoringServiceClient;
 module.exports.UptimeCheckServiceClient = UptimeCheckServiceClient;
