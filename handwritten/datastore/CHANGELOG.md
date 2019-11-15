@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [5.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.5.2...v5.0.0) (2019-11-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* keyToLegacyUrlsafe is now an async method (#496)
+* throw error with out of bounds integer values, optionally wrap into DsInt or provide a custom 'integerValue' type cast options #516
+
+### Features
+
+* throw error with out of bounds integer values, optionally wrap into DsInt or provide a custom 'integerValue' type cast options [#516](https://www.github.com/googleapis/nodejs-datastore/issues/516) ([6c8cc74](https://www.github.com/googleapis/nodejs-datastore/commit/6c8cc74820ca7eaab0e08b9cefac11095c466256))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#535](https://www.github.com/googleapis/nodejs-datastore/issues/535)) ([53ddc21](https://www.github.com/googleapis/nodejs-datastore/commit/53ddc21f3b1545e660433b3805948dfc862ba792))
+* keyToLegacyUrlsafe is now an async method ([#496](https://www.github.com/googleapis/nodejs-datastore/issues/496)) ([bbd1ebe](https://www.github.com/googleapis/nodejs-datastore/commit/bbd1ebe82e302155b80ac801f892a7f12ad17e13))
+
 ### [4.5.2](https://www.github.com/googleapis/nodejs-datastore/compare/v4.5.1...v4.5.2) (2019-11-08)
 
 
