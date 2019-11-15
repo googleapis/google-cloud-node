@@ -63,10 +63,6 @@ r"""
 s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
         r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
 # [END fix-dead-link]
 
 s.replace('src/v4beta1/doc/google/cloud/talent/v4beta1/doc_company.js',
