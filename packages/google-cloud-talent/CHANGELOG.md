@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.0...v1.6.1) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to beta ([#124](https://www.github.com/googleapis/nodejs-talent/issues/124)) ([f5f0ab9](https://www.github.com/googleapis/nodejs-talent/commit/f5f0ab92034eb6f52b13c180b05faaed4c02de91))
+* **docs:** snippets are now replaced in jsdoc comments ([#122](https://www.github.com/googleapis/nodejs-talent/issues/122)) ([9f8af78](https://www.github.com/googleapis/nodejs-talent/commit/9f8af789a2275bae0268d5589aa1a7c4ef00e831))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.5.1...v1.6.0) (2019-11-08)
 
 
