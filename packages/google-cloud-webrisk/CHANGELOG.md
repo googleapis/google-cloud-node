@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.1...v1.3.2) (2019-11-14)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#73](https://www.github.com/googleapis/nodejs-web-risk/issues/73)) ([30ae72f](https://www.github.com/googleapis/nodejs-web-risk/commit/30ae72f3f327c8df6024479d106f01edff6363a4))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
