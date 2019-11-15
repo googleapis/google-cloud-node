@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.1...v1.3.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* import long into proto ts declaration file ([#227](https://www.github.com/googleapis/nodejs-redis/issues/227)) ([976c740](https://www.github.com/googleapis/nodejs-redis/commit/976c740bcd43019f01f6b0c1c6c0df64b6c7a090))
+* **docs:** bump release level to beta ([86d6486](https://www.github.com/googleapis/nodejs-redis/commit/86d6486b8f598105748f01157a22eb24f1b87fca))
+* **docs:** snippets are now replaced in jsdoc comments ([#226](https://www.github.com/googleapis/nodejs-redis/issues/226)) ([57cd10e](https://www.github.com/googleapis/nodejs-redis/commit/57cd10e8de25650bb077ef1c5b320d0309e0569e))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
