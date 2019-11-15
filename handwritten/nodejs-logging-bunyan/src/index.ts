@@ -327,10 +327,15 @@ export class LoggingBunyan extends Writable {
     }>,
     callback: Function
   ) {
-    const entries = chunks.map((request: {// tslint:disable-next-line:no-any
-      chunk: any; encoding: string}) => {
-      return this.formatEntry_(request.chunk);
-    });
+    const entries = chunks.map(
+      (request: {
+        // tslint:disable-next-line:no-any
+        chunk: any;
+        encoding: string;
+      }) => {
+        return this.formatEntry_(request.chunk);
+      }
+    );
 
     this.stackdriverLog.write(entries, callback);
   }
