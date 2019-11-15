@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.1...v2.3.2) (2019-11-14)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#60](https://www.github.com/googleapis/nodejs-grafeas/issues/60)) ([668c16f](https://www.github.com/googleapis/nodejs-grafeas/commit/668c16f5c2773ebd580930d3e97c8c3328852688))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.0...v2.3.1) (2019-11-08)
 
 
