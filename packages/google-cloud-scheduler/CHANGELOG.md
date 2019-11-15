@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [1.3.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.2...v1.3.3) (2019-11-15)
+
+
+### Bug Fixes
+
+* import long into proto ts declaration file ([#156](https://www.github.com/googleapis/nodejs-scheduler/issues/156)) ([1e81d5a](https://www.github.com/googleapis/nodejs-scheduler/commit/1e81d5af09e6183c9b4b5f037025fff799b54fc4))
+* **docs:** snippets are now replaced in jsdoc comments ([#155](https://www.github.com/googleapis/nodejs-scheduler/issues/155)) ([15ffd73](https://www.github.com/googleapis/nodejs-scheduler/commit/15ffd73fe577d1b6161f7cc878c04aad033a8502))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.1...v1.3.2) (2019-10-22)
 
 
