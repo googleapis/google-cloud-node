@@ -885,14 +885,16 @@ class MetricServiceClient {
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
    * @param {Object} [request.aggregation]
-   *   By default, the raw time series data is returned.
-   *   Use this field to combine multiple time series for different
-   *   views of the data.
+   *   Specifies the alignment of data points in individual time series as
+   *   well as how to combine the retrieved time series across specified labels.
+   *
+   *   By default (if no `aggregation` is explicitly specified), the raw time
+   *   series data is returned.
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
    * @param {string} [request.orderBy]
    *   Unsupported: must be left blank. The points in each time series are
-   *   returned in reverse time order.
+   *   currently returned in reverse time order (most recent to oldest).
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1043,14 +1045,16 @@ class MetricServiceClient {
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
    * @param {Object} [request.aggregation]
-   *   By default, the raw time series data is returned.
-   *   Use this field to combine multiple time series for different
-   *   views of the data.
+   *   Specifies the alignment of data points in individual time series as
+   *   well as how to combine the retrieved time series across specified labels.
+   *
+   *   By default (if no `aggregation` is explicitly specified), the raw time
+   *   series data is returned.
    *
    *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
    * @param {string} [request.orderBy]
    *   Unsupported: must be left blank. The points in each time series are
-   *   returned in reverse time order.
+   *   currently returned in reverse time order (most recent to oldest).
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this

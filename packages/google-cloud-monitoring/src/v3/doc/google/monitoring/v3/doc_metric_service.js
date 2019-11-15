@@ -220,15 +220,17 @@ const DeleteMetricDescriptorRequest = {
  *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
  *
  * @property {Object} aggregation
- *   By default, the raw time series data is returned.
- *   Use this field to combine multiple time series for different
- *   views of the data.
+ *   Specifies the alignment of data points in individual time series as
+ *   well as how to combine the retrieved time series across specified labels.
+ *
+ *   By default (if no `aggregation` is explicitly specified), the raw time
+ *   series data is returned.
  *
  *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
  *
  * @property {string} orderBy
  *   Unsupported: must be left blank. The points in each time series are
- *   returned in reverse time order.
+ *   currently returned in reverse time order (most recent to oldest).
  *
  * @property {number} view
  *   Specifies which information is returned about the time series.

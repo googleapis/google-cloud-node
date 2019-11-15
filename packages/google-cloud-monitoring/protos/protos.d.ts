@@ -4386,6 +4386,207 @@ export namespace google {
                 public toJSON(): { [k: string]: any };
             }
 
+            /** Properties of a CreateTimeSeriesSummary. */
+            interface ICreateTimeSeriesSummary {
+
+                /** CreateTimeSeriesSummary totalPointCount */
+                totalPointCount?: (number|null);
+
+                /** CreateTimeSeriesSummary successPointCount */
+                successPointCount?: (number|null);
+
+                /** CreateTimeSeriesSummary errors */
+                errors?: (google.monitoring.v3.CreateTimeSeriesSummary.IError[]|null);
+            }
+
+            /** Represents a CreateTimeSeriesSummary. */
+            class CreateTimeSeriesSummary implements ICreateTimeSeriesSummary {
+
+                /**
+                 * Constructs a new CreateTimeSeriesSummary.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.monitoring.v3.ICreateTimeSeriesSummary);
+
+                /** CreateTimeSeriesSummary totalPointCount. */
+                public totalPointCount: number;
+
+                /** CreateTimeSeriesSummary successPointCount. */
+                public successPointCount: number;
+
+                /** CreateTimeSeriesSummary errors. */
+                public errors: google.monitoring.v3.CreateTimeSeriesSummary.IError[];
+
+                /**
+                 * Creates a new CreateTimeSeriesSummary instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CreateTimeSeriesSummary instance
+                 */
+                public static create(properties?: google.monitoring.v3.ICreateTimeSeriesSummary): google.monitoring.v3.CreateTimeSeriesSummary;
+
+                /**
+                 * Encodes the specified CreateTimeSeriesSummary message. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.verify|verify} messages.
+                 * @param message CreateTimeSeriesSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.monitoring.v3.ICreateTimeSeriesSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CreateTimeSeriesSummary message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.verify|verify} messages.
+                 * @param message CreateTimeSeriesSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.monitoring.v3.ICreateTimeSeriesSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CreateTimeSeriesSummary message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CreateTimeSeriesSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.CreateTimeSeriesSummary;
+
+                /**
+                 * Decodes a CreateTimeSeriesSummary message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CreateTimeSeriesSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.CreateTimeSeriesSummary;
+
+                /**
+                 * Verifies a CreateTimeSeriesSummary message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CreateTimeSeriesSummary message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CreateTimeSeriesSummary
+                 */
+                public static fromObject(object: { [k: string]: any }): google.monitoring.v3.CreateTimeSeriesSummary;
+
+                /**
+                 * Creates a plain object from a CreateTimeSeriesSummary message. Also converts values to other types if specified.
+                 * @param message CreateTimeSeriesSummary
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.monitoring.v3.CreateTimeSeriesSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CreateTimeSeriesSummary to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace CreateTimeSeriesSummary {
+
+                /** Properties of an Error. */
+                interface IError {
+
+                    /** Error status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** Error pointCount */
+                    pointCount?: (number|null);
+                }
+
+                /** Represents an Error. */
+                class Error implements IError {
+
+                    /**
+                     * Constructs a new Error.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.v3.CreateTimeSeriesSummary.IError);
+
+                    /** Error status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** Error pointCount. */
+                    public pointCount: number;
+
+                    /**
+                     * Creates a new Error instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Error instance
+                     */
+                    public static create(properties?: google.monitoring.v3.CreateTimeSeriesSummary.IError): google.monitoring.v3.CreateTimeSeriesSummary.Error;
+
+                    /**
+                     * Encodes the specified Error message. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.Error.verify|verify} messages.
+                     * @param message Error message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.v3.CreateTimeSeriesSummary.IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Error message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.Error.verify|verify} messages.
+                     * @param message Error message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.v3.CreateTimeSeriesSummary.IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Error message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Error
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.v3.CreateTimeSeriesSummary.Error;
+
+                    /**
+                     * Decodes an Error message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Error
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.v3.CreateTimeSeriesSummary.Error;
+
+                    /**
+                     * Verifies an Error message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Error message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Error
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.v3.CreateTimeSeriesSummary.Error;
+
+                    /**
+                     * Creates a plain object from an Error message. Also converts values to other types if specified.
+                     * @param message Error
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.v3.CreateTimeSeriesSummary.Error, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Error to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Properties of a Point. */
             interface IPoint {
 

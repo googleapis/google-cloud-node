@@ -920,11 +920,48 @@
                   "fields": {
                     "timeSeries": {
                       "type": "TimeSeries",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "status": {
                       "type": "google.rpc.Status",
+                      "id": 2,
+                      "options": {
+                        "deprecated": true
+                      }
+                    }
+                  }
+                },
+                "CreateTimeSeriesSummary": {
+                  "fields": {
+                    "totalPointCount": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "successPointCount": {
+                      "type": "int32",
                       "id": 2
+                    },
+                    "errors": {
+                      "rule": "repeated",
+                      "type": "Error",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Error": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "pointCount": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
                     }
                   }
                 },

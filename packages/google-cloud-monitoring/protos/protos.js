@@ -10465,6 +10465,475 @@
                     return CreateTimeSeriesError;
                 })();
     
+                v3.CreateTimeSeriesSummary = (function() {
+    
+                    /**
+                     * Properties of a CreateTimeSeriesSummary.
+                     * @memberof google.monitoring.v3
+                     * @interface ICreateTimeSeriesSummary
+                     * @property {number|null} [totalPointCount] CreateTimeSeriesSummary totalPointCount
+                     * @property {number|null} [successPointCount] CreateTimeSeriesSummary successPointCount
+                     * @property {Array.<google.monitoring.v3.CreateTimeSeriesSummary.IError>|null} [errors] CreateTimeSeriesSummary errors
+                     */
+    
+                    /**
+                     * Constructs a new CreateTimeSeriesSummary.
+                     * @memberof google.monitoring.v3
+                     * @classdesc Represents a CreateTimeSeriesSummary.
+                     * @implements ICreateTimeSeriesSummary
+                     * @constructor
+                     * @param {google.monitoring.v3.ICreateTimeSeriesSummary=} [properties] Properties to set
+                     */
+                    function CreateTimeSeriesSummary(properties) {
+                        this.errors = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateTimeSeriesSummary totalPointCount.
+                     * @member {number} totalPointCount
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @instance
+                     */
+                    CreateTimeSeriesSummary.prototype.totalPointCount = 0;
+    
+                    /**
+                     * CreateTimeSeriesSummary successPointCount.
+                     * @member {number} successPointCount
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @instance
+                     */
+                    CreateTimeSeriesSummary.prototype.successPointCount = 0;
+    
+                    /**
+                     * CreateTimeSeriesSummary errors.
+                     * @member {Array.<google.monitoring.v3.CreateTimeSeriesSummary.IError>} errors
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @instance
+                     */
+                    CreateTimeSeriesSummary.prototype.errors = $util.emptyArray;
+    
+                    /**
+                     * Creates a new CreateTimeSeriesSummary instance using the specified properties.
+                     * @function create
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {google.monitoring.v3.ICreateTimeSeriesSummary=} [properties] Properties to set
+                     * @returns {google.monitoring.v3.CreateTimeSeriesSummary} CreateTimeSeriesSummary instance
+                     */
+                    CreateTimeSeriesSummary.create = function create(properties) {
+                        return new CreateTimeSeriesSummary(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateTimeSeriesSummary message. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {google.monitoring.v3.ICreateTimeSeriesSummary} message CreateTimeSeriesSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateTimeSeriesSummary.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.totalPointCount != null && message.hasOwnProperty("totalPointCount"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalPointCount);
+                        if (message.successPointCount != null && message.hasOwnProperty("successPointCount"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.successPointCount);
+                        if (message.errors != null && message.errors.length)
+                            for (var i = 0; i < message.errors.length; ++i)
+                                $root.google.monitoring.v3.CreateTimeSeriesSummary.Error.encode(message.errors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateTimeSeriesSummary message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {google.monitoring.v3.ICreateTimeSeriesSummary} message CreateTimeSeriesSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateTimeSeriesSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateTimeSeriesSummary message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.monitoring.v3.CreateTimeSeriesSummary} CreateTimeSeriesSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateTimeSeriesSummary.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.totalPointCount = reader.int32();
+                                break;
+                            case 2:
+                                message.successPointCount = reader.int32();
+                                break;
+                            case 3:
+                                if (!(message.errors && message.errors.length))
+                                    message.errors = [];
+                                message.errors.push($root.google.monitoring.v3.CreateTimeSeriesSummary.Error.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateTimeSeriesSummary message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.monitoring.v3.CreateTimeSeriesSummary} CreateTimeSeriesSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateTimeSeriesSummary.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateTimeSeriesSummary message.
+                     * @function verify
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateTimeSeriesSummary.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.totalPointCount != null && message.hasOwnProperty("totalPointCount"))
+                            if (!$util.isInteger(message.totalPointCount))
+                                return "totalPointCount: integer expected";
+                        if (message.successPointCount != null && message.hasOwnProperty("successPointCount"))
+                            if (!$util.isInteger(message.successPointCount))
+                                return "successPointCount: integer expected";
+                        if (message.errors != null && message.hasOwnProperty("errors")) {
+                            if (!Array.isArray(message.errors))
+                                return "errors: array expected";
+                            for (var i = 0; i < message.errors.length; ++i) {
+                                var error = $root.google.monitoring.v3.CreateTimeSeriesSummary.Error.verify(message.errors[i]);
+                                if (error)
+                                    return "errors." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateTimeSeriesSummary message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.monitoring.v3.CreateTimeSeriesSummary} CreateTimeSeriesSummary
+                     */
+                    CreateTimeSeriesSummary.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.monitoring.v3.CreateTimeSeriesSummary)
+                            return object;
+                        var message = new $root.google.monitoring.v3.CreateTimeSeriesSummary();
+                        if (object.totalPointCount != null)
+                            message.totalPointCount = object.totalPointCount | 0;
+                        if (object.successPointCount != null)
+                            message.successPointCount = object.successPointCount | 0;
+                        if (object.errors) {
+                            if (!Array.isArray(object.errors))
+                                throw TypeError(".google.monitoring.v3.CreateTimeSeriesSummary.errors: array expected");
+                            message.errors = [];
+                            for (var i = 0; i < object.errors.length; ++i) {
+                                if (typeof object.errors[i] !== "object")
+                                    throw TypeError(".google.monitoring.v3.CreateTimeSeriesSummary.errors: object expected");
+                                message.errors[i] = $root.google.monitoring.v3.CreateTimeSeriesSummary.Error.fromObject(object.errors[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateTimeSeriesSummary message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @static
+                     * @param {google.monitoring.v3.CreateTimeSeriesSummary} message CreateTimeSeriesSummary
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateTimeSeriesSummary.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.errors = [];
+                        if (options.defaults) {
+                            object.totalPointCount = 0;
+                            object.successPointCount = 0;
+                        }
+                        if (message.totalPointCount != null && message.hasOwnProperty("totalPointCount"))
+                            object.totalPointCount = message.totalPointCount;
+                        if (message.successPointCount != null && message.hasOwnProperty("successPointCount"))
+                            object.successPointCount = message.successPointCount;
+                        if (message.errors && message.errors.length) {
+                            object.errors = [];
+                            for (var j = 0; j < message.errors.length; ++j)
+                                object.errors[j] = $root.google.monitoring.v3.CreateTimeSeriesSummary.Error.toObject(message.errors[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateTimeSeriesSummary to JSON.
+                     * @function toJSON
+                     * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateTimeSeriesSummary.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    CreateTimeSeriesSummary.Error = (function() {
+    
+                        /**
+                         * Properties of an Error.
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                         * @interface IError
+                         * @property {google.rpc.IStatus|null} [status] Error status
+                         * @property {number|null} [pointCount] Error pointCount
+                         */
+    
+                        /**
+                         * Constructs a new Error.
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary
+                         * @classdesc Represents an Error.
+                         * @implements IError
+                         * @constructor
+                         * @param {google.monitoring.v3.CreateTimeSeriesSummary.IError=} [properties] Properties to set
+                         */
+                        function Error(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Error status.
+                         * @member {google.rpc.IStatus|null|undefined} status
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @instance
+                         */
+                        Error.prototype.status = null;
+    
+                        /**
+                         * Error pointCount.
+                         * @member {number} pointCount
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @instance
+                         */
+                        Error.prototype.pointCount = 0;
+    
+                        /**
+                         * Creates a new Error instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {google.monitoring.v3.CreateTimeSeriesSummary.IError=} [properties] Properties to set
+                         * @returns {google.monitoring.v3.CreateTimeSeriesSummary.Error} Error instance
+                         */
+                        Error.create = function create(properties) {
+                            return new Error(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Error message. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.Error.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {google.monitoring.v3.CreateTimeSeriesSummary.IError} message Error message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Error.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                $root.google.rpc.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.pointCount != null && message.hasOwnProperty("pointCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pointCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Error message, length delimited. Does not implicitly {@link google.monitoring.v3.CreateTimeSeriesSummary.Error.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {google.monitoring.v3.CreateTimeSeriesSummary.IError} message Error message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Error.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Error message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.v3.CreateTimeSeriesSummary.Error} Error
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Error.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.v3.CreateTimeSeriesSummary.Error();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.pointCount = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Error message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.v3.CreateTimeSeriesSummary.Error} Error
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Error.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Error message.
+                         * @function verify
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Error.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.rpc.Status.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            if (message.pointCount != null && message.hasOwnProperty("pointCount"))
+                                if (!$util.isInteger(message.pointCount))
+                                    return "pointCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Error message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.v3.CreateTimeSeriesSummary.Error} Error
+                         */
+                        Error.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.v3.CreateTimeSeriesSummary.Error)
+                                return object;
+                            var message = new $root.google.monitoring.v3.CreateTimeSeriesSummary.Error();
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.monitoring.v3.CreateTimeSeriesSummary.Error.status: object expected");
+                                message.status = $root.google.rpc.Status.fromObject(object.status);
+                            }
+                            if (object.pointCount != null)
+                                message.pointCount = object.pointCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Error message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @static
+                         * @param {google.monitoring.v3.CreateTimeSeriesSummary.Error} message Error
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Error.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.status = null;
+                                object.pointCount = 0;
+                            }
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.rpc.Status.toObject(message.status, options);
+                            if (message.pointCount != null && message.hasOwnProperty("pointCount"))
+                                object.pointCount = message.pointCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Error to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.v3.CreateTimeSeriesSummary.Error
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Error.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Error;
+                    })();
+    
+                    return CreateTimeSeriesSummary;
+                })();
+    
                 v3.Point = (function() {
     
                     /**

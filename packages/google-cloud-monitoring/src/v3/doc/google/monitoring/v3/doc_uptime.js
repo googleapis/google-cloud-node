@@ -305,11 +305,15 @@ const UptimeCheckConfig = {
   },
 
   /**
-   * Used to perform string matching. It allows substring and regular
-   * expressions, together with their negations.
+   * Optional. Used to perform content matching. This allows matching based on
+   * substrings and regular expressions, together with their negations. Only the
+   * first 4&nbsp;MB of an HTTP or HTTPS check's response (and the first
+   * 1&nbsp;MB of a TCP check's response) are examined for purposes of content
+   * matching.
    *
    * @property {string} content
-   *   String or regex content to match (max 1024 bytes)
+   *   String or regex content to match. Maximum 1024 bytes. An empty `content`
+   *   string indicates no content matching is to be performed.
    *
    * @property {number} matcher
    *   The type of content matcher that will be applied to the server output,
@@ -340,29 +344,29 @@ const UptimeCheckConfig = {
       CONTENT_MATCHER_OPTION_UNSPECIFIED: 0,
 
       /**
-       * Selects substring matching (there is a match if the output contains
-       * the `content` string).  This is the default value for checks without
+       * Selects substring matching. The match succeeds if the output contains
+       * the `content` string.  This is the default value for checks without
        * a `matcher` option, or where the value of `matcher` is
        * `CONTENT_MATCHER_OPTION_UNSPECIFIED`.
        */
       CONTAINS_STRING: 1,
 
       /**
-       * Selects negation of substring matching (there is a match if the output
-       * does NOT contain the `content` string).
+       * Selects negation of substring matching. The match succeeds if the
+       * output does _NOT_ contain the `content` string.
        */
       NOT_CONTAINS_STRING: 2,
 
       /**
-       * Selects regular expression matching (there is a match of the output
-       * matches the regular expression specified in the `content` string).
+       * Selects regular-expression matching. The match succeeds of the output
+       * matches the regular expression specified in the `content` string.
        */
       MATCHES_REGEX: 3,
 
       /**
-       * Selects negation of regular expression matching (there is a match if
-       * the output does NOT match the regular expression specified in the
-       * `content` string).
+       * Selects negation of regular-expression matching. The match succeeds if
+       * the output does _NOT_ match the regular expression specified in the
+       * `content` string.
        */
       NOT_MATCHES_REGEX: 4
     }
