@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.3...v1.1.4) (2019-11-14)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#258](https://www.github.com/googleapis/nodejs-resource/issues/258)) ([d81b8ae](https://www.github.com/googleapis/nodejs-resource/commit/d81b8aecd58bfcb167463b9c69acd54184efae70))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.2...v1.1.3) (2019-07-26)
 
 
