@@ -11,3 +11,27 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+'use strict';
+
+// sample-metadata:
+//   title: Get Datasets
+//   description: Gets all available Datasets.
+//   usage: node quickstart.js
+
+function main() {
+  // [START datalabeling_quickstart]
+  const {DataLabelingServiceClient} = require('@google-cloud/datalabeling');
+  const client = new DataLabelingServiceClient();
+
+  async function quickstart() {
+    const projectId = await client.getProjectId();
+    const parent = client.projectPath(projectId);
+    const [result] = await client.listDatasets({parent});
+    console.log('Datasets:');
+    console.log(result);
+  }
+  quickstart();
+  // [END datalabeling_quickstart]
+}
+main(...process.argv.slice(2));
