@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.3.2...v3.4.0) (2019-11-14)
+
+
+### Features
+
+* **samples:** bump auto-punctuation sample to v1 and move diarization to v1 ([#463](https://www.github.com/googleapis/nodejs-speech/issues/463)) ([ebcd0d3](https://www.github.com/googleapis/nodejs-speech/commit/ebcd0d3f3ba856b7476a7ada6029575b62133887))
+* add support for speaker tag field ([#466](https://www.github.com/googleapis/nodejs-speech/issues/466)) ([a027563](https://www.github.com/googleapis/nodejs-speech/commit/a027563f006487efc7a2e509074bf11ff7f13c9e))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#465](https://www.github.com/googleapis/nodejs-speech/issues/465)) ([e8c4269](https://www.github.com/googleapis/nodejs-speech/commit/e8c4269098e786e01cc7196d44a9c3bf459e8f91))
+
 ### [3.3.2](https://www.github.com/googleapis/nodejs-speech/compare/v3.3.1...v3.3.2) (2019-10-22)
 
 
