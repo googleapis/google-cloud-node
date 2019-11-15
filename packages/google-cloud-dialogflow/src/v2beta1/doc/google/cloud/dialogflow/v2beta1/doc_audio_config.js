@@ -357,7 +357,7 @@ const OutputAudioEncoding = {
   OUTPUT_AUDIO_ENCODING_LINEAR_16: 1,
 
   /**
-   * MP3 audio.
+   * MP3 audio at 32kbps.
    */
   OUTPUT_AUDIO_ENCODING_MP3: 2,
 
