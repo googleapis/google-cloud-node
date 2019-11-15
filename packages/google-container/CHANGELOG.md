@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.3.1...v1.4.0) (2019-11-14)
+
+
+### Features
+
+* support listUsableSubnetworks rpc and new node config ([#246](https://www.github.com/googleapis/nodejs-cloud-container/issues/246)) ([08f2e19](https://www.github.com/googleapis/nodejs-cloud-container/commit/08f2e19c9bc3eff01adf90b59405c73d0a4f190a))
+* **docs:** bump release level to beta ([#249](https://www.github.com/googleapis/nodejs-cloud-container/issues/249)) ([3651e6a](https://www.github.com/googleapis/nodejs-cloud-container/commit/3651e6a2cd7bf28da94a6d3d5d57861a15d8e332))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#245](https://www.github.com/googleapis/nodejs-cloud-container/issues/245)) ([31fcb61](https://www.github.com/googleapis/nodejs-cloud-container/commit/31fcb616761b9f23f380be6fbe20f7a0d290a5a1))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
