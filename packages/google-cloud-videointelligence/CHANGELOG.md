@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.6.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.0...v2.6.1) (2019-11-14)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#320](https://www.github.com/googleapis/nodejs-video-intelligence/issues/320)) ([db2a759](https://www.github.com/googleapis/nodejs-video-intelligence/commit/db2a759cadf4a554b1287b30776445237f4332b7))
+* import long into proto ts declaration file ([#321](https://www.github.com/googleapis/nodejs-video-intelligence/issues/321)) ([adbe31e](https://www.github.com/googleapis/nodejs-video-intelligence/commit/adbe31e503edc6c1031a7ca03fb3a4fd5d78b090))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.5.2...v2.6.0) (2019-11-07)
 
 
