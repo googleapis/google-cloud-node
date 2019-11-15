@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [0.14.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.14.0...v0.14.1) (2019-11-15)
+
+
+### Bug Fixes
+
+* import long in proto ts declaration file ([#462](https://www.github.com/googleapis/nodejs-dialogflow/issues/462)) ([cacd9c8](https://www.github.com/googleapis/nodejs-dialogflow/commit/cacd9c83e8edea18c7742b55efee91bce1a06e53))
+* **docs:** snippets are now replaced in jsdoc comments ([#461](https://www.github.com/googleapis/nodejs-dialogflow/issues/461)) ([029146e](https://www.github.com/googleapis/nodejs-dialogflow/commit/029146e70d1094f2a5de7cba61ed83006b533451))
+
 ## [0.14.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.13.0...v0.14.0) (2019-11-08)
 
 
