@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.5...v1.1.6) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#365](https://www.github.com/googleapis/nodejs-compute/issues/365)) ([408c75a](https://www.github.com/googleapis/nodejs-compute/commit/408c75a1a58c67e646406ed7271cf201364a16c4))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.4...v1.1.5) (2019-09-10)
 
 
