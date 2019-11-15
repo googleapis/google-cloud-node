@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.1...v2.2.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* import long into proto ts declaration file ([#167](https://www.github.com/googleapis/nodejs-security-center/issues/167)) ([8548ae2](https://www.github.com/googleapis/nodejs-security-center/commit/8548ae2d620a690dcaa2f270c35c91745c37329f))
+* **docs:** bump release level to GA ([#171](https://www.github.com/googleapis/nodejs-security-center/issues/171)) ([8169088](https://www.github.com/googleapis/nodejs-security-center/commit/81690887c934e3a06ca82dd8850d47a74e4ad1c9))
+* **docs:** snippets are now replaced in jsdoc comments ([#166](https://www.github.com/googleapis/nodejs-security-center/issues/166)) ([c2d6f93](https://www.github.com/googleapis/nodejs-security-center/commit/c2d6f93c360bcb44ac095dea23c3191f3d5a4e2b))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.0...v2.2.1) (2019-10-22)
 
 
