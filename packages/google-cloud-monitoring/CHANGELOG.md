@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.5.0...v1.6.0) (2019-11-15)
+
+
+### Features
+
+* add service api support ([#325](https://www.github.com/googleapis/nodejs-monitoring/issues/325)) ([dbc3680](https://www.github.com/googleapis/nodejs-monitoring/commit/dbc36809baeef4fe860da898face3d04103cca63))
+* Introduced detailed status message for CreateTimeSeries: CreateTimeSeriesSummary replaces CreateTimeSeriesError, which is now deprecated and unused ([46e0661](https://www.github.com/googleapis/nodejs-monitoring/commit/46e0661286f8b59c4124338477c5104cd1f5a099))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#324](https://www.github.com/googleapis/nodejs-monitoring/issues/324)) ([6d81605](https://www.github.com/googleapis/nodejs-monitoring/commit/6d8160596340a0c3ee9f4540e505d3e329a532eb))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.4.0...v1.5.0) (2019-10-22)
 
 
