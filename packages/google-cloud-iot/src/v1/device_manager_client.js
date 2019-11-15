@@ -1444,7 +1444,7 @@ class DeviceManagerClient {
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy detail is being requested.
    *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} [request.permissions]
+   * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
    *   information see
@@ -1469,7 +1469,12 @@ class DeviceManagerClient {
    * });
    *
    * const resource = '';
-   * client.testIamPermissions({resource: resource})
+   * const permissions = [];
+   * const request = {
+   *   resource: resource,
+   *   permissions: permissions,
+   * };
+   * client.testIamPermissions(request)
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
