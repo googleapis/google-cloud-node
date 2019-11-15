@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.6](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.5...v1.2.6) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to beta ([f8ffa40](https://www.github.com/googleapis/nodejs-dns/commit/f8ffa401842cce93565ab8f5aedc47289f62cf39))
+* **docs:** snippets are now replaced in jsdoc comments ([#314](https://www.github.com/googleapis/nodejs-dns/issues/314)) ([06cb858](https://www.github.com/googleapis/nodejs-dns/commit/06cb858d1623b7382c794805571b8311916e20e2))
+
 ### [1.2.5](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.4...v1.2.5) (2019-10-21)
 
 
