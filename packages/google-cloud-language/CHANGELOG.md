@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.6.1](https://www.github.com/googleapis/nodejs-language/compare/v3.6.0...v3.6.1) (2019-11-14)
+
+
+### Bug Fixes
+
+* import long into proto ts declaration file ([#323](https://www.github.com/googleapis/nodejs-language/issues/323)) ([d327d99](https://www.github.com/googleapis/nodejs-language/commit/d327d997c78ea2ec76fa6ca75fe94097965b7b71))
+* **docs:** snippets are now replaced in jsdoc comments ([#322](https://www.github.com/googleapis/nodejs-language/issues/322)) ([e316d9a](https://www.github.com/googleapis/nodejs-language/commit/e316d9a69de76c673ce273fe72b692e2e29a3756))
+
 ## [3.6.0](https://www.github.com/googleapis/nodejs-language/compare/v3.5.1...v3.6.0) (2019-11-05)
 
 
