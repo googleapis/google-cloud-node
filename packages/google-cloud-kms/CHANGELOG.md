@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [1.5.2](https://www.github.com/googleapis/nodejs-kms/compare/v1.5.1...v1.5.2) (2019-11-14)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#230](https://www.github.com/googleapis/nodejs-kms/issues/230)) ([ed142f3](https://www.github.com/googleapis/nodejs-kms/commit/ed142f3479c3fe5b98c65e05b6debfded1bad9b1))
+* import long into proto ts declaration file ([#231](https://www.github.com/googleapis/nodejs-kms/issues/231)) ([bc21cff](https://www.github.com/googleapis/nodejs-kms/commit/bc21cff485bccd679c248a3f9c1137fa99775f76))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.5.0...v1.5.1) (2019-10-22)
 
 
