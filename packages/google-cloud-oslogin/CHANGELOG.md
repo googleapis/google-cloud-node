@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.1...v1.3.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to beta ([da02304](https://www.github.com/googleapis/nodejs-os-login/commit/da0230474ad978c5dd837db9c92c875318ffba3a))
+* **docs:** snippets are now replaced in jsdoc comments ([#248](https://www.github.com/googleapis/nodejs-os-login/issues/248)) ([f77a00e](https://www.github.com/googleapis/nodejs-os-login/commit/f77a00ecf9f761db1249a15fc41f8297ad94200e))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
