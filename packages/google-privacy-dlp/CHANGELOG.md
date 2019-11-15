@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.6.1...v1.7.0) (2019-11-14)
+
+
+### Features
+
+* add support for publishToStackdriver field ([#358](https://www.github.com/googleapis/nodejs-dlp/issues/358)) ([5e5a384](https://www.github.com/googleapis/nodejs-dlp/commit/5e5a384a6ee122f7fd3bf07e04892dd70d748897))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#357](https://www.github.com/googleapis/nodejs-dlp/issues/357)) ([678fad7](https://www.github.com/googleapis/nodejs-dlp/commit/678fad7dbe3d0c3255de61edd253b02947e2f9ab))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.6.0...v1.6.1) (2019-10-22)
 
 
