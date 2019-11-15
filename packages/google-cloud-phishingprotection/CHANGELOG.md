@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.3.1...v1.3.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#52](https://www.github.com/googleapis/nodejs-phishing-protection/issues/52)) ([b53e568](https://www.github.com/googleapis/nodejs-phishing-protection/commit/b53e568715e9755c717c0ac9d32926ffc612f381))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
