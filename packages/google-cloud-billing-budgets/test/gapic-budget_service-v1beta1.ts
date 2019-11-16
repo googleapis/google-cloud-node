@@ -297,4 +297,35 @@ describe('BudgetServiceClient', () => {
       });
     });
   });
+  describe('listBudgetsStream', () => {
+    it('invokes listBudgetsStream without error', done => {
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest = {};
+      // Mock response
+      const expectedResponse = {};
+      // Mock Grpc layer
+      client._innerApiCalls.listBudgets = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      const stream = client
+        .listBudgetsStream(request, {})
+        .on('data', (response: {}) => {
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        })
+        .on('error', (err: FakeError) => {
+          done(err);
+        });
+      stream.write(request);
+    });
+  });
 });

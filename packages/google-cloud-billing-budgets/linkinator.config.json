@@ -1,0 +1,10 @@
+{
+  "recurse": true,
+  "skip": [
+    "www.npmjs.org/package/@google-cloud/billing-budgets",
+    "googleapis.dev/nodejs/billingbudgets/latest/index.html",
+    "cloud.google.com/billing/docs/how-to/budget-api-overview",
+    "github.com/googleapis/nodejs-billing-budgets/tree/master/samples",
+    "github.com/googleapis/nodejs-billing-budgets/blob/master/samples/quickstart.js"
+  ]
+}

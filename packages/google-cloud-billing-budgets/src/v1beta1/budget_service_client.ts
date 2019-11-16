@@ -17,74 +17,35 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
+import {
+  APICallback,
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  PaginationResponse,
+} from 'google-gax';
 import * as path from 'path';
 
+import {Transform} from 'stream';
 import * as protosTypes from '../../protos/protos';
 import * as gapicConfig from './budget_service_client_config.json';
 
 const version = require('../../../package.json').version;
 
-export interface ClientOptions
-  extends gax.GrpcClientOptions,
-    gax.GoogleAuthOptions,
-    gax.ClientStubOptions {
-  libName?: string;
-  libVersion?: string;
-  clientConfig?: gax.ClientConfig;
-  fallback?: boolean;
-  apiEndpoint?: string;
-}
-
-interface Descriptors {
-  page: {[name: string]: gax.PageDescriptor};
-  stream: {[name: string]: gax.StreamDescriptor};
-  longrunning: {[name: string]: gax.LongrunningDescriptor};
-}
-
-export interface Callback<
-  ResponseObject,
-  NextRequestObject,
-  RawResponseObject
-> {
-  (
-    err: Error | null | undefined,
-    value?: ResponseObject | null,
-    nextRequest?: NextRequestObject,
-    rawResponse?: RawResponseObject
-  ): void;
-}
-
-export interface PaginationCallback<
-  RequestObject,
-  ResponseObject,
-  ResponseType
-> {
-  (
-    err: Error | null,
-    values?: ResponseType[],
-    nextPageRequest?: RequestObject,
-    rawResponse?: ResponseObject
-  ): void;
-}
-
-export interface PaginationResponse<
-  RequestObject,
-  ResponseObject,
-  ResponseType
-> {
-  values?: ResponseType[];
-  nextPageRequest?: RequestObject;
-  rawResponse?: ResponseObject;
-}
-
 /**
  *  BudgetService stores Cloud Billing budgets, which define a
  *  budget plan and rules to execute as we track spend against that plan.
+ * @class
+ * @memberof v1beta1
  */
 export class BudgetServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _budgetServiceStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
+  private _terminated = false;
   auth: gax.GoogleAuth;
 
   /**
@@ -213,7 +174,7 @@ export class BudgetServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.billing.budgets.v1beta1.BudgetService.
-    const budgetServiceStub = gaxGrpc.createStub(
+    this._budgetServiceStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.billing.budgets.v1beta1.BudgetService'
@@ -234,8 +195,8 @@ export class BudgetServiceClient {
     ];
 
     for (const methodName of budgetServiceStubMethods) {
-      const innerCallPromise = budgetServiceStub.then(
-        (stub: {[method: string]: Function}) => (...args: Array<{}>) => {
+      const innerCallPromise = this._budgetServiceStub.then(
+        stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -243,13 +204,24 @@ export class BudgetServiceClient {
         }
       );
 
-      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+      const apiCall = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
       );
+
+      this._innerApiCalls[methodName] = (
+        argument: {},
+        callOptions?: CallOptions,
+        callback?: APICallback
+      ) => {
+        if (this._terminated) {
+          return Promise.reject('The client has already been closed.');
+        }
+        return apiCall(argument, callOptions, callback);
+      };
     }
   }
 
@@ -309,9 +281,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -326,13 +299,14 @@ export class BudgetServiceClient {
     >
   ): void;
   /**
-   * Creates a new budget if none exists. There is a limit of 1,000 budgets
-   * per billing account.
+   * Creates a new budget. See
+   * <a href="https://cloud.google.com/billing/quotas">Quotas and limits</a>
+   * for more information on the limits of the number of budgets you can create.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. the name of the billing account to create the budget in. Values
+   *   Required. The name of the billing account to create the budget in. Values
    *   are of the form `billingAccounts/{billingAccountId}`.
    * @param {google.cloud.billing.budgets.v1beta1.Budget} request.budget
    *   Required. Budget to create.
@@ -361,9 +335,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -391,9 +366,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -415,7 +391,7 @@ export class BudgetServiceClient {
    * @param {google.cloud.billing.budgets.v1beta1.Budget} request.budget
    *   Required. The updated budget object.
    *   The budget to update is specified by the budget name in the budget.
-   * @param {google.protobuf.FieldMask} request.update_mask
+   * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Indicates which fields in the provided budget to update.
    *   Read-only fields (such as `name`) cannot be changed. If this is not
    *   provided, then only fields with non-default values from the request are
@@ -447,9 +423,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IUpdateBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -477,9 +454,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -526,9 +504,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.cloud.billing.budgets.v1beta1.IBudget,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -556,9 +535,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -605,9 +585,10 @@ export class BudgetServiceClient {
   ): Promise<
     [
       protosTypes.google.protobuf.IEmpty,
-
+      (
         | protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -650,17 +631,17 @@ export class BudgetServiceClient {
     >
   ): void;
   /**
-   * Returns the budgets for a billing account.
+   * Returns a list of budgets for a billing account.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of billing account to list budgets under. Values
    *   are of the form `billingAccounts/{billingAccountId}`.
-   * @param {number} request.page_size
+   * @param {number} [request.pageSize]
    *   Optional. The maximum number of budgets to return per page.
    *   The default and maximum value are 100.
-   * @param {string} request.page_token
+   * @param {string} [request.pageToken]
    *   Optional. The value returned by the last `ListBudgetsResponse` which
    *   indicates that this is a continuation of a prior `ListBudgets` call,
    *   and that the system should return the next page of data.
@@ -716,6 +697,49 @@ export class BudgetServiceClient {
     });
     return this._innerApiCalls.listBudgets(request, options, callback);
   }
+
+  /**
+   * Equivalent to {@link listBudgets}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listBudgets} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of billing account to list budgets under. Values
+   *   are of the form `billingAccounts/{billingAccountId}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of budgets to return per page.
+   *   The default and maximum value are 100.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListBudgetsResponse` which
+   *   indicates that this is a continuation of a prior `ListBudgets` call,
+   *   and that the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Budget]{@link google.cloud.billing.budgets.v1beta1.Budget} on 'data' event.
+   */
+  listBudgetsStream(
+    request?: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
+    options?: gax.CallOptions | {}
+  ): Transform {
+    request = request || {};
+    const callSettings = new gax.CallSettings(options);
+    return this._descriptors.page.listBudgets.createStream(
+      this._innerApiCalls.listBudgets as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -726,5 +750,20 @@ export class BudgetServiceClient {
   }
   matchBudgetFromBudgetName(budgetName: string) {
     return this._pathTemplates.budgetPathTemplate.match(budgetName).budget;
+  }
+
+  /**
+   * Terminate the GRPC channel and close the client.
+   *
+   * The client will no longer be usable and all future behavior is undefined.
+   */
+  close(): Promise<void> {
+    if (!this._terminated) {
+      return this._budgetServiceStub.then(stub => {
+        this._terminated = true;
+        stub.close();
+      });
+    }
+    return Promise.resolve();
   }
 }

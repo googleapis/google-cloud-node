@@ -9,27 +9,45 @@
     "build/src",
     "build/protos"
   ],
-  "dependencies": {
-    "google-gax": "^1.7.5"
-  },
   "devDependencies": {
-    "@types/node": "^12.0.0",
     "@types/mocha": "^5.2.5",
-    "gts": "^1.0.0",
-    "mocha": "^6.0.0",
+    "c8": "^6.0.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "gts": "^1.1.0",
+    "jsdoc": "^3.6.2",
+    "jsdoc-fresh": "^1.0.2",
+    "jsdoc-region-tag": "^1.0.2",
+    "linkinator": "^1.4.0",
+    "mocha": "^6.1.4",
+    "pack-n-play": "^1.0.0-2",
+    "prettier": "^1.17.0",
     "typescript": "~3.6.0"
   },
   "scripts": {
-    "lint": "gts check",
+    "predocs": "npm run compile",
+    "docs": "jsdoc -c .jsdoc.js",
+    "lint": "gts check && eslint .",
     "clean": "gts clean",
+    "fix": "eslint . --fix && gts fix",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "fix": "gts fix",
     "prepare": "npm run compile-protos && npm run compile",
-    "test": "mocha build/test"
+    "pretest": "npm run compile",
+    "test": "c8 mocha build/test",
+    "system-test": "c8 mocha --timeout=15000 system-test/*.js",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.13.0"
+    "node": ">=8.10.0"
+  },
+  "dependencies": {
+    "google-gax": "^1.7.5"
   }
 }

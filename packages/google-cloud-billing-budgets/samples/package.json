@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-billing-budgets-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "files": [
+    "*.js",
+    "resources"
+  ],
+  "author": "Google LLC",
+  "repository": "googleapis/nodejs-billing-budgets",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "test": "c8 mocha system-test --timeout=800000"
+  },
+  "dependencies": {
+    "@google-cloud/billing-budgets": "^0.1.0"
+  },
+  "devDependencies": {
+    "c8": "^6.0.1",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.0"
+  }
+}
