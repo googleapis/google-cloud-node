@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.1...v1.4.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#264](https://www.github.com/googleapis/nodejs-dataproc/issues/264)) ([ee60de3](https://www.github.com/googleapis/nodejs-dataproc/commit/ee60de393169ff9df7cf3813ad27a7443b6db56c))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.0...v1.4.1) (2019-10-22)
 
 
