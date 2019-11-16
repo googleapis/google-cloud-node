@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.3.1...v1.4.0) (2019-11-15)
+
+
+### Features
+
+* add permissions to testIamPermissions call ([#225](https://www.github.com/googleapis/nodejs-iot/issues/225)) ([5549944](https://www.github.com/googleapis/nodejs-iot/commit/554994431348f46b618e407c5f75661de2c4f24b))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-iot/compare/v1.3.0...v1.3.1) (2019-11-12)
 
 
