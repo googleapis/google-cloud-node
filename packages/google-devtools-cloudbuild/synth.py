@@ -39,6 +39,7 @@ templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
+subprocess.run(['rm', '-rf', './system-test/fixtures'])
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
 

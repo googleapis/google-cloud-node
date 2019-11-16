@@ -17,6 +17,16 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
+import {
+  APICallback,
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  PaginationResponse,
+} from 'google-gax';
 import * as path from 'path';
 
 import {Transform} from 'stream';
@@ -24,65 +34,6 @@ import * as protosTypes from '../../protos/protos';
 import * as gapicConfig from './cloud_build_client_config.json';
 
 const version = require('../../../package.json').version;
-
-export interface ClientOptions
-  extends gax.GrpcClientOptions,
-    gax.GoogleAuthOptions,
-    gax.ClientStubOptions {
-  libName?: string;
-  libVersion?: string;
-  clientConfig?: gax.ClientConfig;
-  fallback?: boolean;
-  apiEndpoint?: string;
-}
-
-interface Descriptors {
-  page: {[name: string]: gax.PageDescriptor};
-  stream: {[name: string]: gax.StreamDescriptor};
-  longrunning: {[name: string]: gax.LongrunningDescriptor};
-}
-
-export interface Callback<
-  ResponseObject,
-  NextRequestObject,
-  RawResponseObject
-> {
-  (
-    err: Error | null | undefined,
-    value?: ResponseObject | null,
-    nextRequest?: NextRequestObject,
-    rawResponse?: RawResponseObject
-  ): void;
-}
-
-export interface Operation<ResultType, MetadataType> extends gax.Operation {
-  promise(): Promise<
-    [ResultType, MetadataType, protosTypes.google.longrunning.IOperation]
-  >;
-}
-
-export interface PaginationCallback<
-  RequestObject,
-  ResponseObject,
-  ResponseType
-> {
-  (
-    err: Error | null,
-    values?: ResponseType[],
-    nextPageRequest?: RequestObject,
-    rawResponse?: ResponseObject
-  ): void;
-}
-
-export interface PaginationResponse<
-  RequestObject,
-  ResponseObject,
-  ResponseType
-> {
-  values?: ResponseType[];
-  nextPageRequest?: RequestObject;
-  rawResponse?: ResponseObject;
-}
 
 /**
  *  Creates and manages builds on Google Cloud Platform.
@@ -93,10 +44,14 @@ export interface PaginationResponse<
  *
  *  A user can list previously-requested builds or get builds by their ID to
  *  determine the status of the build.
+ * @class
+ * @memberof v1
  */
 export class CloudBuildClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
+  private _cloudBuildStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
+  private _terminated = false;
   auth: gax.GoogleAuth;
 
   /**
@@ -271,7 +226,7 @@ export class CloudBuildClient {
 
     // Put together the "service stub" for
     // google.devtools.cloudbuild.v1.CloudBuild.
-    const cloudBuildStub = gaxGrpc.createStub(
+    this._cloudBuildStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.devtools.cloudbuild.v1.CloudBuild'
@@ -303,8 +258,8 @@ export class CloudBuildClient {
     ];
 
     for (const methodName of cloudBuildStubMethods) {
-      const innerCallPromise = cloudBuildStub.then(
-        (stub: {[method: string]: Function}) => (...args: Array<{}>) => {
+      const innerCallPromise = this._cloudBuildStub.then(
+        stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -312,13 +267,24 @@ export class CloudBuildClient {
         }
       );
 
-      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+      const apiCall = gaxModule.createApiCall(
         innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]
       );
+
+      this._innerApiCalls[methodName] = (
+        argument: {},
+        callOptions?: CallOptions,
+        callback?: APICallback
+      ) => {
+        if (this._terminated) {
+          return Promise.reject('The client has already been closed.');
+        }
+        return apiCall(argument, callOptions, callback);
+      };
     }
   }
 
@@ -399,7 +365,7 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
    *   Required. ID of the build.
@@ -466,7 +432,7 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
    *   Required. ID of the build.
@@ -539,7 +505,7 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project for which to configure automatic builds.
    * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
    *   Required. `BuildTrigger` to create.
@@ -616,9 +582,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
+   * @param {string} request.triggerId
    *   Required. ID of the `BuildTrigger` to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -693,9 +659,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
+   * @param {string} request.triggerId
    *   Required. ID of the `BuildTrigger` to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -770,9 +736,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project that owns the trigger.
-   * @param {string} request.trigger_id
+   * @param {string} request.triggerId
    *   Required. ID of the `BuildTrigger` to update.
    * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
    *   Required. `BuildTrigger` to update.
@@ -851,7 +817,7 @@ export class CloudBuildClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   ID of the parent project.
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
    *   `WorkerPool` resource to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1081,7 +1047,7 @@ export class CloudBuildClient {
    * @param {string} request.name
    *   The field will contain name of the resource requested, for example:
    *   "projects/project-1/workerPools/workerpool-name"
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.worker_pool
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
    *   `WorkerPool` resource to update.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1207,7 +1173,7 @@ export class CloudBuildClient {
     options?: gax.CallOptions
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1219,7 +1185,7 @@ export class CloudBuildClient {
     request: protosTypes.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     options: gax.CallOptions,
     callback: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1236,7 +1202,7 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {google.devtools.cloudbuild.v1.Build} request.build
    *   Required. Build resource to create.
@@ -1251,7 +1217,7 @@ export class CloudBuildClient {
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          Operation<
+          LROperation<
             protosTypes.google.devtools.cloudbuild.v1.IBuild,
             protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
           >,
@@ -1259,7 +1225,7 @@ export class CloudBuildClient {
           {} | undefined
         >,
     callback?: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1268,7 +1234,7 @@ export class CloudBuildClient {
     >
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1292,7 +1258,7 @@ export class CloudBuildClient {
     options?: gax.CallOptions
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1304,7 +1270,7 @@ export class CloudBuildClient {
     request: protosTypes.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     options: gax.CallOptions,
     callback: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1343,7 +1309,7 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
    * @param {string} request.id
    *   Required. Build ID of the original build.
@@ -1358,7 +1324,7 @@ export class CloudBuildClient {
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          Operation<
+          LROperation<
             protosTypes.google.devtools.cloudbuild.v1.IBuild,
             protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
           >,
@@ -1366,7 +1332,7 @@ export class CloudBuildClient {
           {} | undefined
         >,
     callback?: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1375,7 +1341,7 @@ export class CloudBuildClient {
     >
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1399,7 +1365,7 @@ export class CloudBuildClient {
     options?: gax.CallOptions
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1411,7 +1377,7 @@ export class CloudBuildClient {
     request: protosTypes.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     options: gax.CallOptions,
     callback: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1424,9 +1390,9 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
-   * @param {string} request.trigger_id
+   * @param {string} request.triggerId
    *   Required. ID of the trigger.
    * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
    *   Required. Source to build against this trigger.
@@ -1441,7 +1407,7 @@ export class CloudBuildClient {
     optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          Operation<
+          LROperation<
             protosTypes.google.devtools.cloudbuild.v1.IBuild,
             protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
           >,
@@ -1449,7 +1415,7 @@ export class CloudBuildClient {
           {} | undefined
         >,
     callback?: Callback<
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1458,7 +1424,7 @@ export class CloudBuildClient {
     >
   ): Promise<
     [
-      Operation<
+      LROperation<
         protosTypes.google.devtools.cloudbuild.v1.IBuild,
         protosTypes.google.devtools.cloudbuild.v1.IBuildOperationMetadata
       >,
@@ -1504,11 +1470,11 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project.
-   * @param {number} request.page_size
+   * @param {number} request.pageSize
    *   Number of results to return in the list.
-   * @param {string} request.page_token
+   * @param {string} request.pageToken
    *   Token to provide to skip to a particular spot in the list.
    * @param {string} request.filter
    *   The raw filter text to constrain the results.
@@ -1558,6 +1524,34 @@ export class CloudBuildClient {
     return this._innerApiCalls.listBuilds(request, options, callback);
   }
 
+  /**
+   * Equivalent to {@link listBuilds}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listBuilds} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. ID of the project.
+   * @param {number} request.pageSize
+   *   Number of results to return in the list.
+   * @param {string} request.pageToken
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {string} request.filter
+   *   The raw filter text to constrain the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Build]{@link google.devtools.cloudbuild.v1.Build} on 'data' event.
+   */
   listBuildsStream(
     request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildsRequest,
     options?: gax.CallOptions | {}
@@ -1596,11 +1590,11 @@ export class CloudBuildClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.project_id
+   * @param {string} request.projectId
    *   Required. ID of the project for which to list BuildTriggers.
-   * @param {number} request.page_size
+   * @param {number} request.pageSize
    *   Number of results to return in the list.
-   * @param {string} request.page_token
+   * @param {string} request.pageToken
    *   Token to provide to skip to a particular spot in the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1648,6 +1642,32 @@ export class CloudBuildClient {
     return this._innerApiCalls.listBuildTriggers(request, options, callback);
   }
 
+  /**
+   * Equivalent to {@link listBuildTriggers}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listBuildTriggers} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. ID of the project for which to list BuildTriggers.
+   * @param {number} request.pageSize
+   *   Number of results to return in the list.
+   * @param {string} request.pageToken
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger} on 'data' event.
+   */
   listBuildTriggersStream(
     request?: protosTypes.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     options?: gax.CallOptions | {}
@@ -1659,5 +1679,20 @@ export class CloudBuildClient {
       request,
       callSettings
     );
+  }
+
+  /**
+   * Terminate the GRPC channel and close the client.
+   *
+   * The client will no longer be usable and all future behavior is undefined.
+   */
+  close(): Promise<void> {
+    if (!this._terminated) {
+      return this._cloudBuildStub.then(stub => {
+        this._terminated = true;
+        stub.close();
+      });
+    }
+    return Promise.resolve();
   }
 }

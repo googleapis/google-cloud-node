@@ -37,6 +37,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.4.0",
     "mocha": "^6.1.4",
+    "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.0",
     "typescript": "~3.7.0"
   },
@@ -54,7 +55,7 @@
     "system-test": "c8 mocha --timeout=15000 system-test/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/cloudbuild|googleapis.dev.*|github.com.*'"
+    "docs-test": "linkinator docs"
   },
   "license": "Apache-2.0",
   "engines": {

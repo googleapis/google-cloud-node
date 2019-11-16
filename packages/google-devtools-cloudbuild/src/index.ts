@@ -17,6 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-export {v1};
 const CloudBuildClient = v1.CloudBuildClient;
-export {CloudBuildClient};
+export {v1, CloudBuildClient};
+// For compatibility with JavaScript libraries we need to provide this default export:
+// tslint:disable-next-line no-default-export
+export default {v1, CloudBuildClient};
