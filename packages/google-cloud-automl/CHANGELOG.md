@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.9.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.0...v1.9.1) (2019-11-18)
+
+
+### Bug Fixes
+
+* add extra proto list ([#274](https://www.github.com/googleapis/nodejs-automl/issues/274)) ([d4c456b](https://www.github.com/googleapis/nodejs-automl/commit/d4c456b02629fdbcc090297c67dfe2defb946bb2))
+* **deps:** update dependency yargs to v15 ([#279](https://www.github.com/googleapis/nodejs-automl/issues/279)) ([1341a27](https://www.github.com/googleapis/nodejs-automl/commit/1341a275e7b3f935c8945f887339514a91e149da))
+* update PHP protos, Import automl operation protos ([#273](https://www.github.com/googleapis/nodejs-automl/issues/273)) ([c7b285f](https://www.github.com/googleapis/nodejs-automl/commit/c7b285fc3dfad0410f58ac71c0d70c6f7c51eb68))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.8.0...v1.9.0) (2019-11-12)
 
 
