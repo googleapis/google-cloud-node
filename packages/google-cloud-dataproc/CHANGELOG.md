@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.3](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.2...v1.4.3) (2019-11-18)
+
+
+### Bug Fixes
+
+* change dataproc success message and test ([#269](https://www.github.com/googleapis/nodejs-dataproc/issues/269)) ([9373c41](https://www.github.com/googleapis/nodejs-dataproc/commit/9373c416d865a9a0f4267a2699f3bf395e2e93e1))
+* **deps:** update dependency yargs to v15 ([#271](https://www.github.com/googleapis/nodejs-dataproc/issues/271)) ([929fba4](https://www.github.com/googleapis/nodejs-dataproc/commit/929fba46d62d81090cfbdeb646da0b2a914b245d))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.1...v1.4.2) (2019-11-15)
 
 
