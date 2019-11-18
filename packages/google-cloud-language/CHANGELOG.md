@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.6.2](https://www.github.com/googleapis/nodejs-language/compare/v3.6.1...v3.6.2) (2019-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v15 ([#328](https://www.github.com/googleapis/nodejs-language/issues/328)) ([f035a45](https://www.github.com/googleapis/nodejs-language/commit/f035a4596f5b48d44289474fb7f46432be3a6123))
+
 ### [3.6.1](https://www.github.com/googleapis/nodejs-language/compare/v3.6.0...v3.6.1) (2019-11-14)
 
 
