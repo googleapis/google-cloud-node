@@ -12,7 +12,7 @@
                     "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1;automl",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.automl.v1",
-                    "php_namespace": "Google\\Cloud\\AutoML\\V1",
+                    "php_namespace": "Google\\Cloud\\AutoMl\\V1",
                     "ruby_package": "Google::Cloud::AutoML::V1",
                     "java_outer_classname": "AutoMlProto"
                   },
@@ -893,89 +893,47 @@
                         }
                       }
                     },
-                    "Model": {
-                      "options": {
-                        "(google.api.resource).type": "automl.googleapis.com/Model",
-                        "(google.api.resource).pattern": "projects/{project_id}/locations/{location_id}/models/{model_id}"
-                      },
-                      "oneofs": {
-                        "modelMetadata": {
-                          "oneof": [
-                            "translationModelMetadata",
-                            "imageClassificationModelMetadata",
-                            "textClassificationModelMetadata",
-                            "imageObjectDetectionModelMetadata",
-                            "textExtractionModelMetadata",
-                            "textSentimentModelMetadata"
-                          ]
-                        }
-                      },
+                    "TextSentimentAnnotation": {
                       "fields": {
-                        "translationModelMetadata": {
-                          "type": "TranslationModelMetadata",
-                          "id": 15
-                        },
-                        "imageClassificationModelMetadata": {
-                          "type": "ImageClassificationModelMetadata",
-                          "id": 13
-                        },
-                        "textClassificationModelMetadata": {
-                          "type": "TextClassificationModelMetadata",
-                          "id": 14
-                        },
-                        "imageObjectDetectionModelMetadata": {
-                          "type": "ImageObjectDetectionModelMetadata",
-                          "id": 20
-                        },
-                        "textExtractionModelMetadata": {
-                          "type": "TextExtractionModelMetadata",
-                          "id": 19
-                        },
-                        "textSentimentModelMetadata": {
-                          "type": "TextSentimentModelMetadata",
-                          "id": 22
-                        },
-                        "name": {
-                          "type": "string",
+                        "sentiment": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextSentimentEvaluationMetrics": {
+                      "fields": {
+                        "precision": {
+                          "type": "float",
                           "id": 1
                         },
-                        "displayName": {
-                          "type": "string",
+                        "recall": {
+                          "type": "float",
                           "id": 2
                         },
-                        "datasetId": {
-                          "type": "string",
+                        "f1Score": {
+                          "type": "float",
                           "id": 3
                         },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
+                        "meanAbsoluteError": {
+                          "type": "float",
+                          "id": 4
+                        },
+                        "meanSquaredError": {
+                          "type": "float",
+                          "id": 5
+                        },
+                        "linearKappa": {
+                          "type": "float",
+                          "id": 6
+                        },
+                        "quadraticKappa": {
+                          "type": "float",
                           "id": 7
                         },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 11
-                        },
-                        "deploymentState": {
-                          "type": "DeploymentState",
+                        "confusionMatrix": {
+                          "type": "ClassificationEvaluationMetrics.ConfusionMatrix",
                           "id": 8
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 10
-                        },
-                        "labels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 34
-                        }
-                      },
-                      "nested": {
-                        "DeploymentState": {
-                          "values": {
-                            "DEPLOYMENT_STATE_UNSPECIFIED": 0,
-                            "DEPLOYED": 1,
-                            "UNDEPLOYED": 2
-                          }
                         }
                       }
                     },
@@ -1156,50 +1114,6 @@
                         }
                       }
                     },
-                    "TextSentimentAnnotation": {
-                      "fields": {
-                        "sentiment": {
-                          "type": "int32",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextSentimentEvaluationMetrics": {
-                      "fields": {
-                        "precision": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "recall": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "f1Score": {
-                          "type": "float",
-                          "id": 3
-                        },
-                        "meanAbsoluteError": {
-                          "type": "float",
-                          "id": 4
-                        },
-                        "meanSquaredError": {
-                          "type": "float",
-                          "id": 5
-                        },
-                        "linearKappa": {
-                          "type": "float",
-                          "id": 6
-                        },
-                        "quadraticKappa": {
-                          "type": "float",
-                          "id": 7
-                        },
-                        "confusionMatrix": {
-                          "type": "ClassificationEvaluationMetrics.ConfusionMatrix",
-                          "id": 8
-                        }
-                      }
-                    },
                     "PredictionService": {
                       "options": {
                         "(google.api.default_host)": "automl.googleapis.com",
@@ -1329,6 +1243,92 @@
                         "displayName": {
                           "type": "string",
                           "id": 5
+                        }
+                      }
+                    },
+                    "Model": {
+                      "options": {
+                        "(google.api.resource).type": "automl.googleapis.com/Model",
+                        "(google.api.resource).pattern": "projects/{project_id}/locations/{location_id}/models/{model_id}"
+                      },
+                      "oneofs": {
+                        "modelMetadata": {
+                          "oneof": [
+                            "translationModelMetadata",
+                            "imageClassificationModelMetadata",
+                            "textClassificationModelMetadata",
+                            "imageObjectDetectionModelMetadata",
+                            "textExtractionModelMetadata",
+                            "textSentimentModelMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationModelMetadata": {
+                          "type": "TranslationModelMetadata",
+                          "id": 15
+                        },
+                        "imageClassificationModelMetadata": {
+                          "type": "ImageClassificationModelMetadata",
+                          "id": 13
+                        },
+                        "textClassificationModelMetadata": {
+                          "type": "TextClassificationModelMetadata",
+                          "id": 14
+                        },
+                        "imageObjectDetectionModelMetadata": {
+                          "type": "ImageObjectDetectionModelMetadata",
+                          "id": 20
+                        },
+                        "textExtractionModelMetadata": {
+                          "type": "TextExtractionModelMetadata",
+                          "id": 19
+                        },
+                        "textSentimentModelMetadata": {
+                          "type": "TextSentimentModelMetadata",
+                          "id": 22
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "datasetId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "deploymentState": {
+                          "type": "DeploymentState",
+                          "id": 8
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 34
+                        }
+                      },
+                      "nested": {
+                        "DeploymentState": {
+                          "values": {
+                            "DEPLOYMENT_STATE_UNSPECIFIED": 0,
+                            "DEPLOYED": 1,
+                            "UNDEPLOYED": 2
+                          }
                         }
                       }
                     },
@@ -5516,6 +5516,34 @@
             }
           }
         },
+        "rpc": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
         "longrunning": {
           "options": {
             "cc_enable_arenas": true,
@@ -5679,34 +5707,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }

@@ -5314,185 +5314,226 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of a Model. */
-                interface IModel {
+                /** Properties of a TextSentimentAnnotation. */
+                interface ITextSentimentAnnotation {
 
-                    /** Model translationModelMetadata */
-                    translationModelMetadata?: (google.cloud.automl.v1.ITranslationModelMetadata|null);
-
-                    /** Model imageClassificationModelMetadata */
-                    imageClassificationModelMetadata?: (google.cloud.automl.v1.IImageClassificationModelMetadata|null);
-
-                    /** Model textClassificationModelMetadata */
-                    textClassificationModelMetadata?: (google.cloud.automl.v1.ITextClassificationModelMetadata|null);
-
-                    /** Model imageObjectDetectionModelMetadata */
-                    imageObjectDetectionModelMetadata?: (google.cloud.automl.v1.IImageObjectDetectionModelMetadata|null);
-
-                    /** Model textExtractionModelMetadata */
-                    textExtractionModelMetadata?: (google.cloud.automl.v1.ITextExtractionModelMetadata|null);
-
-                    /** Model textSentimentModelMetadata */
-                    textSentimentModelMetadata?: (google.cloud.automl.v1.ITextSentimentModelMetadata|null);
-
-                    /** Model name */
-                    name?: (string|null);
-
-                    /** Model displayName */
-                    displayName?: (string|null);
-
-                    /** Model datasetId */
-                    datasetId?: (string|null);
-
-                    /** Model createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Model updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Model deploymentState */
-                    deploymentState?: (google.cloud.automl.v1.Model.DeploymentState|null);
-
-                    /** Model etag */
-                    etag?: (string|null);
-
-                    /** Model labels */
-                    labels?: ({ [k: string]: string }|null);
+                    /** TextSentimentAnnotation sentiment */
+                    sentiment?: (number|null);
                 }
 
-                /** Represents a Model. */
-                class Model implements IModel {
+                /** Represents a TextSentimentAnnotation. */
+                class TextSentimentAnnotation implements ITextSentimentAnnotation {
 
                     /**
-                     * Constructs a new Model.
+                     * Constructs a new TextSentimentAnnotation.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.automl.v1.IModel);
+                    constructor(properties?: google.cloud.automl.v1.ITextSentimentAnnotation);
 
-                    /** Model translationModelMetadata. */
-                    public translationModelMetadata?: (google.cloud.automl.v1.ITranslationModelMetadata|null);
-
-                    /** Model imageClassificationModelMetadata. */
-                    public imageClassificationModelMetadata?: (google.cloud.automl.v1.IImageClassificationModelMetadata|null);
-
-                    /** Model textClassificationModelMetadata. */
-                    public textClassificationModelMetadata?: (google.cloud.automl.v1.ITextClassificationModelMetadata|null);
-
-                    /** Model imageObjectDetectionModelMetadata. */
-                    public imageObjectDetectionModelMetadata?: (google.cloud.automl.v1.IImageObjectDetectionModelMetadata|null);
-
-                    /** Model textExtractionModelMetadata. */
-                    public textExtractionModelMetadata?: (google.cloud.automl.v1.ITextExtractionModelMetadata|null);
-
-                    /** Model textSentimentModelMetadata. */
-                    public textSentimentModelMetadata?: (google.cloud.automl.v1.ITextSentimentModelMetadata|null);
-
-                    /** Model name. */
-                    public name: string;
-
-                    /** Model displayName. */
-                    public displayName: string;
-
-                    /** Model datasetId. */
-                    public datasetId: string;
-
-                    /** Model createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Model updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Model deploymentState. */
-                    public deploymentState: google.cloud.automl.v1.Model.DeploymentState;
-
-                    /** Model etag. */
-                    public etag: string;
-
-                    /** Model labels. */
-                    public labels: { [k: string]: string };
-
-                    /** Model modelMetadata. */
-                    public modelMetadata?: ("translationModelMetadata"|"imageClassificationModelMetadata"|"textClassificationModelMetadata"|"imageObjectDetectionModelMetadata"|"textExtractionModelMetadata"|"textSentimentModelMetadata");
+                    /** TextSentimentAnnotation sentiment. */
+                    public sentiment: number;
 
                     /**
-                     * Creates a new Model instance using the specified properties.
+                     * Creates a new TextSentimentAnnotation instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns Model instance
+                     * @returns TextSentimentAnnotation instance
                      */
-                    public static create(properties?: google.cloud.automl.v1.IModel): google.cloud.automl.v1.Model;
+                    public static create(properties?: google.cloud.automl.v1.ITextSentimentAnnotation): google.cloud.automl.v1.TextSentimentAnnotation;
 
                     /**
-                     * Encodes the specified Model message. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
-                     * @param message Model message or plain object to encode
+                     * Encodes the specified TextSentimentAnnotation message. Does not implicitly {@link google.cloud.automl.v1.TextSentimentAnnotation.verify|verify} messages.
+                     * @param message TextSentimentAnnotation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.automl.v1.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.automl.v1.ITextSentimentAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
-                     * @param message Model message or plain object to encode
+                     * Encodes the specified TextSentimentAnnotation message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TextSentimentAnnotation.verify|verify} messages.
+                     * @param message TextSentimentAnnotation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.automl.v1.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.automl.v1.ITextSentimentAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a Model message from the specified reader or buffer.
+                     * Decodes a TextSentimentAnnotation message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns Model
+                     * @returns TextSentimentAnnotation
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.Model;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.TextSentimentAnnotation;
 
                     /**
-                     * Decodes a Model message from the specified reader or buffer, length delimited.
+                     * Decodes a TextSentimentAnnotation message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns Model
+                     * @returns TextSentimentAnnotation
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.Model;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.TextSentimentAnnotation;
 
                     /**
-                     * Verifies a Model message.
+                     * Verifies a TextSentimentAnnotation message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                     * Creates a TextSentimentAnnotation message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns Model
+                     * @returns TextSentimentAnnotation
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.Model;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.TextSentimentAnnotation;
 
                     /**
-                     * Creates a plain object from a Model message. Also converts values to other types if specified.
-                     * @param message Model
+                     * Creates a plain object from a TextSentimentAnnotation message. Also converts values to other types if specified.
+                     * @param message TextSentimentAnnotation
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.automl.v1.Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.automl.v1.TextSentimentAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this Model to JSON.
+                     * Converts this TextSentimentAnnotation to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
                 }
 
-                namespace Model {
+                /** Properties of a TextSentimentEvaluationMetrics. */
+                interface ITextSentimentEvaluationMetrics {
 
-                    /** DeploymentState enum. */
-                    enum DeploymentState {
-                        DEPLOYMENT_STATE_UNSPECIFIED = 0,
-                        DEPLOYED = 1,
-                        UNDEPLOYED = 2
-                    }
+                    /** TextSentimentEvaluationMetrics precision */
+                    precision?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics recall */
+                    recall?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics f1Score */
+                    f1Score?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics meanAbsoluteError */
+                    meanAbsoluteError?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics meanSquaredError */
+                    meanSquaredError?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics linearKappa */
+                    linearKappa?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics quadraticKappa */
+                    quadraticKappa?: (number|null);
+
+                    /** TextSentimentEvaluationMetrics confusionMatrix */
+                    confusionMatrix?: (google.cloud.automl.v1.ClassificationEvaluationMetrics.IConfusionMatrix|null);
+                }
+
+                /** Represents a TextSentimentEvaluationMetrics. */
+                class TextSentimentEvaluationMetrics implements ITextSentimentEvaluationMetrics {
+
+                    /**
+                     * Constructs a new TextSentimentEvaluationMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.automl.v1.ITextSentimentEvaluationMetrics);
+
+                    /** TextSentimentEvaluationMetrics precision. */
+                    public precision: number;
+
+                    /** TextSentimentEvaluationMetrics recall. */
+                    public recall: number;
+
+                    /** TextSentimentEvaluationMetrics f1Score. */
+                    public f1Score: number;
+
+                    /** TextSentimentEvaluationMetrics meanAbsoluteError. */
+                    public meanAbsoluteError: number;
+
+                    /** TextSentimentEvaluationMetrics meanSquaredError. */
+                    public meanSquaredError: number;
+
+                    /** TextSentimentEvaluationMetrics linearKappa. */
+                    public linearKappa: number;
+
+                    /** TextSentimentEvaluationMetrics quadraticKappa. */
+                    public quadraticKappa: number;
+
+                    /** TextSentimentEvaluationMetrics confusionMatrix. */
+                    public confusionMatrix?: (google.cloud.automl.v1.ClassificationEvaluationMetrics.IConfusionMatrix|null);
+
+                    /**
+                     * Creates a new TextSentimentEvaluationMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextSentimentEvaluationMetrics instance
+                     */
+                    public static create(properties?: google.cloud.automl.v1.ITextSentimentEvaluationMetrics): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
+
+                    /**
+                     * Encodes the specified TextSentimentEvaluationMetrics message. Does not implicitly {@link google.cloud.automl.v1.TextSentimentEvaluationMetrics.verify|verify} messages.
+                     * @param message TextSentimentEvaluationMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.automl.v1.ITextSentimentEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextSentimentEvaluationMetrics message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TextSentimentEvaluationMetrics.verify|verify} messages.
+                     * @param message TextSentimentEvaluationMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.automl.v1.ITextSentimentEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextSentimentEvaluationMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextSentimentEvaluationMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
+
+                    /**
+                     * Decodes a TextSentimentEvaluationMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextSentimentEvaluationMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
+
+                    /**
+                     * Verifies a TextSentimentEvaluationMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextSentimentEvaluationMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextSentimentEvaluationMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
+
+                    /**
+                     * Creates a plain object from a TextSentimentEvaluationMetrics message. Also converts values to other types if specified.
+                     * @param message TextSentimentEvaluationMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.automl.v1.TextSentimentEvaluationMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextSentimentEvaluationMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a ModelEvaluation. */
@@ -6359,228 +6400,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a TextSentimentAnnotation. */
-                interface ITextSentimentAnnotation {
-
-                    /** TextSentimentAnnotation sentiment */
-                    sentiment?: (number|null);
-                }
-
-                /** Represents a TextSentimentAnnotation. */
-                class TextSentimentAnnotation implements ITextSentimentAnnotation {
-
-                    /**
-                     * Constructs a new TextSentimentAnnotation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.automl.v1.ITextSentimentAnnotation);
-
-                    /** TextSentimentAnnotation sentiment. */
-                    public sentiment: number;
-
-                    /**
-                     * Creates a new TextSentimentAnnotation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TextSentimentAnnotation instance
-                     */
-                    public static create(properties?: google.cloud.automl.v1.ITextSentimentAnnotation): google.cloud.automl.v1.TextSentimentAnnotation;
-
-                    /**
-                     * Encodes the specified TextSentimentAnnotation message. Does not implicitly {@link google.cloud.automl.v1.TextSentimentAnnotation.verify|verify} messages.
-                     * @param message TextSentimentAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.automl.v1.ITextSentimentAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TextSentimentAnnotation message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TextSentimentAnnotation.verify|verify} messages.
-                     * @param message TextSentimentAnnotation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.automl.v1.ITextSentimentAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TextSentimentAnnotation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TextSentimentAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.TextSentimentAnnotation;
-
-                    /**
-                     * Decodes a TextSentimentAnnotation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TextSentimentAnnotation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.TextSentimentAnnotation;
-
-                    /**
-                     * Verifies a TextSentimentAnnotation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TextSentimentAnnotation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TextSentimentAnnotation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.TextSentimentAnnotation;
-
-                    /**
-                     * Creates a plain object from a TextSentimentAnnotation message. Also converts values to other types if specified.
-                     * @param message TextSentimentAnnotation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.automl.v1.TextSentimentAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TextSentimentAnnotation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TextSentimentEvaluationMetrics. */
-                interface ITextSentimentEvaluationMetrics {
-
-                    /** TextSentimentEvaluationMetrics precision */
-                    precision?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics recall */
-                    recall?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics f1Score */
-                    f1Score?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics meanAbsoluteError */
-                    meanAbsoluteError?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics meanSquaredError */
-                    meanSquaredError?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics linearKappa */
-                    linearKappa?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics quadraticKappa */
-                    quadraticKappa?: (number|null);
-
-                    /** TextSentimentEvaluationMetrics confusionMatrix */
-                    confusionMatrix?: (google.cloud.automl.v1.ClassificationEvaluationMetrics.IConfusionMatrix|null);
-                }
-
-                /** Represents a TextSentimentEvaluationMetrics. */
-                class TextSentimentEvaluationMetrics implements ITextSentimentEvaluationMetrics {
-
-                    /**
-                     * Constructs a new TextSentimentEvaluationMetrics.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.automl.v1.ITextSentimentEvaluationMetrics);
-
-                    /** TextSentimentEvaluationMetrics precision. */
-                    public precision: number;
-
-                    /** TextSentimentEvaluationMetrics recall. */
-                    public recall: number;
-
-                    /** TextSentimentEvaluationMetrics f1Score. */
-                    public f1Score: number;
-
-                    /** TextSentimentEvaluationMetrics meanAbsoluteError. */
-                    public meanAbsoluteError: number;
-
-                    /** TextSentimentEvaluationMetrics meanSquaredError. */
-                    public meanSquaredError: number;
-
-                    /** TextSentimentEvaluationMetrics linearKappa. */
-                    public linearKappa: number;
-
-                    /** TextSentimentEvaluationMetrics quadraticKappa. */
-                    public quadraticKappa: number;
-
-                    /** TextSentimentEvaluationMetrics confusionMatrix. */
-                    public confusionMatrix?: (google.cloud.automl.v1.ClassificationEvaluationMetrics.IConfusionMatrix|null);
-
-                    /**
-                     * Creates a new TextSentimentEvaluationMetrics instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TextSentimentEvaluationMetrics instance
-                     */
-                    public static create(properties?: google.cloud.automl.v1.ITextSentimentEvaluationMetrics): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
-
-                    /**
-                     * Encodes the specified TextSentimentEvaluationMetrics message. Does not implicitly {@link google.cloud.automl.v1.TextSentimentEvaluationMetrics.verify|verify} messages.
-                     * @param message TextSentimentEvaluationMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.automl.v1.ITextSentimentEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TextSentimentEvaluationMetrics message, length delimited. Does not implicitly {@link google.cloud.automl.v1.TextSentimentEvaluationMetrics.verify|verify} messages.
-                     * @param message TextSentimentEvaluationMetrics message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.automl.v1.ITextSentimentEvaluationMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TextSentimentEvaluationMetrics message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TextSentimentEvaluationMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
-
-                    /**
-                     * Decodes a TextSentimentEvaluationMetrics message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TextSentimentEvaluationMetrics
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
-
-                    /**
-                     * Verifies a TextSentimentEvaluationMetrics message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TextSentimentEvaluationMetrics message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TextSentimentEvaluationMetrics
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.TextSentimentEvaluationMetrics;
-
-                    /**
-                     * Creates a plain object from a TextSentimentEvaluationMetrics message. Also converts values to other types if specified.
-                     * @param message TextSentimentEvaluationMetrics
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.automl.v1.TextSentimentEvaluationMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TextSentimentEvaluationMetrics to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Represents a PredictionService */
                 class PredictionService extends $protobuf.rpc.Service {
 
@@ -7176,6 +6995,187 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Model. */
+                interface IModel {
+
+                    /** Model translationModelMetadata */
+                    translationModelMetadata?: (google.cloud.automl.v1.ITranslationModelMetadata|null);
+
+                    /** Model imageClassificationModelMetadata */
+                    imageClassificationModelMetadata?: (google.cloud.automl.v1.IImageClassificationModelMetadata|null);
+
+                    /** Model textClassificationModelMetadata */
+                    textClassificationModelMetadata?: (google.cloud.automl.v1.ITextClassificationModelMetadata|null);
+
+                    /** Model imageObjectDetectionModelMetadata */
+                    imageObjectDetectionModelMetadata?: (google.cloud.automl.v1.IImageObjectDetectionModelMetadata|null);
+
+                    /** Model textExtractionModelMetadata */
+                    textExtractionModelMetadata?: (google.cloud.automl.v1.ITextExtractionModelMetadata|null);
+
+                    /** Model textSentimentModelMetadata */
+                    textSentimentModelMetadata?: (google.cloud.automl.v1.ITextSentimentModelMetadata|null);
+
+                    /** Model name */
+                    name?: (string|null);
+
+                    /** Model displayName */
+                    displayName?: (string|null);
+
+                    /** Model datasetId */
+                    datasetId?: (string|null);
+
+                    /** Model createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model deploymentState */
+                    deploymentState?: (google.cloud.automl.v1.Model.DeploymentState|null);
+
+                    /** Model etag */
+                    etag?: (string|null);
+
+                    /** Model labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Model. */
+                class Model implements IModel {
+
+                    /**
+                     * Constructs a new Model.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.automl.v1.IModel);
+
+                    /** Model translationModelMetadata. */
+                    public translationModelMetadata?: (google.cloud.automl.v1.ITranslationModelMetadata|null);
+
+                    /** Model imageClassificationModelMetadata. */
+                    public imageClassificationModelMetadata?: (google.cloud.automl.v1.IImageClassificationModelMetadata|null);
+
+                    /** Model textClassificationModelMetadata. */
+                    public textClassificationModelMetadata?: (google.cloud.automl.v1.ITextClassificationModelMetadata|null);
+
+                    /** Model imageObjectDetectionModelMetadata. */
+                    public imageObjectDetectionModelMetadata?: (google.cloud.automl.v1.IImageObjectDetectionModelMetadata|null);
+
+                    /** Model textExtractionModelMetadata. */
+                    public textExtractionModelMetadata?: (google.cloud.automl.v1.ITextExtractionModelMetadata|null);
+
+                    /** Model textSentimentModelMetadata. */
+                    public textSentimentModelMetadata?: (google.cloud.automl.v1.ITextSentimentModelMetadata|null);
+
+                    /** Model name. */
+                    public name: string;
+
+                    /** Model displayName. */
+                    public displayName: string;
+
+                    /** Model datasetId. */
+                    public datasetId: string;
+
+                    /** Model createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model deploymentState. */
+                    public deploymentState: google.cloud.automl.v1.Model.DeploymentState;
+
+                    /** Model etag. */
+                    public etag: string;
+
+                    /** Model labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Model modelMetadata. */
+                    public modelMetadata?: ("translationModelMetadata"|"imageClassificationModelMetadata"|"textClassificationModelMetadata"|"imageObjectDetectionModelMetadata"|"textExtractionModelMetadata"|"textSentimentModelMetadata");
+
+                    /**
+                     * Creates a new Model instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Model instance
+                     */
+                    public static create(properties?: google.cloud.automl.v1.IModel): google.cloud.automl.v1.Model;
+
+                    /**
+                     * Encodes the specified Model message. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.automl.v1.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.automl.v1.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.automl.v1.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.automl.v1.Model;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.automl.v1.Model;
+
+                    /**
+                     * Verifies a Model message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Model
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.automl.v1.Model;
+
+                    /**
+                     * Creates a plain object from a Model message. Also converts values to other types if specified.
+                     * @param message Model
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.automl.v1.Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Model to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Model {
+
+                    /** DeploymentState enum. */
+                    enum DeploymentState {
+                        DEPLOYMENT_STATE_UNSPECIFIED = 0,
+                        DEPLOYED = 1,
+                        UNDEPLOYED = 2
+                    }
                 }
 
                 /** Represents an AutoMl */
@@ -28421,6 +28421,112 @@ export namespace google {
         }
     }
 
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
     /** Namespace longrunning. */
     namespace longrunning {
 
@@ -29331,112 +29437,6 @@ export namespace google {
 
             /**
              * Converts this OperationInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
