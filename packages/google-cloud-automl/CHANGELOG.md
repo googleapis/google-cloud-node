@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.9.2](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.1...v1.9.2) (2019-11-18)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to GA ([#280](https://www.github.com/googleapis/nodejs-automl/issues/280)) ([04c897e](https://www.github.com/googleapis/nodejs-automl/commit/04c897ee00642843eb30304186c1628ba0625d56))
+
 ### [1.9.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.0...v1.9.1) (2019-11-18)
 
 
