@@ -18,7 +18,7 @@
     "mathjs": "^6.0.0",
     "natural": "^0.6.1",
     "redis": "^2.8.0",
-    "yargs": "^14.0.0"
+    "yargs": "^15.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^4.0.0",
