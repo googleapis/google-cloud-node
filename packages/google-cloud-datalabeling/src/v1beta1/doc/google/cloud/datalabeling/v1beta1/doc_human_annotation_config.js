@@ -19,7 +19,7 @@
  * Configuration for how human labeling task should be done.
  *
  * @property {string} instruction
- *   Required except for LabelAudio case. Instruction resource name.
+ *   Required. Instruction resource name.
  *
  * @property {string} annotatedDatasetDisplayName
  *   Required. A human-readable name for AnnotatedDataset defined by
@@ -39,7 +39,7 @@
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
  *   Default value is en-US.
  *   Only need to set this when task is language related. For example, French
- *   text classification or Chinese audio transcription.
+ *   text classification.
  *
  * @property {number} replicaCount
  *   Optional. Replication of questions. Each question will be sent to up to

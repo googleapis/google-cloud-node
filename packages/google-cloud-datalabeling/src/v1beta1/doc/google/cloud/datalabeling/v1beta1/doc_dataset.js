@@ -168,7 +168,7 @@ const BigQuerySource = {
  *
  * @property {Object} gcsDestination
  *   Output to a file in Cloud Storage. Should be used for labeling output
- *   other thanimage segmentation.
+ *   other than image segmentation.
  *
  *   This object should have the same structure as [GcsDestination]{@link google.cloud.datalabeling.v1beta1.GcsDestination}
  *
