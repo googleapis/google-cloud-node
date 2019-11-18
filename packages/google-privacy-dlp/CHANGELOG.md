@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.7.0...v1.7.1) (2019-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v15 ([#361](https://www.github.com/googleapis/nodejs-dlp/issues/361)) ([884c89e](https://www.github.com/googleapis/nodejs-dlp/commit/884c89e4f01fa66fe86c33a6d1d5b5fa4c9c94e2))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.6.1...v1.7.0) (2019-11-14)
 
 
