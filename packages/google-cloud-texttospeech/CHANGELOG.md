@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.0.0...v2.0.1) (2019-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v15 ([#295](https://www.github.com/googleapis/nodejs-text-to-speech/issues/295)) ([2c7eea2](https://www.github.com/googleapis/nodejs-text-to-speech/commit/2c7eea213ad6211a38b0ee2d591d52d79a3b4c0a))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.4.1...v2.0.0) (2019-11-14)
 
 
