@@ -20,7 +20,10 @@ import {GoogleAuthOptions} from 'google-auth-library';
 import * as is from 'is';
 
 const isHtml = require('is-html');
-import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
+import {
+  DecorateRequestOptions,
+  BodyResponseCallback,
+} from '@google-cloud/common/build/src/util';
 
 const PKG = require('../../../package.json');
 
@@ -31,8 +34,8 @@ export interface TranslateRequest {
   to?: string;
 }
 
-export interface TranslateCallback<T extends string|string[]> {
-  (err: Error|null, translations?: T|null, apiResponse?: Metadata): void;
+export interface TranslateCallback<T extends string | string[]> {
+  (err: Error | null, translations?: T | null, apiResponse?: Metadata): void;
 }
 
 export interface DetectResult {
@@ -41,8 +44,8 @@ export interface DetectResult {
   input: string;
 }
 
-export interface DetectCallback<T extends DetectResult|DetectResult[]> {
-  (err: Error|null, results?: T|null, apiResponse?: Metadata): void;
+export interface DetectCallback<T extends DetectResult | DetectResult[]> {
+  (err: Error | null, results?: T | null, apiResponse?: Metadata): void;
 }
 
 export interface LanguageResult {
@@ -51,8 +54,11 @@ export interface LanguageResult {
 }
 
 export interface GetLanguagesCallback {
-  (err: Error|null, results?: LanguageResult[]|null,
-   apiResponse?: Metadata): void;
+  (
+    err: Error | null,
+    results?: LanguageResult[] | null,
+    apiResponse?: Metadata
+  ): void;
 }
 
 export interface TranslateConfig extends GoogleAuthOptions {
@@ -151,26 +157,26 @@ export class Translate extends Service {
   detect(input: string[]): Promise<[DetectResult[], Metadata]>;
   detect(input: string, callback: DetectCallback<DetectResult>): void;
   detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
-/**
- * @typedef {object} DetectResult
- * @memberof v2
- * @property {string} 0.language The language code matched from the input.
- * @property {number} [0.confidence] A float 0 - 1. The higher the number, the
- *     higher the confidence in language detection. Note, this is not always
- *     returned from the API.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback DetectCallback
- * @memberof v2
- * @param {?Error} err Request error, if any.
- * @param {object|object[]} results The detection results.
- * @param {string} results.language The language code matched from the input.
- * @param {number} [results.confidence] A float 0 - 1. The higher the number, the
- *     higher the confidence in language detection. Note, this is not always
- *     returned from the API.
- * @param {object} apiResponse The full API response.
- */
+  /**
+   * @typedef {object} DetectResult
+   * @memberof v2
+   * @property {string} 0.language The language code matched from the input.
+   * @property {number} [0.confidence] A float 0 - 1. The higher the number, the
+   *     higher the confidence in language detection. Note, this is not always
+   *     returned from the API.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback DetectCallback
+   * @memberof v2
+   * @param {?Error} err Request error, if any.
+   * @param {object|object[]} results The detection results.
+   * @param {string} results.language The language code matched from the input.
+   * @param {number} [results.confidence] A float 0 - 1. The higher the number, the
+   *     higher the confidence in language detection. Note, this is not always
+   *     returned from the API.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Detect the language used in a string or multiple strings.
    *
@@ -235,69 +241,73 @@ export class Translate extends Service {
    * Here's a full example:
    */
   detect(
-      input: string|string[],
-      callback?: DetectCallback<DetectResult>|
-      DetectCallback<DetectResult[]>): void|Promise<[DetectResult, Metadata]>|
-      Promise<[DetectResult[], Metadata]> {
+    input: string | string[],
+    callback?: DetectCallback<DetectResult> | DetectCallback<DetectResult[]>
+  ):
+    | void
+    | Promise<[DetectResult, Metadata]>
+    | Promise<[DetectResult[], Metadata]> {
     const inputIsArray = Array.isArray(input);
     input = arrify(input);
     this.request(
-        {
-          method: 'POST',
-          uri: '/detect',
-          json: {
-            q: input,
-          },
+      {
+        method: 'POST',
+        uri: '/detect',
+        json: {
+          q: input,
         },
-        (err, resp) => {
-          if (err) {
-            (callback as Function)(err, null, resp);
-            return;
+      },
+      (err, resp) => {
+        if (err) {
+          (callback as Function)(err, null, resp);
+          return;
+        }
+
+        let results = resp.data.detections.map(
+          (detection: Array<{}>, index: number) => {
+            const result = extend({}, detection[0], {
+              input: input[index],
+            });
+
+            // Deprecated.
+            // tslint:disable-next-line no-any
+            delete (result as any).isReliable;
+
+            return result;
           }
+        );
 
-          let results = resp.data.detections.map(
-              (detection: Array<{}>, index: number) => {
-                const result = extend({}, detection[0], {
-                  input: input[index],
-                });
+        if (input.length === 1 && !inputIsArray) {
+          results = results[0];
+        }
 
-                // Deprecated.
-                // tslint:disable-next-line no-any
-                delete (result as any).isReliable;
-
-                return result;
-              });
-
-          if (input.length === 1 && !inputIsArray) {
-            results = results[0];
-          }
-
-          (callback as Function)(null, results, resp);
-        });
+        (callback as Function)(null, results, resp);
+      }
+    );
   }
 
   getLanguages(target?: string): Promise<[LanguageResult[], Metadata]>;
   getLanguages(target: string, callback: GetLanguagesCallback): void;
   getLanguages(callback: GetLanguagesCallback): void;
-/**
- * @typedef {object} LanguageResult
- * @memberof v2
- * @property {string} code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
- *     language code.
- * @property {string} name The language name. This can be translated into your
- *     preferred language with the `target` option.
- */
-/**
- * @callback GetLanguagesCallback
- * @memberof v2
- * @param {?Error} err Request error, if any.
- * @param {object[]} results The languages supported by the API.
- * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
- *     language code.
- * @param {string} results.name The language name. This can be translated into your
- *     preferred language with the `target` option.
- * @param {object} apiResponse The full API response.
- */
+  /**
+   * @typedef {object} LanguageResult
+   * @memberof v2
+   * @property {string} code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+   *     language code.
+   * @property {string} name The language name. This can be translated into your
+   *     preferred language with the `target` option.
+   */
+  /**
+   * @callback GetLanguagesCallback
+   * @memberof v2
+   * @param {?Error} err Request error, if any.
+   * @param {object[]} results The languages supported by the API.
+   * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+   *     language code.
+   * @param {string} results.name The language name. This can be translated into your
+   *     preferred language with the `target` option.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Get an array of all supported languages.
    *
@@ -317,9 +327,9 @@ export class Translate extends Service {
    * Gets the language names in a language other than English:
    */
   getLanguages(
-      targetOrCallback?: string|GetLanguagesCallback,
-      callback?: GetLanguagesCallback):
-      void|Promise<[LanguageResult[], Metadata]> {
+    targetOrCallback?: string | GetLanguagesCallback,
+    callback?: GetLanguagesCallback
+  ): void | Promise<[LanguageResult[], Metadata]> {
     let target: string;
     if (is.fn(targetOrCallback)) {
       callback = targetOrCallback as GetLanguagesCallback;
@@ -345,57 +355,72 @@ export class Translate extends Service {
       }
 
       const languages = resp.data.languages.map(
-          (language: {language: string, name: string}) => {
-            return {
-              code: language.language,
-              name: language.name,
-            };
-          });
+        (language: {language: string; name: string}) => {
+          return {
+            code: language.language,
+            name: language.name,
+          };
+        }
+      );
 
       callback!(null, languages, resp);
     });
   }
 
-  translate(input: string, options: TranslateRequest):
-      Promise<[string, Metadata]>;
-  translate(input: string[], options: TranslateRequest):
-      Promise<[string[], Metadata]>;
+  translate(
+    input: string,
+    options: TranslateRequest
+  ): Promise<[string, Metadata]>;
+  translate(
+    input: string[],
+    options: TranslateRequest
+  ): Promise<[string[], Metadata]>;
   translate(input: string, to: string): Promise<[string, Metadata]>;
   translate(input: string[], to: string): Promise<[string[], Metadata]>;
   translate(
-      input: string, options: TranslateRequest,
-      callback: TranslateCallback<string>): void;
-  translate(input: string, to: string, callback: TranslateCallback<string>):
-      void;
+    input: string,
+    options: TranslateRequest,
+    callback: TranslateCallback<string>
+  ): void;
   translate(
-      input: string[], options: TranslateRequest,
-      callback: TranslateCallback<string[]>): void;
-  translate(input: string[], to: string, callback: TranslateCallback<string[]>):
-      void;
-/**
- * Translate request options.
- *
- * @typedef {object} TranslateRequest
- * @memberof v2
- * @property {string} [format] Set the text's format as `html` or `text`.
- *     If not provided, we will try to auto-detect if the text given is HTML.
- * If not, we set the format as `text`.
- * @property {string} [from] The ISO 639-1 language code the source input
- *     is written in.
- * @property {string} [model] Set the model type requested for this
- *     translation. Please refer to the upstream documentation for possible
- *     values.
- * @property {string} to The ISO 639-1 language code to translate the
- *     input to.
- */
-/**
- * @callback TranslateCallback
- * @memberof v2
- * @param {?Error} err Request error, if any.
- * @param {object|object[]} translations If a single string input was given, a
- *     single translation is given. Otherwise, it is an array of translations.
- * @param {object} apiResponse The full API response.
- */
+    input: string,
+    to: string,
+    callback: TranslateCallback<string>
+  ): void;
+  translate(
+    input: string[],
+    options: TranslateRequest,
+    callback: TranslateCallback<string[]>
+  ): void;
+  translate(
+    input: string[],
+    to: string,
+    callback: TranslateCallback<string[]>
+  ): void;
+  /**
+   * Translate request options.
+   *
+   * @typedef {object} TranslateRequest
+   * @memberof v2
+   * @property {string} [format] Set the text's format as `html` or `text`.
+   *     If not provided, we will try to auto-detect if the text given is HTML.
+   * If not, we set the format as `text`.
+   * @property {string} [from] The ISO 639-1 language code the source input
+   *     is written in.
+   * @property {string} [model] Set the model type requested for this
+   *     translation. Please refer to the upstream documentation for possible
+   *     values.
+   * @property {string} to The ISO 639-1 language code to translate the
+   *     input to.
+   */
+  /**
+   * @callback TranslateCallback
+   * @memberof v2
+   * @param {?Error} err Request error, if any.
+   * @param {object|object[]} translations If a single string input was given, a
+   *     single translation is given. Otherwise, it is an array of translations.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Translate a string or multiple strings into another language.
    *
@@ -472,9 +497,10 @@ export class Translate extends Service {
    * Translation using the premium model:
    */
   translate(
-      inputs: string|string[], optionsOrTo: string|TranslateRequest,
-      callback?: TranslateCallback<string>|TranslateCallback<string[]>):
-      void|Promise<[string, Metadata]>|Promise<[string[], Metadata]> {
+    inputs: string | string[],
+    optionsOrTo: string | TranslateRequest,
+    callback?: TranslateCallback<string> | TranslateCallback<string[]>
+  ): void | Promise<[string, Metadata]> | Promise<[string[], Metadata]> {
     const inputIsArray = Array.isArray(inputs);
     const input = arrify(inputs);
     let options: TranslateRequest = {};
@@ -508,30 +534,33 @@ export class Translate extends Service {
 
     if (!body.target) {
       throw new Error(
-          'A target language is required to perform a translation.');
+        'A target language is required to perform a translation.'
+      );
     }
 
     this.request(
-        {
-          method: 'POST',
-          uri: '',
-          json: body,
-        },
-        (err, resp) => {
-          if (err) {
-            (callback as Function)(err, null, resp);
-            return;
-          }
+      {
+        method: 'POST',
+        uri: '',
+        json: body,
+      },
+      (err, resp) => {
+        if (err) {
+          (callback as Function)(err, null, resp);
+          return;
+        }
 
-          let translations = resp.data.translations.map(
-              (x: {translatedText: string}) => x.translatedText);
+        let translations = resp.data.translations.map(
+          (x: {translatedText: string}) => x.translatedText
+        );
 
-          if (body.q.length === 1 && !inputIsArray) {
-            translations = translations[0];
-          }
+        if (body.q.length === 1 && !inputIsArray) {
+          translations = translations[0];
+        }
 
-          (callback as Function)(err, translations, resp);
-        });
+        (callback as Function)(err, translations, resp);
+      }
+    );
   }
 
   /**
@@ -545,7 +574,10 @@ export class Translate extends Service {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {function} callback - The callback function passed to `request`.
    */
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback): void {
+  request(
+    reqOpts: DecorateRequestOptions,
+    callback: BodyResponseCallback
+  ): void {
     if (!this.key) {
       super.request(reqOpts, callback!);
       return;

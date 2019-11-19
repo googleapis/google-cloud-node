@@ -16,21 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
-
-const assert = require('assert');
-const translationServiceModule = require('../src');
+import * as protosTypes from '../protos/protos';
+import * as assert from 'assert';
+const translationserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 class FakeError {
+  name: string;
+  message: string;
   code: number;
   constructor(n: number) {
+    this.name = 'fakeName';
+    this.message = 'fake message';
     this.code = n;
   }
 }
 const error = new FakeError(FAKE_STATUS_CODE);
 export interface Callback {
-  (err: FakeError | null, response?: {} | null): {};
+  (err: FakeError | null, response?: {} | null): void;
 }
 
 export class Operation {
@@ -78,37 +81,37 @@ function mockLongRunningGrpcMethod(
 describe('TranslationServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      translationServiceModule.v3.TranslationServiceClient.servicePath;
+      translationserviceModule.v3.TranslationServiceClient.servicePath;
     assert(servicePath);
   });
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      translationServiceModule.v3.TranslationServiceClient.apiEndpoint;
+      translationserviceModule.v3.TranslationServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
   it('has port', () => {
-    const port = translationServiceModule.v3.TranslationServiceClient.port;
+    const port = translationserviceModule.v3.TranslationServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
   it('should create a client with no option', () => {
-    const client = new translationServiceModule.v3.TranslationServiceClient();
+    const client = new translationserviceModule.v3.TranslationServiceClient();
     assert(client);
   });
   it('should create a client with gRPC option', () => {
-    const client = new translationServiceModule.v3.TranslationServiceClient({
+    const client = new translationserviceModule.v3.TranslationServiceClient({
       fallback: true,
     });
     assert(client);
   });
   describe('translateText', () => {
     it('invokes translateText without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.ITranslateTextRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -125,12 +128,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes translateText with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.ITranslateTextRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -149,12 +152,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('detectLanguage', () => {
     it('invokes detectLanguage without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IDetectLanguageRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -171,12 +174,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes detectLanguage with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IDetectLanguageRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -195,12 +198,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('getSupportedLanguages', () => {
     it('invokes getSupportedLanguages without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IGetSupportedLanguagesRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -217,12 +220,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes getSupportedLanguages with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IGetSupportedLanguagesRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -241,12 +244,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('getGlossary', () => {
     it('invokes getGlossary without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IGetGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -263,12 +266,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes getGlossary with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IGetGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -287,12 +290,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('batchTranslateText', () => {
     it('invokes batchTranslateText without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IBatchTranslateTextRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -316,12 +319,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes batchTranslateText with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IBatchTranslateTextRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -348,12 +351,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('createGlossary', () => {
     it('invokes createGlossary without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.ICreateGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -377,12 +380,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes createGlossary with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.ICreateGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -409,12 +412,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('deleteGlossary', () => {
     it('invokes deleteGlossary without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IDeleteGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -438,12 +441,12 @@ describe('TranslationServiceClient', () => {
     });
 
     it('invokes deleteGlossary with error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IDeleteGlossaryRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -470,12 +473,12 @@ describe('TranslationServiceClient', () => {
   });
   describe('listGlossaries', () => {
     it('invokes listGlossaries without error', done => {
-      const client = new translationServiceModule.v3.TranslationServiceClient({
+      const client = new translationserviceModule.v3.TranslationServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request = {};
+      const request: protosTypes.google.cloud.translation.v3.IListGlossariesRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -492,6 +495,37 @@ describe('TranslationServiceClient', () => {
         assert.deepStrictEqual(response, expectedResponse);
         done();
       });
+    });
+  });
+  describe('listGlossariesStream', () => {
+    it('invokes listGlossariesStream without error', done => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      // Mock request
+      const request: protosTypes.google.cloud.translation.v3.IListGlossariesRequest = {};
+      // Mock response
+      const expectedResponse = {};
+      // Mock Grpc layer
+      client._innerApiCalls.listGlossaries = (
+        actualRequest: {},
+        options: {},
+        callback: Callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse);
+      };
+      const stream = client
+        .listGlossariesStream(request, {})
+        .on('data', (response: {}) => {
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        })
+        .on('error', (err: FakeError) => {
+          done(err);
+        });
+      stream.write(request);
     });
   });
 });

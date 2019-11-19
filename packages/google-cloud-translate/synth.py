@@ -20,15 +20,18 @@ import logging
 import subprocess
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
-versions = ['v3beta1']
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v3']
 for version in versions:
-    library = gapic.node_library('translate', version)
-    s.copy(library, excludes=['src/index.js', 'src/browser.js', 'README.md', 'package.json'])
-# note: no browser.js support until we fully support TypeScript
+  library = gapic.typescript_library(
+    'translate',
+    generator_args={
+      "grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json"
+    },
+    version=version)
+s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
 
 # Update path discovery due to build/ dir and TypeScript conversion.
-s.replace("src/v3beta1/translation_service_client.js", "../../package.json", "../../../package.json")
 s.replace("test/gapic-*.js", "../../package.json", "../../../package.json")
 
 # [START fix-dead-link]
@@ -41,10 +44,13 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString)')
 # [END fix-dead-link]
 
+s.replace("system-test/fixtures/sample/src/index.js", "'translation'", "'@google-cloud/translate'")
+s.replace("system-test/fixtures/sample/src/index.ts", "'translation'", "'@google-cloud/translate'")
+
 logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates)
+s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])

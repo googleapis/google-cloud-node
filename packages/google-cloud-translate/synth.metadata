@@ -1,19 +1,12 @@
 {
-  "updateTime": "2019-10-24T11:32:27.284278Z",
+  "updateTime": "2019-11-19T19:14:34.278318Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.40.2",
-        "dockerImage": "googleapis/artman@sha256:3b8f7d9b4c206843ce08053474f5c64ae4d388ff7d995e68b59fb65edf73eeb9"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "698b05fe2b05893dfe74a156a5665f879de7fceb",
-        "internalRef": "276276483"
+        "sha": "5af83f47b9656261cafcf88b0b3334521ab266b3",
+        "internalRef": "281334391"
       }
     },
     {
@@ -29,10 +22,9 @@
       "client": {
         "source": "googleapis",
         "apiName": "translate",
-        "apiVersion": "v3beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/translate/artman_translate_v3beta1.yaml"
+        "apiVersion": "v3",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]

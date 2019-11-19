@@ -75,6 +75,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
+    "pack-n-play": "^1.0.0-2",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
