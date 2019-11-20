@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.5.1...v1.6.0) (2019-11-19)
+
+
+### Features
+
+* add resource descriptors ([#109](https://www.github.com/googleapis/nodejs-containeranalysis/issues/109)) ([f06a0a3](https://www.github.com/googleapis/nodejs-containeranalysis/commit/f06a0a3f646dbc276628217104aa630697e9f789))
+
+
+### Bug Fixes
+
+* import long into proto ts declaration file ([#103](https://www.github.com/googleapis/nodejs-containeranalysis/issues/103)) ([1b31db6](https://www.github.com/googleapis/nodejs-containeranalysis/commit/1b31db607243d73a936e12e9e00252fe87716014))
+* **docs:** bump release level to GA ([#107](https://www.github.com/googleapis/nodejs-containeranalysis/issues/107)) ([15366fa](https://www.github.com/googleapis/nodejs-containeranalysis/commit/15366fa0e805ba0e707cc41c2610ea6dec9f791a))
+* **docs:** snippets are now replaced in jsdoc comments ([#102](https://www.github.com/googleapis/nodejs-containeranalysis/issues/102)) ([29523b1](https://www.github.com/googleapis/nodejs-containeranalysis/commit/29523b1b14142c04d8010f87db366c14f83035ef))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.5.0...v1.5.1) (2019-10-22)
 
 
