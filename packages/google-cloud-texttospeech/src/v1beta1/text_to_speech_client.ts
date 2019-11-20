@@ -250,9 +250,10 @@ export class TextToSpeechClient {
   ): Promise<
     [
       protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-
+      (
         | protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -305,9 +306,10 @@ export class TextToSpeechClient {
   ): Promise<
     [
       protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesResponse,
-
+      (
         | protosTypes.google.cloud.texttospeech.v1beta1.IListVoicesRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -328,9 +330,10 @@ export class TextToSpeechClient {
   ): Promise<
     [
       protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-
+      (
         | protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -381,9 +384,10 @@ export class TextToSpeechClient {
   ): Promise<
     [
       protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse,
-
+      (
         | protosTypes.google.cloud.texttospeech.v1beta1.ISynthesizeSpeechRequest
-        | undefined,
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {

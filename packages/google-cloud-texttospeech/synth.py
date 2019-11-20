@@ -30,7 +30,8 @@ for version in versions:
     library = gapic.typescript_library(
         'texttospeech', 
         generator_args={
-            "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json"
+            "grpc-service-config": f"google/cloud/texttospeech/{version}/texttospeech_grpc_service_config.json",
+            "package-name":f"@google-cloud/text-to-speech"
             },
         proto_path=f'/google/cloud/texttospeech/{version}',
         version=version)
@@ -43,10 +44,6 @@ for version in versions:
 
 templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
-
-# Fix system tests
-# TODO: must be a feature of pack-n-play
-s.replace('system-test/fixtures/sample/src/index.*', "'texttospeech'", "'@google-cloud/text-to-speech'")
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
