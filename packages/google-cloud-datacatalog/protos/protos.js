@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 (function(global, factory) { /* global define, require, module */
 
@@ -51,6 +65,4517 @@
                      * @namespace
                      */
                     var v1beta1 = {};
+    
+                    v1beta1.Tag = (function() {
+    
+                        /**
+                         * Properties of a Tag.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ITag
+                         * @property {string|null} [name] Tag name
+                         * @property {string|null} [template] Tag template
+                         * @property {string|null} [templateDisplayName] Tag templateDisplayName
+                         * @property {string|null} [column] Tag column
+                         * @property {Object.<string,google.cloud.datacatalog.v1beta1.ITagField>|null} [fields] Tag fields
+                         */
+    
+                        /**
+                         * Constructs a new Tag.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a Tag.
+                         * @implements ITag
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ITag=} [properties] Properties to set
+                         */
+                        function Tag(properties) {
+                            this.fields = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Tag name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.name = "";
+    
+                        /**
+                         * Tag template.
+                         * @member {string} template
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.template = "";
+    
+                        /**
+                         * Tag templateDisplayName.
+                         * @member {string} templateDisplayName
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.templateDisplayName = "";
+    
+                        /**
+                         * Tag column.
+                         * @member {string} column
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.column = "";
+    
+                        /**
+                         * Tag fields.
+                         * @member {Object.<string,google.cloud.datacatalog.v1beta1.ITagField>} fields
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Tag.prototype.fields = $util.emptyObject;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Tag scope.
+                         * @member {"column"|undefined} scope
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         */
+                        Object.defineProperty(Tag.prototype, "scope", {
+                            get: $util.oneOfGetter($oneOfFields = ["column"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Tag instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITag=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag instance
+                         */
+                        Tag.create = function create(properties) {
+                            return new Tag(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Tag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Tag.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITag} message Tag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Tag.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.template != null && message.hasOwnProperty("template"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.template);
+                            if (message.fields != null && message.hasOwnProperty("fields"))
+                                for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.datacatalog.v1beta1.TagField.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.column);
+                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.templateDisplayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Tag.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITag} message Tag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Tag.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Tag.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Tag(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.template = reader.string();
+                                    break;
+                                case 5:
+                                    message.templateDisplayName = reader.string();
+                                    break;
+                                case 4:
+                                    message.column = reader.string();
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.fields === $util.emptyObject)
+                                        message.fields = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagField.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Tag message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Tag.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Tag message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Tag.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.template != null && message.hasOwnProperty("template"))
+                                if (!$util.isString(message.template))
+                                    return "template: string expected";
+                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
+                                if (!$util.isString(message.templateDisplayName))
+                                    return "templateDisplayName: string expected";
+                            if (message.column != null && message.hasOwnProperty("column")) {
+                                properties.scope = 1;
+                                if (!$util.isString(message.column))
+                                    return "column: string expected";
+                            }
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!$util.isObject(message.fields))
+                                    return "fields: object expected";
+                                var key = Object.keys(message.fields);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.TagField.verify(message.fields[key[i]]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
+                         */
+                        Tag.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.Tag)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.Tag();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.template != null)
+                                message.template = String(object.template);
+                            if (object.templateDisplayName != null)
+                                message.templateDisplayName = String(object.templateDisplayName);
+                            if (object.column != null)
+                                message.column = String(object.column);
+                            if (object.fields) {
+                                if (typeof object.fields !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Tag.fields: object expected");
+                                message.fields = {};
+                                for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.fields[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.Tag.fields: object expected");
+                                    message.fields[keys[i]] = $root.google.cloud.datacatalog.v1beta1.TagField.fromObject(object.fields[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.Tag} message Tag
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Tag.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.fields = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.template = "";
+                                object.templateDisplayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.template != null && message.hasOwnProperty("template"))
+                                object.template = message.template;
+                            var keys2;
+                            if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                                object.fields = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.fields[keys2[j]] = $root.google.cloud.datacatalog.v1beta1.TagField.toObject(message.fields[keys2[j]], options);
+                            }
+                            if (message.column != null && message.hasOwnProperty("column")) {
+                                object.column = message.column;
+                                if (options.oneofs)
+                                    object.scope = "column";
+                            }
+                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
+                                object.templateDisplayName = message.templateDisplayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Tag to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.Tag
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Tag.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Tag;
+                    })();
+    
+                    v1beta1.TagField = (function() {
+    
+                        /**
+                         * Properties of a TagField.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ITagField
+                         * @property {string|null} [displayName] TagField displayName
+                         * @property {number|null} [doubleValue] TagField doubleValue
+                         * @property {string|null} [stringValue] TagField stringValue
+                         * @property {boolean|null} [boolValue] TagField boolValue
+                         * @property {google.protobuf.ITimestamp|null} [timestampValue] TagField timestampValue
+                         * @property {google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null} [enumValue] TagField enumValue
+                         */
+    
+                        /**
+                         * Constructs a new TagField.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a TagField.
+                         * @implements ITagField
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ITagField=} [properties] Properties to set
+                         */
+                        function TagField(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagField displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.displayName = "";
+    
+                        /**
+                         * TagField doubleValue.
+                         * @member {number} doubleValue
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.doubleValue = 0;
+    
+                        /**
+                         * TagField stringValue.
+                         * @member {string} stringValue
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.stringValue = "";
+    
+                        /**
+                         * TagField boolValue.
+                         * @member {boolean} boolValue
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.boolValue = false;
+    
+                        /**
+                         * TagField timestampValue.
+                         * @member {google.protobuf.ITimestamp|null|undefined} timestampValue
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.timestampValue = null;
+    
+                        /**
+                         * TagField enumValue.
+                         * @member {google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null|undefined} enumValue
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        TagField.prototype.enumValue = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TagField kind.
+                         * @member {"doubleValue"|"stringValue"|"boolValue"|"timestampValue"|"enumValue"|undefined} kind
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         */
+                        Object.defineProperty(TagField.prototype, "kind", {
+                            get: $util.oneOfGetter($oneOfFields = ["doubleValue", "stringValue", "boolValue", "timestampValue", "enumValue"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TagField instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagField=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField instance
+                         */
+                        TagField.create = function create(properties) {
+                            return new TagField(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagField message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagField} message TagField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagField.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.doubleValue);
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
+                            if (message.boolValue != null && message.hasOwnProperty("boolValue"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
+                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue"))
+                                $root.google.protobuf.Timestamp.encode(message.timestampValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.enumValue != null && message.hasOwnProperty("enumValue"))
+                                $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.encode(message.enumValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagField message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagField} message TagField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagField.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagField message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagField.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagField();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 2:
+                                    message.doubleValue = reader.double();
+                                    break;
+                                case 3:
+                                    message.stringValue = reader.string();
+                                    break;
+                                case 4:
+                                    message.boolValue = reader.bool();
+                                    break;
+                                case 5:
+                                    message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagField message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagField.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagField message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagField.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                                properties.kind = 1;
+                                if (typeof message.doubleValue !== "number")
+                                    return "doubleValue: number expected";
+                            }
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                if (!$util.isString(message.stringValue))
+                                    return "stringValue: string expected";
+                            }
+                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                if (typeof message.boolValue !== "boolean")
+                                    return "boolValue: boolean expected";
+                            }
+                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.timestampValue);
+                                    if (error)
+                                        return "timestampValue." + error;
+                                }
+                            }
+                            if (message.enumValue != null && message.hasOwnProperty("enumValue")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify(message.enumValue);
+                                    if (error)
+                                        return "enumValue." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagField message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
+                         */
+                        TagField.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagField)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.TagField();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.doubleValue != null)
+                                message.doubleValue = Number(object.doubleValue);
+                            if (object.stringValue != null)
+                                message.stringValue = String(object.stringValue);
+                            if (object.boolValue != null)
+                                message.boolValue = Boolean(object.boolValue);
+                            if (object.timestampValue != null) {
+                                if (typeof object.timestampValue !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagField.timestampValue: object expected");
+                                message.timestampValue = $root.google.protobuf.Timestamp.fromObject(object.timestampValue);
+                            }
+                            if (object.enumValue != null) {
+                                if (typeof object.enumValue !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagField.enumValue: object expected");
+                                message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.fromObject(object.enumValue);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagField message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.TagField} message TagField
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagField.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.displayName = "";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
+                                object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
+                                if (options.oneofs)
+                                    object.kind = "doubleValue";
+                            }
+                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                                object.stringValue = message.stringValue;
+                                if (options.oneofs)
+                                    object.kind = "stringValue";
+                            }
+                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                                object.boolValue = message.boolValue;
+                                if (options.oneofs)
+                                    object.kind = "boolValue";
+                            }
+                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
+                                object.timestampValue = $root.google.protobuf.Timestamp.toObject(message.timestampValue, options);
+                                if (options.oneofs)
+                                    object.kind = "timestampValue";
+                            }
+                            if (message.enumValue != null && message.hasOwnProperty("enumValue")) {
+                                object.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.toObject(message.enumValue, options);
+                                if (options.oneofs)
+                                    object.kind = "enumValue";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagField to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.TagField
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagField.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        TagField.EnumValue = (function() {
+    
+                            /**
+                             * Properties of an EnumValue.
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField
+                             * @interface IEnumValue
+                             * @property {string|null} [displayName] EnumValue displayName
+                             */
+    
+                            /**
+                             * Constructs a new EnumValue.
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField
+                             * @classdesc Represents an EnumValue.
+                             * @implements IEnumValue
+                             * @constructor
+                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue=} [properties] Properties to set
+                             */
+                            function EnumValue(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EnumValue displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @instance
+                             */
+                            EnumValue.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new EnumValue instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue instance
+                             */
+                            EnumValue.create = function create(properties) {
+                                return new EnumValue(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EnumValue message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue} message EnumValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnumValue.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EnumValue message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue} message EnumValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnumValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EnumValue message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnumValue.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.displayName = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EnumValue message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnumValue.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EnumValue message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EnumValue.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EnumValue message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
+                             */
+                            EnumValue.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EnumValue message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.TagField.EnumValue} message EnumValue
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EnumValue.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.displayName = "";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EnumValue to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EnumValue.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return EnumValue;
+                        })();
+    
+                        return TagField;
+                    })();
+    
+                    v1beta1.TagTemplate = (function() {
+    
+                        /**
+                         * Properties of a TagTemplate.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ITagTemplate
+                         * @property {string|null} [name] TagTemplate name
+                         * @property {string|null} [displayName] TagTemplate displayName
+                         * @property {Object.<string,google.cloud.datacatalog.v1beta1.ITagTemplateField>|null} [fields] TagTemplate fields
+                         */
+    
+                        /**
+                         * Constructs a new TagTemplate.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a TagTemplate.
+                         * @implements ITagTemplate
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate=} [properties] Properties to set
+                         */
+                        function TagTemplate(properties) {
+                            this.fields = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagTemplate name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @instance
+                         */
+                        TagTemplate.prototype.name = "";
+    
+                        /**
+                         * TagTemplate displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @instance
+                         */
+                        TagTemplate.prototype.displayName = "";
+    
+                        /**
+                         * TagTemplate fields.
+                         * @member {Object.<string,google.cloud.datacatalog.v1beta1.ITagTemplateField>} fields
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @instance
+                         */
+                        TagTemplate.prototype.fields = $util.emptyObject;
+    
+                        /**
+                         * Creates a new TagTemplate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate instance
+                         */
+                        TagTemplate.create = function create(properties) {
+                            return new TagTemplate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagTemplate message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate} message TagTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagTemplate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.fields != null && message.hasOwnProperty("fields"))
+                                for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.datacatalog.v1beta1.TagTemplateField.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagTemplate message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate} message TagTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagTemplate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagTemplate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    reader.skip().pos++;
+                                    if (message.fields === $util.emptyObject)
+                                        message.fields = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagTemplate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagTemplate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagTemplate message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagTemplate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!$util.isObject(message.fields))
+                                    return "fields: object expected";
+                                var key = Object.keys(message.fields);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.verify(message.fields[key[i]]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagTemplate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         */
+                        TagTemplate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagTemplate)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.fields) {
+                                if (typeof object.fields !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplate.fields: object expected");
+                                message.fields = {};
+                                for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.fields[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplate.fields: object expected");
+                                    message.fields[keys[i]] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.fromObject(object.fields[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagTemplate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.TagTemplate} message TagTemplate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagTemplate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.fields = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            var keys2;
+                            if (message.fields && (keys2 = Object.keys(message.fields)).length) {
+                                object.fields = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.fields[keys2[j]] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.toObject(message.fields[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagTemplate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagTemplate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TagTemplate;
+                    })();
+    
+                    v1beta1.TagTemplateField = (function() {
+    
+                        /**
+                         * Properties of a TagTemplateField.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ITagTemplateField
+                         * @property {string|null} [name] TagTemplateField name
+                         * @property {string|null} [displayName] TagTemplateField displayName
+                         * @property {google.cloud.datacatalog.v1beta1.IFieldType|null} [type] TagTemplateField type
+                         */
+    
+                        /**
+                         * Constructs a new TagTemplateField.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a TagTemplateField.
+                         * @implements ITagTemplateField
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField=} [properties] Properties to set
+                         */
+                        function TagTemplateField(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagTemplateField name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         */
+                        TagTemplateField.prototype.name = "";
+    
+                        /**
+                         * TagTemplateField displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         */
+                        TagTemplateField.prototype.displayName = "";
+    
+                        /**
+                         * TagTemplateField type.
+                         * @member {google.cloud.datacatalog.v1beta1.IFieldType|null|undefined} type
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         */
+                        TagTemplateField.prototype.type = null;
+    
+                        /**
+                         * Creates a new TagTemplateField instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField instance
+                         */
+                        TagTemplateField.create = function create(properties) {
+                            return new TagTemplateField(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagTemplateField message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplateField.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField} message TagTemplateField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagTemplateField.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                $root.google.cloud.datacatalog.v1beta1.FieldType.encode(message.type, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagTemplateField message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplateField.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField} message TagTemplateField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagTemplateField.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagTemplateField message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagTemplateField.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplateField();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 6:
+                                    message.name = reader.string();
+                                    break;
+                                case 1:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 2:
+                                    message.type = $root.google.cloud.datacatalog.v1beta1.FieldType.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagTemplateField message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagTemplateField.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagTemplateField message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagTemplateField.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.FieldType.verify(message.type);
+                                if (error)
+                                    return "type." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagTemplateField message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         */
+                        TagTemplateField.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagTemplateField)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.TagTemplateField();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.type != null) {
+                                if (typeof object.type !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplateField.type: object expected");
+                                message.type = $root.google.cloud.datacatalog.v1beta1.FieldType.fromObject(object.type);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagTemplateField message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.TagTemplateField} message TagTemplateField
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagTemplateField.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.type = null;
+                                object.name = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = $root.google.cloud.datacatalog.v1beta1.FieldType.toObject(message.type, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagTemplateField to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagTemplateField.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TagTemplateField;
+                    })();
+    
+                    v1beta1.FieldType = (function() {
+    
+                        /**
+                         * Properties of a FieldType.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IFieldType
+                         * @property {google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType|null} [primitiveType] FieldType primitiveType
+                         * @property {google.cloud.datacatalog.v1beta1.FieldType.IEnumType|null} [enumType] FieldType enumType
+                         */
+    
+                        /**
+                         * Constructs a new FieldType.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a FieldType.
+                         * @implements IFieldType
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IFieldType=} [properties] Properties to set
+                         */
+                        function FieldType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FieldType primitiveType.
+                         * @member {google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType} primitiveType
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @instance
+                         */
+                        FieldType.prototype.primitiveType = 0;
+    
+                        /**
+                         * FieldType enumType.
+                         * @member {google.cloud.datacatalog.v1beta1.FieldType.IEnumType|null|undefined} enumType
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @instance
+                         */
+                        FieldType.prototype.enumType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FieldType typeDecl.
+                         * @member {"primitiveType"|"enumType"|undefined} typeDecl
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @instance
+                         */
+                        Object.defineProperty(FieldType.prototype, "typeDecl", {
+                            get: $util.oneOfGetter($oneOfFields = ["primitiveType", "enumType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FieldType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IFieldType=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType instance
+                         */
+                        FieldType.create = function create(properties) {
+                            return new FieldType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FieldType message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IFieldType} message FieldType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FieldType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.primitiveType);
+                            if (message.enumType != null && message.hasOwnProperty("enumType"))
+                                $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.encode(message.enumType, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FieldType message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IFieldType} message FieldType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FieldType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FieldType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FieldType.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.primitiveType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FieldType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FieldType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FieldType message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FieldType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType")) {
+                                properties.typeDecl = 1;
+                                switch (message.primitiveType) {
+                                default:
+                                    return "primitiveType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            }
+                            if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                                if (properties.typeDecl === 1)
+                                    return "typeDecl: multiple values";
+                                properties.typeDecl = 1;
+                                {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify(message.enumType);
+                                    if (error)
+                                        return "enumType." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FieldType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         */
+                        FieldType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.FieldType();
+                            switch (object.primitiveType) {
+                            case "PRIMITIVE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.primitiveType = 0;
+                                break;
+                            case "DOUBLE":
+                            case 1:
+                                message.primitiveType = 1;
+                                break;
+                            case "STRING":
+                            case 2:
+                                message.primitiveType = 2;
+                                break;
+                            case "BOOL":
+                            case 3:
+                                message.primitiveType = 3;
+                                break;
+                            case "TIMESTAMP":
+                            case 4:
+                                message.primitiveType = 4;
+                                break;
+                            }
+                            if (object.enumType != null) {
+                                if (typeof object.enumType !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.enumType: object expected");
+                                message.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.fromObject(object.enumType);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FieldType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.FieldType} message FieldType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FieldType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType")) {
+                                object.primitiveType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType[message.primitiveType] : message.primitiveType;
+                                if (options.oneofs)
+                                    object.typeDecl = "primitiveType";
+                            }
+                            if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                                object.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.toObject(message.enumType, options);
+                                if (options.oneofs)
+                                    object.typeDecl = "enumType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FieldType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FieldType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        FieldType.EnumType = (function() {
+    
+                            /**
+                             * Properties of an EnumType.
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                             * @interface IEnumType
+                             * @property {Array.<google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue>|null} [allowedValues] EnumType allowedValues
+                             */
+    
+                            /**
+                             * Constructs a new EnumType.
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                             * @classdesc Represents an EnumType.
+                             * @implements IEnumType
+                             * @constructor
+                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType=} [properties] Properties to set
+                             */
+                            function EnumType(properties) {
+                                this.allowedValues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EnumType allowedValues.
+                             * @member {Array.<google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue>} allowedValues
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @instance
+                             */
+                            EnumType.prototype.allowedValues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new EnumType instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType instance
+                             */
+                            EnumType.create = function create(properties) {
+                                return new EnumType(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EnumType message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType} message EnumType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnumType.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowedValues != null && message.allowedValues.length)
+                                    for (var i = 0; i < message.allowedValues.length; ++i)
+                                        $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.encode(message.allowedValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EnumType message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType} message EnumType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnumType.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EnumType message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnumType.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.allowedValues && message.allowedValues.length))
+                                            message.allowedValues = [];
+                                        message.allowedValues.push($root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EnumType message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnumType.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EnumType message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EnumType.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowedValues != null && message.hasOwnProperty("allowedValues")) {
+                                    if (!Array.isArray(message.allowedValues))
+                                        return "allowedValues: array expected";
+                                    for (var i = 0; i < message.allowedValues.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify(message.allowedValues[i]);
+                                        if (error)
+                                            return "allowedValues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EnumType message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
+                             */
+                            EnumType.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType();
+                                if (object.allowedValues) {
+                                    if (!Array.isArray(object.allowedValues))
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.EnumType.allowedValues: array expected");
+                                    message.allowedValues = [];
+                                    for (var i = 0; i < object.allowedValues.length; ++i) {
+                                        if (typeof object.allowedValues[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.EnumType.allowedValues: object expected");
+                                        message.allowedValues[i] = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.fromObject(object.allowedValues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EnumType message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @static
+                             * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType} message EnumType
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EnumType.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.allowedValues = [];
+                                if (message.allowedValues && message.allowedValues.length) {
+                                    object.allowedValues = [];
+                                    for (var j = 0; j < message.allowedValues.length; ++j)
+                                        object.allowedValues[j] = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.toObject(message.allowedValues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EnumType to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EnumType.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            EnumType.EnumValue = (function() {
+    
+                                /**
+                                 * Properties of an EnumValue.
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                                 * @interface IEnumValue
+                                 * @property {string|null} [displayName] EnumValue displayName
+                                 */
+    
+                                /**
+                                 * Constructs a new EnumValue.
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
+                                 * @classdesc Represents an EnumValue.
+                                 * @implements IEnumValue
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue=} [properties] Properties to set
+                                 */
+                                function EnumValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * EnumValue displayName.
+                                 * @member {string} displayName
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @instance
+                                 */
+                                EnumValue.prototype.displayName = "";
+    
+                                /**
+                                 * Creates a new EnumValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue instance
+                                 */
+                                EnumValue.create = function create(properties) {
+                                    return new EnumValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified EnumValue message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue} message EnumValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EnumValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified EnumValue message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue} message EnumValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EnumValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an EnumValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EnumValue.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.displayName = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an EnumValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EnumValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an EnumValue message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                EnumValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        if (!$util.isString(message.displayName))
+                                            return "displayName: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an EnumValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
+                                 */
+                                EnumValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue();
+                                    if (object.displayName != null)
+                                        message.displayName = String(object.displayName);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an EnumValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @static
+                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} message EnumValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                EnumValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.displayName = "";
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        object.displayName = message.displayName;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this EnumValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                EnumValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return EnumValue;
+                            })();
+    
+                            return EnumType;
+                        })();
+    
+                        /**
+                         * PrimitiveType enum.
+                         * @name google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType
+                         * @enum {string}
+                         * @property {number} PRIMITIVE_TYPE_UNSPECIFIED=0 PRIMITIVE_TYPE_UNSPECIFIED value
+                         * @property {number} DOUBLE=1 DOUBLE value
+                         * @property {number} STRING=2 STRING value
+                         * @property {number} BOOL=3 BOOL value
+                         * @property {number} TIMESTAMP=4 TIMESTAMP value
+                         */
+                        FieldType.PrimitiveType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PRIMITIVE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DOUBLE"] = 1;
+                            values[valuesById[2] = "STRING"] = 2;
+                            values[valuesById[3] = "BOOL"] = 3;
+                            values[valuesById[4] = "TIMESTAMP"] = 4;
+                            return values;
+                        })();
+    
+                        return FieldType;
+                    })();
+    
+                    v1beta1.SystemTimestamps = (function() {
+    
+                        /**
+                         * Properties of a SystemTimestamps.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISystemTimestamps
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SystemTimestamps createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SystemTimestamps updateTime
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] SystemTimestamps expireTime
+                         */
+    
+                        /**
+                         * Constructs a new SystemTimestamps.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a SystemTimestamps.
+                         * @implements ISystemTimestamps
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
+                         */
+                        function SystemTimestamps(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SystemTimestamps createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.createTime = null;
+    
+                        /**
+                         * SystemTimestamps updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.updateTime = null;
+    
+                        /**
+                         * SystemTimestamps expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.expireTime = null;
+    
+                        /**
+                         * Creates a new SystemTimestamps instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps instance
+                         */
+                        SystemTimestamps.create = function create(properties) {
+                            return new SystemTimestamps(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SystemTimestamps.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SystemTimestamps.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SystemTimestamps message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SystemTimestamps.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SystemTimestamps.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SystemTimestamps message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SystemTimestamps.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         */
+                        SystemTimestamps.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SystemTimestamps)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.SystemTimestamps} message SystemTimestamps
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SystemTimestamps.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.expireTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SystemTimestamps to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SystemTimestamps.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SystemTimestamps;
+                    })();
+    
+                    v1beta1.GcsFilesetSpec = (function() {
+    
+                        /**
+                         * Properties of a GcsFilesetSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGcsFilesetSpec
+                         * @property {Array.<string>|null} [filePatterns] GcsFilesetSpec filePatterns
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>|null} [sampleGcsFileSpecs] GcsFilesetSpec sampleGcsFileSpecs
+                         */
+    
+                        /**
+                         * Constructs a new GcsFilesetSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GcsFilesetSpec.
+                         * @implements IGcsFilesetSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
+                         */
+                        function GcsFilesetSpec(properties) {
+                            this.filePatterns = [];
+                            this.sampleGcsFileSpecs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsFilesetSpec filePatterns.
+                         * @member {Array.<string>} filePatterns
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         */
+                        GcsFilesetSpec.prototype.filePatterns = $util.emptyArray;
+    
+                        /**
+                         * GcsFilesetSpec sampleGcsFileSpecs.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>} sampleGcsFileSpecs
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         */
+                        GcsFilesetSpec.prototype.sampleGcsFileSpecs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GcsFilesetSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec instance
+                         */
+                        GcsFilesetSpec.create = function create(properties) {
+                            return new GcsFilesetSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFilesetSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filePatterns != null && message.filePatterns.length)
+                                for (var i = 0; i < message.filePatterns.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePatterns[i]);
+                            if (message.sampleGcsFileSpecs != null && message.sampleGcsFileSpecs.length)
+                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.encode(message.sampleGcsFileSpecs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFilesetSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsFilesetSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFilesetSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.filePatterns && message.filePatterns.length))
+                                        message.filePatterns = [];
+                                    message.filePatterns.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length))
+                                        message.sampleGcsFileSpecs = [];
+                                    message.sampleGcsFileSpecs.push($root.google.cloud.datacatalog.v1beta1.GcsFileSpec.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFilesetSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsFilesetSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsFilesetSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filePatterns != null && message.hasOwnProperty("filePatterns")) {
+                                if (!Array.isArray(message.filePatterns))
+                                    return "filePatterns: array expected";
+                                for (var i = 0; i < message.filePatterns.length; ++i)
+                                    if (!$util.isString(message.filePatterns[i]))
+                                        return "filePatterns: string[] expected";
+                            }
+                            if (message.sampleGcsFileSpecs != null && message.hasOwnProperty("sampleGcsFileSpecs")) {
+                                if (!Array.isArray(message.sampleGcsFileSpecs))
+                                    return "sampleGcsFileSpecs: array expected";
+                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.verify(message.sampleGcsFileSpecs[i]);
+                                    if (error)
+                                        return "sampleGcsFileSpecs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         */
+                        GcsFilesetSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
+                            if (object.filePatterns) {
+                                if (!Array.isArray(object.filePatterns))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.filePatterns: array expected");
+                                message.filePatterns = [];
+                                for (var i = 0; i < object.filePatterns.length; ++i)
+                                    message.filePatterns[i] = String(object.filePatterns[i]);
+                            }
+                            if (object.sampleGcsFileSpecs) {
+                                if (!Array.isArray(object.sampleGcsFileSpecs))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: array expected");
+                                message.sampleGcsFileSpecs = [];
+                                for (var i = 0; i < object.sampleGcsFileSpecs.length; ++i) {
+                                    if (typeof object.sampleGcsFileSpecs[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: object expected");
+                                    message.sampleGcsFileSpecs[i] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.fromObject(object.sampleGcsFileSpecs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} message GcsFilesetSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsFilesetSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.filePatterns = [];
+                                object.sampleGcsFileSpecs = [];
+                            }
+                            if (message.filePatterns && message.filePatterns.length) {
+                                object.filePatterns = [];
+                                for (var j = 0; j < message.filePatterns.length; ++j)
+                                    object.filePatterns[j] = message.filePatterns[j];
+                            }
+                            if (message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length) {
+                                object.sampleGcsFileSpecs = [];
+                                for (var j = 0; j < message.sampleGcsFileSpecs.length; ++j)
+                                    object.sampleGcsFileSpecs[j] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.toObject(message.sampleGcsFileSpecs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsFilesetSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsFilesetSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsFilesetSpec;
+                    })();
+    
+                    v1beta1.GcsFileSpec = (function() {
+    
+                        /**
+                         * Properties of a GcsFileSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGcsFileSpec
+                         * @property {string|null} [filePath] GcsFileSpec filePath
+                         * @property {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null} [gcsTimestamps] GcsFileSpec gcsTimestamps
+                         * @property {number|Long|null} [sizeBytes] GcsFileSpec sizeBytes
+                         */
+    
+                        /**
+                         * Constructs a new GcsFileSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GcsFileSpec.
+                         * @implements IGcsFileSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
+                         */
+                        function GcsFileSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsFileSpec filePath.
+                         * @member {string} filePath
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.filePath = "";
+    
+                        /**
+                         * GcsFileSpec gcsTimestamps.
+                         * @member {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null|undefined} gcsTimestamps
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.gcsTimestamps = null;
+    
+                        /**
+                         * GcsFileSpec sizeBytes.
+                         * @member {number|Long} sizeBytes
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new GcsFileSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec instance
+                         */
+                        GcsFileSpec.create = function create(properties) {
+                            return new GcsFileSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFileSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
+                                $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.encode(message.gcsTimestamps, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.sizeBytes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFileSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsFileSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFileSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.filePath = reader.string();
+                                    break;
+                                case 2:
+                                    message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.sizeBytes = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFileSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsFileSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsFileSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                if (!$util.isString(message.filePath))
+                                    return "filePath: string expected";
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.verify(message.gcsTimestamps);
+                                if (error)
+                                    return "gcsTimestamps." + error;
+                            }
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
+                                    return "sizeBytes: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         */
+                        GcsFileSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFileSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
+                            if (object.filePath != null)
+                                message.filePath = String(object.filePath);
+                            if (object.gcsTimestamps != null) {
+                                if (typeof object.gcsTimestamps !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFileSpec.gcsTimestamps: object expected");
+                                message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.fromObject(object.gcsTimestamps);
+                            }
+                            if (object.sizeBytes != null)
+                                if ($util.Long)
+                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
+                                else if (typeof object.sizeBytes === "string")
+                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
+                                else if (typeof object.sizeBytes === "number")
+                                    message.sizeBytes = object.sizeBytes;
+                                else if (typeof object.sizeBytes === "object")
+                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GcsFileSpec} message GcsFileSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsFileSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.filePath = "";
+                                object.gcsTimestamps = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                object.filePath = message.filePath;
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
+                                object.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.toObject(message.gcsTimestamps, options);
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (typeof message.sizeBytes === "number")
+                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
+                                else
+                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsFileSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsFileSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsFileSpec;
+                    })();
+    
+                    v1beta1.Schema = (function() {
+    
+                        /**
+                         * Properties of a Schema.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISchema
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>|null} [columns] Schema columns
+                         */
+    
+                        /**
+                         * Constructs a new Schema.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a Schema.
+                         * @implements ISchema
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISchema=} [properties] Properties to set
+                         */
+                        function Schema(properties) {
+                            this.columns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Schema columns.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>} columns
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @instance
+                         */
+                        Schema.prototype.columns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Schema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISchema=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema instance
+                         */
+                        Schema.create = function create(properties) {
+                            return new Schema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Schema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISchema} message Schema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Schema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columns != null && message.columns.length)
+                                for (var i = 0; i < message.columns.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.ColumnSchema.encode(message.columns[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISchema} message Schema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Schema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Schema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Schema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Schema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    if (!(message.columns && message.columns.length))
+                                        message.columns = [];
+                                    message.columns.push($root.google.cloud.datacatalog.v1beta1.ColumnSchema.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Schema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Schema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Schema message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Schema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columns != null && message.hasOwnProperty("columns")) {
+                                if (!Array.isArray(message.columns))
+                                    return "columns: array expected";
+                                for (var i = 0; i < message.columns.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.verify(message.columns[i]);
+                                    if (error)
+                                        return "columns." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
+                         */
+                        Schema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.Schema)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.Schema();
+                            if (object.columns) {
+                                if (!Array.isArray(object.columns))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Schema.columns: array expected");
+                                message.columns = [];
+                                for (var i = 0; i < object.columns.length; ++i) {
+                                    if (typeof object.columns[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.Schema.columns: object expected");
+                                    message.columns[i] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.fromObject(object.columns[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Schema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.Schema} message Schema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Schema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.columns = [];
+                            if (message.columns && message.columns.length) {
+                                object.columns = [];
+                                for (var j = 0; j < message.columns.length; ++j)
+                                    object.columns[j] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.toObject(message.columns[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Schema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.Schema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Schema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Schema;
+                    })();
+    
+                    v1beta1.ColumnSchema = (function() {
+    
+                        /**
+                         * Properties of a ColumnSchema.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IColumnSchema
+                         * @property {string|null} [column] ColumnSchema column
+                         * @property {string|null} [type] ColumnSchema type
+                         * @property {string|null} [description] ColumnSchema description
+                         * @property {string|null} [mode] ColumnSchema mode
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>|null} [subcolumns] ColumnSchema subcolumns
+                         */
+    
+                        /**
+                         * Constructs a new ColumnSchema.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ColumnSchema.
+                         * @implements IColumnSchema
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema=} [properties] Properties to set
+                         */
+                        function ColumnSchema(properties) {
+                            this.subcolumns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ColumnSchema column.
+                         * @member {string} column
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         */
+                        ColumnSchema.prototype.column = "";
+    
+                        /**
+                         * ColumnSchema type.
+                         * @member {string} type
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         */
+                        ColumnSchema.prototype.type = "";
+    
+                        /**
+                         * ColumnSchema description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         */
+                        ColumnSchema.prototype.description = "";
+    
+                        /**
+                         * ColumnSchema mode.
+                         * @member {string} mode
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         */
+                        ColumnSchema.prototype.mode = "";
+    
+                        /**
+                         * ColumnSchema subcolumns.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>} subcolumns
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         */
+                        ColumnSchema.prototype.subcolumns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ColumnSchema instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema instance
+                         */
+                        ColumnSchema.create = function create(properties) {
+                            return new ColumnSchema(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ColumnSchema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema} message ColumnSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ColumnSchema.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mode);
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.column);
+                            if (message.subcolumns != null && message.subcolumns.length)
+                                for (var i = 0; i < message.subcolumns.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.ColumnSchema.encode(message.subcolumns[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ColumnSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema} message ColumnSchema message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ColumnSchema.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ColumnSchema message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ColumnSchema.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ColumnSchema();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 6:
+                                    message.column = reader.string();
+                                    break;
+                                case 1:
+                                    message.type = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.mode = reader.string();
+                                    break;
+                                case 7:
+                                    if (!(message.subcolumns && message.subcolumns.length))
+                                        message.subcolumns = [];
+                                    message.subcolumns.push($root.google.cloud.datacatalog.v1beta1.ColumnSchema.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ColumnSchema message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ColumnSchema.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ColumnSchema message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ColumnSchema.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                if (!$util.isString(message.column))
+                                    return "column: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                if (!$util.isString(message.mode))
+                                    return "mode: string expected";
+                            if (message.subcolumns != null && message.hasOwnProperty("subcolumns")) {
+                                if (!Array.isArray(message.subcolumns))
+                                    return "subcolumns: array expected";
+                                for (var i = 0; i < message.subcolumns.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.verify(message.subcolumns[i]);
+                                    if (error)
+                                        return "subcolumns." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ColumnSchema message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
+                         */
+                        ColumnSchema.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ColumnSchema)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ColumnSchema();
+                            if (object.column != null)
+                                message.column = String(object.column);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.mode != null)
+                                message.mode = String(object.mode);
+                            if (object.subcolumns) {
+                                if (!Array.isArray(object.subcolumns))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ColumnSchema.subcolumns: array expected");
+                                message.subcolumns = [];
+                                for (var i = 0; i < object.subcolumns.length; ++i) {
+                                    if (typeof object.subcolumns[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ColumnSchema.subcolumns: object expected");
+                                    message.subcolumns[i] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.fromObject(object.subcolumns[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ColumnSchema message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ColumnSchema} message ColumnSchema
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ColumnSchema.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subcolumns = [];
+                            if (options.defaults) {
+                                object.type = "";
+                                object.description = "";
+                                object.mode = "";
+                                object.column = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = message.mode;
+                            if (message.column != null && message.hasOwnProperty("column"))
+                                object.column = message.column;
+                            if (message.subcolumns && message.subcolumns.length) {
+                                object.subcolumns = [];
+                                for (var j = 0; j < message.subcolumns.length; ++j)
+                                    object.subcolumns[j] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.toObject(message.subcolumns[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ColumnSchema to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ColumnSchema.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ColumnSchema;
+                    })();
+    
+                    v1beta1.SearchCatalogResult = (function() {
+    
+                        /**
+                         * Properties of a SearchCatalogResult.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISearchCatalogResult
+                         * @property {google.cloud.datacatalog.v1beta1.SearchResultType|null} [searchResultType] SearchCatalogResult searchResultType
+                         * @property {string|null} [searchResultSubtype] SearchCatalogResult searchResultSubtype
+                         * @property {string|null} [relativeResourceName] SearchCatalogResult relativeResourceName
+                         * @property {string|null} [linkedResource] SearchCatalogResult linkedResource
+                         */
+    
+                        /**
+                         * Constructs a new SearchCatalogResult.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a SearchCatalogResult.
+                         * @implements ISearchCatalogResult
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult=} [properties] Properties to set
+                         */
+                        function SearchCatalogResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchCatalogResult searchResultType.
+                         * @member {google.cloud.datacatalog.v1beta1.SearchResultType} searchResultType
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.searchResultType = 0;
+    
+                        /**
+                         * SearchCatalogResult searchResultSubtype.
+                         * @member {string} searchResultSubtype
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.searchResultSubtype = "";
+    
+                        /**
+                         * SearchCatalogResult relativeResourceName.
+                         * @member {string} relativeResourceName
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.relativeResourceName = "";
+    
+                        /**
+                         * SearchCatalogResult linkedResource.
+                         * @member {string} linkedResource
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.linkedResource = "";
+    
+                        /**
+                         * Creates a new SearchCatalogResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult instance
+                         */
+                        SearchCatalogResult.create = function create(properties) {
+                            return new SearchCatalogResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchCatalogResult message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult} message SearchCatalogResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchCatalogResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.searchResultType);
+                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.searchResultSubtype);
+                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.relativeResourceName);
+                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.linkedResource);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchCatalogResult message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult} message SearchCatalogResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchCatalogResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchCatalogResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchCatalogResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.searchResultType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.searchResultSubtype = reader.string();
+                                    break;
+                                case 3:
+                                    message.relativeResourceName = reader.string();
+                                    break;
+                                case 4:
+                                    message.linkedResource = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchCatalogResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchCatalogResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchCatalogResult message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchCatalogResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
+                                switch (message.searchResultType) {
+                                default:
+                                    return "searchResultType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
+                                if (!$util.isString(message.searchResultSubtype))
+                                    return "searchResultSubtype: string expected";
+                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
+                                if (!$util.isString(message.relativeResourceName))
+                                    return "relativeResourceName: string expected";
+                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
+                                if (!$util.isString(message.linkedResource))
+                                    return "linkedResource: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchCatalogResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
+                         */
+                        SearchCatalogResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult();
+                            switch (object.searchResultType) {
+                            case "SEARCH_RESULT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.searchResultType = 0;
+                                break;
+                            case "ENTRY":
+                            case 1:
+                                message.searchResultType = 1;
+                                break;
+                            case "TAG_TEMPLATE":
+                            case 2:
+                                message.searchResultType = 2;
+                                break;
+                            case "ENTRY_GROUP":
+                            case 3:
+                                message.searchResultType = 3;
+                                break;
+                            }
+                            if (object.searchResultSubtype != null)
+                                message.searchResultSubtype = String(object.searchResultSubtype);
+                            if (object.relativeResourceName != null)
+                                message.relativeResourceName = String(object.relativeResourceName);
+                            if (object.linkedResource != null)
+                                message.linkedResource = String(object.linkedResource);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchCatalogResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.SearchCatalogResult} message SearchCatalogResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchCatalogResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.searchResultType = options.enums === String ? "SEARCH_RESULT_TYPE_UNSPECIFIED" : 0;
+                                object.searchResultSubtype = "";
+                                object.relativeResourceName = "";
+                                object.linkedResource = "";
+                            }
+                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
+                                object.searchResultType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.SearchResultType[message.searchResultType] : message.searchResultType;
+                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
+                                object.searchResultSubtype = message.searchResultSubtype;
+                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
+                                object.relativeResourceName = message.relativeResourceName;
+                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
+                                object.linkedResource = message.linkedResource;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchCatalogResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchCatalogResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchCatalogResult;
+                    })();
+    
+                    /**
+                     * SearchResultType enum.
+                     * @name google.cloud.datacatalog.v1beta1.SearchResultType
+                     * @enum {string}
+                     * @property {number} SEARCH_RESULT_TYPE_UNSPECIFIED=0 SEARCH_RESULT_TYPE_UNSPECIFIED value
+                     * @property {number} ENTRY=1 ENTRY value
+                     * @property {number} TAG_TEMPLATE=2 TAG_TEMPLATE value
+                     * @property {number} ENTRY_GROUP=3 ENTRY_GROUP value
+                     */
+                    v1beta1.SearchResultType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SEARCH_RESULT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ENTRY"] = 1;
+                        values[valuesById[2] = "TAG_TEMPLATE"] = 2;
+                        values[valuesById[3] = "ENTRY_GROUP"] = 3;
+                        return values;
+                    })();
+    
+                    v1beta1.BigQueryTableSpec = (function() {
+    
+                        /**
+                         * Properties of a BigQueryTableSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IBigQueryTableSpec
+                         * @property {google.cloud.datacatalog.v1beta1.TableSourceType|null} [tableSourceType] BigQueryTableSpec tableSourceType
+                         * @property {google.cloud.datacatalog.v1beta1.IViewSpec|null} [viewSpec] BigQueryTableSpec viewSpec
+                         * @property {google.cloud.datacatalog.v1beta1.ITableSpec|null} [tableSpec] BigQueryTableSpec tableSpec
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryTableSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a BigQueryTableSpec.
+                         * @implements IBigQueryTableSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec=} [properties] Properties to set
+                         */
+                        function BigQueryTableSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryTableSpec tableSourceType.
+                         * @member {google.cloud.datacatalog.v1beta1.TableSourceType} tableSourceType
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @instance
+                         */
+                        BigQueryTableSpec.prototype.tableSourceType = 0;
+    
+                        /**
+                         * BigQueryTableSpec viewSpec.
+                         * @member {google.cloud.datacatalog.v1beta1.IViewSpec|null|undefined} viewSpec
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @instance
+                         */
+                        BigQueryTableSpec.prototype.viewSpec = null;
+    
+                        /**
+                         * BigQueryTableSpec tableSpec.
+                         * @member {google.cloud.datacatalog.v1beta1.ITableSpec|null|undefined} tableSpec
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @instance
+                         */
+                        BigQueryTableSpec.prototype.tableSpec = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BigQueryTableSpec typeSpec.
+                         * @member {"viewSpec"|"tableSpec"|undefined} typeSpec
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @instance
+                         */
+                        Object.defineProperty(BigQueryTableSpec.prototype, "typeSpec", {
+                            get: $util.oneOfGetter($oneOfFields = ["viewSpec", "tableSpec"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BigQueryTableSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec instance
+                         */
+                        BigQueryTableSpec.create = function create(properties) {
+                            return new BigQueryTableSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryTableSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryTableSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec} message BigQueryTableSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryTableSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.tableSourceType);
+                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec"))
+                                $root.google.cloud.datacatalog.v1beta1.ViewSpec.encode(message.viewSpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec"))
+                                $root.google.cloud.datacatalog.v1beta1.TableSpec.encode(message.tableSpec, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryTableSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryTableSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec} message BigQueryTableSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryTableSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryTableSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryTableSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.tableSourceType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryTableSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryTableSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryTableSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryTableSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
+                                switch (message.tableSourceType) {
+                                default:
+                                    return "tableSourceType: enum value expected";
+                                case 0:
+                                case 2:
+                                case 5:
+                                    break;
+                                }
+                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec")) {
+                                properties.typeSpec = 1;
+                                {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.ViewSpec.verify(message.viewSpec);
+                                    if (error)
+                                        return "viewSpec." + error;
+                                }
+                            }
+                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec")) {
+                                if (properties.typeSpec === 1)
+                                    return "typeSpec: multiple values";
+                                properties.typeSpec = 1;
+                                {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.TableSpec.verify(message.tableSpec);
+                                    if (error)
+                                        return "tableSpec." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryTableSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
+                         */
+                        BigQueryTableSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec();
+                            switch (object.tableSourceType) {
+                            case "TABLE_SOURCE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.tableSourceType = 0;
+                                break;
+                            case "BIGQUERY_VIEW":
+                            case 2:
+                                message.tableSourceType = 2;
+                                break;
+                            case "BIGQUERY_TABLE":
+                            case 5:
+                                message.tableSourceType = 5;
+                                break;
+                            }
+                            if (object.viewSpec != null) {
+                                if (typeof object.viewSpec !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.BigQueryTableSpec.viewSpec: object expected");
+                                message.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.fromObject(object.viewSpec);
+                            }
+                            if (object.tableSpec != null) {
+                                if (typeof object.tableSpec !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.BigQueryTableSpec.tableSpec: object expected");
+                                message.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.fromObject(object.tableSpec);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryTableSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} message BigQueryTableSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryTableSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.tableSourceType = options.enums === String ? "TABLE_SOURCE_TYPE_UNSPECIFIED" : 0;
+                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
+                                object.tableSourceType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.TableSourceType[message.tableSourceType] : message.tableSourceType;
+                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec")) {
+                                object.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.toObject(message.viewSpec, options);
+                                if (options.oneofs)
+                                    object.typeSpec = "viewSpec";
+                            }
+                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec")) {
+                                object.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.toObject(message.tableSpec, options);
+                                if (options.oneofs)
+                                    object.typeSpec = "tableSpec";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryTableSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryTableSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BigQueryTableSpec;
+                    })();
+    
+                    /**
+                     * TableSourceType enum.
+                     * @name google.cloud.datacatalog.v1beta1.TableSourceType
+                     * @enum {string}
+                     * @property {number} TABLE_SOURCE_TYPE_UNSPECIFIED=0 TABLE_SOURCE_TYPE_UNSPECIFIED value
+                     * @property {number} BIGQUERY_VIEW=2 BIGQUERY_VIEW value
+                     * @property {number} BIGQUERY_TABLE=5 BIGQUERY_TABLE value
+                     */
+                    v1beta1.TableSourceType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TABLE_SOURCE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "BIGQUERY_VIEW"] = 2;
+                        values[valuesById[5] = "BIGQUERY_TABLE"] = 5;
+                        return values;
+                    })();
+    
+                    v1beta1.ViewSpec = (function() {
+    
+                        /**
+                         * Properties of a ViewSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IViewSpec
+                         * @property {string|null} [viewQuery] ViewSpec viewQuery
+                         */
+    
+                        /**
+                         * Constructs a new ViewSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ViewSpec.
+                         * @implements IViewSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec=} [properties] Properties to set
+                         */
+                        function ViewSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ViewSpec viewQuery.
+                         * @member {string} viewQuery
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @instance
+                         */
+                        ViewSpec.prototype.viewQuery = "";
+    
+                        /**
+                         * Creates a new ViewSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec instance
+                         */
+                        ViewSpec.create = function create(properties) {
+                            return new ViewSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ViewSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ViewSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec} message ViewSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ViewSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.viewQuery);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ViewSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ViewSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec} message ViewSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ViewSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ViewSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ViewSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ViewSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.viewQuery = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ViewSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ViewSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ViewSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ViewSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
+                                if (!$util.isString(message.viewQuery))
+                                    return "viewQuery: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ViewSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
+                         */
+                        ViewSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ViewSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ViewSpec();
+                            if (object.viewQuery != null)
+                                message.viewQuery = String(object.viewQuery);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ViewSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ViewSpec} message ViewSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ViewSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.viewQuery = "";
+                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
+                                object.viewQuery = message.viewQuery;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ViewSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ViewSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ViewSpec;
+                    })();
+    
+                    v1beta1.TableSpec = (function() {
+    
+                        /**
+                         * Properties of a TableSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ITableSpec
+                         * @property {string|null} [groupedEntry] TableSpec groupedEntry
+                         */
+    
+                        /**
+                         * Constructs a new TableSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a TableSpec.
+                         * @implements ITableSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec=} [properties] Properties to set
+                         */
+                        function TableSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TableSpec groupedEntry.
+                         * @member {string} groupedEntry
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @instance
+                         */
+                        TableSpec.prototype.groupedEntry = "";
+    
+                        /**
+                         * Creates a new TableSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec instance
+                         */
+                        TableSpec.create = function create(properties) {
+                            return new TableSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TableSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TableSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec} message TableSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.groupedEntry);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TableSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TableSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec} message TableSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TableSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TableSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TableSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.groupedEntry = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TableSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TableSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TableSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TableSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
+                                if (!$util.isString(message.groupedEntry))
+                                    return "groupedEntry: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TableSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
+                         */
+                        TableSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TableSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.TableSpec();
+                            if (object.groupedEntry != null)
+                                message.groupedEntry = String(object.groupedEntry);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TableSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.TableSpec} message TableSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TableSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.groupedEntry = "";
+                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
+                                object.groupedEntry = message.groupedEntry;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TableSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TableSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TableSpec;
+                    })();
+    
+                    v1beta1.BigQueryDateShardedSpec = (function() {
+    
+                        /**
+                         * Properties of a BigQueryDateShardedSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IBigQueryDateShardedSpec
+                         * @property {string|null} [dataset] BigQueryDateShardedSpec dataset
+                         * @property {string|null} [tablePrefix] BigQueryDateShardedSpec tablePrefix
+                         * @property {number|Long|null} [shardCount] BigQueryDateShardedSpec shardCount
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryDateShardedSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a BigQueryDateShardedSpec.
+                         * @implements IBigQueryDateShardedSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec=} [properties] Properties to set
+                         */
+                        function BigQueryDateShardedSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryDateShardedSpec dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @instance
+                         */
+                        BigQueryDateShardedSpec.prototype.dataset = "";
+    
+                        /**
+                         * BigQueryDateShardedSpec tablePrefix.
+                         * @member {string} tablePrefix
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @instance
+                         */
+                        BigQueryDateShardedSpec.prototype.tablePrefix = "";
+    
+                        /**
+                         * BigQueryDateShardedSpec shardCount.
+                         * @member {number|Long} shardCount
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @instance
+                         */
+                        BigQueryDateShardedSpec.prototype.shardCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new BigQueryDateShardedSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec instance
+                         */
+                        BigQueryDateShardedSpec.create = function create(properties) {
+                            return new BigQueryDateShardedSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDateShardedSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec} message BigQueryDateShardedSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDateShardedSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tablePrefix);
+                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.shardCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDateShardedSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec} message BigQueryDateShardedSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDateShardedSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDateShardedSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDateShardedSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataset = reader.string();
+                                    break;
+                                case 2:
+                                    message.tablePrefix = reader.string();
+                                    break;
+                                case 3:
+                                    message.shardCount = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDateShardedSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDateShardedSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryDateShardedSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryDateShardedSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                if (!$util.isString(message.tablePrefix))
+                                    return "tablePrefix: string expected";
+                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
+                                if (!$util.isInteger(message.shardCount) && !(message.shardCount && $util.isInteger(message.shardCount.low) && $util.isInteger(message.shardCount.high)))
+                                    return "shardCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryDateShardedSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
+                         */
+                        BigQueryDateShardedSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec();
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.tablePrefix != null)
+                                message.tablePrefix = String(object.tablePrefix);
+                            if (object.shardCount != null)
+                                if ($util.Long)
+                                    (message.shardCount = $util.Long.fromValue(object.shardCount)).unsigned = false;
+                                else if (typeof object.shardCount === "string")
+                                    message.shardCount = parseInt(object.shardCount, 10);
+                                else if (typeof object.shardCount === "number")
+                                    message.shardCount = object.shardCount;
+                                else if (typeof object.shardCount === "object")
+                                    message.shardCount = new $util.LongBits(object.shardCount.low >>> 0, object.shardCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryDateShardedSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} message BigQueryDateShardedSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryDateShardedSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = "";
+                                object.tablePrefix = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.shardCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.shardCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
+                                object.tablePrefix = message.tablePrefix;
+                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
+                                if (typeof message.shardCount === "number")
+                                    object.shardCount = options.longs === String ? String(message.shardCount) : message.shardCount;
+                                else
+                                    object.shardCount = options.longs === String ? $util.Long.prototype.toString.call(message.shardCount) : options.longs === Number ? new $util.LongBits(message.shardCount.low >>> 0, message.shardCount.high >>> 0).toNumber() : message.shardCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryDateShardedSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryDateShardedSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BigQueryDateShardedSpec;
+                    })();
     
                     v1beta1.DataCatalog = (function() {
     
@@ -6957,273 +11482,492 @@
                         return ListTagsResponse;
                     })();
     
-                    v1beta1.GcsFilesetSpec = (function() {
+                    v1beta1.PolicyTagManager = (function() {
     
                         /**
-                         * Properties of a GcsFilesetSpec.
+                         * Constructs a new PolicyTagManager service.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IGcsFilesetSpec
-                         * @property {Array.<string>|null} [filePatterns] GcsFilesetSpec filePatterns
-                         * @property {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>|null} [sampleGcsFileSpecs] GcsFilesetSpec sampleGcsFileSpecs
-                         */
-    
-                        /**
-                         * Constructs a new GcsFilesetSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a GcsFilesetSpec.
-                         * @implements IGcsFilesetSpec
+                         * @classdesc Represents a PolicyTagManager
+                         * @extends $protobuf.rpc.Service
                          * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
                          */
-                        function GcsFilesetSpec(properties) {
-                            this.filePatterns = [];
-                            this.sampleGcsFileSpecs = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
+                        function PolicyTagManager(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
                         }
     
-                        /**
-                         * GcsFilesetSpec filePatterns.
-                         * @member {Array.<string>} filePatterns
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @instance
-                         */
-                        GcsFilesetSpec.prototype.filePatterns = $util.emptyArray;
+                        (PolicyTagManager.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PolicyTagManager;
     
                         /**
-                         * GcsFilesetSpec sampleGcsFileSpecs.
-                         * @member {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>} sampleGcsFileSpecs
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @instance
-                         */
-                        GcsFilesetSpec.prototype.sampleGcsFileSpecs = $util.emptyArray;
-    
-                        /**
-                         * Creates a new GcsFilesetSpec instance using the specified properties.
+                         * Creates new PolicyTagManager service using the specified rpc implementation.
                          * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec instance
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {PolicyTagManager} RPC service. Useful where requests and/or responses are streamed.
                          */
-                        GcsFilesetSpec.create = function create(properties) {
-                            return new GcsFilesetSpec(properties);
+                        PolicyTagManager.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
                         };
     
                         /**
-                         * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createTaxonomy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef CreateTaxonomyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.Taxonomy} [response] Taxonomy
                          */
-                        GcsFilesetSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.filePatterns != null && message.filePatterns.length)
-                                for (var i = 0; i < message.filePatterns.length; ++i)
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePatterns[i]);
-                            if (message.sampleGcsFileSpecs != null && message.sampleGcsFileSpecs.length)
-                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i)
-                                    $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.encode(message.sampleGcsFileSpecs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
     
                         /**
-                         * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GcsFilesetSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GcsFilesetSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcsFilesetSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.filePatterns && message.filePatterns.length))
-                                        message.filePatterns = [];
-                                    message.filePatterns.push(reader.string());
-                                    break;
-                                case 2:
-                                    if (!(message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length))
-                                        message.sampleGcsFileSpecs = [];
-                                    message.sampleGcsFileSpecs.push($root.google.cloud.datacatalog.v1beta1.GcsFileSpec.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcsFilesetSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GcsFilesetSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GcsFilesetSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.filePatterns != null && message.hasOwnProperty("filePatterns")) {
-                                if (!Array.isArray(message.filePatterns))
-                                    return "filePatterns: array expected";
-                                for (var i = 0; i < message.filePatterns.length; ++i)
-                                    if (!$util.isString(message.filePatterns[i]))
-                                        return "filePatterns: string[] expected";
-                            }
-                            if (message.sampleGcsFileSpecs != null && message.hasOwnProperty("sampleGcsFileSpecs")) {
-                                if (!Array.isArray(message.sampleGcsFileSpecs))
-                                    return "sampleGcsFileSpecs: array expected";
-                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i) {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.verify(message.sampleGcsFileSpecs[i]);
-                                    if (error)
-                                        return "sampleGcsFileSpecs." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
-                         */
-                        GcsFilesetSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
-                            if (object.filePatterns) {
-                                if (!Array.isArray(object.filePatterns))
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.filePatterns: array expected");
-                                message.filePatterns = [];
-                                for (var i = 0; i < object.filePatterns.length; ++i)
-                                    message.filePatterns[i] = String(object.filePatterns[i]);
-                            }
-                            if (object.sampleGcsFileSpecs) {
-                                if (!Array.isArray(object.sampleGcsFileSpecs))
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: array expected");
-                                message.sampleGcsFileSpecs = [];
-                                for (var i = 0; i < object.sampleGcsFileSpecs.length; ++i) {
-                                    if (typeof object.sampleGcsFileSpecs[i] !== "object")
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: object expected");
-                                    message.sampleGcsFileSpecs[i] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.fromObject(object.sampleGcsFileSpecs[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} message GcsFilesetSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GcsFilesetSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.filePatterns = [];
-                                object.sampleGcsFileSpecs = [];
-                            }
-                            if (message.filePatterns && message.filePatterns.length) {
-                                object.filePatterns = [];
-                                for (var j = 0; j < message.filePatterns.length; ++j)
-                                    object.filePatterns[j] = message.filePatterns[j];
-                            }
-                            if (message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length) {
-                                object.sampleGcsFileSpecs = [];
-                                for (var j = 0; j < message.sampleGcsFileSpecs.length; ++j)
-                                    object.sampleGcsFileSpecs[j] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.toObject(message.sampleGcsFileSpecs[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GcsFilesetSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * Calls CreateTaxonomy.
+                         * @function createTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
                          * @instance
-                         * @returns {Object.<string,*>} JSON object
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest} request CreateTaxonomyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomyCallback} callback Node-style callback called with the error, if any, and Taxonomy
+                         * @returns {undefined}
+                         * @variation 1
                          */
-                        GcsFilesetSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
+                        Object.defineProperty(PolicyTagManager.prototype.createTaxonomy = function createTaxonomy(request, callback) {
+                            return this.rpcCall(createTaxonomy, $root.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest, $root.google.cloud.datacatalog.v1beta1.Taxonomy, request, callback);
+                        }, "name", { value: "CreateTaxonomy" });
     
-                        return GcsFilesetSpec;
+                        /**
+                         * Calls CreateTaxonomy.
+                         * @function createTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest} request CreateTaxonomyRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.Taxonomy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deleteTaxonomy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef DeleteTaxonomyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteTaxonomy.
+                         * @function deleteTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest} request DeleteTaxonomyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomyCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.deleteTaxonomy = function deleteTaxonomy(request, callback) {
+                            return this.rpcCall(deleteTaxonomy, $root.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteTaxonomy" });
+    
+                        /**
+                         * Calls DeleteTaxonomy.
+                         * @function deleteTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest} request DeleteTaxonomyRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updateTaxonomy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef UpdateTaxonomyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.Taxonomy} [response] Taxonomy
+                         */
+    
+                        /**
+                         * Calls UpdateTaxonomy.
+                         * @function updateTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest} request UpdateTaxonomyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomyCallback} callback Node-style callback called with the error, if any, and Taxonomy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.updateTaxonomy = function updateTaxonomy(request, callback) {
+                            return this.rpcCall(updateTaxonomy, $root.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest, $root.google.cloud.datacatalog.v1beta1.Taxonomy, request, callback);
+                        }, "name", { value: "UpdateTaxonomy" });
+    
+                        /**
+                         * Calls UpdateTaxonomy.
+                         * @function updateTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest} request UpdateTaxonomyRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.Taxonomy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listTaxonomies}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef ListTaxonomiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} [response] ListTaxonomiesResponse
+                         */
+    
+                        /**
+                         * Calls ListTaxonomies.
+                         * @function listTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest} request ListTaxonomiesRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomiesCallback} callback Node-style callback called with the error, if any, and ListTaxonomiesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.listTaxonomies = function listTaxonomies(request, callback) {
+                            return this.rpcCall(listTaxonomies, $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest, $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse, request, callback);
+                        }, "name", { value: "ListTaxonomies" });
+    
+                        /**
+                         * Calls ListTaxonomies.
+                         * @function listTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest} request ListTaxonomiesRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getTaxonomy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef GetTaxonomyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.Taxonomy} [response] Taxonomy
+                         */
+    
+                        /**
+                         * Calls GetTaxonomy.
+                         * @function getTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest} request GetTaxonomyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomyCallback} callback Node-style callback called with the error, if any, and Taxonomy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.getTaxonomy = function getTaxonomy(request, callback) {
+                            return this.rpcCall(getTaxonomy, $root.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest, $root.google.cloud.datacatalog.v1beta1.Taxonomy, request, callback);
+                        }, "name", { value: "GetTaxonomy" });
+    
+                        /**
+                         * Calls GetTaxonomy.
+                         * @function getTaxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest} request GetTaxonomyRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.Taxonomy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createPolicyTag}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef CreatePolicyTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTag} [response] PolicyTag
+                         */
+    
+                        /**
+                         * Calls CreatePolicyTag.
+                         * @function createPolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest} request CreatePolicyTagRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTagCallback} callback Node-style callback called with the error, if any, and PolicyTag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.createPolicyTag = function createPolicyTag(request, callback) {
+                            return this.rpcCall(createPolicyTag, $root.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest, $root.google.cloud.datacatalog.v1beta1.PolicyTag, request, callback);
+                        }, "name", { value: "CreatePolicyTag" });
+    
+                        /**
+                         * Calls CreatePolicyTag.
+                         * @function createPolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest} request CreatePolicyTagRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.PolicyTag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deletePolicyTag}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef DeletePolicyTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeletePolicyTag.
+                         * @function deletePolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest} request DeletePolicyTagRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTagCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.deletePolicyTag = function deletePolicyTag(request, callback) {
+                            return this.rpcCall(deletePolicyTag, $root.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeletePolicyTag" });
+    
+                        /**
+                         * Calls DeletePolicyTag.
+                         * @function deletePolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest} request DeletePolicyTagRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updatePolicyTag}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef UpdatePolicyTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTag} [response] PolicyTag
+                         */
+    
+                        /**
+                         * Calls UpdatePolicyTag.
+                         * @function updatePolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest} request UpdatePolicyTagRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTagCallback} callback Node-style callback called with the error, if any, and PolicyTag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.updatePolicyTag = function updatePolicyTag(request, callback) {
+                            return this.rpcCall(updatePolicyTag, $root.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest, $root.google.cloud.datacatalog.v1beta1.PolicyTag, request, callback);
+                        }, "name", { value: "UpdatePolicyTag" });
+    
+                        /**
+                         * Calls UpdatePolicyTag.
+                         * @function updatePolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest} request UpdatePolicyTagRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.PolicyTag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listPolicyTags}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef ListPolicyTagsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} [response] ListPolicyTagsResponse
+                         */
+    
+                        /**
+                         * Calls ListPolicyTags.
+                         * @function listPolicyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest} request ListPolicyTagsRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTagsCallback} callback Node-style callback called with the error, if any, and ListPolicyTagsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.listPolicyTags = function listPolicyTags(request, callback) {
+                            return this.rpcCall(listPolicyTags, $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest, $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse, request, callback);
+                        }, "name", { value: "ListPolicyTags" });
+    
+                        /**
+                         * Calls ListPolicyTags.
+                         * @function listPolicyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest} request ListPolicyTagsRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getPolicyTag}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef GetPolicyTagCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTag} [response] PolicyTag
+                         */
+    
+                        /**
+                         * Calls GetPolicyTag.
+                         * @function getPolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest} request GetPolicyTagRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTagCallback} callback Node-style callback called with the error, if any, and PolicyTag
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.getPolicyTag = function getPolicyTag(request, callback) {
+                            return this.rpcCall(getPolicyTag, $root.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest, $root.google.cloud.datacatalog.v1beta1.PolicyTag, request, callback);
+                        }, "name", { value: "GetPolicyTag" });
+    
+                        /**
+                         * Calls GetPolicyTag.
+                         * @function getPolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest} request GetPolicyTagRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.PolicyTag>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getIamPolicy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef GetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "GetIamPolicy" });
+    
+                        /**
+                         * Calls GetIamPolicy.
+                         * @function getIamPolicy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#setIamPolicy}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef SetIamPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        }, "name", { value: "SetIamPolicy" });
+    
+                        /**
+                         * Calls SetIamPolicy.
+                         * @function setIamPolicy
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                         * @returns {Promise<google.iam.v1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#testIamPermissions}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @typedef TestIamPermissionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                         */
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManager.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManager.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        }, "name", { value: "TestIamPermissions" });
+    
+                        /**
+                         * Calls TestIamPermissions.
+                         * @function testIamPermissions
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManager
+                         * @instance
+                         * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                         * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return PolicyTagManager;
                     })();
     
-                    v1beta1.GcsFileSpec = (function() {
+                    v1beta1.Taxonomy = (function() {
     
                         /**
-                         * Properties of a GcsFileSpec.
+                         * Properties of a Taxonomy.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IGcsFileSpec
-                         * @property {string|null} [filePath] GcsFileSpec filePath
-                         * @property {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null} [gcsTimestamps] GcsFileSpec gcsTimestamps
-                         * @property {number|Long|null} [sizeBytes] GcsFileSpec sizeBytes
+                         * @interface ITaxonomy
+                         * @property {string|null} [name] Taxonomy name
+                         * @property {string|null} [displayName] Taxonomy displayName
+                         * @property {string|null} [description] Taxonomy description
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType>|null} [activatedPolicyTypes] Taxonomy activatedPolicyTypes
                          */
     
                         /**
-                         * Constructs a new GcsFileSpec.
+                         * Constructs a new Taxonomy.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a GcsFileSpec.
-                         * @implements IGcsFileSpec
+                         * @classdesc Represents a Taxonomy.
+                         * @implements ITaxonomy
                          * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
+                         * @param {google.cloud.datacatalog.v1beta1.ITaxonomy=} [properties] Properties to set
                          */
-                        function GcsFileSpec(properties) {
+                        function Taxonomy(properties) {
+                            this.activatedPolicyTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -7231,3178 +11975,104 @@
                         }
     
                         /**
-                         * GcsFileSpec filePath.
-                         * @member {string} filePath
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * Taxonomy name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @instance
                          */
-                        GcsFileSpec.prototype.filePath = "";
+                        Taxonomy.prototype.name = "";
     
                         /**
-                         * GcsFileSpec gcsTimestamps.
-                         * @member {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null|undefined} gcsTimestamps
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * Taxonomy displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @instance
                          */
-                        GcsFileSpec.prototype.gcsTimestamps = null;
+                        Taxonomy.prototype.displayName = "";
     
                         /**
-                         * GcsFileSpec sizeBytes.
-                         * @member {number|Long} sizeBytes
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @instance
-                         */
-                        GcsFileSpec.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new GcsFileSpec instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec instance
-                         */
-                        GcsFileSpec.create = function create(properties) {
-                            return new GcsFileSpec(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GcsFileSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.filePath != null && message.hasOwnProperty("filePath"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
-                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
-                                $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.encode(message.gcsTimestamps, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.sizeBytes);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GcsFileSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GcsFileSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcsFileSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.filePath = reader.string();
-                                    break;
-                                case 2:
-                                    message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.sizeBytes = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GcsFileSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GcsFileSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GcsFileSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.filePath != null && message.hasOwnProperty("filePath"))
-                                if (!$util.isString(message.filePath))
-                                    return "filePath: string expected";
-                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps")) {
-                                var error = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.verify(message.gcsTimestamps);
-                                if (error)
-                                    return "gcsTimestamps." + error;
-                            }
-                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
-                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
-                                    return "sizeBytes: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
-                         */
-                        GcsFileSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFileSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
-                            if (object.filePath != null)
-                                message.filePath = String(object.filePath);
-                            if (object.gcsTimestamps != null) {
-                                if (typeof object.gcsTimestamps !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFileSpec.gcsTimestamps: object expected");
-                                message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.fromObject(object.gcsTimestamps);
-                            }
-                            if (object.sizeBytes != null)
-                                if ($util.Long)
-                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
-                                else if (typeof object.sizeBytes === "string")
-                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
-                                else if (typeof object.sizeBytes === "number")
-                                    message.sizeBytes = object.sizeBytes;
-                                else if (typeof object.sizeBytes === "object")
-                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.GcsFileSpec} message GcsFileSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GcsFileSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.filePath = "";
-                                object.gcsTimestamps = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.sizeBytes = options.longs === String ? "0" : 0;
-                            }
-                            if (message.filePath != null && message.hasOwnProperty("filePath"))
-                                object.filePath = message.filePath;
-                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
-                                object.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.toObject(message.gcsTimestamps, options);
-                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
-                                if (typeof message.sizeBytes === "number")
-                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
-                                else
-                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GcsFileSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GcsFileSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return GcsFileSpec;
-                    })();
-    
-                    v1beta1.SystemTimestamps = (function() {
-    
-                        /**
-                         * Properties of a SystemTimestamps.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ISystemTimestamps
-                         * @property {google.protobuf.ITimestamp|null} [createTime] SystemTimestamps createTime
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] SystemTimestamps updateTime
-                         * @property {google.protobuf.ITimestamp|null} [expireTime] SystemTimestamps expireTime
-                         */
-    
-                        /**
-                         * Constructs a new SystemTimestamps.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a SystemTimestamps.
-                         * @implements ISystemTimestamps
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
-                         */
-                        function SystemTimestamps(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SystemTimestamps createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.createTime = null;
-    
-                        /**
-                         * SystemTimestamps updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.updateTime = null;
-    
-                        /**
-                         * SystemTimestamps expireTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.expireTime = null;
-    
-                        /**
-                         * Creates a new SystemTimestamps instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps instance
-                         */
-                        SystemTimestamps.create = function create(properties) {
-                            return new SystemTimestamps(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SystemTimestamps.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SystemTimestamps.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SystemTimestamps message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SystemTimestamps.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SystemTimestamps.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SystemTimestamps message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SystemTimestamps.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                if (error)
-                                    return "expireTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         */
-                        SystemTimestamps.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SystemTimestamps)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            if (object.expireTime != null) {
-                                if (typeof object.expireTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.expireTime: object expected");
-                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.SystemTimestamps} message SystemTimestamps
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SystemTimestamps.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.createTime = null;
-                                object.updateTime = null;
-                                object.expireTime = null;
-                            }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SystemTimestamps to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SystemTimestamps.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return SystemTimestamps;
-                    })();
-    
-                    v1beta1.Schema = (function() {
-    
-                        /**
-                         * Properties of a Schema.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ISchema
-                         * @property {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>|null} [columns] Schema columns
-                         */
-    
-                        /**
-                         * Constructs a new Schema.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a Schema.
-                         * @implements ISchema
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ISchema=} [properties] Properties to set
-                         */
-                        function Schema(properties) {
-                            this.columns = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Schema columns.
-                         * @member {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>} columns
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @instance
-                         */
-                        Schema.prototype.columns = $util.emptyArray;
-    
-                        /**
-                         * Creates a new Schema instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISchema=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema instance
-                         */
-                        Schema.create = function create(properties) {
-                            return new Schema(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Schema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISchema} message Schema message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Schema.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.columns != null && message.columns.length)
-                                for (var i = 0; i < message.columns.length; ++i)
-                                    $root.google.cloud.datacatalog.v1beta1.ColumnSchema.encode(message.columns[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISchema} message Schema message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Schema.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Schema message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Schema.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Schema();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 2:
-                                    if (!(message.columns && message.columns.length))
-                                        message.columns = [];
-                                    message.columns.push($root.google.cloud.datacatalog.v1beta1.ColumnSchema.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Schema message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Schema.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Schema message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Schema.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.columns != null && message.hasOwnProperty("columns")) {
-                                if (!Array.isArray(message.columns))
-                                    return "columns: array expected";
-                                for (var i = 0; i < message.columns.length; ++i) {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.verify(message.columns[i]);
-                                    if (error)
-                                        return "columns." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Schema message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.Schema} Schema
-                         */
-                        Schema.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.Schema)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.Schema();
-                            if (object.columns) {
-                                if (!Array.isArray(object.columns))
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Schema.columns: array expected");
-                                message.columns = [];
-                                for (var i = 0; i < object.columns.length; ++i) {
-                                    if (typeof object.columns[i] !== "object")
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.Schema.columns: object expected");
-                                    message.columns[i] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.fromObject(object.columns[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Schema message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.Schema} message Schema
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Schema.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.columns = [];
-                            if (message.columns && message.columns.length) {
-                                object.columns = [];
-                                for (var j = 0; j < message.columns.length; ++j)
-                                    object.columns[j] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.toObject(message.columns[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Schema to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.Schema
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Schema.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return Schema;
-                    })();
-    
-                    v1beta1.ColumnSchema = (function() {
-    
-                        /**
-                         * Properties of a ColumnSchema.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IColumnSchema
-                         * @property {string|null} [column] ColumnSchema column
-                         * @property {string|null} [type] ColumnSchema type
-                         * @property {string|null} [description] ColumnSchema description
-                         * @property {string|null} [mode] ColumnSchema mode
-                         * @property {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>|null} [subcolumns] ColumnSchema subcolumns
-                         */
-    
-                        /**
-                         * Constructs a new ColumnSchema.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a ColumnSchema.
-                         * @implements IColumnSchema
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema=} [properties] Properties to set
-                         */
-                        function ColumnSchema(properties) {
-                            this.subcolumns = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ColumnSchema column.
-                         * @member {string} column
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @instance
-                         */
-                        ColumnSchema.prototype.column = "";
-    
-                        /**
-                         * ColumnSchema type.
-                         * @member {string} type
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @instance
-                         */
-                        ColumnSchema.prototype.type = "";
-    
-                        /**
-                         * ColumnSchema description.
+                         * Taxonomy description.
                          * @member {string} description
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @instance
                          */
-                        ColumnSchema.prototype.description = "";
+                        Taxonomy.prototype.description = "";
     
                         /**
-                         * ColumnSchema mode.
-                         * @member {string} mode
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * Taxonomy activatedPolicyTypes.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType>} activatedPolicyTypes
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @instance
                          */
-                        ColumnSchema.prototype.mode = "";
+                        Taxonomy.prototype.activatedPolicyTypes = $util.emptyArray;
     
                         /**
-                         * ColumnSchema subcolumns.
-                         * @member {Array.<google.cloud.datacatalog.v1beta1.IColumnSchema>} subcolumns
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @instance
-                         */
-                        ColumnSchema.prototype.subcolumns = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ColumnSchema instance using the specified properties.
+                         * Creates a new Taxonomy instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema instance
+                         * @param {google.cloud.datacatalog.v1beta1.ITaxonomy=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.Taxonomy} Taxonomy instance
                          */
-                        ColumnSchema.create = function create(properties) {
-                            return new ColumnSchema(properties);
+                        Taxonomy.create = function create(properties) {
+                            return new Taxonomy(properties);
                         };
     
                         /**
-                         * Encodes the specified ColumnSchema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
+                         * Encodes the specified Taxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema} message ColumnSchema message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.ITaxonomy} message Taxonomy message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        ColumnSchema.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                            if (message.mode != null && message.hasOwnProperty("mode"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mode);
-                            if (message.column != null && message.hasOwnProperty("column"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.column);
-                            if (message.subcolumns != null && message.subcolumns.length)
-                                for (var i = 0; i < message.subcolumns.length; ++i)
-                                    $root.google.cloud.datacatalog.v1beta1.ColumnSchema.encode(message.subcolumns[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ColumnSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IColumnSchema} message ColumnSchema message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ColumnSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ColumnSchema message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ColumnSchema.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ColumnSchema();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 6:
-                                    message.column = reader.string();
-                                    break;
-                                case 1:
-                                    message.type = reader.string();
-                                    break;
-                                case 2:
-                                    message.description = reader.string();
-                                    break;
-                                case 3:
-                                    message.mode = reader.string();
-                                    break;
-                                case 7:
-                                    if (!(message.subcolumns && message.subcolumns.length))
-                                        message.subcolumns = [];
-                                    message.subcolumns.push($root.google.cloud.datacatalog.v1beta1.ColumnSchema.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ColumnSchema message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ColumnSchema.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ColumnSchema message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ColumnSchema.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.column != null && message.hasOwnProperty("column"))
-                                if (!$util.isString(message.column))
-                                    return "column: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                if (!$util.isString(message.type))
-                                    return "type: string expected";
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                if (!$util.isString(message.description))
-                                    return "description: string expected";
-                            if (message.mode != null && message.hasOwnProperty("mode"))
-                                if (!$util.isString(message.mode))
-                                    return "mode: string expected";
-                            if (message.subcolumns != null && message.hasOwnProperty("subcolumns")) {
-                                if (!Array.isArray(message.subcolumns))
-                                    return "subcolumns: array expected";
-                                for (var i = 0; i < message.subcolumns.length; ++i) {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.verify(message.subcolumns[i]);
-                                    if (error)
-                                        return "subcolumns." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ColumnSchema message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.ColumnSchema} ColumnSchema
-                         */
-                        ColumnSchema.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ColumnSchema)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.ColumnSchema();
-                            if (object.column != null)
-                                message.column = String(object.column);
-                            if (object.type != null)
-                                message.type = String(object.type);
-                            if (object.description != null)
-                                message.description = String(object.description);
-                            if (object.mode != null)
-                                message.mode = String(object.mode);
-                            if (object.subcolumns) {
-                                if (!Array.isArray(object.subcolumns))
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ColumnSchema.subcolumns: array expected");
-                                message.subcolumns = [];
-                                for (var i = 0; i < object.subcolumns.length; ++i) {
-                                    if (typeof object.subcolumns[i] !== "object")
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ColumnSchema.subcolumns: object expected");
-                                    message.subcolumns[i] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.fromObject(object.subcolumns[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ColumnSchema message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ColumnSchema} message ColumnSchema
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ColumnSchema.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.subcolumns = [];
-                            if (options.defaults) {
-                                object.type = "";
-                                object.description = "";
-                                object.mode = "";
-                                object.column = "";
-                            }
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = message.type;
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                object.description = message.description;
-                            if (message.mode != null && message.hasOwnProperty("mode"))
-                                object.mode = message.mode;
-                            if (message.column != null && message.hasOwnProperty("column"))
-                                object.column = message.column;
-                            if (message.subcolumns && message.subcolumns.length) {
-                                object.subcolumns = [];
-                                for (var j = 0; j < message.subcolumns.length; ++j)
-                                    object.subcolumns[j] = $root.google.cloud.datacatalog.v1beta1.ColumnSchema.toObject(message.subcolumns[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ColumnSchema to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.ColumnSchema
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ColumnSchema.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return ColumnSchema;
-                    })();
-    
-                    v1beta1.SearchCatalogResult = (function() {
-    
-                        /**
-                         * Properties of a SearchCatalogResult.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ISearchCatalogResult
-                         * @property {google.cloud.datacatalog.v1beta1.SearchResultType|null} [searchResultType] SearchCatalogResult searchResultType
-                         * @property {string|null} [searchResultSubtype] SearchCatalogResult searchResultSubtype
-                         * @property {string|null} [relativeResourceName] SearchCatalogResult relativeResourceName
-                         * @property {string|null} [linkedResource] SearchCatalogResult linkedResource
-                         */
-    
-                        /**
-                         * Constructs a new SearchCatalogResult.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a SearchCatalogResult.
-                         * @implements ISearchCatalogResult
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult=} [properties] Properties to set
-                         */
-                        function SearchCatalogResult(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchCatalogResult searchResultType.
-                         * @member {google.cloud.datacatalog.v1beta1.SearchResultType} searchResultType
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @instance
-                         */
-                        SearchCatalogResult.prototype.searchResultType = 0;
-    
-                        /**
-                         * SearchCatalogResult searchResultSubtype.
-                         * @member {string} searchResultSubtype
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @instance
-                         */
-                        SearchCatalogResult.prototype.searchResultSubtype = "";
-    
-                        /**
-                         * SearchCatalogResult relativeResourceName.
-                         * @member {string} relativeResourceName
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @instance
-                         */
-                        SearchCatalogResult.prototype.relativeResourceName = "";
-    
-                        /**
-                         * SearchCatalogResult linkedResource.
-                         * @member {string} linkedResource
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @instance
-                         */
-                        SearchCatalogResult.prototype.linkedResource = "";
-    
-                        /**
-                         * Creates a new SearchCatalogResult instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult instance
-                         */
-                        SearchCatalogResult.create = function create(properties) {
-                            return new SearchCatalogResult(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchCatalogResult message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult} message SearchCatalogResult message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchCatalogResult.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.searchResultType);
-                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.searchResultSubtype);
-                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.relativeResourceName);
-                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.linkedResource);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchCatalogResult message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISearchCatalogResult} message SearchCatalogResult message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchCatalogResult.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchCatalogResult message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchCatalogResult.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.searchResultType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.searchResultSubtype = reader.string();
-                                    break;
-                                case 3:
-                                    message.relativeResourceName = reader.string();
-                                    break;
-                                case 4:
-                                    message.linkedResource = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchCatalogResult message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchCatalogResult.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchCatalogResult message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchCatalogResult.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
-                                switch (message.searchResultType) {
-                                default:
-                                    return "searchResultType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
-                                if (!$util.isString(message.searchResultSubtype))
-                                    return "searchResultSubtype: string expected";
-                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
-                                if (!$util.isString(message.relativeResourceName))
-                                    return "relativeResourceName: string expected";
-                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
-                                if (!$util.isString(message.linkedResource))
-                                    return "linkedResource: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchCatalogResult message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.SearchCatalogResult} SearchCatalogResult
-                         */
-                        SearchCatalogResult.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.SearchCatalogResult();
-                            switch (object.searchResultType) {
-                            case "SEARCH_RESULT_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.searchResultType = 0;
-                                break;
-                            case "ENTRY":
-                            case 1:
-                                message.searchResultType = 1;
-                                break;
-                            case "TAG_TEMPLATE":
-                            case 2:
-                                message.searchResultType = 2;
-                                break;
-                            case "ENTRY_GROUP":
-                            case 3:
-                                message.searchResultType = 3;
-                                break;
-                            }
-                            if (object.searchResultSubtype != null)
-                                message.searchResultSubtype = String(object.searchResultSubtype);
-                            if (object.relativeResourceName != null)
-                                message.relativeResourceName = String(object.relativeResourceName);
-                            if (object.linkedResource != null)
-                                message.linkedResource = String(object.linkedResource);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchCatalogResult message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.SearchCatalogResult} message SearchCatalogResult
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchCatalogResult.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.searchResultType = options.enums === String ? "SEARCH_RESULT_TYPE_UNSPECIFIED" : 0;
-                                object.searchResultSubtype = "";
-                                object.relativeResourceName = "";
-                                object.linkedResource = "";
-                            }
-                            if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
-                                object.searchResultType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.SearchResultType[message.searchResultType] : message.searchResultType;
-                            if (message.searchResultSubtype != null && message.hasOwnProperty("searchResultSubtype"))
-                                object.searchResultSubtype = message.searchResultSubtype;
-                            if (message.relativeResourceName != null && message.hasOwnProperty("relativeResourceName"))
-                                object.relativeResourceName = message.relativeResourceName;
-                            if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
-                                object.linkedResource = message.linkedResource;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchCatalogResult to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.SearchCatalogResult
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchCatalogResult.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return SearchCatalogResult;
-                    })();
-    
-                    /**
-                     * SearchResultType enum.
-                     * @name google.cloud.datacatalog.v1beta1.SearchResultType
-                     * @enum {string}
-                     * @property {number} SEARCH_RESULT_TYPE_UNSPECIFIED=0 SEARCH_RESULT_TYPE_UNSPECIFIED value
-                     * @property {number} ENTRY=1 ENTRY value
-                     * @property {number} TAG_TEMPLATE=2 TAG_TEMPLATE value
-                     * @property {number} ENTRY_GROUP=3 ENTRY_GROUP value
-                     */
-                    v1beta1.SearchResultType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "SEARCH_RESULT_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ENTRY"] = 1;
-                        values[valuesById[2] = "TAG_TEMPLATE"] = 2;
-                        values[valuesById[3] = "ENTRY_GROUP"] = 3;
-                        return values;
-                    })();
-    
-                    v1beta1.BigQueryTableSpec = (function() {
-    
-                        /**
-                         * Properties of a BigQueryTableSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IBigQueryTableSpec
-                         * @property {google.cloud.datacatalog.v1beta1.TableSourceType|null} [tableSourceType] BigQueryTableSpec tableSourceType
-                         * @property {google.cloud.datacatalog.v1beta1.IViewSpec|null} [viewSpec] BigQueryTableSpec viewSpec
-                         * @property {google.cloud.datacatalog.v1beta1.ITableSpec|null} [tableSpec] BigQueryTableSpec tableSpec
-                         */
-    
-                        /**
-                         * Constructs a new BigQueryTableSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a BigQueryTableSpec.
-                         * @implements IBigQueryTableSpec
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec=} [properties] Properties to set
-                         */
-                        function BigQueryTableSpec(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * BigQueryTableSpec tableSourceType.
-                         * @member {google.cloud.datacatalog.v1beta1.TableSourceType} tableSourceType
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @instance
-                         */
-                        BigQueryTableSpec.prototype.tableSourceType = 0;
-    
-                        /**
-                         * BigQueryTableSpec viewSpec.
-                         * @member {google.cloud.datacatalog.v1beta1.IViewSpec|null|undefined} viewSpec
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @instance
-                         */
-                        BigQueryTableSpec.prototype.viewSpec = null;
-    
-                        /**
-                         * BigQueryTableSpec tableSpec.
-                         * @member {google.cloud.datacatalog.v1beta1.ITableSpec|null|undefined} tableSpec
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @instance
-                         */
-                        BigQueryTableSpec.prototype.tableSpec = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * BigQueryTableSpec typeSpec.
-                         * @member {"viewSpec"|"tableSpec"|undefined} typeSpec
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @instance
-                         */
-                        Object.defineProperty(BigQueryTableSpec.prototype, "typeSpec", {
-                            get: $util.oneOfGetter($oneOfFields = ["viewSpec", "tableSpec"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new BigQueryTableSpec instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec instance
-                         */
-                        BigQueryTableSpec.create = function create(properties) {
-                            return new BigQueryTableSpec(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified BigQueryTableSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryTableSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec} message BigQueryTableSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BigQueryTableSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.tableSourceType);
-                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec"))
-                                $root.google.cloud.datacatalog.v1beta1.ViewSpec.encode(message.viewSpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec"))
-                                $root.google.cloud.datacatalog.v1beta1.TableSpec.encode(message.tableSpec, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified BigQueryTableSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryTableSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec} message BigQueryTableSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BigQueryTableSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a BigQueryTableSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BigQueryTableSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.tableSourceType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a BigQueryTableSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BigQueryTableSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a BigQueryTableSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        BigQueryTableSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
-                                switch (message.tableSourceType) {
-                                default:
-                                    return "tableSourceType: enum value expected";
-                                case 0:
-                                case 2:
-                                case 5:
-                                    break;
-                                }
-                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec")) {
-                                properties.typeSpec = 1;
-                                {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.ViewSpec.verify(message.viewSpec);
-                                    if (error)
-                                        return "viewSpec." + error;
-                                }
-                            }
-                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec")) {
-                                if (properties.typeSpec === 1)
-                                    return "typeSpec: multiple values";
-                                properties.typeSpec = 1;
-                                {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.TableSpec.verify(message.tableSpec);
-                                    if (error)
-                                        return "tableSpec." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a BigQueryTableSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} BigQueryTableSpec
-                         */
-                        BigQueryTableSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec();
-                            switch (object.tableSourceType) {
-                            case "TABLE_SOURCE_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.tableSourceType = 0;
-                                break;
-                            case "BIGQUERY_VIEW":
-                            case 2:
-                                message.tableSourceType = 2;
-                                break;
-                            case "BIGQUERY_TABLE":
-                            case 5:
-                                message.tableSourceType = 5;
-                                break;
-                            }
-                            if (object.viewSpec != null) {
-                                if (typeof object.viewSpec !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.BigQueryTableSpec.viewSpec: object expected");
-                                message.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.fromObject(object.viewSpec);
-                            }
-                            if (object.tableSpec != null) {
-                                if (typeof object.tableSpec !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.BigQueryTableSpec.tableSpec: object expected");
-                                message.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.fromObject(object.tableSpec);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a BigQueryTableSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.BigQueryTableSpec} message BigQueryTableSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        BigQueryTableSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.tableSourceType = options.enums === String ? "TABLE_SOURCE_TYPE_UNSPECIFIED" : 0;
-                            if (message.tableSourceType != null && message.hasOwnProperty("tableSourceType"))
-                                object.tableSourceType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.TableSourceType[message.tableSourceType] : message.tableSourceType;
-                            if (message.viewSpec != null && message.hasOwnProperty("viewSpec")) {
-                                object.viewSpec = $root.google.cloud.datacatalog.v1beta1.ViewSpec.toObject(message.viewSpec, options);
-                                if (options.oneofs)
-                                    object.typeSpec = "viewSpec";
-                            }
-                            if (message.tableSpec != null && message.hasOwnProperty("tableSpec")) {
-                                object.tableSpec = $root.google.cloud.datacatalog.v1beta1.TableSpec.toObject(message.tableSpec, options);
-                                if (options.oneofs)
-                                    object.typeSpec = "tableSpec";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this BigQueryTableSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryTableSpec
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        BigQueryTableSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return BigQueryTableSpec;
-                    })();
-    
-                    /**
-                     * TableSourceType enum.
-                     * @name google.cloud.datacatalog.v1beta1.TableSourceType
-                     * @enum {string}
-                     * @property {number} TABLE_SOURCE_TYPE_UNSPECIFIED=0 TABLE_SOURCE_TYPE_UNSPECIFIED value
-                     * @property {number} BIGQUERY_VIEW=2 BIGQUERY_VIEW value
-                     * @property {number} BIGQUERY_TABLE=5 BIGQUERY_TABLE value
-                     */
-                    v1beta1.TableSourceType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "TABLE_SOURCE_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[2] = "BIGQUERY_VIEW"] = 2;
-                        values[valuesById[5] = "BIGQUERY_TABLE"] = 5;
-                        return values;
-                    })();
-    
-                    v1beta1.ViewSpec = (function() {
-    
-                        /**
-                         * Properties of a ViewSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IViewSpec
-                         * @property {string|null} [viewQuery] ViewSpec viewQuery
-                         */
-    
-                        /**
-                         * Constructs a new ViewSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a ViewSpec.
-                         * @implements IViewSpec
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec=} [properties] Properties to set
-                         */
-                        function ViewSpec(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ViewSpec viewQuery.
-                         * @member {string} viewQuery
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @instance
-                         */
-                        ViewSpec.prototype.viewQuery = "";
-    
-                        /**
-                         * Creates a new ViewSpec instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec instance
-                         */
-                        ViewSpec.create = function create(properties) {
-                            return new ViewSpec(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ViewSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ViewSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec} message ViewSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ViewSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.viewQuery);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ViewSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ViewSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IViewSpec} message ViewSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ViewSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ViewSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ViewSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ViewSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.viewQuery = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ViewSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ViewSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ViewSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ViewSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
-                                if (!$util.isString(message.viewQuery))
-                                    return "viewQuery: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ViewSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.ViewSpec} ViewSpec
-                         */
-                        ViewSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ViewSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.ViewSpec();
-                            if (object.viewQuery != null)
-                                message.viewQuery = String(object.viewQuery);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ViewSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ViewSpec} message ViewSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ViewSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.viewQuery = "";
-                            if (message.viewQuery != null && message.hasOwnProperty("viewQuery"))
-                                object.viewQuery = message.viewQuery;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ViewSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.ViewSpec
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ViewSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return ViewSpec;
-                    })();
-    
-                    v1beta1.TableSpec = (function() {
-    
-                        /**
-                         * Properties of a TableSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ITableSpec
-                         * @property {string|null} [groupedEntry] TableSpec groupedEntry
-                         */
-    
-                        /**
-                         * Constructs a new TableSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a TableSpec.
-                         * @implements ITableSpec
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec=} [properties] Properties to set
-                         */
-                        function TableSpec(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TableSpec groupedEntry.
-                         * @member {string} groupedEntry
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @instance
-                         */
-                        TableSpec.prototype.groupedEntry = "";
-    
-                        /**
-                         * Creates a new TableSpec instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec instance
-                         */
-                        TableSpec.create = function create(properties) {
-                            return new TableSpec(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TableSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TableSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec} message TableSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TableSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.groupedEntry);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified TableSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TableSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITableSpec} message TableSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TableSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a TableSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TableSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TableSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.groupedEntry = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a TableSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TableSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a TableSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        TableSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
-                                if (!$util.isString(message.groupedEntry))
-                                    return "groupedEntry: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a TableSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.TableSpec} TableSpec
-                         */
-                        TableSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TableSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.TableSpec();
-                            if (object.groupedEntry != null)
-                                message.groupedEntry = String(object.groupedEntry);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a TableSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.TableSpec} message TableSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        TableSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.groupedEntry = "";
-                            if (message.groupedEntry != null && message.hasOwnProperty("groupedEntry"))
-                                object.groupedEntry = message.groupedEntry;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this TableSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.TableSpec
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        TableSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return TableSpec;
-                    })();
-    
-                    v1beta1.BigQueryDateShardedSpec = (function() {
-    
-                        /**
-                         * Properties of a BigQueryDateShardedSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IBigQueryDateShardedSpec
-                         * @property {string|null} [dataset] BigQueryDateShardedSpec dataset
-                         * @property {string|null} [tablePrefix] BigQueryDateShardedSpec tablePrefix
-                         * @property {number|Long|null} [shardCount] BigQueryDateShardedSpec shardCount
-                         */
-    
-                        /**
-                         * Constructs a new BigQueryDateShardedSpec.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a BigQueryDateShardedSpec.
-                         * @implements IBigQueryDateShardedSpec
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec=} [properties] Properties to set
-                         */
-                        function BigQueryDateShardedSpec(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * BigQueryDateShardedSpec dataset.
-                         * @member {string} dataset
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @instance
-                         */
-                        BigQueryDateShardedSpec.prototype.dataset = "";
-    
-                        /**
-                         * BigQueryDateShardedSpec tablePrefix.
-                         * @member {string} tablePrefix
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @instance
-                         */
-                        BigQueryDateShardedSpec.prototype.tablePrefix = "";
-    
-                        /**
-                         * BigQueryDateShardedSpec shardCount.
-                         * @member {number|Long} shardCount
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @instance
-                         */
-                        BigQueryDateShardedSpec.prototype.shardCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * Creates a new BigQueryDateShardedSpec instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec instance
-                         */
-                        BigQueryDateShardedSpec.create = function create(properties) {
-                            return new BigQueryDateShardedSpec(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified BigQueryDateShardedSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec} message BigQueryDateShardedSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BigQueryDateShardedSpec.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.dataset != null && message.hasOwnProperty("dataset"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
-                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tablePrefix);
-                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.shardCount);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified BigQueryDateShardedSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec} message BigQueryDateShardedSpec message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        BigQueryDateShardedSpec.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a BigQueryDateShardedSpec message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BigQueryDateShardedSpec.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.dataset = reader.string();
-                                    break;
-                                case 2:
-                                    message.tablePrefix = reader.string();
-                                    break;
-                                case 3:
-                                    message.shardCount = reader.int64();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a BigQueryDateShardedSpec message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        BigQueryDateShardedSpec.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a BigQueryDateShardedSpec message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        BigQueryDateShardedSpec.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.dataset != null && message.hasOwnProperty("dataset"))
-                                if (!$util.isString(message.dataset))
-                                    return "dataset: string expected";
-                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
-                                if (!$util.isString(message.tablePrefix))
-                                    return "tablePrefix: string expected";
-                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
-                                if (!$util.isInteger(message.shardCount) && !(message.shardCount && $util.isInteger(message.shardCount.low) && $util.isInteger(message.shardCount.high)))
-                                    return "shardCount: integer|Long expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a BigQueryDateShardedSpec message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} BigQueryDateShardedSpec
-                         */
-                        BigQueryDateShardedSpec.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec();
-                            if (object.dataset != null)
-                                message.dataset = String(object.dataset);
-                            if (object.tablePrefix != null)
-                                message.tablePrefix = String(object.tablePrefix);
-                            if (object.shardCount != null)
-                                if ($util.Long)
-                                    (message.shardCount = $util.Long.fromValue(object.shardCount)).unsigned = false;
-                                else if (typeof object.shardCount === "string")
-                                    message.shardCount = parseInt(object.shardCount, 10);
-                                else if (typeof object.shardCount === "number")
-                                    message.shardCount = object.shardCount;
-                                else if (typeof object.shardCount === "object")
-                                    message.shardCount = new $util.LongBits(object.shardCount.low >>> 0, object.shardCount.high >>> 0).toNumber();
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a BigQueryDateShardedSpec message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec} message BigQueryDateShardedSpec
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        BigQueryDateShardedSpec.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.dataset = "";
-                                object.tablePrefix = "";
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.shardCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.shardCount = options.longs === String ? "0" : 0;
-                            }
-                            if (message.dataset != null && message.hasOwnProperty("dataset"))
-                                object.dataset = message.dataset;
-                            if (message.tablePrefix != null && message.hasOwnProperty("tablePrefix"))
-                                object.tablePrefix = message.tablePrefix;
-                            if (message.shardCount != null && message.hasOwnProperty("shardCount"))
-                                if (typeof message.shardCount === "number")
-                                    object.shardCount = options.longs === String ? String(message.shardCount) : message.shardCount;
-                                else
-                                    object.shardCount = options.longs === String ? $util.Long.prototype.toString.call(message.shardCount) : options.longs === Number ? new $util.LongBits(message.shardCount.low >>> 0, message.shardCount.high >>> 0).toNumber() : message.shardCount;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this BigQueryDateShardedSpec to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        BigQueryDateShardedSpec.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return BigQueryDateShardedSpec;
-                    })();
-    
-                    v1beta1.Tag = (function() {
-    
-                        /**
-                         * Properties of a Tag.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ITag
-                         * @property {string|null} [name] Tag name
-                         * @property {string|null} [template] Tag template
-                         * @property {string|null} [templateDisplayName] Tag templateDisplayName
-                         * @property {string|null} [column] Tag column
-                         * @property {Object.<string,google.cloud.datacatalog.v1beta1.ITagField>|null} [fields] Tag fields
-                         */
-    
-                        /**
-                         * Constructs a new Tag.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a Tag.
-                         * @implements ITag
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ITag=} [properties] Properties to set
-                         */
-                        function Tag(properties) {
-                            this.fields = {};
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Tag name.
-                         * @member {string} name
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Tag.prototype.name = "";
-    
-                        /**
-                         * Tag template.
-                         * @member {string} template
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Tag.prototype.template = "";
-    
-                        /**
-                         * Tag templateDisplayName.
-                         * @member {string} templateDisplayName
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Tag.prototype.templateDisplayName = "";
-    
-                        /**
-                         * Tag column.
-                         * @member {string} column
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Tag.prototype.column = "";
-    
-                        /**
-                         * Tag fields.
-                         * @member {Object.<string,google.cloud.datacatalog.v1beta1.ITagField>} fields
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Tag.prototype.fields = $util.emptyObject;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * Tag scope.
-                         * @member {"column"|undefined} scope
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         */
-                        Object.defineProperty(Tag.prototype, "scope", {
-                            get: $util.oneOfGetter($oneOfFields = ["column"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new Tag instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITag=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag instance
-                         */
-                        Tag.create = function create(properties) {
-                            return new Tag(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Tag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Tag.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITag} message Tag message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Tag.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.template != null && message.hasOwnProperty("template"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.template);
-                            if (message.fields != null && message.hasOwnProperty("fields"))
-                                for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
-                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                    $root.google.cloud.datacatalog.v1beta1.TagField.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                }
-                            if (message.column != null && message.hasOwnProperty("column"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.column);
-                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.templateDisplayName);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Tag.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITag} message Tag message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Tag.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Tag message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Tag.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Tag(), key;
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.template = reader.string();
-                                    break;
-                                case 5:
-                                    message.templateDisplayName = reader.string();
-                                    break;
-                                case 4:
-                                    message.column = reader.string();
-                                    break;
-                                case 3:
-                                    reader.skip().pos++;
-                                    if (message.fields === $util.emptyObject)
-                                        message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagField.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Tag message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Tag.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Tag message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Tag.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.template != null && message.hasOwnProperty("template"))
-                                if (!$util.isString(message.template))
-                                    return "template: string expected";
-                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
-                                if (!$util.isString(message.templateDisplayName))
-                                    return "templateDisplayName: string expected";
-                            if (message.column != null && message.hasOwnProperty("column")) {
-                                properties.scope = 1;
-                                if (!$util.isString(message.column))
-                                    return "column: string expected";
-                            }
-                            if (message.fields != null && message.hasOwnProperty("fields")) {
-                                if (!$util.isObject(message.fields))
-                                    return "fields: object expected";
-                                var key = Object.keys(message.fields);
-                                for (var i = 0; i < key.length; ++i) {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.TagField.verify(message.fields[key[i]]);
-                                    if (error)
-                                        return "fields." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Tag message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.Tag} Tag
-                         */
-                        Tag.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.Tag)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.Tag();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.template != null)
-                                message.template = String(object.template);
-                            if (object.templateDisplayName != null)
-                                message.templateDisplayName = String(object.templateDisplayName);
-                            if (object.column != null)
-                                message.column = String(object.column);
-                            if (object.fields) {
-                                if (typeof object.fields !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Tag.fields: object expected");
-                                message.fields = {};
-                                for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
-                                    if (typeof object.fields[keys[i]] !== "object")
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.Tag.fields: object expected");
-                                    message.fields[keys[i]] = $root.google.cloud.datacatalog.v1beta1.TagField.fromObject(object.fields[keys[i]]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Tag message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.Tag} message Tag
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Tag.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.objects || options.defaults)
-                                object.fields = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.template = "";
-                                object.templateDisplayName = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.template != null && message.hasOwnProperty("template"))
-                                object.template = message.template;
-                            var keys2;
-                            if (message.fields && (keys2 = Object.keys(message.fields)).length) {
-                                object.fields = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.fields[keys2[j]] = $root.google.cloud.datacatalog.v1beta1.TagField.toObject(message.fields[keys2[j]], options);
-                            }
-                            if (message.column != null && message.hasOwnProperty("column")) {
-                                object.column = message.column;
-                                if (options.oneofs)
-                                    object.scope = "column";
-                            }
-                            if (message.templateDisplayName != null && message.hasOwnProperty("templateDisplayName"))
-                                object.templateDisplayName = message.templateDisplayName;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Tag to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.Tag
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Tag.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return Tag;
-                    })();
-    
-                    v1beta1.TagField = (function() {
-    
-                        /**
-                         * Properties of a TagField.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ITagField
-                         * @property {string|null} [displayName] TagField displayName
-                         * @property {number|null} [doubleValue] TagField doubleValue
-                         * @property {string|null} [stringValue] TagField stringValue
-                         * @property {boolean|null} [boolValue] TagField boolValue
-                         * @property {google.protobuf.ITimestamp|null} [timestampValue] TagField timestampValue
-                         * @property {google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null} [enumValue] TagField enumValue
-                         */
-    
-                        /**
-                         * Constructs a new TagField.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a TagField.
-                         * @implements ITagField
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ITagField=} [properties] Properties to set
-                         */
-                        function TagField(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TagField displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.displayName = "";
-    
-                        /**
-                         * TagField doubleValue.
-                         * @member {number} doubleValue
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.doubleValue = 0;
-    
-                        /**
-                         * TagField stringValue.
-                         * @member {string} stringValue
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.stringValue = "";
-    
-                        /**
-                         * TagField boolValue.
-                         * @member {boolean} boolValue
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.boolValue = false;
-    
-                        /**
-                         * TagField timestampValue.
-                         * @member {google.protobuf.ITimestamp|null|undefined} timestampValue
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.timestampValue = null;
-    
-                        /**
-                         * TagField enumValue.
-                         * @member {google.cloud.datacatalog.v1beta1.TagField.IEnumValue|null|undefined} enumValue
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        TagField.prototype.enumValue = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * TagField kind.
-                         * @member {"doubleValue"|"stringValue"|"boolValue"|"timestampValue"|"enumValue"|undefined} kind
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         */
-                        Object.defineProperty(TagField.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["doubleValue", "stringValue", "boolValue", "timestampValue", "enumValue"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new TagField instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagField=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField instance
-                         */
-                        TagField.create = function create(properties) {
-                            return new TagField(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TagField message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagField} message TagField message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TagField.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
-                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
-                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.doubleValue);
-                            if (message.stringValue != null && message.hasOwnProperty("stringValue"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.stringValue);
-                            if (message.boolValue != null && message.hasOwnProperty("boolValue"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.boolValue);
-                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue"))
-                                $root.google.protobuf.Timestamp.encode(message.timestampValue, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.enumValue != null && message.hasOwnProperty("enumValue"))
-                                $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.encode(message.enumValue, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified TagField message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagField} message TagField message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TagField.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a TagField message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TagField.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagField();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 2:
-                                    message.doubleValue = reader.double();
-                                    break;
-                                case 3:
-                                    message.stringValue = reader.string();
-                                    break;
-                                case 4:
-                                    message.boolValue = reader.bool();
-                                    break;
-                                case 5:
-                                    message.timestampValue = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a TagField message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TagField.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a TagField message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        TagField.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
-                                properties.kind = 1;
-                                if (typeof message.doubleValue !== "number")
-                                    return "doubleValue: number expected";
-                            }
-                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                                if (properties.kind === 1)
-                                    return "kind: multiple values";
-                                properties.kind = 1;
-                                if (!$util.isString(message.stringValue))
-                                    return "stringValue: string expected";
-                            }
-                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
-                                if (properties.kind === 1)
-                                    return "kind: multiple values";
-                                properties.kind = 1;
-                                if (typeof message.boolValue !== "boolean")
-                                    return "boolValue: boolean expected";
-                            }
-                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
-                                if (properties.kind === 1)
-                                    return "kind: multiple values";
-                                properties.kind = 1;
-                                {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.timestampValue);
-                                    if (error)
-                                        return "timestampValue." + error;
-                                }
-                            }
-                            if (message.enumValue != null && message.hasOwnProperty("enumValue")) {
-                                if (properties.kind === 1)
-                                    return "kind: multiple values";
-                                properties.kind = 1;
-                                {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify(message.enumValue);
-                                    if (error)
-                                        return "enumValue." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a TagField message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.TagField} TagField
-                         */
-                        TagField.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagField)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.TagField();
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            if (object.doubleValue != null)
-                                message.doubleValue = Number(object.doubleValue);
-                            if (object.stringValue != null)
-                                message.stringValue = String(object.stringValue);
-                            if (object.boolValue != null)
-                                message.boolValue = Boolean(object.boolValue);
-                            if (object.timestampValue != null) {
-                                if (typeof object.timestampValue !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagField.timestampValue: object expected");
-                                message.timestampValue = $root.google.protobuf.Timestamp.fromObject(object.timestampValue);
-                            }
-                            if (object.enumValue != null) {
-                                if (typeof object.enumValue !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagField.enumValue: object expected");
-                                message.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.fromObject(object.enumValue);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a TagField message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.TagField} message TagField
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        TagField.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.displayName = "";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.doubleValue != null && message.hasOwnProperty("doubleValue")) {
-                                object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
-                                if (options.oneofs)
-                                    object.kind = "doubleValue";
-                            }
-                            if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
-                                object.stringValue = message.stringValue;
-                                if (options.oneofs)
-                                    object.kind = "stringValue";
-                            }
-                            if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
-                                object.boolValue = message.boolValue;
-                                if (options.oneofs)
-                                    object.kind = "boolValue";
-                            }
-                            if (message.timestampValue != null && message.hasOwnProperty("timestampValue")) {
-                                object.timestampValue = $root.google.protobuf.Timestamp.toObject(message.timestampValue, options);
-                                if (options.oneofs)
-                                    object.kind = "timestampValue";
-                            }
-                            if (message.enumValue != null && message.hasOwnProperty("enumValue")) {
-                                object.enumValue = $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue.toObject(message.enumValue, options);
-                                if (options.oneofs)
-                                    object.kind = "enumValue";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this TagField to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.TagField
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        TagField.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        TagField.EnumValue = (function() {
-    
-                            /**
-                             * Properties of an EnumValue.
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField
-                             * @interface IEnumValue
-                             * @property {string|null} [displayName] EnumValue displayName
-                             */
-    
-                            /**
-                             * Constructs a new EnumValue.
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField
-                             * @classdesc Represents an EnumValue.
-                             * @implements IEnumValue
-                             * @constructor
-                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue=} [properties] Properties to set
-                             */
-                            function EnumValue(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * EnumValue displayName.
-                             * @member {string} displayName
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @instance
-                             */
-                            EnumValue.prototype.displayName = "";
-    
-                            /**
-                             * Creates a new EnumValue instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue=} [properties] Properties to set
-                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue instance
-                             */
-                            EnumValue.create = function create(properties) {
-                                return new EnumValue(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified EnumValue message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue} message EnumValue message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            EnumValue.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified EnumValue message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagField.EnumValue.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.TagField.IEnumValue} message EnumValue message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            EnumValue.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an EnumValue message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            EnumValue.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.displayName = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an EnumValue message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            EnumValue.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an EnumValue message.
-                             * @function verify
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            EnumValue.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    if (!$util.isString(message.displayName))
-                                        return "displayName: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an EnumValue message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.datacatalog.v1beta1.TagField.EnumValue} EnumValue
-                             */
-                            EnumValue.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue)
-                                    return object;
-                                var message = new $root.google.cloud.datacatalog.v1beta1.TagField.EnumValue();
-                                if (object.displayName != null)
-                                    message.displayName = String(object.displayName);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an EnumValue message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.TagField.EnumValue} message EnumValue
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            EnumValue.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.displayName = "";
-                                if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                    object.displayName = message.displayName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this EnumValue to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.datacatalog.v1beta1.TagField.EnumValue
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            EnumValue.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return EnumValue;
-                        })();
-    
-                        return TagField;
-                    })();
-    
-                    v1beta1.TagTemplate = (function() {
-    
-                        /**
-                         * Properties of a TagTemplate.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ITagTemplate
-                         * @property {string|null} [name] TagTemplate name
-                         * @property {string|null} [displayName] TagTemplate displayName
-                         * @property {Object.<string,google.cloud.datacatalog.v1beta1.ITagTemplateField>|null} [fields] TagTemplate fields
-                         */
-    
-                        /**
-                         * Constructs a new TagTemplate.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a TagTemplate.
-                         * @implements ITagTemplate
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate=} [properties] Properties to set
-                         */
-                        function TagTemplate(properties) {
-                            this.fields = {};
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TagTemplate name.
-                         * @member {string} name
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
-                         * @instance
-                         */
-                        TagTemplate.prototype.name = "";
-    
-                        /**
-                         * TagTemplate displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
-                         * @instance
-                         */
-                        TagTemplate.prototype.displayName = "";
-    
-                        /**
-                         * TagTemplate fields.
-                         * @member {Object.<string,google.cloud.datacatalog.v1beta1.ITagTemplateField>} fields
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
-                         * @instance
-                         */
-                        TagTemplate.prototype.fields = $util.emptyObject;
-    
-                        /**
-                         * Creates a new TagTemplate instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate instance
-                         */
-                        TagTemplate.create = function create(properties) {
-                            return new TagTemplate(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TagTemplate message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplate.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate} message TagTemplate message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TagTemplate.encode = function encode(message, writer) {
+                        Taxonomy.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.name != null && message.hasOwnProperty("name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-                            if (message.fields != null && message.hasOwnProperty("fields"))
-                                for (var keys = Object.keys(message.fields), i = 0; i < keys.length; ++i) {
-                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                                    $root.google.cloud.datacatalog.v1beta1.TagTemplateField.encode(message.fields[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
-                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.activatedPolicyTypes != null && message.activatedPolicyTypes.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.activatedPolicyTypes.length; ++i)
+                                    writer.int32(message.activatedPolicyTypes[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified TagTemplate message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplate.verify|verify} messages.
+                         * Encodes the specified Taxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplate} message TagTemplate message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.ITaxonomy} message Taxonomy message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TagTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                        Taxonomy.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a TagTemplate message from the specified reader or buffer.
+                         * Decodes a Taxonomy message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         * @returns {google.cloud.datacatalog.v1beta1.Taxonomy} Taxonomy
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TagTemplate.decode = function decode(reader, length) {
+                        Taxonomy.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate(), key;
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.Taxonomy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -10413,12 +12083,17 @@
                                     message.displayName = reader.string();
                                     break;
                                 case 3:
-                                    reader.skip().pos++;
-                                    if (message.fields === $util.emptyObject)
-                                        message.fields = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.fields[key] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.decode(reader, reader.uint32());
+                                    message.description = reader.string();
+                                    break;
+                                case 6:
+                                    if (!(message.activatedPolicyTypes && message.activatedPolicyTypes.length))
+                                        message.activatedPolicyTypes = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.activatedPolicyTypes.push(reader.int32());
+                                    } else
+                                        message.activatedPolicyTypes.push(reader.int32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10429,30 +12104,30 @@
                         };
     
                         /**
-                         * Decodes a TagTemplate message from the specified reader or buffer, length delimited.
+                         * Decodes a Taxonomy message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         * @returns {google.cloud.datacatalog.v1beta1.Taxonomy} Taxonomy
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TagTemplate.decodeDelimited = function decodeDelimited(reader) {
+                        Taxonomy.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a TagTemplate message.
+                         * Verifies a Taxonomy message.
                          * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TagTemplate.verify = function verify(message) {
+                        Taxonomy.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -10461,114 +12136,147 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
-                            if (message.fields != null && message.hasOwnProperty("fields")) {
-                                if (!$util.isObject(message.fields))
-                                    return "fields: object expected";
-                                var key = Object.keys(message.fields);
-                                for (var i = 0; i < key.length; ++i) {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.verify(message.fields[key[i]]);
-                                    if (error)
-                                        return "fields." + error;
-                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.activatedPolicyTypes != null && message.hasOwnProperty("activatedPolicyTypes")) {
+                                if (!Array.isArray(message.activatedPolicyTypes))
+                                    return "activatedPolicyTypes: array expected";
+                                for (var i = 0; i < message.activatedPolicyTypes.length; ++i)
+                                    switch (message.activatedPolicyTypes[i]) {
+                                    default:
+                                        return "activatedPolicyTypes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
                             }
                             return null;
                         };
     
                         /**
-                         * Creates a TagTemplate message from a plain object. Also converts values to their respective internal types.
+                         * Creates a Taxonomy message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplate} TagTemplate
+                         * @returns {google.cloud.datacatalog.v1beta1.Taxonomy} Taxonomy
                          */
-                        TagTemplate.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagTemplate)
+                        Taxonomy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.Taxonomy)
                                 return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.TagTemplate();
+                            var message = new $root.google.cloud.datacatalog.v1beta1.Taxonomy();
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
-                            if (object.fields) {
-                                if (typeof object.fields !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplate.fields: object expected");
-                                message.fields = {};
-                                for (var keys = Object.keys(object.fields), i = 0; i < keys.length; ++i) {
-                                    if (typeof object.fields[keys[i]] !== "object")
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplate.fields: object expected");
-                                    message.fields[keys[i]] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.fromObject(object.fields[keys[i]]);
-                                }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.activatedPolicyTypes) {
+                                if (!Array.isArray(object.activatedPolicyTypes))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Taxonomy.activatedPolicyTypes: array expected");
+                                message.activatedPolicyTypes = [];
+                                for (var i = 0; i < object.activatedPolicyTypes.length; ++i)
+                                    switch (object.activatedPolicyTypes[i]) {
+                                    default:
+                                    case "POLICY_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.activatedPolicyTypes[i] = 0;
+                                        break;
+                                    case "FINE_GRAINED_ACCESS_CONTROL":
+                                    case 1:
+                                        message.activatedPolicyTypes[i] = 1;
+                                        break;
+                                    }
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a TagTemplate message. Also converts values to other types if specified.
+                         * Creates a plain object from a Taxonomy message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.TagTemplate} message TagTemplate
+                         * @param {google.cloud.datacatalog.v1beta1.Taxonomy} message Taxonomy
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        TagTemplate.toObject = function toObject(message, options) {
+                        Taxonomy.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
-                                object.fields = {};
+                            if (options.arrays || options.defaults)
+                                object.activatedPolicyTypes = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.displayName = "";
+                                object.description = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
-                            var keys2;
-                            if (message.fields && (keys2 = Object.keys(message.fields)).length) {
-                                object.fields = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.fields[keys2[j]] = $root.google.cloud.datacatalog.v1beta1.TagTemplateField.toObject(message.fields[keys2[j]], options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.activatedPolicyTypes && message.activatedPolicyTypes.length) {
+                                object.activatedPolicyTypes = [];
+                                for (var j = 0; j < message.activatedPolicyTypes.length; ++j)
+                                    object.activatedPolicyTypes[j] = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[message.activatedPolicyTypes[j]] : message.activatedPolicyTypes[j];
                             }
                             return object;
                         };
     
                         /**
-                         * Converts this TagTemplate to JSON.
+                         * Converts this Taxonomy to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplate
+                         * @memberof google.cloud.datacatalog.v1beta1.Taxonomy
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        TagTemplate.prototype.toJSON = function toJSON() {
+                        Taxonomy.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return TagTemplate;
+                        /**
+                         * PolicyType enum.
+                         * @name google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType
+                         * @enum {string}
+                         * @property {number} POLICY_TYPE_UNSPECIFIED=0 POLICY_TYPE_UNSPECIFIED value
+                         * @property {number} FINE_GRAINED_ACCESS_CONTROL=1 FINE_GRAINED_ACCESS_CONTROL value
+                         */
+                        Taxonomy.PolicyType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "POLICY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FINE_GRAINED_ACCESS_CONTROL"] = 1;
+                            return values;
+                        })();
+    
+                        return Taxonomy;
                     })();
     
-                    v1beta1.TagTemplateField = (function() {
+                    v1beta1.PolicyTag = (function() {
     
                         /**
-                         * Properties of a TagTemplateField.
+                         * Properties of a PolicyTag.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ITagTemplateField
-                         * @property {string|null} [name] TagTemplateField name
-                         * @property {string|null} [displayName] TagTemplateField displayName
-                         * @property {google.cloud.datacatalog.v1beta1.IFieldType|null} [type] TagTemplateField type
+                         * @interface IPolicyTag
+                         * @property {string|null} [name] PolicyTag name
+                         * @property {string|null} [displayName] PolicyTag displayName
+                         * @property {string|null} [description] PolicyTag description
+                         * @property {string|null} [parentPolicyTag] PolicyTag parentPolicyTag
+                         * @property {Array.<string>|null} [childPolicyTags] PolicyTag childPolicyTags
                          */
     
                         /**
-                         * Constructs a new TagTemplateField.
+                         * Constructs a new PolicyTag.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a TagTemplateField.
-                         * @implements ITagTemplateField
+                         * @classdesc Represents a PolicyTag.
+                         * @implements IPolicyTag
                          * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField=} [properties] Properties to set
+                         * @param {google.cloud.datacatalog.v1beta1.IPolicyTag=} [properties] Properties to set
                          */
-                        function TagTemplateField(properties) {
+                        function PolicyTag(properties) {
+                            this.childPolicyTags = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -10576,101 +12284,130 @@
                         }
     
                         /**
-                         * TagTemplateField name.
+                         * PolicyTag name.
                          * @member {string} name
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @instance
                          */
-                        TagTemplateField.prototype.name = "";
+                        PolicyTag.prototype.name = "";
     
                         /**
-                         * TagTemplateField displayName.
+                         * PolicyTag displayName.
                          * @member {string} displayName
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @instance
                          */
-                        TagTemplateField.prototype.displayName = "";
+                        PolicyTag.prototype.displayName = "";
     
                         /**
-                         * TagTemplateField type.
-                         * @member {google.cloud.datacatalog.v1beta1.IFieldType|null|undefined} type
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * PolicyTag description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @instance
                          */
-                        TagTemplateField.prototype.type = null;
+                        PolicyTag.prototype.description = "";
     
                         /**
-                         * Creates a new TagTemplateField instance using the specified properties.
+                         * PolicyTag parentPolicyTag.
+                         * @member {string} parentPolicyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
+                         * @instance
+                         */
+                        PolicyTag.prototype.parentPolicyTag = "";
+    
+                        /**
+                         * PolicyTag childPolicyTags.
+                         * @member {Array.<string>} childPolicyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
+                         * @instance
+                         */
+                        PolicyTag.prototype.childPolicyTags = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PolicyTag instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField instance
+                         * @param {google.cloud.datacatalog.v1beta1.IPolicyTag=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.PolicyTag} PolicyTag instance
                          */
-                        TagTemplateField.create = function create(properties) {
-                            return new TagTemplateField(properties);
+                        PolicyTag.create = function create(properties) {
+                            return new PolicyTag(properties);
                         };
     
                         /**
-                         * Encodes the specified TagTemplateField message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplateField.verify|verify} messages.
+                         * Encodes the specified PolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField} message TagTemplateField message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.IPolicyTag} message PolicyTag message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TagTemplateField.encode = function encode(message, writer) {
+                        PolicyTag.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                $root.google.cloud.datacatalog.v1beta1.FieldType.encode(message.type, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.parentPolicyTag != null && message.hasOwnProperty("parentPolicyTag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.parentPolicyTag);
+                            if (message.childPolicyTags != null && message.childPolicyTags.length)
+                                for (var i = 0; i < message.childPolicyTags.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.childPolicyTags[i]);
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified TagTemplateField message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.TagTemplateField.verify|verify} messages.
+                         * Encodes the specified PolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ITagTemplateField} message TagTemplateField message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.IPolicyTag} message PolicyTag message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TagTemplateField.encodeDelimited = function encodeDelimited(message, writer) {
+                        PolicyTag.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a TagTemplateField message from the specified reader or buffer.
+                         * Decodes a PolicyTag message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         * @returns {google.cloud.datacatalog.v1beta1.PolicyTag} PolicyTag
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TagTemplateField.decode = function decode(reader, length) {
+                        PolicyTag.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.TagTemplateField();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.PolicyTag();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 6:
+                                case 1:
                                     message.name = reader.string();
                                     break;
-                                case 1:
+                                case 2:
                                     message.displayName = reader.string();
                                     break;
-                                case 2:
-                                    message.type = $root.google.cloud.datacatalog.v1beta1.FieldType.decode(reader, reader.uint32());
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.parentPolicyTag = reader.string();
+                                    break;
+                                case 5:
+                                    if (!(message.childPolicyTags && message.childPolicyTags.length))
+                                        message.childPolicyTags = [];
+                                    message.childPolicyTags.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10681,30 +12418,30 @@
                         };
     
                         /**
-                         * Decodes a TagTemplateField message from the specified reader or buffer, length delimited.
+                         * Decodes a PolicyTag message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         * @returns {google.cloud.datacatalog.v1beta1.PolicyTag} PolicyTag
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TagTemplateField.decodeDelimited = function decodeDelimited(reader) {
+                        PolicyTag.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a TagTemplateField message.
+                         * Verifies a PolicyTag message.
                          * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TagTemplateField.verify = function verify(message) {
+                        PolicyTag.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -10713,98 +12450,122 @@
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
-                            if (message.type != null && message.hasOwnProperty("type")) {
-                                var error = $root.google.cloud.datacatalog.v1beta1.FieldType.verify(message.type);
-                                if (error)
-                                    return "type." + error;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.parentPolicyTag != null && message.hasOwnProperty("parentPolicyTag"))
+                                if (!$util.isString(message.parentPolicyTag))
+                                    return "parentPolicyTag: string expected";
+                            if (message.childPolicyTags != null && message.hasOwnProperty("childPolicyTags")) {
+                                if (!Array.isArray(message.childPolicyTags))
+                                    return "childPolicyTags: array expected";
+                                for (var i = 0; i < message.childPolicyTags.length; ++i)
+                                    if (!$util.isString(message.childPolicyTags[i]))
+                                        return "childPolicyTags: string[] expected";
                             }
                             return null;
                         };
     
                         /**
-                         * Creates a TagTemplateField message from a plain object. Also converts values to their respective internal types.
+                         * Creates a PolicyTag message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.TagTemplateField} TagTemplateField
+                         * @returns {google.cloud.datacatalog.v1beta1.PolicyTag} PolicyTag
                          */
-                        TagTemplateField.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagTemplateField)
+                        PolicyTag.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.PolicyTag)
                                 return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.TagTemplateField();
+                            var message = new $root.google.cloud.datacatalog.v1beta1.PolicyTag();
                             if (object.name != null)
                                 message.name = String(object.name);
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
-                            if (object.type != null) {
-                                if (typeof object.type !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.TagTemplateField.type: object expected");
-                                message.type = $root.google.cloud.datacatalog.v1beta1.FieldType.fromObject(object.type);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.parentPolicyTag != null)
+                                message.parentPolicyTag = String(object.parentPolicyTag);
+                            if (object.childPolicyTags) {
+                                if (!Array.isArray(object.childPolicyTags))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.PolicyTag.childPolicyTags: array expected");
+                                message.childPolicyTags = [];
+                                for (var i = 0; i < object.childPolicyTags.length; ++i)
+                                    message.childPolicyTags[i] = String(object.childPolicyTags[i]);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a TagTemplateField message. Also converts values to other types if specified.
+                         * Creates a plain object from a PolicyTag message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.TagTemplateField} message TagTemplateField
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTag} message PolicyTag
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        TagTemplateField.toObject = function toObject(message, options) {
+                        PolicyTag.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.childPolicyTags = [];
                             if (options.defaults) {
-                                object.displayName = "";
-                                object.type = null;
                                 object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.parentPolicyTag = "";
                             }
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = $root.google.cloud.datacatalog.v1beta1.FieldType.toObject(message.type, options);
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.parentPolicyTag != null && message.hasOwnProperty("parentPolicyTag"))
+                                object.parentPolicyTag = message.parentPolicyTag;
+                            if (message.childPolicyTags && message.childPolicyTags.length) {
+                                object.childPolicyTags = [];
+                                for (var j = 0; j < message.childPolicyTags.length; ++j)
+                                    object.childPolicyTags[j] = message.childPolicyTags[j];
+                            }
                             return object;
                         };
     
                         /**
-                         * Converts this TagTemplateField to JSON.
+                         * Converts this PolicyTag to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTag
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        TagTemplateField.prototype.toJSON = function toJSON() {
+                        PolicyTag.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return TagTemplateField;
+                        return PolicyTag;
                     })();
     
-                    v1beta1.FieldType = (function() {
+                    v1beta1.CreateTaxonomyRequest = (function() {
     
                         /**
-                         * Properties of a FieldType.
+                         * Properties of a CreateTaxonomyRequest.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface IFieldType
-                         * @property {google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType|null} [primitiveType] FieldType primitiveType
-                         * @property {google.cloud.datacatalog.v1beta1.FieldType.IEnumType|null} [enumType] FieldType enumType
+                         * @interface ICreateTaxonomyRequest
+                         * @property {string|null} [parent] CreateTaxonomyRequest parent
+                         * @property {google.cloud.datacatalog.v1beta1.ITaxonomy|null} [taxonomy] CreateTaxonomyRequest taxonomy
                          */
     
                         /**
-                         * Constructs a new FieldType.
+                         * Constructs a new CreateTaxonomyRequest.
                          * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a FieldType.
-                         * @implements IFieldType
+                         * @classdesc Represents a CreateTaxonomyRequest.
+                         * @implements ICreateTaxonomyRequest
                          * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.IFieldType=} [properties] Properties to set
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest=} [properties] Properties to set
                          */
-                        function FieldType(properties) {
+                        function CreateTaxonomyRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -10812,102 +12573,3255 @@
                         }
     
                         /**
-                         * FieldType primitiveType.
-                         * @member {google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType} primitiveType
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * CreateTaxonomyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
                          * @instance
                          */
-                        FieldType.prototype.primitiveType = 0;
+                        CreateTaxonomyRequest.prototype.parent = "";
     
                         /**
-                         * FieldType enumType.
-                         * @member {google.cloud.datacatalog.v1beta1.FieldType.IEnumType|null|undefined} enumType
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * CreateTaxonomyRequest taxonomy.
+                         * @member {google.cloud.datacatalog.v1beta1.ITaxonomy|null|undefined} taxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
                          * @instance
                          */
-                        FieldType.prototype.enumType = null;
+                        CreateTaxonomyRequest.prototype.taxonomy = null;
+    
+                        /**
+                         * Creates a new CreateTaxonomyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest} CreateTaxonomyRequest instance
+                         */
+                        CreateTaxonomyRequest.create = function create(properties) {
+                            return new CreateTaxonomyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest} message CreateTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTaxonomyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy"))
+                                $root.google.cloud.datacatalog.v1beta1.Taxonomy.encode(message.taxonomy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest} message CreateTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateTaxonomyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateTaxonomyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest} CreateTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTaxonomyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateTaxonomyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest} CreateTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateTaxonomyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateTaxonomyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateTaxonomyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.Taxonomy.verify(message.taxonomy);
+                                if (error)
+                                    return "taxonomy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest} CreateTaxonomyRequest
+                         */
+                        CreateTaxonomyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.taxonomy != null) {
+                                if (typeof object.taxonomy !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.taxonomy: object expected");
+                                message.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.fromObject(object.taxonomy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateTaxonomyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest} message CreateTaxonomyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateTaxonomyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.taxonomy = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy"))
+                                object.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.toObject(message.taxonomy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateTaxonomyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateTaxonomyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateTaxonomyRequest;
+                    })();
+    
+                    v1beta1.DeleteTaxonomyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IDeleteTaxonomyRequest
+                         * @property {string|null} [name] DeleteTaxonomyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a DeleteTaxonomyRequest.
+                         * @implements IDeleteTaxonomyRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest=} [properties] Properties to set
+                         */
+                        function DeleteTaxonomyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteTaxonomyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @instance
+                         */
+                        DeleteTaxonomyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteTaxonomyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest} DeleteTaxonomyRequest instance
+                         */
+                        DeleteTaxonomyRequest.create = function create(properties) {
+                            return new DeleteTaxonomyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest} message DeleteTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTaxonomyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest} message DeleteTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteTaxonomyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest} DeleteTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTaxonomyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest} DeleteTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteTaxonomyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteTaxonomyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteTaxonomyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest} DeleteTaxonomyRequest
+                         */
+                        DeleteTaxonomyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteTaxonomyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest} message DeleteTaxonomyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteTaxonomyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteTaxonomyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteTaxonomyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteTaxonomyRequest;
+                    })();
+    
+                    v1beta1.UpdateTaxonomyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IUpdateTaxonomyRequest
+                         * @property {google.cloud.datacatalog.v1beta1.ITaxonomy|null} [taxonomy] UpdateTaxonomyRequest taxonomy
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateTaxonomyRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an UpdateTaxonomyRequest.
+                         * @implements IUpdateTaxonomyRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest=} [properties] Properties to set
+                         */
+                        function UpdateTaxonomyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateTaxonomyRequest taxonomy.
+                         * @member {google.cloud.datacatalog.v1beta1.ITaxonomy|null|undefined} taxonomy
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @instance
+                         */
+                        UpdateTaxonomyRequest.prototype.taxonomy = null;
+    
+                        /**
+                         * UpdateTaxonomyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @instance
+                         */
+                        UpdateTaxonomyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateTaxonomyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest} UpdateTaxonomyRequest instance
+                         */
+                        UpdateTaxonomyRequest.create = function create(properties) {
+                            return new UpdateTaxonomyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest} message UpdateTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTaxonomyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy"))
+                                $root.google.cloud.datacatalog.v1beta1.Taxonomy.encode(message.taxonomy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest} message UpdateTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateTaxonomyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest} UpdateTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTaxonomyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest} UpdateTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateTaxonomyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateTaxonomyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateTaxonomyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.Taxonomy.verify(message.taxonomy);
+                                if (error)
+                                    return "taxonomy." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest} UpdateTaxonomyRequest
+                         */
+                        UpdateTaxonomyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest();
+                            if (object.taxonomy != null) {
+                                if (typeof object.taxonomy !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.taxonomy: object expected");
+                                message.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.fromObject(object.taxonomy);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateTaxonomyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest} message UpdateTaxonomyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateTaxonomyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.taxonomy = null;
+                                object.updateMask = null;
+                            }
+                            if (message.taxonomy != null && message.hasOwnProperty("taxonomy"))
+                                object.taxonomy = $root.google.cloud.datacatalog.v1beta1.Taxonomy.toObject(message.taxonomy, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateTaxonomyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateTaxonomyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateTaxonomyRequest;
+                    })();
+    
+                    v1beta1.ListTaxonomiesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IListTaxonomiesRequest
+                         * @property {string|null} [parent] ListTaxonomiesRequest parent
+                         * @property {number|null} [pageSize] ListTaxonomiesRequest pageSize
+                         * @property {string|null} [pageToken] ListTaxonomiesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ListTaxonomiesRequest.
+                         * @implements IListTaxonomiesRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest=} [properties] Properties to set
+                         */
+                        function ListTaxonomiesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTaxonomiesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @instance
+                         */
+                        ListTaxonomiesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListTaxonomiesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @instance
+                         */
+                        ListTaxonomiesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListTaxonomiesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @instance
+                         */
+                        ListTaxonomiesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListTaxonomiesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest} ListTaxonomiesRequest instance
+                         */
+                        ListTaxonomiesRequest.create = function create(properties) {
+                            return new ListTaxonomiesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest} message ListTaxonomiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTaxonomiesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest} message ListTaxonomiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTaxonomiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTaxonomiesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest} ListTaxonomiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTaxonomiesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTaxonomiesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest} ListTaxonomiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTaxonomiesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTaxonomiesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTaxonomiesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest} ListTaxonomiesRequest
+                         */
+                        ListTaxonomiesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTaxonomiesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest} message ListTaxonomiesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTaxonomiesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTaxonomiesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTaxonomiesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListTaxonomiesRequest;
+                    })();
+    
+                    v1beta1.ListTaxonomiesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IListTaxonomiesResponse
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ITaxonomy>|null} [taxonomies] ListTaxonomiesResponse taxonomies
+                         * @property {string|null} [nextPageToken] ListTaxonomiesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ListTaxonomiesResponse.
+                         * @implements IListTaxonomiesResponse
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse=} [properties] Properties to set
+                         */
+                        function ListTaxonomiesResponse(properties) {
+                            this.taxonomies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListTaxonomiesResponse taxonomies.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ITaxonomy>} taxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @instance
+                         */
+                        ListTaxonomiesResponse.prototype.taxonomies = $util.emptyArray;
+    
+                        /**
+                         * ListTaxonomiesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @instance
+                         */
+                        ListTaxonomiesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListTaxonomiesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} ListTaxonomiesResponse instance
+                         */
+                        ListTaxonomiesResponse.create = function create(properties) {
+                            return new ListTaxonomiesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse} message ListTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTaxonomiesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.taxonomies != null && message.taxonomies.length)
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.Taxonomy.encode(message.taxonomies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse} message ListTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListTaxonomiesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListTaxonomiesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} ListTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTaxonomiesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.taxonomies && message.taxonomies.length))
+                                        message.taxonomies = [];
+                                    message.taxonomies.push($root.google.cloud.datacatalog.v1beta1.Taxonomy.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} ListTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListTaxonomiesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListTaxonomiesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListTaxonomiesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.taxonomies != null && message.hasOwnProperty("taxonomies")) {
+                                if (!Array.isArray(message.taxonomies))
+                                    return "taxonomies: array expected";
+                                for (var i = 0; i < message.taxonomies.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.Taxonomy.verify(message.taxonomies[i]);
+                                    if (error)
+                                        return "taxonomies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} ListTaxonomiesResponse
+                         */
+                        ListTaxonomiesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse();
+                            if (object.taxonomies) {
+                                if (!Array.isArray(object.taxonomies))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.taxonomies: array expected");
+                                message.taxonomies = [];
+                                for (var i = 0; i < object.taxonomies.length; ++i) {
+                                    if (typeof object.taxonomies[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.taxonomies: object expected");
+                                    message.taxonomies[i] = $root.google.cloud.datacatalog.v1beta1.Taxonomy.fromObject(object.taxonomies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListTaxonomiesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} message ListTaxonomiesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListTaxonomiesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.taxonomies = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.taxonomies && message.taxonomies.length) {
+                                object.taxonomies = [];
+                                for (var j = 0; j < message.taxonomies.length; ++j)
+                                    object.taxonomies[j] = $root.google.cloud.datacatalog.v1beta1.Taxonomy.toObject(message.taxonomies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListTaxonomiesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListTaxonomiesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListTaxonomiesResponse;
+                    })();
+    
+                    v1beta1.GetTaxonomyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGetTaxonomyRequest
+                         * @property {string|null} [name] GetTaxonomyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetTaxonomyRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GetTaxonomyRequest.
+                         * @implements IGetTaxonomyRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest=} [properties] Properties to set
+                         */
+                        function GetTaxonomyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetTaxonomyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @instance
+                         */
+                        GetTaxonomyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetTaxonomyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GetTaxonomyRequest} GetTaxonomyRequest instance
+                         */
+                        GetTaxonomyRequest.create = function create(properties) {
+                            return new GetTaxonomyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest} message GetTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTaxonomyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest} message GetTaxonomyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetTaxonomyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetTaxonomyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GetTaxonomyRequest} GetTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTaxonomyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetTaxonomyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GetTaxonomyRequest} GetTaxonomyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetTaxonomyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetTaxonomyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetTaxonomyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GetTaxonomyRequest} GetTaxonomyRequest
+                         */
+                        GetTaxonomyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GetTaxonomyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetTaxonomyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GetTaxonomyRequest} message GetTaxonomyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetTaxonomyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetTaxonomyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GetTaxonomyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetTaxonomyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetTaxonomyRequest;
+                    })();
+    
+                    v1beta1.CreatePolicyTagRequest = (function() {
+    
+                        /**
+                         * Properties of a CreatePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ICreatePolicyTagRequest
+                         * @property {string|null} [parent] CreatePolicyTagRequest parent
+                         * @property {google.cloud.datacatalog.v1beta1.IPolicyTag|null} [policyTag] CreatePolicyTagRequest policyTag
+                         */
+    
+                        /**
+                         * Constructs a new CreatePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a CreatePolicyTagRequest.
+                         * @implements ICreatePolicyTagRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest=} [properties] Properties to set
+                         */
+                        function CreatePolicyTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreatePolicyTagRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @instance
+                         */
+                        CreatePolicyTagRequest.prototype.parent = "";
+    
+                        /**
+                         * CreatePolicyTagRequest policyTag.
+                         * @member {google.cloud.datacatalog.v1beta1.IPolicyTag|null|undefined} policyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @instance
+                         */
+                        CreatePolicyTagRequest.prototype.policyTag = null;
+    
+                        /**
+                         * Creates a new CreatePolicyTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest} CreatePolicyTagRequest instance
+                         */
+                        CreatePolicyTagRequest.create = function create(properties) {
+                            return new CreatePolicyTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest} message CreatePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePolicyTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                $root.google.cloud.datacatalog.v1beta1.PolicyTag.encode(message.policyTag, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest} message CreatePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreatePolicyTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreatePolicyTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest} CreatePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePolicyTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreatePolicyTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest} CreatePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreatePolicyTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreatePolicyTagRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreatePolicyTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.PolicyTag.verify(message.policyTag);
+                                if (error)
+                                    return "policyTag." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest} CreatePolicyTagRequest
+                         */
+                        CreatePolicyTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.policyTag != null) {
+                                if (typeof object.policyTag !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.policyTag: object expected");
+                                message.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.fromObject(object.policyTag);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreatePolicyTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest} message CreatePolicyTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreatePolicyTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.policyTag = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                object.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.toObject(message.policyTag, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreatePolicyTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreatePolicyTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreatePolicyTagRequest;
+                    })();
+    
+                    v1beta1.DeletePolicyTagRequest = (function() {
+    
+                        /**
+                         * Properties of a DeletePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IDeletePolicyTagRequest
+                         * @property {string|null} [name] DeletePolicyTagRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeletePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a DeletePolicyTagRequest.
+                         * @implements IDeletePolicyTagRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest=} [properties] Properties to set
+                         */
+                        function DeletePolicyTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeletePolicyTagRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @instance
+                         */
+                        DeletePolicyTagRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeletePolicyTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest} DeletePolicyTagRequest instance
+                         */
+                        DeletePolicyTagRequest.create = function create(properties) {
+                            return new DeletePolicyTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest} message DeletePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePolicyTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeletePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest} message DeletePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeletePolicyTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeletePolicyTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest} DeletePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePolicyTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeletePolicyTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest} DeletePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeletePolicyTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeletePolicyTagRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeletePolicyTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeletePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest} DeletePolicyTagRequest
+                         */
+                        DeletePolicyTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeletePolicyTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest} message DeletePolicyTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeletePolicyTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeletePolicyTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeletePolicyTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeletePolicyTagRequest;
+                    })();
+    
+                    v1beta1.UpdatePolicyTagRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IUpdatePolicyTagRequest
+                         * @property {google.cloud.datacatalog.v1beta1.IPolicyTag|null} [policyTag] UpdatePolicyTagRequest policyTag
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePolicyTagRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an UpdatePolicyTagRequest.
+                         * @implements IUpdatePolicyTagRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest=} [properties] Properties to set
+                         */
+                        function UpdatePolicyTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePolicyTagRequest policyTag.
+                         * @member {google.cloud.datacatalog.v1beta1.IPolicyTag|null|undefined} policyTag
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @instance
+                         */
+                        UpdatePolicyTagRequest.prototype.policyTag = null;
+    
+                        /**
+                         * UpdatePolicyTagRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @instance
+                         */
+                        UpdatePolicyTagRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdatePolicyTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest} UpdatePolicyTagRequest instance
+                         */
+                        UpdatePolicyTagRequest.create = function create(properties) {
+                            return new UpdatePolicyTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest} message UpdatePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePolicyTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                $root.google.cloud.datacatalog.v1beta1.PolicyTag.encode(message.policyTag, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest} message UpdatePolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePolicyTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest} UpdatePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePolicyTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest} UpdatePolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePolicyTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePolicyTagRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePolicyTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.PolicyTag.verify(message.policyTag);
+                                if (error)
+                                    return "policyTag." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest} UpdatePolicyTagRequest
+                         */
+                        UpdatePolicyTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest();
+                            if (object.policyTag != null) {
+                                if (typeof object.policyTag !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.policyTag: object expected");
+                                message.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.fromObject(object.policyTag);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePolicyTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest} message UpdatePolicyTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePolicyTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.policyTag = null;
+                                object.updateMask = null;
+                            }
+                            if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                object.policyTag = $root.google.cloud.datacatalog.v1beta1.PolicyTag.toObject(message.policyTag, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePolicyTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePolicyTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdatePolicyTagRequest;
+                    })();
+    
+                    v1beta1.ListPolicyTagsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListPolicyTagsRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IListPolicyTagsRequest
+                         * @property {string|null} [parent] ListPolicyTagsRequest parent
+                         * @property {number|null} [pageSize] ListPolicyTagsRequest pageSize
+                         * @property {string|null} [pageToken] ListPolicyTagsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPolicyTagsRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ListPolicyTagsRequest.
+                         * @implements IListPolicyTagsRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest=} [properties] Properties to set
+                         */
+                        function ListPolicyTagsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPolicyTagsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @instance
+                         */
+                        ListPolicyTagsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListPolicyTagsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @instance
+                         */
+                        ListPolicyTagsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListPolicyTagsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @instance
+                         */
+                        ListPolicyTagsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListPolicyTagsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest} ListPolicyTagsRequest instance
+                         */
+                        ListPolicyTagsRequest.create = function create(properties) {
+                            return new ListPolicyTagsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyTagsRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest} message ListPolicyTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyTagsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyTagsRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest} message ListPolicyTagsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyTagsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyTagsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest} ListPolicyTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyTagsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyTagsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest} ListPolicyTagsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyTagsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPolicyTagsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPolicyTagsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPolicyTagsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest} ListPolicyTagsRequest
+                         */
+                        ListPolicyTagsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPolicyTagsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest} message ListPolicyTagsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPolicyTagsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPolicyTagsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPolicyTagsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPolicyTagsRequest;
+                    })();
+    
+                    v1beta1.ListPolicyTagsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListPolicyTagsResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IListPolicyTagsResponse
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.IPolicyTag>|null} [policyTags] ListPolicyTagsResponse policyTags
+                         * @property {string|null} [nextPageToken] ListPolicyTagsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListPolicyTagsResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a ListPolicyTagsResponse.
+                         * @implements IListPolicyTagsResponse
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse=} [properties] Properties to set
+                         */
+                        function ListPolicyTagsResponse(properties) {
+                            this.policyTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListPolicyTagsResponse policyTags.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.IPolicyTag>} policyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @instance
+                         */
+                        ListPolicyTagsResponse.prototype.policyTags = $util.emptyArray;
+    
+                        /**
+                         * ListPolicyTagsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @instance
+                         */
+                        ListPolicyTagsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListPolicyTagsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} ListPolicyTagsResponse instance
+                         */
+                        ListPolicyTagsResponse.create = function create(properties) {
+                            return new ListPolicyTagsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyTagsResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse} message ListPolicyTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyTagsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policyTags != null && message.policyTags.length)
+                                for (var i = 0; i < message.policyTags.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.PolicyTag.encode(message.policyTags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListPolicyTagsResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse} message ListPolicyTagsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListPolicyTagsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyTagsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} ListPolicyTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyTagsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.policyTags && message.policyTags.length))
+                                        message.policyTags = [];
+                                    message.policyTags.push($root.google.cloud.datacatalog.v1beta1.PolicyTag.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListPolicyTagsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} ListPolicyTagsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListPolicyTagsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListPolicyTagsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListPolicyTagsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policyTags != null && message.hasOwnProperty("policyTags")) {
+                                if (!Array.isArray(message.policyTags))
+                                    return "policyTags: array expected";
+                                for (var i = 0; i < message.policyTags.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.PolicyTag.verify(message.policyTags[i]);
+                                    if (error)
+                                        return "policyTags." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListPolicyTagsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} ListPolicyTagsResponse
+                         */
+                        ListPolicyTagsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse();
+                            if (object.policyTags) {
+                                if (!Array.isArray(object.policyTags))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.policyTags: array expected");
+                                message.policyTags = [];
+                                for (var i = 0; i < object.policyTags.length; ++i) {
+                                    if (typeof object.policyTags[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.policyTags: object expected");
+                                    message.policyTags[i] = $root.google.cloud.datacatalog.v1beta1.PolicyTag.fromObject(object.policyTags[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListPolicyTagsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} message ListPolicyTagsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListPolicyTagsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.policyTags = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.policyTags && message.policyTags.length) {
+                                object.policyTags = [];
+                                for (var j = 0; j < message.policyTags.length; ++j)
+                                    object.policyTags[j] = $root.google.cloud.datacatalog.v1beta1.PolicyTag.toObject(message.policyTags[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListPolicyTagsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListPolicyTagsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListPolicyTagsResponse;
+                    })();
+    
+                    v1beta1.GetPolicyTagRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGetPolicyTagRequest
+                         * @property {string|null} [name] GetPolicyTagRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPolicyTagRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GetPolicyTagRequest.
+                         * @implements IGetPolicyTagRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest=} [properties] Properties to set
+                         */
+                        function GetPolicyTagRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPolicyTagRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @instance
+                         */
+                        GetPolicyTagRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPolicyTagRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GetPolicyTagRequest} GetPolicyTagRequest instance
+                         */
+                        GetPolicyTagRequest.create = function create(properties) {
+                            return new GetPolicyTagRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest} message GetPolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyTagRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest} message GetPolicyTagRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPolicyTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyTagRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GetPolicyTagRequest} GetPolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyTagRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPolicyTagRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GetPolicyTagRequest} GetPolicyTagRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPolicyTagRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPolicyTagRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPolicyTagRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GetPolicyTagRequest} GetPolicyTagRequest
+                         */
+                        GetPolicyTagRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GetPolicyTagRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPolicyTagRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GetPolicyTagRequest} message GetPolicyTagRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPolicyTagRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPolicyTagRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GetPolicyTagRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPolicyTagRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetPolicyTagRequest;
+                    })();
+    
+                    v1beta1.PolicyTagManagerSerialization = (function() {
+    
+                        /**
+                         * Constructs a new PolicyTagManagerSerialization service.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a PolicyTagManagerSerialization
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function PolicyTagManagerSerialization(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (PolicyTagManagerSerialization.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PolicyTagManagerSerialization;
+    
+                        /**
+                         * Creates new PolicyTagManagerSerialization service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {PolicyTagManagerSerialization} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        PolicyTagManagerSerialization.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#importTaxonomies}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @typedef ImportTaxonomiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} [response] ImportTaxonomiesResponse
+                         */
+    
+                        /**
+                         * Calls ImportTaxonomies.
+                         * @function importTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest} request ImportTaxonomiesRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomiesCallback} callback Node-style callback called with the error, if any, and ImportTaxonomiesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManagerSerialization.prototype.importTaxonomies = function importTaxonomies(request, callback) {
+                            return this.rpcCall(importTaxonomies, $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest, $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse, request, callback);
+                        }, "name", { value: "ImportTaxonomies" });
+    
+                        /**
+                         * Calls ImportTaxonomies.
+                         * @function importTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest} request ImportTaxonomiesRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#exportTaxonomies}.
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @typedef ExportTaxonomiesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} [response] ExportTaxonomiesResponse
+                         */
+    
+                        /**
+                         * Calls ExportTaxonomies.
+                         * @function exportTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest} request ExportTaxonomiesRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomiesCallback} callback Node-style callback called with the error, if any, and ExportTaxonomiesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(PolicyTagManagerSerialization.prototype.exportTaxonomies = function exportTaxonomies(request, callback) {
+                            return this.rpcCall(exportTaxonomies, $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest, $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse, request, callback);
+                        }, "name", { value: "ExportTaxonomies" });
+    
+                        /**
+                         * Calls ExportTaxonomies.
+                         * @function exportTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest} request ExportTaxonomiesRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return PolicyTagManagerSerialization;
+                    })();
+    
+                    v1beta1.SerializedTaxonomy = (function() {
+    
+                        /**
+                         * Properties of a SerializedTaxonomy.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISerializedTaxonomy
+                         * @property {string|null} [displayName] SerializedTaxonomy displayName
+                         * @property {string|null} [description] SerializedTaxonomy description
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ISerializedPolicyTag>|null} [policyTags] SerializedTaxonomy policyTags
+                         */
+    
+                        /**
+                         * Constructs a new SerializedTaxonomy.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a SerializedTaxonomy.
+                         * @implements ISerializedTaxonomy
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedTaxonomy=} [properties] Properties to set
+                         */
+                        function SerializedTaxonomy(properties) {
+                            this.policyTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SerializedTaxonomy displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @instance
+                         */
+                        SerializedTaxonomy.prototype.displayName = "";
+    
+                        /**
+                         * SerializedTaxonomy description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @instance
+                         */
+                        SerializedTaxonomy.prototype.description = "";
+    
+                        /**
+                         * SerializedTaxonomy policyTags.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ISerializedPolicyTag>} policyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @instance
+                         */
+                        SerializedTaxonomy.prototype.policyTags = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SerializedTaxonomy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedTaxonomy=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedTaxonomy} SerializedTaxonomy instance
+                         */
+                        SerializedTaxonomy.create = function create(properties) {
+                            return new SerializedTaxonomy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SerializedTaxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedTaxonomy} message SerializedTaxonomy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SerializedTaxonomy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.policyTags != null && message.policyTags.length)
+                                for (var i = 0; i < message.policyTags.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.encode(message.policyTags[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SerializedTaxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedTaxonomy} message SerializedTaxonomy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SerializedTaxonomy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SerializedTaxonomy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedTaxonomy} SerializedTaxonomy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SerializedTaxonomy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.policyTags && message.policyTags.length))
+                                        message.policyTags = [];
+                                    message.policyTags.push($root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SerializedTaxonomy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedTaxonomy} SerializedTaxonomy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SerializedTaxonomy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SerializedTaxonomy message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SerializedTaxonomy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.policyTags != null && message.hasOwnProperty("policyTags")) {
+                                if (!Array.isArray(message.policyTags))
+                                    return "policyTags: array expected";
+                                for (var i = 0; i < message.policyTags.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify(message.policyTags[i]);
+                                    if (error)
+                                        return "policyTags." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SerializedTaxonomy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedTaxonomy} SerializedTaxonomy
+                         */
+                        SerializedTaxonomy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.policyTags) {
+                                if (!Array.isArray(object.policyTags))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SerializedTaxonomy.policyTags: array expected");
+                                message.policyTags = [];
+                                for (var i = 0; i < object.policyTags.length; ++i) {
+                                    if (typeof object.policyTags[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.SerializedTaxonomy.policyTags: object expected");
+                                    message.policyTags[i] = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.fromObject(object.policyTags[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SerializedTaxonomy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.SerializedTaxonomy} message SerializedTaxonomy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SerializedTaxonomy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.policyTags = [];
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.description = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.policyTags && message.policyTags.length) {
+                                object.policyTags = [];
+                                for (var j = 0; j < message.policyTags.length; ++j)
+                                    object.policyTags[j] = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.toObject(message.policyTags[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SerializedTaxonomy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedTaxonomy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SerializedTaxonomy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SerializedTaxonomy;
+                    })();
+    
+                    v1beta1.SerializedPolicyTag = (function() {
+    
+                        /**
+                         * Properties of a SerializedPolicyTag.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISerializedPolicyTag
+                         * @property {string|null} [displayName] SerializedPolicyTag displayName
+                         * @property {string|null} [description] SerializedPolicyTag description
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ISerializedPolicyTag>|null} [childPolicyTags] SerializedPolicyTag childPolicyTags
+                         */
+    
+                        /**
+                         * Constructs a new SerializedPolicyTag.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a SerializedPolicyTag.
+                         * @implements ISerializedPolicyTag
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedPolicyTag=} [properties] Properties to set
+                         */
+                        function SerializedPolicyTag(properties) {
+                            this.childPolicyTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SerializedPolicyTag displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @instance
+                         */
+                        SerializedPolicyTag.prototype.displayName = "";
+    
+                        /**
+                         * SerializedPolicyTag description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @instance
+                         */
+                        SerializedPolicyTag.prototype.description = "";
+    
+                        /**
+                         * SerializedPolicyTag childPolicyTags.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ISerializedPolicyTag>} childPolicyTags
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @instance
+                         */
+                        SerializedPolicyTag.prototype.childPolicyTags = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SerializedPolicyTag instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedPolicyTag=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedPolicyTag} SerializedPolicyTag instance
+                         */
+                        SerializedPolicyTag.create = function create(properties) {
+                            return new SerializedPolicyTag(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SerializedPolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedPolicyTag} message SerializedPolicyTag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SerializedPolicyTag.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.childPolicyTags != null && message.childPolicyTags.length)
+                                for (var i = 0; i < message.childPolicyTags.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.encode(message.childPolicyTags[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SerializedPolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISerializedPolicyTag} message SerializedPolicyTag message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SerializedPolicyTag.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SerializedPolicyTag message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedPolicyTag} SerializedPolicyTag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SerializedPolicyTag.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.childPolicyTags && message.childPolicyTags.length))
+                                        message.childPolicyTags = [];
+                                    message.childPolicyTags.push($root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SerializedPolicyTag message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedPolicyTag} SerializedPolicyTag
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SerializedPolicyTag.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SerializedPolicyTag message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SerializedPolicyTag.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.childPolicyTags != null && message.hasOwnProperty("childPolicyTags")) {
+                                if (!Array.isArray(message.childPolicyTags))
+                                    return "childPolicyTags: array expected";
+                                for (var i = 0; i < message.childPolicyTags.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify(message.childPolicyTags[i]);
+                                    if (error)
+                                        return "childPolicyTags." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SerializedPolicyTag message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.SerializedPolicyTag} SerializedPolicyTag
+                         */
+                        SerializedPolicyTag.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.childPolicyTags) {
+                                if (!Array.isArray(object.childPolicyTags))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SerializedPolicyTag.childPolicyTags: array expected");
+                                message.childPolicyTags = [];
+                                for (var i = 0; i < object.childPolicyTags.length; ++i) {
+                                    if (typeof object.childPolicyTags[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.SerializedPolicyTag.childPolicyTags: object expected");
+                                    message.childPolicyTags[i] = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.fromObject(object.childPolicyTags[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SerializedPolicyTag message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.SerializedPolicyTag} message SerializedPolicyTag
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SerializedPolicyTag.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.childPolicyTags = [];
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.description = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.childPolicyTags && message.childPolicyTags.length) {
+                                object.childPolicyTags = [];
+                                for (var j = 0; j < message.childPolicyTags.length; ++j)
+                                    object.childPolicyTags[j] = $root.google.cloud.datacatalog.v1beta1.SerializedPolicyTag.toObject(message.childPolicyTags[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SerializedPolicyTag to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.SerializedPolicyTag
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SerializedPolicyTag.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SerializedPolicyTag;
+                    })();
+    
+                    v1beta1.ImportTaxonomiesRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IImportTaxonomiesRequest
+                         * @property {string|null} [parent] ImportTaxonomiesRequest parent
+                         * @property {google.cloud.datacatalog.v1beta1.IInlineSource|null} [inlineSource] ImportTaxonomiesRequest inlineSource
+                         */
+    
+                        /**
+                         * Constructs a new ImportTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an ImportTaxonomiesRequest.
+                         * @implements IImportTaxonomiesRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest=} [properties] Properties to set
+                         */
+                        function ImportTaxonomiesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportTaxonomiesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
+                         * @instance
+                         */
+                        ImportTaxonomiesRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportTaxonomiesRequest inlineSource.
+                         * @member {google.cloud.datacatalog.v1beta1.IInlineSource|null|undefined} inlineSource
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
+                         * @instance
+                         */
+                        ImportTaxonomiesRequest.prototype.inlineSource = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
-                         * FieldType typeDecl.
-                         * @member {"primitiveType"|"enumType"|undefined} typeDecl
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * ImportTaxonomiesRequest source.
+                         * @member {"inlineSource"|undefined} source
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @instance
                          */
-                        Object.defineProperty(FieldType.prototype, "typeDecl", {
-                            get: $util.oneOfGetter($oneOfFields = ["primitiveType", "enumType"]),
+                        Object.defineProperty(ImportTaxonomiesRequest.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["inlineSource"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
-                         * Creates a new FieldType instance using the specified properties.
+                         * Creates a new ImportTaxonomiesRequest instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IFieldType=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType instance
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest} ImportTaxonomiesRequest instance
                          */
-                        FieldType.create = function create(properties) {
-                            return new FieldType(properties);
+                        ImportTaxonomiesRequest.create = function create(properties) {
+                            return new ImportTaxonomiesRequest(properties);
                         };
     
                         /**
-                         * Encodes the specified FieldType message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.verify|verify} messages.
+                         * Encodes the specified ImportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IFieldType} message FieldType message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest} message ImportTaxonomiesRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        FieldType.encode = function encode(message, writer) {
+                        ImportTaxonomiesRequest.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.primitiveType);
-                            if (message.enumType != null && message.hasOwnProperty("enumType"))
-                                $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.encode(message.enumType, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.inlineSource != null && message.hasOwnProperty("inlineSource"))
+                                $root.google.cloud.datacatalog.v1beta1.InlineSource.encode(message.inlineSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified FieldType message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.verify|verify} messages.
+                         * Encodes the specified ImportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.IFieldType} message FieldType message or plain object to encode
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest} message ImportTaxonomiesRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        FieldType.encodeDelimited = function encodeDelimited(message, writer) {
+                        ImportTaxonomiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a FieldType message from the specified reader or buffer.
+                         * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest} ImportTaxonomiesRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FieldType.decode = function decode(reader, length) {
+                        ImportTaxonomiesRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.primitiveType = reader.int32();
+                                    message.parent = reader.string();
                                     break;
                                 case 2:
-                                    message.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.decode(reader, reader.uint32());
+                                    message.inlineSource = $root.google.cloud.datacatalog.v1beta1.InlineSource.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10918,554 +15832,997 @@
                         };
     
                         /**
-                         * Decodes a FieldType message from the specified reader or buffer, length delimited.
+                         * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest} ImportTaxonomiesRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FieldType.decodeDelimited = function decodeDelimited(reader) {
+                        ImportTaxonomiesRequest.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a FieldType message.
+                         * Verifies an ImportTaxonomiesRequest message.
                          * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FieldType.verify = function verify(message) {
+                        ImportTaxonomiesRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
-                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType")) {
-                                properties.typeDecl = 1;
-                                switch (message.primitiveType) {
-                                default:
-                                    return "primitiveType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    break;
-                                }
-                            }
-                            if (message.enumType != null && message.hasOwnProperty("enumType")) {
-                                if (properties.typeDecl === 1)
-                                    return "typeDecl: multiple values";
-                                properties.typeDecl = 1;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.inlineSource != null && message.hasOwnProperty("inlineSource")) {
+                                properties.source = 1;
                                 {
-                                    var error = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify(message.enumType);
+                                    var error = $root.google.cloud.datacatalog.v1beta1.InlineSource.verify(message.inlineSource);
                                     if (error)
-                                        return "enumType." + error;
+                                        return "inlineSource." + error;
                                 }
                             }
                             return null;
                         };
     
                         /**
-                         * Creates a FieldType message from a plain object. Also converts values to their respective internal types.
+                         * Creates an ImportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.FieldType} FieldType
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest} ImportTaxonomiesRequest
                          */
-                        FieldType.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType)
+                        ImportTaxonomiesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest)
                                 return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.FieldType();
-                            switch (object.primitiveType) {
-                            case "PRIMITIVE_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.primitiveType = 0;
-                                break;
-                            case "DOUBLE":
-                            case 1:
-                                message.primitiveType = 1;
-                                break;
-                            case "STRING":
-                            case 2:
-                                message.primitiveType = 2;
-                                break;
-                            case "BOOL":
-                            case 3:
-                                message.primitiveType = 3;
-                                break;
-                            case "TIMESTAMP":
-                            case 4:
-                                message.primitiveType = 4;
-                                break;
-                            }
-                            if (object.enumType != null) {
-                                if (typeof object.enumType !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.enumType: object expected");
-                                message.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.fromObject(object.enumType);
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.inlineSource != null) {
+                                if (typeof object.inlineSource !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.inlineSource: object expected");
+                                message.inlineSource = $root.google.cloud.datacatalog.v1beta1.InlineSource.fromObject(object.inlineSource);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a FieldType message. Also converts values to other types if specified.
+                         * Creates a plain object from an ImportTaxonomiesRequest message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @static
-                         * @param {google.cloud.datacatalog.v1beta1.FieldType} message FieldType
+                         * @param {google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest} message ImportTaxonomiesRequest
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        FieldType.toObject = function toObject(message, options) {
+                        ImportTaxonomiesRequest.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (message.primitiveType != null && message.hasOwnProperty("primitiveType")) {
-                                object.primitiveType = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType[message.primitiveType] : message.primitiveType;
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.inlineSource != null && message.hasOwnProperty("inlineSource")) {
+                                object.inlineSource = $root.google.cloud.datacatalog.v1beta1.InlineSource.toObject(message.inlineSource, options);
                                 if (options.oneofs)
-                                    object.typeDecl = "primitiveType";
-                            }
-                            if (message.enumType != null && message.hasOwnProperty("enumType")) {
-                                object.enumType = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.toObject(message.enumType, options);
-                                if (options.oneofs)
-                                    object.typeDecl = "enumType";
+                                    object.source = "inlineSource";
                             }
                             return object;
                         };
     
                         /**
-                         * Converts this FieldType to JSON.
+                         * Converts this ImportTaxonomiesRequest to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.FieldType
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        FieldType.prototype.toJSON = function toJSON() {
+                        ImportTaxonomiesRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        FieldType.EnumType = (function() {
+                        return ImportTaxonomiesRequest;
+                    })();
     
-                            /**
-                             * Properties of an EnumType.
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType
-                             * @interface IEnumType
-                             * @property {Array.<google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue>|null} [allowedValues] EnumType allowedValues
-                             */
-    
-                            /**
-                             * Constructs a new EnumType.
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType
-                             * @classdesc Represents an EnumType.
-                             * @implements IEnumType
-                             * @constructor
-                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType=} [properties] Properties to set
-                             */
-                            function EnumType(properties) {
-                                this.allowedValues = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * EnumType allowedValues.
-                             * @member {Array.<google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue>} allowedValues
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @instance
-                             */
-                            EnumType.prototype.allowedValues = $util.emptyArray;
-    
-                            /**
-                             * Creates a new EnumType instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType=} [properties] Properties to set
-                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType instance
-                             */
-                            EnumType.create = function create(properties) {
-                                return new EnumType(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified EnumType message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType} message EnumType message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            EnumType.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.allowedValues != null && message.allowedValues.length)
-                                    for (var i = 0; i < message.allowedValues.length; ++i)
-                                        $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.encode(message.allowedValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified EnumType message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.FieldType.IEnumType} message EnumType message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            EnumType.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an EnumType message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            EnumType.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        if (!(message.allowedValues && message.allowedValues.length))
-                                            message.allowedValues = [];
-                                        message.allowedValues.push($root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.decode(reader, reader.uint32()));
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an EnumType message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            EnumType.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an EnumType message.
-                             * @function verify
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            EnumType.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.allowedValues != null && message.hasOwnProperty("allowedValues")) {
-                                    if (!Array.isArray(message.allowedValues))
-                                        return "allowedValues: array expected";
-                                    for (var i = 0; i < message.allowedValues.length; ++i) {
-                                        var error = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify(message.allowedValues[i]);
-                                        if (error)
-                                            return "allowedValues." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an EnumType message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType} EnumType
-                             */
-                            EnumType.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType)
-                                    return object;
-                                var message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType();
-                                if (object.allowedValues) {
-                                    if (!Array.isArray(object.allowedValues))
-                                        throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.EnumType.allowedValues: array expected");
-                                    message.allowedValues = [];
-                                    for (var i = 0; i < object.allowedValues.length; ++i) {
-                                        if (typeof object.allowedValues[i] !== "object")
-                                            throw TypeError(".google.cloud.datacatalog.v1beta1.FieldType.EnumType.allowedValues: object expected");
-                                        message.allowedValues[i] = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.fromObject(object.allowedValues[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an EnumType message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @static
-                             * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType} message EnumType
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            EnumType.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.allowedValues = [];
-                                if (message.allowedValues && message.allowedValues.length) {
-                                    object.allowedValues = [];
-                                    for (var j = 0; j < message.allowedValues.length; ++j)
-                                        object.allowedValues[j] = $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.toObject(message.allowedValues[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this EnumType to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            EnumType.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            EnumType.EnumValue = (function() {
-    
-                                /**
-                                 * Properties of an EnumValue.
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                                 * @interface IEnumValue
-                                 * @property {string|null} [displayName] EnumValue displayName
-                                 */
-    
-                                /**
-                                 * Constructs a new EnumValue.
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType
-                                 * @classdesc Represents an EnumValue.
-                                 * @implements IEnumValue
-                                 * @constructor
-                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue=} [properties] Properties to set
-                                 */
-                                function EnumValue(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * EnumValue displayName.
-                                 * @member {string} displayName
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @instance
-                                 */
-                                EnumValue.prototype.displayName = "";
-    
-                                /**
-                                 * Creates a new EnumValue instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue=} [properties] Properties to set
-                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue instance
-                                 */
-                                EnumValue.create = function create(properties) {
-                                    return new EnumValue(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified EnumValue message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue} message EnumValue message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                EnumValue.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified EnumValue message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.IEnumValue} message EnumValue message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                EnumValue.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes an EnumValue message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                EnumValue.decode = function decode(reader, length) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        switch (tag >>> 3) {
-                                        case 1:
-                                            message.displayName = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes an EnumValue message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                EnumValue.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies an EnumValue message.
-                                 * @function verify
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                EnumValue.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                        if (!$util.isString(message.displayName))
-                                            return "displayName: string expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates an EnumValue message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} EnumValue
-                                 */
-                                EnumValue.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue)
-                                        return object;
-                                    var message = new $root.google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue();
-                                    if (object.displayName != null)
-                                        message.displayName = String(object.displayName);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from an EnumValue message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @static
-                                 * @param {google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue} message EnumValue
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                EnumValue.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults)
-                                        object.displayName = "";
-                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                        object.displayName = message.displayName;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this EnumValue to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.datacatalog.v1beta1.FieldType.EnumType.EnumValue
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                EnumValue.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                return EnumValue;
-                            })();
-    
-                            return EnumType;
-                        })();
+                    v1beta1.InlineSource = (function() {
     
                         /**
-                         * PrimitiveType enum.
-                         * @name google.cloud.datacatalog.v1beta1.FieldType.PrimitiveType
-                         * @enum {string}
-                         * @property {number} PRIMITIVE_TYPE_UNSPECIFIED=0 PRIMITIVE_TYPE_UNSPECIFIED value
-                         * @property {number} DOUBLE=1 DOUBLE value
-                         * @property {number} STRING=2 STRING value
-                         * @property {number} BOOL=3 BOOL value
-                         * @property {number} TIMESTAMP=4 TIMESTAMP value
+                         * Properties of an InlineSource.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IInlineSource
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ISerializedTaxonomy>|null} [taxonomies] InlineSource taxonomies
                          */
-                        FieldType.PrimitiveType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "PRIMITIVE_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "DOUBLE"] = 1;
-                            values[valuesById[2] = "STRING"] = 2;
-                            values[valuesById[3] = "BOOL"] = 3;
-                            values[valuesById[4] = "TIMESTAMP"] = 4;
-                            return values;
-                        })();
     
-                        return FieldType;
+                        /**
+                         * Constructs a new InlineSource.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an InlineSource.
+                         * @implements IInlineSource
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IInlineSource=} [properties] Properties to set
+                         */
+                        function InlineSource(properties) {
+                            this.taxonomies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InlineSource taxonomies.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ISerializedTaxonomy>} taxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @instance
+                         */
+                        InlineSource.prototype.taxonomies = $util.emptyArray;
+    
+                        /**
+                         * Creates a new InlineSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IInlineSource=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.InlineSource} InlineSource instance
+                         */
+                        InlineSource.create = function create(properties) {
+                            return new InlineSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InlineSource message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IInlineSource} message InlineSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.taxonomies != null && message.taxonomies.length)
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.encode(message.taxonomies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InlineSource message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IInlineSource} message InlineSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InlineSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InlineSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.InlineSource} InlineSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineSource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.InlineSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.taxonomies && message.taxonomies.length))
+                                        message.taxonomies = [];
+                                    message.taxonomies.push($root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InlineSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.InlineSource} InlineSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InlineSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InlineSource message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InlineSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.taxonomies != null && message.hasOwnProperty("taxonomies")) {
+                                if (!Array.isArray(message.taxonomies))
+                                    return "taxonomies: array expected";
+                                for (var i = 0; i < message.taxonomies.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify(message.taxonomies[i]);
+                                    if (error)
+                                        return "taxonomies." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InlineSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.InlineSource} InlineSource
+                         */
+                        InlineSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.InlineSource)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.InlineSource();
+                            if (object.taxonomies) {
+                                if (!Array.isArray(object.taxonomies))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.InlineSource.taxonomies: array expected");
+                                message.taxonomies = [];
+                                for (var i = 0; i < object.taxonomies.length; ++i) {
+                                    if (typeof object.taxonomies[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.InlineSource.taxonomies: object expected");
+                                    message.taxonomies[i] = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.fromObject(object.taxonomies[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InlineSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.InlineSource} message InlineSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InlineSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.taxonomies = [];
+                            if (message.taxonomies && message.taxonomies.length) {
+                                object.taxonomies = [];
+                                for (var j = 0; j < message.taxonomies.length; ++j)
+                                    object.taxonomies[j] = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.toObject(message.taxonomies[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InlineSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.InlineSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InlineSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return InlineSource;
+                    })();
+    
+                    v1beta1.ImportTaxonomiesResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IImportTaxonomiesResponse
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ITaxonomy>|null} [taxonomies] ImportTaxonomiesResponse taxonomies
+                         */
+    
+                        /**
+                         * Constructs a new ImportTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an ImportTaxonomiesResponse.
+                         * @implements IImportTaxonomiesResponse
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse=} [properties] Properties to set
+                         */
+                        function ImportTaxonomiesResponse(properties) {
+                            this.taxonomies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportTaxonomiesResponse taxonomies.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ITaxonomy>} taxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @instance
+                         */
+                        ImportTaxonomiesResponse.prototype.taxonomies = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ImportTaxonomiesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} ImportTaxonomiesResponse instance
+                         */
+                        ImportTaxonomiesResponse.create = function create(properties) {
+                            return new ImportTaxonomiesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse} message ImportTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportTaxonomiesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.taxonomies != null && message.taxonomies.length)
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.Taxonomy.encode(message.taxonomies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse} message ImportTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportTaxonomiesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} ImportTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportTaxonomiesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.taxonomies && message.taxonomies.length))
+                                        message.taxonomies = [];
+                                    message.taxonomies.push($root.google.cloud.datacatalog.v1beta1.Taxonomy.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} ImportTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportTaxonomiesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportTaxonomiesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportTaxonomiesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.taxonomies != null && message.hasOwnProperty("taxonomies")) {
+                                if (!Array.isArray(message.taxonomies))
+                                    return "taxonomies: array expected";
+                                for (var i = 0; i < message.taxonomies.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.Taxonomy.verify(message.taxonomies[i]);
+                                    if (error)
+                                        return "taxonomies." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} ImportTaxonomiesResponse
+                         */
+                        ImportTaxonomiesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse();
+                            if (object.taxonomies) {
+                                if (!Array.isArray(object.taxonomies))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.taxonomies: array expected");
+                                message.taxonomies = [];
+                                for (var i = 0; i < object.taxonomies.length; ++i) {
+                                    if (typeof object.taxonomies[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.taxonomies: object expected");
+                                    message.taxonomies[i] = $root.google.cloud.datacatalog.v1beta1.Taxonomy.fromObject(object.taxonomies[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportTaxonomiesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse} message ImportTaxonomiesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportTaxonomiesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.taxonomies = [];
+                            if (message.taxonomies && message.taxonomies.length) {
+                                object.taxonomies = [];
+                                for (var j = 0; j < message.taxonomies.length; ++j)
+                                    object.taxonomies[j] = $root.google.cloud.datacatalog.v1beta1.Taxonomy.toObject(message.taxonomies[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportTaxonomiesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportTaxonomiesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportTaxonomiesResponse;
+                    })();
+    
+                    v1beta1.ExportTaxonomiesRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IExportTaxonomiesRequest
+                         * @property {string|null} [parent] ExportTaxonomiesRequest parent
+                         * @property {Array.<string>|null} [taxonomies] ExportTaxonomiesRequest taxonomies
+                         * @property {boolean|null} [serializedTaxonomies] ExportTaxonomiesRequest serializedTaxonomies
+                         */
+    
+                        /**
+                         * Constructs a new ExportTaxonomiesRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an ExportTaxonomiesRequest.
+                         * @implements IExportTaxonomiesRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest=} [properties] Properties to set
+                         */
+                        function ExportTaxonomiesRequest(properties) {
+                            this.taxonomies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportTaxonomiesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @instance
+                         */
+                        ExportTaxonomiesRequest.prototype.parent = "";
+    
+                        /**
+                         * ExportTaxonomiesRequest taxonomies.
+                         * @member {Array.<string>} taxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @instance
+                         */
+                        ExportTaxonomiesRequest.prototype.taxonomies = $util.emptyArray;
+    
+                        /**
+                         * ExportTaxonomiesRequest serializedTaxonomies.
+                         * @member {boolean} serializedTaxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @instance
+                         */
+                        ExportTaxonomiesRequest.prototype.serializedTaxonomies = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportTaxonomiesRequest destination.
+                         * @member {"serializedTaxonomies"|undefined} destination
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ExportTaxonomiesRequest.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["serializedTaxonomies"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportTaxonomiesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest} ExportTaxonomiesRequest instance
+                         */
+                        ExportTaxonomiesRequest.create = function create(properties) {
+                            return new ExportTaxonomiesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest} message ExportTaxonomiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportTaxonomiesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.taxonomies != null && message.taxonomies.length)
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.taxonomies[i]);
+                            if (message.serializedTaxonomies != null && message.hasOwnProperty("serializedTaxonomies"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.serializedTaxonomies);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest} message ExportTaxonomiesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportTaxonomiesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest} ExportTaxonomiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportTaxonomiesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.taxonomies && message.taxonomies.length))
+                                        message.taxonomies = [];
+                                    message.taxonomies.push(reader.string());
+                                    break;
+                                case 3:
+                                    message.serializedTaxonomies = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest} ExportTaxonomiesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportTaxonomiesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportTaxonomiesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportTaxonomiesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.taxonomies != null && message.hasOwnProperty("taxonomies")) {
+                                if (!Array.isArray(message.taxonomies))
+                                    return "taxonomies: array expected";
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    if (!$util.isString(message.taxonomies[i]))
+                                        return "taxonomies: string[] expected";
+                            }
+                            if (message.serializedTaxonomies != null && message.hasOwnProperty("serializedTaxonomies")) {
+                                properties.destination = 1;
+                                if (typeof message.serializedTaxonomies !== "boolean")
+                                    return "serializedTaxonomies: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest} ExportTaxonomiesRequest
+                         */
+                        ExportTaxonomiesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.taxonomies) {
+                                if (!Array.isArray(object.taxonomies))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.taxonomies: array expected");
+                                message.taxonomies = [];
+                                for (var i = 0; i < object.taxonomies.length; ++i)
+                                    message.taxonomies[i] = String(object.taxonomies[i]);
+                            }
+                            if (object.serializedTaxonomies != null)
+                                message.serializedTaxonomies = Boolean(object.serializedTaxonomies);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportTaxonomiesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest} message ExportTaxonomiesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportTaxonomiesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.taxonomies = [];
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.taxonomies && message.taxonomies.length) {
+                                object.taxonomies = [];
+                                for (var j = 0; j < message.taxonomies.length; ++j)
+                                    object.taxonomies[j] = message.taxonomies[j];
+                            }
+                            if (message.serializedTaxonomies != null && message.hasOwnProperty("serializedTaxonomies")) {
+                                object.serializedTaxonomies = message.serializedTaxonomies;
+                                if (options.oneofs)
+                                    object.destination = "serializedTaxonomies";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportTaxonomiesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportTaxonomiesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportTaxonomiesRequest;
+                    })();
+    
+                    v1beta1.ExportTaxonomiesResponse = (function() {
+    
+                        /**
+                         * Properties of an ExportTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IExportTaxonomiesResponse
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.ISerializedTaxonomy>|null} [taxonomies] ExportTaxonomiesResponse taxonomies
+                         */
+    
+                        /**
+                         * Constructs a new ExportTaxonomiesResponse.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an ExportTaxonomiesResponse.
+                         * @implements IExportTaxonomiesResponse
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse=} [properties] Properties to set
+                         */
+                        function ExportTaxonomiesResponse(properties) {
+                            this.taxonomies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportTaxonomiesResponse taxonomies.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.ISerializedTaxonomy>} taxonomies
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @instance
+                         */
+                        ExportTaxonomiesResponse.prototype.taxonomies = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ExportTaxonomiesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} ExportTaxonomiesResponse instance
+                         */
+                        ExportTaxonomiesResponse.create = function create(properties) {
+                            return new ExportTaxonomiesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse} message ExportTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportTaxonomiesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.taxonomies != null && message.taxonomies.length)
+                                for (var i = 0; i < message.taxonomies.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.encode(message.taxonomies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse} message ExportTaxonomiesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportTaxonomiesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} ExportTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportTaxonomiesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.taxonomies && message.taxonomies.length))
+                                        message.taxonomies = [];
+                                    message.taxonomies.push($root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} ExportTaxonomiesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportTaxonomiesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportTaxonomiesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportTaxonomiesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.taxonomies != null && message.hasOwnProperty("taxonomies")) {
+                                if (!Array.isArray(message.taxonomies))
+                                    return "taxonomies: array expected";
+                                for (var i = 0; i < message.taxonomies.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify(message.taxonomies[i]);
+                                    if (error)
+                                        return "taxonomies." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} ExportTaxonomiesResponse
+                         */
+                        ExportTaxonomiesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse();
+                            if (object.taxonomies) {
+                                if (!Array.isArray(object.taxonomies))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.taxonomies: array expected");
+                                message.taxonomies = [];
+                                for (var i = 0; i < object.taxonomies.length; ++i) {
+                                    if (typeof object.taxonomies[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.taxonomies: object expected");
+                                    message.taxonomies[i] = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.fromObject(object.taxonomies[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportTaxonomiesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse} message ExportTaxonomiesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportTaxonomiesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.taxonomies = [];
+                            if (message.taxonomies && message.taxonomies.length) {
+                                object.taxonomies = [];
+                                for (var j = 0; j < message.taxonomies.length; ++j)
+                                    object.taxonomies[j] = $root.google.cloud.datacatalog.v1beta1.SerializedTaxonomy.toObject(message.taxonomies[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportTaxonomiesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportTaxonomiesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportTaxonomiesResponse;
                     })();
     
                     return v1beta1;
@@ -11485,6 +16842,587 @@
              * @namespace
              */
             var api = {};
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
     
             api.Http = (function() {
     
@@ -12388,543 +18326,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {string}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.pattern = [];
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {string}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
             })();
     
             return api;
@@ -17098,6 +22499,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -17110,6 +22512,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -17285,6 +22688,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -17351,6 +22762,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -17449,6 +22863,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -17560,6 +22979,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -17637,6 +23065,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -17653,8 +23091,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -17721,6 +23161,11 @@
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                    }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
                     }
                     return object;
                 };

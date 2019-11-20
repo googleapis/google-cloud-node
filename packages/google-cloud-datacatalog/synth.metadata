@@ -1,19 +1,12 @@
 {
-  "updateTime": "2019-11-09T12:12:09.084785Z",
+  "updateTime": "2019-11-20T23:32:02.897435Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.41.1",
-        "dockerImage": "googleapis/artman@sha256:545c758c76c3f779037aa259023ec3d1ef2d57d2c8cd00a222cb187d63ceac5e"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "34e661f58d58fa57da8ed113a3d8bb3de26b307d",
-        "internalRef": "279417429"
+        "sha": "d47e1b4485b3effbb2298eb10dd13a544c0f66dc",
+        "internalRef": "281594037"
       }
     },
     {
@@ -30,9 +23,8 @@
         "source": "googleapis",
         "apiName": "datacatalog",
         "apiVersion": "v1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/datacatalog/artman_datacatalog_v1beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ]

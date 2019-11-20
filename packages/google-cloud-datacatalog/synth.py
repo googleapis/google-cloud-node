@@ -22,51 +22,34 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
+name = 'datacatalog'
 versions = ['v1beta1']
 for version in versions:
-    library = gapic.node_library(
-        'datacatalog',
+    library = gapic.typescript_library(
+        name,
         version,
-        config_path='v1beta1/artman_datacatalog_v1beta1.yaml',
-        private=False,
+        proto_path=f'google/cloud/{name}/{version}',
+        generator_args={
+            'grpc-service-config': f'google/cloud/{name}/{version}/{name}_grpc_service_config.json',
+            'package-name': f'@google-cloud/{name}'
+        }
     )
     s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# cleanup some hiccups in jsdoc comments.
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""
-/**
- * @namespace google
- */
-/**
- * @namespace google.iam.v1
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.iam.v1
- */
-/**
- * @namespace google.type
- */
-""")
-
-s.replace("src/v1beta1/doc/google/cloud/datacatalog/v1beta1/doc_gcs_fileset_spec.js",
-r"""\* @see \[google.cloud.datacatalog.v1beta1.GcsFileSpec definition in proto format\]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/gcs_fileset_spec.proto}
-""",
-r"""
-""")
+# Fix broken links to cloud.google.com documentation
+s.replace('src/v1beta1/*.ts', '/data-catalog/docs/', 'https://cloud.google.com/data-catalog/docs/')
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
+
+# Fix broken links to cloud.google.com documentation
+s.replace('protos/protos.js', '/data-catalog/docs/', 'https://cloud.google.com/data-catalog/docs/')
+
