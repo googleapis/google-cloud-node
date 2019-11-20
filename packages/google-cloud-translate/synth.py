@@ -26,7 +26,8 @@ for version in versions:
   library = gapic.typescript_library(
     'translate',
     generator_args={
-      "grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json"
+      "grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json",
+      "package-name":"@google-cloud/translate"
     },
     version=version)
 s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
@@ -43,9 +44,6 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString\]',
         'toISOString)')
 # [END fix-dead-link]
-
-s.replace("system-test/fixtures/sample/src/index.js", "'translation'", "'@google-cloud/translate'")
-s.replace("system-test/fixtures/sample/src/index.ts", "'translation'", "'@google-cloud/translate'")
 
 logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
