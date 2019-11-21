@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.3.0...v1.4.0) (2019-11-20)
+
+In this release the library has been converted to TypeScript. There should be no breaking changes
+for existing users, but please feel free to submit an issue if you find anything wrong!
+
+### Features
+
+* new clients, convert to TypeScript ([#61](https://www.github.com/googleapis/nodejs-datacatalog/issues/61)) ([489c492](https://www.github.com/googleapis/nodejs-datacatalog/commit/489c49231c5386d7c540239c8861fdcef080679f))
+
+
+### Bug Fixes
+
+* **docs:** snippets are now replaced in jsdoc comments ([#54](https://www.github.com/googleapis/nodejs-datacatalog/issues/54)) ([4a61922](https://www.github.com/googleapis/nodejs-datacatalog/commit/4a6192275313e64f4e28fb43f6a7144807a89512))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.2.0...v1.3.0) (2019-10-22)
 
 
