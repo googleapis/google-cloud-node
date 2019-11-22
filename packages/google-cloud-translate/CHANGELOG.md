@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [5.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.2...v5.1.0) (2019-11-22)
+
+
+### Features
+
+* convert v3beta1 to TypeScript ([#389](https://www.github.com/googleapis/nodejs-translate/issues/389)) ([0a88c63](https://www.github.com/googleapis/nodejs-translate/commit/0a88c63a1cb0564958f8b2f9d9d11d504284a229))
+
+
+### Bug Fixes
+
+* get autosynth working again ([#387](https://www.github.com/googleapis/nodejs-translate/issues/387)) ([c226e58](https://www.github.com/googleapis/nodejs-translate/commit/c226e5811f898ad424a6bf85af197559bf668b25))
+* **deps:** update dependency yargs to v15 ([#386](https://www.github.com/googleapis/nodejs-translate/issues/386)) ([e87a80f](https://www.github.com/googleapis/nodejs-translate/commit/e87a80f201588b779728dd29c5dae96fb7055dbf))
+* **docs:** snippets are now replaced in jsdoc comments ([#381](https://www.github.com/googleapis/nodejs-translate/issues/381)) ([b14f7d4](https://www.github.com/googleapis/nodejs-translate/commit/b14f7d42b961400dfe9dec7bc3fff3a7688c0baa))
+
 ### [5.0.2](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.1...v5.0.2) (2019-11-08)
 
 
