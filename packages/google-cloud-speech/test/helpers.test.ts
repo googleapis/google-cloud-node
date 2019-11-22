@@ -16,46 +16,14 @@
 
 'use strict';
 
-const assert = require('assert');
-const common = require('@google-cloud/common');
-const proxyquire = require('proxyquire');
-const sinon = require('sinon');
-const stream = require('stream');
+import * as assert from 'assert';
+import * as sinon from 'sinon';
+import * as stream from 'stream';
+
+const speech = require('../src');
 
 describe('Speech helper methods', () => {
-  let client;
-  let FakeApiErrorOverride;
   const sandbox = sinon.createSandbox();
-  let speech;
-
-  class FakeApiError extends common.util.ApiError {
-    constructor(error) {
-      super();
-
-      if (FakeApiErrorOverride) {
-        return FakeApiErrorOverride(error);
-      }
-    }
-  }
-
-  before(() => {
-    speech = proxyquire('../', {
-      './helpers.js': proxyquire('../src/helpers.js', {
-        '@google-cloud/common': {
-          util: {
-            ApiError: FakeApiError,
-          },
-        },
-      }),
-    });
-  });
-
-  beforeEach(() => {
-    client = new speech.v1.SpeechClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
-    });
-  });
 
   afterEach(() => {
     sandbox.restore();
@@ -68,6 +36,11 @@ describe('Speech helper methods', () => {
     const OPTIONS = {timeout: Infinity};
 
     it('writes the config to the resulting stream', done => {
+      const client = new speech.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
@@ -89,13 +62,18 @@ describe('Speech helper methods', () => {
           streamingConfig: CONFIG,
         });
         setImmediate(done);
-        next(null, data);
+        next(null);
       };
 
       userStream.write(undefined);
     });
 
     it('does not require options', () => {
+      const client = new speech.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
@@ -112,6 +90,11 @@ describe('Speech helper methods', () => {
     });
 
     it('destroys the user stream when the request stream errors', done => {
+      const client = new speech.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
@@ -123,7 +106,7 @@ describe('Speech helper methods', () => {
 
       const error = new Error('Request stream error');
 
-      userStream.once('error', err => {
+      userStream.once('error', (err: Error) => {
         assert.strictEqual(err, error);
         done();
       });
@@ -131,34 +114,12 @@ describe('Speech helper methods', () => {
       requestStream.emit('error', error);
     });
 
-    it('destroys the user stream when the response contains an error', done => {
-      // Stub the underlying _streamingRecognize method to just return
-      // a bogus stream.
-      const requestStream = new stream.PassThrough({objectMode: true});
-      sandbox
-        .stub(client._innerApiCalls, 'streamingRecognize')
-        .returns(requestStream);
-
-      const userStream = client.streamingRecognize(CONFIG, OPTIONS);
-
-      const error = {};
-      const fakeApiError = {};
-
-      FakeApiErrorOverride = err => {
-        assert.strictEqual(err, error);
-        return fakeApiError;
-      };
-
-      userStream.once('error', err => {
-        assert.strictEqual(err, fakeApiError);
-        done();
+    it('re-emits response from the request stream', done => {
+      const client = new speech.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
-      userStream.emit('writing');
-      requestStream.end({error});
-    });
-
-    it('re-emits response from the request stream', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
@@ -170,7 +131,7 @@ describe('Speech helper methods', () => {
 
       const response = {};
 
-      userStream.on('response', _response => {
+      userStream.on('response', (_response: {}) => {
         assert.strictEqual(_response, response);
         done();
       });
@@ -180,6 +141,11 @@ describe('Speech helper methods', () => {
     });
 
     it('wraps incoming audio data', done => {
+      const client = new speech.v1.SpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
       const requestStream = new stream.PassThrough({objectMode: true});
@@ -193,18 +159,18 @@ describe('Speech helper methods', () => {
 
       let count = 0;
       requestStream._write = (data, enc, next) => {
-        if (count === 0)
+        if (count === 0) {
           assert.deepStrictEqual(data, {
             streamingConfig: CONFIG,
           });
-        else if (count === 1) {
+        } else if (count === 1) {
           assert.deepStrictEqual(data, {
-            audioContent: audioContent,
+            audioContent,
           });
           setImmediate(done);
         }
         count++;
-        next(null, data);
+        next(null);
       };
 
       userStream.end(audioContent);

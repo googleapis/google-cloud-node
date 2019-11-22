@@ -21,38 +21,40 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 common_templates = gcp.CommonTemplates()
 
 versions = ['v1', 'v1p1beta1']
+name = 'speech'
 
 for version in versions:
-    library = gapic.node_library('speech', version)
+    library = gapic.typescript_library(
+        name,
+        proto_path=f'google/cloud/{name}/{version}',
+        generator_args={
+            'grpc-service-config': f'google/cloud/{name}/{version}/{name}_grpc_service_config.json',
+            'package-name': f'@google-cloud/{name}'
+        },
+        version=version)
 
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'src/index.js',]
+        excludes=['package.json', 'src/index.ts',]
     )
 
-    # Manual helper methods overrides the streaming API so that it
-    # accepts streamingConfig when calling streamingRecognize. Fix
-    # the gapic tests to use the overridden method signature.
-    s.replace( f"test/gapic-{version}.js",
-        "(mockBidiStreamingGrpcMethod\()request",
-        r"\1{ streamingConfig: {} }")
+    # Manual helper methods override the streaming API so that it
+    # accepts streamingConfig when calling streamingRecognize.
+    # Rename the generated methods to avoid confusion.
+    s.replace(f'src/{version}/{name}_client.ts', r'( +)streamingRecognize\(', '\\1_streamingRecognize(')
+    s.replace(f'test/gapic-{name}-{version}.ts', r'client\.streamingRecognize\(', 'client._streamingRecognize(')
+    s.replace(f'src/{version}/{name}_client.ts', r'\Z', 
+        '\n' + 
+        "import {ImprovedStreamingClient} from '../helpers';\n" +
+        'export interface SpeechClient extends ImprovedStreamingClient {}\n'
+    )
 
-    s.replace(
-        f"test/gapic-{version}.js",
-        "stream\.write\(request\)",
-        "stream.write()")
-
-    s.replace(
-        f"test/gapic-{version}.js",
-        "// Mock request\n\s*const request = {};",
-        "")
-
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 #

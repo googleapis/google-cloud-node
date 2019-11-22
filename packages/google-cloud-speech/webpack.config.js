@@ -12,10 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const path = require('path');
+
 module.exports = {
-  entry: './src/browser.js',
+  entry: './src/index.ts',
   output: {
-    library: 'speech',
+    library: 'Speech',
     filename: './speech.js',
   },
   node: {
@@ -24,21 +26,37 @@ module.exports = {
     crypto: 'empty',
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    alias: {
+      '../../../package.json': path.resolve(__dirname, 'package.json'),
+    },
+    extensions: ['.js', '.json', '.ts'],
   },
   module: {
     rules: [
       {
-        test: /node_modules[\\/]retry-request[\\/]/,
-        use: 'null-loader',
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
-        test: /node_modules[\\/]https-proxy-agent[\\/]/,
-        use: 'null-loader',
+        test: /node_modules[\\/]@grpc[\\/]grpc-js/,
+        use: 'null-loader'
       },
       {
-        test: /node_modules[\\/]gtoken[\\/]/,
-        use: 'null-loader',
+        test: /node_modules[\\/]grpc/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]retry-request/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]https?-proxy-agent/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]gtoken/,
+        use: 'null-loader'
       },
     ],
   },

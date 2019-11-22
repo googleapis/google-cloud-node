@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,25 +14,18 @@
  * limitations under the License.
  */
 
-'use strict';
+import * as common from '@google-cloud/common';
+import * as pumpify from 'pumpify';
+import * as streamEvents from 'stream-events';
+import {PassThrough} from 'stream';
+import * as protosTypes from '../protos/protos';
+import * as gax from 'google-gax';
 
-const common = require('@google-cloud/common');
-const pumpify = require('pumpify');
-const streamEvents = require('stream-events');
-const {PassThrough} = require('stream');
-
-/*!
- * Return a dictionary-like object with helpers to augment the Speech
- * GAPIC.
- */
-module.exports = () => {
-  const methods = {};
-
+export class ImprovedStreamingClient {
   /**
    * Performs bidirectional streaming speech recognition: receive results while
    * sending audio. This method is only available via the gRPC API (not REST).
    *
-   * @method v1.SpeechClient#streamingRecognize
    * @param {object} config The configuration for the stream. This is
    *     appropriately wrapped and sent as the first argument. It should be an
    *     object conforming to the [StreamingRecognitionConfig]{@link StreamingRecognitionConfig}
@@ -63,21 +56,34 @@ module.exports = () => {
    * // Write request objects.
    * stream.write(request);
    */
-  methods.streamingRecognize = function(streamingConfig, options) {
+  streamingRecognize(
+    streamingConfig?:
+      | protosTypes.google.cloud.speech.v1.IStreamingRecognitionConfig
+      | protosTypes.google.cloud.speech.v1p1beta1.IStreamingRecognitionConfig,
+    options?: gax.CallOptions
+  ) {
     options = options || {};
     streamingConfig = streamingConfig || {};
 
     // Format the audio content as input request for pipeline
-    const recognizeStream = streamEvents(pumpify.obj());
+    const recognizeStream = streamEvents(new pumpify.obj());
 
-    const requestStream = this._innerApiCalls
-      .streamingRecognize(options)
-      .on('error', err => {
+    // tslint:disable-next-line no-any
+    const requestStream = (this as any)
+      ._streamingRecognize(options)
+      .on('error', (err: Error) => {
         recognizeStream.destroy(err);
       })
-      .on('response', response => {
-        recognizeStream.emit('response', response);
-      });
+      .on(
+        'response',
+        (
+          response:
+            | protosTypes.google.cloud.speech.v1.StreamingRecognizeResponse
+            | protosTypes.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
+        ) => {
+          recognizeStream.emit('response', response);
+        }
+      );
 
     // Attach the events to the request stream, but only do so
     // when the first write (of data) comes in.
@@ -98,7 +104,7 @@ module.exports = () => {
           objectMode: true,
           transform: (audioContent, _, next) => {
             if (audioContent !== undefined) {
-              next(null, {audioContent});
+              next(undefined, {audioContent});
               return;
             }
             next();
@@ -112,14 +118,12 @@ module.exports = () => {
               next(new common.util.ApiError(response.error));
               return;
             }
-            next(null, response);
+            next(undefined, response);
           },
         }),
       ]);
     });
 
     return recognizeStream;
-  };
-
-  return methods;
-};
+  }
+}

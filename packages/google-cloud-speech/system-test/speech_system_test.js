@@ -15,9 +15,9 @@
 'use strict';
 
 const assert = require('assert');
-const speech = require('../src');
-const fs = require('fs');
 const path = require('path');
+const speech = require(path.join(process.cwd(), 'build', 'src'));
+const fs = require('fs');
 
 describe('SpeechClient system test default', () => {
   it('calls recognize', async () => {
