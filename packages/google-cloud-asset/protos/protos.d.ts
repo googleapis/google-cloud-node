@@ -4893,6 +4893,12 @@ export namespace google {
 
             /** ResourceDescriptor history */
             history?: (google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
         }
 
         /** Represents a ResourceDescriptor. */
@@ -4915,6 +4921,12 @@ export namespace google {
 
             /** ResourceDescriptor history. */
             public history: google.api.ResourceDescriptor.History;
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
 
             /**
              * Creates a new ResourceDescriptor instance using the specified properties.
@@ -6652,6 +6664,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
