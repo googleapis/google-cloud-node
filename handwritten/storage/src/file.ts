@@ -108,9 +108,9 @@ export interface GetSignedUrlCallback {
 }
 
 export interface PolicyDocument {
-  expiration: string;
-  conditions: Array<Array<string | number>>;
   string: string;
+  base64: string;
+  signature: string;
 }
 
 export type GetSignedPolicyResponse = [PolicyDocument];
