@@ -29,9 +29,10 @@ describe('logger', () => {
     });
     describe('Exception handling', () => {
       it('Should not throw given undefined', () => {
-        assert.doesNotThrow(createLogger, (createLogger() as {}) as (
-          err: Error
-        ) => boolean);
+        assert.doesNotThrow(
+          createLogger,
+          (createLogger() as {}) as (err: Error) => boolean
+        );
       });
       it('Should not throw given an empty object', () => {
         assert.doesNotThrow(
@@ -53,9 +54,12 @@ describe('logger', () => {
       });
       it('Should not throw given an env variable to use', () => {
         process.env.GCLOUD_ERRORS_LOGLEVEL = '4';
-        assert.doesNotThrow(createLogger, (createLogger({
-          logLevel: 4,
-        }) as {}) as (err: Error) => boolean);
+        assert.doesNotThrow(
+          createLogger,
+          (createLogger({
+            logLevel: 4,
+          }) as {}) as (err: Error) => boolean
+        );
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });
       it('Should thow given logLevel as null', () => {
