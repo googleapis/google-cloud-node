@@ -21,7 +21,6 @@ const translation = require('@google-cloud/translate');
 
 function main() {
   const translationServiceClient = new translation.TranslationServiceClient();
-  console.log('translationServiceClient was created!');
 }
 
 main();

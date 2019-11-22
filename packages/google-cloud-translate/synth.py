@@ -21,29 +21,19 @@ import subprocess
 
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
-versions = ['v3']
+versions = ['v3beta1', 'v3']
+name = 'translate'
 for version in versions:
   library = gapic.typescript_library(
-    'translate',
+    name,
+    proto_path=f"google/cloud/{name}/{version}",
     generator_args={
-      "grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json",
-      "package-name":"@google-cloud/translate"
+      "grpc-service-config": f"google/cloud/{name}/{version}/{name}_grpc_service_config.json",
+      "package-name": f"@google-cloud/{name}"
     },
+    extra_proto_files=['google/cloud/common_resources.proto'],
     version=version)
-s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
-
-# Update path discovery due to build/ dir and TypeScript conversion.
-s.replace("test/gapic-*.js", "../../package.json", "../../../package.json")
-
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-# [END fix-dead-link]
+  s.copy(library, excludes=['README.md', 'package.json', 'src/index.ts'])
 
 logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
@@ -53,3 +43,4 @@ s.copy(templates, excludes=[])
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])
 subprocess.run(["npm", "run", "fix"])
+subprocess.run(["npx", "compileProtos", "src"])

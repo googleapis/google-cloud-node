@@ -14,54 +14,34 @@
  * limitations under the License.
  */
 
-/**
- * @namespace v2
- */
-/**
- * @namespace google.cloud.translation.v3beta1
- */
-/**
- * @namespace google.longrunning
- */
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.protobuf
- */
-const v3beta1 = require('./v3beta1');
 import * as v2 from './v2';
 
 /**
  * The `@google-cloud/translate` package has the following named exports:
  *
- * - `{@link Translate}` class - constructor for v2 of the Translation API.
- * See {@link Translate} and {@link ClientConfig} for client methods and
- * configuration options. Provides TypeScript types out-of-the-box.
+ * - `{@link TranslationServiceClient}` class - constructor for v3 of the Translation API.
+ * See {@link v3.TranslationServiceClient} for client methods.
+ * - `v3` - client for the v3 backend service version. It exports:
+ *    - `TranslationServiceClient` - Reference to {@link v3.TranslationServiceClient}
  * - `v3beta1` - client for the v3beta1 backend service version. It exports:
- *    - `TranslationServiceClient` - Reference to {@link
- * v3beta1.TranslationServiceClient}
- *
+ *    - `TranslationServiceClient` - Reference to {@link v3beta1.TranslationServiceClient}
+ * - `v2` - client for the v2 backend service version. It exports:
+ *    - `Translate` - Reference to {@link v2.Translate}
  *
  * @module {constructor} @google-cloud/translate
  * @alias nodejs-translate
  *
- * @example <caption>Install the v2 client library with <a
- * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
- * @google-cloud/translate
+ * @example <caption>Install the v3 client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/translate
  *
- * @example <caption>Import the v2 client library:</caption>
- * const {Translate} = require('@google-cloud/translate');
+ * @example <caption>Import the v3 client library:</caption>
+ * const {TranslationServiceClient} = require('@google-cloud/translate');
  *
- * @example <caption>Create a v2 client that uses <a
+ * @example <caption>Create a v3 client that uses <a
  * href="https://goo.gl/64dyYX">Application Default Credentials
- * (ADC)</a>:</caption> const client = new Translate();
- *
- * @example <caption>Create a v2 client with <a
- * href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption> const client
- * = new Translate({ projectId: 'your-project-id', keyFilename:
- * '/path/to/keyfile.json',
- * });
+ * (ADC)</a>:</caption>
+ * const client = new TranslationServiceClient();
  *
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:translate_quickstart
@@ -74,12 +54,17 @@ import * as v2 from './v2';
  * const {TranslationServiceClient} =
  * require('@google-cloud/translate').v3beta1;
  */
+import * as v3beta1 from './v3beta1';
 import * as v3 from './v3';
 export * from './v3';
 
-/**
- * @type {object}
- * @property {constructor} TranslationServiceClient
- *   Reference to {@link v3beta1.TranslationServiceClient}
- */
-export {v2, v3beta1, v3};
+const TranslationServiceClient = v3.TranslationServiceClient;
+export {TranslationServiceClient, v2, v3beta1, v3};
+// For compatibility with JavaScript libraries we need to provide this default export:
+// tslint:disable-next-line no-default-export
+export default {
+  v2,
+  v3beta1,
+  v3,
+  TranslationServiceClient,
+};

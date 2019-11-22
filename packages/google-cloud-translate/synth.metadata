@@ -1,12 +1,12 @@
 {
-  "updateTime": "2019-11-20T20:59:24.452560Z",
+  "updateTime": "2019-11-21T07:10:28.256353Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "16543773103e2619d2b5f52456264de5bb9be104",
-        "internalRef": "281423227"
+        "sha": "5bc0fecee454f857cec042fb99fe2d22e1bff5bc",
+        "internalRef": "281635572"
       }
     },
     {
@@ -18,6 +18,15 @@
     }
   ],
   "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "translate",
+        "apiVersion": "v3beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
     {
       "client": {
         "source": "googleapis",

@@ -20,7 +20,6 @@ import {TranslationServiceClient} from '@google-cloud/translate';
 
 function main() {
   const translationServiceClient = new TranslationServiceClient();
-  console.log("translationServiceClient was created!");
 }
 
 main();
