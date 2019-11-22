@@ -22,7 +22,6 @@ const texttospeech = require('@google-cloud/text-to-speech');
 
 function main() {
   const textToSpeechClient = new texttospeech.TextToSpeechClient();
-  console.log("textToSpeechClient was created!");
 }
 
 main();
