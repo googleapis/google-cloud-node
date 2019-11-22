@@ -128,9 +128,10 @@ function restifyRequestHandler(
   ) {
     listener = () => {
       restifyRequestFinishHandler(client, config, req, res);
-      res.removeListener('finish', (listener as {}) as (
-        ...args: Array<{}>
-      ) => void);
+      res.removeListener(
+        'finish',
+        (listener as {}) as (...args: Array<{}>) => void
+      );
     };
 
     res.on('finish', (listener as {}) as (...args: Array<{}>) => void);

@@ -53,7 +53,11 @@ export class Fuzzer {
       const lenChecked = (is.number(len) ? len : 10)!;
       const chars: string[] = [];
       let thisRange: number[] = [];
-      const ranges = [[48, 57], [65, 90], [97, 122]];
+      const ranges = [
+        [48, 57],
+        [65, 90],
+        [97, 122],
+      ];
 
       for (let i = 0; i < lenChecked; i++) {
         thisRange = ranges[random(0, 2)];
