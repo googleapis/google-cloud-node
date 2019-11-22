@@ -341,6 +341,12 @@
               "id": 1055,
               "extend": "google.protobuf.FieldOptions"
             },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
             "resource": {
               "type": "google.api.ResourceDescriptor",
               "id": 1053,
@@ -364,6 +370,14 @@
                 "history": {
                   "type": "History",
                   "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
                 }
               },
               "nested": {
