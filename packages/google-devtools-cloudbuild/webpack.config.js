@@ -39,23 +39,23 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /node_modules[\\\/]@grpc[\\\/]grpc-js/,
+        test: /node_modules[\\/]@grpc[\\/]grpc-js/,
         use: 'null-loader'
       },
       {
-        test: /node_modules[\\\/]grpc/,
+        test: /node_modules[\\/]grpc/,
         use: 'null-loader'
       },
       {
-        test: /node_modules[\\\/]retry-request/,
+        test: /node_modules[\\/]retry-request/,
         use: 'null-loader'
       },
       {
-        test: /node_modules[\\\/]https-proxy-agent/,
+        test: /node_modules[\\/]https-proxy-agent/,
         use: 'null-loader'
       },
       {
-        test: /node_modules[\\\/]gtoken/,
+        test: /node_modules[\\/]gtoken/,
         use: 'null-loader'
       },
     ],
