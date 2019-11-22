@@ -442,6 +442,15 @@ export class PolicyTagManagerSerializationClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified taxonomy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} taxonomy
+   * @returns {string} Resource name string.
+   */
   taxonomyPath(project: string, location: string, taxonomy: string) {
     return this._pathTemplates.taxonomyPathTemplate.render({
       project,
@@ -449,13 +458,37 @@ export class PolicyTagManagerSerializationClient {
       taxonomy,
     });
   }
+
+  /**
+   * Parse the project from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the project.
+   */
   matchProjectFromTaxonomyName(taxonomyName: string) {
     return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName).project;
   }
+
+  /**
+   * Parse the location from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the location.
+   */
   matchLocationFromTaxonomyName(taxonomyName: string) {
     return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
       .location;
   }
+
+  /**
+   * Parse the taxonomy from Taxonomy resource.
+   *
+   * @param {string} taxonomyName
+   *   A fully-qualified path representing Taxonomy resource.
+   * @returns {string} A string representing the taxonomy.
+   */
   matchTaxonomyFromTaxonomyName(taxonomyName: string) {
     return this._pathTemplates.taxonomyPathTemplate.match(taxonomyName)
       .taxonomy;

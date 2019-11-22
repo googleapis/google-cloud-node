@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'PolicyTagManagerSerialization',
-    filename: './policy-tag-manager-serialization.js',
+    library: 'DataCatalog',
+    filename: './data-catalog.js',
   },
   node: {
     child_process: 'empty',
