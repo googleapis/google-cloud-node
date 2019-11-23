@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.2...v1.4.0) (2019-11-22)
+
+In this release this library has been converted to TypeScript. This change is supposed to be compatible
+with the previous versions, but if you find that your code is broken by this change, please file an
+issue!
+
+### Features
+
+* add plural/singular resource descriptor ([d6c7f4d](https://www.github.com/googleapis/nodejs-redis/commit/d6c7f4debb839be0245f55b6fe4c81a847228eb9))
+* convert to TypeScript ([#236](https://www.github.com/googleapis/nodejs-redis/issues/236)) ([6bcdf55](https://www.github.com/googleapis/nodejs-redis/commit/6bcdf55da38093009dba8f4dfc8a5a3eaacb5f3d))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.1...v1.3.2) (2019-11-15)
 
 
