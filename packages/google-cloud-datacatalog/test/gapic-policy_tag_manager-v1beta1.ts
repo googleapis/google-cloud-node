@@ -40,7 +40,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -57,7 +56,7 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('PolicyTagManagerClient', () => {
+describe('v1beta1.PolicyTagManagerClient', () => {
   it('has servicePath', () => {
     const servicePath =
       policytagmanagerModule.v1beta1.PolicyTagManagerClient.servicePath;
@@ -77,7 +76,7 @@ describe('PolicyTagManagerClient', () => {
     const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
       fallback: true,
     });

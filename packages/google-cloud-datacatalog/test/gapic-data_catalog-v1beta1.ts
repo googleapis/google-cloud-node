@@ -40,7 +40,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -57,7 +56,7 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('DataCatalogClient', () => {
+describe('v1beta1.DataCatalogClient', () => {
   it('has servicePath', () => {
     const servicePath = datacatalogModule.v1beta1.DataCatalogClient.servicePath;
     assert(servicePath);
@@ -75,7 +74,7 @@ describe('DataCatalogClient', () => {
     const client = new datacatalogModule.v1beta1.DataCatalogClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new datacatalogModule.v1beta1.DataCatalogClient({
       fallback: true,
     });
