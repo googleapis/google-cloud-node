@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.4.0...v3.5.0) (2019-11-22)
+
+In this release this library has been converted to TypeScript. This change is supposed to be compatible
+with the previous versions, but if you find that your code is broken by this change, please file an
+issue!
+
+### Features
+
+* convert to TypeScript ([#472](https://www.github.com/googleapis/nodejs-speech/issues/472)) ([c6d8145](https://www.github.com/googleapis/nodejs-speech/commit/c6d8145c469d42e74f54a65740c96fc8b9d3e5f2))
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v15 ([#469](https://www.github.com/googleapis/nodejs-speech/issues/469)) ([9e7d2e4](https://www.github.com/googleapis/nodejs-speech/commit/9e7d2e479d3744617844f2587dc4e57408bfc0d1))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.3.2...v3.4.0) (2019-11-14)
 
 
