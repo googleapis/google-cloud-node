@@ -40,7 +40,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -78,7 +77,7 @@ function mockLongRunningGrpcMethod(
     return Promise.resolve([mockOperation]);
   };
 }
-describe('CloudBuildClient', () => {
+describe('v1.CloudBuildClient', () => {
   it('has servicePath', () => {
     const servicePath = cloudbuildModule.v1.CloudBuildClient.servicePath;
     assert(servicePath);
@@ -96,7 +95,7 @@ describe('CloudBuildClient', () => {
     const client = new cloudbuildModule.v1.CloudBuildClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new cloudbuildModule.v1.CloudBuildClient({
       fallback: true,
     });
