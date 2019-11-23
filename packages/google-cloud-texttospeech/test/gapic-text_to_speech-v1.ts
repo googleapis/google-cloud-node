@@ -40,7 +40,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -57,7 +56,7 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('TextToSpeechClient', () => {
+describe('v1.TextToSpeechClient', () => {
   it('has servicePath', () => {
     const servicePath = texttospeechModule.v1.TextToSpeechClient.servicePath;
     assert(servicePath);
@@ -75,7 +74,7 @@ describe('TextToSpeechClient', () => {
     const client = new texttospeechModule.v1.TextToSpeechClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new texttospeechModule.v1.TextToSpeechClient({
       fallback: true,
     });
