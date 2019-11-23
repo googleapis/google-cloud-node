@@ -40,7 +40,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -78,7 +77,7 @@ function mockLongRunningGrpcMethod(
     return Promise.resolve([mockOperation]);
   };
 }
-describe('TranslationServiceClient', () => {
+describe('v3beta1.TranslationServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
       translationserviceModule.v3beta1.TranslationServiceClient.servicePath;
@@ -98,7 +97,7 @@ describe('TranslationServiceClient', () => {
     const client = new translationserviceModule.v3beta1.TranslationServiceClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new translationserviceModule.v3beta1.TranslationServiceClient(
       {
         fallback: true,
