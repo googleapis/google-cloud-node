@@ -51,7 +51,7 @@ module.exports = {
         use: 'null-loader'
       },
       {
-        test: /node_modules[\\/]https-proxy-agent/,
+        test: /node_modules[\\/]https?-proxy-agent/,
         use: 'null-loader'
       },
       {
