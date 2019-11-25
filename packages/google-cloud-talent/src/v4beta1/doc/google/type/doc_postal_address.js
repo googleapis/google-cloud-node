@@ -35,7 +35,9 @@
  * https://support.google.com/business/answer/6397478
  *
  * @property {number} revision
- *   The schema revision of the `PostalAddress`.
+ *   The schema revision of the `PostalAddress`. This must be set to 0, which is
+ *   the latest revision.
+ *
  *   All new revisions **must** be backward compatible with old revisions.
  *
  * @property {string} regionCode
