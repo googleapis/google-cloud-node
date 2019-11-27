@@ -228,9 +228,9 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
+   *   Required. The ID of the project against which to make the request.
    * @param {Object[]} request.keys
-   *   Keys of entities to look up.
+   *   Required. Keys of entities to look up.
    *
    *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}
    * @param {Object} [request.readOptions]
@@ -295,8 +295,8 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
-   * @param {Object} request.partitionId
+   *   Required. The ID of the project against which to make the request.
+   * @param {Object} [request.partitionId]
    *   Entities are partitioned into subsets, identified by a partition ID.
    *   Queries are scoped to a single partition.
    *   This partition ID is normalized with the standard default context
@@ -335,12 +335,7 @@ class DatastoreClient {
    * });
    *
    * const projectId = '';
-   * const partitionId = {};
-   * const request = {
-   *   projectId: projectId,
-   *   partitionId: partitionId,
-   * };
-   * client.runQuery(request)
+   * client.runQuery({projectId: projectId})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -373,7 +368,7 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
+   *   Required. The ID of the project against which to make the request.
    * @param {Object} [request.transactionOptions]
    *   Options for a new transaction.
    *
@@ -432,12 +427,16 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
-   * @param {number} request.mode
+   *   Required. The ID of the project against which to make the request.
+   * @param {number} [request.mode]
    *   The type of commit to perform. Defaults to `TRANSACTIONAL`.
    *
    *   The number should be among the values of [Mode]{@link google.datastore.v1.Mode}
-   * @param {Object[]} request.mutations
+   * @param {Buffer} [request.transaction]
+   *   The identifier of the transaction associated with the commit. A
+   *   transaction identifier is returned by a call to
+   *   Datastore.BeginTransaction.
+   * @param {Object[]} [request.mutations]
    *   The mutations to perform.
    *
    *   When mode is `TRANSACTIONAL`, mutations affecting a single entity are
@@ -453,10 +452,6 @@ class DatastoreClient {
    *   entity.
    *
    *   This object should have the same structure as [Mutation]{@link google.datastore.v1.Mutation}
-   * @param {Buffer} [request.transaction]
-   *   The identifier of the transaction associated with the commit. A
-   *   transaction identifier is returned by a call to
-   *   Datastore.BeginTransaction.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -477,14 +472,7 @@ class DatastoreClient {
    * });
    *
    * const projectId = '';
-   * const mode = 'MODE_UNSPECIFIED';
-   * const mutations = [];
-   * const request = {
-   *   projectId: projectId,
-   *   mode: mode,
-   *   mutations: mutations,
-   * };
-   * client.commit(request)
+   * client.commit({projectId: projectId})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -517,9 +505,9 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
+   *   Required. The ID of the project against which to make the request.
    * @param {Buffer} request.transaction
-   *   The transaction identifier, returned by a call to
+   *   Required. The transaction identifier, returned by a call to
    *   Datastore.BeginTransaction.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -580,9 +568,9 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
+   *   Required. The ID of the project against which to make the request.
    * @param {Object[]} request.keys
-   *   A list of keys with incomplete key paths for which to allocate IDs.
+   *   Required. A list of keys with incomplete key paths for which to allocate IDs.
    *   No key may be reserved/read-only.
    *
    *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}
@@ -645,9 +633,9 @@ class DatastoreClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
-   *   The ID of the project against which to make the request.
+   *   Required. The ID of the project against which to make the request.
    * @param {Object[]} request.keys
-   *   A list of keys with complete key paths whose numeric IDs should not be
+   *   Required. A list of keys with complete key paths whose numeric IDs should not be
    *   auto-allocated.
    *
    *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}

@@ -115,10 +115,8 @@ describe('DatastoreClient', () => {
 
       // Mock request
       const projectId = 'projectId-1969970175';
-      const partitionId = {};
       const request = {
         projectId: projectId,
-        partitionId: partitionId,
       };
 
       // Mock response
@@ -145,10 +143,8 @@ describe('DatastoreClient', () => {
 
       // Mock request
       const projectId = 'projectId-1969970175';
-      const partitionId = {};
       const request = {
         projectId: projectId,
-        partitionId: partitionId,
       };
 
       // Mock Grpc layer
@@ -236,12 +232,8 @@ describe('DatastoreClient', () => {
 
       // Mock request
       const projectId = 'projectId-1969970175';
-      const mode = 'MODE_UNSPECIFIED';
-      const mutations = [];
       const request = {
         projectId: projectId,
-        mode: mode,
-        mutations: mutations,
       };
 
       // Mock response
@@ -271,12 +263,8 @@ describe('DatastoreClient', () => {
 
       // Mock request
       const projectId = 'projectId-1969970175';
-      const mode = 'MODE_UNSPECIFIED';
-      const mutations = [];
       const request = {
         projectId: projectId,
-        mode: mode,
-        mutations: mutations,
       };
 
       // Mock Grpc layer
