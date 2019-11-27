@@ -116,16 +116,17 @@ __Usage:__
 
 ### Set Endpoint
 
-View the [source code]https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js)
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js).
 
-[![Open in Cloud shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md)
 
 __Usage:__
 
+
 `node setEndpoint.js`
 
------
 
+-----
 
 
 
