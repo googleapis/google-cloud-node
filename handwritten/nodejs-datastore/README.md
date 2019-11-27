@@ -88,6 +88,7 @@ quickstart();
 ### Troubleshooting
 #### Emulator returning `DEADLINE_EXCEEDED`, `java.lang.OutOfMemoryError`
 *Reference Issue: [#95](https://github.com/googleapis/nodejs-datastore/issues/95)*
+
 When using the emulator, you may experience errors such as "DEADLINE_EXCEEDED" within your application, corresponding to an error in the emulator: "java.lang.OutOfMemoryError". These errors are unique to the emulator environment and will not persist in production.
 
 A workaround is available, provided by [@ohmpatel1997](https://github.com/ohmpatel1997) [here](https://github.com/googleapis/nodejs-datastore/issues/95#issuecomment-554387312).

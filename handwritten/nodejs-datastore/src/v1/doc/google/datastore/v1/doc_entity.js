@@ -128,8 +128,8 @@ const Key = {
  *
  * @property {Object[]} values
  *   Values in the array.
- *   The order of this array may not be preserved if it contains a mix of
- *   indexed and unindexed values.
+ *   The order of values in an array is preserved as long as all values have
+ *   identical settings for 'exclude_from_indexes'.
  *
  *   This object should have the same structure as [Value]{@link google.datastore.v1.Value}
  *
@@ -173,8 +173,8 @@ const ArrayValue = {
  *
  * @property {string} stringValue
  *   A UTF-8 encoded string value.
- *   When `exclude_from_indexes` is false (it is indexed) , may have at most
- *   1500 bytes. Otherwise, may be set to at least 1,000,000 bytes.
+ *   When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
+ *   Otherwise, may be set to at least 1,000,000 bytes.
  *
  * @property {Buffer} blobValue
  *   A blob value.

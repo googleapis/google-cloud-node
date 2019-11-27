@@ -19,7 +19,7 @@
  * The request for Datastore.Lookup.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {Object} readOptions
  *   The options for this lookup request.
@@ -27,7 +27,7 @@
  *   This object should have the same structure as [ReadOptions]{@link google.datastore.v1.ReadOptions}
  *
  * @property {Object[]} keys
- *   Keys of entities to look up.
+ *   Required. Keys of entities to look up.
  *
  *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}
  *
@@ -75,7 +75,7 @@ const LookupResponse = {
  * The request for Datastore.RunQuery.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {Object} partitionId
  *   Entities are partitioned into subsets, identified by a partition ID.
@@ -109,8 +109,7 @@ const RunQueryRequest = {
 };
 
 /**
- * The response for
- * Datastore.RunQuery.
+ * The response for Datastore.RunQuery.
  *
  * @property {Object} batch
  *   A batch of query results (always present).
@@ -131,11 +130,10 @@ const RunQueryResponse = {
 };
 
 /**
- * The request for
- * Datastore.BeginTransaction.
+ * The request for Datastore.BeginTransaction.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {Object} transactionOptions
  *   Options for a new transaction.
@@ -151,8 +149,7 @@ const BeginTransactionRequest = {
 };
 
 /**
- * The response for
- * Datastore.BeginTransaction.
+ * The response for Datastore.BeginTransaction.
  *
  * @property {Buffer} transaction
  *   The transaction identifier (always present).
@@ -169,10 +166,10 @@ const BeginTransactionResponse = {
  * The request for Datastore.Rollback.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {Buffer} transaction
- *   The transaction identifier, returned by a call to
+ *   Required. The transaction identifier, returned by a call to
  *   Datastore.BeginTransaction.
  *
  * @typedef RollbackRequest
@@ -184,9 +181,8 @@ const RollbackRequest = {
 };
 
 /**
- * The response for
- * Datastore.Rollback. (an empty
- * message).
+ * The response for Datastore.Rollback.
+ * (an empty message).
  * @typedef RollbackResponse
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RollbackResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
@@ -199,7 +195,7 @@ const RollbackResponse = {
  * The request for Datastore.Commit.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {number} mode
  *   The type of commit to perform. Defaults to `TRANSACTIONAL`.
@@ -284,14 +280,13 @@ const CommitResponse = {
 };
 
 /**
- * The request for
- * Datastore.AllocateIds.
+ * The request for Datastore.AllocateIds.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {Object[]} keys
- *   A list of keys with incomplete key paths for which to allocate IDs.
+ *   Required. A list of keys with incomplete key paths for which to allocate IDs.
  *   No key may be reserved/read-only.
  *
  *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}
@@ -305,8 +300,7 @@ const AllocateIdsRequest = {
 };
 
 /**
- * The response for
- * Datastore.AllocateIds.
+ * The response for Datastore.AllocateIds.
  *
  * @property {Object[]} keys
  *   The keys specified in the request (in the same order), each with
@@ -323,17 +317,16 @@ const AllocateIdsResponse = {
 };
 
 /**
- * The request for
- * Datastore.ReserveIds.
+ * The request for Datastore.ReserveIds.
  *
  * @property {string} projectId
- *   The ID of the project against which to make the request.
+ *   Required. The ID of the project against which to make the request.
  *
  * @property {string} databaseId
  *   If not empty, the ID of the database against which to make the request.
  *
  * @property {Object[]} keys
- *   A list of keys with complete key paths whose numeric IDs should not be
+ *   Required. A list of keys with complete key paths whose numeric IDs should not be
  *   auto-allocated.
  *
  *   This object should have the same structure as [Key]{@link google.datastore.v1.Key}
@@ -347,8 +340,7 @@ const ReserveIdsRequest = {
 };
 
 /**
- * The response for
- * Datastore.ReserveIds.
+ * The response for Datastore.ReserveIds.
  * @typedef ReserveIdsResponse
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ReserveIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
@@ -474,10 +466,8 @@ const ReadOptions = {
  * Options for beginning a new transaction.
  *
  * Transactions can be created explicitly with calls to
- * Datastore.BeginTransaction
- * or implicitly by setting
- * ReadOptions.new_transaction
- * in read requests.
+ * Datastore.BeginTransaction or implicitly by setting
+ * ReadOptions.new_transaction in read requests.
  *
  * @property {Object} readWrite
  *   The transaction should allow both reads and writes.
