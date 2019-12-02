@@ -481,8 +481,8 @@ class Zone extends common.ServiceObject {
    * @param {string} name - Name of the instance.
    * @param {object} config - See an
    *     [Instance resource](https://cloud.google.com/compute/docs/reference/v1/instances).
-   * @param {?object[]} config.disks - See a
-   *     [Disk resource](https://cloud.google.com/compute/docs/reference/v1/disks).
+   * @param {?object[]} config.disks - See
+   *     [disks object](https://cloud.google.com/compute/docs/reference/rest/v1/instances/insert).
    * @param {boolean=} config.http - Allow HTTP traffic. Default: `false`
    * @param {boolean=} config.https - Allow HTTPS traffic. Default: `false`
    * @param {?object[]} config.networkInterfaces - An array of configurations for
