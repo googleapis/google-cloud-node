@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.1.7](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.6...v1.1.7) (2019-12-02)
+
+
+### Bug Fixes
+
+* **docs:** document correct object structure for zone.createVM ([#371](https://www.github.com/googleapis/nodejs-compute/issues/371)) ([4551f1e](https://www.github.com/googleapis/nodejs-compute/commit/4551f1ede21812d250d165f3b7f4c1a2da92b6ff))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.5...v1.1.6) (2019-11-15)
 
 
