@@ -146,9 +146,14 @@ class Entity extends TestHelper {
   }
 
   testEntityWithParent() {
-    const taskKey = this.keyWithParent;
-
     // [START datastore_entity_with_parent]
+    const taskKey = datastore.key([
+      'TaskList',
+      'default',
+      'Task',
+      'sampleTask',
+    ]);
+
     const task = {
       key: taskKey,
       data: {
@@ -222,10 +227,15 @@ class Entity extends TestHelper {
   }
 
   async testUpsert() {
-    const taskKey = this.getIncompleteKey();
-    const task = this.getTask();
-
     // [START datastore_upsert]
+    const taskKey = datastore.key('Task');
+    const task = {
+      category: 'Personal',
+      done: false,
+      priority: 4,
+      description: 'Learn Cloud Datastore',
+    };
+
     const entity = {
       key: taskKey,
       data: task,
@@ -242,10 +252,15 @@ class Entity extends TestHelper {
   }
 
   testInsert() {
-    const taskKey = this.getIncompleteKey();
-    const task = this.getTask();
-
     // [START datastore_insert]
+    const taskKey = datastore.key('Task');
+    const task = {
+      category: 'Personal',
+      done: false,
+      priority: 4,
+      description: 'Learn Cloud Datastore',
+    };
+
     const entity = {
       key: taskKey,
       data: task,
@@ -264,9 +279,8 @@ class Entity extends TestHelper {
   }
 
   async testLookup() {
-    const taskKey = this.getIncompleteKey();
-
     // [START datastore_lookup]
+    const taskKey = datastore.key('Task');
     const [entity] = await datastore.get(taskKey);
     // entity = {
     //   category: 'Personal',
@@ -294,10 +308,15 @@ class Entity extends TestHelper {
   }
 
   async testUpdate() {
-    const taskKey = this.getIncompleteKey();
-    const task = this.getTask();
-
     // [START datastore_update]
+    const taskKey = datastore.key('Task');
+    const task = {
+      category: 'Personal',
+      done: false,
+      priority: 4,
+      description: 'Learn Cloud Datastore',
+    };
+
     const entity = {
       key: taskKey,
       data: task,
@@ -316,9 +335,8 @@ class Entity extends TestHelper {
   }
 
   async testDelete() {
-    const taskKey = this.getIncompleteKey();
-
     // [START datastore_delete]
+    const taskKey = datastore.key('Task');
     await datastore.delete(taskKey);
     // Task deleted successfully.
     // [END datastore_delete]
@@ -331,6 +349,7 @@ class Entity extends TestHelper {
   }
 
   async testBatchUpsert() {
+    // [START datastore_batch_upsert]
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -348,7 +367,6 @@ class Entity extends TestHelper {
       description: 'Integrate Cloud Datastore',
     };
 
-    // [START datastore_batch_upsert]
     const entities = [
       {
         key: taskKey1,
@@ -377,10 +395,10 @@ class Entity extends TestHelper {
   }
 
   async testBatchLookup() {
+    // [START datastore_batch_lookup]
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
-    // [START datastore_batch_lookup]
     const keys = [taskKey1, taskKey2];
 
     const [tasks] = await datastore.get(keys);
@@ -392,10 +410,10 @@ class Entity extends TestHelper {
   }
 
   async testBatchDelete() {
+    // [START datastore_batch_delete]
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
-    // [START datastore_batch_delete]
     const keys = [taskKey1, taskKey2];
 
     await datastore.delete(keys);
