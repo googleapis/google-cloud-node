@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [1.3.4](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.3.3...v1.3.4) (2019-12-05)
+
+
+### Bug Fixes
+
+* import long type into proto ts declaration file ([#93](https://www.github.com/googleapis/nodejs-datalabeling/issues/93)) ([7b16da1](https://www.github.com/googleapis/nodejs-datalabeling/commit/7b16da1bc47cc0b235c7a6293ff393d9db2b7538))
+* **deps:** pin TypeScript below 3.7.0 ([6b91e93](https://www.github.com/googleapis/nodejs-datalabeling/commit/6b91e93e9c56697c07001323a84733f17992c3c5))
+
 ### [1.3.3](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.3.2...v1.3.3) (2019-11-15)
 
 
