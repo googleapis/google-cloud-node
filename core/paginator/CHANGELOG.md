@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.2...v2.0.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([e06e1b0](https://www.github.com/googleapis/nodejs-paginator/commit/e06e1b0a2e2bb1cf56fc806c1703b8b5e468b954))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-paginator/compare/v2.0.1...v2.0.2) (2019-11-13)
 
 
