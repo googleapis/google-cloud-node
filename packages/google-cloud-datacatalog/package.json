@@ -44,7 +44,7 @@
     "mocha": "^6.1.4",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^1.17.0",
-    "typescript": "~3.7.0"
+    "typescript": "3.6.4"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
