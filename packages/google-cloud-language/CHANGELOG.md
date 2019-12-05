@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.6.3](https://www.github.com/googleapis/nodejs-language/compare/v3.6.2...v3.6.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([d93b13e](https://www.github.com/googleapis/nodejs-language/commit/d93b13e7fe29e093ff1e2af134098113a06dab00))
+* correct AutoML Natural Language region tags to match with all other languages. ([#335](https://www.github.com/googleapis/nodejs-language/issues/335)) ([e20276a](https://www.github.com/googleapis/nodejs-language/commit/e20276a70d0008cd2776191467a1a58b373be6f3))
+
 ### [3.6.2](https://www.github.com/googleapis/nodejs-language/compare/v3.6.1...v3.6.2) (2019-11-18)
 
 
