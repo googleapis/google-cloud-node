@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.1](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.0...v5.1.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([53f3cff](https://www.github.com/googleapis/nodejs-translate/commit/53f3cff821869347a8d34f3b0561d3b8158d171d))
+
 ## [5.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v5.0.2...v5.1.0) (2019-11-22)
 
 
