@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.3...v1.4.4) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([41afb13](https://www.github.com/googleapis/nodejs-dataproc/commit/41afb131ebc57172b8220e1586e43d8f0ec8b60a))
+
 ### [1.4.3](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.2...v1.4.3) (2019-11-18)
 
 
