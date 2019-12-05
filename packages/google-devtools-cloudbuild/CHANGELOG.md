@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.1.0...v1.2.0) (2019-12-05)
+
+
+### Features
+
+* add default exports ([#22](https://www.github.com/googleapis/nodejs-cloudbuild/issues/22)) ([870bfd6](https://www.github.com/googleapis/nodejs-cloudbuild/commit/870bfd649e99f0332b04b51eddfce27ab5078cf5))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([c8d7267](https://www.github.com/googleapis/nodejs-cloudbuild/commit/c8d72671a810750d13d327e78b0eafbd0aeac46f))
+* **docs:** snippets are now replaced in jsdoc comments ([#21](https://www.github.com/googleapis/nodejs-cloudbuild/issues/21)) ([b6bf159](https://www.github.com/googleapis/nodejs-cloudbuild/commit/b6bf159e7d3799121b58fe8b290181c16b6aa894))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.0.0...v1.1.0) (2019-11-11)
 
 
