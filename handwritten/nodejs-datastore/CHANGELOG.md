@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [5.0.1](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.0...v5.0.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([eeebcf6](https://www.github.com/googleapis/nodejs-datastore/commit/eeebcf6d53fd4040b536fe3537d8a4c9a3bdd5c3))
+* **deps:** update dependency @grpc/grpc-js to v0.6.12 ([#541](https://www.github.com/googleapis/nodejs-datastore/issues/541)) ([972d3e7](https://www.github.com/googleapis/nodejs-datastore/commit/972d3e7e37b161ca8404975e4f9f80887609268f))
+* **deps:** update dependency @grpc/grpc-js to v0.6.13 ([#548](https://www.github.com/googleapis/nodejs-datastore/issues/548)) ([f8948c6](https://www.github.com/googleapis/nodejs-datastore/commit/f8948c63924225866130eb81e7ed26becbc3e1a9))
+
 ## [5.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.5.2...v5.0.0) (2019-11-14)
 
 
