@@ -12,6 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Async-batch-annotate-images](#async-batch-annotate-images)
+  * [Batch-annotate-files-gcs](#batch-annotate-files-gcs)
+  * [Batch-annotate-files](#batch-annotate-files)
   * [Detect](#detect)
   * [Detect.v1p1beta1](#detect.v1p1beta1)
   * [Detect.v1p3beta1](#detect.v1p3beta1)
@@ -26,6 +29,57 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-vision#using-the-client-library).
 
 ## Samples
+
+
+
+### Async-batch-annotate-images
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/async-batch-annotate-images.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/async-batch-annotate-images.js,samples/README.md)
+
+__Usage:__
+
+
+`node async-batch-annotate-images.js`
+
+
+-----
+
+
+
+
+### Batch-annotate-files-gcs
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/batch-annotate-files-gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files-gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node batch-annotate-files-gcs.js`
+
+
+-----
+
+
+
+
+### Batch-annotate-files
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/batch-annotate-files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files.js,samples/README.md)
+
+__Usage:__
+
+
+`node batch-annotate-files.js`
+
+
+-----
+
 
 
 
