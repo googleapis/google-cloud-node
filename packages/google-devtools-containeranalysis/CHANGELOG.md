@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.6.0...v1.6.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([9a171a3](https://www.github.com/googleapis/nodejs-containeranalysis/commit/9a171a3b10b3a0bf6bf746ac8f093c349062f61e))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.5.1...v1.6.0) (2019-11-19)
 
 
