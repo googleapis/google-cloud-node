@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.1.8](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.7...v1.1.8) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([5f1fc47](https://www.github.com/googleapis/nodejs-compute/commit/5f1fc472dfc4046ba6ff966d1b2f31778a43a3c0))
+
 ### [1.1.7](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.6...v1.1.7) (2019-12-02)
 
 
