@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-error-reporting/compare/v1.1.2...v1.1.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([e54ef75](https://www.github.com/googleapis/nodejs-error-reporting/commit/e54ef75df1aced12b862bf0688ddb02a28b87c81))
+* **docs:** snippets are now replaced in jsdoc comments ([#411](https://www.github.com/googleapis/nodejs-error-reporting/issues/411)) ([edd884f](https://www.github.com/googleapis/nodejs-error-reporting/commit/edd884fdb81fb6d4434f8487f8040fd9f463869e))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-error-reporting/compare/v1.1.1...v1.1.2) (2019-09-26)
 
 
