@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.5.0...v1.5.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([9e22425](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/9e22425c970f92348cab350c9b5604d0a406220e))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.4.1...v1.5.0) (2019-11-13)
 
 
