@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.6.3](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.2...v2.6.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([b4ef100](https://www.github.com/googleapis/nodejs-video-intelligence/commit/b4ef100ab0bebc2beb80234d93f3a3b8905079d9))
+
 ### [2.6.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.1...v2.6.2) (2019-11-18)
 
 
