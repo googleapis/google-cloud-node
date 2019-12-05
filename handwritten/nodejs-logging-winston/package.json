@@ -82,7 +82,7 @@
     "prettier": "^1.18.2",
     "proxyquire": "^2.1.0",
     "source-map-support": "^0.5.12",
-    "typescript": "^3.5.1",
+    "typescript": "3.6.4",
     "uuid": "^3.3.2",
     "winston": "^3.2.1"
   },
