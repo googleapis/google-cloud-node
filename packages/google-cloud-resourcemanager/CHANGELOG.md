@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+### [1.1.5](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.4...v1.1.5) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([6e6c60d](https://www.github.com/googleapis/nodejs-resource/commit/6e6c60d196bea624efd983be4b7fe3b41aa77c2f))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.3...v1.1.4) (2019-11-14)
 
 
