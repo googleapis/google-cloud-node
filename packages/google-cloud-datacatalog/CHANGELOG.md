@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.4.0...v1.4.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([cc671d9](https://www.github.com/googleapis/nodejs-datacatalog/commit/cc671d9ae2bfd420195df25bdaa0e4c1757008ec))
+* **docs:** adds jsdoc strings ([2834bfe](https://www.github.com/googleapis/nodejs-datacatalog/commit/2834bfe0057d9222f8c6f70e60de216560251d06))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.3.0...v1.4.0) (2019-11-20)
 
 In this release the library has been converted to TypeScript. There should be no breaking changes
