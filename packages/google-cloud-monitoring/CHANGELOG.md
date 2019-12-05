@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.6.0...v1.6.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** TypeScript 3.7.0 causes breaking change in typings ([#339](https://www.github.com/googleapis/nodejs-monitoring/issues/339)) ([3616df7](https://www.github.com/googleapis/nodejs-monitoring/commit/3616df79a5b23a0eae1bb899e7a6a4c45d7cee7e))
+* **deps:** update dependency yargs to v15 ([#333](https://www.github.com/googleapis/nodejs-monitoring/issues/333)) ([dd3ba97](https://www.github.com/googleapis/nodejs-monitoring/commit/dd3ba97f7506577c264f40353d403ac62ce9951b))
+* **docs:** bump release level to GA ([#335](https://www.github.com/googleapis/nodejs-monitoring/issues/335)) ([839a25b](https://www.github.com/googleapis/nodejs-monitoring/commit/839a25b443ec0c65ed18822f5ca305ab0737fa71))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.5.0...v1.6.0) (2019-11-15)
 
 
