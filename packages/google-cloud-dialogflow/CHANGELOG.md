@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.14.1...v1.0.0) (2019-12-05)
+
+
+### Features
+
+* adds plural and singular resource descriptor ([#471](https://www.github.com/googleapis/nodejs-dialogflow/issues/471)) ([29e47a6](https://www.github.com/googleapis/nodejs-dialogflow/commit/29e47a68e66303b4485a3d0808fd022248887534))
+* **process:** library should be at 1.x ([#481](https://www.github.com/googleapis/nodejs-dialogflow/issues/481)) ([7d0df44](https://www.github.com/googleapis/nodejs-dialogflow/commit/7d0df44c32e29fa4cb93182b6b97a15bae30836c))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([4dfa20f](https://www.github.com/googleapis/nodejs-dialogflow/commit/4dfa20fc10e7a5fcc294b60d2659b24e967fc17f))
+* **deps:** update dependency yargs to v15 ([#469](https://www.github.com/googleapis/nodejs-dialogflow/issues/469)) ([74e847e](https://www.github.com/googleapis/nodejs-dialogflow/commit/74e847e7b047d83e3fdcbd601def1493d228fe08))
+* **docs:** bump release level to GA ([#475](https://www.github.com/googleapis/nodejs-dialogflow/issues/475)) ([59b5d8c](https://www.github.com/googleapis/nodejs-dialogflow/commit/59b5d8c6c4e4b7091c1b5ea31404d0f941f85b13))
+
 ### [0.14.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.14.0...v0.14.1) (2019-11-15)
 
 
