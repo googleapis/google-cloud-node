@@ -2821,7 +2821,7 @@ describe('storage', () => {
         if (!SECOND_SERVICE_ACCOUNT) {
           this.skip();
         }
-        await deleteHmacKeys(SECOND_SERVICE_ACCOUNT, HMAC_PROJECT!);
+        await deleteHmacKeys(SECOND_SERVICE_ACCOUNT!, HMAC_PROJECT!);
       });
 
       it('should create key for a second service account', async () => {
