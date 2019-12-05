@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.3.2...v1.4.0) (2019-12-05)
+
+
+### Features
+
+* add plural and singular resource descriptor ([#56](https://www.github.com/googleapis/nodejs-phishing-protection/issues/56)) ([85e99f9](https://www.github.com/googleapis/nodejs-phishing-protection/commit/85e99f9e9d15def40bdf1043b43eb1e941eb98f0))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([758a2f3](https://www.github.com/googleapis/nodejs-phishing-protection/commit/758a2f3a10a59c8ed6fd13a3ef76ffda07997a1b))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.3.1...v1.3.2) (2019-11-15)
 
 
