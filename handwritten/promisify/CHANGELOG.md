@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.3...v1.0.4) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([e48750e](https://www.github.com/googleapis/nodejs-promisify/commit/e48750ef96aa20eb3a2b73fe2f062d04430468a7))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.2...v1.0.3) (2019-11-13)
 
 
