@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.7.1...v1.8.0) (2019-12-05)
+
+
+### Features
+
+* add plural and singular resource descriptor ([#365](https://www.github.com/googleapis/nodejs-dlp/issues/365)) ([29e876b](https://www.github.com/googleapis/nodejs-dlp/commit/29e876b70c39d0e4533d151132139c52ad8767fe))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([346b756](https://www.github.com/googleapis/nodejs-dlp/commit/346b7564e7b97c77ede1483207b83faef3aae6c1))
+* **docs:** bump release level to GA ([#363](https://www.github.com/googleapis/nodejs-dlp/issues/363)) ([67dfc81](https://www.github.com/googleapis/nodejs-dlp/commit/67dfc816ec097b91248a0a9f63e39d25c90c5647))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.7.0...v1.7.1) (2019-11-18)
 
 
