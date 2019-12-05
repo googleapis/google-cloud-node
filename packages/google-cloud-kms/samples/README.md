@@ -14,6 +14,10 @@
 * [Samples](#samples)
   * [Add Member To Crypto Key Policy](#add-member-to-crypto-key-policy)
   * [Add Member To Key Ring Policy](#add-member-to-key-ring-policy)
+  * [Asymmetric Decrypt](#asymmetric-decrypt)
+  * [Asymmetric Encrypt](#asymmetric-encrypt)
+  * [Asymmetric Sign](#asymmetric-sign)
+  * [Asymmetric Verify](#asymmetric-verify)
   * [Create Crypto Key](#create-crypto-key)
   * [Create Crypto Key Version](#create-crypto-key-version)
   * [Create Keyring](#create-keyring)
@@ -26,6 +30,7 @@
   * [Get Crypto Key Iam Policy](#get-crypto-key-iam-policy)
   * [Get Keyring](#get-keyring)
   * [Get Keyring Iam Policy](#get-keyring-iam-policy)
+  * [Get Public Key](#get-public-key)
   * [List Crypto Key Versions](#list-crypto-key-versions)
   * [List Crypto Keys](#list-crypto-keys)
   * [List Keyrings](#list-keyrings)
@@ -71,6 +76,74 @@ __Usage:__
 
 
 `node addMemberToKeyRingPolicy.js`
+
+
+-----
+
+
+
+
+### Asymmetric Decrypt
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/asymmetricDecrypt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/asymmetricDecrypt.js,samples/README.md)
+
+__Usage:__
+
+
+`node asymmetricDecrypt.js`
+
+
+-----
+
+
+
+
+### Asymmetric Encrypt
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/asymmetricEncrypt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/asymmetricEncrypt.js,samples/README.md)
+
+__Usage:__
+
+
+`node asymmetricEncrypt.js`
+
+
+-----
+
+
+
+
+### Asymmetric Sign
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/asymmetricSign.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/asymmetricSign.js,samples/README.md)
+
+__Usage:__
+
+
+`node asymmetricSign.js`
+
+
+-----
+
+
+
+
+### Asymmetric Verify
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/asymmetricVerify.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/asymmetricVerify.js,samples/README.md)
+
+__Usage:__
+
+
+`node asymmetricVerify.js`
 
 
 -----
@@ -275,6 +348,23 @@ __Usage:__
 
 
 `node getKeyringIamPolicy.js`
+
+
+-----
+
+
+
+
+### Get Public Key
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/getPublicKey.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/getPublicKey.js,samples/README.md)
+
+__Usage:__
+
+
+`node getPublicKey.js`
 
 
 -----
