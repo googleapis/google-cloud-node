@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.8](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.7...v1.2.8) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([609120a](https://www.github.com/googleapis/nodejs-dns/commit/609120a5cf39a54f0187fb0a6e4907548a488aa0))
+
 ### [1.2.7](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.6...v1.2.7) (2019-11-19)
 
 
