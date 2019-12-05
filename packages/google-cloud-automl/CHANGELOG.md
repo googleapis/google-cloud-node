@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.10.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.2...v1.10.0) (2019-12-05)
+
+
+### Features
+
+* support resource definitions ([#282](https://www.github.com/googleapis/nodejs-automl/issues/282)) ([439b440](https://www.github.com/googleapis/nodejs-automl/commit/439b440a709d4fba35f3c8fcf297bb20af7dd9d5))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([927b5ee](https://www.github.com/googleapis/nodejs-automl/commit/927b5ee5b88cb62e6aa86e44443c6d072fe80669))
+* correct AutoML Natural Language region tags to match with all other languages ([bab8fcb](https://www.github.com/googleapis/nodejs-automl/commit/bab8fcbc7ff3cdc34892fa165085d6bd7964413e))
+
 ### [1.9.2](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.1...v1.9.2) (2019-11-18)
 
 
