@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [2.0.2](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.1...v2.0.2) (2019-12-05)
+
+
+### Bug Fixes
+
+* **deps:** TypeScript 3.7.0 causes breaking change in typings ([#384](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/384)) ([b7c509c](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/b7c509ce00d8436405abe4e19922594825927a13))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.0...v2.0.1) (2019-12-02)
 
 
