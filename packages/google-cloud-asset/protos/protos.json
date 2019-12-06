@@ -39,6 +39,48 @@
                           "options": {
                             "(google.api.http).get": "/v1/{parent=*/*}:batchGetAssetsHistory"
                           }
+                        },
+                        "CreateFeed": {
+                          "requestType": "CreateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=*/*}/feeds",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetFeed": {
+                          "requestType": "GetFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=*/*/feeds/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "ListFeeds": {
+                          "requestType": "ListFeedsRequest",
+                          "responseType": "ListFeedsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=*/*}/feeds",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "UpdateFeed": {
+                          "requestType": "UpdateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{feed.name=*/*/feeds/*}",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "feed"
+                          }
+                        },
+                        "DeleteFeed": {
+                          "requestType": "DeleteFeedRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=*/*/feeds/*}",
+                            "(google.api.method_signature)": "name"
+                          }
                         }
                       }
                     },
@@ -126,6 +168,93 @@
                         }
                       }
                     },
+                    "CreateFeedRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feedId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feed": {
+                          "type": "Feed",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/Feed"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedsResponse": {
+                      "fields": {
+                        "feeds": {
+                          "rule": "repeated",
+                          "type": "Feed",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateFeedRequest": {
+                      "fields": {
+                        "feed": {
+                          "type": "Feed",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/Feed"
+                          }
+                        }
+                      }
+                    },
                     "OutputConfig": {
                       "oneofs": {
                         "destination": {
@@ -188,6 +317,14 @@
                         }
                       }
                     },
+                    "PubsubDestination": {
+                      "fields": {
+                        "topic": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ContentType": {
                       "values": {
                         "CONTENT_TYPE_UNSPECIFIED": 0,
@@ -195,6 +332,58 @@
                         "IAM_POLICY": 2,
                         "ORG_POLICY": 4,
                         "ACCESS_POLICY": 5
+                      }
+                    },
+                    "FeedOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "pubsubDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pubsubDestination": {
+                          "type": "PubsubDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Feed": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Feed",
+                        "(google.api.resource).pattern": "organizations/{organization}/feeds/{feed}",
+                        "(google.api.resource).history": "ORIGINALLY_SINGLE_PATTERN"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "assetNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "contentType": {
+                          "type": "ContentType",
+                          "id": 4
+                        },
+                        "feedOutputConfig": {
+                          "type": "FeedOutputConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
                       }
                     },
                     "TemporalAsset": {
@@ -246,6 +435,11 @@
                         "iamPolicy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
                         }
                       }
                     },

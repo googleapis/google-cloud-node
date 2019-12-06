@@ -164,6 +164,171 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#createFeed}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef CreateFeedCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.Feed} [response] Feed
+                         */
+    
+                        /**
+                         * Calls CreateFeed.
+                         * @function createFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest} request CreateFeedRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.CreateFeedCallback} callback Node-style callback called with the error, if any, and Feed
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.createFeed = function createFeed(request, callback) {
+                            return this.rpcCall(createFeed, $root.google.cloud.asset.v1.CreateFeedRequest, $root.google.cloud.asset.v1.Feed, request, callback);
+                        }, "name", { value: "CreateFeed" });
+    
+                        /**
+                         * Calls CreateFeed.
+                         * @function createFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest} request CreateFeedRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.Feed>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#getFeed}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef GetFeedCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.Feed} [response] Feed
+                         */
+    
+                        /**
+                         * Calls GetFeed.
+                         * @function getFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IGetFeedRequest} request GetFeedRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.GetFeedCallback} callback Node-style callback called with the error, if any, and Feed
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.getFeed = function getFeed(request, callback) {
+                            return this.rpcCall(getFeed, $root.google.cloud.asset.v1.GetFeedRequest, $root.google.cloud.asset.v1.Feed, request, callback);
+                        }, "name", { value: "GetFeed" });
+    
+                        /**
+                         * Calls GetFeed.
+                         * @function getFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IGetFeedRequest} request GetFeedRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.Feed>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#listFeeds}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef ListFeedsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.ListFeedsResponse} [response] ListFeedsResponse
+                         */
+    
+                        /**
+                         * Calls ListFeeds.
+                         * @function listFeeds
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IListFeedsRequest} request ListFeedsRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.ListFeedsCallback} callback Node-style callback called with the error, if any, and ListFeedsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.listFeeds = function listFeeds(request, callback) {
+                            return this.rpcCall(listFeeds, $root.google.cloud.asset.v1.ListFeedsRequest, $root.google.cloud.asset.v1.ListFeedsResponse, request, callback);
+                        }, "name", { value: "ListFeeds" });
+    
+                        /**
+                         * Calls ListFeeds.
+                         * @function listFeeds
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IListFeedsRequest} request ListFeedsRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.ListFeedsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#updateFeed}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef UpdateFeedCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.Feed} [response] Feed
+                         */
+    
+                        /**
+                         * Calls UpdateFeed.
+                         * @function updateFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest} request UpdateFeedRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.UpdateFeedCallback} callback Node-style callback called with the error, if any, and Feed
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.updateFeed = function updateFeed(request, callback) {
+                            return this.rpcCall(updateFeed, $root.google.cloud.asset.v1.UpdateFeedRequest, $root.google.cloud.asset.v1.Feed, request, callback);
+                        }, "name", { value: "UpdateFeed" });
+    
+                        /**
+                         * Calls UpdateFeed.
+                         * @function updateFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest} request UpdateFeedRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.Feed>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#deleteFeed}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef DeleteFeedCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteFeed.
+                         * @function deleteFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest} request DeleteFeedRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.DeleteFeedCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.deleteFeed = function deleteFeed(request, callback) {
+                            return this.rpcCall(deleteFeed, $root.google.cloud.asset.v1.DeleteFeedRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteFeed" });
+    
+                        /**
+                         * Calls DeleteFeed.
+                         * @function deleteFeed
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest} request DeleteFeedRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
                         return AssetService;
                     })();
     
@@ -1230,6 +1395,1232 @@
                         return BatchGetAssetsHistoryResponse;
                     })();
     
+                    v1.CreateFeedRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface ICreateFeedRequest
+                         * @property {string|null} [parent] CreateFeedRequest parent
+                         * @property {string|null} [feedId] CreateFeedRequest feedId
+                         * @property {google.cloud.asset.v1.IFeed|null} [feed] CreateFeedRequest feed
+                         */
+    
+                        /**
+                         * Constructs a new CreateFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a CreateFeedRequest.
+                         * @implements ICreateFeedRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest=} [properties] Properties to set
+                         */
+                        function CreateFeedRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateFeedRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @instance
+                         */
+                        CreateFeedRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateFeedRequest feedId.
+                         * @member {string} feedId
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @instance
+                         */
+                        CreateFeedRequest.prototype.feedId = "";
+    
+                        /**
+                         * CreateFeedRequest feed.
+                         * @member {google.cloud.asset.v1.IFeed|null|undefined} feed
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @instance
+                         */
+                        CreateFeedRequest.prototype.feed = null;
+    
+                        /**
+                         * Creates a new CreateFeedRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.CreateFeedRequest} CreateFeedRequest instance
+                         */
+                        CreateFeedRequest.create = function create(properties) {
+                            return new CreateFeedRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.CreateFeedRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest} message CreateFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFeedRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.feedId != null && message.hasOwnProperty("feedId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.feedId);
+                            if (message.feed != null && message.hasOwnProperty("feed"))
+                                $root.google.cloud.asset.v1.Feed.encode(message.feed, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.CreateFeedRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ICreateFeedRequest} message CreateFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateFeedRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateFeedRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.CreateFeedRequest} CreateFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFeedRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.CreateFeedRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.feedId = reader.string();
+                                    break;
+                                case 3:
+                                    message.feed = $root.google.cloud.asset.v1.Feed.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateFeedRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.CreateFeedRequest} CreateFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateFeedRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateFeedRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateFeedRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.feedId != null && message.hasOwnProperty("feedId"))
+                                if (!$util.isString(message.feedId))
+                                    return "feedId: string expected";
+                            if (message.feed != null && message.hasOwnProperty("feed")) {
+                                var error = $root.google.cloud.asset.v1.Feed.verify(message.feed);
+                                if (error)
+                                    return "feed." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateFeedRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.CreateFeedRequest} CreateFeedRequest
+                         */
+                        CreateFeedRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.CreateFeedRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.CreateFeedRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.feedId != null)
+                                message.feedId = String(object.feedId);
+                            if (object.feed != null) {
+                                if (typeof object.feed !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.CreateFeedRequest.feed: object expected");
+                                message.feed = $root.google.cloud.asset.v1.Feed.fromObject(object.feed);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateFeedRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.CreateFeedRequest} message CreateFeedRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateFeedRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.feedId = "";
+                                object.feed = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.feedId != null && message.hasOwnProperty("feedId"))
+                                object.feedId = message.feedId;
+                            if (message.feed != null && message.hasOwnProperty("feed"))
+                                object.feed = $root.google.cloud.asset.v1.Feed.toObject(message.feed, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateFeedRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.CreateFeedRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateFeedRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateFeedRequest;
+                    })();
+    
+                    v1.GetFeedRequest = (function() {
+    
+                        /**
+                         * Properties of a GetFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IGetFeedRequest
+                         * @property {string|null} [name] GetFeedRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a GetFeedRequest.
+                         * @implements IGetFeedRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IGetFeedRequest=} [properties] Properties to set
+                         */
+                        function GetFeedRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetFeedRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @instance
+                         */
+                        GetFeedRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetFeedRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetFeedRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.GetFeedRequest} GetFeedRequest instance
+                         */
+                        GetFeedRequest.create = function create(properties) {
+                            return new GetFeedRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.GetFeedRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetFeedRequest} message GetFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFeedRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.GetFeedRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IGetFeedRequest} message GetFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetFeedRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetFeedRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.GetFeedRequest} GetFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFeedRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GetFeedRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetFeedRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.GetFeedRequest} GetFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetFeedRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetFeedRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetFeedRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetFeedRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.GetFeedRequest} GetFeedRequest
+                         */
+                        GetFeedRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.GetFeedRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.GetFeedRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetFeedRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.GetFeedRequest} message GetFeedRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetFeedRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetFeedRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.GetFeedRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetFeedRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetFeedRequest;
+                    })();
+    
+                    v1.ListFeedsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListFeedsRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IListFeedsRequest
+                         * @property {string|null} [parent] ListFeedsRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new ListFeedsRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ListFeedsRequest.
+                         * @implements IListFeedsRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IListFeedsRequest=} [properties] Properties to set
+                         */
+                        function ListFeedsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFeedsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @instance
+                         */
+                        ListFeedsRequest.prototype.parent = "";
+    
+                        /**
+                         * Creates a new ListFeedsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ListFeedsRequest} ListFeedsRequest instance
+                         */
+                        ListFeedsRequest.create = function create(properties) {
+                            return new ListFeedsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFeedsRequest message. Does not implicitly {@link google.cloud.asset.v1.ListFeedsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsRequest} message ListFeedsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFeedsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFeedsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListFeedsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsRequest} message ListFeedsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFeedsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFeedsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ListFeedsRequest} ListFeedsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFeedsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListFeedsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFeedsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ListFeedsRequest} ListFeedsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFeedsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFeedsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFeedsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFeedsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ListFeedsRequest} ListFeedsRequest
+                         */
+                        ListFeedsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ListFeedsRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ListFeedsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFeedsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.ListFeedsRequest} message ListFeedsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFeedsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.parent = "";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFeedsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ListFeedsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFeedsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListFeedsRequest;
+                    })();
+    
+                    v1.ListFeedsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListFeedsResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IListFeedsResponse
+                         * @property {Array.<google.cloud.asset.v1.IFeed>|null} [feeds] ListFeedsResponse feeds
+                         */
+    
+                        /**
+                         * Constructs a new ListFeedsResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ListFeedsResponse.
+                         * @implements IListFeedsResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IListFeedsResponse=} [properties] Properties to set
+                         */
+                        function ListFeedsResponse(properties) {
+                            this.feeds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListFeedsResponse feeds.
+                         * @member {Array.<google.cloud.asset.v1.IFeed>} feeds
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @instance
+                         */
+                        ListFeedsResponse.prototype.feeds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListFeedsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ListFeedsResponse} ListFeedsResponse instance
+                         */
+                        ListFeedsResponse.create = function create(properties) {
+                            return new ListFeedsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListFeedsResponse message. Does not implicitly {@link google.cloud.asset.v1.ListFeedsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsResponse} message ListFeedsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFeedsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.feeds != null && message.feeds.length)
+                                for (var i = 0; i < message.feeds.length; ++i)
+                                    $root.google.cloud.asset.v1.Feed.encode(message.feeds[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListFeedsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListFeedsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IListFeedsResponse} message ListFeedsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListFeedsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListFeedsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ListFeedsResponse} ListFeedsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFeedsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListFeedsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.feeds && message.feeds.length))
+                                        message.feeds = [];
+                                    message.feeds.push($root.google.cloud.asset.v1.Feed.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListFeedsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ListFeedsResponse} ListFeedsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListFeedsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListFeedsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListFeedsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.feeds != null && message.hasOwnProperty("feeds")) {
+                                if (!Array.isArray(message.feeds))
+                                    return "feeds: array expected";
+                                for (var i = 0; i < message.feeds.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.Feed.verify(message.feeds[i]);
+                                    if (error)
+                                        return "feeds." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListFeedsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ListFeedsResponse} ListFeedsResponse
+                         */
+                        ListFeedsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ListFeedsResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ListFeedsResponse();
+                            if (object.feeds) {
+                                if (!Array.isArray(object.feeds))
+                                    throw TypeError(".google.cloud.asset.v1.ListFeedsResponse.feeds: array expected");
+                                message.feeds = [];
+                                for (var i = 0; i < object.feeds.length; ++i) {
+                                    if (typeof object.feeds[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ListFeedsResponse.feeds: object expected");
+                                    message.feeds[i] = $root.google.cloud.asset.v1.Feed.fromObject(object.feeds[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListFeedsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.ListFeedsResponse} message ListFeedsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListFeedsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.feeds = [];
+                            if (message.feeds && message.feeds.length) {
+                                object.feeds = [];
+                                for (var j = 0; j < message.feeds.length; ++j)
+                                    object.feeds[j] = $root.google.cloud.asset.v1.Feed.toObject(message.feeds[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListFeedsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ListFeedsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListFeedsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListFeedsResponse;
+                    })();
+    
+                    v1.UpdateFeedRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IUpdateFeedRequest
+                         * @property {google.cloud.asset.v1.IFeed|null} [feed] UpdateFeedRequest feed
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFeedRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an UpdateFeedRequest.
+                         * @implements IUpdateFeedRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest=} [properties] Properties to set
+                         */
+                        function UpdateFeedRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateFeedRequest feed.
+                         * @member {google.cloud.asset.v1.IFeed|null|undefined} feed
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @instance
+                         */
+                        UpdateFeedRequest.prototype.feed = null;
+    
+                        /**
+                         * UpdateFeedRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @instance
+                         */
+                        UpdateFeedRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateFeedRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.UpdateFeedRequest} UpdateFeedRequest instance
+                         */
+                        UpdateFeedRequest.create = function create(properties) {
+                            return new UpdateFeedRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.UpdateFeedRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest} message UpdateFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFeedRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.feed != null && message.hasOwnProperty("feed"))
+                                $root.google.cloud.asset.v1.Feed.encode(message.feed, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.UpdateFeedRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IUpdateFeedRequest} message UpdateFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateFeedRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateFeedRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.UpdateFeedRequest} UpdateFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFeedRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.UpdateFeedRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.feed = $root.google.cloud.asset.v1.Feed.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateFeedRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.UpdateFeedRequest} UpdateFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateFeedRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateFeedRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateFeedRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.feed != null && message.hasOwnProperty("feed")) {
+                                var error = $root.google.cloud.asset.v1.Feed.verify(message.feed);
+                                if (error)
+                                    return "feed." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateFeedRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.UpdateFeedRequest} UpdateFeedRequest
+                         */
+                        UpdateFeedRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.UpdateFeedRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.UpdateFeedRequest();
+                            if (object.feed != null) {
+                                if (typeof object.feed !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.UpdateFeedRequest.feed: object expected");
+                                message.feed = $root.google.cloud.asset.v1.Feed.fromObject(object.feed);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.UpdateFeedRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateFeedRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.UpdateFeedRequest} message UpdateFeedRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateFeedRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.feed = null;
+                                object.updateMask = null;
+                            }
+                            if (message.feed != null && message.hasOwnProperty("feed"))
+                                object.feed = $root.google.cloud.asset.v1.Feed.toObject(message.feed, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateFeedRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.UpdateFeedRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateFeedRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateFeedRequest;
+                    })();
+    
+                    v1.DeleteFeedRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IDeleteFeedRequest
+                         * @property {string|null} [name] DeleteFeedRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFeedRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a DeleteFeedRequest.
+                         * @implements IDeleteFeedRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest=} [properties] Properties to set
+                         */
+                        function DeleteFeedRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFeedRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @instance
+                         */
+                        DeleteFeedRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteFeedRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.DeleteFeedRequest} DeleteFeedRequest instance
+                         */
+                        DeleteFeedRequest.create = function create(properties) {
+                            return new DeleteFeedRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.DeleteFeedRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest} message DeleteFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFeedRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.DeleteFeedRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IDeleteFeedRequest} message DeleteFeedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFeedRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFeedRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.DeleteFeedRequest} DeleteFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFeedRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.DeleteFeedRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFeedRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.DeleteFeedRequest} DeleteFeedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFeedRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFeedRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFeedRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFeedRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.DeleteFeedRequest} DeleteFeedRequest
+                         */
+                        DeleteFeedRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.DeleteFeedRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.DeleteFeedRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFeedRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.DeleteFeedRequest} message DeleteFeedRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFeedRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFeedRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.DeleteFeedRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFeedRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteFeedRequest;
+                    })();
+    
                     v1.OutputConfig = (function() {
     
                         /**
@@ -1940,6 +3331,193 @@
                         return BigQueryDestination;
                     })();
     
+                    v1.PubsubDestination = (function() {
+    
+                        /**
+                         * Properties of a PubsubDestination.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IPubsubDestination
+                         * @property {string|null} [topic] PubsubDestination topic
+                         */
+    
+                        /**
+                         * Constructs a new PubsubDestination.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a PubsubDestination.
+                         * @implements IPubsubDestination
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IPubsubDestination=} [properties] Properties to set
+                         */
+                        function PubsubDestination(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PubsubDestination topic.
+                         * @member {string} topic
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @instance
+                         */
+                        PubsubDestination.prototype.topic = "";
+    
+                        /**
+                         * Creates a new PubsubDestination instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {google.cloud.asset.v1.IPubsubDestination=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.PubsubDestination} PubsubDestination instance
+                         */
+                        PubsubDestination.create = function create(properties) {
+                            return new PubsubDestination(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PubsubDestination message. Does not implicitly {@link google.cloud.asset.v1.PubsubDestination.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {google.cloud.asset.v1.IPubsubDestination} message PubsubDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubsubDestination.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PubsubDestination message, length delimited. Does not implicitly {@link google.cloud.asset.v1.PubsubDestination.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {google.cloud.asset.v1.IPubsubDestination} message PubsubDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PubsubDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PubsubDestination message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.PubsubDestination} PubsubDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubsubDestination.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.PubsubDestination();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.topic = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PubsubDestination message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.PubsubDestination} PubsubDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PubsubDestination.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PubsubDestination message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PubsubDestination.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                if (!$util.isString(message.topic))
+                                    return "topic: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PubsubDestination message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.PubsubDestination} PubsubDestination
+                         */
+                        PubsubDestination.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.PubsubDestination)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.PubsubDestination();
+                            if (object.topic != null)
+                                message.topic = String(object.topic);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PubsubDestination message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @static
+                         * @param {google.cloud.asset.v1.PubsubDestination} message PubsubDestination
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PubsubDestination.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.topic = "";
+                            if (message.topic != null && message.hasOwnProperty("topic"))
+                                object.topic = message.topic;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PubsubDestination to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.PubsubDestination
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PubsubDestination.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PubsubDestination;
+                    })();
+    
                     /**
                      * ContentType enum.
                      * @name google.cloud.asset.v1.ContentType
@@ -1958,6 +3536,560 @@
                         values[valuesById[4] = "ORG_POLICY"] = 4;
                         values[valuesById[5] = "ACCESS_POLICY"] = 5;
                         return values;
+                    })();
+    
+                    v1.FeedOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a FeedOutputConfig.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IFeedOutputConfig
+                         * @property {google.cloud.asset.v1.IPubsubDestination|null} [pubsubDestination] FeedOutputConfig pubsubDestination
+                         */
+    
+                        /**
+                         * Constructs a new FeedOutputConfig.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a FeedOutputConfig.
+                         * @implements IFeedOutputConfig
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IFeedOutputConfig=} [properties] Properties to set
+                         */
+                        function FeedOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FeedOutputConfig pubsubDestination.
+                         * @member {google.cloud.asset.v1.IPubsubDestination|null|undefined} pubsubDestination
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @instance
+                         */
+                        FeedOutputConfig.prototype.pubsubDestination = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FeedOutputConfig destination.
+                         * @member {"pubsubDestination"|undefined} destination
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(FeedOutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["pubsubDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FeedOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeedOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.FeedOutputConfig} FeedOutputConfig instance
+                         */
+                        FeedOutputConfig.create = function create(properties) {
+                            return new FeedOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FeedOutputConfig message. Does not implicitly {@link google.cloud.asset.v1.FeedOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeedOutputConfig} message FeedOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FeedOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pubsubDestination != null && message.hasOwnProperty("pubsubDestination"))
+                                $root.google.cloud.asset.v1.PubsubDestination.encode(message.pubsubDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FeedOutputConfig message, length delimited. Does not implicitly {@link google.cloud.asset.v1.FeedOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeedOutputConfig} message FeedOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FeedOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FeedOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.FeedOutputConfig} FeedOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FeedOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.FeedOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pubsubDestination = $root.google.cloud.asset.v1.PubsubDestination.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FeedOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.FeedOutputConfig} FeedOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FeedOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FeedOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FeedOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.pubsubDestination != null && message.hasOwnProperty("pubsubDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.PubsubDestination.verify(message.pubsubDestination);
+                                    if (error)
+                                        return "pubsubDestination." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FeedOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.FeedOutputConfig} FeedOutputConfig
+                         */
+                        FeedOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.FeedOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.FeedOutputConfig();
+                            if (object.pubsubDestination != null) {
+                                if (typeof object.pubsubDestination !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.FeedOutputConfig.pubsubDestination: object expected");
+                                message.pubsubDestination = $root.google.cloud.asset.v1.PubsubDestination.fromObject(object.pubsubDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FeedOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @static
+                         * @param {google.cloud.asset.v1.FeedOutputConfig} message FeedOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FeedOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.pubsubDestination != null && message.hasOwnProperty("pubsubDestination")) {
+                                object.pubsubDestination = $root.google.cloud.asset.v1.PubsubDestination.toObject(message.pubsubDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "pubsubDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FeedOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.FeedOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FeedOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FeedOutputConfig;
+                    })();
+    
+                    v1.Feed = (function() {
+    
+                        /**
+                         * Properties of a Feed.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IFeed
+                         * @property {string|null} [name] Feed name
+                         * @property {Array.<string>|null} [assetNames] Feed assetNames
+                         * @property {Array.<string>|null} [assetTypes] Feed assetTypes
+                         * @property {google.cloud.asset.v1.ContentType|null} [contentType] Feed contentType
+                         * @property {google.cloud.asset.v1.IFeedOutputConfig|null} [feedOutputConfig] Feed feedOutputConfig
+                         */
+    
+                        /**
+                         * Constructs a new Feed.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a Feed.
+                         * @implements IFeed
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IFeed=} [properties] Properties to set
+                         */
+                        function Feed(properties) {
+                            this.assetNames = [];
+                            this.assetTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Feed name.
+                         * @member {string} name
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.name = "";
+    
+                        /**
+                         * Feed assetNames.
+                         * @member {Array.<string>} assetNames
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.assetNames = $util.emptyArray;
+    
+                        /**
+                         * Feed assetTypes.
+                         * @member {Array.<string>} assetTypes
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.assetTypes = $util.emptyArray;
+    
+                        /**
+                         * Feed contentType.
+                         * @member {google.cloud.asset.v1.ContentType} contentType
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.contentType = 0;
+    
+                        /**
+                         * Feed feedOutputConfig.
+                         * @member {google.cloud.asset.v1.IFeedOutputConfig|null|undefined} feedOutputConfig
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.feedOutputConfig = null;
+    
+                        /**
+                         * Creates a new Feed instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeed=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.Feed} Feed instance
+                         */
+                        Feed.create = function create(properties) {
+                            return new Feed(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Feed message. Does not implicitly {@link google.cloud.asset.v1.Feed.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeed} message Feed message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Feed.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.assetNames != null && message.assetNames.length)
+                                for (var i = 0; i < message.assetNames.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.assetNames[i]);
+                            if (message.assetTypes != null && message.assetTypes.length)
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.assetTypes[i]);
+                            if (message.contentType != null && message.hasOwnProperty("contentType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.contentType);
+                            if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig"))
+                                $root.google.cloud.asset.v1.FeedOutputConfig.encode(message.feedOutputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Feed message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Feed.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {google.cloud.asset.v1.IFeed} message Feed message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Feed.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Feed message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.Feed} Feed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Feed.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.Feed();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.assetNames && message.assetNames.length))
+                                        message.assetNames = [];
+                                    message.assetNames.push(reader.string());
+                                    break;
+                                case 3:
+                                    if (!(message.assetTypes && message.assetTypes.length))
+                                        message.assetTypes = [];
+                                    message.assetTypes.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.contentType = reader.int32();
+                                    break;
+                                case 5:
+                                    message.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Feed message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.Feed} Feed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Feed.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Feed message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Feed.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.assetNames != null && message.hasOwnProperty("assetNames")) {
+                                if (!Array.isArray(message.assetNames))
+                                    return "assetNames: array expected";
+                                for (var i = 0; i < message.assetNames.length; ++i)
+                                    if (!$util.isString(message.assetNames[i]))
+                                        return "assetNames: string[] expected";
+                            }
+                            if (message.assetTypes != null && message.hasOwnProperty("assetTypes")) {
+                                if (!Array.isArray(message.assetTypes))
+                                    return "assetTypes: array expected";
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    if (!$util.isString(message.assetTypes[i]))
+                                        return "assetTypes: string[] expected";
+                            }
+                            if (message.contentType != null && message.hasOwnProperty("contentType"))
+                                switch (message.contentType) {
+                                default:
+                                    return "contentType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig")) {
+                                var error = $root.google.cloud.asset.v1.FeedOutputConfig.verify(message.feedOutputConfig);
+                                if (error)
+                                    return "feedOutputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Feed message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.Feed} Feed
+                         */
+                        Feed.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.Feed)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.Feed();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.assetNames) {
+                                if (!Array.isArray(object.assetNames))
+                                    throw TypeError(".google.cloud.asset.v1.Feed.assetNames: array expected");
+                                message.assetNames = [];
+                                for (var i = 0; i < object.assetNames.length; ++i)
+                                    message.assetNames[i] = String(object.assetNames[i]);
+                            }
+                            if (object.assetTypes) {
+                                if (!Array.isArray(object.assetTypes))
+                                    throw TypeError(".google.cloud.asset.v1.Feed.assetTypes: array expected");
+                                message.assetTypes = [];
+                                for (var i = 0; i < object.assetTypes.length; ++i)
+                                    message.assetTypes[i] = String(object.assetTypes[i]);
+                            }
+                            switch (object.contentType) {
+                            case "CONTENT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.contentType = 0;
+                                break;
+                            case "RESOURCE":
+                            case 1:
+                                message.contentType = 1;
+                                break;
+                            case "IAM_POLICY":
+                            case 2:
+                                message.contentType = 2;
+                                break;
+                            case "ORG_POLICY":
+                            case 4:
+                                message.contentType = 4;
+                                break;
+                            case "ACCESS_POLICY":
+                            case 5:
+                                message.contentType = 5;
+                                break;
+                            }
+                            if (object.feedOutputConfig != null) {
+                                if (typeof object.feedOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Feed.feedOutputConfig: object expected");
+                                message.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.fromObject(object.feedOutputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Feed message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @static
+                         * @param {google.cloud.asset.v1.Feed} message Feed
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Feed.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.assetNames = [];
+                                object.assetTypes = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.contentType = options.enums === String ? "CONTENT_TYPE_UNSPECIFIED" : 0;
+                                object.feedOutputConfig = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.assetNames && message.assetNames.length) {
+                                object.assetNames = [];
+                                for (var j = 0; j < message.assetNames.length; ++j)
+                                    object.assetNames[j] = message.assetNames[j];
+                            }
+                            if (message.assetTypes && message.assetTypes.length) {
+                                object.assetTypes = [];
+                                for (var j = 0; j < message.assetTypes.length; ++j)
+                                    object.assetTypes[j] = message.assetTypes[j];
+                            }
+                            if (message.contentType != null && message.hasOwnProperty("contentType"))
+                                object.contentType = options.enums === String ? $root.google.cloud.asset.v1.ContentType[message.contentType] : message.contentType;
+                            if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig"))
+                                object.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.toObject(message.feedOutputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Feed to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Feed.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Feed;
                     })();
     
                     v1.TemporalAsset = (function() {
@@ -2432,6 +4564,7 @@
                          * @property {string|null} [assetType] Asset assetType
                          * @property {google.cloud.asset.v1.IResource|null} [resource] Asset resource
                          * @property {google.iam.v1.IPolicy|null} [iamPolicy] Asset iamPolicy
+                         * @property {Array.<string>|null} [ancestors] Asset ancestors
                          */
     
                         /**
@@ -2443,6 +4576,7 @@
                          * @param {google.cloud.asset.v1.IAsset=} [properties] Properties to set
                          */
                         function Asset(properties) {
+                            this.ancestors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2482,6 +4616,14 @@
                         Asset.prototype.iamPolicy = null;
     
                         /**
+                         * Asset ancestors.
+                         * @member {Array.<string>} ancestors
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.ancestors = $util.emptyArray;
+    
+                        /**
                          * Creates a new Asset instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.Asset
@@ -2513,6 +4655,9 @@
                                 $root.google.cloud.asset.v1.Resource.encode(message.resource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.iamPolicy != null && message.hasOwnProperty("iamPolicy"))
                                 $root.google.iam.v1.Policy.encode(message.iamPolicy, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.ancestors != null && message.ancestors.length)
+                                for (var i = 0; i < message.ancestors.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.ancestors[i]);
                             return writer;
                         };
     
@@ -2558,6 +4703,11 @@
                                     break;
                                 case 4:
                                     message.iamPolicy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    if (!(message.ancestors && message.ancestors.length))
+                                        message.ancestors = [];
+                                    message.ancestors.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2610,6 +4760,13 @@
                                 if (error)
                                     return "iamPolicy." + error;
                             }
+                            if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
+                                if (!Array.isArray(message.ancestors))
+                                    return "ancestors: array expected";
+                                for (var i = 0; i < message.ancestors.length; ++i)
+                                    if (!$util.isString(message.ancestors[i]))
+                                        return "ancestors: string[] expected";
+                            }
                             return null;
                         };
     
@@ -2639,6 +4796,13 @@
                                     throw TypeError(".google.cloud.asset.v1.Asset.iamPolicy: object expected");
                                 message.iamPolicy = $root.google.iam.v1.Policy.fromObject(object.iamPolicy);
                             }
+                            if (object.ancestors) {
+                                if (!Array.isArray(object.ancestors))
+                                    throw TypeError(".google.cloud.asset.v1.Asset.ancestors: array expected");
+                                message.ancestors = [];
+                                for (var i = 0; i < object.ancestors.length; ++i)
+                                    message.ancestors[i] = String(object.ancestors[i]);
+                            }
                             return message;
                         };
     
@@ -2655,6 +4819,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ancestors = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.assetType = "";
@@ -2669,6 +4835,11 @@
                                 object.resource = $root.google.cloud.asset.v1.Resource.toObject(message.resource, options);
                             if (message.iamPolicy != null && message.hasOwnProperty("iamPolicy"))
                                 object.iamPolicy = $root.google.iam.v1.Policy.toObject(message.iamPolicy, options);
+                            if (message.ancestors && message.ancestors.length) {
+                                object.ancestors = [];
+                                for (var j = 0; j < message.ancestors.length; ++j)
+                                    object.ancestors[j] = message.ancestors[j];
+                            }
                             return object;
                         };
     

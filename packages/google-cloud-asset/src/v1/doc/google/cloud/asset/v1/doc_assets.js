@@ -87,6 +87,14 @@ const TimeWindow = {
  *
  *   This object should have the same structure as [Policy]{@link google.iam.v1.Policy}
  *
+ * @property {string[]} ancestors
+ *   Asset's ancestry path in Cloud Resource Manager (CRM) hierarchy,
+ *   represented as a list of relative resource names. Ancestry path starts with
+ *   the closest CRM ancestor and ends at root. If the asset is a CRM
+ *   project/folder/organization, this starts from the asset itself.
+ *
+ *   Example: ["projects/123456789", "folders/5432", "organizations/1234"]
+ *
  * @typedef Asset
  * @memberof google.cloud.asset.v1
  * @see [google.cloud.asset.v1.Asset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/assets.proto}

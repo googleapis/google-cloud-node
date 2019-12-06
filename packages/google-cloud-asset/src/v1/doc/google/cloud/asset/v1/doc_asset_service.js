@@ -144,6 +144,126 @@ const BatchGetAssetsHistoryResponse = {
 };
 
 /**
+ * Create asset feed request.
+ *
+ * @property {string} parent
+ *   Required. The name of the project/folder/organization where this feed
+ *   should be created in. It can only be an organization number (such as
+ *   "organizations/123"), a folder number (such as "folders/123"), a project ID
+ *   (such as "projects/my-project-id")", or a project number (such as
+ *   "projects/12345").
+ *
+ * @property {string} feedId
+ *   Required. This is the client-assigned asset feed identifier and it needs to
+ *   be unique under a specific parent project/folder/organization.
+ *
+ * @property {Object} feed
+ *   Required. The feed details. The field `name` must be empty and it will be generated
+ *   in the format of:
+ *   projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ *
+ *   This object should have the same structure as [Feed]{@link google.cloud.asset.v1.Feed}
+ *
+ * @typedef CreateFeedRequest
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.CreateFeedRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const CreateFeedRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Get asset feed request.
+ *
+ * @property {string} name
+ *   Required. The name of the Feed and it must be in the format of:
+ *   projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ *
+ * @typedef GetFeedRequest
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.GetFeedRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const GetFeedRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * List asset feeds request.
+ *
+ * @property {string} parent
+ *   Required. The parent project/folder/organization whose feeds are to be
+ *   listed. It can only be using project/folder/organization number (such as
+ *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+ *
+ * @typedef ListFeedsRequest
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.ListFeedsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const ListFeedsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * @property {Object[]} feeds
+ *   A list of feeds.
+ *
+ *   This object should have the same structure as [Feed]{@link google.cloud.asset.v1.Feed}
+ *
+ * @typedef ListFeedsResponse
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.ListFeedsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const ListFeedsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Update asset feed request.
+ *
+ * @property {Object} feed
+ *   Required. The new values of feed details. It must match an existing feed and the
+ *   field `name` must be in the format of:
+ *   projects/project_number/feeds/feed_id or
+ *   folders/folder_number/feeds/feed_id or
+ *   organizations/organization_number/feeds/feed_id.
+ *
+ *   This object should have the same structure as [Feed]{@link google.cloud.asset.v1.Feed}
+ *
+ * @property {Object} updateMask
+ *   Required. Only updates the `feed` fields indicated by this mask.
+ *   The field mask must not be empty, and it must not contain fields that
+ *   are immutable or only set by the server.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateFeedRequest
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.UpdateFeedRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const UpdateFeedRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * @property {string} name
+ *   Required. The name of the feed and it must be in the format of:
+ *   projects/project_number/feeds/feed_id
+ *   folders/folder_number/feeds/feed_id
+ *   organizations/organization_number/feeds/feed_id
+ *
+ * @typedef DeleteFeedRequest
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.DeleteFeedRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const DeleteFeedRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Output configuration for export assets destination.
  *
  * @property {Object} gcsDestination
@@ -221,6 +341,92 @@ const GcsDestination = {
  * @see [google.cloud.asset.v1.BigQueryDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
  */
 const BigQueryDestination = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A Cloud Pubsub destination.
+ *
+ * @property {string} topic
+ *   The name of the Cloud Pub/Sub topic to publish to.
+ *   For example: `projects/PROJECT_ID/topics/TOPIC_ID`.
+ *
+ * @typedef PubsubDestination
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.PubsubDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const PubsubDestination = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Output configuration for asset feed destination.
+ *
+ * @property {Object} pubsubDestination
+ *   Destination on Cloud Pubsub.
+ *
+ *   This object should have the same structure as [PubsubDestination]{@link google.cloud.asset.v1.PubsubDestination}
+ *
+ * @typedef FeedOutputConfig
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.FeedOutputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const FeedOutputConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * An asset feed used to export asset updates to a destinations.
+ * An asset feed filter controls what updates are exported.
+ * The asset feed must be created within a project, organization, or
+ * folder. Supported destinations are:
+ * Cloud Pub/Sub topics.
+ *
+ * @property {string} name
+ *   Required. The format will be
+ *   projects/{project_number}/feeds/{client-assigned_feed_identifier} or
+ *   folders/{folder_number}/feeds/{client-assigned_feed_identifier} or
+ *   organizations/{organization_number}/feeds/{client-assigned_feed_identifier}
+ *
+ *   The client-assigned feed identifier must be unique within the parent
+ *   project/folder/organization.
+ *
+ * @property {string[]} assetNames
+ *   A list of the full names of the assets to receive updates. You must specify
+ *   either or both of asset_names and asset_types. Only asset updates matching
+ *   specified asset_names and asset_types are exported to the feed. For
+ *   example:
+ *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+ *   See [Resource
+ *   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+ *   for more info.
+ *
+ * @property {string[]} assetTypes
+ *   A list of types of the assets to receive updates. You must specify either
+ *   or both of asset_names and asset_types. Only asset updates matching
+ *   specified asset_names and asset_types are exported to the feed.
+ *   For example:
+ *   "compute.googleapis.com/Disk" See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+ *   for all supported asset types.
+ *
+ * @property {number} contentType
+ *   Asset content type. If not specified, no content but the asset name and
+ *   type will be returned.
+ *
+ *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1.ContentType}
+ *
+ * @property {Object} feedOutputConfig
+ *   Required. Feed output configuration defining where the asset updates are
+ *   published to.
+ *
+ *   This object should have the same structure as [FeedOutputConfig]{@link google.cloud.asset.v1.FeedOutputConfig}
+ *
+ * @typedef Feed
+ * @memberof google.cloud.asset.v1
+ * @see [google.cloud.asset.v1.Feed definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1/asset_service.proto}
+ */
+const Feed = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
