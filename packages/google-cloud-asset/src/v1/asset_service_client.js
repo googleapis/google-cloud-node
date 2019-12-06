@@ -125,6 +125,9 @@ class AssetServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      feedPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/feeds/{feed}'
+      ),
       projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
@@ -179,7 +182,15 @@ class AssetServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const assetServiceStubMethods = ['exportAssets', 'batchGetAssetsHistory'];
+    const assetServiceStubMethods = [
+      'exportAssets',
+      'batchGetAssetsHistory',
+      'createFeed',
+      'getFeed',
+      'listFeeds',
+      'updateFeed',
+      'deleteFeed',
+    ];
     for (const methodName of assetServiceStubMethods) {
       const innerCallPromise = assetServiceStub.then(
         stub => (...args) => {
@@ -480,9 +491,333 @@ class AssetServiceClient {
     );
   }
 
+  /**
+   * Creates a feed in a parent project/folder/organization to listen to its
+   * asset updates.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project/folder/organization where this feed
+   *   should be created in. It can only be an organization number (such as
+   *   "organizations/123"), a folder number (such as "folders/123"), a project ID
+   *   (such as "projects/my-project-id")", or a project number (such as
+   *   "projects/12345").
+   * @param {string} request.feedId
+   *   Required. This is the client-assigned asset feed identifier and it needs to
+   *   be unique under a specific parent project/folder/organization.
+   * @param {Object} request.feed
+   *   Required. The feed details. The field `name` must be empty and it will be generated
+   *   in the format of:
+   *   projects/project_number/feeds/feed_id
+   *   folders/folder_number/feeds/feed_id
+   *   organizations/organization_number/feeds/feed_id
+   *
+   *   This object should have the same structure as [Feed]{@link google.cloud.asset.v1.Feed}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const asset = require('asset.v1');
+   *
+   * const client = new asset.v1.AssetServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const parent = '';
+   * const feedId = '';
+   * const feed = {};
+   * const request = {
+   *   parent: parent,
+   *   feedId: feedId,
+   *   feed: feed,
+   * };
+   * client.createFeed(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createFeed(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createFeed(request, options, callback);
+  }
+
+  /**
+   * Gets details about an asset feed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Feed and it must be in the format of:
+   *   projects/project_number/feeds/feed_id
+   *   folders/folder_number/feeds/feed_id
+   *   organizations/organization_number/feeds/feed_id
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const asset = require('asset.v1');
+   *
+   * const client = new asset.v1.AssetServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+   * client.getFeed({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getFeed(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getFeed(request, options, callback);
+  }
+
+  /**
+   * Lists all asset feeds in a parent project/folder/organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project/folder/organization whose feeds are to be
+   *   listed. It can only be using project/folder/organization number (such as
+   *   "folders/12345")", or a project ID (such as "projects/my-project-id").
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ListFeedsResponse]{@link google.cloud.asset.v1.ListFeedsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListFeedsResponse]{@link google.cloud.asset.v1.ListFeedsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const asset = require('asset.v1');
+   *
+   * const client = new asset.v1.AssetServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const parent = '';
+   * client.listFeeds({parent: parent})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listFeeds(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listFeeds(request, options, callback);
+  }
+
+  /**
+   * Updates an asset feed configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.feed
+   *   Required. The new values of feed details. It must match an existing feed and the
+   *   field `name` must be in the format of:
+   *   projects/project_number/feeds/feed_id or
+   *   folders/folder_number/feeds/feed_id or
+   *   organizations/organization_number/feeds/feed_id.
+   *
+   *   This object should have the same structure as [Feed]{@link google.cloud.asset.v1.Feed}
+   * @param {Object} request.updateMask
+   *   Required. Only updates the `feed` fields indicated by this mask.
+   *   The field mask must not be empty, and it must not contain fields that
+   *   are immutable or only set by the server.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Feed]{@link google.cloud.asset.v1.Feed}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const asset = require('asset.v1');
+   *
+   * const client = new asset.v1.AssetServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const feed = {};
+   * const updateMask = {};
+   * const request = {
+   *   feed: feed,
+   *   updateMask: updateMask,
+   * };
+   * client.updateFeed(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateFeed(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'feed.name': request.feed.name,
+    });
+
+    return this._innerApiCalls.updateFeed(request, options, callback);
+  }
+
+  /**
+   * Deletes an asset feed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the feed and it must be in the format of:
+   *   projects/project_number/feeds/feed_id
+   *   folders/folder_number/feeds/feed_id
+   *   organizations/organization_number/feeds/feed_id
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const asset = require('asset.v1');
+   *
+   * const client = new asset.v1.AssetServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+   * client.deleteFeed({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteFeed(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteFeed(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified feed resource name string.
+   *
+   * @param {String} project
+   * @param {String} feed
+   * @returns {String}
+   */
+  feedPath(project, feed) {
+    return this._pathTemplates.feedPathTemplate.render({
+      project: project,
+      feed: feed,
+    });
+  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -494,6 +829,28 @@ class AssetServiceClient {
     return this._pathTemplates.projectPathTemplate.render({
       project: project,
     });
+  }
+
+  /**
+   * Parse the feedName from a feed resource.
+   *
+   * @param {String} feedName
+   *   A fully-qualified path representing a feed resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromFeedName(feedName) {
+    return this._pathTemplates.feedPathTemplate.match(feedName).project;
+  }
+
+  /**
+   * Parse the feedName from a feed resource.
+   *
+   * @param {String} feedName
+   *   A fully-qualified path representing a feed resources.
+   * @returns {String} - A string representing the feed.
+   */
+  matchFeedFromFeedName(feedName) {
+    return this._pathTemplates.feedPathTemplate.match(feedName).feed;
   }
 
   /**

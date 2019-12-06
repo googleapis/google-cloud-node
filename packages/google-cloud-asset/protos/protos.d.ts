@@ -73,6 +73,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchGetAssetsHistory(request: google.cloud.asset.v1.IBatchGetAssetsHistoryRequest): Promise<google.cloud.asset.v1.BatchGetAssetsHistoryResponse>;
+
+                    /**
+                     * Calls CreateFeed.
+                     * @param request CreateFeedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Feed
+                     */
+                    public createFeed(request: google.cloud.asset.v1.ICreateFeedRequest, callback: google.cloud.asset.v1.AssetService.CreateFeedCallback): void;
+
+                    /**
+                     * Calls CreateFeed.
+                     * @param request CreateFeedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFeed(request: google.cloud.asset.v1.ICreateFeedRequest): Promise<google.cloud.asset.v1.Feed>;
+
+                    /**
+                     * Calls GetFeed.
+                     * @param request GetFeedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Feed
+                     */
+                    public getFeed(request: google.cloud.asset.v1.IGetFeedRequest, callback: google.cloud.asset.v1.AssetService.GetFeedCallback): void;
+
+                    /**
+                     * Calls GetFeed.
+                     * @param request GetFeedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFeed(request: google.cloud.asset.v1.IGetFeedRequest): Promise<google.cloud.asset.v1.Feed>;
+
+                    /**
+                     * Calls ListFeeds.
+                     * @param request ListFeedsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFeedsResponse
+                     */
+                    public listFeeds(request: google.cloud.asset.v1.IListFeedsRequest, callback: google.cloud.asset.v1.AssetService.ListFeedsCallback): void;
+
+                    /**
+                     * Calls ListFeeds.
+                     * @param request ListFeedsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFeeds(request: google.cloud.asset.v1.IListFeedsRequest): Promise<google.cloud.asset.v1.ListFeedsResponse>;
+
+                    /**
+                     * Calls UpdateFeed.
+                     * @param request UpdateFeedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Feed
+                     */
+                    public updateFeed(request: google.cloud.asset.v1.IUpdateFeedRequest, callback: google.cloud.asset.v1.AssetService.UpdateFeedCallback): void;
+
+                    /**
+                     * Calls UpdateFeed.
+                     * @param request UpdateFeedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFeed(request: google.cloud.asset.v1.IUpdateFeedRequest): Promise<google.cloud.asset.v1.Feed>;
+
+                    /**
+                     * Calls DeleteFeed.
+                     * @param request DeleteFeedRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteFeed(request: google.cloud.asset.v1.IDeleteFeedRequest, callback: google.cloud.asset.v1.AssetService.DeleteFeedCallback): void;
+
+                    /**
+                     * Calls DeleteFeed.
+                     * @param request DeleteFeedRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFeed(request: google.cloud.asset.v1.IDeleteFeedRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace AssetService {
@@ -90,6 +160,41 @@ export namespace google {
                      * @param [response] BatchGetAssetsHistoryResponse
                      */
                     type BatchGetAssetsHistoryCallback = (error: (Error|null), response?: google.cloud.asset.v1.BatchGetAssetsHistoryResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#createFeed}.
+                     * @param error Error, if any
+                     * @param [response] Feed
+                     */
+                    type CreateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#getFeed}.
+                     * @param error Error, if any
+                     * @param [response] Feed
+                     */
+                    type GetFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#listFeeds}.
+                     * @param error Error, if any
+                     * @param [response] ListFeedsResponse
+                     */
+                    type ListFeedsCallback = (error: (Error|null), response?: google.cloud.asset.v1.ListFeedsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#updateFeed}.
+                     * @param error Error, if any
+                     * @param [response] Feed
+                     */
+                    type UpdateFeedCallback = (error: (Error|null), response?: google.cloud.asset.v1.Feed) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#deleteFeed}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteFeedCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of an ExportAssetsRequest. */
@@ -500,6 +605,564 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a CreateFeedRequest. */
+                interface ICreateFeedRequest {
+
+                    /** CreateFeedRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFeedRequest feedId */
+                    feedId?: (string|null);
+
+                    /** CreateFeedRequest feed */
+                    feed?: (google.cloud.asset.v1.IFeed|null);
+                }
+
+                /** Represents a CreateFeedRequest. */
+                class CreateFeedRequest implements ICreateFeedRequest {
+
+                    /**
+                     * Constructs a new CreateFeedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.ICreateFeedRequest);
+
+                    /** CreateFeedRequest parent. */
+                    public parent: string;
+
+                    /** CreateFeedRequest feedId. */
+                    public feedId: string;
+
+                    /** CreateFeedRequest feed. */
+                    public feed?: (google.cloud.asset.v1.IFeed|null);
+
+                    /**
+                     * Creates a new CreateFeedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFeedRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.ICreateFeedRequest): google.cloud.asset.v1.CreateFeedRequest;
+
+                    /**
+                     * Encodes the specified CreateFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.CreateFeedRequest.verify|verify} messages.
+                     * @param message CreateFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.ICreateFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.CreateFeedRequest.verify|verify} messages.
+                     * @param message CreateFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.ICreateFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFeedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.CreateFeedRequest;
+
+                    /**
+                     * Decodes a CreateFeedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.CreateFeedRequest;
+
+                    /**
+                     * Verifies a CreateFeedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFeedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFeedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.CreateFeedRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFeedRequest message. Also converts values to other types if specified.
+                     * @param message CreateFeedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.CreateFeedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFeedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetFeedRequest. */
+                interface IGetFeedRequest {
+
+                    /** GetFeedRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFeedRequest. */
+                class GetFeedRequest implements IGetFeedRequest {
+
+                    /**
+                     * Constructs a new GetFeedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IGetFeedRequest);
+
+                    /** GetFeedRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFeedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFeedRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IGetFeedRequest): google.cloud.asset.v1.GetFeedRequest;
+
+                    /**
+                     * Encodes the specified GetFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.GetFeedRequest.verify|verify} messages.
+                     * @param message GetFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IGetFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.GetFeedRequest.verify|verify} messages.
+                     * @param message GetFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IGetFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFeedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.GetFeedRequest;
+
+                    /**
+                     * Decodes a GetFeedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.GetFeedRequest;
+
+                    /**
+                     * Verifies a GetFeedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFeedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFeedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.GetFeedRequest;
+
+                    /**
+                     * Creates a plain object from a GetFeedRequest message. Also converts values to other types if specified.
+                     * @param message GetFeedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.GetFeedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFeedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFeedsRequest. */
+                interface IListFeedsRequest {
+
+                    /** ListFeedsRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a ListFeedsRequest. */
+                class ListFeedsRequest implements IListFeedsRequest {
+
+                    /**
+                     * Constructs a new ListFeedsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IListFeedsRequest);
+
+                    /** ListFeedsRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new ListFeedsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeedsRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IListFeedsRequest): google.cloud.asset.v1.ListFeedsRequest;
+
+                    /**
+                     * Encodes the specified ListFeedsRequest message. Does not implicitly {@link google.cloud.asset.v1.ListFeedsRequest.verify|verify} messages.
+                     * @param message ListFeedsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IListFeedsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeedsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListFeedsRequest.verify|verify} messages.
+                     * @param message ListFeedsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IListFeedsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeedsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeedsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ListFeedsRequest;
+
+                    /**
+                     * Decodes a ListFeedsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeedsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ListFeedsRequest;
+
+                    /**
+                     * Verifies a ListFeedsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeedsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeedsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ListFeedsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFeedsRequest message. Also converts values to other types if specified.
+                     * @param message ListFeedsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ListFeedsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeedsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListFeedsResponse. */
+                interface IListFeedsResponse {
+
+                    /** ListFeedsResponse feeds */
+                    feeds?: (google.cloud.asset.v1.IFeed[]|null);
+                }
+
+                /** Represents a ListFeedsResponse. */
+                class ListFeedsResponse implements IListFeedsResponse {
+
+                    /**
+                     * Constructs a new ListFeedsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IListFeedsResponse);
+
+                    /** ListFeedsResponse feeds. */
+                    public feeds: google.cloud.asset.v1.IFeed[];
+
+                    /**
+                     * Creates a new ListFeedsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeedsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IListFeedsResponse): google.cloud.asset.v1.ListFeedsResponse;
+
+                    /**
+                     * Encodes the specified ListFeedsResponse message. Does not implicitly {@link google.cloud.asset.v1.ListFeedsResponse.verify|verify} messages.
+                     * @param message ListFeedsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IListFeedsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeedsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListFeedsResponse.verify|verify} messages.
+                     * @param message ListFeedsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IListFeedsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeedsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeedsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ListFeedsResponse;
+
+                    /**
+                     * Decodes a ListFeedsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeedsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ListFeedsResponse;
+
+                    /**
+                     * Verifies a ListFeedsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeedsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeedsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ListFeedsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFeedsResponse message. Also converts values to other types if specified.
+                     * @param message ListFeedsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ListFeedsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeedsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateFeedRequest. */
+                interface IUpdateFeedRequest {
+
+                    /** UpdateFeedRequest feed */
+                    feed?: (google.cloud.asset.v1.IFeed|null);
+
+                    /** UpdateFeedRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFeedRequest. */
+                class UpdateFeedRequest implements IUpdateFeedRequest {
+
+                    /**
+                     * Constructs a new UpdateFeedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IUpdateFeedRequest);
+
+                    /** UpdateFeedRequest feed. */
+                    public feed?: (google.cloud.asset.v1.IFeed|null);
+
+                    /** UpdateFeedRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFeedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFeedRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IUpdateFeedRequest): google.cloud.asset.v1.UpdateFeedRequest;
+
+                    /**
+                     * Encodes the specified UpdateFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.UpdateFeedRequest.verify|verify} messages.
+                     * @param message UpdateFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IUpdateFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.UpdateFeedRequest.verify|verify} messages.
+                     * @param message UpdateFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IUpdateFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFeedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.UpdateFeedRequest;
+
+                    /**
+                     * Decodes an UpdateFeedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.UpdateFeedRequest;
+
+                    /**
+                     * Verifies an UpdateFeedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFeedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFeedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.UpdateFeedRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFeedRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFeedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.UpdateFeedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFeedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteFeedRequest. */
+                interface IDeleteFeedRequest {
+
+                    /** DeleteFeedRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFeedRequest. */
+                class DeleteFeedRequest implements IDeleteFeedRequest {
+
+                    /**
+                     * Constructs a new DeleteFeedRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IDeleteFeedRequest);
+
+                    /** DeleteFeedRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFeedRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFeedRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IDeleteFeedRequest): google.cloud.asset.v1.DeleteFeedRequest;
+
+                    /**
+                     * Encodes the specified DeleteFeedRequest message. Does not implicitly {@link google.cloud.asset.v1.DeleteFeedRequest.verify|verify} messages.
+                     * @param message DeleteFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IDeleteFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFeedRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.DeleteFeedRequest.verify|verify} messages.
+                     * @param message DeleteFeedRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IDeleteFeedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFeedRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.DeleteFeedRequest;
+
+                    /**
+                     * Decodes a DeleteFeedRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFeedRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.DeleteFeedRequest;
+
+                    /**
+                     * Verifies a DeleteFeedRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFeedRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFeedRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.DeleteFeedRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFeedRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFeedRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.DeleteFeedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFeedRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an OutputConfig. */
                 interface IOutputConfig {
 
@@ -800,6 +1463,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a PubsubDestination. */
+                interface IPubsubDestination {
+
+                    /** PubsubDestination topic */
+                    topic?: (string|null);
+                }
+
+                /** Represents a PubsubDestination. */
+                class PubsubDestination implements IPubsubDestination {
+
+                    /**
+                     * Constructs a new PubsubDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IPubsubDestination);
+
+                    /** PubsubDestination topic. */
+                    public topic: string;
+
+                    /**
+                     * Creates a new PubsubDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PubsubDestination instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IPubsubDestination): google.cloud.asset.v1.PubsubDestination;
+
+                    /**
+                     * Encodes the specified PubsubDestination message. Does not implicitly {@link google.cloud.asset.v1.PubsubDestination.verify|verify} messages.
+                     * @param message PubsubDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IPubsubDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PubsubDestination message, length delimited. Does not implicitly {@link google.cloud.asset.v1.PubsubDestination.verify|verify} messages.
+                     * @param message PubsubDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IPubsubDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PubsubDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PubsubDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.PubsubDestination;
+
+                    /**
+                     * Decodes a PubsubDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PubsubDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.PubsubDestination;
+
+                    /**
+                     * Verifies a PubsubDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PubsubDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PubsubDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.PubsubDestination;
+
+                    /**
+                     * Creates a plain object from a PubsubDestination message. Also converts values to other types if specified.
+                     * @param message PubsubDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.PubsubDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PubsubDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** ContentType enum. */
                 enum ContentType {
                     CONTENT_TYPE_UNSPECIFIED = 0,
@@ -807,6 +1560,213 @@ export namespace google {
                     IAM_POLICY = 2,
                     ORG_POLICY = 4,
                     ACCESS_POLICY = 5
+                }
+
+                /** Properties of a FeedOutputConfig. */
+                interface IFeedOutputConfig {
+
+                    /** FeedOutputConfig pubsubDestination */
+                    pubsubDestination?: (google.cloud.asset.v1.IPubsubDestination|null);
+                }
+
+                /** Represents a FeedOutputConfig. */
+                class FeedOutputConfig implements IFeedOutputConfig {
+
+                    /**
+                     * Constructs a new FeedOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IFeedOutputConfig);
+
+                    /** FeedOutputConfig pubsubDestination. */
+                    public pubsubDestination?: (google.cloud.asset.v1.IPubsubDestination|null);
+
+                    /** FeedOutputConfig destination. */
+                    public destination?: "pubsubDestination";
+
+                    /**
+                     * Creates a new FeedOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeedOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IFeedOutputConfig): google.cloud.asset.v1.FeedOutputConfig;
+
+                    /**
+                     * Encodes the specified FeedOutputConfig message. Does not implicitly {@link google.cloud.asset.v1.FeedOutputConfig.verify|verify} messages.
+                     * @param message FeedOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IFeedOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeedOutputConfig message, length delimited. Does not implicitly {@link google.cloud.asset.v1.FeedOutputConfig.verify|verify} messages.
+                     * @param message FeedOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IFeedOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeedOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeedOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.FeedOutputConfig;
+
+                    /**
+                     * Decodes a FeedOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeedOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.FeedOutputConfig;
+
+                    /**
+                     * Verifies a FeedOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeedOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeedOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.FeedOutputConfig;
+
+                    /**
+                     * Creates a plain object from a FeedOutputConfig message. Also converts values to other types if specified.
+                     * @param message FeedOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.FeedOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeedOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Feed. */
+                interface IFeed {
+
+                    /** Feed name */
+                    name?: (string|null);
+
+                    /** Feed assetNames */
+                    assetNames?: (string[]|null);
+
+                    /** Feed assetTypes */
+                    assetTypes?: (string[]|null);
+
+                    /** Feed contentType */
+                    contentType?: (google.cloud.asset.v1.ContentType|null);
+
+                    /** Feed feedOutputConfig */
+                    feedOutputConfig?: (google.cloud.asset.v1.IFeedOutputConfig|null);
+                }
+
+                /** Represents a Feed. */
+                class Feed implements IFeed {
+
+                    /**
+                     * Constructs a new Feed.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IFeed);
+
+                    /** Feed name. */
+                    public name: string;
+
+                    /** Feed assetNames. */
+                    public assetNames: string[];
+
+                    /** Feed assetTypes. */
+                    public assetTypes: string[];
+
+                    /** Feed contentType. */
+                    public contentType: google.cloud.asset.v1.ContentType;
+
+                    /** Feed feedOutputConfig. */
+                    public feedOutputConfig?: (google.cloud.asset.v1.IFeedOutputConfig|null);
+
+                    /**
+                     * Creates a new Feed instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Feed instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IFeed): google.cloud.asset.v1.Feed;
+
+                    /**
+                     * Encodes the specified Feed message. Does not implicitly {@link google.cloud.asset.v1.Feed.verify|verify} messages.
+                     * @param message Feed message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IFeed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Feed message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Feed.verify|verify} messages.
+                     * @param message Feed message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IFeed, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Feed message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Feed
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Feed;
+
+                    /**
+                     * Decodes a Feed message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Feed
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Feed;
+
+                    /**
+                     * Verifies a Feed message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Feed message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Feed
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Feed;
+
+                    /**
+                     * Creates a plain object from a Feed message. Also converts values to other types if specified.
+                     * @param message Feed
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.Feed, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Feed to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a TemporalAsset. */
@@ -1021,6 +1981,9 @@ export namespace google {
 
                     /** Asset iamPolicy */
                     iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors */
+                    ancestors?: (string[]|null);
                 }
 
                 /** Represents an Asset. */
@@ -1043,6 +2006,9 @@ export namespace google {
 
                     /** Asset iamPolicy. */
                     public iamPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** Asset ancestors. */
+                    public ancestors: string[];
 
                     /**
                      * Creates a new Asset instance using the specified properties.

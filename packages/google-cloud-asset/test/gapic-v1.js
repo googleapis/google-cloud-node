@@ -205,6 +205,304 @@ describe('AssetServiceClient', () => {
       });
     });
   });
+
+  describe('createFeed', () => {
+    it('invokes createFeed without error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const parent = 'parent-995424086';
+      const feedId = 'feedId-976011428';
+      const feed = {};
+      const request = {
+        parent: parent,
+        feedId: feedId,
+        feed: feed,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const expectedResponse = {
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createFeed = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createFeed(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createFeed with error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const parent = 'parent-995424086';
+      const feedId = 'feedId-976011428';
+      const feed = {};
+      const request = {
+        parent: parent,
+        feedId: feedId,
+        feed: feed,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createFeed = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createFeed(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getFeed', () => {
+    it('invokes getFeed without error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
+        name: name2,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getFeed = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getFeed(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getFeed with error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getFeed = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getFeed(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listFeeds', () => {
+    it('invokes listFeeds without error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const parent = 'parent-995424086';
+      const request = {
+        parent: parent,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.listFeeds = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.listFeeds(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes listFeeds with error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const parent = 'parent-995424086';
+      const request = {
+        parent: parent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listFeeds = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listFeeds(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateFeed', () => {
+    it('invokes updateFeed without error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const feed = {};
+      const updateMask = {};
+      const request = {
+        feed: feed,
+        updateMask: updateMask,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const expectedResponse = {
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateFeed = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateFeed(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateFeed with error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const feed = {};
+      const updateMask = {};
+      const request = {
+        feed: feed,
+        updateMask: updateMask,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateFeed = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateFeed(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteFeed', () => {
+    it('invokes deleteFeed without error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteFeed = mockSimpleGrpcMethod(request);
+
+      client.deleteFeed(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteFeed with error', done => {
+      const client = new assetModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.feedPath('[PROJECT]', '[FEED]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteFeed = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteFeed(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
