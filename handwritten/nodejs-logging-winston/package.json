@@ -68,7 +68,7 @@
     "@types/uuid": "^3.4.4",
     "c8": "^6.0.1",
     "codecov": "^3.5.0",
-    "cpy-cli": "^2.0.0",
+    "cpy-cli": "^3.0.0",
     "delay": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
