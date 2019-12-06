@@ -411,7 +411,7 @@ export class TranslationServiceClient {
    *   Optional. Glossary to be applied. The glossary must be
    *   within the same region (have the same location-id) as the model, otherwise
    *   an INVALID_ARGUMENT (400) error is returned.
-   * @param {number} [request.labels]
+   * @param {number[]} [request.labels]
    *   Optional. The labels with user-defined metadata for the request.
    *
    *   Label keys and values can be no longer than 63 characters
@@ -521,7 +521,7 @@ export class TranslationServiceClient {
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
    *   "text/plain". If left blank, the MIME type defaults to "text/html".
-   * @param {number} [request.labels]
+   * @param {number[]} [request.labels]
    *   Optional. The labels with user-defined metadata for the request.
    *
    *   Label keys and values can be no longer than 63 characters
@@ -819,7 +819,7 @@ export class TranslationServiceClient {
    *   Required. Source language code.
    * @param {string[]} request.targetLanguageCodes
    *   Required. Specify up to 10 language codes here.
-   * @param {number} [request.models]
+   * @param {number[]} [request.models]
    *   Optional. The models to use for translation. Map's key is target language
    *   code. Map's value is model name. Value can be a built-in general model,
    *   or an AutoML Translation model.
@@ -836,7 +836,7 @@ export class TranslationServiceClient {
    *
    *   If the map is empty or a specific model is
    *   not requested for a language pair, then default google model (nmt) is used.
-   * @param {number} request.inputConfigs
+   * @param {number[]} request.inputConfigs
    *   Required. Input configurations.
    *   The total number of files matched should be <= 1000.
    *   The total content size should be <= 100M Unicode codepoints.
@@ -845,10 +845,10 @@ export class TranslationServiceClient {
    *   Required. Output configuration.
    *   If 2 input configs match to the same file (that is, same input path),
    *   we don't generate output for duplicate inputs.
-   * @param {number} [request.glossaries]
+   * @param {number[]} [request.glossaries]
    *   Optional. Glossaries to be applied for translation.
    *   It's keyed by target language code.
-   * @param {number} [request.labels]
+   * @param {number[]} [request.labels]
    *   Optional. The labels with user-defined metadata for the request.
    *
    *   Label keys and values can be no longer than 63 characters
