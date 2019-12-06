@@ -49,7 +49,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/logging": "^5.5.2",
+    "@google-cloud/logging": "^6.0.0",
     "google-auth-library": "^5.0.0"
   },
   "devDependencies": {
