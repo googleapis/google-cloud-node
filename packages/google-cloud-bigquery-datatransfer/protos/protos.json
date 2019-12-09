@@ -16,7 +16,9 @@
                         "java_outer_classname": "TransferProto",
                         "java_package": "com.google.cloud.bigquery.datatransfer.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\DataTransfer\\V1",
-                        "objc_class_prefix": "GCBDT"
+                        "objc_class_prefix": "GCBDT",
+                        "(google.api.resource_definition).type": "bigquerydatatransfer.google.com/Parent",
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}"
                       },
                       "nested": {
                         "DataTransferService": {
@@ -249,7 +251,7 @@
                         "DataSource": {
                           "options": {
                             "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/DataSource",
-                            "(google.api.resource).pattern": "projects/{project}/dataSources/{data_source}"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataSources/{data_source}"
                           },
                           "fields": {
                             "name": {
@@ -372,7 +374,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                                "(google.api.resource_reference).child_type": "bigquerydatatransfer.googleapis.com/DataSource"
                               }
                             },
                             "pageToken": {
@@ -408,7 +410,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                                "(google.api.resource_reference).child_type": "bigquerydatatransfer.googleapis.com/TransferConfig"
                               }
                             },
                             "transferConfig": {
@@ -425,6 +427,10 @@
                             "versionInfo": {
                               "type": "string",
                               "id": 5
+                            },
+                            "serviceAccountName": {
+                              "type": "string",
+                              "id": 6
                             }
                           }
                         },
@@ -451,6 +457,10 @@
                             "versionInfo": {
                               "type": "string",
                               "id": 5
+                            },
+                            "serviceAccountName": {
+                              "type": "string",
+                              "id": 6
                             }
                           }
                         },
@@ -485,7 +495,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/Run"
                               }
                             }
                           }
@@ -497,7 +507,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/Run"
                               }
                             }
                           }
@@ -509,7 +519,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                                "(google.api.resource_reference).child_type": "bigquerydatatransfer.googleapis.com/TransferConfig"
                               }
                             },
                             "dataSourceIds": {
@@ -553,7 +563,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                                "(google.api.resource_reference).child_type": "bigquerydatatransfer.googleapis.com/Run"
                               }
                             },
                             "states": {
@@ -609,7 +619,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/Run"
                               }
                             },
                             "pageToken": {
@@ -771,6 +781,14 @@
                             "CANCELLED": 6
                           }
                         },
+                        "EmailPreferences": {
+                          "fields": {
+                            "enableFailureEmail": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
+                        },
                         "ScheduleOptions": {
                           "fields": {
                             "disableAutoScheduling": {
@@ -790,7 +808,7 @@
                         "TransferConfig": {
                           "options": {
                             "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/TransferConfig",
-                            "(google.api.resource).pattern": "projects/{project}/transferConfigs/{transfer_config}"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/transferConfigs/{transfer_config}"
                           },
                           "oneofs": {
                             "destination": {
@@ -867,12 +885,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "notificationPubsubTopic": {
+                              "type": "string",
+                              "id": 15
+                            },
+                            "emailPreferences": {
+                              "type": "EmailPreferences",
+                              "id": 18
                             }
                           }
                         },
                         "TransferRun": {
                           "options": {
-                            "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/TransferRun",
+                            "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/Run",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}"
                           },
                           "oneofs": {
@@ -952,6 +978,20 @@
                             "schedule": {
                               "type": "string",
                               "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "notificationPubsubTopic": {
+                              "type": "string",
+                              "id": 23,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "emailPreferences": {
+                              "type": "EmailPreferences",
+                              "id": 25,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }

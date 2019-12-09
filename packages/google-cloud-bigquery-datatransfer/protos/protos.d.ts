@@ -1052,6 +1052,9 @@ export namespace google {
 
                         /** CreateTransferConfigRequest versionInfo */
                         versionInfo?: (string|null);
+
+                        /** CreateTransferConfigRequest serviceAccountName */
+                        serviceAccountName?: (string|null);
                     }
 
                     /** Represents a CreateTransferConfigRequest. */
@@ -1074,6 +1077,9 @@ export namespace google {
 
                         /** CreateTransferConfigRequest versionInfo. */
                         public versionInfo: string;
+
+                        /** CreateTransferConfigRequest serviceAccountName. */
+                        public serviceAccountName: string;
 
                         /**
                          * Creates a new CreateTransferConfigRequest instance using the specified properties.
@@ -1160,6 +1166,9 @@ export namespace google {
 
                         /** UpdateTransferConfigRequest versionInfo */
                         versionInfo?: (string|null);
+
+                        /** UpdateTransferConfigRequest serviceAccountName */
+                        serviceAccountName?: (string|null);
                     }
 
                     /** Represents an UpdateTransferConfigRequest. */
@@ -1182,6 +1191,9 @@ export namespace google {
 
                         /** UpdateTransferConfigRequest versionInfo. */
                         public versionInfo: string;
+
+                        /** UpdateTransferConfigRequest serviceAccountName. */
+                        public serviceAccountName: string;
 
                         /**
                          * Creates a new UpdateTransferConfigRequest instance using the specified properties.
@@ -2924,6 +2936,96 @@ export namespace google {
                         CANCELLED = 6
                     }
 
+                    /** Properties of an EmailPreferences. */
+                    interface IEmailPreferences {
+
+                        /** EmailPreferences enableFailureEmail */
+                        enableFailureEmail?: (boolean|null);
+                    }
+
+                    /** Represents an EmailPreferences. */
+                    class EmailPreferences implements IEmailPreferences {
+
+                        /**
+                         * Constructs a new EmailPreferences.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datatransfer.v1.IEmailPreferences);
+
+                        /** EmailPreferences enableFailureEmail. */
+                        public enableFailureEmail: boolean;
+
+                        /**
+                         * Creates a new EmailPreferences instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EmailPreferences instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datatransfer.v1.IEmailPreferences): google.cloud.bigquery.datatransfer.v1.EmailPreferences;
+
+                        /**
+                         * Encodes the specified EmailPreferences message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify|verify} messages.
+                         * @param message EmailPreferences message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datatransfer.v1.IEmailPreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EmailPreferences message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify|verify} messages.
+                         * @param message EmailPreferences message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datatransfer.v1.IEmailPreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EmailPreferences message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EmailPreferences
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datatransfer.v1.EmailPreferences;
+
+                        /**
+                         * Decodes an EmailPreferences message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EmailPreferences
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datatransfer.v1.EmailPreferences;
+
+                        /**
+                         * Verifies an EmailPreferences message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EmailPreferences message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EmailPreferences
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datatransfer.v1.EmailPreferences;
+
+                        /**
+                         * Creates a plain object from an EmailPreferences message. Also converts values to other types if specified.
+                         * @param message EmailPreferences
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datatransfer.v1.EmailPreferences, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EmailPreferences to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of a ScheduleOptions. */
                     interface IScheduleOptions {
 
@@ -3070,6 +3172,12 @@ export namespace google {
 
                         /** TransferConfig datasetRegion */
                         datasetRegion?: (string|null);
+
+                        /** TransferConfig notificationPubsubTopic */
+                        notificationPubsubTopic?: (string|null);
+
+                        /** TransferConfig emailPreferences */
+                        emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
                     }
 
                     /** Represents a TransferConfig. */
@@ -3122,6 +3230,12 @@ export namespace google {
 
                         /** TransferConfig datasetRegion. */
                         public datasetRegion: string;
+
+                        /** TransferConfig notificationPubsubTopic. */
+                        public notificationPubsubTopic: string;
+
+                        /** TransferConfig emailPreferences. */
+                        public emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
 
                         /** TransferConfig destination. */
                         public destination?: "destinationDatasetId";
@@ -3238,6 +3352,12 @@ export namespace google {
 
                         /** TransferRun schedule */
                         schedule?: (string|null);
+
+                        /** TransferRun notificationPubsubTopic */
+                        notificationPubsubTopic?: (string|null);
+
+                        /** TransferRun emailPreferences */
+                        emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
                     }
 
                     /** Represents a TransferRun. */
@@ -3287,6 +3407,12 @@ export namespace google {
 
                         /** TransferRun schedule. */
                         public schedule: string;
+
+                        /** TransferRun notificationPubsubTopic. */
+                        public notificationPubsubTopic: string;
+
+                        /** TransferRun emailPreferences. */
+                        public emailPreferences?: (google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null);
 
                         /** TransferRun destination. */
                         public destination?: "destinationDatasetId";

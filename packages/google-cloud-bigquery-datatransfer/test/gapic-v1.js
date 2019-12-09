@@ -243,6 +243,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const notificationPubsubTopic = 'notificationPubsubTopic1794281191';
       const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
@@ -253,6 +254,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        notificationPubsubTopic: notificationPubsubTopic,
       };
 
       // Mock Grpc layer
@@ -327,6 +329,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const notificationPubsubTopic = 'notificationPubsubTopic1794281191';
       const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
@@ -337,6 +340,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        notificationPubsubTopic: notificationPubsubTopic,
       };
 
       // Mock Grpc layer
@@ -473,6 +477,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const notificationPubsubTopic = 'notificationPubsubTopic1794281191';
       const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
@@ -483,6 +488,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        notificationPubsubTopic: notificationPubsubTopic,
       };
 
       // Mock Grpc layer
@@ -702,12 +708,14 @@ describe('DataTransferServiceClient', () => {
       const dataSourceId = 'dataSourceId-1015796374';
       const userId = 147132913;
       const schedule = 'schedule-697920873';
+      const notificationPubsubTopic = 'notificationPubsubTopic1794281191';
       const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
         dataSourceId: dataSourceId,
         userId: userId,
         schedule: schedule,
+        notificationPubsubTopic: notificationPubsubTopic,
       };
 
       // Mock Grpc layer

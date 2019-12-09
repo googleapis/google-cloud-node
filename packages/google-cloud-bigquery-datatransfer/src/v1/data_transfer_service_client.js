@@ -288,7 +288,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/dataSources/{data_source_id}`
+   *   `projects/{project_id}/dataSources/{data_source_id}` or
+   *   `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -344,7 +345,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources should be returned.
-   *   Must be in the form: `projects/{project_id}`
+   *   Must be in the form: `projects/{project_id}` or
+   *   `projects/{project_id}/locations/{location_id}
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -457,7 +459,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources should be returned.
-   *   Must be in the form: `projects/{project_id}`
+   *   Must be in the form: `projects/{project_id}` or
+   *   `projects/{project_id}/locations/{location_id}
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -503,9 +506,9 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BigQuery project id where the transfer configuration should be created.
-   *   Must be in the format projects/{project_id}/locations/{location_id}
-   *   If specified location and location of the destination bigquery dataset
-   *   do not match - the request will fail.
+   *   Must be in the format projects/{project_id}/locations/{location_id} or
+   *   projects/{project_id}. If specified location and location of the
+   *   destination bigquery dataset do not match - the request will fail.
    * @param {Object} request.transferConfig
    *   Required. Data transfer configuration to create.
    *
@@ -534,6 +537,11 @@ class DataTransferServiceClient {
    *   must use the "none+gsession" response type. which be return a
    *   version_info back in the authorization response which be be put in a JWT
    *   claim in the token request.
+   * @param {string} [request.serviceAccountName]
+   *   Optional service account name. If this field is set, transfer config will
+   *   be created with this service account credentials. It requires that
+   *   requesting user calling this API has permissions to act as this service
+   *   account.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -624,6 +632,12 @@ class DataTransferServiceClient {
    *   must use the "none+gsession" response type. which be return a
    *   version_info back in the authorization response which be be put in a JWT
    *   claim in the token request.
+   * @param {string} [request.serviceAccountName]
+   *   Optional service account name. If this field is set and
+   *   "service_account_name" is set in update_mask, transfer config will be
+   *   updated to use this service account credentials. It requires that
+   *   requesting user calling this API has permissions to act as this service
+   *   account.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -684,7 +698,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}`
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -731,7 +746,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}`
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -786,7 +802,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources
-   *   should be returned: `projects/{project_id}`.
+   *   should be returned: `projects/{project_id}` or
+   *   `projects/{project_id}/locations/{location_id}`
    * @param {string[]} [request.dataSourceIds]
    *   When specified, only configurations of requested data sources are returned.
    * @param {number} [request.pageSize]
@@ -901,7 +918,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BigQuery project id for which data sources
-   *   should be returned: `projects/{project_id}`.
+   *   should be returned: `projects/{project_id}` or
+   *   `projects/{project_id}/locations/{location_id}`
    * @param {string[]} [request.dataSourceIds]
    *   When specified, only configurations of requested data sources are returned.
    * @param {number} [request.pageSize]
@@ -953,7 +971,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Transfer configuration name in the form:
-   *   `projects/{project_id}/transferConfigs/{config_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {Object} request.startTime
    *   Required. Start time of the range of transfer runs. For example,
    *   `"2017-05-25T00:00:00+00:00"`.
@@ -1025,7 +1044,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1080,7 +1100,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The field will contain name of the resource requested, for example:
-   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1128,7 +1149,8 @@ class DataTransferServiceClient {
    * @param {string} request.parent
    *   Required. Name of transfer configuration for which transfer runs should be retrieved.
    *   Format of transfer configuration resource name is:
-   *   `projects/{project_id}/transferConfigs/{config_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {number[]} [request.states]
    *   When specified, only transfer runs with requested states are returned.
    *
@@ -1250,7 +1272,8 @@ class DataTransferServiceClient {
    * @param {string} request.parent
    *   Required. Name of transfer configuration for which transfer runs should be retrieved.
    *   Format of transfer configuration resource name is:
-   *   `projects/{project_id}/transferConfigs/{config_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {number[]} [request.states]
    *   When specified, only transfer runs with requested states are returned.
    *
@@ -1304,7 +1327,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Transfer run name in the form:
-   *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1422,7 +1446,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Transfer run name in the form:
-   *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1478,7 +1503,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The data source in the form:
-   *   `projects/{project_id}/dataSources/{data_source_id}`
+   *   `projects/{project_id}/dataSources/{data_source_id}` or
+   *   `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1536,7 +1562,8 @@ class DataTransferServiceClient {
    *   The request object that will be sent.
    * @param {string} [request.parent]
    *   Transfer configuration name in the form:
-   *   `projects/{project_id}/transferConfigs/{config_id}`.
+   *   `projects/{project_id}/transferConfigs/{config_id}` or
+   *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
    * @param {Object} [request.requestedTimeRange]
    *   Time range for the transfer runs that should be started.
    *

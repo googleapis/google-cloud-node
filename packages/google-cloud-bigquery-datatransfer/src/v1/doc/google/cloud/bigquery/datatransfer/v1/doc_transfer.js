@@ -16,6 +16,21 @@
 // to be loaded as the JS file.
 
 /**
+ * Represents preferences for sending email notifications for transfer run
+ * events.
+ *
+ * @property {boolean} enableFailureEmail
+ *   If true, email notifications will be sent on transfer run failures.
+ *
+ * @typedef EmailPreferences
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.EmailPreferences definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
+ */
+const EmailPreferences = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Options customizing the data transfer schedule.
  *
  * @property {boolean} disableAutoScheduling
@@ -132,6 +147,16 @@ const ScheduleOptions = {
  * @property {string} datasetRegion
  *   Output only. Region in which BigQuery dataset is located.
  *
+ * @property {string} notificationPubsubTopic
+ *   Pub/Sub topic where notifications will be sent after transfer runs
+ *   associated with this transfer config finish.
+ *
+ * @property {Object} emailPreferences
+ *   Email notifications will be sent according to these preferences
+ *   to the email address of the user who owns this transfer config.
+ *
+ *   This object should have the same structure as [EmailPreferences]{@link google.cloud.bigquery.datatransfer.v1.EmailPreferences}
+ *
  * @typedef TransferConfig
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.TransferConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
@@ -207,6 +232,17 @@ const TransferConfig = {
  *   scheduled manually, this is empty.
  *   NOTE: the system might choose to delay the schedule depending on the
  *   current load, so `schedule_time` doesn't always match this.
+ *
+ * @property {string} notificationPubsubTopic
+ *   Output only. Pub/Sub topic where a notification will be sent after this
+ *   transfer run finishes
+ *
+ * @property {Object} emailPreferences
+ *   Output only. Email notifications will be sent according to these
+ *   preferences to the email address of the user who owns the transfer config
+ *   this run was derived from.
+ *
+ *   This object should have the same structure as [EmailPreferences]{@link google.cloud.bigquery.datatransfer.v1.EmailPreferences}
  *
  * @typedef TransferRun
  * @memberof google.cloud.bigquery.datatransfer.v1
