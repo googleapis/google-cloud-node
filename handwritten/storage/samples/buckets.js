@@ -22,33 +22,6 @@
 
 'use strict';
 
-async function createBucket(bucketName) {
-  // [START storage_create_bucket]
-  // Imports the Google Cloud client library
-  const {Storage} = require('@google-cloud/storage');
-
-  // Creates a client
-  const storage = new Storage();
-
-  /**
-   * TODO(developer): Uncomment the following line before running the sample.
-   */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-
-  // Creates a new bucket in the Asia region with the coldline default storage
-  // class. Leave the second argument blank for default settings.
-  //
-  // For default values see: https://cloud.google.com/storage/docs/locations and
-  // https://cloud.google.com/storage/docs/storage-classes
-  await storage.createBucket(bucketName, {
-    location: 'ASIA',
-    storageClass: 'COLDLINE',
-  });
-
-  console.log(`Bucket ${bucketName} created.`);
-  // [END storage_create_bucket]
-}
-
 async function listBuckets() {
   // [START storage_list_buckets]
   // Imports the Google Cloud client library
@@ -198,9 +171,6 @@ async function getUniformBucketLevelAccess(bucketName) {
 
 require(`yargs`)
   .demand(1)
-  .command(`create <bucket>`, `Creates a new bucket.`, {}, opts =>
-    createBucket(opts.bucket)
-  )
   .command(`list`, `Lists all buckets in the current project.`, {}, listBuckets)
   .command(
     `enable-default-kms-key <bucket> <defaultKmsKeyName>`,

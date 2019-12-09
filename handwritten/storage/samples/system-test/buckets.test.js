@@ -32,7 +32,7 @@ after(async () => {
 });
 
 it('should create a bucket', async () => {
-  const output = execSync(`${cmd} create ${bucketName}`);
+  const output = execSync(`node createNewBucket.js ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} created.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, true);
