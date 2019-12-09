@@ -283,7 +283,8 @@ const DataSource = {
  *
  * @property {string} name
  *   Required. The field will contain name of the resource requested, for example:
- *   `projects/{project_id}/dataSources/{data_source_id}`
+ *   `projects/{project_id}/dataSources/{data_source_id}` or
+ *   `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
  *
  * @typedef GetDataSourceRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -298,7 +299,8 @@ const GetDataSourceRequest = {
  *
  * @property {string} parent
  *   Required. The BigQuery project id for which data sources should be returned.
- *   Must be in the form: `projects/{project_id}`
+ *   Must be in the form: `projects/{project_id}` or
+ *   `projects/{project_id}/locations/{location_id}
  *
  * @property {string} pageToken
  *   Pagination token, which can be used to request a specific page
@@ -350,9 +352,9 @@ const ListDataSourcesResponse = {
  *
  * @property {string} parent
  *   Required. The BigQuery project id where the transfer configuration should be created.
- *   Must be in the format projects/{project_id}/locations/{location_id}
- *   If specified location and location of the destination bigquery dataset
- *   do not match - the request will fail.
+ *   Must be in the format projects/{project_id}/locations/{location_id} or
+ *   projects/{project_id}. If specified location and location of the
+ *   destination bigquery dataset do not match - the request will fail.
  *
  * @property {Object} transferConfig
  *   Required. Data transfer configuration to create.
@@ -384,6 +386,12 @@ const ListDataSourcesResponse = {
  *   must use the "none+gsession" response type. which be return a
  *   version_info back in the authorization response which be be put in a JWT
  *   claim in the token request.
+ *
+ * @property {string} serviceAccountName
+ *   Optional service account name. If this field is set, transfer config will
+ *   be created with this service account credentials. It requires that
+ *   requesting user calling this API has permissions to act as this service
+ *   account.
  *
  * @typedef CreateTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -433,6 +441,13 @@ const CreateTransferConfigRequest = {
  *   version_info back in the authorization response which be be put in a JWT
  *   claim in the token request.
  *
+ * @property {string} serviceAccountName
+ *   Optional service account name. If this field is set and
+ *   "service_account_name" is set in update_mask, transfer config will be
+ *   updated to use this service account credentials. It requires that
+ *   requesting user calling this API has permissions to act as this service
+ *   account.
+ *
  * @typedef UpdateTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
@@ -446,7 +461,8 @@ const UpdateTransferConfigRequest = {
  *
  * @property {string} name
  *   Required. The field will contain name of the resource requested, for example:
- *   `projects/{project_id}/transferConfigs/{config_id}`
+ *   `projects/{project_id}/transferConfigs/{config_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
  *
  * @typedef GetTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -462,7 +478,8 @@ const GetTransferConfigRequest = {
  *
  * @property {string} name
  *   Required. The field will contain name of the resource requested, for example:
- *   `projects/{project_id}/transferConfigs/{config_id}`
+ *   `projects/{project_id}/transferConfigs/{config_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
  *
  * @typedef DeleteTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -477,7 +494,8 @@ const DeleteTransferConfigRequest = {
  *
  * @property {string} name
  *   Required. The field will contain name of the resource requested, for example:
- *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+ *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
  *
  * @typedef GetTransferRunRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -492,7 +510,8 @@ const GetTransferRunRequest = {
  *
  * @property {string} name
  *   Required. The field will contain name of the resource requested, for example:
- *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+ *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
  *
  * @typedef DeleteTransferRunRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -507,7 +526,8 @@ const DeleteTransferRunRequest = {
  *
  * @property {string} parent
  *   Required. The BigQuery project id for which data sources
- *   should be returned: `projects/{project_id}`.
+ *   should be returned: `projects/{project_id}` or
+ *   `projects/{project_id}/locations/{location_id}`
  *
  * @property {string[]} dataSourceIds
  *   When specified, only configurations of requested data sources are returned.
@@ -560,7 +580,8 @@ const ListTransferConfigsResponse = {
  * @property {string} parent
  *   Required. Name of transfer configuration for which transfer runs should be retrieved.
  *   Format of transfer configuration resource name is:
- *   `projects/{project_id}/transferConfigs/{config_id}`.
+ *   `projects/{project_id}/transferConfigs/{config_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
  *
  * @property {number[]} states
  *   When specified, only transfer runs with requested states are returned.
@@ -636,7 +657,8 @@ const ListTransferRunsResponse = {
  *
  * @property {string} parent
  *   Required. Transfer run name in the form:
- *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
+ *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
  *
  * @property {string} pageToken
  *   Pagination token, which can be used to request a specific page
@@ -694,7 +716,8 @@ const ListTransferLogsResponse = {
  *
  * @property {string} name
  *   Required. The data source in the form:
- *   `projects/{project_id}/dataSources/{data_source_id}`
+ *   `projects/{project_id}/dataSources/{data_source_id}` or
+ *   `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`.
  *
  * @typedef CheckValidCredsRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -723,7 +746,8 @@ const CheckValidCredsResponse = {
  *
  * @property {string} parent
  *   Required. Transfer configuration name in the form:
- *   `projects/{project_id}/transferConfigs/{config_id}`.
+ *   `projects/{project_id}/transferConfigs/{config_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
  *
  * @property {Object} startTime
  *   Required. Start time of the range of transfer runs. For example,
@@ -766,7 +790,8 @@ const ScheduleTransferRunsResponse = {
  *
  * @property {string} parent
  *   Transfer configuration name in the form:
- *   `projects/{project_id}/transferConfigs/{config_id}`.
+ *   `projects/{project_id}/transferConfigs/{config_id}` or
+ *   `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
  *
  * @property {Object} requestedTimeRange
  *   Time range for the transfer runs that should be started.

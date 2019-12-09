@@ -2553,6 +2553,7 @@
                              * @property {google.cloud.bigquery.datatransfer.v1.ITransferConfig|null} [transferConfig] CreateTransferConfigRequest transferConfig
                              * @property {string|null} [authorizationCode] CreateTransferConfigRequest authorizationCode
                              * @property {string|null} [versionInfo] CreateTransferConfigRequest versionInfo
+                             * @property {string|null} [serviceAccountName] CreateTransferConfigRequest serviceAccountName
                              */
     
                             /**
@@ -2603,6 +2604,14 @@
                             CreateTransferConfigRequest.prototype.versionInfo = "";
     
                             /**
+                             * CreateTransferConfigRequest serviceAccountName.
+                             * @member {string} serviceAccountName
+                             * @memberof google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest
+                             * @instance
+                             */
+                            CreateTransferConfigRequest.prototype.serviceAccountName = "";
+    
+                            /**
                              * Creates a new CreateTransferConfigRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest
@@ -2634,6 +2643,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.authorizationCode);
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.versionInfo);
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceAccountName);
                                 return writer;
                             };
     
@@ -2679,6 +2690,9 @@
                                         break;
                                     case 5:
                                         message.versionInfo = reader.string();
+                                        break;
+                                    case 6:
+                                        message.serviceAccountName = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2729,6 +2743,9 @@
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     if (!$util.isString(message.versionInfo))
                                         return "versionInfo: string expected";
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    if (!$util.isString(message.serviceAccountName))
+                                        return "serviceAccountName: string expected";
                                 return null;
                             };
     
@@ -2755,6 +2772,8 @@
                                     message.authorizationCode = String(object.authorizationCode);
                                 if (object.versionInfo != null)
                                     message.versionInfo = String(object.versionInfo);
+                                if (object.serviceAccountName != null)
+                                    message.serviceAccountName = String(object.serviceAccountName);
                                 return message;
                             };
     
@@ -2776,6 +2795,7 @@
                                     object.transferConfig = null;
                                     object.authorizationCode = "";
                                     object.versionInfo = "";
+                                    object.serviceAccountName = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -2785,6 +2805,8 @@
                                     object.authorizationCode = message.authorizationCode;
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     object.versionInfo = message.versionInfo;
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    object.serviceAccountName = message.serviceAccountName;
                                 return object;
                             };
     
@@ -2812,6 +2834,7 @@
                              * @property {string|null} [authorizationCode] UpdateTransferConfigRequest authorizationCode
                              * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateTransferConfigRequest updateMask
                              * @property {string|null} [versionInfo] UpdateTransferConfigRequest versionInfo
+                             * @property {string|null} [serviceAccountName] UpdateTransferConfigRequest serviceAccountName
                              */
     
                             /**
@@ -2862,6 +2885,14 @@
                             UpdateTransferConfigRequest.prototype.versionInfo = "";
     
                             /**
+                             * UpdateTransferConfigRequest serviceAccountName.
+                             * @member {string} serviceAccountName
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest
+                             * @instance
+                             */
+                            UpdateTransferConfigRequest.prototype.serviceAccountName = "";
+    
+                            /**
                              * Creates a new UpdateTransferConfigRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest
@@ -2893,6 +2924,8 @@
                                     $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.versionInfo);
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceAccountName);
                                 return writer;
                             };
     
@@ -2938,6 +2971,9 @@
                                         break;
                                     case 5:
                                         message.versionInfo = reader.string();
+                                        break;
+                                    case 6:
+                                        message.serviceAccountName = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2990,6 +3026,9 @@
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     if (!$util.isString(message.versionInfo))
                                         return "versionInfo: string expected";
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    if (!$util.isString(message.serviceAccountName))
+                                        return "serviceAccountName: string expected";
                                 return null;
                             };
     
@@ -3019,6 +3058,8 @@
                                 }
                                 if (object.versionInfo != null)
                                     message.versionInfo = String(object.versionInfo);
+                                if (object.serviceAccountName != null)
+                                    message.serviceAccountName = String(object.serviceAccountName);
                                 return message;
                             };
     
@@ -3040,6 +3081,7 @@
                                     object.authorizationCode = "";
                                     object.updateMask = null;
                                     object.versionInfo = "";
+                                    object.serviceAccountName = "";
                                 }
                                 if (message.transferConfig != null && message.hasOwnProperty("transferConfig"))
                                     object.transferConfig = $root.google.cloud.bigquery.datatransfer.v1.TransferConfig.toObject(message.transferConfig, options);
@@ -3049,6 +3091,8 @@
                                     object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
                                 if (message.versionInfo != null && message.hasOwnProperty("versionInfo"))
                                     object.versionInfo = message.versionInfo;
+                                if (message.serviceAccountName != null && message.hasOwnProperty("serviceAccountName"))
+                                    object.serviceAccountName = message.serviceAccountName;
                                 return object;
                             };
     
@@ -7003,6 +7047,193 @@
                             return values;
                         })();
     
+                        v1.EmailPreferences = (function() {
+    
+                            /**
+                             * Properties of an EmailPreferences.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IEmailPreferences
+                             * @property {boolean|null} [enableFailureEmail] EmailPreferences enableFailureEmail
+                             */
+    
+                            /**
+                             * Constructs a new EmailPreferences.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents an EmailPreferences.
+                             * @implements IEmailPreferences
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEmailPreferences=} [properties] Properties to set
+                             */
+                            function EmailPreferences(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EmailPreferences enableFailureEmail.
+                             * @member {boolean} enableFailureEmail
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @instance
+                             */
+                            EmailPreferences.prototype.enableFailureEmail = false;
+    
+                            /**
+                             * Creates a new EmailPreferences instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEmailPreferences=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EmailPreferences} EmailPreferences instance
+                             */
+                            EmailPreferences.create = function create(properties) {
+                                return new EmailPreferences(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EmailPreferences message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEmailPreferences} message EmailPreferences message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EmailPreferences.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enableFailureEmail != null && message.hasOwnProperty("enableFailureEmail"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableFailureEmail);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EmailPreferences message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IEmailPreferences} message EmailPreferences message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EmailPreferences.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EmailPreferences message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EmailPreferences} EmailPreferences
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EmailPreferences.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.enableFailureEmail = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EmailPreferences message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EmailPreferences} EmailPreferences
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EmailPreferences.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EmailPreferences message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EmailPreferences.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enableFailureEmail != null && message.hasOwnProperty("enableFailureEmail"))
+                                    if (typeof message.enableFailureEmail !== "boolean")
+                                        return "enableFailureEmail: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EmailPreferences message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.EmailPreferences} EmailPreferences
+                             */
+                            EmailPreferences.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences();
+                                if (object.enableFailureEmail != null)
+                                    message.enableFailureEmail = Boolean(object.enableFailureEmail);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EmailPreferences message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.EmailPreferences} message EmailPreferences
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EmailPreferences.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.enableFailureEmail = false;
+                                if (message.enableFailureEmail != null && message.hasOwnProperty("enableFailureEmail"))
+                                    object.enableFailureEmail = message.enableFailureEmail;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EmailPreferences to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.EmailPreferences
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EmailPreferences.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return EmailPreferences;
+                        })();
+    
                         v1.ScheduleOptions = (function() {
     
                             /**
@@ -7265,6 +7496,8 @@
                              * @property {google.cloud.bigquery.datatransfer.v1.TransferState|null} [state] TransferConfig state
                              * @property {number|Long|null} [userId] TransferConfig userId
                              * @property {string|null} [datasetRegion] TransferConfig datasetRegion
+                             * @property {string|null} [notificationPubsubTopic] TransferConfig notificationPubsubTopic
+                             * @property {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null} [emailPreferences] TransferConfig emailPreferences
                              */
     
                             /**
@@ -7394,6 +7627,22 @@
                              */
                             TransferConfig.prototype.datasetRegion = "";
     
+                            /**
+                             * TransferConfig notificationPubsubTopic.
+                             * @member {string} notificationPubsubTopic
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            TransferConfig.prototype.notificationPubsubTopic = "";
+    
+                            /**
+                             * TransferConfig emailPreferences.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null|undefined} emailPreferences
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferConfig
+                             * @instance
+                             */
+                            TransferConfig.prototype.emailPreferences = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -7458,6 +7707,10 @@
                                     writer.uint32(/* id 13, wireType 0 =*/104).bool(message.disabled);
                                 if (message.datasetRegion != null && message.hasOwnProperty("datasetRegion"))
                                     writer.uint32(/* id 14, wireType 2 =*/114).string(message.datasetRegion);
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.notificationPubsubTopic);
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.encode(message.emailPreferences, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                                 if (message.scheduleOptions != null && message.hasOwnProperty("scheduleOptions"))
                                     $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.encode(message.scheduleOptions, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                                 return writer;
@@ -7535,6 +7788,12 @@
                                         break;
                                     case 14:
                                         message.datasetRegion = reader.string();
+                                        break;
+                                    case 15:
+                                        message.notificationPubsubTopic = reader.string();
+                                        break;
+                                    case 18:
+                                        message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -7633,6 +7892,14 @@
                                 if (message.datasetRegion != null && message.hasOwnProperty("datasetRegion"))
                                     if (!$util.isString(message.datasetRegion))
                                         return "datasetRegion: string expected";
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    if (!$util.isString(message.notificationPubsubTopic))
+                                        return "notificationPubsubTopic: string expected";
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences")) {
+                                    var error = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify(message.emailPreferences);
+                                    if (error)
+                                        return "emailPreferences." + error;
+                                }
                                 return null;
                             };
     
@@ -7719,6 +7986,13 @@
                                         message.userId = new $util.LongBits(object.userId.low >>> 0, object.userId.high >>> 0).toNumber();
                                 if (object.datasetRegion != null)
                                     message.datasetRegion = String(object.datasetRegion);
+                                if (object.notificationPubsubTopic != null)
+                                    message.notificationPubsubTopic = String(object.notificationPubsubTopic);
+                                if (object.emailPreferences != null) {
+                                    if (typeof object.emailPreferences !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferConfig.emailPreferences: object expected");
+                                    message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.fromObject(object.emailPreferences);
+                                }
                                 return message;
                             };
     
@@ -7752,6 +8026,8 @@
                                     object.dataRefreshWindowDays = 0;
                                     object.disabled = false;
                                     object.datasetRegion = "";
+                                    object.notificationPubsubTopic = "";
+                                    object.emailPreferences = null;
                                     object.scheduleOptions = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
@@ -7786,6 +8062,10 @@
                                     object.disabled = message.disabled;
                                 if (message.datasetRegion != null && message.hasOwnProperty("datasetRegion"))
                                     object.datasetRegion = message.datasetRegion;
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    object.notificationPubsubTopic = message.notificationPubsubTopic;
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences"))
+                                    object.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.toObject(message.emailPreferences, options);
                                 if (message.scheduleOptions != null && message.hasOwnProperty("scheduleOptions"))
                                     object.scheduleOptions = $root.google.cloud.bigquery.datatransfer.v1.ScheduleOptions.toObject(message.scheduleOptions, options);
                                 return object;
@@ -7824,6 +8104,8 @@
                              * @property {google.cloud.bigquery.datatransfer.v1.TransferState|null} [state] TransferRun state
                              * @property {number|Long|null} [userId] TransferRun userId
                              * @property {string|null} [schedule] TransferRun schedule
+                             * @property {string|null} [notificationPubsubTopic] TransferRun notificationPubsubTopic
+                             * @property {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null} [emailPreferences] TransferRun emailPreferences
                              */
     
                             /**
@@ -7945,6 +8227,22 @@
                              */
                             TransferRun.prototype.schedule = "";
     
+                            /**
+                             * TransferRun notificationPubsubTopic.
+                             * @member {string} notificationPubsubTopic
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferRun
+                             * @instance
+                             */
+                            TransferRun.prototype.notificationPubsubTopic = "";
+    
+                            /**
+                             * TransferRun emailPreferences.
+                             * @member {google.cloud.bigquery.datatransfer.v1.IEmailPreferences|null|undefined} emailPreferences
+                             * @memberof google.cloud.bigquery.datatransfer.v1.TransferRun
+                             * @instance
+                             */
+                            TransferRun.prototype.emailPreferences = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -8009,6 +8307,10 @@
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.schedule);
                                 if (message.errorStatus != null && message.hasOwnProperty("errorStatus"))
                                     $root.google.rpc.Status.encode(message.errorStatus, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.notificationPubsubTopic);
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences"))
+                                    $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.encode(message.emailPreferences, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                                 return writer;
                             };
     
@@ -8081,6 +8383,12 @@
                                         break;
                                     case 12:
                                         message.schedule = reader.string();
+                                        break;
+                                    case 23:
+                                        message.notificationPubsubTopic = reader.string();
+                                        break;
+                                    case 25:
+                                        message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -8182,6 +8490,14 @@
                                 if (message.schedule != null && message.hasOwnProperty("schedule"))
                                     if (!$util.isString(message.schedule))
                                         return "schedule: string expected";
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    if (!$util.isString(message.notificationPubsubTopic))
+                                        return "notificationPubsubTopic: string expected";
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences")) {
+                                    var error = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.verify(message.emailPreferences);
+                                    if (error)
+                                        return "emailPreferences." + error;
+                                }
                                 return null;
                             };
     
@@ -8275,6 +8591,13 @@
                                         message.userId = new $util.LongBits(object.userId.low >>> 0, object.userId.high >>> 0).toNumber();
                                 if (object.schedule != null)
                                     message.schedule = String(object.schedule);
+                                if (object.notificationPubsubTopic != null)
+                                    message.notificationPubsubTopic = String(object.notificationPubsubTopic);
+                                if (object.emailPreferences != null) {
+                                    if (typeof object.emailPreferences !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.TransferRun.emailPreferences: object expected");
+                                    message.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.fromObject(object.emailPreferences);
+                                }
                                 return message;
                             };
     
@@ -8308,6 +8631,8 @@
                                         object.userId = options.longs === String ? "0" : 0;
                                     object.schedule = "";
                                     object.errorStatus = null;
+                                    object.notificationPubsubTopic = "";
+                                    object.emailPreferences = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -8341,6 +8666,10 @@
                                     object.schedule = message.schedule;
                                 if (message.errorStatus != null && message.hasOwnProperty("errorStatus"))
                                     object.errorStatus = $root.google.rpc.Status.toObject(message.errorStatus, options);
+                                if (message.notificationPubsubTopic != null && message.hasOwnProperty("notificationPubsubTopic"))
+                                    object.notificationPubsubTopic = message.notificationPubsubTopic;
+                                if (message.emailPreferences != null && message.hasOwnProperty("emailPreferences"))
+                                    object.emailPreferences = $root.google.cloud.bigquery.datatransfer.v1.EmailPreferences.toObject(message.emailPreferences, options);
                                 return object;
                             };
     
