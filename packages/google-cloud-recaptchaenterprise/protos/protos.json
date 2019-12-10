@@ -40,6 +40,43 @@
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,annotation"
                           }
+                        },
+                        "CreateKey": {
+                          "requestType": "CreateKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*}/keys",
+                            "(google.api.http).body": "key"
+                          }
+                        },
+                        "ListKeys": {
+                          "requestType": "ListKeysRequest",
+                          "responseType": "ListKeysResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*}/keys"
+                          }
+                        },
+                        "GetKey": {
+                          "requestType": "GetKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/keys/*}"
+                          }
+                        },
+                        "UpdateKey": {
+                          "requestType": "UpdateKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{key.name=projects/*/keys/*}",
+                            "(google.api.http).body": "key"
+                          }
+                        },
+                        "DeleteKey": {
+                          "requestType": "DeleteKeyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/keys/*}"
+                          }
                         }
                       }
                     },
@@ -152,14 +189,35 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "siteKey": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userAgent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "expectedAction": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -198,6 +256,207 @@
                             "SITE_MISMATCH": 5,
                             "MISSING": 6
                           }
+                        }
+                      }
+                    },
+                    "CreateKeyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "key": {
+                          "type": "Key",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListKeysResponse": {
+                      "fields": {
+                        "keys": {
+                          "rule": "repeated",
+                          "type": "Key",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateKeyRequest": {
+                      "fields": {
+                        "key": {
+                          "type": "Key",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "Key": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Key",
+                        "(google.api.resource).pattern": "projects/{project}/keys/{key}"
+                      },
+                      "oneofs": {
+                        "platformSettings": {
+                          "oneof": [
+                            "webSettings",
+                            "androidSettings",
+                            "iosSettings"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "webSettings": {
+                          "type": "WebKeySettings",
+                          "id": 3
+                        },
+                        "androidSettings": {
+                          "type": "AndroidKeySettings",
+                          "id": 4
+                        },
+                        "iosSettings": {
+                          "type": "IOSKeySettings",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "WebKeySettings": {
+                      "fields": {
+                        "enforceAllowedDomains": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "allowedDomains": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "allowAmpTraffic": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "integrationType": {
+                          "type": "IntegrationType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "challengeSecurityPreference": {
+                          "type": "ChallengeSecurityPreference",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "IntegrationType": {
+                          "values": {
+                            "INTEGRATION_TYPE_UNSPECIFIED": 0,
+                            "SCORE_ONLY": 1,
+                            "CHECKBOX_CHALLENGE": 2,
+                            "INVISIBLE_CHALLENGE": 3
+                          }
+                        },
+                        "ChallengeSecurityPreference": {
+                          "values": {
+                            "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED": 0,
+                            "USABILITY": 1,
+                            "BALANCED": 2,
+                            "SECURITY": 3
+                          }
+                        }
+                      }
+                    },
+                    "AndroidKeySettings": {
+                      "fields": {
+                        "allowedPackageNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "IOSKeySettings": {
+                      "fields": {
+                        "allowedBundleIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }
@@ -1292,6 +1551,18 @@
                       "id": 4
                     }
                   }
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             },

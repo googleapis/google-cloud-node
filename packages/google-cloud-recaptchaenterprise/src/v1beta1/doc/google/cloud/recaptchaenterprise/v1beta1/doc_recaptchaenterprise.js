@@ -168,12 +168,24 @@ const Assessment = {
 
 /**
  * @property {string} token
- *   Required. The user response token provided by the reCAPTCHA client-side integration
+ *   Optional. The user response token provided by the reCAPTCHA client-side integration
  *   on your site.
  *
  * @property {string} siteKey
- *   Required. The site key that was used to invoke reCAPTCHA on your site and generate
+ *   Optional. The site key that was used to invoke reCAPTCHA on your site and generate
  *   the token.
+ *
+ * @property {string} userAgent
+ *   Optional. The user agent present in the request from the user's device related to
+ *   this event.
+ *
+ * @property {string} userIpAddress
+ *   Optional. The IP address in the request from the user's device related to this event.
+ *
+ * @property {string} expectedAction
+ *   Optional. The expected action for this type of event. This should be the same action
+ *   provided at token generation time on client-side platforms already
+ *   integrated with recaptcha enterprise.
  *
  * @typedef Event
  * @memberof google.cloud.recaptchaenterprise.v1beta1
@@ -257,4 +269,282 @@ const TokenProperties = {
      */
     MISSING: 6
   }
+};
+
+/**
+ * The create key request message.
+ *
+ * @property {string} parent
+ *   Required. The name of the project in which the key will be created, in the
+ *   format "projects/{project_number}".
+ *
+ * @property {Object} key
+ *   Required. Information to create a reCAPTCHA Enterprise key.
+ *
+ *   This object should have the same structure as [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}
+ *
+ * @typedef CreateKeyRequest
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const CreateKeyRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The list keys request message.
+ *
+ * @property {string} parent
+ *   Required. The name of the project that contains the keys that will be
+ *   listed, in the format "projects/{project_number}".
+ *
+ * @property {number} pageSize
+ *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+ *   1000.
+ *
+ * @property {string} pageToken
+ *   Optional. The next_page_token value returned from a previous.
+ *   ListKeysRequest, if any.
+ *
+ * @typedef ListKeysRequest
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const ListKeysRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response to request to list keys in a project.
+ *
+ * @property {Object[]} keys
+ *   Key details.
+ *
+ *   This object should have the same structure as [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}
+ *
+ * @property {string} nextPageToken
+ *   Token to retrieve the next page of results. It is set to empty if no keys
+ *   remain in results.
+ *
+ * @typedef ListKeysResponse
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const ListKeysResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The get key request message.
+ *
+ * @property {string} name
+ *   Required. The name of the requested key, in the format
+ *   "projects/{project_number}/keys/{key_id}".
+ *
+ * @typedef GetKeyRequest
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const GetKeyRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The update key request message.
+ *
+ * @property {Object} key
+ *   Required. The key to update.
+ *
+ *   This object should have the same structure as [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}
+ *
+ * @property {Object} updateMask
+ *   Optional. The mask to control which field of the key get updated. If the mask is not
+ *   present, all fields will be updated.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateKeyRequest
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const UpdateKeyRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The delete key request message.
+ *
+ * @property {string} name
+ *   Required. The name of the key to be deleted, in the format
+ *   "projects/{project_number}/keys/{key_id}".
+ *
+ * @typedef DeleteKeyRequest
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const DeleteKeyRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A key used to identify and configure applications (web and/or mobile) that
+ * use reCAPTCHA Enterprise.
+ *
+ * @property {string} name
+ *   The resource name for the Key in the format
+ *   "projects/{project_number}/keys/{key_id}".
+ *
+ * @property {string} displayName
+ *   Human-readable display name of this key. Modifiable by user.
+ *
+ * @property {Object} webSettings
+ *   Settings for keys that can be used by websites.
+ *
+ *   This object should have the same structure as [WebKeySettings]{@link google.cloud.recaptchaenterprise.v1beta1.WebKeySettings}
+ *
+ * @property {Object} androidSettings
+ *   Settings for keys that can be used by Android apps.
+ *
+ *   This object should have the same structure as [AndroidKeySettings]{@link google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings}
+ *
+ * @property {Object} iosSettings
+ *   Settings for keys that can be used by iOS apps.
+ *
+ *   This object should have the same structure as [IOSKeySettings]{@link google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings}
+ *
+ * @typedef Key
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.Key definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const Key = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Settings specific to keys that can be used by websites.
+ *
+ * @property {boolean} enforceAllowedDomains
+ *   Whether allowed_domains is enforced or not.
+ *
+ * @property {string[]} allowedDomains
+ *   Domains or subdomains of websites allowed to use the key. All subdomains
+ *   of an allowed domain are automatically allowed. A valid domain requires a
+ *   host and must not include any path, port, query or fragment.
+ *   Examples: 'example.com' or 'subdomain.example.com'
+ *
+ * @property {boolean} allowAmpTraffic
+ *   Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
+ *
+ * @property {number} integrationType
+ *   Required. Describes how this key is integrated with the website.
+ *
+ *   The number should be among the values of [IntegrationType]{@link google.cloud.recaptchaenterprise.v1beta1.IntegrationType}
+ *
+ * @property {number} challengeSecurityPreference
+ *   Settings for the frequency and difficulty at which this key triggers
+ *   captcha challenges. This should only be specified for IntegrationTypes
+ *   CHECKBOX_CHALLENGE and INVISIBLE_CHALLENGE.
+ *
+ *   The number should be among the values of [ChallengeSecurityPreference]{@link google.cloud.recaptchaenterprise.v1beta1.ChallengeSecurityPreference}
+ *
+ * @typedef WebKeySettings
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.WebKeySettings definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const WebKeySettings = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Enum that represents the possible challenge frequency and difficulty
+   * configurations for a web key.
+   *
+   * @enum {number}
+   * @memberof google.cloud.recaptchaenterprise.v1beta1
+   */
+  ChallengeSecurityPreference: {
+
+    /**
+     * Default type that indicates this enum hasn't been specified.
+     */
+    CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED: 0,
+
+    /**
+     * Key tends to show fewer and easier challenges.
+     */
+    USABILITY: 1,
+
+    /**
+     * Key tends to show balanced (in amount and difficulty) challenges.
+     */
+    BALANCED: 2,
+
+    /**
+     * Key tends to show more and harder challenges.
+     */
+    SECURITY: 3
+  },
+
+  /**
+   * Enum that represents the integration types for web keys.
+   *
+   * @enum {number}
+   * @memberof google.cloud.recaptchaenterprise.v1beta1
+   */
+  IntegrationType: {
+
+    /**
+     * Default type that indicates this enum hasn't been specified. This is not
+     * a valid IntegrationType, one of the other types must be specified
+     * instead.
+     */
+    INTEGRATION_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * Only used to produce scores. It doesn't display the "I'm not a robot"
+     * checkbox and never shows captcha challenges.
+     */
+    SCORE_ONLY: 1,
+
+    /**
+     * Displays the "I'm not a robot" checkbox and may show captcha challenges
+     * after it is checked.
+     */
+    CHECKBOX_CHALLENGE: 2,
+
+    /**
+     * Doesn't display the "I'm not a robot" checkbox, but may show captcha
+     * challenges after risk analysis.
+     */
+    INVISIBLE_CHALLENGE: 3
+  }
+};
+
+/**
+ * Settings specific to keys that can be used by Android apps.
+ *
+ * @property {string[]} allowedPackageNames
+ *   Android package names of apps allowed to use the key.
+ *   Example: 'com.companyname.appname'
+ *
+ * @typedef AndroidKeySettings
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const AndroidKeySettings = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Settings specific to keys that can be used by iOS apps.
+ *
+ * @property {string[]} allowedBundleIds
+ *   iOS bundle ids of apps allowed to use the key.
+ *   Example: 'com.companyname.productname.appname'
+ *
+ * @typedef IOSKeySettings
+ * @memberof google.cloud.recaptchaenterprise.v1beta1
+ * @see [google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto}
+ */
+const IOSKeySettings = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
 };

@@ -191,6 +191,324 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
       });
     });
   });
+
+  describe('createKey', () => {
+    it('invokes createKey without error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const key = {};
+      const request = {
+        parent: formattedParent,
+        key: key,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createKey = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createKey(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createKey with error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const key = {};
+      const request = {
+        parent: formattedParent,
+        key: key,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createKey = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createKey(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listKeys', () => {
+    it('invokes listKeys without error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const keysElement = {};
+      const keys = [keysElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        keys: keys,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listKeys = (actualRequest, options, callback) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.keys);
+      };
+
+      client.listKeys(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.keys);
+        done();
+      });
+    });
+
+    it('invokes listKeys with error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listKeys = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listKeys(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getKey', () => {
+    it('invokes getKey without error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedName = client.keyPath('[PROJECT]', '[KEY]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getKey = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getKey(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getKey with error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedName = client.keyPath('[PROJECT]', '[KEY]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getKey = mockSimpleGrpcMethod(request, null, error);
+
+      client.getKey(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateKey', () => {
+    it('invokes updateKey without error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const key = {};
+      const request = {
+        key: key,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateKey = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateKey(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateKey with error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const key = {};
+      const request = {
+        key: key,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateKey = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateKey(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteKey', () => {
+    it('invokes deleteKey without error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedName = client.keyPath('[PROJECT]', '[KEY]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteKey = mockSimpleGrpcMethod(request);
+
+      client.deleteKey(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteKey with error', done => {
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const formattedName = client.keyPath('[PROJECT]', '[KEY]');
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteKey = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteKey(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
