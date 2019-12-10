@@ -8947,24 +8947,6 @@
                         return Entity;
                     })();
     
-                    /**
-                     * EncodingType enum.
-                     * @name google.cloud.language.v1beta2.EncodingType
-                     * @enum {string}
-                     * @property {number} NONE=0 NONE value
-                     * @property {number} UTF8=1 UTF8 value
-                     * @property {number} UTF16=2 UTF16 value
-                     * @property {number} UTF32=3 UTF32 value
-                     */
-                    v1beta2.EncodingType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "NONE"] = 0;
-                        values[valuesById[1] = "UTF8"] = 1;
-                        values[valuesById[2] = "UTF16"] = 2;
-                        values[valuesById[3] = "UTF32"] = 3;
-                        return values;
-                    })();
-    
                     v1beta2.Token = (function() {
     
                         /**
@@ -9232,6 +9214,24 @@
                         };
     
                         return Token;
+                    })();
+    
+                    /**
+                     * EncodingType enum.
+                     * @name google.cloud.language.v1beta2.EncodingType
+                     * @enum {string}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} UTF8=1 UTF8 value
+                     * @property {number} UTF16=2 UTF16 value
+                     * @property {number} UTF32=3 UTF32 value
+                     */
+                    v1beta2.EncodingType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "UTF8"] = 1;
+                        values[valuesById[2] = "UTF16"] = 2;
+                        values[valuesById[3] = "UTF32"] = 3;
+                        return values;
                     })();
     
                     v1beta2.Sentiment = (function() {

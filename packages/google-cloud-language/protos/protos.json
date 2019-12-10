@@ -939,14 +939,6 @@
                         }
                       }
                     },
-                    "EncodingType": {
-                      "values": {
-                        "NONE": 0,
-                        "UTF8": 1,
-                        "UTF16": 2,
-                        "UTF32": 3
-                      }
-                    },
                     "Token": {
                       "fields": {
                         "text": {
@@ -965,6 +957,14 @@
                           "type": "string",
                           "id": 4
                         }
+                      }
+                    },
+                    "EncodingType": {
+                      "values": {
+                        "NONE": 0,
+                        "UTF8": 1,
+                        "UTF16": 2,
+                        "UTF32": 3
                       }
                     },
                     "Sentiment": {

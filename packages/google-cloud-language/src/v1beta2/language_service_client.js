@@ -383,7 +383,7 @@ class LanguageServiceClient {
 
   /**
    * Analyzes the syntax of the text and provides sentence boundaries and
-   * tokenization along with part of speech tags, dependency trees, and other
+   * tokenization along with part-of-speech tags, dependency trees, and other
    * properties.
    *
    * @param {Object} request

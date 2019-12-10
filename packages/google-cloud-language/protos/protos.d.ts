@@ -3334,14 +3334,6 @@ export namespace google {
                     }
                 }
 
-                /** EncodingType enum. */
-                enum EncodingType {
-                    NONE = 0,
-                    UTF8 = 1,
-                    UTF16 = 2,
-                    UTF32 = 3
-                }
-
                 /** Properties of a Token. */
                 interface IToken {
 
@@ -3448,6 +3440,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** EncodingType enum. */
+                enum EncodingType {
+                    NONE = 0,
+                    UTF8 = 1,
+                    UTF16 = 2,
+                    UTF32 = 3
                 }
 
                 /** Properties of a Sentiment. */
