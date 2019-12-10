@@ -12,6 +12,12 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Analyze-streaming-annotation-to-storage](#analyze-streaming-annotation-to-storage)
+  * [Analyze-streaming-automl-classification](#analyze-streaming-automl-classification)
+  * [Analyze-streaming-labels](#analyze-streaming-labels)
+  * [Analyze-streaming-object](#analyze-streaming-object)
+  * [Analyze-streaming-safe-search](#analyze-streaming-safe-search)
+  * [Analyze-streaming-shot-change](#analyze-streaming-shot-change)
   * [Analyze](#analyze)
   * [Analyze.v1p2beta1](#analyze.v1p2beta1)
   * [Quickstart](#quickstart)
@@ -22,6 +28,108 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-video-intelligence#using-the-client-library).
 
 ## Samples
+
+
+
+### Analyze-streaming-annotation-to-storage
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-annotation-to-storage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-annotation-to-storage.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-annotation-to-storage.js`
+
+
+-----
+
+
+
+
+### Analyze-streaming-automl-classification
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-automl-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-automl-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-automl-classification.js`
+
+
+-----
+
+
+
+
+### Analyze-streaming-labels
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-labels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-labels.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-labels.js`
+
+
+-----
+
+
+
+
+### Analyze-streaming-object
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-object.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-object.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-object.js`
+
+
+-----
+
+
+
+
+### Analyze-streaming-safe-search
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-safe-search.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-safe-search.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-safe-search.js`
+
+
+-----
+
+
+
+
+### Analyze-streaming-shot-change
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-shot-change.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-shot-change.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze-streaming-shot-change.js`
+
+
+-----
+
 
 
 
