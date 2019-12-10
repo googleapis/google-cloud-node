@@ -17,13 +17,18 @@
                   },
                   "nested": {
                     "SecurityCenter": {
+                      "options": {
+                        "(google.api.default_host)": "securitycenter.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "CreateSource": {
                           "requestType": "CreateSourceRequest",
                           "responseType": "Source",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*}/sources",
-                            "(google.api.http).body": "source"
+                            "(google.api.http).body": "source",
+                            "(google.api.method_signature)": "parent,source"
                           }
                         },
                         "CreateFinding": {
@@ -31,7 +36,8 @@
                           "responseType": "Finding",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*/sources/*}/findings",
-                            "(google.api.http).body": "finding"
+                            "(google.api.http).body": "finding",
+                            "(google.api.method_signature)": "parent,finding_id,finding"
                           }
                         },
                         "GetIamPolicy": {
@@ -39,21 +45,24 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:getIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource"
                           }
                         },
                         "GetOrganizationSettings": {
                           "requestType": "GetOrganizationSettingsRequest",
                           "responseType": "OrganizationSettings",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=organizations/*/organizationSettings}"
+                            "(google.api.http).get": "/v1/{name=organizations/*/organizationSettings}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetSource": {
                           "requestType": "GetSourceRequest",
                           "responseType": "Source",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=organizations/*/sources/*}"
+                            "(google.api.http).get": "/v1/{name=organizations/*/sources/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GroupAssets": {
@@ -69,7 +78,8 @@
                           "responseType": "GroupFindingsResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*/sources/*}/findings:group",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,group_by"
                           }
                         },
                         "ListAssets": {
@@ -90,7 +100,8 @@
                           "requestType": "ListSourcesRequest",
                           "responseType": "ListSourcesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=organizations/*}/sources"
+                            "(google.api.http).get": "/v1/{parent=organizations/*}/sources",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "RunAssetDiscovery": {
@@ -98,7 +109,10 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*}/assets:runDiscovery",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.securitycenter.v1.RunAssetDiscoveryResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Empty"
                           }
                         },
                         "SetFindingState": {
@@ -106,7 +120,8 @@
                           "responseType": "Finding",
                           "options": {
                             "(google.api.http).post": "/v1/{name=organizations/*/sources/*/findings/*}:setState",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,state,start_time"
                           }
                         },
                         "SetIamPolicy": {
@@ -114,7 +129,8 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:setIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource,policy"
                           }
                         },
                         "TestIamPermissions": {
@@ -122,7 +138,8 @@
                           "responseType": "google.iam.v1.TestIamPermissionsResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{resource=organizations/*/sources/*}:testIamPermissions",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource,permissions"
                           }
                         },
                         "UpdateFinding": {
@@ -130,7 +147,8 @@
                           "responseType": "Finding",
                           "options": {
                             "(google.api.http).patch": "/v1/{finding.name=organizations/*/sources/*/findings/*}",
-                            "(google.api.http).body": "finding"
+                            "(google.api.http).body": "finding",
+                            "(google.api.method_signature)": "finding"
                           }
                         },
                         "UpdateOrganizationSettings": {
@@ -138,7 +156,8 @@
                           "responseType": "OrganizationSettings",
                           "options": {
                             "(google.api.http).patch": "/v1/{organization_settings.name=organizations/*/organizationSettings}",
-                            "(google.api.http).body": "organization_settings"
+                            "(google.api.http).body": "organization_settings",
+                            "(google.api.method_signature)": "organization_settings"
                           }
                         },
                         "UpdateSource": {
@@ -146,7 +165,8 @@
                           "responseType": "Source",
                           "options": {
                             "(google.api.http).patch": "/v1/{source.name=organizations/*/sources/*}",
-                            "(google.api.http).body": "source"
+                            "(google.api.http).body": "source",
+                            "(google.api.method_signature)": "source"
                           }
                         },
                         "UpdateSecurityMarks": {
@@ -156,7 +176,8 @@
                             "(google.api.http).patch": "/v1/{security_marks.name=organizations/*/assets/*/securityMarks}",
                             "(google.api.http).body": "security_marks",
                             "(google.api.http).additional_bindings.patch": "/v1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
-                            "(google.api.http).additional_bindings.body": "security_marks"
+                            "(google.api.http).additional_bindings.body": "security_marks",
+                            "(google.api.method_signature)": "security_marks"
                           }
                         }
                       }
@@ -165,15 +186,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Source"
+                          }
                         },
                         "findingId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "finding": {
                           "type": "Finding",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -181,11 +212,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         },
                         "source": {
                           "type": "Source",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -193,7 +231,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/OrganizationSettings"
+                          }
                         }
                       }
                     },
@@ -201,7 +243,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Source"
+                          }
                         }
                       }
                     },
@@ -209,7 +255,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -217,7 +267,10 @@
                         },
                         "groupBy": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "compareDuration": {
                           "type": "google.protobuf.Duration",
@@ -235,13 +288,7 @@
                           "type": "int32",
                           "id": 8
                         }
-                      },
-                      "reserved": [
-                        [
-                          6,
-                          6
-                        ]
-                      ]
+                      }
                     },
                     "GroupAssetsResponse": {
                       "fields": {
@@ -268,7 +315,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Source"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -276,7 +327,10 @@
                         },
                         "groupBy": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "readTime": {
                           "type": "google.protobuf.Timestamp",
@@ -294,13 +348,7 @@
                           "type": "int32",
                           "id": 8
                         }
-                      },
-                      "reserved": [
-                        [
-                          6,
-                          6
-                        ]
-                      ]
+                      }
                     },
                     "GroupFindingsResponse": {
                       "fields": {
@@ -340,7 +388,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -369,7 +421,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -389,7 +445,10 @@
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -399,13 +458,7 @@
                           "type": "int32",
                           "id": 9
                         }
-                      },
-                      "reserved": [
-                        [
-                          6,
-                          6
-                        ]
-                      ]
+                      }
                     },
                     "ListAssetsResponse": {
                       "fields": {
@@ -456,7 +509,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Source"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -476,7 +533,10 @@
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -486,13 +546,7 @@
                           "type": "int32",
                           "id": 9
                         }
-                      },
-                      "reserved": [
-                        [
-                          6,
-                          6
-                        ]
-                      ]
+                      }
                     },
                     "ListFindingsResponse": {
                       "fields": {
@@ -544,15 +598,25 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Finding"
+                          }
                         },
                         "state": {
                           "type": "Finding.State",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -560,7 +624,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                          }
                         }
                       }
                     },
@@ -568,7 +636,10 @@
                       "fields": {
                         "finding": {
                           "type": "Finding",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -580,7 +651,10 @@
                       "fields": {
                         "organizationSettings": {
                           "type": "OrganizationSettings",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -592,7 +666,10 @@
                       "fields": {
                         "source": {
                           "type": "Source",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -604,7 +681,10 @@
                       "fields": {
                         "securityMarks": {
                           "type": "SecurityMarks",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -617,6 +697,10 @@
                       }
                     },
                     "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "organizations/{organization}/assets/{asset}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -685,6 +769,10 @@
                       }
                     },
                     "SecurityMarks": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/SecurityMarks",
+                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}/findings/{finding}/securityMarks"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -698,6 +786,10 @@
                       }
                     },
                     "Finding": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/Finding",
+                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}/findings/{finding}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -730,7 +822,10 @@
                         },
                         "securityMarks": {
                           "type": "SecurityMarks",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "eventTime": {
                           "type": "google.protobuf.Timestamp",
@@ -752,6 +847,10 @@
                       }
                     },
                     "OrganizationSettings": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/OrganizationSettings",
+                        "(google.api.resource).pattern": "organizations/{organization}/organizationSettings"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -766,16 +865,6 @@
                           "id": 3
                         }
                       },
-                      "reserved": [
-                        [
-                          4,
-                          4
-                        ],
-                        [
-                          5,
-                          5
-                        ]
-                      ],
                       "nested": {
                         "AssetDiscoveryConfig": {
                           "fields": {
@@ -824,6 +913,10 @@
                       }
                     },
                     "Source": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/Source",
+                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -837,13 +930,7 @@
                           "type": "string",
                           "id": 3
                         }
-                      },
-                      "reserved": [
-                        [
-                          4,
-                          4
-                        ]
-                      ]
+                      }
                     }
                   }
                 },

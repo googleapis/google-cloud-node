@@ -27,7 +27,7 @@
  *   The relative resource name of this asset. See:
  *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
  *   Example:
- *   "organizations/123/assets/456".
+ *   "organizations/{organization_id}/assets/{asset_id}".
  *
  * @property {Object} securityCenterProperties
  *   Cloud SCC managed properties. These properties are managed by

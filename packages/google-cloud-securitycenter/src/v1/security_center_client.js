@@ -320,10 +320,10 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the new source's parent. Its format should be
+   *   Required. Resource name of the new source's parent. Its format should be
    *   "organizations/[organization_id]".
    * @param {Object} request.source
-   *   The Source being created, only the display_name and description will be
+   *   Required. The Source being created, only the display_name and description will be
    *   used. All other fields will be ignored.
    *
    *   This object should have the same structure as [Source]{@link google.cloud.securitycenter.v1.Source}
@@ -386,14 +386,14 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the new finding's parent. Its format should be
+   *   Required. Resource name of the new finding's parent. Its format should be
    *   "organizations/[organization_id]/sources/[source_id]".
    * @param {string} request.findingId
-   *   Unique identifier provided by the client within the parent scope.
+   *   Required. Unique identifier provided by the client within the parent scope.
    *   It must be alphanumeric and less than or equal to 32 characters and
    *   greater than 0 characters in length.
    * @param {Object} request.finding
-   *   The Finding being created. The name and security_marks will be ignored as
+   *   Required. The Finding being created. The name and security_marks will be ignored as
    *   they are both output only fields on this resource.
    *
    *   This object should have the same structure as [Finding]{@link google.cloud.securitycenter.v1.Finding}
@@ -517,7 +517,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the organization to get organization settings for. Its format is
+   *   Required. Name of the organization to get organization settings for. Its format is
    *   "organizations/[organization_id]/organizationSettings".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -576,7 +576,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Relative resource name of the source. Its format is
+   *   Required. Relative resource name of the source. Its format is
    *   "organizations/[organization_id]/source/[source_id]".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -632,10 +632,10 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the organization to groupBy. Its format is
+   *   Required. Name of the organization to groupBy. Its format is
    *   "organizations/[organization_id]".
    * @param {string} request.groupBy
-   *   Expression that defines what assets fields to use for grouping. The string
+   *   Required. Expression that defines what assets fields to use for grouping. The string
    *   value should follow SQL syntax: comma separated list of fields. For
    *   example:
    *   "security_center_properties.resource_project,security_center_properties.project".
@@ -677,29 +677,30 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | '='
-   *   update_time | '=', '>', '<', '>=', '<='
+   *
+   *   * name: `=`
+   *   * update_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "update_time = \"2019-06-10T16:07:18-07:00\""
    *       "update_time = 1560208038000"
    *
-   *   create_time |  '=', '>', '<', '>=', '<='
+   *   * create_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "create_time = \"2019-06-10T16:07:18-07:00\""
    *       "create_time = 1560208038000"
    *
-   *   iam_policy.policy_blob | '=', ':'
-   *   resource_properties | '=', ':', '>', '<', '>=', '<='
-   *   security_marks | '=', ':'
-   *   security_center_properties.resource_name | '=', ':'
-   *   security_center_properties.resource_type | '=', ':'
-   *   security_center_properties.resource_parent | '=', ':'
-   *   security_center_properties.resource_project | '=', ':'
-   *   security_center_properties.resource_owners | '=', ':'
+   *   * iam_policy.policy_blob: `=`, `:`
+   *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * security_center_properties.resource_name: `=`, `:`
+   *   * security_center_properties.resource_type: `=`, `:`
+   *   * security_center_properties.resource_parent: `=`, `:`
+   *   * security_center_properties.resource_project: `=`, `:`
+   *   * security_center_properties.resource_owners: `=`, `:`
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {Object} [request.compareDuration]
@@ -860,10 +861,10 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the organization to groupBy. Its format is
+   *   Required. Name of the organization to groupBy. Its format is
    *   "organizations/[organization_id]".
    * @param {string} request.groupBy
-   *   Expression that defines what assets fields to use for grouping. The string
+   *   Required. Expression that defines what assets fields to use for grouping. The string
    *   value should follow SQL syntax: comma separated list of fields. For
    *   example:
    *   "security_center_properties.resource_project,security_center_properties.project".
@@ -905,29 +906,30 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | '='
-   *   update_time | '=', '>', '<', '>=', '<='
+   *
+   *   * name: `=`
+   *   * update_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "update_time = \"2019-06-10T16:07:18-07:00\""
    *       "update_time = 1560208038000"
    *
-   *   create_time |  '=', '>', '<', '>=', '<='
+   *   * create_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "create_time = \"2019-06-10T16:07:18-07:00\""
    *       "create_time = 1560208038000"
    *
-   *   iam_policy.policy_blob | '=', ':'
-   *   resource_properties | '=', ':', '>', '<', '>=', '<='
-   *   security_marks | '=', ':'
-   *   security_center_properties.resource_name | '=', ':'
-   *   security_center_properties.resource_type | '=', ':'
-   *   security_center_properties.resource_parent | '=', ':'
-   *   security_center_properties.resource_project | '=', ':'
-   *   security_center_properties.resource_owners | '=', ':'
+   *   * iam_policy.policy_blob: `=`, `:`
+   *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * security_center_properties.resource_name: `=`, `:`
+   *   * security_center_properties.resource_type: `=`, `:`
+   *   * security_center_properties.resource_parent: `=`, `:`
+   *   * security_center_properties.resource_project: `=`, `:`
+   *   * security_center_properties.resource_owners: `=`, `:`
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {Object} [request.compareDuration]
@@ -1015,17 +1017,17 @@ class SecurityCenterClient {
    * specified properties.
    *
    * To group across all sources provide a `-` as the source id.
-   * Example: /v1/organizations/123/sources/-/findings
+   * Example: /v1/organizations/{organization_id}/sources/-/findings
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the source to groupBy. Its format is
+   *   Required. Name of the source to groupBy. Its format is
    *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
    *   all sources provide a source_id of `-`. For example:
-   *   organizations/123/sources/-
+   *   organizations/{organization_id}/sources/-
    * @param {string} request.groupBy
-   *   Expression that defines what assets fields to use for grouping (including
+   *   Required. Expression that defines what assets fields to use for grouping (including
    *   `state_change`). The string value should follow SQL syntax: comma separated
    *   list of fields. For example: "parent,resource_name".
    *
@@ -1065,21 +1067,22 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | `=`
-   *   parent | '=', ':'
-   *   resource_name | '=', ':'
-   *   state | '=', ':'
-   *   category | '=', ':'
-   *   external_uri | '=', ':'
-   *   event_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   * name: `=`
+   *   * parent: `=`, `:`
+   *   * resource_name: `=`, `:`
+   *   * state: `=`, `:`
+   *   * category: `=`, `:`
+   *   * external_uri: `=`, `:`
+   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "event_time = \"2019-06-10T16:07:18-07:00\""
    *       "event_time = 1560208038000"
    *
-   *   security_marks | '=', ':'
-   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {Object} [request.readTime]
@@ -1239,12 +1242,12 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the source to groupBy. Its format is
+   *   Required. Name of the source to groupBy. Its format is
    *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
    *   all sources provide a source_id of `-`. For example:
-   *   organizations/123/sources/-
+   *   organizations/{organization_id}/sources/-
    * @param {string} request.groupBy
-   *   Expression that defines what assets fields to use for grouping (including
+   *   Required. Expression that defines what assets fields to use for grouping (including
    *   `state_change`). The string value should follow SQL syntax: comma separated
    *   list of fields. For example: "parent,resource_name".
    *
@@ -1284,21 +1287,22 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | `=`
-   *   parent | '=', ':'
-   *   resource_name | '=', ':'
-   *   state | '=', ':'
-   *   category | '=', ':'
-   *   external_uri | '=', ':'
-   *   event_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   * name: `=`
+   *   * parent: `=`, `:`
+   *   * resource_name: `=`, `:`
+   *   * state: `=`, `:`
+   *   * category: `=`, `:`
+   *   * external_uri: `=`, `:`
+   *   * event_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "event_time = \"2019-06-10T16:07:18-07:00\""
    *       "event_time = 1560208038000"
    *
-   *   security_marks | '=', ':'
-   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {Object} [request.readTime]
@@ -1386,7 +1390,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the organization assets should belong to. Its format is
+   *   Required. Name of the organization assets should belong to. Its format is
    *   "organizations/[organization_id]".
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across assets.
@@ -1416,29 +1420,30 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following are the allowed field and operator combinations:
-   *   name | `=`
-   *   update_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   * name: `=`
+   *   * update_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "update_time = \"2019-06-10T16:07:18-07:00\""
    *       "update_time = 1560208038000"
    *
-   *   create_time | `=`, `>`, `<`, `>=`, `<=`
+   *   * create_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "create_time = \"2019-06-10T16:07:18-07:00\""
    *       "create_time = 1560208038000"
    *
-   *   iam_policy.policy_blob | '=', ':'
-   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
-   *   security_marks | '=', ':'
-   *   security_center_properties.resource_name | '=', ':'
-   *   security_center_properties.resource_type | '=', ':'
-   *   security_center_properties.resource_parent | '=', ':'
-   *   security_center_properties.resource_project | '=', ':'
-   *   security_center_properties.resource_owners | '=', ':'
+   *   * iam_policy.policy_blob: `=`, `:`
+   *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * security_center_properties.resource_name: `=`, `:`
+   *   * security_center_properties.resource_type: `=`, `:`
+   *   * security_center_properties.resource_parent: `=`, `:`
+   *   * security_center_properties.resource_project: `=`, `:`
+   *   * security_center_properties.resource_owners: `=`, `:`
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
@@ -1455,7 +1460,7 @@ class SecurityCenterClient {
    *   name
    *   update_time
    *   resource_properties
-   *   security_marks
+   *   security_marks.marks
    *   security_center_properties.resource_name
    *   security_center_properties.resource_parent
    *   security_center_properties.resource_project
@@ -1495,9 +1500,7 @@ class SecurityCenterClient {
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {Object} [request.fieldMask]
-   *   Optional.
-   *
-   *   A field mask to specify the ListAssetsResult fields to be listed in the
+   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
    *   response.
    *   An empty field mask will list all fields.
    *
@@ -1613,7 +1616,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the organization assets should belong to. Its format is
+   *   Required. Name of the organization assets should belong to. Its format is
    *   "organizations/[organization_id]".
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across assets.
@@ -1643,29 +1646,30 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following are the allowed field and operator combinations:
-   *   name | `=`
-   *   update_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   * name: `=`
+   *   * update_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "update_time = \"2019-06-10T16:07:18-07:00\""
    *       "update_time = 1560208038000"
    *
-   *   create_time | `=`, `>`, `<`, `>=`, `<=`
+   *   * create_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "create_time = \"2019-06-10T16:07:18-07:00\""
    *       "create_time = 1560208038000"
    *
-   *   iam_policy.policy_blob | '=', ':'
-   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
-   *   security_marks | '=', ':'
-   *   security_center_properties.resource_name | '=', ':'
-   *   security_center_properties.resource_type | '=', ':'
-   *   security_center_properties.resource_parent | '=', ':'
-   *   security_center_properties.resource_project | '=', ':'
-   *   security_center_properties.resource_owners | '=', ':'
+   *   * iam_policy.policy_blob: `=`, `:`
+   *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+   *   * security_marks.marks: `=`, `:`
+   *   * security_center_properties.resource_name: `=`, `:`
+   *   * security_center_properties.resource_type: `=`, `:`
+   *   * security_center_properties.resource_parent: `=`, `:`
+   *   * security_center_properties.resource_project: `=`, `:`
+   *   * security_center_properties.resource_owners: `=`, `:`
    *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
@@ -1682,7 +1686,7 @@ class SecurityCenterClient {
    *   name
    *   update_time
    *   resource_properties
-   *   security_marks
+   *   security_marks.marks
    *   security_center_properties.resource_name
    *   security_center_properties.resource_parent
    *   security_center_properties.resource_project
@@ -1722,9 +1726,7 @@ class SecurityCenterClient {
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {Object} [request.fieldMask]
-   *   Optional.
-   *
-   *   A field mask to specify the ListAssetsResult fields to be listed in the
+   *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
    *   response.
    *   An empty field mask will list all fields.
    *
@@ -1771,15 +1773,15 @@ class SecurityCenterClient {
    * Lists an organization or source's findings.
    *
    * To list across all sources provide a `-` as the source id.
-   * Example: /v1/organizations/123/sources/-/findings
+   * Example: /v1/organizations/{organization_id}/sources/-/findings
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the source the findings belong to. Its format is
+   *   Required. Name of the source the findings belong to. Its format is
    *   "organizations/[organization_id]/sources/[source_id]". To list across all
    *   sources provide a source_id of `-`. For example:
-   *   organizations/123/sources/-
+   *   organizations/{organization_id}/sources/-
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -1806,21 +1808,22 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | `=`
-   *   parent | '=', ':'
-   *   resource_name | '=', ':'
-   *   state | '=', ':'
-   *   category | '=', ':'
-   *   external_uri | '=', ':'
-   *   event_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   name: `=`
+   *   parent: `=`, `:`
+   *   resource_name: `=`, `:`
+   *   state: `=`, `:`
+   *   category: `=`, `:`
+   *   external_uri: `=`, `:`
+   *   event_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "event_time = \"2019-06-10T16:07:18-07:00\""
    *       "event_time = 1560208038000"
    *
-   *   security_marks | '=', ':'
-   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks.marks: `=`, `:`
+   *   source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
@@ -1841,7 +1844,7 @@ class SecurityCenterClient {
    *   resource_name
    *   event_time
    *   source_properties
-   *   security_marks
+   *   security_marks.marks
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering findings. The filter is
    *   limited to findings existing at the supplied time and their values are
@@ -1877,9 +1880,7 @@ class SecurityCenterClient {
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {Object} [request.fieldMask]
-   *   Optional.
-   *
-   *   A field mask to specify the Finding fields to be listed in the response.
+   *   Optional. A field mask to specify the Finding fields to be listed in the response.
    *   An empty field mask will list all fields.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
@@ -1994,10 +1995,10 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the source the findings belong to. Its format is
+   *   Required. Name of the source the findings belong to. Its format is
    *   "organizations/[organization_id]/sources/[source_id]". To list across all
    *   sources provide a source_id of `-`. For example:
-   *   organizations/123/sources/-
+   *   organizations/{organization_id}/sources/-
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -2024,21 +2025,22 @@ class SecurityCenterClient {
    *   * boolean literals `true` and `false` without quotes.
    *
    *   The following field and operator combinations are supported:
-   *   name | `=`
-   *   parent | '=', ':'
-   *   resource_name | '=', ':'
-   *   state | '=', ':'
-   *   category | '=', ':'
-   *   external_uri | '=', ':'
-   *   event_time | `=`, `>`, `<`, `>=`, `<=`
+   *
+   *   name: `=`
+   *   parent: `=`, `:`
+   *   resource_name: `=`, `:`
+   *   state: `=`, `:`
+   *   category: `=`, `:`
+   *   external_uri: `=`, `:`
+   *   event_time: `=`, `>`, `<`, `>=`, `<=`
    *
    *     Usage: This should be milliseconds since epoch or an RFC3339 string.
    *     Examples:
    *       "event_time = \"2019-06-10T16:07:18-07:00\""
    *       "event_time = 1560208038000"
    *
-   *   security_marks | '=', ':'
-   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks.marks: `=`, `:`
+   *   source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
@@ -2059,7 +2061,7 @@ class SecurityCenterClient {
    *   resource_name
    *   event_time
    *   source_properties
-   *   security_marks
+   *   security_marks.marks
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering findings. The filter is
    *   limited to findings existing at the supplied time and their values are
@@ -2095,9 +2097,7 @@ class SecurityCenterClient {
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {Object} [request.fieldMask]
-   *   Optional.
-   *
-   *   A field mask to specify the Finding fields to be listed in the response.
+   *   Optional. A field mask to specify the Finding fields to be listed in the response.
    *   An empty field mask will list all fields.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
@@ -2145,7 +2145,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent of sources to list. Its format should be
+   *   Required. Resource name of the parent of sources to list. Its format should be
    *   "organizations/[organization_id]".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -2258,7 +2258,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent of sources to list. Its format should be
+   *   Required. Resource name of the parent of sources to list. Its format should be
    *   "organizations/[organization_id]".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -2309,7 +2309,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of the organization to run asset discovery for. Its format is
+   *   Required. Name of the organization to run asset discovery for. Its format is
    *   "organizations/[organization_id]".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2408,16 +2408,16 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The relative resource name of the finding. See:
+   *   Required. The relative resource name of the finding. See:
    *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
    *   Example:
-   *   "organizations/123/sources/456/finding/789".
+   *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
    * @param {number} request.state
-   *   The desired State of the finding.
+   *   Required. The desired State of the finding.
    *
    *   The number should be among the values of [State]{@link google.cloud.securitycenter.v1.State}
    * @param {Object} request.startTime
-   *   The time at which the updated state takes effect.
+   *   Required. The time at which the updated state takes effect.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
    * @param {Object} [options]
@@ -2613,7 +2613,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.finding
-   *   The finding resource to update or create if it does not already exist.
+   *   Required. The finding resource to update or create if it does not already exist.
    *   parent, security_marks, and update_time will be ignored.
    *
    *   In the case of creation, the finding id portion of the name must be
@@ -2684,7 +2684,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.organizationSettings
-   *   The organization settings resource to update.
+   *   Required. The organization settings resource to update.
    *
    *   This object should have the same structure as [OrganizationSettings]{@link google.cloud.securitycenter.v1.OrganizationSettings}
    * @param {Object} [request.updateMask]
@@ -2750,7 +2750,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.source
-   *   The source resource to update.
+   *   Required. The source resource to update.
    *
    *   This object should have the same structure as [Source]{@link google.cloud.securitycenter.v1.Source}
    * @param {Object} [request.updateMask]
@@ -2812,7 +2812,7 @@ class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.securityMarks
-   *   The security marks resource to update.
+   *   Required. The security marks resource to update.
    *
    *   This object should have the same structure as [SecurityMarks]{@link google.cloud.securitycenter.v1.SecurityMarks}
    * @param {Object} [request.updateMask]

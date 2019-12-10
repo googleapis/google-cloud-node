@@ -18,28 +18,31 @@
 /**
  * Cloud Security Command Center (Cloud SCC) finding.
  *
- * A finding is a record of assessment data (security, risk, health or privacy)
- * ingested into Cloud SCC for presentation, notification, analysis,
- * policy testing, and enforcement. For example, an XSS vulnerability in an
- * App Engine application is a finding.
+ * A finding is a record of assessment data like security, risk, health, or
+ * privacy, that is ingested into Cloud SCC for presentation, notification,
+ * analysis, policy testing, and enforcement. For example, a
+ * cross-site scripting (XSS) vulnerability in an App Engine application is a
+ * finding.
  *
  * @property {string} name
  *   The relative resource name of this finding. See:
  *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
  *   Example:
- *   "organizations/123/sources/456/findings/789"
+ *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
  *
  * @property {string} parent
  *   The relative resource name of the source the finding belongs to. See:
  *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
  *   This field is immutable after creation time.
  *   For example:
- *   "organizations/123/sources/456"
+ *   "organizations/{organization_id}/sources/{source_id}"
  *
  * @property {string} resourceName
- *   The full resource name of the Google Cloud Platform (GCP) resource this
- *   finding is for. See:
+ *   For findings on Google Cloud Platform (GCP) resources, the full resource
+ *   name of the GCP resource this finding is for. See:
  *   https://cloud.google.com/apis/design/resource_names#full_resource_name
+ *   When the finding is for a non-GCP resource, the resourceName can be a
+ *   customer or partner defined string.
  *   This field is immutable after creation time.
  *
  * @property {number} state
@@ -72,8 +75,8 @@
  *
  * @property {Object} eventTime
  *   The time at which the event took place. For example, if the finding
- *   represents an open firewall it would capture the time the open firewall was
- *   detected.
+ *   represents an open firewall it would capture the time the detector believes
+ *   the firewall became open. The accuracy is determined by the detector.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

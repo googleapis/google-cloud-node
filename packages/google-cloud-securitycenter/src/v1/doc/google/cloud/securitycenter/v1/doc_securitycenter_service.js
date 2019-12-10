@@ -19,16 +19,16 @@
  * Request message for creating a finding.
  *
  * @property {string} parent
- *   Resource name of the new finding's parent. Its format should be
+ *   Required. Resource name of the new finding's parent. Its format should be
  *   "organizations/[organization_id]/sources/[source_id]".
  *
  * @property {string} findingId
- *   Unique identifier provided by the client within the parent scope.
+ *   Required. Unique identifier provided by the client within the parent scope.
  *   It must be alphanumeric and less than or equal to 32 characters and
  *   greater than 0 characters in length.
  *
  * @property {Object} finding
- *   The Finding being created. The name and security_marks will be ignored as
+ *   Required. The Finding being created. The name and security_marks will be ignored as
  *   they are both output only fields on this resource.
  *
  *   This object should have the same structure as [Finding]{@link google.cloud.securitycenter.v1.Finding}
@@ -45,11 +45,11 @@ const CreateFindingRequest = {
  * Request message for creating a source.
  *
  * @property {string} parent
- *   Resource name of the new source's parent. Its format should be
+ *   Required. Resource name of the new source's parent. Its format should be
  *   "organizations/[organization_id]".
  *
  * @property {Object} source
- *   The Source being created, only the display_name and description will be
+ *   Required. The Source being created, only the display_name and description will be
  *   used. All other fields will be ignored.
  *
  *   This object should have the same structure as [Source]{@link google.cloud.securitycenter.v1.Source}
@@ -66,7 +66,7 @@ const CreateSourceRequest = {
  * Request message for getting organization settings.
  *
  * @property {string} name
- *   Name of the organization to get organization settings for. Its format is
+ *   Required. Name of the organization to get organization settings for. Its format is
  *   "organizations/[organization_id]/organizationSettings".
  *
  * @typedef GetOrganizationSettingsRequest
@@ -81,7 +81,7 @@ const GetOrganizationSettingsRequest = {
  * Request message for getting a source.
  *
  * @property {string} name
- *   Relative resource name of the source. Its format is
+ *   Required. Relative resource name of the source. Its format is
  *   "organizations/[organization_id]/source/[source_id]".
  *
  * @typedef GetSourceRequest
@@ -96,7 +96,7 @@ const GetSourceRequest = {
  * Request message for grouping by assets.
  *
  * @property {string} parent
- *   Name of the organization to groupBy. Its format is
+ *   Required. Name of the organization to groupBy. Its format is
  *   "organizations/[organization_id]".
  *
  * @property {string} filter
@@ -127,34 +127,35 @@ const GetSourceRequest = {
  *   * boolean literals `true` and `false` without quotes.
  *
  *   The following field and operator combinations are supported:
- *   name | '='
- *   update_time | '=', '>', '<', '>=', '<='
+ *
+ *   * name: `=`
+ *   * update_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "update_time = \"2019-06-10T16:07:18-07:00\""
  *       "update_time = 1560208038000"
  *
- *   create_time |  '=', '>', '<', '>=', '<='
+ *   * create_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "create_time = \"2019-06-10T16:07:18-07:00\""
  *       "create_time = 1560208038000"
  *
- *   iam_policy.policy_blob | '=', ':'
- *   resource_properties | '=', ':', '>', '<', '>=', '<='
- *   security_marks | '=', ':'
- *   security_center_properties.resource_name | '=', ':'
- *   security_center_properties.resource_type | '=', ':'
- *   security_center_properties.resource_parent | '=', ':'
- *   security_center_properties.resource_project | '=', ':'
- *   security_center_properties.resource_owners | '=', ':'
+ *   * iam_policy.policy_blob: `=`, `:`
+ *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+ *   * security_marks.marks: `=`, `:`
+ *   * security_center_properties.resource_name: `=`, `:`
+ *   * security_center_properties.resource_type: `=`, `:`
+ *   * security_center_properties.resource_parent: `=`, `:`
+ *   * security_center_properties.resource_project: `=`, `:`
+ *   * security_center_properties.resource_owners: `=`, `:`
  *
  *   For example, `resource_properties.size = 100` is a valid filter string.
  *
  * @property {string} groupBy
- *   Expression that defines what assets fields to use for grouping. The string
+ *   Required. Expression that defines what assets fields to use for grouping. The string
  *   value should follow SQL syntax: comma separated list of fields. For
  *   example:
  *   "security_center_properties.resource_project,security_center_properties.project".
@@ -259,10 +260,10 @@ const GroupAssetsResponse = {
  * Request message for grouping by findings.
  *
  * @property {string} parent
- *   Name of the source to groupBy. Its format is
+ *   Required. Name of the source to groupBy. Its format is
  *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
  *   all sources provide a source_id of `-`. For example:
- *   organizations/123/sources/-
+ *   organizations/{organization_id}/sources/-
  *
  * @property {string} filter
  *   Expression that defines the filter to apply across findings.
@@ -290,26 +291,27 @@ const GroupAssetsResponse = {
  *   * boolean literals `true` and `false` without quotes.
  *
  *   The following field and operator combinations are supported:
- *   name | `=`
- *   parent | '=', ':'
- *   resource_name | '=', ':'
- *   state | '=', ':'
- *   category | '=', ':'
- *   external_uri | '=', ':'
- *   event_time | `=`, `>`, `<`, `>=`, `<=`
+ *
+ *   * name: `=`
+ *   * parent: `=`, `:`
+ *   * resource_name: `=`, `:`
+ *   * state: `=`, `:`
+ *   * category: `=`, `:`
+ *   * external_uri: `=`, `:`
+ *   * event_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "event_time = \"2019-06-10T16:07:18-07:00\""
  *       "event_time = 1560208038000"
  *
- *   security_marks | '=', ':'
- *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *   * security_marks.marks: `=`, `:`
+ *   * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
  *
  *   For example, `source_properties.size = 100` is a valid filter string.
  *
  * @property {string} groupBy
- *   Expression that defines what assets fields to use for grouping (including
+ *   Required. Expression that defines what assets fields to use for grouping (including
  *   `state_change`). The string value should follow SQL syntax: comma separated
  *   list of fields. For example: "parent,resource_name".
  *
@@ -430,7 +432,7 @@ const GroupResult = {
  * Request message for listing sources.
  *
  * @property {string} parent
- *   Resource name of the parent of sources to list. Its format should be
+ *   Required. Resource name of the parent of sources to list. Its format should be
  *   "organizations/[organization_id]".
  *
  * @property {string} pageToken
@@ -474,7 +476,7 @@ const ListSourcesResponse = {
  * Request message for listing assets.
  *
  * @property {string} parent
- *   Name of the organization assets should belong to. Its format is
+ *   Required. Name of the organization assets should belong to. Its format is
  *   "organizations/[organization_id]".
  *
  * @property {string} filter
@@ -505,29 +507,30 @@ const ListSourcesResponse = {
  *   * boolean literals `true` and `false` without quotes.
  *
  *   The following are the allowed field and operator combinations:
- *   name | `=`
- *   update_time | `=`, `>`, `<`, `>=`, `<=`
+ *
+ *   * name: `=`
+ *   * update_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "update_time = \"2019-06-10T16:07:18-07:00\""
  *       "update_time = 1560208038000"
  *
- *   create_time | `=`, `>`, `<`, `>=`, `<=`
+ *   * create_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "create_time = \"2019-06-10T16:07:18-07:00\""
  *       "create_time = 1560208038000"
  *
- *   iam_policy.policy_blob | '=', ':'
- *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
- *   security_marks | '=', ':'
- *   security_center_properties.resource_name | '=', ':'
- *   security_center_properties.resource_type | '=', ':'
- *   security_center_properties.resource_parent | '=', ':'
- *   security_center_properties.resource_project | '=', ':'
- *   security_center_properties.resource_owners | '=', ':'
+ *   * iam_policy.policy_blob: `=`, `:`
+ *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+ *   * security_marks.marks: `=`, `:`
+ *   * security_center_properties.resource_name: `=`, `:`
+ *   * security_center_properties.resource_type: `=`, `:`
+ *   * security_center_properties.resource_parent: `=`, `:`
+ *   * security_center_properties.resource_project: `=`, `:`
+ *   * security_center_properties.resource_owners: `=`, `:`
  *
  *   For example, `resource_properties.size = 100` is a valid filter string.
  *
@@ -545,7 +548,7 @@ const ListSourcesResponse = {
  *   name
  *   update_time
  *   resource_properties
- *   security_marks
+ *   security_marks.marks
  *   security_center_properties.resource_name
  *   security_center_properties.resource_parent
  *   security_center_properties.resource_project
@@ -588,9 +591,7 @@ const ListSourcesResponse = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} fieldMask
- *   Optional.
- *
- *   A field mask to specify the ListAssetsResult fields to be listed in the
+ *   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
  *   response.
  *   An empty field mask will list all fields.
  *
@@ -700,10 +701,10 @@ const ListAssetsResponse = {
  * Request message for listing findings.
  *
  * @property {string} parent
- *   Name of the source the findings belong to. Its format is
+ *   Required. Name of the source the findings belong to. Its format is
  *   "organizations/[organization_id]/sources/[source_id]". To list across all
  *   sources provide a source_id of `-`. For example:
- *   organizations/123/sources/-
+ *   organizations/{organization_id}/sources/-
  *
  * @property {string} filter
  *   Expression that defines the filter to apply across findings.
@@ -731,21 +732,22 @@ const ListAssetsResponse = {
  *   * boolean literals `true` and `false` without quotes.
  *
  *   The following field and operator combinations are supported:
- *   name | `=`
- *   parent | '=', ':'
- *   resource_name | '=', ':'
- *   state | '=', ':'
- *   category | '=', ':'
- *   external_uri | '=', ':'
- *   event_time | `=`, `>`, `<`, `>=`, `<=`
+ *
+ *   name: `=`
+ *   parent: `=`, `:`
+ *   resource_name: `=`, `:`
+ *   state: `=`, `:`
+ *   category: `=`, `:`
+ *   external_uri: `=`, `:`
+ *   event_time: `=`, `>`, `<`, `>=`, `<=`
  *
  *     Usage: This should be milliseconds since epoch or an RFC3339 string.
  *     Examples:
  *       "event_time = \"2019-06-10T16:07:18-07:00\""
  *       "event_time = 1560208038000"
  *
- *   security_marks | '=', ':'
- *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *   security_marks.marks: `=`, `:`
+ *   source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
  *
  *   For example, `source_properties.size = 100` is a valid filter string.
  *
@@ -767,7 +769,7 @@ const ListAssetsResponse = {
  *   resource_name
  *   event_time
  *   source_properties
- *   security_marks
+ *   security_marks.marks
  *
  * @property {Object} readTime
  *   Time used as a reference point when filtering findings. The filter is
@@ -806,9 +808,7 @@ const ListAssetsResponse = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} fieldMask
- *   Optional.
- *
- *   A field mask to specify the Finding fields to be listed in the response.
+ *   Optional. A field mask to specify the Finding fields to be listed in the response.
  *   An empty field mask will list all fields.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
@@ -927,18 +927,18 @@ const ListFindingsResponse = {
  * Request message for updating a finding's state.
  *
  * @property {string} name
- *   The relative resource name of the finding. See:
+ *   Required. The relative resource name of the finding. See:
  *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
  *   Example:
- *   "organizations/123/sources/456/finding/789".
+ *   "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
  *
  * @property {number} state
- *   The desired State of the finding.
+ *   Required. The desired State of the finding.
  *
  *   The number should be among the values of [State]{@link google.cloud.securitycenter.v1.State}
  *
  * @property {Object} startTime
- *   The time at which the updated state takes effect.
+ *   Required. The time at which the updated state takes effect.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -954,7 +954,7 @@ const SetFindingStateRequest = {
  * Request message for running asset discovery for an organization.
  *
  * @property {string} parent
- *   Name of the organization to run asset discovery for. Its format is
+ *   Required. Name of the organization to run asset discovery for. Its format is
  *   "organizations/[organization_id]".
  *
  * @typedef RunAssetDiscoveryRequest
@@ -969,7 +969,7 @@ const RunAssetDiscoveryRequest = {
  * Request message for updating or creating a finding.
  *
  * @property {Object} finding
- *   The finding resource to update or create if it does not already exist.
+ *   Required. The finding resource to update or create if it does not already exist.
  *   parent, security_marks, and update_time will be ignored.
  *
  *   In the case of creation, the finding id portion of the name must be
@@ -1001,7 +1001,7 @@ const UpdateFindingRequest = {
  * Request message for updating an organization's settings.
  *
  * @property {Object} organizationSettings
- *   The organization settings resource to update.
+ *   Required. The organization settings resource to update.
  *
  *   This object should have the same structure as [OrganizationSettings]{@link google.cloud.securitycenter.v1.OrganizationSettings}
  *
@@ -1024,7 +1024,7 @@ const UpdateOrganizationSettingsRequest = {
  * Request message for updating a source.
  *
  * @property {Object} source
- *   The source resource to update.
+ *   Required. The source resource to update.
  *
  *   This object should have the same structure as [Source]{@link google.cloud.securitycenter.v1.Source}
  *
@@ -1047,7 +1047,7 @@ const UpdateSourceRequest = {
  * Request message for updating a SecurityMarks resource.
  *
  * @property {Object} securityMarks
- *   The security marks resource to update.
+ *   Required. The security marks resource to update.
  *
  *   This object should have the same structure as [SecurityMarks]{@link google.cloud.securitycenter.v1.SecurityMarks}
  *
