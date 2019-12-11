@@ -38,10 +38,10 @@ const version = require('../../../package.json').version;
  */
 export class TextToSpeechClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _textToSpeechStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  textToSpeechStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TextToSpeechClient.
@@ -149,7 +149,7 @@ export class TextToSpeechClient {
 
     // Put together the "service stub" for
     // google.cloud.texttospeech.v1.TextToSpeech.
-    this._textToSpeechStub = gaxGrpc.createStub(
+    this.textToSpeechStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.texttospeech.v1.TextToSpeech'
@@ -164,7 +164,7 @@ export class TextToSpeechClient {
     const textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
 
     for (const methodName of textToSpeechStubMethods) {
-      const innerCallPromise = this._textToSpeechStub.then(
+      const innerCallPromise = this.textToSpeechStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -402,7 +402,7 @@ export class TextToSpeechClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._textToSpeechStub.then(stub => {
+      return this.textToSpeechStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
