@@ -11,7 +11,7 @@
     "test": "c8 mocha system-test"
   },
   "dependencies": {
-    "@google-cloud/redis": "^1.4.0"
+    "@google-cloud/redis": "^1.4.1"
   },
   "devDependencies": {
     "c8": "^6.0.0",

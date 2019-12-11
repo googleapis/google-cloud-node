@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.0...v1.4.1) (2019-12-11)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([362c159](https://www.github.com/googleapis/nodejs-redis/commit/362c159f9b713818442640414b07a67b3c5b80a0))
+* make operationsClient and service stub public ([60b8213](https://www.github.com/googleapis/nodejs-redis/commit/60b821381d8a916bad4d4c6b2aea2b52ace859b8))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.3.2...v1.4.0) (2019-11-22)
 
 In this release this library has been converted to TypeScript. This change is supposed to be compatible
