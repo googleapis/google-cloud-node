@@ -39,13 +39,11 @@ const version = require('../../../package.json').version;
  */
 export class PolicyTagManagerSerializationClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _policyTagManagerSerializationStub: Promise<{
-    [name: string]: Function;
-  }>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  policyTagManagerSerializationStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PolicyTagManagerSerializationClient.
@@ -164,7 +162,7 @@ export class PolicyTagManagerSerializationClient {
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.
-    this._policyTagManagerSerializationStub = gaxGrpc.createStub(
+    this.policyTagManagerSerializationStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization'
@@ -183,7 +181,7 @@ export class PolicyTagManagerSerializationClient {
     ];
 
     for (const methodName of policyTagManagerSerializationStubMethods) {
-      const innerCallPromise = this._policyTagManagerSerializationStub.then(
+      const innerCallPromise = this.policyTagManagerSerializationStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -501,7 +499,7 @@ export class PolicyTagManagerSerializationClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._policyTagManagerSerializationStub.then(stub => {
+      return this.policyTagManagerSerializationStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

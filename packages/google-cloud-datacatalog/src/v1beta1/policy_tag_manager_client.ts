@@ -42,11 +42,11 @@ const version = require('../../../package.json').version;
  */
 export class PolicyTagManagerClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _policyTagManagerStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  policyTagManagerStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PolicyTagManagerClient.
@@ -182,7 +182,7 @@ export class PolicyTagManagerClient {
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.PolicyTagManager.
-    this._policyTagManagerStub = gaxGrpc.createStub(
+    this.policyTagManagerStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.PolicyTagManager'
@@ -211,7 +211,7 @@ export class PolicyTagManagerClient {
     ];
 
     for (const methodName of policyTagManagerStubMethods) {
-      const innerCallPromise = this._policyTagManagerStub.then(
+      const innerCallPromise = this.policyTagManagerStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -1527,7 +1527,7 @@ export class PolicyTagManagerClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._policyTagManagerStub.then(stub => {
+      return this.policyTagManagerStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

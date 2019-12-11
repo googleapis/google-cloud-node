@@ -42,11 +42,11 @@ const version = require('../../../package.json').version;
  */
 export class DataCatalogClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _dataCatalogStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  dataCatalogStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataCatalogClient.
@@ -191,7 +191,7 @@ export class DataCatalogClient {
 
     // Put together the "service stub" for
     // google.cloud.datacatalog.v1beta1.DataCatalog.
-    this._dataCatalogStub = gaxGrpc.createStub(
+    this.dataCatalogStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.datacatalog.v1beta1.DataCatalog'
@@ -231,7 +231,7 @@ export class DataCatalogClient {
     ];
 
     for (const methodName of dataCatalogStubMethods) {
-      const innerCallPromise = this._dataCatalogStub.then(
+      const innerCallPromise = this.dataCatalogStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -2847,7 +2847,7 @@ export class DataCatalogClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._dataCatalogStub.then(stub => {
+      return this.dataCatalogStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
