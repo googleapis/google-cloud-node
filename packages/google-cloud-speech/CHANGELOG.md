@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.5.2](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.1...v3.5.2) (2019-12-11)
+
+
+### Bug Fixes
+
+* make operationsClient and service stub public ([0c22cd7](https://www.github.com/googleapis/nodejs-speech/commit/0c22cd75daebb88f4f9a59bc069ef87552ea1017))
+
 ### [3.5.1](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.0...v3.5.1) (2019-12-05)
 
 
