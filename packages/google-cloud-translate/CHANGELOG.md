@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.2](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.1...v5.1.2) (2019-12-11)
+
+
+### Bug Fixes
+
+* make operationsClient and service stub public ([7ac1252](https://www.github.com/googleapis/nodejs-translate/commit/7ac12522ef96d6a37c15ca7847e6e872316c8a9d))
+
 ### [5.1.1](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.0...v5.1.1) (2019-12-05)
 
 
