@@ -42,11 +42,12 @@ const version = require('../../../package.json').version;
  */
 export class TranslationServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _translationServiceStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  operationsClient: gax.OperationsClient;
+  translationServiceStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TranslationServiceClient.
@@ -169,7 +170,7 @@ export class TranslationServiceClient {
       ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
       : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    const operationsClient = gaxModule
+    this.operationsClient = gaxModule
       .lro({
         auth: this.auth,
         grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
@@ -196,17 +197,17 @@ export class TranslationServiceClient {
 
     this._descriptors.longrunning = {
       batchTranslateText: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         batchTranslateTextResponse.decode.bind(batchTranslateTextResponse),
         batchTranslateTextMetadata.decode.bind(batchTranslateTextMetadata)
       ),
       createGlossary: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         createGlossaryResponse.decode.bind(createGlossaryResponse),
         createGlossaryMetadata.decode.bind(createGlossaryMetadata)
       ),
       deleteGlossary: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         deleteGlossaryResponse.decode.bind(deleteGlossaryResponse),
         deleteGlossaryMetadata.decode.bind(deleteGlossaryMetadata)
       ),
@@ -227,7 +228,7 @@ export class TranslationServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.translation.v3beta1.TranslationService.
-    this._translationServiceStub = gaxGrpc.createStub(
+    this.translationServiceStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.translation.v3beta1.TranslationService'
@@ -251,7 +252,7 @@ export class TranslationServiceClient {
     ];
 
     for (const methodName of translationServiceStubMethods) {
-      const innerCallPromise = this._translationServiceStub.then(
+      const innerCallPromise = this.translationServiceStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -1341,7 +1342,7 @@ export class TranslationServiceClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._translationServiceStub.then(stub => {
+      return this.translationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
