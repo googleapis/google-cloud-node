@@ -49,10 +49,11 @@ const version = require('../../../package.json').version;
  */
 export class CloudBuildClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _cloudBuildStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  operationsClient: gax.OperationsClient;
+  cloudBuildStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudBuildClient.
@@ -168,7 +169,7 @@ export class CloudBuildClient {
       ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
       : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    const operationsClient = gaxModule
+    this.operationsClient = gaxModule
       .lro({
         auth: this.auth,
         grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
@@ -195,17 +196,17 @@ export class CloudBuildClient {
 
     this._descriptors.longrunning = {
       createBuild: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         createBuildResponse.decode.bind(createBuildResponse),
         createBuildMetadata.decode.bind(createBuildMetadata)
       ),
       retryBuild: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         retryBuildResponse.decode.bind(retryBuildResponse),
         retryBuildMetadata.decode.bind(retryBuildMetadata)
       ),
       runBuildTrigger: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         runBuildTriggerResponse.decode.bind(runBuildTriggerResponse),
         runBuildTriggerMetadata.decode.bind(runBuildTriggerMetadata)
       ),
@@ -226,7 +227,7 @@ export class CloudBuildClient {
 
     // Put together the "service stub" for
     // google.devtools.cloudbuild.v1.CloudBuild.
-    this._cloudBuildStub = gaxGrpc.createStub(
+    this.cloudBuildStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.devtools.cloudbuild.v1.CloudBuild'
@@ -258,7 +259,7 @@ export class CloudBuildClient {
     ];
 
     for (const methodName of cloudBuildStubMethods) {
-      const innerCallPromise = this._cloudBuildStub.then(
+      const innerCallPromise = this.cloudBuildStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -1688,7 +1689,7 @@ export class CloudBuildClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._cloudBuildStub.then(stub => {
+      return this.cloudBuildStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
