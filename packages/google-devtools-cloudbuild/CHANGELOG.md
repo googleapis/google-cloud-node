@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.2.0...v1.3.0) (2019-12-11)
+
+
+### Features
+
+* make operationsClient and service stub public ([2fa96df](https://www.github.com/googleapis/nodejs-cloudbuild/commit/2fa96dfe9145f479a2561b5a1215a6ffd19ddf07))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.1.0...v1.2.0) (2019-12-05)
 
 
