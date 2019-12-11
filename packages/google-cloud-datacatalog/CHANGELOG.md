@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.4.1...v1.5.0) (2019-12-11)
+
+
+### Features
+
+* make operationsClient and service stub public ([e7ca581](https://www.github.com/googleapis/nodejs-datacatalog/commit/e7ca5815340c3d9ffd4d170a1193565a76f53b15))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.4.0...v1.4.1) (2019-12-05)
 
 
