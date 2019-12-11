@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.0.2...v2.1.0) (2019-12-11)
+
+
+### Features
+
+* make service stub public ([921f404](https://www.github.com/googleapis/nodejs-text-to-speech/commit/921f404c156379c6073f5a0db224df703b2d3e3e))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([4da93ee](https://www.github.com/googleapis/nodejs-text-to-speech/commit/4da93ee0b509c1260b9c49e7794b6546ecd2ed6e))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.0.1...v2.0.2) (2019-11-20)
 
 
