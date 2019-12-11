@@ -39,10 +39,11 @@ const version = require('../../../package.json').version;
  */
 export class SpeechClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _speechStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  operationsClient: gax.OperationsClient;
+  speechStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SpeechClient.
@@ -150,7 +151,7 @@ export class SpeechClient {
       ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
       : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    const operationsClient = gaxModule
+    this.operationsClient = gaxModule
       .lro({
         auth: this.auth,
         grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
@@ -165,7 +166,7 @@ export class SpeechClient {
 
     this._descriptors.longrunning = {
       longRunningRecognize: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         longRunningRecognizeResponse.decode.bind(longRunningRecognizeResponse),
         longRunningRecognizeMetadata.decode.bind(longRunningRecognizeMetadata)
       ),
@@ -186,7 +187,7 @@ export class SpeechClient {
 
     // Put together the "service stub" for
     // google.cloud.speech.v1p1beta1.Speech.
-    this._speechStub = gaxGrpc.createStub(
+    this.speechStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.speech.v1p1beta1.Speech'
@@ -205,7 +206,7 @@ export class SpeechClient {
     ];
 
     for (const methodName of speechStubMethods) {
-      const innerCallPromise = this._speechStub.then(
+      const innerCallPromise = this.speechStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -466,7 +467,7 @@ export class SpeechClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._speechStub.then(stub => {
+      return this.speechStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
