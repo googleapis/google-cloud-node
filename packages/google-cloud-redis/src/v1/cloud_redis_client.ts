@@ -56,11 +56,12 @@ const version = require('../../../package.json').version;
  */
 export class CloudRedisClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _cloudRedisStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  operationsClient: gax.OperationsClient;
+  cloudRedisStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudRedisClient.
@@ -183,7 +184,7 @@ export class CloudRedisClient {
       ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
       : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    const operationsClient = gaxModule
+    this.operationsClient = gaxModule
       .lro({
         auth: this.auth,
         grpc: 'grpc' in gaxGrpc ? gaxGrpc.grpc : undefined,
@@ -228,32 +229,32 @@ export class CloudRedisClient {
 
     this._descriptors.longrunning = {
       createInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
         createInstanceMetadata.decode.bind(createInstanceMetadata)
       ),
       updateInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
         updateInstanceMetadata.decode.bind(updateInstanceMetadata)
       ),
       importInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         importInstanceResponse.decode.bind(importInstanceResponse),
         importInstanceMetadata.decode.bind(importInstanceMetadata)
       ),
       exportInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         exportInstanceResponse.decode.bind(exportInstanceResponse),
         exportInstanceMetadata.decode.bind(exportInstanceMetadata)
       ),
       failoverInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         failoverInstanceResponse.decode.bind(failoverInstanceResponse),
         failoverInstanceMetadata.decode.bind(failoverInstanceMetadata)
       ),
       deleteInstance: new gaxModule.LongrunningDescriptor(
-        operationsClient,
+        this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
       ),
@@ -274,7 +275,7 @@ export class CloudRedisClient {
 
     // Put together the "service stub" for
     // google.cloud.redis.v1.CloudRedis.
-    this._cloudRedisStub = gaxGrpc.createStub(
+    this.cloudRedisStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.redis.v1.CloudRedis'
@@ -298,7 +299,7 @@ export class CloudRedisClient {
     ];
 
     for (const methodName of cloudRedisStubMethods) {
-      const innerCallPromise = this._cloudRedisStub.then(
+      const innerCallPromise = this.cloudRedisStub.then(
         stub => (...args: Array<{}>) => {
           return stub[methodName].apply(stub, args);
         },
@@ -1280,7 +1281,7 @@ export class CloudRedisClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._cloudRedisStub.then(stub => {
+      return this.cloudRedisStub.then(stub => {
         this._terminated = true;
         stub.close();
       });
