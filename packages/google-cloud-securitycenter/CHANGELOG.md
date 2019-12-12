@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.2...v2.3.0) (2019-12-10)
+
+
+### Features
+
+* support resource descriptors ([#174](https://www.github.com/googleapis/nodejs-security-center/issues/174)) ([a55b223](https://www.github.com/googleapis/nodejs-security-center/commit/a55b2232a821ddcbe1132eab2f1e5873bc5e96f2))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([121d969](https://www.github.com/googleapis/nodejs-security-center/commit/121d9696bcc9453d497a53e40c4679a63793673c))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.1...v2.2.2) (2019-11-15)
 
 
