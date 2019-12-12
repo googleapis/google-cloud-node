@@ -58,7 +58,9 @@ to your [`package.json`](https://docs.npmjs.com/files/package.json#dependencies)
 2. Include and start the profiler at the beginning of your application:
 
     ```js
-    var profiler = require('@google-cloud/profiler').start();
+    require('@google-cloud/profiler').start().catch((err) => {
+      console.log(`Failed to start profiler: ${err}`);
+    });
     ```
 
     Some environments require a configuration to be passed to the `start()`
@@ -86,7 +88,7 @@ configuration options. These options can be passed to the agent through the
 object argument to the start command shown below:
 
 ```js
-require('@google-cloud/profiler').start({disableTime: true});
+await require('@google-cloud/profiler').start({disableTime: true});
 ```
 
 Alternatively, you can provide the configuration through a config file. This
@@ -111,7 +113,7 @@ So, for example, to start the profiler with the log level at debug, you would
 do this:
 
 ```js
-require('@google-cloud/profiler').start({logLevel: 4});
+await require('@google-cloud/profiler').start({logLevel: 4});
 ```
 
 ### Disabling heap or time profile collection
@@ -124,13 +126,13 @@ disable the collection of either type of profile.
 To disable time profile collection, set `disableTime` to true:
 
 ```js
-require('@google-cloud/profiler').start({disableTime: true});
+await require('@google-cloud/profiler').start({disableTime: true});
 ```
 
 To disable heap profile collection, set `disableHeap` to true:
 
 ```js
-require('@google-cloud/profiler').start({disableHeap: true});
+await require('@google-cloud/profiler').start({disableHeap: true});
 ```
 
 ## Running on Google Cloud Platform
@@ -149,7 +151,7 @@ flexible environment, import the agent at the top of your application’s main
 script or entry point by including the following code snippet:
 
 ```js
-var profiler = require('@google-cloud/profiler').start();
+require('@google-cloud/profiler').start();
 ```
 
 You can specify which version of Node.js you're using by adding a snippet like
@@ -194,6 +196,37 @@ require('@google-cloud/profiler').start({
 });
 ```
 
+### Running on Istio
+
+On Istio, the GCP Metadata server may not be available for a few seconds after
+your application has started. When this occurs, the profiling agent may fail
+to start because it cannot initialize required fields. One can retry when
+starting the profiler with the following snippet.
+
+```js
+const profiler = require('@google-cloud/profiler');
+async function startProfiler() {
+  for (let i = 0; i < 3; i++) {
+    try {
+      await profiler.start({
+        serviceContext: {
+          service: 'your-service',
+          version: '1.0.0',
+        },
+      });
+    } catch(e) {
+      console.log(`Failed to start profiler: ${e}`);
+    }
+
+    // Wait for 1 second before trying again.
+    await new Promise(r => setTimeout(r, 1000));
+  }
+}
+startProfiler();
+
+```
+
+
 ## Running elsewhere
 
 You can still use `@google-cloud/profiler` if your application is running
@@ -205,7 +238,7 @@ collected profiles to be associated with, and (optionally) the version of
 the service when starting the profiler:
 
   ```js
-    require('@google-cloud/profiler').start({
+    await require('@google-cloud/profiler').start({
       projectId: 'project-id',
       serviceContext: {
         service: 'your-service',
@@ -238,7 +271,7 @@ the service when starting the profiler:
 
        This is how you would set `keyFilename`:
        ```js
-       require('@google-cloud/profiler').start({
+       await require('@google-cloud/profiler').start({
          projectId: 'project-id',
          serviceContext: {
            service: 'your-service',
@@ -250,7 +283,7 @@ the service when starting the profiler:
 
        This is how you would set  `credentials`:
        ```js
-       require('@google-cloud/profiler').start({
+       await require('@google-cloud/profiler').start({
          projectId: 'project-id',
          serviceContext: {
            service: 'your-service',

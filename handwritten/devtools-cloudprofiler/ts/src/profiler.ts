@@ -153,9 +153,9 @@ function isDeployment(deployment: any): deployment is Deployment {
       typeof deployment.projectId === 'string') &&
     (deployment.target === undefined ||
       typeof deployment.target === 'string') &&
-    (deployment.labels !== undefined &&
-      deployment.labels.language !== undefined &&
-      typeof deployment.labels.language === 'string')
+    deployment.labels !== undefined &&
+    deployment.labels.language !== undefined &&
+    typeof deployment.labels.language === 'string'
   );
 }
 
@@ -449,22 +449,25 @@ export class Profiler extends ServiceObject {
 
     this.logger.debug(`Attempting to create profile.`);
     return new Promise<RequestProfile>((resolve, reject) => {
-      this.request(options, (
-        err: Error | ApiError | null,
-        body?: object,
-        // tslint:disable-next-line: no-any
-        response?: r.Response<any>
-      ) => {
-        try {
-          const prof = responseToProfileOrError(err, body, response);
-          this.logger.debug(
-            `Successfully created profile ${prof.profileType}.`
-          );
-          resolve(prof);
-        } catch (err) {
-          reject(err);
+      this.request(
+        options,
+        (
+          err: Error | ApiError | null,
+          body?: object,
+          // tslint:disable-next-line: no-any
+          response?: r.Response<any>
+        ) => {
+          try {
+            const prof = responseToProfileOrError(err, body, response);
+            this.logger.debug(
+              `Successfully created profile ${prof.profileType}.`
+            );
+            resolve(prof);
+          } catch (err) {
+            reject(err);
+          }
         }
-      });
+      );
     });
   }
 

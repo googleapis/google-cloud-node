@@ -146,8 +146,8 @@ export interface Config extends GoogleAuthOptions {
   disableSourceMaps?: boolean;
 }
 
-// Interface for an initialized config.
-export interface ProfilerConfig extends GoogleAuthOptions {
+// Interface for config after local initialization.
+export interface LocalConfig extends GoogleAuthOptions {
   apiEndpoint: string;
   projectId?: string;
   logLevel: number;
@@ -169,6 +169,11 @@ export interface ProfilerConfig extends GoogleAuthOptions {
   localTimeDurationMillis: number;
   sourceMapSearchPath: string[];
   disableSourceMaps: boolean;
+}
+
+// Interface for an initialized profiler config.
+export interface ProfilerConfig extends LocalConfig {
+  projectId: string;
 }
 
 // Default values for configuration for a profiler.
