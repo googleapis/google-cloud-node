@@ -26,7 +26,8 @@ const execPromise = cmd =>
     cp.exec(cmd, {encoding: 'utf-8'}, (err, stdout, stderr) => {
       if (err) {
         err.stderr = stderr;
-        return reject(err);
+        reject(err);
+        return;
       }
       resolve(stdout);
     });
@@ -48,21 +49,22 @@ describe('subscriptions', () => {
   const fullSubscriptionNameFour = `projects/${projectId}/subscriptions/${subscriptionNameFour}`;
   const cmd = `node subscriptions.js`;
 
-  before(async () => {
-    await Promise.all([
+  before(() => {
+    return Promise.all([
       pubsub.createTopic(topicNameOne),
       pubsub.createTopic(topicNameTwo),
     ]);
   });
 
-  after(async () => {
-    const rm = obj => obj.delete().catch(console.error);
-    await rm(pubsub.subscription(subscriptionNameOne));
-    await rm(pubsub.subscription(subscriptionNameTwo));
-    await rm(pubsub.subscription(subscriptionNameThree));
-    await rm(pubsub.subscription(subscriptionNameFour));
-    await rm(pubsub.topic(topicNameOne));
-    await rm(pubsub.topic(topicNameTwo));
+  after(() => {
+    return Promise.all([
+      pubsub.subscription(subscriptionNameOne).delete(),
+      pubsub.subscription(subscriptionNameTwo).delete(),
+      pubsub.subscription(subscriptionNameThree).delete(),
+      pubsub.subscription(subscriptionNameFour).delete(),
+      pubsub.topic(topicNameOne).delete(),
+      pubsub.topic(topicNameTwo).delete(),
+    ]).catch(console.error);
   });
 
   it('should create a subscription', async () => {

@@ -34,43 +34,34 @@ describe('topics', () => {
   const expectedMessage = {data: 'Hello, world!'};
   const cmd = 'node topics.js';
 
-  before(async () => {
-    await pubsub.createTopic(topicNameTwo).catch(console.error);
+  before(() => {
+    return pubsub.createTopic(topicNameTwo).catch(console.error);
   });
 
-  after(async () => {
-    const rm = obj => obj.delete().catch(console.error);
-    await rm(pubsub.subscription(subscriptionNameOne));
-    await rm(pubsub.topic(topicNameOne));
-    await rm(pubsub.subscription(subscriptionNameTwo));
-    await rm(pubsub.subscription(subscriptionNameThree));
-    await rm(pubsub.subscription(subscriptionNameFour));
-    await rm(pubsub.topic(topicNameTwo));
+  after(() => {
+    return Promise.all([
+      pubsub.subscription(subscriptionNameOne).delete(),
+      pubsub.topic(topicNameOne).delete(),
+      pubsub.topic(topicNameTwo).delete(),
+      pubsub.subscription(subscriptionNameTwo).delete(),
+      pubsub.subscription(subscriptionNameThree).delete(),
+      pubsub.subscription(subscriptionNameFour).delete(),
+    ]).catch(console.error);
   });
 
-  // Helper function to pull one message
-  const _pullOneMessage = (subscriptionObj, timeout) => {
-    timeout = timeout || 10000; // 10 second timeout by default
-
-    let message;
+  // Helper function to pull one message.
+  // Times out after 55 seconds.
+  const _pullOneMessage = subscriptionObj => {
     return new Promise((resolve, reject) => {
-      // First message received; ack it + resolve promise
-      const messageHandler = received => {
-        received.ack();
-        message = received;
-        return resolve(messageHandler);
-      };
+      const timeoutHandler = setTimeout(() => {
+        reject(new Error(`_pullOneMessage timed out`));
+      }, 55000);
 
-      // Listen for new messages
-      subscriptionObj.on(`message`, messageHandler);
-
-      // Timeout appropriately
-      setTimeout(() => {
-        return reject(new Error(`_pullOneMessage timed out`));
-      }, timeout);
-    }).then(messageHandler => {
-      subscriptionObj.removeListener('message', messageHandler);
-      return Promise.resolve(message);
+      subscriptionObj.once('error', reject).once('message', message => {
+        message.ack();
+        clearTimeout(timeoutHandler);
+        resolve(message);
+      });
     });
   };
 
