@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [5.0.2](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.1...v5.0.2) (2019-12-12)
+
+
+### Bug Fixes
+
+* update datastore_transactional_single_entity_group_read_only to consistently use transaction ([#551](https://www.github.com/googleapis/nodejs-datastore/issues/551)) ([fbff2e7](https://www.github.com/googleapis/nodejs-datastore/commit/fbff2e7d2f054b157cc669c979a9e5acb09dd7a1))
+* **deps:** update dependency @grpc/grpc-js to v0.6.14 ([#552](https://www.github.com/googleapis/nodejs-datastore/issues/552)) ([f4df89c](https://www.github.com/googleapis/nodejs-datastore/commit/f4df89c50059541c75a7576c7264e3b7818871ea))
+
 ### [5.0.1](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.0...v5.0.1) (2019-12-05)
 
 
