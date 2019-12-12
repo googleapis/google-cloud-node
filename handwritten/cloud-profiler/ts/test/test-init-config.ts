@@ -62,7 +62,9 @@ describe('nodeVersionOkay', () => {
 describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;
   // tslint:disable-next-line no-any
-  let metadataStub: sinon.SinonStub<any>;
+  let instanceMetadataStub: sinon.SinonStub<any>;
+  // tslint:disable-next-line no-any
+  let projectMetadataStub: sinon.SinonStub<any>;
   let startStub: sinon.SinonStub<[number, number], void>;
 
   const internalConfigParams = {
@@ -79,7 +81,6 @@ describe('createProfiler', () => {
     localLogPeriodMillis: 10000,
     apiEndpoint: 'cloudprofiler.googleapis.com',
   };
-
   const disableSourceMapParams = {
     sourceMapSearchPath: ['path'],
     disableSourceMaps: true,
@@ -98,8 +99,11 @@ describe('createProfiler', () => {
   });
 
   afterEach(() => {
-    if (metadataStub) {
-      metadataStub.restore();
+    if (instanceMetadataStub) {
+      instanceMetadataStub.restore();
+    }
+    if (projectMetadataStub) {
+      projectMetadataStub.restore();
     }
     heapProfiler.stop();
     startStub.reset();
@@ -111,9 +115,10 @@ describe('createProfiler', () => {
   });
 
   it('should not modify specified fields when not on GCE', async () => {
-    metadataStub = sinon
-      .stub(gcpMetadata, 'instance')
-      .throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
 
     const config = Object.assign(
       {
@@ -133,13 +138,15 @@ describe('createProfiler', () => {
     assert.deepStrictEqual(profiler.config, expConfig);
   });
 
-  it('should not modify specified fields when on GCE', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub
+  it('should not modify specified fields when on metadata', async () => {
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub
       .withArgs('name')
       .resolves('gce-instance')
       .withArgs('zone')
       .resolves('projects/123456789012/zones/gce-zone');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.withArgs('project-id').resolves('gce-project');
 
     const config = Object.assign(
       {
@@ -158,16 +165,17 @@ describe('createProfiler', () => {
     assert.deepStrictEqual(profiler.config, expConfig);
   });
 
-  it('should get zone and instance from GCE', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub
+  it('should get project ID, zone and instance from metadata', async () => {
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub
       .withArgs('name')
       .resolves('gce-instance')
       .withArgs('zone')
       .resolves('projects/123456789012/zones/gce-zone');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.withArgs('project-id').resolves('gce-project');
     const config = Object.assign(
       {
-        projectId: 'projectId',
         logLevel: 2,
         serviceContext: {version: '', service: 'fake-service'},
         disableHeap: true,
@@ -176,13 +184,13 @@ describe('createProfiler', () => {
       disableSourceMapParams
     );
     const expConfigParams = {
+      projectId: 'gce-project',
       logLevel: 2,
       serviceContext: {version: '', service: 'fake-service'},
       disableHeap: true,
       disableTime: true,
       instance: 'gce-instance',
       zone: 'gce-zone',
-      projectId: 'projectId',
     };
     const profiler: Profiler = await createProfiler(config);
     const expConfig = Object.assign(
@@ -195,8 +203,10 @@ describe('createProfiler', () => {
   });
 
   it('should not reject when not on GCE and no zone and instance found', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {
         projectId: 'fake-projectId',
@@ -222,8 +232,10 @@ describe('createProfiler', () => {
   });
 
   it('should reject when no service specified', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {
         logLevel: 2,
@@ -246,8 +258,10 @@ describe('createProfiler', () => {
   });
 
   it('should reject when no service does not match service regular expression', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = {
       logLevel: 2,
       serviceContext: {service: 'serviceName', version: ''},
@@ -265,10 +279,11 @@ describe('createProfiler', () => {
     }
   });
 
-  it('should get have no projectId when no projectId given', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
-
+  it('should reject when no projectId given', async () => {
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {
         logLevel: 2,
@@ -280,22 +295,25 @@ describe('createProfiler', () => {
       },
       disableSourceMapParams
     );
-    const profiler: Profiler = await createProfiler(config);
-    const expConfig = Object.assign(
-      {},
-      config,
-      disableSourceMapParams,
-      defaultConfig
-    );
-    assert.deepStrictEqual(profiler.config, expConfig);
+    try {
+      await createProfiler(config);
+      assert.fail('expected an error because invalid service was specified');
+    } catch (e) {
+      assert.strictEqual(
+        e.message,
+        'Project ID must be specified in the configuration'
+      );
+    }
   });
 
   it('should set sourceMapSearchPaths when specified in the config', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
-
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = Object.assign(
       {
+        projectId: 'project',
         logLevel: 2,
         serviceContext: {version: '', service: 'fake-service'},
         disableHeap: true,
@@ -317,9 +335,10 @@ describe('createProfiler', () => {
   });
 
   it('should reject when sourceMapSearchPaths is empty array and source map support is enabled', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
-
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
     const config = {
       serviceContext: {version: '', service: 'fake-service'},
       instance: 'instance',
@@ -341,17 +360,21 @@ describe('createProfiler', () => {
   });
 
   it('should set apiEndpoint to non-default value', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
 
     const config = Object.assign(
       {
+        projectId: 'project',
         apiEndpoint: 'test-cloudprofiler.sandbox.googleapis.com',
         serviceContext: {version: '', service: 'fake-service'},
       },
       disableSourceMapParams
     );
     const expConfigParams = {
+      projectId: 'project',
       serviceContext: {version: '', service: 'fake-service'},
       disableHeap: false,
       disableTime: false,
@@ -368,18 +391,21 @@ describe('createProfiler', () => {
     assert.deepStrictEqual(profiler.config, expConfig);
   });
 
-  it('should get values from from environment variable when not specified in config or environment variables', async () => {
+  it('should get values from environment variable when not specified in config or environment variables', async () => {
     process.env.GCLOUD_PROJECT = 'process-projectId';
     process.env.GCLOUD_PROFILER_LOGLEVEL = '4';
     process.env.GAE_SERVICE = 'process-service';
     process.env.GAE_VERSION = 'process-version';
     process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub
       .withArgs('name')
       .resolves('gce-instance')
       .withArgs('zone')
       .resolves('projects/123456789012/zones/gce-zone');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.withArgs('project-id').resolves('gce-project');
+
     const config = disableSourceMapParams;
     const expConfigParams = {
       projectId: 'process-projectId',
@@ -401,8 +427,14 @@ describe('createProfiler', () => {
   it('should get values from Knative environment variables when values not specified in config or other environment variables', async () => {
     process.env.K_SERVICE = 'k-service';
     process.env.K_REVISION = 'k-version';
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    const config = disableSourceMapParams;
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
+    const config = Object.assign(
+      {projectId: 'project'},
+      disableSourceMapParams
+    );
     const expConfigParams = {
       serviceContext: {version: 'k-version', service: 'k-service'},
       disableHeap: false,
@@ -419,8 +451,14 @@ describe('createProfiler', () => {
     process.env.GAE_VERSION = 'process-version';
     process.env.K_SERVICE = 'k-service';
     process.env.K_REVISION = 'k-version';
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    const config = disableSourceMapParams;
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
+    const config = Object.assign(
+      {projectId: 'project'},
+      disableSourceMapParams
+    );
     const expConfigParams = {
       serviceContext: {
         version: 'process-version',
@@ -441,12 +479,14 @@ describe('createProfiler', () => {
     process.env.GAE_SERVICE = 'process-service';
     process.env.GAE_VERSION = 'process-version';
     process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub
       .withArgs('name')
       .resolves('gce-instance')
       .withArgs('zone')
       .resolves('projects/123456789012/zones/gce-zone');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.withArgs('project-id').resolves('gce-project');
 
     const config = Object.assign(
       {
@@ -469,8 +509,11 @@ describe('createProfiler', () => {
   });
 
   it('should get values from from environment config when not specified in config or other environment variables', async () => {
-    metadataStub = sinon.stub(gcpMetadata, 'instance');
-    metadataStub.throwsException('cannot access metadata');
+    instanceMetadataStub = sinon.stub(gcpMetadata, 'instance');
+    instanceMetadataStub.throwsException('cannot access metadata');
+    projectMetadataStub = sinon.stub(gcpMetadata, 'project');
+    projectMetadataStub.throwsException('cannot access metadata');
+
     process.env.GCLOUD_PROFILER_CONFIG = './ts/test/fixtures/test-config.json';
 
     const expConfigParams = {
