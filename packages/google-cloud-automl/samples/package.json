@@ -9,7 +9,7 @@
   "repository": "googleapis/nodejs-automl",
   "private": true,
   "scripts": {
-    "test": "mocha --timeout 600000"
+    "test": "mocha --timeout 900000"
   },
   "files": [
     "**/*.js",
@@ -22,7 +22,9 @@
     "yargs": "^15.0.0"
   },
   "devDependencies": {
+    "@google-cloud/storage": "^3.5.0",
     "chai": "^4.2.0",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "uuid": "^3.3.3"
   }
 }
