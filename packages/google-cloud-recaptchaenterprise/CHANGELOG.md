@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.3.1...v1.4.0) (2019-12-10)
+
+
+### Features
+
+* add crud support for keys ([#84](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/84)) ([adfc3f9](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/adfc3f954f79110ad73425e2da9381fa6c02152d))
+* add plural and singular resource descriptor ([#78](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/78)) ([a67ffa7](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/a67ffa751551f4d6346c806e82b2311030b7ab61))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([0e96508](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/0e965087f253c8474143051c06a955d2797cbcf4))
+* **docs:** bump the release level to beta ([#76](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/76)) ([8a2e2c0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/8a2e2c005d5d73a57cff2056cc212736610060a6))
+* **docs:** snippets are now replaced in jsdoc comments ([#74](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/74)) ([b3c31fc](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/b3c31fced63701a8e70b5f0ce3373466626ee960))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.3.0...v1.3.1) (2019-10-22)
 
 
