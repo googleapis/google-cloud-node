@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.1...v3.0.2) (2019-12-12)
+
+
+### Bug Fixes
+
+* **docs:** link to Stackdriver Error Reporting ([#424](https://www.github.com/googleapis/nodejs-logging-winston/issues/424)) ([19ba68f](https://www.github.com/googleapis/nodejs-logging-winston/commit/19ba68f2b0cb3eb1ef314dd156ef3995a0a0faaa))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.0...v3.0.1) (2019-12-05)
 
 
