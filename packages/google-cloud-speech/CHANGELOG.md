@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.5.3](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.2...v3.5.3) (2019-12-12)
+
+
+### Bug Fixes
+
+* added clarity around needing SoX for 'streamingMicRecognize' sample ([edee8d2](https://www.github.com/googleapis/nodejs-speech/commit/edee8d2ceebb646fd0e248a5fea3cc4d4d43cb50))
+
 ### [3.5.2](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.1...v3.5.2) (2019-12-11)
 
 
