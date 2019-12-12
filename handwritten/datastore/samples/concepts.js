@@ -1143,13 +1143,13 @@ class Transaction extends TestHelper {
         const taskListKey = datastore.key(['TaskList', 'default']);
 
         await transaction.run();
-        const [taskList] = await datastore.get(taskListKey);
+        const [taskList] = await transaction.get(taskListKey);
         const query = datastore.createQuery('Task').hasAncestor(taskListKey);
-        const [taskListEntities] = await datastore.runQuery(query);
+        const [taskListEntities] = await transaction.runQuery(query);
         await transaction.commit();
         return [taskList, taskListEntities];
       } catch (err) {
-        transaction.rollback();
+        await transaction.rollback();
       }
     }
     // [END datastore_transactional_single_entity_group_read_only]
