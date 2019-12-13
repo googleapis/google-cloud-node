@@ -21,34 +21,32 @@
 
 'use strict';
 
-// [START samplegen_paged]
+function main() {
+  // [START samplegen_paged]
 
-const {ProductSearchClient} = require('@google-cloud/vision').v1;
+  // Imports the client library
+  const {ProductSearchClient} = require('@google-cloud/vision').v1;
 
-/** List product sets */
-function sampleListProductSets() {
-  const client = new ProductSearchClient();
-  // Iterate over all elements.
+  // Instantiates a client
+  const productSearchClient = new ProductSearchClient();
 
-  // The project and location where the product sets are contained.
-  const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+  async function sampleListProductSets() {
 
-  client
-    .listProductSets({parent: formattedParent})
-    .then(responses => {
-      const resources = responses[0];
-      for (const resource of resources) {
-        // The entity in this iteration represents a product set
-        const productSet = resource;
-        console.log(`The full name of this product set: ${productSet.name}`);
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    // The project and location where the product sets are contained.
+    const formattedParent = productSearchClient.locationPath('[PROJECT]', '[LOCATION]');
+
+    // Run request
+    const [response] = productSearchClient.listProductSets({parent: formattedParent});
+
+    // Iterate over paged response (uses auto pagination by default)
+    for (const resource of response) {
+      // The entity in this iteration represents a product set
+      const productSet = resource;
+      console.log(`The full name of this product set: ${productSet.name}`);
+    }
+  }
+  sampleListProductSets();
+  // [END samplegen_paged]
 }
 
-// [END samplegen_paged]
-// tslint:disable-next-line:no-any
-
-sampleListProductSets();
+main();

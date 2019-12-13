@@ -21,55 +21,54 @@
 
 'use strict';
 
-// [START samplegen_map_field_access]
+function main() {
+  // [START samplegen_map_field_access]
 
-const {LanguageServiceClient} = require('@google-cloud/language').v1;
+  // Imports the client library
+  const {LanguageServiceClient} = require('@google-cloud/language').v1;
 
-/** This sample reads and loops over a map field in the response */
-function sampleAnalyzeEntities() {
-  const client = new LanguageServiceClient();
-  const type = 'PLAIN_TEXT';
-  const language = 'en';
+  // Instantiates a client
+  const languageServiceClient = new LanguageServiceClient();
 
-  // The text content to analyze
-  const content =
-    'Googleplex is at 1600 Amphitheatre Parkway, Mountain View, CA.';
-  const document = {
-    type: type,
-    language: language,
-    content: content,
-  };
-  client
-    .analyzeEntities({document: document})
-    .then(responses => {
-      const response = responses[0];
-      for (const entity of response.entities) {
-        // Each detected entity has a map of metadata:
-        const map = entity.metadata;
-        // Access value by key:
-        console.log(`URL: ${map['wikipedia_url']}`);
-        // Loop over keys and values:
-        for (const [key, value] of Object.entries(map)) {
-          console.log(`${key}: ${value}`);
-        }
+  async function sampleAnalyzeEntities() {
+    const type = 'PLAIN_TEXT';
+    const language = 'en';
 
-        // Loop over just keys:
-        for (const theKey of Object.keys(map)) {
-          console.log(`Key: ${theKey}`);
-        }
+    // The text content to analyze
+    const content =
+      'Googleplex is at 1600 Amphitheatre Parkway, Mountain View, CA.';
+    const document = {
+      type: type,
+      language: language,
+      content: content,
+    };
 
-        // Loop over just values:
-        for (const theValue of Object.values(map)) {
-          console.log(`Value: ${theValue}`);
-        }
-      }
-    })
-    .catch(err => {
-      console.error(err);
+    // Run request
+    const [response] = await languageServiceClient.analyzeEntities({
+      document: document,
     });
+
+    for (const entity of response.entities) {
+      // Access value by key:
+      console.log(`URL: ${entity.metadata['wikipedia_url']}`);
+      // Loop over keys and values:
+      for (const [key, value] of Object.entries(entity.metadata)) {
+        console.log(`${key}: ${value}`);
+      }
+
+      // Loop over just keys:
+      for (const theKey of Object.keys(entity.metadata)) {
+        console.log(`Key: ${theKey}`);
+      }
+
+      // Loop over just values:
+      for (const theValue of Object.values(entity.metadata)) {
+        console.log(`Value: ${theValue}`);
+      }
+    }
+  }
+  sampleAnalyzeEntities();
+  // [END samplegen_map_field_access]
 }
 
-// [END samplegen_map_field_access]
-// tslint:disable-next-line:no-any
-
-sampleAnalyzeEntities();
+main();

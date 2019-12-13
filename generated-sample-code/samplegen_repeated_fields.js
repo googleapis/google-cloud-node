@@ -21,51 +21,53 @@
 
 'use strict';
 
-// [START samplegen_repeated_fields]
+function main() {
+  // [START samplegen_repeated_fields]
 
-const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
+  // Imports the client library
+  const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
 
-/** Showing repeated fields (in request and response) */
-function sampleRecognize() {
-  const client = new SpeechClient();
-  const encoding = 'MP3';
+  // Instantiates a client
+  const speechClient = new SpeechClient();
 
-  // A list of strings containing words and phrases "hints"
-  const phrasesElement = 'Fox in socks';
-  const phrasesElement2 = 'Knox in box';
-  const phrases = [phrasesElement, phrasesElement2];
-  const speechContextsElement = {
-    phrases: phrases,
-  };
-  const speechContexts = [speechContextsElement];
-  const config = {
-    encoding: encoding,
-    speechContexts: speechContexts,
-  };
-  const uri = 'gs://[BUCKET]/[FILENAME]';
-  const audio = {
-    uri: uri,
-  };
-  const request = {
-    config: config,
-    audio: audio,
-  };
-  client.recognize(request)
-    .then(responses => {
-      const response = responses[0];
-      // Loop over all transcription results
-      for (const result of response.results) {
-        // The first "alternative" of each result contains most likely transcription
-        const alternative = result.alternatives[0];
-        console.log(`Transcription of result: ${alternative.transcript}`);
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  async function sampleRecognize() {
+    const encoding = 'MP3';
+
+    // A list of strings containing words and phrases "hints"
+    const phrasesElement = 'Fox in socks';
+    const phrasesElement2 = 'Knox in box';
+    const phrases = [phrasesElement, phrasesElement2];
+    const speechContextsElement = {
+      phrases: phrases,
+    };
+    const speechContexts = [speechContextsElement];
+    const config = {
+      encoding: encoding,
+      speechContexts: speechContexts,
+    };
+    const uri = 'gs://[BUCKET]/[FILENAME]';
+    const audio = {
+      uri: uri,
+    };
+
+    // Construct request
+    const request = {
+      config: config,
+      audio: audio,
+    };
+
+    // Run request
+    const [response] = await speechClient.recognize(request);
+
+    // Loop over all transcription results
+    for (const result of response.results) {
+      // The first "alternative" of each result contains most likely transcription
+      const alternative = result.alternatives[0];
+      console.log(`Transcription of result: ${alternative.transcript}`);
+    }
+  }
+  sampleRecognize();
+  // [END samplegen_repeated_fields]
 }
 
-// [END samplegen_repeated_fields]
-// tslint:disable-next-line:no-any
-
-sampleRecognize();
+main();

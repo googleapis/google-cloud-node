@@ -15,49 +15,53 @@
 // DO NOT EDIT! This is a generated sample ("Request",  "samplegen_read_and_write_files")
 
 // sample-metadata:
-//   title: Showing repeated fields (in request and response)
-//   description: Showing repeated fields (in request and response)
+//   title: Read binary file into bytes field & write string in response to file
+//   description: Read binary file into bytes field & write string in response to file
 //   usage: node samples/v1p1beta1/samplegen_read_and_write_files.js
 
 'use strict';
 
-// [START samplegen_read_and_write_files]
+function main() {
+  // [START samplegen_read_and_write_files]
 
-const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
+  // Imports the client library
+  const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
 
-const util = require('util');
-const fs = require('fs');
-/** Showing repeated fields (in request and response) */
-function sampleRecognize() {
-  const client = new SpeechClient();
-  const encoding = 'MP3';
-  const config = {
-    encoding: encoding,
-  };
+  // Additional imports
+  const util = require('util');
+  const fs = require('fs');
 
-  // The bytes from this file will be read into `content`
-  const content = fs.readFileSync('path/to/file.mp3').toString('base64');
-  const audio = {
-    content: content,
-  };
-  const request = {
-    config: config,
-    audio: audio,
-  };
-  client.recognize(request)
-    .then(responses => {
-      const response = responses[0];
-      // Your audio has been transcribed.
-      // Writing audio transcript to transcript.txt for demonstration:
-      const writeFile = util.promisify(fs.writeFile);
-      writeFile('transcript.txt', response.results[0].alternatives[0].transcript);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  // Instantiates a client
+  const speechClient = new SpeechClient();
+
+  async function sampleRecognize() {
+    const encoding = 'MP3';
+    const config = {
+      encoding: encoding,
+    };
+
+    // The bytes from this file will be read into `content`
+    const content = fs.readFileSync('path/to/file.mp3').toString('base64');
+    const audio = {
+      content: content,
+    };
+
+    // Construct request
+    const request = {
+      config: config,
+      audio: audio,
+    };
+
+    // Run request
+    const [response] = await speechClient.recognize(request);
+
+    // Your audio has been transcribed.
+    // Writing audio transcript to transcript.txt for demonstration:
+    const writeFile = util.promisify(fs.writeFile);
+    await writeFile('transcript.txt', response.results[0].alternatives[0].transcript);
+  }
+  sampleRecognize();
+  // [END samplegen_read_and_write_files]
 }
 
-// [END samplegen_read_and_write_files]
-// tslint:disable-next-line:no-any
-
-sampleRecognize();
+main();

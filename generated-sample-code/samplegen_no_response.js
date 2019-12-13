@@ -21,27 +21,27 @@
 
 'use strict';
 
-// [START samplegen_no_response]
+function main() {
+  // [START samplegen_no_response]
 
-const {ProductSearchClient} = require('@google-cloud/vision').v1;
+  // Imports the client library
+  const {ProductSearchClient} = require('@google-cloud/vision').v1;
 
-/** Delete Product Set (returns Empty) */
-function sampleDeleteProductSet() {
-  const client = new ProductSearchClient();
+  // Instantiates a client
+  const productSearchClient = new ProductSearchClient();
 
-  // The full name of the product set to delete
-  const formattedName = client.productSetPath(
-    '[PROJECT]',
-    '[LOCATION]',
-    '[PRODUCT_SET]'
-  );
-  client.deleteProductSet({name: formattedName}).catch(err => {
-    console.error(err);
-  });
-  // Deleted product set.
+  async function sampleDeleteProductSet() {
+
+    // The full name of the product set to delete
+    const formattedName = productSearchClient.productSetPath('[PROJECT]', '[LOCATION]', '[PRODUCT_SET]');
+
+    // Run request
+    const [response] = await productSearchClient.deleteProductSet({name: formattedName});
+
+    console.log(`Deleted product set.`);
+  }
+  sampleDeleteProductSet();
+  // [END samplegen_no_response]
 }
 
-// [END samplegen_no_response]
-// tslint:disable-next-line:no-any
-
-sampleDeleteProductSet();
+main();

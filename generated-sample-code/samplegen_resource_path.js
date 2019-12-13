@@ -21,48 +21,48 @@
 
 'use strict';
 
-// [START samplegen_resource_path]
-
-const {ProductSearchClient} = require('@google-cloud/vision').v1;
-
-/**
- * Create product set (demonstrate resource paths)
- *
- * @param project {string} The Google Cloud Project for creating this product set
- */
-function sampleCreateProductSet(project) {
-  const client = new ProductSearchClient();
+function main(project = '[PROJECT ID]') {
+  // [START samplegen_resource_path]
+  /**
+  * TODO(developer): Uncomment these variables before running the sample.
+  */
   // const project = '[PROJECT ID]';
-  const formattedParent = client.locationPath(project, 'us-central1');
-  const displayName = '[DISPLAY NAME]';
-  const productSet = {
-    displayName: displayName,
-  };
-  const request = {
-    parent: formattedParent,
-    productSet: productSet,
-  };
-  client
-    .createProductSet(request)
-    .then(responses => {
-      const response = responses[0];
-      // The API response represents the created product set
-      const productSet = response;
-      console.log(
-        `The full name of the created product set: ${productSet.name}`
-      );
-    })
-    .catch(err => {
-      console.error(err);
-    });
+
+  // Imports the client library
+  const {ProductSearchClient} = require('@google-cloud/vision').v1;
+
+  // Instantiates a client
+  const productSearchClient = new ProductSearchClient();
+
+  async function sampleCreateProductSet() {
+    const formattedParent = productSearchClient.locationPath(project, 'us-central1');
+    const displayName = '[DISPLAY NAME]';
+    const productSet = {
+      displayName: displayName,
+    };
+
+    // Construct request
+    const request = {
+      parent: formattedParent,
+      productSet: productSet,
+    };
+
+    // Run request
+    const [response] = await productSearchClient.createProductSet(request);
+
+    // The API response represents the created product set
+    const productSet = response;
+    console.log(`The full name of the created product set: ${productSet.name}`);
+  }
+  sampleCreateProductSet();
+  // [END samplegen_resource_path]
 }
 
-// [END samplegen_resource_path]
-// tslint:disable-next-line:no-any
+const argv = require(`yargs`)
+  .option('project', {
+    default: '[PROJECT ID]',
+    string: true
+  })
+  .argv;
 
-const argv = require(`yargs`).option('project', {
-  default: '[PROJECT ID]',
-  string: true,
-}).argv;
-
-sampleCreateProductSet(argv.project);
+main(argv.project);

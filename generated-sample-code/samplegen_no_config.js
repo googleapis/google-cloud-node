@@ -20,30 +20,30 @@
 
 'use strict';
 
-// [START ]
+function main() {
 
-const {ProductSearchClient} = require('@google-cloud/vision').v1;
+  // Imports the client library
+  const {ProductSearchClient} = require('@google-cloud/vision').v1;
 
-function sampleCreateProductSet() {
-  const client = new ProductSearchClient();
-  const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-  const productSet = {};
-  const request = {
-    parent: formattedParent,
-    productSet: productSet,
-  };
-  client
-    .createProductSet(request)
-    .then(responses => {
-      const response = responses[0];
-      console.log(response);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  // Instantiates a client
+  const productSearchClient = new ProductSearchClient();
+
+  async function sampleCreateProductSet() {
+    const formattedParent = productSearchClient.locationPath('[PROJECT]', '[LOCATION]');
+    const productSet = {};
+
+    // Construct request
+    const request = {
+      parent: formattedParent,
+      productSet: productSet,
+    };
+
+    // Run request
+    const [response] = await productSearchClient.createProductSet(request);
+
+    console.log(response);
+  }
+  sampleCreateProductSet();
 }
 
-// [END ]
-// tslint:disable-next-line:no-any
-
-sampleCreateProductSet();
+main();

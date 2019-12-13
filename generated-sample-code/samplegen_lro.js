@@ -21,37 +21,42 @@
 
 'use strict';
 
-// [START samplegen_lro]
+function main() {
+  // [START samplegen_lro]
 
-const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
+  // Imports the client library
+  const {SpeechClient} = require('@google-cloud/speech').v1p1beta1;
 
-/** Calling Long-Running API method */
-async function sampleLongRunningRecognize() {
-  const client = new SpeechClient();
-  const encoding = 'MP3';
-  const config = {
-    encoding: encoding,
-  };
-  const uri = 'gs://[BUCKET]/[FILENAME]';
-  const audio = {
-    uri: uri,
-  };
-  const request = {
-    config: config,
-    audio: audio,
-  };
+  // Instantiates a client
+  const speechClient = new SpeechClient();
 
-  // Create a job whose results you can either wait for now, or get later
-  const [operation] = await client.longRunningRecognize(request);
+  async function sampleLongRunningRecognize() {
+    const encoding = 'MP3';
+    const config = {
+      encoding: encoding,
+    };
+    const uri = 'gs://[BUCKET]/[FILENAME]';
+    const audio = {
+      uri: uri,
+    };
 
-  // Get a Promise representation of the final result of the job
-  const [response] = await operation.promise();
+    // Construct request
+    const request = {
+      config: config,
+      audio: audio,
+    };
 
-  // Your audio has been transcribed.
-  console.log(`Transcript: ${response.results[0].alternatives[0].transcript}`);
+    // Start long-running operation. You can wait for now or get results later.
+    const [operation] = await speechClient.longRunningRecognize(request);;
+
+    // Wait for operation to complete.
+    const [response] = await operation.promise();
+
+    // Your audio has been transcribed.
+    console.log(`Transcript: ${response.results[0].alternatives[0].transcript}`);
+  }
+  sampleLongRunningRecognize();
+  // [END samplegen_lro]
 }
 
-// [END samplegen_lro]
-// tslint:disable-next-line:no-any
-
-sampleLongRunningRecognize().catch(console.error);
+main();

@@ -21,45 +21,49 @@
 
 'use strict';
 
-// [START samplegen_basics]
-
-const {ProductSearchClient} = require('@google-cloud/vision').v1;
-
-/** This is the sample description */
-function sampleCreateProductSet(displayName) {
-  const client = new ProductSearchClient();
+function main(displayName = 'This is the default value of the display_name request field') {
+  // [START samplegen_basics]
+  /**
+  * TODO(developer): Uncomment these variables before running the sample.
+  */
   // const displayName = 'This is the default value of the display_name request field';
 
-  // The project and location in which the product set should be created.
-  const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-  const productSet = {
-    displayName: displayName,
-  };
-  const request = {
-    parent: formattedParent,
-    productSet: productSet,
-  };
-  client
-    .createProductSet(request)
-    .then(responses => {
-      const response = responses[0];
-      // The API response represents the created product set
-      const productSet = response;
-      console.log(
-        `The full name of the created product set: ${productSet.name}`
-      );
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  // Imports the client library
+  const {ProductSearchClient} = require('@google-cloud/vision').v1;
+
+  // Instantiates a client
+  const productSearchClient = new ProductSearchClient();
+
+  async function sampleCreateProductSet() {
+
+    // The project and location in which the product set should be created.
+    const formattedParent = productSearchClient.locationPath('[PROJECT]', '[LOCATION]');
+    const productSet = {
+      displayName: displayName,
+    };
+
+    // Construct request
+    const request = {
+      parent: formattedParent,
+      productSet: productSet,
+    };
+
+    // Run request
+    const [response] = await productSearchClient.createProductSet(request);
+
+    // The API response represents the created product set
+    const productSet = response;
+    console.log(`The full name of the created product set: ${productSet.name}`);
+  }
+  sampleCreateProductSet();
+  // [END samplegen_basics]
 }
 
-// [END samplegen_basics]
-// tslint:disable-next-line:no-any
+const argv = require(`yargs`)
+  .option('display_name', {
+    default: 'This is the default value of the display_name request field',
+    string: true
+  })
+  .argv;
 
-const argv = require(`yargs`).option('display_name', {
-  default: 'This is the default value of the display_name request field',
-  string: true,
-}).argv;
-
-sampleCreateProductSet(argv.display_name);
+main(argv.display_name);
