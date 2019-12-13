@@ -158,9 +158,10 @@ describe('topics', () => {
 
     const {data, publishTime} = await _pullOneMessage(subscription);
     const actualWait = publishTime.getTime() - startTime;
+    const acceptableLatency = 100;
 
     assert.strictEqual(data.toString(), expectedMessage.data);
-    assert(actualWait <= waitTime);
+    assert(actualWait <= waitTime + acceptableLatency);
   });
 
   it('should publish with retry settings', async () => {
