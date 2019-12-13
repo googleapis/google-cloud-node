@@ -1198,13 +1198,18 @@ export class PolicyTagManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse}.
+   *   The first element of the array is Array of [Taxonomy]{@link google.cloud.datacatalog.v1beta1.Taxonomy}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ListTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse}.
+   *   The first element is Array of [Taxonomy]{@link google.cloud.datacatalog.v1beta1.Taxonomy} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListTaxonomiesRequest]{@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
@@ -1323,13 +1328,18 @@ export class PolicyTagManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListPolicyTagsResponse]{@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse}.
+   *   The first element of the array is Array of [PolicyTag]{@link google.cloud.datacatalog.v1beta1.PolicyTag}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ListPolicyTagsResponse]{@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListPolicyTagsResponse]{@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse}.
+   *   The first element is Array of [PolicyTag]{@link google.cloud.datacatalog.v1beta1.PolicyTag} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListPolicyTagsRequest]{@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListPolicyTagsResponse]{@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
