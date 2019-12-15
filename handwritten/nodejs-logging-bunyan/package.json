@@ -63,7 +63,7 @@
     "bunyan": "^1.8.12",
     "c8": "^6.0.1",
     "codecov": "^3.0.2",
-    "cpy-cli": "^2.0.0",
+    "cpy-cli": "^3.0.0",
     "delay": "^4.1.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
