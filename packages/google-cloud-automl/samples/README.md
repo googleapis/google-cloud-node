@@ -12,6 +12,9 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Language_entity_extraction_create_dataset](#language_entity_extraction_create_dataset)
+  * [Language_entity_extraction_create_model](#language_entity_extraction_create_model)
+  * [Language_entity_extraction_predict](#language_entity_extraction_predict)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -20,6 +23,57 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-automl#using-the-client-library).
 
 ## Samples
+
+
+
+### Language_entity_extraction_create_dataset
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_create_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_create_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node language_entity_extraction_create_dataset.js`
+
+
+-----
+
+
+
+
+### Language_entity_extraction_create_model
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_create_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_create_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node language_entity_extraction_create_model.js`
+
+
+-----
+
+
+
+
+### Language_entity_extraction_predict
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node language_entity_extraction_predict.js`
+
+
+-----
+
 
 
 
