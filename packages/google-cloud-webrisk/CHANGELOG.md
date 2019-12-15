@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.3.3](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.2...v1.3.3) (2019-12-05)
+
+
+### Bug Fixes
+
+* import long type into proto ts declaration file ([#77](https://www.github.com/googleapis/nodejs-web-risk/issues/77)) ([2b15305](https://www.github.com/googleapis/nodejs-web-risk/commit/2b1530507108780089a1ce8abd3b303c09a70979))
+* **deps:** pin TypeScript below 3.7.0 ([75f591e](https://www.github.com/googleapis/nodejs-web-risk/commit/75f591ea06f8145040b5f159e9dc7b7b2251fc4d))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.1...v1.3.2) (2019-11-14)
 
 
