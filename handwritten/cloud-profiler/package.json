@@ -41,7 +41,7 @@
     "pprof": "1.2.0",
     "pretty-ms": "^5.0.0",
     "protobufjs": "~6.8.6",
-    "semver": "^6.0.0"
+    "semver": "^7.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
