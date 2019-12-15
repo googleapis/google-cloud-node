@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [1.5.2](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.5.1...v1.5.2) (2019-12-09)
+
+
+### Bug Fixes
+
+* change resource type TransferRun to Run to be consistent with gapic configs ([993eb79](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/993eb79b7398720b7882006f96b54b21ba365217))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.5.0...v1.5.1) (2019-12-05)
 
 
