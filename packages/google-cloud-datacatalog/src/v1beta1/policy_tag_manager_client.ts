@@ -163,7 +163,7 @@ export class PolicyTagManagerClient {
       listPolicyTags: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'policy_tags'
+        'policyTags'
       ),
     };
 
