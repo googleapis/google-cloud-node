@@ -508,10 +508,6 @@ require(`yargs`)
     `Uploads "./file.txt" to "my-bucket" using "my-key".`
   )
   .example(
-    `node $0 upload-directory my-bucket ./my-folder`,
-    `Uploads full hierarchy of "./my-folder directory to "my-bucket.`
-  )
-  .example(
     `node $0 download my-bucket file.txt ./file.txt`,
     `Downloads "gs://my-bucket/file.txt" to "./file.txt".`
   )
