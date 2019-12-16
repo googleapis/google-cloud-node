@@ -156,7 +156,7 @@ main();
 
 ### Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
 
 ```javascript
 const loggingWinston = new LoggingWinston({
