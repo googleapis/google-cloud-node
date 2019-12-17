@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.3](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.2...v5.1.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* refactored request call to supress unhandled promise rejection ([#406](https://www.github.com/googleapis/nodejs-translate/issues/406)) ([19fc9c7](https://www.github.com/googleapis/nodejs-translate/commit/19fc9c7d24e5b8d16f32d80023b81294e02d34d6))
+* removed display_name from sample ([f518b1a](https://www.github.com/googleapis/nodejs-translate/commit/f518b1a9b405626e058f9f143d3e8929af1401db))
+* update translate_create_glossary.js ([#403](https://www.github.com/googleapis/nodejs-translate/issues/403)) ([aa10fc7](https://www.github.com/googleapis/nodejs-translate/commit/aa10fc7ac9299895b7e87ebec574e27871e0bd1d))
+
 ### [5.1.2](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.1...v5.1.2) (2019-12-11)
 
 
