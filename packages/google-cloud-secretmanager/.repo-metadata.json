@@ -1,0 +1,13 @@
+{
+  "name": "secretmanager",
+  "name_pretty": "Secret Manager",
+  "product_documentation": "https://cloud.google.com/secret-manager/docs",
+  "client_documentation": "https://googleapis.dev/nodejs/secretmanager/latest/index.html",
+  "issue_tracker": "https://issuetracker.google.com/issues/new?component=784854",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-secret-manager",
+  "distribution_name": "@google-cloud/secret-manager",
+  "api_id": "secretmanager.googleapis.com",
+  "requires_billing": true
+}

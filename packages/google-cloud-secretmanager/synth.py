@@ -21,17 +21,18 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-# gapic = gcp.GAPICMicrogenerator()
-# versions = ['v1beta1']
-#for version in versions:
-#  library = gapic.typescript_library(
-#    'secretmanager',
-#    generator_args={
-#      "grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json"
-#    },
-#    proto_path='/google/cloud/secrets/v1beta1',
-#    version=version)
-#s.copy(library, excludes=['package.json', 'README.md'])
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v1beta1']
+for version in versions:
+  library = gapic.typescript_library(
+    'secretmanager',
+    generator_args={
+      "grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
+      "package-name": "@google-cloud/secret-manager",
+    },
+    proto_path='/google/cloud/secrets/v1beta1',
+    version=version)
+s.copy(library, excludes=['package.json', 'README.md', 'linkinator.config.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
@@ -39,27 +40,5 @@ templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
-subprocess.run(['rm', '-rf', './system-test/fixtures'])
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
-
-# Add missing jsdoc annotations:
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""/**
- * @namespace google
- */
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.longrunning
- */""")
-s.replace("src/index.js",
-r"namespace google.cloud.cloudbuild",
-r"namespace google.devtools.cloudbuild")

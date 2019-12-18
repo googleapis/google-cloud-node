@@ -1,0 +1,31 @@
+{
+  "updateTime": "2019-12-18T18:35:32.320943Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a985eeda90ae98e8519d2320bee4dec148eb8ccb",
+        "internalRef": "286191318"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "secretmanager",
+        "apiVersion": "v1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ]
+}
