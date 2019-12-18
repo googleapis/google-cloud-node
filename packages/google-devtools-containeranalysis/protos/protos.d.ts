@@ -3065,6 +3065,117 @@ export namespace grafeas {
                 }
             }
 
+            /** Properties of a GenericSignedAttestation. */
+            interface IGenericSignedAttestation {
+
+                /** GenericSignedAttestation contentType */
+                contentType?: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|null);
+
+                /** GenericSignedAttestation serializedPayload */
+                serializedPayload?: (Uint8Array|null);
+
+                /** GenericSignedAttestation signatures */
+                signatures?: (grafeas.v1beta1.ISignature[]|null);
+            }
+
+            /** Represents a GenericSignedAttestation. */
+            class GenericSignedAttestation implements IGenericSignedAttestation {
+
+                /**
+                 * Constructs a new GenericSignedAttestation.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1beta1.attestation.IGenericSignedAttestation);
+
+                /** GenericSignedAttestation contentType. */
+                public contentType: grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType;
+
+                /** GenericSignedAttestation serializedPayload. */
+                public serializedPayload: Uint8Array;
+
+                /** GenericSignedAttestation signatures. */
+                public signatures: grafeas.v1beta1.ISignature[];
+
+                /**
+                 * Creates a new GenericSignedAttestation instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GenericSignedAttestation instance
+                 */
+                public static create(properties?: grafeas.v1beta1.attestation.IGenericSignedAttestation): grafeas.v1beta1.attestation.GenericSignedAttestation;
+
+                /**
+                 * Encodes the specified GenericSignedAttestation message. Does not implicitly {@link grafeas.v1beta1.attestation.GenericSignedAttestation.verify|verify} messages.
+                 * @param message GenericSignedAttestation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1beta1.attestation.IGenericSignedAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GenericSignedAttestation message, length delimited. Does not implicitly {@link grafeas.v1beta1.attestation.GenericSignedAttestation.verify|verify} messages.
+                 * @param message GenericSignedAttestation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1beta1.attestation.IGenericSignedAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GenericSignedAttestation message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GenericSignedAttestation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.attestation.GenericSignedAttestation;
+
+                /**
+                 * Decodes a GenericSignedAttestation message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GenericSignedAttestation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.attestation.GenericSignedAttestation;
+
+                /**
+                 * Verifies a GenericSignedAttestation message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GenericSignedAttestation message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GenericSignedAttestation
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.attestation.GenericSignedAttestation;
+
+                /**
+                 * Creates a plain object from a GenericSignedAttestation message. Also converts values to other types if specified.
+                 * @param message GenericSignedAttestation
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1beta1.attestation.GenericSignedAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GenericSignedAttestation to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace GenericSignedAttestation {
+
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    SIMPLE_SIGNING_JSON = 1
+                }
+            }
+
             /** Properties of an Authority. */
             interface IAuthority {
 
@@ -3343,6 +3454,9 @@ export namespace grafeas {
 
                 /** Attestation pgpSignedAttestation */
                 pgpSignedAttestation?: (grafeas.v1beta1.attestation.IPgpSignedAttestation|null);
+
+                /** Attestation genericSignedAttestation */
+                genericSignedAttestation?: (grafeas.v1beta1.attestation.IGenericSignedAttestation|null);
             }
 
             /** Represents an Attestation. */
@@ -3357,8 +3471,11 @@ export namespace grafeas {
                 /** Attestation pgpSignedAttestation. */
                 public pgpSignedAttestation?: (grafeas.v1beta1.attestation.IPgpSignedAttestation|null);
 
+                /** Attestation genericSignedAttestation. */
+                public genericSignedAttestation?: (grafeas.v1beta1.attestation.IGenericSignedAttestation|null);
+
                 /** Attestation signature. */
-                public signature?: "pgpSignedAttestation";
+                public signature?: ("pgpSignedAttestation"|"genericSignedAttestation");
 
                 /**
                  * Creates a new Attestation instance using the specified properties.
@@ -3430,6 +3547,210 @@ export namespace grafeas {
                  */
                 public toJSON(): { [k: string]: any };
             }
+        }
+
+        /** NoteKind enum. */
+        enum NoteKind {
+            NOTE_KIND_UNSPECIFIED = 0,
+            VULNERABILITY = 1,
+            BUILD = 2,
+            IMAGE = 3,
+            PACKAGE = 4,
+            DEPLOYMENT = 5,
+            DISCOVERY = 6,
+            ATTESTATION = 7
+        }
+
+        /** Properties of a RelatedUrl. */
+        interface IRelatedUrl {
+
+            /** RelatedUrl url */
+            url?: (string|null);
+
+            /** RelatedUrl label */
+            label?: (string|null);
+        }
+
+        /** Represents a RelatedUrl. */
+        class RelatedUrl implements IRelatedUrl {
+
+            /**
+             * Constructs a new RelatedUrl.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1beta1.IRelatedUrl);
+
+            /** RelatedUrl url. */
+            public url: string;
+
+            /** RelatedUrl label. */
+            public label: string;
+
+            /**
+             * Creates a new RelatedUrl instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RelatedUrl instance
+             */
+            public static create(properties?: grafeas.v1beta1.IRelatedUrl): grafeas.v1beta1.RelatedUrl;
+
+            /**
+             * Encodes the specified RelatedUrl message. Does not implicitly {@link grafeas.v1beta1.RelatedUrl.verify|verify} messages.
+             * @param message RelatedUrl message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1beta1.IRelatedUrl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RelatedUrl message, length delimited. Does not implicitly {@link grafeas.v1beta1.RelatedUrl.verify|verify} messages.
+             * @param message RelatedUrl message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1beta1.IRelatedUrl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RelatedUrl message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RelatedUrl
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.RelatedUrl;
+
+            /**
+             * Decodes a RelatedUrl message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RelatedUrl
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.RelatedUrl;
+
+            /**
+             * Verifies a RelatedUrl message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RelatedUrl message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RelatedUrl
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.RelatedUrl;
+
+            /**
+             * Creates a plain object from a RelatedUrl message. Also converts values to other types if specified.
+             * @param message RelatedUrl
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1beta1.RelatedUrl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RelatedUrl to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Signature. */
+        interface ISignature {
+
+            /** Signature signature */
+            signature?: (Uint8Array|null);
+
+            /** Signature publicKeyId */
+            publicKeyId?: (string|null);
+        }
+
+        /** Represents a Signature. */
+        class Signature implements ISignature {
+
+            /**
+             * Constructs a new Signature.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1beta1.ISignature);
+
+            /** Signature signature. */
+            public signature: Uint8Array;
+
+            /** Signature publicKeyId. */
+            public publicKeyId: string;
+
+            /**
+             * Creates a new Signature instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Signature instance
+             */
+            public static create(properties?: grafeas.v1beta1.ISignature): grafeas.v1beta1.Signature;
+
+            /**
+             * Encodes the specified Signature message. Does not implicitly {@link grafeas.v1beta1.Signature.verify|verify} messages.
+             * @param message Signature message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1beta1.ISignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Signature message, length delimited. Does not implicitly {@link grafeas.v1beta1.Signature.verify|verify} messages.
+             * @param message Signature message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1beta1.ISignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Signature message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Signature
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.Signature;
+
+            /**
+             * Decodes a Signature message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Signature
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.Signature;
+
+            /**
+             * Verifies a Signature message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Signature message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Signature
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.Signature;
+
+            /**
+             * Creates a plain object from a Signature message. Also converts values to other types if specified.
+             * @param message Signature
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1beta1.Signature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Signature to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
 
         /** Namespace build. */
@@ -5164,114 +5485,6 @@ export namespace grafeas {
                  */
                 public toJSON(): { [k: string]: any };
             }
-        }
-
-        /** NoteKind enum. */
-        enum NoteKind {
-            NOTE_KIND_UNSPECIFIED = 0,
-            VULNERABILITY = 1,
-            BUILD = 2,
-            IMAGE = 3,
-            PACKAGE = 4,
-            DEPLOYMENT = 5,
-            DISCOVERY = 6,
-            ATTESTATION = 7
-        }
-
-        /** Properties of a RelatedUrl. */
-        interface IRelatedUrl {
-
-            /** RelatedUrl url */
-            url?: (string|null);
-
-            /** RelatedUrl label */
-            label?: (string|null);
-        }
-
-        /** Represents a RelatedUrl. */
-        class RelatedUrl implements IRelatedUrl {
-
-            /**
-             * Constructs a new RelatedUrl.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: grafeas.v1beta1.IRelatedUrl);
-
-            /** RelatedUrl url. */
-            public url: string;
-
-            /** RelatedUrl label. */
-            public label: string;
-
-            /**
-             * Creates a new RelatedUrl instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns RelatedUrl instance
-             */
-            public static create(properties?: grafeas.v1beta1.IRelatedUrl): grafeas.v1beta1.RelatedUrl;
-
-            /**
-             * Encodes the specified RelatedUrl message. Does not implicitly {@link grafeas.v1beta1.RelatedUrl.verify|verify} messages.
-             * @param message RelatedUrl message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: grafeas.v1beta1.IRelatedUrl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified RelatedUrl message, length delimited. Does not implicitly {@link grafeas.v1beta1.RelatedUrl.verify|verify} messages.
-             * @param message RelatedUrl message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: grafeas.v1beta1.IRelatedUrl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a RelatedUrl message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns RelatedUrl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.RelatedUrl;
-
-            /**
-             * Decodes a RelatedUrl message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns RelatedUrl
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.RelatedUrl;
-
-            /**
-             * Verifies a RelatedUrl message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a RelatedUrl message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns RelatedUrl
-             */
-            public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.RelatedUrl;
-
-            /**
-             * Creates a plain object from a RelatedUrl message. Also converts values to other types if specified.
-             * @param message RelatedUrl
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: grafeas.v1beta1.RelatedUrl, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this RelatedUrl to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
         }
 
         /** Namespace deployment. */
@@ -7086,6 +7299,15 @@ export namespace grafeas {
 
                 /** Vulnerability details */
                 details?: (grafeas.v1beta1.vulnerability.Vulnerability.IDetail[]|null);
+
+                /** Vulnerability cvssV3 */
+                cvssV3?: (grafeas.v1beta1.vulnerability.ICVSSv3|null);
+
+                /** Vulnerability windowsDetails */
+                windowsDetails?: (grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail[]|null);
+
+                /** Vulnerability sourceUpdateTime */
+                sourceUpdateTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Vulnerability. */
@@ -7105,6 +7327,15 @@ export namespace grafeas {
 
                 /** Vulnerability details. */
                 public details: grafeas.v1beta1.vulnerability.Vulnerability.IDetail[];
+
+                /** Vulnerability cvssV3. */
+                public cvssV3?: (grafeas.v1beta1.vulnerability.ICVSSv3|null);
+
+                /** Vulnerability windowsDetails. */
+                public windowsDetails: grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail[];
+
+                /** Vulnerability sourceUpdateTime. */
+                public sourceUpdateTime?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Vulnerability instance using the specified properties.
@@ -7208,6 +7439,9 @@ export namespace grafeas {
 
                     /** Detail isObsolete */
                     isObsolete?: (boolean|null);
+
+                    /** Detail sourceUpdateTime */
+                    sourceUpdateTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Detail. */
@@ -7245,6 +7479,9 @@ export namespace grafeas {
 
                     /** Detail isObsolete. */
                     public isObsolete: boolean;
+
+                    /** Detail sourceUpdateTime. */
+                    public sourceUpdateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new Detail instance using the specified properties.
@@ -7316,6 +7553,213 @@ export namespace grafeas {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a WindowsDetail. */
+                interface IWindowsDetail {
+
+                    /** WindowsDetail cpeUri */
+                    cpeUri?: (string|null);
+
+                    /** WindowsDetail name */
+                    name?: (string|null);
+
+                    /** WindowsDetail description */
+                    description?: (string|null);
+
+                    /** WindowsDetail fixingKbs */
+                    fixingKbs?: (grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase[]|null);
+                }
+
+                /** Represents a WindowsDetail. */
+                class WindowsDetail implements IWindowsDetail {
+
+                    /**
+                     * Constructs a new WindowsDetail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail);
+
+                    /** WindowsDetail cpeUri. */
+                    public cpeUri: string;
+
+                    /** WindowsDetail name. */
+                    public name: string;
+
+                    /** WindowsDetail description. */
+                    public description: string;
+
+                    /** WindowsDetail fixingKbs. */
+                    public fixingKbs: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase[];
+
+                    /**
+                     * Creates a new WindowsDetail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WindowsDetail instance
+                     */
+                    public static create(properties?: grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail;
+
+                    /**
+                     * Encodes the specified WindowsDetail message. Does not implicitly {@link grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.verify|verify} messages.
+                     * @param message WindowsDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WindowsDetail message, length delimited. Does not implicitly {@link grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.verify|verify} messages.
+                     * @param message WindowsDetail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: grafeas.v1beta1.vulnerability.Vulnerability.IWindowsDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WindowsDetail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WindowsDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail;
+
+                    /**
+                     * Decodes a WindowsDetail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WindowsDetail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail;
+
+                    /**
+                     * Verifies a WindowsDetail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WindowsDetail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WindowsDetail
+                     */
+                    public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail;
+
+                    /**
+                     * Creates a plain object from a WindowsDetail message. Also converts values to other types if specified.
+                     * @param message WindowsDetail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WindowsDetail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace WindowsDetail {
+
+                    /** Properties of a KnowledgeBase. */
+                    interface IKnowledgeBase {
+
+                        /** KnowledgeBase name */
+                        name?: (string|null);
+
+                        /** KnowledgeBase url */
+                        url?: (string|null);
+                    }
+
+                    /** Represents a KnowledgeBase. */
+                    class KnowledgeBase implements IKnowledgeBase {
+
+                        /**
+                         * Constructs a new KnowledgeBase.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase);
+
+                        /** KnowledgeBase name. */
+                        public name: string;
+
+                        /** KnowledgeBase url. */
+                        public url: string;
+
+                        /**
+                         * Creates a new KnowledgeBase instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns KnowledgeBase instance
+                         */
+                        public static create(properties?: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase;
+
+                        /**
+                         * Encodes the specified KnowledgeBase message. Does not implicitly {@link grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase.verify|verify} messages.
+                         * @param message KnowledgeBase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified KnowledgeBase message, length delimited. Does not implicitly {@link grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase.verify|verify} messages.
+                         * @param message KnowledgeBase message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.IKnowledgeBase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a KnowledgeBase message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns KnowledgeBase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase;
+
+                        /**
+                         * Decodes a KnowledgeBase message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns KnowledgeBase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase;
+
+                        /**
+                         * Verifies a KnowledgeBase message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a KnowledgeBase message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns KnowledgeBase
+                         */
+                        public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase;
+
+                        /**
+                         * Creates a plain object from a KnowledgeBase message. Also converts values to other types if specified.
+                         * @param message KnowledgeBase
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: grafeas.v1beta1.vulnerability.Vulnerability.WindowsDetail.KnowledgeBase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this KnowledgeBase to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
             }
 
             /** Properties of a Details. */
@@ -7341,6 +7785,9 @@ export namespace grafeas {
 
                 /** Details relatedUrls */
                 relatedUrls?: (grafeas.v1beta1.IRelatedUrl[]|null);
+
+                /** Details effectiveSeverity */
+                effectiveSeverity?: (grafeas.v1beta1.vulnerability.Severity|null);
             }
 
             /** Represents a Details. */
@@ -7372,6 +7819,9 @@ export namespace grafeas {
 
                 /** Details relatedUrls. */
                 public relatedUrls: grafeas.v1beta1.IRelatedUrl[];
+
+                /** Details effectiveSeverity. */
+                public effectiveSeverity: grafeas.v1beta1.vulnerability.Severity;
 
                 /**
                  * Creates a new Details instance using the specified properties.
@@ -7646,6 +8096,205 @@ export namespace grafeas {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a CVSSv3. */
+            interface ICVSSv3 {
+
+                /** CVSSv3 baseScore */
+                baseScore?: (number|null);
+
+                /** CVSSv3 exploitabilityScore */
+                exploitabilityScore?: (number|null);
+
+                /** CVSSv3 impactScore */
+                impactScore?: (number|null);
+
+                /** CVSSv3 attackVector */
+                attackVector?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackVector|null);
+
+                /** CVSSv3 attackComplexity */
+                attackComplexity?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity|null);
+
+                /** CVSSv3 privilegesRequired */
+                privilegesRequired?: (grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired|null);
+
+                /** CVSSv3 userInteraction */
+                userInteraction?: (grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction|null);
+
+                /** CVSSv3 scope */
+                scope?: (grafeas.v1beta1.vulnerability.CVSSv3.Scope|null);
+
+                /** CVSSv3 confidentialityImpact */
+                confidentialityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+
+                /** CVSSv3 integrityImpact */
+                integrityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+
+                /** CVSSv3 availabilityImpact */
+                availabilityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+            }
+
+            /** Represents a CVSSv3. */
+            class CVSSv3 implements ICVSSv3 {
+
+                /**
+                 * Constructs a new CVSSv3.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1beta1.vulnerability.ICVSSv3);
+
+                /** CVSSv3 baseScore. */
+                public baseScore: number;
+
+                /** CVSSv3 exploitabilityScore. */
+                public exploitabilityScore: number;
+
+                /** CVSSv3 impactScore. */
+                public impactScore: number;
+
+                /** CVSSv3 attackVector. */
+                public attackVector: grafeas.v1beta1.vulnerability.CVSSv3.AttackVector;
+
+                /** CVSSv3 attackComplexity. */
+                public attackComplexity: grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity;
+
+                /** CVSSv3 privilegesRequired. */
+                public privilegesRequired: grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired;
+
+                /** CVSSv3 userInteraction. */
+                public userInteraction: grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction;
+
+                /** CVSSv3 scope. */
+                public scope: grafeas.v1beta1.vulnerability.CVSSv3.Scope;
+
+                /** CVSSv3 confidentialityImpact. */
+                public confidentialityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+
+                /** CVSSv3 integrityImpact. */
+                public integrityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+
+                /** CVSSv3 availabilityImpact. */
+                public availabilityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+
+                /**
+                 * Creates a new CVSSv3 instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CVSSv3 instance
+                 */
+                public static create(properties?: grafeas.v1beta1.vulnerability.ICVSSv3): grafeas.v1beta1.vulnerability.CVSSv3;
+
+                /**
+                 * Encodes the specified CVSSv3 message. Does not implicitly {@link grafeas.v1beta1.vulnerability.CVSSv3.verify|verify} messages.
+                 * @param message CVSSv3 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1beta1.vulnerability.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CVSSv3 message, length delimited. Does not implicitly {@link grafeas.v1beta1.vulnerability.CVSSv3.verify|verify} messages.
+                 * @param message CVSSv3 message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1beta1.vulnerability.ICVSSv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CVSSv3 message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CVSSv3
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1beta1.vulnerability.CVSSv3;
+
+                /**
+                 * Decodes a CVSSv3 message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CVSSv3
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1beta1.vulnerability.CVSSv3;
+
+                /**
+                 * Verifies a CVSSv3 message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CVSSv3 message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CVSSv3
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1beta1.vulnerability.CVSSv3;
+
+                /**
+                 * Creates a plain object from a CVSSv3 message. Also converts values to other types if specified.
+                 * @param message CVSSv3
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1beta1.vulnerability.CVSSv3, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CVSSv3 to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace CVSSv3 {
+
+                /** AttackVector enum. */
+                enum AttackVector {
+                    ATTACK_VECTOR_UNSPECIFIED = 0,
+                    ATTACK_VECTOR_NETWORK = 1,
+                    ATTACK_VECTOR_ADJACENT = 2,
+                    ATTACK_VECTOR_LOCAL = 3,
+                    ATTACK_VECTOR_PHYSICAL = 4
+                }
+
+                /** AttackComplexity enum. */
+                enum AttackComplexity {
+                    ATTACK_COMPLEXITY_UNSPECIFIED = 0,
+                    ATTACK_COMPLEXITY_LOW = 1,
+                    ATTACK_COMPLEXITY_HIGH = 2
+                }
+
+                /** PrivilegesRequired enum. */
+                enum PrivilegesRequired {
+                    PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
+                    PRIVILEGES_REQUIRED_NONE = 1,
+                    PRIVILEGES_REQUIRED_LOW = 2,
+                    PRIVILEGES_REQUIRED_HIGH = 3
+                }
+
+                /** UserInteraction enum. */
+                enum UserInteraction {
+                    USER_INTERACTION_UNSPECIFIED = 0,
+                    USER_INTERACTION_NONE = 1,
+                    USER_INTERACTION_REQUIRED = 2
+                }
+
+                /** Scope enum. */
+                enum Scope {
+                    SCOPE_UNSPECIFIED = 0,
+                    SCOPE_UNCHANGED = 1,
+                    SCOPE_CHANGED = 2
+                }
+
+                /** Impact enum. */
+                enum Impact {
+                    IMPACT_UNSPECIFIED = 0,
+                    IMPACT_HIGH = 1,
+                    IMPACT_LOW = 2,
+                    IMPACT_NONE = 3
+                }
             }
         }
     }

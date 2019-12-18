@@ -29,8 +29,8 @@
  *
  * @property {string} noteName
  *   Required. Immutable. The analysis note associated with this occurrence, in
- *   the form of `projects[PROVIDER_ID]/notes/[NOTE_ID]`. This field can be used
- *   as a filter in list requests.
+ *   the form of `projects/[PROVIDER_ID]/notes/[NOTE_ID]`. This field can be
+ *   used as a filter in list requests.
  *
  * @property {number} kind
  *   Output only. This explicitly denotes which of the occurrence details are
@@ -103,7 +103,7 @@ const Occurrence = {
  *   "Debian".
  *
  * @property {string} uri
- *   The unique URI of the resource. For example,
+ *   Required. The unique URI of the resource. For example,
  *   `https://gcr.io/project/image@sha256:foo` for a Docker image.
  *
  * @property {Object} contentHash
@@ -612,7 +612,7 @@ const VulnerabilityOccurrencesSummary = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Per resource and severity counts of fixable and total vulnerabilites.
+   * Per resource and severity counts of fixable and total vulnerabilities.
    *
    * @property {Object} resource
    *   The affected resource.

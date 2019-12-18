@@ -20,7 +20,7 @@
  * E.g., Debian's jessie-backports dpkg mirror.
  *
  * @property {string} cpeUri
- *   The cpe_uri in [cpe format](https://cpe.mitre.org/specification/)
+ *   Required. The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
  *   denoting the package manager version distributing a package.
  *
  * @property {number} architecture
@@ -30,8 +30,7 @@
  *   The number should be among the values of [Architecture]{@link grafeas.v1beta1.package.Architecture}
  *
  * @property {Object} latestVersion
- *   The latest available version of this package in this distribution
- *   channel.
+ *   The latest available version of this package in this distribution channel.
  *
  *   This object should have the same structure as [Version]{@link grafeas.v1beta1.package.Version}
  *
@@ -54,10 +53,10 @@ const Distribution = {
 
 /**
  * An occurrence of a particular package installation found within a system's
- * filesystem. E.g., glibc was found in /var/lib/dpkg/status.
+ * filesystem. E.g., glibc was found in `/var/lib/dpkg/status`.
  *
  * @property {string} cpeUri
- *   The cpe_uri in [cpe format](https://cpe.mitre.org/specification/)
+ *   Required. The CPE URI in [CPE format](https://cpe.mitre.org/specification/)
  *   denoting the package manager version distributing a package.
  *
  * @property {Object} version
@@ -82,7 +81,7 @@ const Location = {
  * versions.
  *
  * @property {string} name
- *   The name of the package.
+ *   Required. Immutable. The name of the package.
  *
  * @property {Object[]} distribution
  *   The various channels by which a package is distributed.
@@ -101,7 +100,7 @@ const Package = {
  * Details of a package occurrence.
  *
  * @property {Object} installation
- *   Where the package was installed.
+ *   Required. Where the package was installed.
  *
  *   This object should have the same structure as [Installation]{@link grafeas.v1beta1.package.Installation}
  *
@@ -121,7 +120,7 @@ const Details = {
  *   Output only. The name of the installed package.
  *
  * @property {Object[]} location
- *   All of the places within the filesystem versions of this package
+ *   Required. All of the places within the filesystem versions of this package
  *   have been found.
  *
  *   This object should have the same structure as [Location]{@link grafeas.v1beta1.package.Location}
@@ -141,14 +140,15 @@ const Installation = {
  *   Used to correct mistakes in the version numbering scheme.
  *
  * @property {string} name
- *   The main part of the version name.
+ *   Required only when version kind is NORMAL. The main part of the version
+ *   name.
  *
  * @property {string} revision
  *   The iteration of the package build from the above version.
  *
  * @property {number} kind
- *   Distinguish between sentinel MIN/MAX versions and normal versions. If
- *   kind is not NORMAL, then the other fields are ignored.
+ *   Required. Distinguishes between sentinel MIN/MAX versions and normal
+ *   versions.
  *
  *   The number should be among the values of [VersionKind]{@link grafeas.v1beta1.package.VersionKind}
  *
@@ -173,19 +173,17 @@ const Version = {
     VERSION_KIND_UNSPECIFIED: 0,
 
     /**
-     * A standard package version, defined by the other fields.
+     * A standard package version.
      */
     NORMAL: 1,
 
     /**
-     * A special version representing negative infinity, other fields are
-     * ignored.
+     * A special version representing negative infinity.
      */
     MINIMUM: 2,
 
     /**
-     * A special version representing positive infinity, other fields are
-     * ignored.
+     * A special version representing positive infinity.
      */
     MAXIMUM: 3
   }

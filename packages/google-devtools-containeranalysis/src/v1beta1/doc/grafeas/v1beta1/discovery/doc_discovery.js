@@ -21,7 +21,8 @@
  * consumer's project at the start of analysis.
  *
  * @property {number} analysisKind
- *   The kind of analysis that is handled by this discovery.
+ *   Required. Immutable. The kind of analysis that is handled by this
+ *   discovery.
  *
  *   The number should be among the values of [NoteKind]{@link grafeas.v1beta1.NoteKind}
  *
@@ -37,7 +38,7 @@ const Discovery = {
  * Details of a discovery occurrence.
  *
  * @property {Object} discovered
- *   Analysis status for the discovered resource.
+ *   Required. Analysis status for the discovered resource.
  *
  *   This object should have the same structure as [Discovered]{@link grafeas.v1beta1.discovery.Discovered}
  *

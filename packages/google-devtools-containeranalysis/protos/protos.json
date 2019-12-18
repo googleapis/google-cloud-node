@@ -622,6 +622,31 @@
                     }
                   }
                 },
+                "GenericSignedAttestation": {
+                  "fields": {
+                    "contentType": {
+                      "type": "ContentType",
+                      "id": 1
+                    },
+                    "serializedPayload": {
+                      "type": "bytes",
+                      "id": 2
+                    },
+                    "signatures": {
+                      "rule": "repeated",
+                      "type": "Signature",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "SIMPLE_SIGNING_JSON": 1
+                      }
+                    }
+                  }
+                },
                 "Authority": {
                   "fields": {
                     "hint": {
@@ -652,7 +677,8 @@
                   "oneofs": {
                     "signature": {
                       "oneof": [
-                        "pgpSignedAttestation"
+                        "pgpSignedAttestation",
+                        "genericSignedAttestation"
                       ]
                     }
                   },
@@ -660,8 +686,48 @@
                     "pgpSignedAttestation": {
                       "type": "PgpSignedAttestation",
                       "id": 1
+                    },
+                    "genericSignedAttestation": {
+                      "type": "GenericSignedAttestation",
+                      "id": 2
                     }
                   }
+                }
+              }
+            },
+            "NoteKind": {
+              "values": {
+                "NOTE_KIND_UNSPECIFIED": 0,
+                "VULNERABILITY": 1,
+                "BUILD": 2,
+                "IMAGE": 3,
+                "PACKAGE": 4,
+                "DEPLOYMENT": 5,
+                "DISCOVERY": 6,
+                "ATTESTATION": 7
+              }
+            },
+            "RelatedUrl": {
+              "fields": {
+                "url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "label": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Signature": {
+              "fields": {
+                "signature": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "publicKeyId": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -1054,30 +1120,6 @@
                 }
               }
             },
-            "NoteKind": {
-              "values": {
-                "NOTE_KIND_UNSPECIFIED": 0,
-                "VULNERABILITY": 1,
-                "BUILD": 2,
-                "IMAGE": 3,
-                "PACKAGE": 4,
-                "DEPLOYMENT": 5,
-                "DISCOVERY": 6,
-                "ATTESTATION": 7
-              }
-            },
-            "RelatedUrl": {
-              "fields": {
-                "url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "label": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "deployment": {
               "options": {
                 "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/deployment;deployment",
@@ -1444,7 +1486,7 @@
             },
             "vulnerability": {
               "options": {
-                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/vulnerability;vulnerability",
+                "go_package": "google.golang.org/genproto/googleapis/devtools/containeranalysis/v1beta1/cvss;cvss",
                 "java_multiple_files": true,
                 "java_package": "io.grafeas.v1beta1.vulnerability",
                 "objc_class_prefix": "GRA"
@@ -1474,6 +1516,19 @@
                       "rule": "repeated",
                       "type": "Detail",
                       "id": 3
+                    },
+                    "cvssV3": {
+                      "type": "CVSSv3",
+                      "id": 4
+                    },
+                    "windowsDetails": {
+                      "rule": "repeated",
+                      "type": "WindowsDetail",
+                      "id": 5
+                    },
+                    "sourceUpdateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6
                     }
                   },
                   "nested": {
@@ -1514,6 +1569,45 @@
                         "isObsolete": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "sourceUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "WindowsDetail": {
+                      "fields": {
+                        "cpeUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "fixingKbs": {
+                          "rule": "repeated",
+                          "type": "KnowledgeBase",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "KnowledgeBase": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "url": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     }
@@ -1550,6 +1644,10 @@
                       "rule": "repeated",
                       "type": "grafeas.v1beta1.RelatedUrl",
                       "id": 7
+                    },
+                    "effectiveSeverity": {
+                      "type": "Severity",
+                      "id": 8
                     }
                   }
                 },
@@ -1582,6 +1680,102 @@
                     "version": {
                       "type": "grafeas.v1beta1.package.Version",
                       "id": 3
+                    }
+                  }
+                },
+                "CVSSv3": {
+                  "fields": {
+                    "baseScore": {
+                      "type": "float",
+                      "id": 1
+                    },
+                    "exploitabilityScore": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "impactScore": {
+                      "type": "float",
+                      "id": 3
+                    },
+                    "attackVector": {
+                      "type": "AttackVector",
+                      "id": 5
+                    },
+                    "attackComplexity": {
+                      "type": "AttackComplexity",
+                      "id": 6
+                    },
+                    "privilegesRequired": {
+                      "type": "PrivilegesRequired",
+                      "id": 7
+                    },
+                    "userInteraction": {
+                      "type": "UserInteraction",
+                      "id": 8
+                    },
+                    "scope": {
+                      "type": "Scope",
+                      "id": 9
+                    },
+                    "confidentialityImpact": {
+                      "type": "Impact",
+                      "id": 10
+                    },
+                    "integrityImpact": {
+                      "type": "Impact",
+                      "id": 11
+                    },
+                    "availabilityImpact": {
+                      "type": "Impact",
+                      "id": 12
+                    }
+                  },
+                  "nested": {
+                    "AttackVector": {
+                      "values": {
+                        "ATTACK_VECTOR_UNSPECIFIED": 0,
+                        "ATTACK_VECTOR_NETWORK": 1,
+                        "ATTACK_VECTOR_ADJACENT": 2,
+                        "ATTACK_VECTOR_LOCAL": 3,
+                        "ATTACK_VECTOR_PHYSICAL": 4
+                      }
+                    },
+                    "AttackComplexity": {
+                      "values": {
+                        "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                        "ATTACK_COMPLEXITY_LOW": 1,
+                        "ATTACK_COMPLEXITY_HIGH": 2
+                      }
+                    },
+                    "PrivilegesRequired": {
+                      "values": {
+                        "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                        "PRIVILEGES_REQUIRED_NONE": 1,
+                        "PRIVILEGES_REQUIRED_LOW": 2,
+                        "PRIVILEGES_REQUIRED_HIGH": 3
+                      }
+                    },
+                    "UserInteraction": {
+                      "values": {
+                        "USER_INTERACTION_UNSPECIFIED": 0,
+                        "USER_INTERACTION_NONE": 1,
+                        "USER_INTERACTION_REQUIRED": 2
+                      }
+                    },
+                    "Scope": {
+                      "values": {
+                        "SCOPE_UNSPECIFIED": 0,
+                        "SCOPE_UNCHANGED": 1,
+                        "SCOPE_CHANGED": 2
+                      }
+                    },
+                    "Impact": {
+                      "values": {
+                        "IMPACT_UNSPECIFIED": 0,
+                        "IMPACT_HIGH": 1,
+                        "IMPACT_LOW": 2,
+                        "IMPACT_NONE": 3
+                      }
                     }
                   }
                 }

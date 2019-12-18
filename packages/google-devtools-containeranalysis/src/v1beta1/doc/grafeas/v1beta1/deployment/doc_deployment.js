@@ -19,7 +19,7 @@
  * An artifact that can be deployed in some runtime.
  *
  * @property {string[]} resourceUri
- *   Resource URI for the artifact being deployed.
+ *   Required. Resource URI for the artifact being deployed.
  *
  * @typedef Deployable
  * @memberof grafeas.v1beta1.deployment
@@ -33,7 +33,7 @@ const Deployable = {
  * Details of a deployment occurrence.
  *
  * @property {Object} deployment
- *   Deployment history for the resource.
+ *   Required. Deployment history for the resource.
  *
  *   This object should have the same structure as [Deployment]{@link grafeas.v1beta1.deployment.Deployment}
  *
@@ -52,7 +52,7 @@ const Details = {
  *   Identity of the user that triggered this deployment.
  *
  * @property {Object} deployTime
- *   Beginning of the lifetime of this deployment.
+ *   Required. Beginning of the lifetime of this deployment.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

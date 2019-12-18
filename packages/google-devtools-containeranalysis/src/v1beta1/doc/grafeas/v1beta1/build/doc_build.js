@@ -17,14 +17,14 @@
 
 /**
  * Note holding the version of the provider's builder and the signature of the
- * provenance message in linked BuildDetails.
+ * provenance message in the build details occurrence.
  *
  * @property {string} builderVersion
- *   Version of the builder which produced this Note.
+ *   Required. Immutable. Version of the builder which produced this build.
  *
  * @property {Object} signature
- *   Signature of the build in Occurrences pointing to the Note containing this
- *   `BuilderDetails`.
+ *   Signature of the build in occurrences pointing to this build note
+ *   containing build details.
  *
  *   This object should have the same structure as [BuildSignature]{@link grafeas.v1beta1.build.BuildSignature}
  *
@@ -46,8 +46,8 @@ const Build = {
  *
  *   This field may be empty if `key_id` references an external key.
  *
- *   For Cloud Container Builder based signatures, this is a PEM encoded public
- *   key. To verify the Cloud Container Builder signature, place the contents of
+ *   For Cloud Build based signatures, this is a PEM encoded public
+ *   key. To verify the Cloud Build signature, place the contents of
  *   this field into a file (public.pem). The signature field is base64-decoded
  *   into its binary representation in signature.bin, and the provenance bytes
  *   from `BuildDetails` are base64-decoded into a binary representation in
@@ -55,18 +55,18 @@ const Build = {
  *   `openssl sha256 -verify public.pem -signature signature.bin signed.bin`
  *
  * @property {Buffer} signature
- *   Signature of the related `BuildProvenance`. In JSON, this is base-64
- *   encoded.
+ *   Required. Signature of the related `BuildProvenance`. In JSON, this is
+ *   base-64 encoded.
  *
  * @property {string} keyId
- *   An ID for the key used to sign. This could be either an Id for the key
- *   stored in `public_key` (such as the Id or fingerprint for a PGP key, or the
+ *   An ID for the key used to sign. This could be either an ID for the key
+ *   stored in `public_key` (such as the ID or fingerprint for a PGP key, or the
  *   CN for a cert), or a reference to an external key (such as a reference to a
  *   key in Cloud Key Management Service).
  *
  * @property {number} keyType
  *   The type of the key, either stored in `public_key` or referenced in
- *   `key_id`
+ *   `key_id`.
  *
  *   The number should be among the values of [KeyType]{@link grafeas.v1beta1.build.KeyType}
  *
@@ -78,7 +78,7 @@ const BuildSignature = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Public key formats
+   * Public key formats.
    *
    * @enum {number}
    * @memberof grafeas.v1beta1.build
@@ -106,13 +106,13 @@ const BuildSignature = {
  * Details of a build occurrence.
  *
  * @property {Object} provenance
- *   The actual provenance for the build.
+ *   Required. The actual provenance for the build.
  *
  *   This object should have the same structure as [BuildProvenance]{@link grafeas.v1beta1.provenance.BuildProvenance}
  *
  * @property {string} provenanceBytes
  *   Serialized JSON representation of the provenance, used in generating the
- *   `BuildSignature` in the corresponding Result. After verifying the
+ *   build signature in the corresponding build note. After verifying the
  *   signature, `provenance_bytes` can be unmarshalled and compared to the
  *   provenance to confirm that it is unchanged. A base64-encoded string
  *   representation of the provenance bytes is used for the signature in order

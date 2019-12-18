@@ -20,7 +20,7 @@
  * details about the build from source to completion.
  *
  * @property {string} id
- *   Unique identifier of the build.
+ *   Required. Unique identifier of the build.
  *
  * @property {string} projectId
  *   ID of the project.
@@ -120,11 +120,11 @@ const Source = {
 };
 
 /**
- * Container message for hashes of byte content of files, used in Source
+ * Container message for hashes of byte content of files, used in source
  * messages to verify integrity of source input to the build.
  *
  * @property {Object[]} fileHash
- *   Collection of file hashes.
+ *   Required. Collection of file hashes.
  *
  *   This object should have the same structure as [Hash]{@link grafeas.v1beta1.provenance.Hash}
  *
@@ -140,12 +140,12 @@ const FileHashes = {
  * Container message for hash values.
  *
  * @property {number} type
- *   The type of hash that was performed.
+ *   Required. The type of hash that was performed.
  *
  *   The number should be among the values of [HashType]{@link grafeas.v1beta1.provenance.HashType}
  *
  * @property {Buffer} value
- *   The hash value.
+ *   Required. The hash value.
  *
  * @typedef Hash
  * @memberof grafeas.v1beta1.provenance
@@ -155,7 +155,7 @@ const Hash = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Specifies the hash algorithm, if any.
+   * Specifies the hash algorithm.
    *
    * @enum {number}
    * @memberof grafeas.v1beta1.provenance
@@ -178,8 +178,8 @@ const Hash = {
  * Command describes a step performed as part of the build pipeline.
  *
  * @property {string} name
- *   Name of the command, as presented on the command line, or if the command is
- *   packaged as a Docker container, as presented to `docker pull`.
+ *   Required. Name of the command, as presented on the command line, or if the
+ *   command is packaged as a Docker container, as presented to `docker pull`.
  *
  * @property {string[]} env
  *   Environment variables set before running this command.

@@ -19,7 +19,7 @@
  * Layer holds metadata specific to a layer of a Docker image.
  *
  * @property {number} directive
- *   The recovered Dockerfile directive used to construct this layer.
+ *   Required. The recovered Dockerfile directive used to construct this layer.
  *
  *   The number should be among the values of [Directive]{@link grafeas.v1beta1.image.Directive}
  *
@@ -47,87 +47,87 @@ const Layer = {
     DIRECTIVE_UNSPECIFIED: 0,
 
     /**
-     * https://docs.docker.com/reference/builder/#maintainer
+     * https://docs.docker.com/engine/reference/builder/
      */
     MAINTAINER: 1,
 
     /**
-     * https://docs.docker.com/reference/builder/#run
+     * https://docs.docker.com/engine/reference/builder/
      */
     RUN: 2,
 
     /**
-     * https://docs.docker.com/reference/builder/#cmd
+     * https://docs.docker.com/engine/reference/builder/
      */
     CMD: 3,
 
     /**
-     * https://docs.docker.com/reference/builder/#label
+     * https://docs.docker.com/engine/reference/builder/
      */
     LABEL: 4,
 
     /**
-     * https://docs.docker.com/reference/builder/#expose
+     * https://docs.docker.com/engine/reference/builder/
      */
     EXPOSE: 5,
 
     /**
-     * https://docs.docker.com/reference/builder/#env
+     * https://docs.docker.com/engine/reference/builder/
      */
     ENV: 6,
 
     /**
-     * https://docs.docker.com/reference/builder/#add
+     * https://docs.docker.com/engine/reference/builder/
      */
     ADD: 7,
 
     /**
-     * https://docs.docker.com/reference/builder/#copy
+     * https://docs.docker.com/engine/reference/builder/
      */
     COPY: 8,
 
     /**
-     * https://docs.docker.com/reference/builder/#entrypoint
+     * https://docs.docker.com/engine/reference/builder/
      */
     ENTRYPOINT: 9,
 
     /**
-     * https://docs.docker.com/reference/builder/#volume
+     * https://docs.docker.com/engine/reference/builder/
      */
     VOLUME: 10,
 
     /**
-     * https://docs.docker.com/reference/builder/#user
+     * https://docs.docker.com/engine/reference/builder/
      */
     USER: 11,
 
     /**
-     * https://docs.docker.com/reference/builder/#workdir
+     * https://docs.docker.com/engine/reference/builder/
      */
     WORKDIR: 12,
 
     /**
-     * https://docs.docker.com/reference/builder/#arg
+     * https://docs.docker.com/engine/reference/builder/
      */
     ARG: 13,
 
     /**
-     * https://docs.docker.com/reference/builder/#onbuild
+     * https://docs.docker.com/engine/reference/builder/
      */
     ONBUILD: 14,
 
     /**
-     * https://docs.docker.com/reference/builder/#stopsignal
+     * https://docs.docker.com/engine/reference/builder/
      */
     STOPSIGNAL: 15,
 
     /**
-     * https://docs.docker.com/reference/builder/#healthcheck
+     * https://docs.docker.com/engine/reference/builder/
      */
     HEALTHCHECK: 16,
 
     /**
-     * https://docs.docker.com/reference/builder/#shell
+     * https://docs.docker.com/engine/reference/builder/
      */
     SHELL: 17
   }
@@ -137,10 +137,11 @@ const Layer = {
  * A set of properties that uniquely identify a given Docker image.
  *
  * @property {string} v1Name
- *   The layer-id of the final layer in the Docker image's v1 representation.
+ *   Required. The layer ID of the final layer in the Docker image's v1
+ *   representation.
  *
  * @property {string[]} v2Blob
- *   The ordered list of v2 blobs that represent a given image.
+ *   Required. The ordered list of v2 blobs that represent a given image.
  *
  * @property {string} v2Name
  *   Output only. The name of the image's v2 blobs computed via:
@@ -164,11 +165,11 @@ const Fingerprint = {
  * Or an equivalent reference, e.g. a tag of the resource_url.
  *
  * @property {string} resourceUrl
- *   The resource_url for the resource representing the basis of
- *   associated occurrence images.
+ *   Required. Immutable. The resource_url for the resource representing the
+ *   basis of associated occurrence images.
  *
  * @property {Object} fingerprint
- *   The fingerprint of the base image.
+ *   Required. Immutable. The fingerprint of the base image.
  *
  *   This object should have the same structure as [Fingerprint]{@link grafeas.v1beta1.image.Fingerprint}
  *
@@ -184,7 +185,7 @@ const Basis = {
  * Details of an image occurrence.
  *
  * @property {Object} derivedImage
- *   The child image derived from the base image.
+ *   Required. Immutable. The child image derived from the base image.
  *
  *   This object should have the same structure as [Derived]{@link grafeas.v1beta1.image.Derived}
  *
@@ -202,7 +203,7 @@ const Details = {
  * <DockerImage.Basis in attached Note>.
  *
  * @property {Object} fingerprint
- *   The fingerprint of the derived image.
+ *   Required. The fingerprint of the derived image.
  *
  *   This object should have the same structure as [Fingerprint]{@link grafeas.v1beta1.image.Fingerprint}
  *
