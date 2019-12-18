@@ -22,7 +22,7 @@
 async function main() {
   // [START asset_quickstart_list_feeds]
   const util = require('util');
-  const {AssetServiceClient} = require('@google-cloud/asset/src/v1p2beta1');
+  const {AssetServiceClient} = require('@google-cloud/asset');
 
   const client = new AssetServiceClient();
 
