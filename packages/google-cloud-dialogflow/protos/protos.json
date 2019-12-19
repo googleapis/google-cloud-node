@@ -676,7 +676,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "parent,entities,language_code"
+                            "(google.api.method_signature)": "parent,entities,language_code",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           }
                         },
                         "BatchDeleteEntities": {
@@ -685,7 +687,9 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "parent,entity_values,language_code"
+                            "(google.api.method_signature)": "parent,entity_values,language_code",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
                           }
                         }
                       }
