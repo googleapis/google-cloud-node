@@ -9,3 +9,5 @@ system-test/*key.json
 *.lock
 package-lock.json
 __pycache__/
+.DS_Store
+build/
