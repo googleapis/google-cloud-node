@@ -11,10 +11,361 @@
                     "cc_enable_arenas": true,
                     "go_package": "google.golang.org/genproto/googleapis/cloud/iot/v1;iot",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "DeviceManagerProto",
                     "java_package": "com.google.cloud.iot.v1"
                   },
                   "nested": {
+                    "Device": {
+                      "options": {
+                        "(google.api.resource).type": "cloudiot.googleapis.com/Device",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}/devices/{device}"
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "numId": {
+                          "type": "uint64",
+                          "id": 3
+                        },
+                        "credentials": {
+                          "rule": "repeated",
+                          "type": "DeviceCredential",
+                          "id": 12
+                        },
+                        "lastHeartbeatTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "lastEventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        },
+                        "lastStateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 20
+                        },
+                        "lastConfigAckTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "lastConfigSendTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 18
+                        },
+                        "blocked": {
+                          "type": "bool",
+                          "id": 19
+                        },
+                        "lastErrorTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        },
+                        "lastErrorStatus": {
+                          "type": "google.rpc.Status",
+                          "id": 11
+                        },
+                        "config": {
+                          "type": "DeviceConfig",
+                          "id": 13
+                        },
+                        "state": {
+                          "type": "DeviceState",
+                          "id": 16
+                        },
+                        "logLevel": {
+                          "type": "LogLevel",
+                          "id": 21
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "gatewayConfig": {
+                          "type": "GatewayConfig",
+                          "id": 24
+                        }
+                      }
+                    },
+                    "GatewayConfig": {
+                      "fields": {
+                        "gatewayType": {
+                          "type": "GatewayType",
+                          "id": 1
+                        },
+                        "gatewayAuthMethod": {
+                          "type": "GatewayAuthMethod",
+                          "id": 2
+                        },
+                        "lastAccessedGatewayId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "lastAccessedGatewayTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeviceRegistry": {
+                      "options": {
+                        "(google.api.resource).type": "cloudiot.googleapis.com/Registry",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}"
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "eventNotificationConfigs": {
+                          "rule": "repeated",
+                          "type": "EventNotificationConfig",
+                          "id": 10
+                        },
+                        "stateNotificationConfig": {
+                          "type": "StateNotificationConfig",
+                          "id": 7
+                        },
+                        "mqttConfig": {
+                          "type": "MqttConfig",
+                          "id": 4
+                        },
+                        "httpConfig": {
+                          "type": "HttpConfig",
+                          "id": 9
+                        },
+                        "logLevel": {
+                          "type": "LogLevel",
+                          "id": 11
+                        },
+                        "credentials": {
+                          "rule": "repeated",
+                          "type": "RegistryCredential",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "MqttConfig": {
+                      "fields": {
+                        "mqttEnabledState": {
+                          "type": "MqttState",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "MqttState": {
+                      "values": {
+                        "MQTT_STATE_UNSPECIFIED": 0,
+                        "MQTT_ENABLED": 1,
+                        "MQTT_DISABLED": 2
+                      }
+                    },
+                    "HttpConfig": {
+                      "fields": {
+                        "httpEnabledState": {
+                          "type": "HttpState",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "HttpState": {
+                      "values": {
+                        "HTTP_STATE_UNSPECIFIED": 0,
+                        "HTTP_ENABLED": 1,
+                        "HTTP_DISABLED": 2
+                      }
+                    },
+                    "LogLevel": {
+                      "values": {
+                        "LOG_LEVEL_UNSPECIFIED": 0,
+                        "NONE": 10,
+                        "ERROR": 20,
+                        "INFO": 30,
+                        "DEBUG": 40
+                      }
+                    },
+                    "GatewayType": {
+                      "values": {
+                        "GATEWAY_TYPE_UNSPECIFIED": 0,
+                        "GATEWAY": 1,
+                        "NON_GATEWAY": 2
+                      }
+                    },
+                    "GatewayAuthMethod": {
+                      "values": {
+                        "GATEWAY_AUTH_METHOD_UNSPECIFIED": 0,
+                        "ASSOCIATION_ONLY": 1,
+                        "DEVICE_AUTH_TOKEN_ONLY": 2,
+                        "ASSOCIATION_AND_DEVICE_AUTH_TOKEN": 3
+                      }
+                    },
+                    "EventNotificationConfig": {
+                      "fields": {
+                        "subfolderMatches": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pubsubTopicName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StateNotificationConfig": {
+                      "fields": {
+                        "pubsubTopicName": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RegistryCredential": {
+                      "oneofs": {
+                        "credential": {
+                          "oneof": [
+                            "publicKeyCertificate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "publicKeyCertificate": {
+                          "type": "PublicKeyCertificate",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "X509CertificateDetails": {
+                      "fields": {
+                        "issuer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "subject": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "expiryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "signatureAlgorithm": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "publicKeyType": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "PublicKeyCertificate": {
+                      "fields": {
+                        "format": {
+                          "type": "PublicKeyCertificateFormat",
+                          "id": 1
+                        },
+                        "certificate": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "x509Details": {
+                          "type": "X509CertificateDetails",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PublicKeyCertificateFormat": {
+                      "values": {
+                        "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT": 0,
+                        "X509_CERTIFICATE_PEM": 1
+                      }
+                    },
+                    "DeviceCredential": {
+                      "oneofs": {
+                        "credential": {
+                          "oneof": [
+                            "publicKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "publicKey": {
+                          "type": "PublicKeyCredential",
+                          "id": 2
+                        },
+                        "expirationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "PublicKeyCredential": {
+                      "fields": {
+                        "format": {
+                          "type": "PublicKeyFormat",
+                          "id": 1
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PublicKeyFormat": {
+                      "values": {
+                        "UNSPECIFIED_PUBLIC_KEY_FORMAT": 0,
+                        "RSA_PEM": 3,
+                        "RSA_X509_PEM": 1,
+                        "ES256_PEM": 2,
+                        "ES256_X509_PEM": 4
+                      }
+                    },
+                    "DeviceConfig": {
+                      "fields": {
+                        "version": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "cloudUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "deviceAckTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "binaryData": {
+                          "type": "bytes",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeviceState": {
+                      "fields": {
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "binaryData": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
                     "DeviceManager": {
                       "options": {
                         "(google.api.default_host)": "cloudiot.googleapis.com",
@@ -597,357 +948,6 @@
                     },
                     "UnbindDeviceFromGatewayResponse": {
                       "fields": {}
-                    },
-                    "Device": {
-                      "options": {
-                        "(google.api.resource).type": "cloudiot.googleapis.com/Device",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}/devices/{device}"
-                      },
-                      "fields": {
-                        "id": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "numId": {
-                          "type": "uint64",
-                          "id": 3
-                        },
-                        "credentials": {
-                          "rule": "repeated",
-                          "type": "DeviceCredential",
-                          "id": 12
-                        },
-                        "lastHeartbeatTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "lastEventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8
-                        },
-                        "lastStateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 20
-                        },
-                        "lastConfigAckTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 14
-                        },
-                        "lastConfigSendTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 18
-                        },
-                        "blocked": {
-                          "type": "bool",
-                          "id": 19
-                        },
-                        "lastErrorTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10
-                        },
-                        "lastErrorStatus": {
-                          "type": "google.rpc.Status",
-                          "id": 11
-                        },
-                        "config": {
-                          "type": "DeviceConfig",
-                          "id": 13
-                        },
-                        "state": {
-                          "type": "DeviceState",
-                          "id": 16
-                        },
-                        "logLevel": {
-                          "type": "LogLevel",
-                          "id": 21
-                        },
-                        "metadata": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 17
-                        },
-                        "gatewayConfig": {
-                          "type": "GatewayConfig",
-                          "id": 24
-                        }
-                      }
-                    },
-                    "GatewayConfig": {
-                      "fields": {
-                        "gatewayType": {
-                          "type": "GatewayType",
-                          "id": 1
-                        },
-                        "gatewayAuthMethod": {
-                          "type": "GatewayAuthMethod",
-                          "id": 2
-                        },
-                        "lastAccessedGatewayId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "lastAccessedGatewayTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "DeviceRegistry": {
-                      "options": {
-                        "(google.api.resource).type": "cloudiot.googleapis.com/Registry",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registries/{registry}"
-                      },
-                      "fields": {
-                        "id": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "eventNotificationConfigs": {
-                          "rule": "repeated",
-                          "type": "EventNotificationConfig",
-                          "id": 10
-                        },
-                        "stateNotificationConfig": {
-                          "type": "StateNotificationConfig",
-                          "id": 7
-                        },
-                        "mqttConfig": {
-                          "type": "MqttConfig",
-                          "id": 4
-                        },
-                        "httpConfig": {
-                          "type": "HttpConfig",
-                          "id": 9
-                        },
-                        "logLevel": {
-                          "type": "LogLevel",
-                          "id": 11
-                        },
-                        "credentials": {
-                          "rule": "repeated",
-                          "type": "RegistryCredential",
-                          "id": 8
-                        }
-                      }
-                    },
-                    "MqttConfig": {
-                      "fields": {
-                        "mqttEnabledState": {
-                          "type": "MqttState",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "MqttState": {
-                      "values": {
-                        "MQTT_STATE_UNSPECIFIED": 0,
-                        "MQTT_ENABLED": 1,
-                        "MQTT_DISABLED": 2
-                      }
-                    },
-                    "HttpConfig": {
-                      "fields": {
-                        "httpEnabledState": {
-                          "type": "HttpState",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "HttpState": {
-                      "values": {
-                        "HTTP_STATE_UNSPECIFIED": 0,
-                        "HTTP_ENABLED": 1,
-                        "HTTP_DISABLED": 2
-                      }
-                    },
-                    "LogLevel": {
-                      "values": {
-                        "LOG_LEVEL_UNSPECIFIED": 0,
-                        "NONE": 10,
-                        "ERROR": 20,
-                        "INFO": 30,
-                        "DEBUG": 40
-                      }
-                    },
-                    "GatewayType": {
-                      "values": {
-                        "GATEWAY_TYPE_UNSPECIFIED": 0,
-                        "GATEWAY": 1,
-                        "NON_GATEWAY": 2
-                      }
-                    },
-                    "GatewayAuthMethod": {
-                      "values": {
-                        "GATEWAY_AUTH_METHOD_UNSPECIFIED": 0,
-                        "ASSOCIATION_ONLY": 1,
-                        "DEVICE_AUTH_TOKEN_ONLY": 2,
-                        "ASSOCIATION_AND_DEVICE_AUTH_TOKEN": 3
-                      }
-                    },
-                    "EventNotificationConfig": {
-                      "fields": {
-                        "subfolderMatches": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "pubsubTopicName": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StateNotificationConfig": {
-                      "fields": {
-                        "pubsubTopicName": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "RegistryCredential": {
-                      "oneofs": {
-                        "credential": {
-                          "oneof": [
-                            "publicKeyCertificate"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "publicKeyCertificate": {
-                          "type": "PublicKeyCertificate",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "X509CertificateDetails": {
-                      "fields": {
-                        "issuer": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "subject": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "expiryTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "signatureAlgorithm": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "publicKeyType": {
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "PublicKeyCertificate": {
-                      "fields": {
-                        "format": {
-                          "type": "PublicKeyCertificateFormat",
-                          "id": 1
-                        },
-                        "certificate": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "x509Details": {
-                          "type": "X509CertificateDetails",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "PublicKeyCertificateFormat": {
-                      "values": {
-                        "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT": 0,
-                        "X509_CERTIFICATE_PEM": 1
-                      }
-                    },
-                    "DeviceCredential": {
-                      "oneofs": {
-                        "credential": {
-                          "oneof": [
-                            "publicKey"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "publicKey": {
-                          "type": "PublicKeyCredential",
-                          "id": 2
-                        },
-                        "expirationTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "PublicKeyCredential": {
-                      "fields": {
-                        "format": {
-                          "type": "PublicKeyFormat",
-                          "id": 1
-                        },
-                        "key": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PublicKeyFormat": {
-                      "values": {
-                        "UNSPECIFIED_PUBLIC_KEY_FORMAT": 0,
-                        "RSA_PEM": 3,
-                        "RSA_X509_PEM": 1,
-                        "ES256_PEM": 2,
-                        "ES256_X509_PEM": 4
-                      }
-                    },
-                    "DeviceConfig": {
-                      "fields": {
-                        "version": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "cloudUpdateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "deviceAckTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "binaryData": {
-                          "type": "bytes",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "DeviceState": {
-                      "fields": {
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "binaryData": {
-                          "type": "bytes",
-                          "id": 2
-                        }
-                      }
                     }
                   }
                 }
@@ -957,14 +957,80 @@
         },
         "api": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1082,72 +1148,6 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
               }
             }
           }

@@ -21,34 +21,30 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
-library = gapic.node_library(
-    'iot', 'v1',
-    config_path="/google/cloud/iot/"
-                f"artman_cloudiot.yaml")
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v1']
+
+for version in versions:
+    library = gapic.typescript_library(
+        'iot', 
+        generator_args={
+            "grpc-service-config": f"google/cloud/iot/{version}/cloudiot_grpc_service_config.json",
+            "package-name": f"@google-cloud/iot",
+            "main-service": f"iot"
+            },
+        proto_path=f'/google/cloud/iot/{version}',
+        extra_proto_files=['google/cloud/common_resources.proto'],
+        version=version)
 
 # skip index, protos, package.json, and README.md
 s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.js'],
+    excludes=['package.json', 'README.md', 'src/index.ts'],
 )
-
-# Streaming is broken and missing grpc handling
-# https://github.com/googleapis/gapic-generator/issues/2152
-s.replace(
-    'src/v1/device_manager_client.js',
-    f'(listDeviceRegistriesStream\(.*\n\s+options = .*\n)(\n\s+return)',
-    '''\g<1>options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });\n\g<2>''')
 
 # Copy common templated files
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 s.replace("src/v1/doc/google/cloud/iot/v1/doc_resources.js",
@@ -68,3 +64,4 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

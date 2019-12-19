@@ -1,19 +1,12 @@
 {
-  "updateTime": "2019-11-19T12:19:00.663698Z",
+  "updateTime": "2019-12-19T22:16:57.346409Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.42.1",
-        "dockerImage": "googleapis/artman@sha256:c773192618c608a7a0415dd95282f841f8e6bcdef7dd760a988c93b77a64bd57"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d8dd7fe8d5304f7bd1c52207703d7f27d5328c5a",
-        "internalRef": "281088257"
+        "sha": "0ca305403dcc50e31ad9477c9b6241ddfd2056af",
+        "internalRef": "286439553"
       }
     },
     {
@@ -30,10 +23,317 @@
         "source": "googleapis",
         "apiName": "iot",
         "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/iot/artman_cloudiot.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "webpack.config.js"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "protos/google/cloud/iot/v1/device_manager.proto"
+    },
+    {
+      "path": "protos/google/cloud/iot/v1/resources.proto"
+    },
+    {
+      "path": "test/gapic-device_manager-v1.ts"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/package-lock.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/minimist/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/espree/package.json"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": "build/protos/protos.d.ts"
+    },
+    {
+      "path": "build/protos/protos.json"
+    },
+    {
+      "path": "build/protos/protos.js"
+    },
+    {
+      "path": "build/protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "build/protos/google/cloud/iot/v1/device_manager.proto"
+    },
+    {
+      "path": "build/protos/google/cloud/iot/v1/resources.proto"
+    },
+    {
+      "path": "build/test/gapic-device_manager-v1.js.map"
+    },
+    {
+      "path": "build/test/gapic-device_manager-v1.js"
+    },
+    {
+      "path": "build/test/gapic-device_manager-v1.d.ts"
+    },
+    {
+      "path": "build/system-test/install.js.map"
+    },
+    {
+      "path": "build/system-test/install.js"
+    },
+    {
+      "path": "build/system-test/install.d.ts"
+    },
+    {
+      "path": "build/src/index.js"
+    },
+    {
+      "path": "build/src/index.js.map"
+    },
+    {
+      "path": "build/src/index.d.ts"
+    },
+    {
+      "path": "build/src/v1/device_manager_client.js"
+    },
+    {
+      "path": "build/src/v1/device_manager_client_config.d.ts"
+    },
+    {
+      "path": "build/src/v1/device_manager_client_config.json"
+    },
+    {
+      "path": "build/src/v1/index.js"
+    },
+    {
+      "path": "build/src/v1/device_manager_client.js.map"
+    },
+    {
+      "path": "build/src/v1/index.js.map"
+    },
+    {
+      "path": "build/src/v1/index.d.ts"
+    },
+    {
+      "path": "build/src/v1/device_manager_client.d.ts"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": "src/v1/device_manager_proto_list.json"
+    },
+    {
+      "path": "src/v1/device_manager_client_config.json"
+    },
+    {
+      "path": "src/v1/device_manager_client.ts"
+    },
+    {
+      "path": "src/v1/index.ts"
     }
   ]
 }

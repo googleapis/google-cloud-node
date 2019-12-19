@@ -8,10 +8,10 @@
     "node": ">=8.10.0"
   },
   "repository": "googleapis/nodejs-iot",
-  "main": "src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "protos",
-    "src"
+    "build/protos",
+    "build/src"
   ],
   "keywords": [
     "google apis client",
@@ -27,32 +27,44 @@
     "Cloud IoT API"
   ],
   "scripts": {
-    "test": "nyc mocha",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "lint": "eslint '**/*.js'",
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "lint": "gts fix && eslint --fix samples/*.js",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test --timeout 600000",
-    "fix": "eslint --fix '**/*.js'",
+    "system-test": "mocha build/system-test",
+    "fix": "gts fix",
     "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs"
+    "predocs-test": "npm run docs",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile"
   },
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^1.9.0"
   },
   "devDependencies": {
-    "codecov": "^3.0.2",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^12.0.0",
+    "c8": "^6.0.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "intelli-espower-loader": "^1.0.1",
+    "gts": "^1.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
-    "mocha": "^6.0.0",
-    "nyc": "^14.0.0",
     "power-assert": "^1.6.0",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "mocha": "^6.1.4",
+    "null-loader": "^3.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
