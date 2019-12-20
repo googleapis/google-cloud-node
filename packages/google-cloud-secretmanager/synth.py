@@ -32,7 +32,7 @@ for version in versions:
     },
     proto_path='/google/cloud/secrets/v1beta1',
     version=version)
-s.copy(library, excludes=['package.json', 'README.md', 'linkinator.config.json'])
+s.copy(library, excludes=['package.json', 'README.md', '.github/release-please.yml'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
