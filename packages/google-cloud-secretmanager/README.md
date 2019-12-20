@@ -59,51 +59,47 @@ npm install @google-cloud/secret-manager
   const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
   const client = new SecretManagerServiceClient();
 
-  // const project = 'YOUR_PROJECT_NAME', // Project to manage secrets for.
-  // const secretId = 'foo', // Identifier for secret.
-  // const secretStringPayload = 'hello world!', // A secret string.
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // parent = 'projects/my-project', // Project for which to manage secrets.
+  // secretId = 'foo', // Secret ID.
+  // payload = 'hello world!' // String source data.
 
-  async function setAndAccessSecret() {
-    // Create the secret, ignoring errors related to the secret
-    // already existing:
-    try {
-      await client.createSecret({
-        parent: `projects/${project}`,
-        secret: {
-          name: secretId,
-          replication: {
-            automatic: {},
-          },
+  async function createAndAccessSecret() {
+    // Create the secret with automation replication.
+    const [secret] = await client.createSecret({
+      parent: parent,
+      secret: {
+        name: secretId,
+        replication: {
+          automatic: {},
         },
-        secretId,
-      });
-    } catch (err) {
-      if (err.message.includes('ALREADY_EXISTS')) {
-        console.info(`secret '${secretId}' already exists`);
-      } else {
-        throw err; // Unexpected error.
-      }
-    }
+      },
+      secretId,
+    });
 
-    // Update the latest version of the secret to the value provided:
-    await client.addSecretVersion({
-      parent: `projects/${project}/secrets/${secretId}`,
+    console.info(`Created secret ${secret.name}`);
+
+    // Add a version with a payload onto the secret.
+    const [version] = await client.addSecretVersion({
+      parent: secret.name,
       payload: {
-        data: Buffer.from(secretStringPayload, 'utf8'),
+        data: Buffer.from(payload, 'utf8'),
       },
     });
-    console.info(
-      `set current version of '${secretId}' to '${secretStringPayload}'`
-    );
 
-    // Fetch the latest version of the secret:
-    const [secret] = await client.accessSecretVersion({
-      name: `projects/${project}/secrets/${secretId}/versions/latest`,
+    console.info(`Added secret version ${version.name}`);
+
+    // Access the secret.
+    const [accessResponse] = await client.accessSecretVersion({
+      name: version.name,
     });
-    const secretString = secret.payload.data.toString('utf8');
-    console.info(`get latest '${secretId}' with value '${secretString}'`);
+
+    const responsePayload = accessResponse.payload.data.toString('utf8');
+    console.info(`Payload: ${responsePayload}`);
   }
-  setAndAccessSecret();
+  createAndAccessSecret();
 
 ```
 
@@ -116,7 +112,19 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Access Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/accessSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/accessSecretVersion.js,samples/README.md) |
+| Add Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/addSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/addSecretVersion.js,samples/README.md) |
+| Create Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/createSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/createSecret.js,samples/README.md) |
+| Delete Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/deleteSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/deleteSecret.js,samples/README.md) |
+| Destroy Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/destroySecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/destroySecretVersion.js,samples/README.md) |
+| Disable Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/disableSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/disableSecretVersion.js,samples/README.md) |
+| Enable Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/enableSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/enableSecretVersion.js,samples/README.md) |
+| Get Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/getSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/getSecret.js,samples/README.md) |
+| Get Secret Version | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/getSecretVersion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/getSecretVersion.js,samples/README.md) |
+| List Secret Versions | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/listSecretVersions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/listSecretVersions.js,samples/README.md) |
+| List Secrets | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/listSecrets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/listSecrets.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Update Secret | [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/updateSecret.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/updateSecret.js,samples/README.md) |
 
 
 
