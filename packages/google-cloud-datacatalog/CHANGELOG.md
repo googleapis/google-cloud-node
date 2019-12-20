@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.5.0...v1.5.1) (2019-12-20)
+
+
+### Bug Fixes
+
+* bring common resources back ([#75](https://www.github.com/googleapis/nodejs-datacatalog/issues/75)) ([8472def](https://www.github.com/googleapis/nodejs-datacatalog/commit/8472defdf9a2394f218f5a15d2d8e9400fc3af86))
+* fix auto-pagination field name ([1b9d24b](https://www.github.com/googleapis/nodejs-datacatalog/commit/1b9d24b281e38097df2a7886cefaa515dc89c655))
+* increase timeout from 20s to 60s ([#76](https://www.github.com/googleapis/nodejs-datacatalog/issues/76)) ([3fbcf3d](https://www.github.com/googleapis/nodejs-datacatalog/commit/3fbcf3d3fb07b9d59cbd42e78f581b74aa5bccd4))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.4.1...v1.5.0) (2019-12-11)
 
 
