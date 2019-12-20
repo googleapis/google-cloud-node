@@ -20,9 +20,9 @@
 const datacatalog = require('@google-cloud/datacatalog');
 
 function main() {
+  const dataCatalogClient = new datacatalog.DataCatalogClient();
   const policyTagManagerClient = new datacatalog.PolicyTagManagerClient();
   const policyTagManagerSerializationClient = new datacatalog.PolicyTagManagerSerializationClient();
-  const dataCatalogClient = new datacatalog.DataCatalogClient();
 }
 
 main();
