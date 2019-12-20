@@ -12,19 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
+import * as protoTypes from '../protos/protos';
 const {assert} = require('chai');
-
-describe('WebRiskSmokeTest', () => {
-  it('searches threat database for URI', async () => {
-    const {WebRiskServiceV1Beta1Client} = require('../');
+const http2spy = require('http2spy');
+const {WebRiskServiceV1Beta1Client} = http2spy.require(require.resolve('../src/v1beta1'));
+describe('header', () => {
+  it('populates x-goog-api-client header', async () => {
     const client = new WebRiskServiceV1Beta1Client();
     const request = {
       uri: 'http://testsafebrowsing.appspot.com/s/malware.html',
       threatTypes: ['MALWARE'],
     };
-    const {threat} = (await client.searchUris(request))[0];
-    assert.include(threat.threatTypes, 'MALWARE');
+    await client.searchUris(
+      (request as unknown) as protoTypes.google.cloud.webrisk.v1beta1.SearchUrisRequest
+    );
+    assert.ok(
+      /^gax\/[\w.-]+ gapic\/[\w.-]+ gl-node\/[0-9]+\.[\w.-]+ grpc\/[\w.-]+$/.test(
+        http2spy.requests[0]['x-goog-api-client'][0]
+      )
+    );
   });
 });

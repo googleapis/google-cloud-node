@@ -12,24 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
 const {assert} = require('chai');
-const http2spy = require('http2spy');
-const {WebRiskServiceV1Beta1Client} = http2spy.require(require.resolve('../'));
 
-describe('header', () => {
-  it('populates x-goog-api-client header', async () => {
+describe('WebRiskSmokeTest', () => {
+  it('searches threat database for URI', async () => {
+    const {WebRiskServiceV1Beta1Client} = require('../src/v1beta1');
     const client = new WebRiskServiceV1Beta1Client();
     const request = {
       uri: 'http://testsafebrowsing.appspot.com/s/malware.html',
       threatTypes: ['MALWARE'],
     };
-    await client.searchUris(request);
-    assert.ok(
-      /^gl-node\/[0-9]+\.[\w.-]+ gax\/[\w.-]+ grpc\/[\w.-]+ gapic\/[\w.-]+$/.test(
-        http2spy.requests[0]['x-goog-api-client'][0]
-      )
-    );
+    const {threat} = (await client.searchUris(request))[0];
+    assert.include(threat.threatTypes, 'MALWARE');
   });
 });

@@ -21,19 +21,25 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
 for version in versions:
-  library = gapic.node_library(
+  library = gapic.typescript_library(
     'webrisk',
-    version)
-  s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
+    generator_args={
+      "grpc-service-config": f"google/cloud/webrisk/{version}/webrisk_grpc_service_config.json",
+      "package-name": f"@google-cloud/web-risk"
+      },
+    proto_path=f'/google/cloud/webrisk/{version}',
+    version=version)
+  s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=['.nycrc'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
