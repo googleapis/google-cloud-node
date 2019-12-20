@@ -19,64 +19,58 @@
 'use strict';
 
 async function main(
-  project = 'YOUR_PROJECT_NAME', // Project to manage secrets for.
-  secretId = 'foo', // Identifier for secret.
-  secretStringPayload = 'hello world!' // A secret string.
+  parent = 'projects/my-project', // Project for which to manage secrets.
+  secretId = 'foo', // Secret ID.
+  payload = 'hello world!' // String or buffer source data.
 ) {
-  // [START secret_manager_quickstart]
+  // [START secretmanager_quickstart]
   // Import the Secret Manager client and instantiate it:
   const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
   const client = new SecretManagerServiceClient();
 
-  // const project = 'YOUR_PROJECT_NAME', // Project to manage secrets for.
-  // const secretId = 'foo', // Identifier for secret.
-  // const secretStringPayload = 'hello world!', // A secret string.
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // parent = 'projects/my-project', // Project for which to manage secrets.
+  // secretId = 'foo', // Secret ID.
+  // payload = 'hello world!' // String source data.
 
-  async function setAndAccessSecret() {
-    // Create the secret, ignoring errors related to the secret
-    // already existing:
-    try {
-      await client.createSecret({
-        parent: `projects/${project}`,
-        secret: {
-          name: secretId,
-          replication: {
-            automatic: {},
-          },
+  async function createAndAccessSecret() {
+    // Create the secret with automation replication.
+    const [secret] = await client.createSecret({
+      parent: parent,
+      secret: {
+        name: secretId,
+        replication: {
+          automatic: {},
         },
-        secretId,
-      });
-    } catch (err) {
-      if (err.message.includes('ALREADY_EXISTS')) {
-        console.info(`secret '${secretId}' already exists`);
-      } else {
-        throw err; // Unexpected error.
-      }
-    }
+      },
+      secretId,
+    });
 
-    // Update the latest version of the secret to the value provided:
-    await client.addSecretVersion({
-      parent: `projects/${project}/secrets/${secretId}`,
+    console.info(`Created secret ${secret.name}`);
+
+    // Add a version with a payload onto the secret.
+    const [version] = await client.addSecretVersion({
+      parent: secret.name,
       payload: {
-        data: Buffer.from(secretStringPayload, 'utf8'),
+        data: Buffer.from(payload, 'utf8'),
       },
     });
-    console.info(
-      `set current version of '${secretId}' to '${secretStringPayload}'`
-    );
 
-    // Fetch the latest version of the secret:
-    const [secret] = await client.accessSecretVersion({
-      name: `projects/${project}/secrets/${secretId}/versions/latest`,
+    console.info(`Added secret version ${version.name}`);
+
+    // Access the secret.
+    const [accessResponse] = await client.accessSecretVersion({
+      name: version.name,
     });
-    const secretString = secret.payload.data.toString('utf8');
-    console.info(`get latest '${secretId}' with value '${secretString}'`);
+
+    const responsePayload = accessResponse.payload.data.toString('utf8');
+    console.info(`Payload: ${responsePayload}`);
   }
-  setAndAccessSecret();
-  // [END secret_manager_quickstart]
+  createAndAccessSecret();
+  // [END secretmanager_quickstart]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
-  process.exitCode = 1;
-});
+const args = process.argv.slice(2);
+main(...args).catch(console.error);
