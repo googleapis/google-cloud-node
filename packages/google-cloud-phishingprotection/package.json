@@ -4,10 +4,10 @@
   "version": "1.4.0",
   "author": "Google LLC",
   "description": "Phishing Protection API client for Node.js",
-  "main": "src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "protos",
-    "src",
+    "build/protos",
+    "build/src",
     "AUTHORS",
     "COPYING"
   ],
@@ -25,31 +25,46 @@
     "Phishing Protection API"
   ],
   "dependencies": {
-    "google-gax": "^1.7.5"
+    "google-gax": "^1.9.0"
   },
   "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^12.0.0",
     "c8": "^6.0.0",
     "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "gts": "^1.0.0",
+    "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.4.0",
-    "mocha": "^6.0.0",
-    "prettier": "^1.17.0"
+    "mocha": "^6.1.4",
+    "null-loader": "^3.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "power-assert": "^1.4.4",
+    "prettier": "^1.17.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "scripts": {
+    "test": "c8 mocha build/test",
     "docs": "jsdoc -c .jsdoc.js",
-    "fix": "eslint . --fix",
-    "lint": "eslint .",
-    "test": "c8 mocha test/*.js",
+    "lint": "gts fix && eslint --fix samples/*.js",
+    "fix": "gts fix",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "system-test": "mocha build/system-test",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "samples-test": "c8 mocha samples/test/*.js",
-    "system-test": "c8 mocha --timeout=5000 system-test/*.js"
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile"
   },
   "license": "Apache-2.0",
   "engines": {

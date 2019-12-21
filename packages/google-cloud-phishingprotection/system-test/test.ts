@@ -12,13 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
 const PROJECT_ID = '1046198160504';
 
 describe('PhishingProtection', () => {
   it('submits a URI to the phishing protection API', async () => {
-    const {PhishingProtectionServiceV1Beta1Client} = require('../');
+    const {PhishingProtectionServiceV1Beta1Client} = require('../src/v1beta1');
     const client = new PhishingProtectionServiceV1Beta1Client();
 
     // the numeric project ID.
