@@ -21,19 +21,26 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
 for version in versions:
-  library = gapic.node_library(
-    'recaptchaenterprise',
-    version)
-  s.copy(library, excludes=['package.json', 'src/index.js'])
+  library = gapic.typescript_library(
+    'recaptchaenterprise', version,
+    generator_args={
+      "grpc-service-config": f"google/cloud/recaptchaenterprise/{version}/recaptchaenterprise_grpc_service_config.json",
+      "package-name": f"@google-cloud/recaptcha-enterprise",
+      },
+      proto_path=f'/google/cloud/recaptchaenterprise/{version}',
+      extra_proto_files=['google/cloud/common_resources.proto']
+      )
+  s.copy(library, excludes=['package.json', 'src/index.ts'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

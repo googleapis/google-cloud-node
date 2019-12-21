@@ -1,19 +1,12 @@
 {
-  "updateTime": "2019-12-03T12:19:56.567157Z",
+  "updateTime": "2019-12-20T23:47:04.933248Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.42.1",
-        "dockerImage": "googleapis/artman@sha256:c773192618c608a7a0415dd95282f841f8e6bcdef7dd760a988c93b77a64bd57"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "38dc36a2a43cbab4a2a9183a43dd0441670098a9",
-        "internalRef": "283384331"
+        "sha": "1a380ea21dea9b6ac6ad28c60ad96d9d73574e19",
+        "internalRef": "286616241"
       }
     },
     {
@@ -30,10 +23,314 @@
         "source": "googleapis",
         "apiName": "recaptchaenterprise",
         "apiVersion": "v1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/recaptchaenterprise/artman_recaptchaenterprise_v1beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "webpack.config.js"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "protos/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto"
+    },
+    {
+      "path": "test/gapic-recaptcha_enterprise_service_v1_beta1-v1beta1.ts"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/package-lock.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/minimist/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/espree/package.json"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": "build/protos/.DS_Store"
+    },
+    {
+      "path": "build/protos/protos.d.ts"
+    },
+    {
+      "path": "build/protos/protos.json"
+    },
+    {
+      "path": "build/protos/protos.js"
+    },
+    {
+      "path": "build/protos/google/.DS_Store"
+    },
+    {
+      "path": "build/protos/google/cloud/.DS_Store"
+    },
+    {
+      "path": "build/protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "build/protos/google/cloud/recaptchaenterprise/.DS_Store"
+    },
+    {
+      "path": "build/protos/google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise.proto"
+    },
+    {
+      "path": "build/test/gapic-recaptcha_enterprise_service_v1_beta1-v1beta1.d.ts"
+    },
+    {
+      "path": "build/test/gapic-recaptcha_enterprise_service_v1_beta1-v1beta1.js.map"
+    },
+    {
+      "path": "build/test/gapic-recaptcha_enterprise_service_v1_beta1-v1beta1.js"
+    },
+    {
+      "path": "build/system-test/install.js.map"
+    },
+    {
+      "path": "build/system-test/install.js"
+    },
+    {
+      "path": "build/system-test/install.d.ts"
+    },
+    {
+      "path": "build/src/v1beta1/recaptcha_enterprise_service_v1_beta1_client.d.ts"
+    },
+    {
+      "path": "build/src/v1beta1/index.js"
+    },
+    {
+      "path": "build/src/v1beta1/recaptcha_enterprise_service_v1_beta1_client.js"
+    },
+    {
+      "path": "build/src/v1beta1/index.js.map"
+    },
+    {
+      "path": "build/src/v1beta1/recaptcha_enterprise_service_v1_beta1_client.js.map"
+    },
+    {
+      "path": "build/src/v1beta1/recaptcha_enterprise_service_v1_beta1_client_config.json"
+    },
+    {
+      "path": "build/src/v1beta1/recaptcha_enterprise_service_v1_beta1_client_config.d.ts"
+    },
+    {
+      "path": "build/src/v1beta1/index.d.ts"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": "src/v1beta1/recaptcha_enterprise_service_v1_beta1_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/recaptcha_enterprise_service_v1_beta1_client.ts"
+    },
+    {
+      "path": "src/v1beta1/index.ts"
+    },
+    {
+      "path": "src/v1beta1/recaptcha_enterprise_service_v1_beta1_client_config.json"
     }
   ]
 }
