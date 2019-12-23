@@ -33,10 +33,6 @@ s.replace("src/v1/doc/google/container/v1/doc_cluster_service.js",
         "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePools#resource-nodepool")
 
 s.replace('src/v1/*.ts',
-        '/compute/docs/zones#available',
-        'https://cloud.google.com/compute/docs/regions-zones/')
-
-s.replace('src/v1/*.ts',
         '/compute/docs/zones',
         'https://cloud.google.com/compute/docs/regions-zones/')
 
