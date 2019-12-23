@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.0.3...v1.1.0) (2019-12-23)
+
+### Features
+
+* add keywords for npm ([bdc5046](https://www.github.com/googleapis/nodejs-secret-manager/commit/bdc5046eb4aa0c9c46487be013706d01de4ad876))
+
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.0.0...v1.0.3) (2019-12-23)
 
 
