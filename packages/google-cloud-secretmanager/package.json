@@ -9,6 +9,7 @@
     "build/src",
     "build/protos"
   ],
+  "keywords": ["secrets", "secret", "secret manager", "secrets management", "gcp", "google", "cloud"],
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
