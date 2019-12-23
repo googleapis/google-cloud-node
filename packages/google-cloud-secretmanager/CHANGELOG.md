@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.0.0...v1.0.1) (2019-12-23)
+
+
+### Bug Fixes
+
+* build script did not run 'npm build' ([#13](https://www.github.com/googleapis/nodejs-secret-manager/issues/13)) ([cd09290](https://www.github.com/googleapis/nodejs-secret-manager/commit/cd0929078539225254cf481bd17c3b02a691d6e3))
+
 ## 1.0.0 (2019-12-20)
 
 
