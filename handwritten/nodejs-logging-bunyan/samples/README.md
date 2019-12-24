@@ -23,6 +23,12 @@ compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach th
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-logging-bunyan#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -36,7 +42,7 @@ View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/
 __Usage:__
 
 
-`node express.js`
+`node samples/express.js`
 
 
 -----
@@ -53,7 +59,7 @@ View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -70,7 +76,7 @@ View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/
 __Usage:__
 
 
-`node setup_explicit.js`
+`node samples/setup_explicit.js`
 
 
 
