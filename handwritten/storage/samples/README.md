@@ -44,6 +44,12 @@ objects to users via direct download.
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-storage#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -57,7 +63,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node acl.js`
+`node samples/acl.js`
 
 
 -----
@@ -74,7 +80,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node bucketLock.js`
+`node samples/bucketLock.js`
 
 
 -----
@@ -110,7 +116,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node buckets.js`
+`node samples/buckets.js`
 
 
 -----
@@ -127,7 +133,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node createNewBucket.js`
+`node samples/createNewBucket.js`
 
 
 -----
@@ -144,7 +150,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node encryption.js`
+`node samples/encryption.js`
 
 
 -----
@@ -180,7 +186,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node files.js`
+`node samples/files.js`
 
 
 -----
@@ -311,7 +317,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node iam.js`
+`node samples/iam.js`
 
 
 -----
@@ -328,7 +334,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node notifications.js`
+`node samples/notifications.js`
 
 
 -----
@@ -345,7 +351,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -362,7 +368,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node requesterPays.js`
+`node samples/requesterPays.js`
 
 
 -----
@@ -398,7 +404,7 @@ View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/
 __Usage:__
 
 
-`node uploadFile.js`
+`node samples/uploadFile.js`
 
 
 
