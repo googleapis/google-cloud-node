@@ -24,6 +24,12 @@ and a variety of common application components including Cassandra, Nginx, Apach
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-monitoring#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -37,7 +43,7 @@ View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/mast
 __Usage:__
 
 
-`node alerts.js`
+`node samples/alerts.js`
 
 
 -----
@@ -54,7 +60,7 @@ View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/mast
 __Usage:__
 
 
-`node metrics.js`
+`node samples/metrics.js`
 
 
 -----
@@ -71,7 +77,7 @@ View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/mast
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -88,7 +94,7 @@ View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/mast
 __Usage:__
 
 
-`node uptime.js`
+`node samples/uptime.js`
 
 
 
