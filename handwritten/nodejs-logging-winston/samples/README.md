@@ -23,6 +23,12 @@ transport to your existing Winston loggers.
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-logging-winston#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -36,7 +42,7 @@ View the [source code](https://github.com/googleapis/nodejs-logging-winston/blob
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -53,7 +59,7 @@ View the [source code](https://github.com/googleapis/nodejs-logging-winston/blob
 __Usage:__
 
 
-`node setup_explicit.js`
+`node samples/setup_explicit.js`
 
 
 
