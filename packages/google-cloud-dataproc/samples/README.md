@@ -12,15 +12,38 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Quickstart](#quickstart)
   * [Create Cluster](#create-cluster)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-dataproc#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
+
+
+
+### Create Cluster
+
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/createCluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/createCluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createCluster.js`
+
+
+-----
+
 
 
 
@@ -33,19 +56,11 @@ View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
-### Create Cluster
-
-View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/createCluster.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/createCluster.js,samples/README.md)
-
-__Usage:__
 
 
-`node createCluster.js`
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
