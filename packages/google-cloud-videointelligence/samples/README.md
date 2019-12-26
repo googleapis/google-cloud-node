@@ -27,6 +27,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-video-intelligence#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -40,7 +46,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-annotation-to-storage.js`
+`node samples/analyze-streaming-annotation-to-storage.js`
 
 
 -----
@@ -57,7 +63,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-automl-classification.js`
+`node samples/analyze-streaming-automl-classification.js`
 
 
 -----
@@ -74,7 +80,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-labels.js`
+`node samples/analyze-streaming-labels.js`
 
 
 -----
@@ -91,7 +97,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-object.js`
+`node samples/analyze-streaming-object.js`
 
 
 -----
@@ -108,7 +114,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-safe-search.js`
+`node samples/analyze-streaming-safe-search.js`
 
 
 -----
@@ -125,7 +131,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze-streaming-shot-change.js`
+`node samples/analyze-streaming-shot-change.js`
 
 
 -----
@@ -142,7 +148,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze.js`
+`node samples/analyze.js`
 
 
 -----
@@ -159,7 +165,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node analyze.v1p2beta1.js`
+`node samples/analyze.v1p2beta1.js`
 
 
 -----
@@ -176,7 +182,7 @@ View the [source code](https://github.com/googleapis/nodejs-video-intelligence/b
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 
