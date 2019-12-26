@@ -45,6 +45,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-kms#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -58,7 +64,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node addMemberToCryptoKeyPolicy.js`
+`node samples/addMemberToCryptoKeyPolicy.js`
 
 
 -----
@@ -75,7 +81,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node addMemberToKeyRingPolicy.js`
+`node samples/addMemberToKeyRingPolicy.js`
 
 
 -----
@@ -92,7 +98,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node asymmetricDecrypt.js`
+`node samples/asymmetricDecrypt.js`
 
 
 -----
@@ -109,7 +115,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node asymmetricEncrypt.js`
+`node samples/asymmetricEncrypt.js`
 
 
 -----
@@ -126,7 +132,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node asymmetricSign.js`
+`node samples/asymmetricSign.js`
 
 
 -----
@@ -143,7 +149,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node asymmetricVerify.js`
+`node samples/asymmetricVerify.js`
 
 
 -----
@@ -160,7 +166,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node createCryptoKey.js`
+`node samples/createCryptoKey.js`
 
 
 -----
@@ -177,7 +183,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node createCryptoKeyVersion.js`
+`node samples/createCryptoKeyVersion.js`
 
 
 -----
@@ -194,7 +200,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node createKeyring.js`
+`node samples/createKeyring.js`
 
 
 -----
@@ -211,7 +217,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node decrypt.js`
+`node samples/decrypt.js`
 
 
 -----
@@ -228,7 +234,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node destroyCryptoKeyVersion.js`
+`node samples/destroyCryptoKeyVersion.js`
 
 
 -----
@@ -245,7 +251,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node disableCryptoKeyVersion.js`
+`node samples/disableCryptoKeyVersion.js`
 
 
 -----
@@ -262,7 +268,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node enableCryptoKeyVersion.js`
+`node samples/enableCryptoKeyVersion.js`
 
 
 -----
@@ -279,7 +285,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node encrypt.js`
+`node samples/encrypt.js`
 
 
 -----
@@ -296,7 +302,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node getCryptoKey.js`
+`node samples/getCryptoKey.js`
 
 
 -----
@@ -313,7 +319,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node getCryptoKeyIamPolicy.js`
+`node samples/getCryptoKeyIamPolicy.js`
 
 
 -----
@@ -330,7 +336,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node getKeyring.js`
+`node samples/getKeyring.js`
 
 
 -----
@@ -347,7 +353,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node getKeyringIamPolicy.js`
+`node samples/getKeyringIamPolicy.js`
 
 
 -----
@@ -364,7 +370,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node getPublicKey.js`
+`node samples/getPublicKey.js`
 
 
 -----
@@ -381,7 +387,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node listCryptoKeyVersions.js`
+`node samples/listCryptoKeyVersions.js`
 
 
 -----
@@ -398,7 +404,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node listCryptoKeys.js`
+`node samples/listCryptoKeys.js`
 
 
 -----
@@ -415,7 +421,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node listKeyrings.js`
+`node samples/listKeyrings.js`
 
 
 -----
@@ -432,7 +438,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -449,7 +455,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node removeMemberCryptoKeyPolicy.js`
+`node samples/removeMemberCryptoKeyPolicy.js`
 
 
 -----
@@ -466,7 +472,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node removeMemberFromKeyRingPolicy.js`
+`node samples/removeMemberFromKeyRingPolicy.js`
 
 
 -----
@@ -483,7 +489,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node restoreCryptoKeyVersion.js`
+`node samples/restoreCryptoKeyVersion.js`
 
 
 -----
@@ -500,7 +506,7 @@ View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samp
 __Usage:__
 
 
-`node setPrimaryCryptoKeyVersion.js`
+`node samples/setPrimaryCryptoKeyVersion.js`
 
 
 
