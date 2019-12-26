@@ -20,6 +20,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/cloud-profiler-nodejs#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -33,7 +39,7 @@ View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/
 __Usage:__
 
 
-`node app.js`
+`node samples/app.js`
 
 
 -----
@@ -50,7 +56,7 @@ View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/
 __Usage:__
 
 
-`node snippets.js`
+`node samples/snippets.js`
 
 
 
