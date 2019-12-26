@@ -27,6 +27,12 @@ analysis, and syntax analysis. This API is part of the larger Cloud Machine Lear
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-language#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -40,7 +46,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node analyze.v1.js`
+`node samples/analyze.v1.js`
 
 
 -----
@@ -57,7 +63,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node analyze.v1beta2.js`
+`node samples/analyze.v1beta2.js`
 
 
 -----
@@ -74,7 +80,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node automlNaturalLanguageDataset.js`
+`node samples/automlNaturalLanguageDataset.js`
 
 
 -----
@@ -91,7 +97,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node automlNaturalLanguageModel.js`
+`node samples/automlNaturalLanguageModel.js`
 
 
 -----
@@ -108,7 +114,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node automlNaturalLanguagePredict.js`
+`node samples/automlNaturalLanguagePredict.js`
 
 
 -----
@@ -125,7 +131,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -142,7 +148,7 @@ View the [source code](https://github.com/googleapis/nodejs-language/blob/master
 __Usage:__
 
 
-`node setEndpoint.js`
+`node samples/setEndpoint.js`
 
 
 
