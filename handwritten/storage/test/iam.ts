@@ -93,7 +93,23 @@ describe('storage/iam', () => {
       };
 
       iam.request_ = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      iam.getPolicy(options, assert.ifError);
+    });
+
+    it('should map requestedPolicyVersion option to optionsRequestedPolicyVersion', done => {
+      const VERSION = 3;
+      const options = {
+        requestedPolicyVersion: VERSION,
+      };
+
+      iam.request_ = (reqOpts: DecorateRequestOptions) => {
+        assert.deepStrictEqual(reqOpts.qs, {
+          optionsRequestedPolicyVersion: VERSION,
+        });
         done();
       };
 

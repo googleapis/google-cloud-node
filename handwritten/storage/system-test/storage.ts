@@ -725,6 +725,41 @@ describe('storage', () => {
         });
       });
 
+      it('should get-modify-set a conditional policy', async () => {
+        // Uniform-bucket-level-access is required to use IAM Conditions.
+        await bucket.setMetadata({
+          iamConfiguration: {
+            uniformBucketLevelAccess: {
+              enabled: true,
+            },
+          },
+        });
+
+        const [policy] = await bucket.iam.getPolicy();
+
+        const serviceAccount = (await storage.authClient.getCredentials())
+          .client_email;
+        const conditionalBinding = {
+          role: 'roles/storage.objectViewer',
+          members: [`serviceAccount:${serviceAccount}`],
+          condition: {
+            title: 'always-true',
+            description: 'this condition is always effective',
+            expression: 'true',
+          },
+        };
+
+        policy.version = 3;
+        policy.bindings.push(conditionalBinding);
+
+        await bucket.iam.setPolicy(policy);
+
+        const [newPolicy] = await bucket.iam.getPolicy({
+          requestedPolicyVersion: 3,
+        });
+        assert.deepStrictEqual(newPolicy.bindings, policy.bindings);
+      });
+
       it('should test the iam permissions', done => {
         const testPermissions = [
           'storage.buckets.get',
