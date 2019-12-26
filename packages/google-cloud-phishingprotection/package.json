@@ -34,7 +34,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
