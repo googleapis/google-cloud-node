@@ -23,6 +23,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-text-to-speech#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -36,7 +42,7 @@ View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/
 __Usage:__
 
 
-`node audioProfile.js`
+`node samples/audioProfile.js`
 
 
 -----
@@ -53,7 +59,7 @@ View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/
 __Usage:__
 
 
-`node listVoices.js`
+`node samples/listVoices.js`
 
 
 -----
@@ -70,7 +76,7 @@ View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -87,7 +93,7 @@ View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/
 __Usage:__
 
 
-`node ssmlAddresses.js`
+`node samples/ssmlAddresses.js`
 
 
 -----
@@ -104,7 +110,7 @@ View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/
 __Usage:__
 
 
-`node synthesize.js`
+`node samples/synthesize.js`
 
 
 
