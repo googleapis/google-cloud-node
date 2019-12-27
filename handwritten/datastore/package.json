@@ -89,7 +89,7 @@
     "power-assert": "^1.6.1",
     "prettier": "^1.17.1",
     "proxyquire": "^2.1.0",
-    "sinon": "^7.3.2",
+    "sinon": "^8.0.0",
     "tmp": "0.1.0",
     "typescript": "3.6.4"
   }
