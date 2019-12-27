@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "test": "nyc mocha",
+    "test": "c8 mocha",
     "lint": "eslint '**/*.js'",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
@@ -52,7 +52,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.0.0",
-    "nyc": "^14.0.0",
+    "c8": "^7.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.7"
   }
