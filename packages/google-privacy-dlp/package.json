@@ -29,14 +29,11 @@
     "DLP API"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js --timeout 600000",
-    "test-no-cover": "mocha",
-    "test": "npm run cover",
+    "test": "c8 mocha",
     "fix": "eslint --fix '**/*.js'",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
@@ -46,8 +43,6 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "codecov": "^3.0.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^10.0.0",
@@ -58,7 +53,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.0.0",
-    "nyc": "^15.0.0",
+    "c8": "^7.0.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4"
   }
