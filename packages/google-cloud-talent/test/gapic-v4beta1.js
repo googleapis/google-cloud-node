@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const {describe, it} = require('mocha');
 
 const talentModule = require('../src');
 
