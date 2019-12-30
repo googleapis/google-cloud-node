@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import merge = require('lodash.merge');
 
 import {ErrorMessage} from '../../../src/classes/error-message';

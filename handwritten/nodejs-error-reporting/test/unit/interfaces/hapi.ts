@@ -15,6 +15,7 @@
 import * as is from 'is';
 import has = require('lodash.has');
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {makeHapiPlugin as hapiInterface} from '../../../src/interfaces/hapi';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {Fuzzer} from '../../../utils/fuzzer';

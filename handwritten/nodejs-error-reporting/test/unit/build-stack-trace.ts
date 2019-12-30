@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as path from 'path';
 import {buildStackTrace} from '../../src/build-stack-trace';
 
