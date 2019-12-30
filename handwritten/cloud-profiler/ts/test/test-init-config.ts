@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as gcpMetadata from 'gcp-metadata';
 import {heap as heapProfiler} from 'pprof';
 import * as sinon from 'sinon';

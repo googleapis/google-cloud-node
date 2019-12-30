@@ -18,6 +18,7 @@ import {
   DecorateRequestOptions,
 } from '@google-cloud/common';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as nock from 'nock';
 import {heap as heapProfiler, time as timeProfiler} from 'pprof';
