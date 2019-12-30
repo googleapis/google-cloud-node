@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {TranslationServiceClient} from '../src';
 
 const http2spy = require('http2spy');
