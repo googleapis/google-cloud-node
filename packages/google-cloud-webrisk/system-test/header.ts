@@ -13,7 +13,8 @@
 // limitations under the License.
 
 import * as protoTypes from '../protos/protos';
-const {assert} = require('chai');
+import {assert} from 'chai';
+import {describe, it} from 'mocha';
 const http2spy = require('http2spy');
 const {WebRiskServiceV1Beta1Client} = http2spy.require(
   require.resolve('../src/v1beta1')

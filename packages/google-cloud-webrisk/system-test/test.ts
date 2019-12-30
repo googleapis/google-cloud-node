@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {assert} = require('chai');
+import {assert} from 'chai';
+import {describe, it} from 'mocha';
 
 describe('WebRiskSmokeTest', () => {
   it('searches threat database for URI', async () => {
