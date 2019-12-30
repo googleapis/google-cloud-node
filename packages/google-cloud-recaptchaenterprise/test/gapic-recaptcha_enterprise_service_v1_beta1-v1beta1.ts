@@ -18,6 +18,7 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 const recaptchaenterpriseservicev1beta1Module = require('../src');
 
 const FAKE_STATUS_CODE = 1;
