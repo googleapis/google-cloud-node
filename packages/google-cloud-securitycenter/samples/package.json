@@ -1,6 +1,10 @@
 {
   "name": "nodejs-security-center-samples",
   "private": true,
+  "files": [
+    "**/*.js",
+    "!system-test/"
+  ],
   "engines": {
     "node": ">=8"
   },
