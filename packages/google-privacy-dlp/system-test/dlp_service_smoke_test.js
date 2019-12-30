@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('DlpServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const dlp = require('../src');
