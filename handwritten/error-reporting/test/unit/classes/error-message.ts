@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
 import {deepStrictEqual} from '../../util';
