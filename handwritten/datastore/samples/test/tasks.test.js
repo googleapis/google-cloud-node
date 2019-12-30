@@ -16,6 +16,7 @@
 
 const {Datastore} = require('@google-cloud/datastore');
 const {assert} = require('chai');
+const {describe, it, after} = require('mocha');
 const {execSync} = require('child_process');
 
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});

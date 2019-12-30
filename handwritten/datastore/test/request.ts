@@ -15,6 +15,7 @@
 import * as pjy from '@google-cloud/projectify';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
