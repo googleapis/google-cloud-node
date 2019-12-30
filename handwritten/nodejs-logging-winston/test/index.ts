@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as TransportStream from 'winston-transport';
 
 import * as types from '../src/types/core';
