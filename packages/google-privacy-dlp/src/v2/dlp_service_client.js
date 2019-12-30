@@ -340,6 +340,9 @@ class DlpServiceClient {
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
+   * @param {string} [request.locationId]
+   *   The geographic location to process content inspection. Reserved for future
+   *   extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -401,6 +404,9 @@ class DlpServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   The parent resource name, for example projects/my-project-id.
+   * @param {string} [request.locationId]
+   *   The geographic location to process the request. Reserved for future
+   *   extensions.
    * @param {Object} [request.inspectConfig]
    *   Configuration for the inspector.
    *
@@ -505,6 +511,9 @@ class DlpServiceClient {
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
+   * @param {string} [request.locationId]
+   *   The geographic location to process de-identification. Reserved for future
+   *   extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -596,6 +605,9 @@ class DlpServiceClient {
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
+   * @param {string} [request.locationId]
+   *   The geographic location to process content reidentification.  Reserved for
+   *   future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -657,6 +669,9 @@ class DlpServiceClient {
    * @param {string} [request.filter]
    *   Optional filter to only return infoTypes supported by certain parts of the
    *   API. Defaults to supported_by=INSPECT.
+   * @param {string} [request.locationId]
+   *   The geographic location to list info types. Reserved for future
+   *   extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -693,6 +708,13 @@ class DlpServiceClient {
     }
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      location_id: request.locationId,
+    });
 
     return this._innerApiCalls.listInfoTypes(request, options, callback);
   }
@@ -716,6 +738,9 @@ class DlpServiceClient {
    *   numbers, and hyphens; that is, it must match the regular
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
+   * @param {string} [request.locationId]
+   *   The geographic location to store the inspection template. Reserved for
+   *   future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -922,6 +947,9 @@ class DlpServiceClient {
    *   - `update_time`: corresponds to time the template was last updated.
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where inspection templates will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1049,6 +1077,9 @@ class DlpServiceClient {
    *   - `update_time`: corresponds to time the template was last updated.
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where inspection templates will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1154,6 +1185,9 @@ class DlpServiceClient {
    *   numbers, and hyphens; that is, it must match the regular
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
+   * @param {string} [request.locationId]
+   *   The geographic location to store the deidentification template. Reserved
+   *   for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1367,6 +1401,9 @@ class DlpServiceClient {
    *   - `update_time`: corresponds to time the template was last updated.
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where deidentifications templates will be retrieved
+   *   from. Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1498,6 +1535,9 @@ class DlpServiceClient {
    *   - `update_time`: corresponds to time the template was last updated.
    *   - `name`: corresponds to template's name.
    *   - `display_name`: corresponds to template's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where deidentifications templates will be retrieved
+   *   from. Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1606,6 +1646,9 @@ class DlpServiceClient {
    *   numbers, and hyphens; that is, it must match the regular
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
+   * @param {string} [request.locationId]
+   *   The geographic location to store and process the job. Reserved for
+   *   future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1715,6 +1758,9 @@ class DlpServiceClient {
    *   - `end_time`: corresponds to time the job ended.
    *   - `name`: corresponds to job's name.
    *   - `state`: corresponds to `state`
+   * @param {string} [request.locationId]
+   *   The geographic location where jobs will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1874,6 +1920,9 @@ class DlpServiceClient {
    *   - `end_time`: corresponds to time the job ended.
    *   - `name`: corresponds to job's name.
    *   - `state`: corresponds to `state`
+   * @param {string} [request.locationId]
+   *   The geographic location where jobs will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2117,6 +2166,9 @@ class DlpServiceClient {
    *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
    *
    *   The length of this field should be no more than 500 characters.
+   * @param {string} [request.locationId]
+   *   The geographic location where job triggers will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2270,6 +2322,9 @@ class DlpServiceClient {
    *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
    *
    *   The length of this field should be no more than 500 characters.
+   * @param {string} [request.locationId]
+   *   The geographic location where job triggers will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2488,6 +2543,9 @@ class DlpServiceClient {
    *   numbers, and hyphens; that is, it must match the regular
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
+   * @param {string} [request.locationId]
+   *   The geographic location to store the job trigger. Reserved for
+   *   future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2554,6 +2612,9 @@ class DlpServiceClient {
    *   numbers, and hyphens; that is, it must match the regular
    *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
+   * @param {string} [request.locationId]
+   *   The geographic location to store the stored infoType. Reserved for
+   *   future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2759,6 +2820,9 @@ class DlpServiceClient {
    *   - `state`: corresponds to the state of the resource.
    *   - `name`: corresponds to resource name.
    *   - `display_name`: corresponds to info type's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where stored infoTypes will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2887,6 +2951,9 @@ class DlpServiceClient {
    *   - `state`: corresponds to the state of the resource.
    *   - `name`: corresponds to resource name.
    *   - `display_name`: corresponds to info type's display name.
+   * @param {string} [request.locationId]
+   *   The geographic location where stored infoTypes will be retrieved from.
+   *   Use `-` for all locations. Reserved for future extensions.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

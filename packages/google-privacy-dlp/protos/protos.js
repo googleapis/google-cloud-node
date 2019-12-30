@@ -6721,6 +6721,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IRedactImageRequest
                          * @property {string|null} [parent] RedactImageRequest parent
+                         * @property {string|null} [locationId] RedactImageRequest locationId
                          * @property {google.privacy.dlp.v2.IInspectConfig|null} [inspectConfig] RedactImageRequest inspectConfig
                          * @property {Array.<google.privacy.dlp.v2.RedactImageRequest.IImageRedactionConfig>|null} [imageRedactionConfigs] RedactImageRequest imageRedactionConfigs
                          * @property {boolean|null} [includeFindings] RedactImageRequest includeFindings
@@ -6750,6 +6751,14 @@
                          * @instance
                          */
                         RedactImageRequest.prototype.parent = "";
+    
+                        /**
+                         * RedactImageRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.locationId = "";
     
                         /**
                          * RedactImageRequest inspectConfig.
@@ -6818,6 +6827,8 @@
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.includeFindings);
                             if (message.byteItem != null && message.hasOwnProperty("byteItem"))
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.locationId);
                             return writer;
                         };
     
@@ -6854,6 +6865,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.parent = reader.string();
+                                    break;
+                                case 8:
+                                    message.locationId = reader.string();
                                     break;
                                 case 2:
                                     message.inspectConfig = $root.google.privacy.dlp.v2.InspectConfig.decode(reader, reader.uint32());
@@ -6907,6 +6921,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             if (message.inspectConfig != null && message.hasOwnProperty("inspectConfig")) {
                                 var error = $root.google.privacy.dlp.v2.InspectConfig.verify(message.inspectConfig);
                                 if (error)
@@ -6946,6 +6963,8 @@
                             var message = new $root.google.privacy.dlp.v2.RedactImageRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             if (object.inspectConfig != null) {
                                 if (typeof object.inspectConfig !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.RedactImageRequest.inspectConfig: object expected");
@@ -6991,6 +7010,7 @@
                                 object.inspectConfig = null;
                                 object.includeFindings = false;
                                 object.byteItem = null;
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -7005,6 +7025,8 @@
                                 object.includeFindings = message.includeFindings;
                             if (message.byteItem != null && message.hasOwnProperty("byteItem"))
                                 object.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.toObject(message.byteItem, options);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -7779,6 +7801,7 @@
                          * @property {google.privacy.dlp.v2.IContentItem|null} [item] DeidentifyContentRequest item
                          * @property {string|null} [inspectTemplateName] DeidentifyContentRequest inspectTemplateName
                          * @property {string|null} [deidentifyTemplateName] DeidentifyContentRequest deidentifyTemplateName
+                         * @property {string|null} [locationId] DeidentifyContentRequest locationId
                          */
     
                         /**
@@ -7845,6 +7868,14 @@
                         DeidentifyContentRequest.prototype.deidentifyTemplateName = "";
     
                         /**
+                         * DeidentifyContentRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.DeidentifyContentRequest
+                         * @instance
+                         */
+                        DeidentifyContentRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new DeidentifyContentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.DeidentifyContentRequest
@@ -7880,6 +7911,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.inspectTemplateName);
                             if (message.deidentifyTemplateName != null && message.hasOwnProperty("deidentifyTemplateName"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.deidentifyTemplateName);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.locationId);
                             return writer;
                         };
     
@@ -7931,6 +7964,9 @@
                                     break;
                                 case 6:
                                     message.deidentifyTemplateName = reader.string();
+                                    break;
+                                case 7:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7991,6 +8027,9 @@
                             if (message.deidentifyTemplateName != null && message.hasOwnProperty("deidentifyTemplateName"))
                                 if (!$util.isString(message.deidentifyTemplateName))
                                     return "deidentifyTemplateName: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -8027,6 +8066,8 @@
                                 message.inspectTemplateName = String(object.inspectTemplateName);
                             if (object.deidentifyTemplateName != null)
                                 message.deidentifyTemplateName = String(object.deidentifyTemplateName);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -8050,6 +8091,7 @@
                                 object.item = null;
                                 object.inspectTemplateName = "";
                                 object.deidentifyTemplateName = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -8063,6 +8105,8 @@
                                 object.inspectTemplateName = message.inspectTemplateName;
                             if (message.deidentifyTemplateName != null && message.hasOwnProperty("deidentifyTemplateName"))
                                 object.deidentifyTemplateName = message.deidentifyTemplateName;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -8312,6 +8356,7 @@
                          * @property {google.privacy.dlp.v2.IContentItem|null} [item] ReidentifyContentRequest item
                          * @property {string|null} [inspectTemplateName] ReidentifyContentRequest inspectTemplateName
                          * @property {string|null} [reidentifyTemplateName] ReidentifyContentRequest reidentifyTemplateName
+                         * @property {string|null} [locationId] ReidentifyContentRequest locationId
                          */
     
                         /**
@@ -8378,6 +8423,14 @@
                         ReidentifyContentRequest.prototype.reidentifyTemplateName = "";
     
                         /**
+                         * ReidentifyContentRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ReidentifyContentRequest
+                         * @instance
+                         */
+                        ReidentifyContentRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ReidentifyContentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ReidentifyContentRequest
@@ -8413,6 +8466,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.inspectTemplateName);
                             if (message.reidentifyTemplateName != null && message.hasOwnProperty("reidentifyTemplateName"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.reidentifyTemplateName);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.locationId);
                             return writer;
                         };
     
@@ -8464,6 +8519,9 @@
                                     break;
                                 case 6:
                                     message.reidentifyTemplateName = reader.string();
+                                    break;
+                                case 7:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8524,6 +8582,9 @@
                             if (message.reidentifyTemplateName != null && message.hasOwnProperty("reidentifyTemplateName"))
                                 if (!$util.isString(message.reidentifyTemplateName))
                                     return "reidentifyTemplateName: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -8560,6 +8621,8 @@
                                 message.inspectTemplateName = String(object.inspectTemplateName);
                             if (object.reidentifyTemplateName != null)
                                 message.reidentifyTemplateName = String(object.reidentifyTemplateName);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -8583,6 +8646,7 @@
                                 object.item = null;
                                 object.inspectTemplateName = "";
                                 object.reidentifyTemplateName = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -8596,6 +8660,8 @@
                                 object.inspectTemplateName = message.inspectTemplateName;
                             if (message.reidentifyTemplateName != null && message.hasOwnProperty("reidentifyTemplateName"))
                                 object.reidentifyTemplateName = message.reidentifyTemplateName;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -8843,6 +8909,7 @@
                          * @property {google.privacy.dlp.v2.IInspectConfig|null} [inspectConfig] InspectContentRequest inspectConfig
                          * @property {google.privacy.dlp.v2.IContentItem|null} [item] InspectContentRequest item
                          * @property {string|null} [inspectTemplateName] InspectContentRequest inspectTemplateName
+                         * @property {string|null} [locationId] InspectContentRequest locationId
                          */
     
                         /**
@@ -8893,6 +8960,14 @@
                         InspectContentRequest.prototype.inspectTemplateName = "";
     
                         /**
+                         * InspectContentRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.InspectContentRequest
+                         * @instance
+                         */
+                        InspectContentRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new InspectContentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.InspectContentRequest
@@ -8924,6 +8999,8 @@
                                 $root.google.privacy.dlp.v2.ContentItem.encode(message.item, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.inspectTemplateName != null && message.hasOwnProperty("inspectTemplateName"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.inspectTemplateName);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
                             return writer;
                         };
     
@@ -8969,6 +9046,9 @@
                                     break;
                                 case 4:
                                     message.inspectTemplateName = reader.string();
+                                    break;
+                                case 5:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9021,6 +9101,9 @@
                             if (message.inspectTemplateName != null && message.hasOwnProperty("inspectTemplateName"))
                                 if (!$util.isString(message.inspectTemplateName))
                                     return "inspectTemplateName: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -9050,6 +9133,8 @@
                             }
                             if (object.inspectTemplateName != null)
                                 message.inspectTemplateName = String(object.inspectTemplateName);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -9071,6 +9156,7 @@
                                 object.inspectConfig = null;
                                 object.item = null;
                                 object.inspectTemplateName = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -9080,6 +9166,8 @@
                                 object.item = $root.google.privacy.dlp.v2.ContentItem.toObject(message.item, options);
                             if (message.inspectTemplateName != null && message.hasOwnProperty("inspectTemplateName"))
                                 object.inspectTemplateName = message.inspectTemplateName;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -10836,6 +10924,7 @@
                          * @interface IListInfoTypesRequest
                          * @property {string|null} [languageCode] ListInfoTypesRequest languageCode
                          * @property {string|null} [filter] ListInfoTypesRequest filter
+                         * @property {string|null} [locationId] ListInfoTypesRequest locationId
                          */
     
                         /**
@@ -10870,6 +10959,14 @@
                         ListInfoTypesRequest.prototype.filter = "";
     
                         /**
+                         * ListInfoTypesRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListInfoTypesRequest
+                         * @instance
+                         */
+                        ListInfoTypesRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListInfoTypesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListInfoTypesRequest
@@ -10897,6 +10994,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.languageCode);
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.locationId);
                             return writer;
                         };
     
@@ -10936,6 +11035,9 @@
                                     break;
                                 case 2:
                                     message.filter = reader.string();
+                                    break;
+                                case 3:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10978,6 +11080,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -10997,6 +11102,8 @@
                                 message.languageCode = String(object.languageCode);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -11016,11 +11123,14 @@
                             if (options.defaults) {
                                 object.languageCode = "";
                                 object.filter = "";
+                                object.locationId = "";
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -31906,6 +32016,7 @@
                          * @property {string|null} [parent] CreateInspectTemplateRequest parent
                          * @property {google.privacy.dlp.v2.IInspectTemplate|null} [inspectTemplate] CreateInspectTemplateRequest inspectTemplate
                          * @property {string|null} [templateId] CreateInspectTemplateRequest templateId
+                         * @property {string|null} [locationId] CreateInspectTemplateRequest locationId
                          */
     
                         /**
@@ -31948,6 +32059,14 @@
                         CreateInspectTemplateRequest.prototype.templateId = "";
     
                         /**
+                         * CreateInspectTemplateRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.CreateInspectTemplateRequest
+                         * @instance
+                         */
+                        CreateInspectTemplateRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new CreateInspectTemplateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.CreateInspectTemplateRequest
@@ -31977,6 +32096,8 @@
                                 $root.google.privacy.dlp.v2.InspectTemplate.encode(message.inspectTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.templateId);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.locationId);
                             return writer;
                         };
     
@@ -32019,6 +32140,9 @@
                                     break;
                                 case 3:
                                     message.templateId = reader.string();
+                                    break;
+                                case 4:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -32066,6 +32190,9 @@
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 if (!$util.isString(message.templateId))
                                     return "templateId: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -32090,6 +32217,8 @@
                             }
                             if (object.templateId != null)
                                 message.templateId = String(object.templateId);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -32110,6 +32239,7 @@
                                 object.parent = "";
                                 object.inspectTemplate = null;
                                 object.templateId = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -32117,6 +32247,8 @@
                                 object.inspectTemplate = $root.google.privacy.dlp.v2.InspectTemplate.toObject(message.inspectTemplate, options);
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 object.templateId = message.templateId;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -32573,6 +32705,7 @@
                          * @property {string|null} [pageToken] ListInspectTemplatesRequest pageToken
                          * @property {number|null} [pageSize] ListInspectTemplatesRequest pageSize
                          * @property {string|null} [orderBy] ListInspectTemplatesRequest orderBy
+                         * @property {string|null} [locationId] ListInspectTemplatesRequest locationId
                          */
     
                         /**
@@ -32623,6 +32756,14 @@
                         ListInspectTemplatesRequest.prototype.orderBy = "";
     
                         /**
+                         * ListInspectTemplatesRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListInspectTemplatesRequest
+                         * @instance
+                         */
+                        ListInspectTemplatesRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListInspectTemplatesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListInspectTemplatesRequest
@@ -32654,6 +32795,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
                             return writer;
                         };
     
@@ -32699,6 +32842,9 @@
                                     break;
                                 case 4:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 5:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -32747,6 +32893,9 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -32770,6 +32919,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -32791,6 +32942,7 @@
                                 object.pageToken = "";
                                 object.pageSize = 0;
                                 object.orderBy = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -32800,6 +32952,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -33244,6 +33398,7 @@
                          * @property {string|null} [parent] CreateJobTriggerRequest parent
                          * @property {google.privacy.dlp.v2.IJobTrigger|null} [jobTrigger] CreateJobTriggerRequest jobTrigger
                          * @property {string|null} [triggerId] CreateJobTriggerRequest triggerId
+                         * @property {string|null} [locationId] CreateJobTriggerRequest locationId
                          */
     
                         /**
@@ -33286,6 +33441,14 @@
                         CreateJobTriggerRequest.prototype.triggerId = "";
     
                         /**
+                         * CreateJobTriggerRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.CreateJobTriggerRequest
+                         * @instance
+                         */
+                        CreateJobTriggerRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new CreateJobTriggerRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.CreateJobTriggerRequest
@@ -33315,6 +33478,8 @@
                                 $root.google.privacy.dlp.v2.JobTrigger.encode(message.jobTrigger, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.triggerId != null && message.hasOwnProperty("triggerId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.triggerId);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.locationId);
                             return writer;
                         };
     
@@ -33357,6 +33522,9 @@
                                     break;
                                 case 3:
                                     message.triggerId = reader.string();
+                                    break;
+                                case 4:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -33404,6 +33572,9 @@
                             if (message.triggerId != null && message.hasOwnProperty("triggerId"))
                                 if (!$util.isString(message.triggerId))
                                     return "triggerId: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -33428,6 +33599,8 @@
                             }
                             if (object.triggerId != null)
                                 message.triggerId = String(object.triggerId);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -33448,6 +33621,7 @@
                                 object.parent = "";
                                 object.jobTrigger = null;
                                 object.triggerId = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -33455,6 +33629,8 @@
                                 object.jobTrigger = $root.google.privacy.dlp.v2.JobTrigger.toObject(message.jobTrigger, options);
                             if (message.triggerId != null && message.hasOwnProperty("triggerId"))
                                 object.triggerId = message.triggerId;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -34098,6 +34274,7 @@
                          * @property {google.privacy.dlp.v2.IInspectJobConfig|null} [inspectJob] CreateDlpJobRequest inspectJob
                          * @property {google.privacy.dlp.v2.IRiskAnalysisJobConfig|null} [riskJob] CreateDlpJobRequest riskJob
                          * @property {string|null} [jobId] CreateDlpJobRequest jobId
+                         * @property {string|null} [locationId] CreateDlpJobRequest locationId
                          */
     
                         /**
@@ -34147,6 +34324,14 @@
                          */
                         CreateDlpJobRequest.prototype.jobId = "";
     
+                        /**
+                         * CreateDlpJobRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.CreateDlpJobRequest
+                         * @instance
+                         */
+                        CreateDlpJobRequest.prototype.locationId = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -34193,6 +34378,8 @@
                                 $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.encode(message.riskJob, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.jobId != null && message.hasOwnProperty("jobId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.jobId);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
                             return writer;
                         };
     
@@ -34238,6 +34425,9 @@
                                     break;
                                 case 4:
                                     message.jobId = reader.string();
+                                    break;
+                                case 5:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -34299,6 +34489,9 @@
                             if (message.jobId != null && message.hasOwnProperty("jobId"))
                                 if (!$util.isString(message.jobId))
                                     return "jobId: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -34328,6 +34521,8 @@
                             }
                             if (object.jobId != null)
                                 message.jobId = String(object.jobId);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -34347,6 +34542,7 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.jobId = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -34362,6 +34558,8 @@
                             }
                             if (message.jobId != null && message.hasOwnProperty("jobId"))
                                 object.jobId = message.jobId;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -34390,6 +34588,7 @@
                          * @property {number|null} [pageSize] ListJobTriggersRequest pageSize
                          * @property {string|null} [orderBy] ListJobTriggersRequest orderBy
                          * @property {string|null} [filter] ListJobTriggersRequest filter
+                         * @property {string|null} [locationId] ListJobTriggersRequest locationId
                          */
     
                         /**
@@ -34448,6 +34647,14 @@
                         ListJobTriggersRequest.prototype.filter = "";
     
                         /**
+                         * ListJobTriggersRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListJobTriggersRequest
+                         * @instance
+                         */
+                        ListJobTriggersRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListJobTriggersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListJobTriggersRequest
@@ -34481,6 +34688,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.locationId);
                             return writer;
                         };
     
@@ -34529,6 +34738,9 @@
                                     break;
                                 case 5:
                                     message.filter = reader.string();
+                                    break;
+                                case 7:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -34580,6 +34792,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -34605,6 +34820,8 @@
                                 message.orderBy = String(object.orderBy);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -34627,6 +34844,7 @@
                                 object.pageSize = 0;
                                 object.orderBy = "";
                                 object.filter = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -34638,6 +34856,8 @@
                                 object.orderBy = message.orderBy;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -36079,32 +36299,6 @@
                         return GetDlpJobRequest;
                     })();
     
-                    /**
-                     * RelationalOperator enum.
-                     * @name google.privacy.dlp.v2.RelationalOperator
-                     * @enum {string}
-                     * @property {number} RELATIONAL_OPERATOR_UNSPECIFIED=0 RELATIONAL_OPERATOR_UNSPECIFIED value
-                     * @property {number} EQUAL_TO=1 EQUAL_TO value
-                     * @property {number} NOT_EQUAL_TO=2 NOT_EQUAL_TO value
-                     * @property {number} GREATER_THAN=3 GREATER_THAN value
-                     * @property {number} LESS_THAN=4 LESS_THAN value
-                     * @property {number} GREATER_THAN_OR_EQUALS=5 GREATER_THAN_OR_EQUALS value
-                     * @property {number} LESS_THAN_OR_EQUALS=6 LESS_THAN_OR_EQUALS value
-                     * @property {number} EXISTS=7 EXISTS value
-                     */
-                    v2.RelationalOperator = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "RELATIONAL_OPERATOR_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "EQUAL_TO"] = 1;
-                        values[valuesById[2] = "NOT_EQUAL_TO"] = 2;
-                        values[valuesById[3] = "GREATER_THAN"] = 3;
-                        values[valuesById[4] = "LESS_THAN"] = 4;
-                        values[valuesById[5] = "GREATER_THAN_OR_EQUALS"] = 5;
-                        values[valuesById[6] = "LESS_THAN_OR_EQUALS"] = 6;
-                        values[valuesById[7] = "EXISTS"] = 7;
-                        return values;
-                    })();
-    
                     v2.ListDlpJobsRequest = (function() {
     
                         /**
@@ -36117,6 +36311,7 @@
                          * @property {string|null} [pageToken] ListDlpJobsRequest pageToken
                          * @property {google.privacy.dlp.v2.DlpJobType|null} [type] ListDlpJobsRequest type
                          * @property {string|null} [orderBy] ListDlpJobsRequest orderBy
+                         * @property {string|null} [locationId] ListDlpJobsRequest locationId
                          */
     
                         /**
@@ -36183,6 +36378,14 @@
                         ListDlpJobsRequest.prototype.orderBy = "";
     
                         /**
+                         * ListDlpJobsRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListDlpJobsRequest
+                         * @instance
+                         */
+                        ListDlpJobsRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListDlpJobsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListDlpJobsRequest
@@ -36218,6 +36421,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.type);
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.locationId);
                             return writer;
                         };
     
@@ -36269,6 +36474,9 @@
                                     break;
                                 case 6:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 7:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -36329,6 +36537,9 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -36368,6 +36579,8 @@
                             }
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -36391,6 +36604,7 @@
                                 object.parent = "";
                                 object.type = options.enums === String ? "DLP_JOB_TYPE_UNSPECIFIED" : 0;
                                 object.orderBy = "";
+                                object.locationId = "";
                             }
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
@@ -36404,6 +36618,8 @@
                                 object.type = options.enums === String ? $root.google.privacy.dlp.v2.DlpJobType[message.type] : message.type;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -36419,6 +36635,32 @@
                         };
     
                         return ListDlpJobsRequest;
+                    })();
+    
+                    /**
+                     * RelationalOperator enum.
+                     * @name google.privacy.dlp.v2.RelationalOperator
+                     * @enum {string}
+                     * @property {number} RELATIONAL_OPERATOR_UNSPECIFIED=0 RELATIONAL_OPERATOR_UNSPECIFIED value
+                     * @property {number} EQUAL_TO=1 EQUAL_TO value
+                     * @property {number} NOT_EQUAL_TO=2 NOT_EQUAL_TO value
+                     * @property {number} GREATER_THAN=3 GREATER_THAN value
+                     * @property {number} LESS_THAN=4 LESS_THAN value
+                     * @property {number} GREATER_THAN_OR_EQUALS=5 GREATER_THAN_OR_EQUALS value
+                     * @property {number} LESS_THAN_OR_EQUALS=6 LESS_THAN_OR_EQUALS value
+                     * @property {number} EXISTS=7 EXISTS value
+                     */
+                    v2.RelationalOperator = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RELATIONAL_OPERATOR_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EQUAL_TO"] = 1;
+                        values[valuesById[2] = "NOT_EQUAL_TO"] = 2;
+                        values[valuesById[3] = "GREATER_THAN"] = 3;
+                        values[valuesById[4] = "LESS_THAN"] = 4;
+                        values[valuesById[5] = "GREATER_THAN_OR_EQUALS"] = 5;
+                        values[valuesById[6] = "LESS_THAN_OR_EQUALS"] = 6;
+                        values[valuesById[7] = "EXISTS"] = 7;
+                        return values;
                     })();
     
                     v2.ListDlpJobsResponse = (function() {
@@ -37035,6 +37277,7 @@
                          * @property {string|null} [parent] CreateDeidentifyTemplateRequest parent
                          * @property {google.privacy.dlp.v2.IDeidentifyTemplate|null} [deidentifyTemplate] CreateDeidentifyTemplateRequest deidentifyTemplate
                          * @property {string|null} [templateId] CreateDeidentifyTemplateRequest templateId
+                         * @property {string|null} [locationId] CreateDeidentifyTemplateRequest locationId
                          */
     
                         /**
@@ -37077,6 +37320,14 @@
                         CreateDeidentifyTemplateRequest.prototype.templateId = "";
     
                         /**
+                         * CreateDeidentifyTemplateRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.CreateDeidentifyTemplateRequest
+                         * @instance
+                         */
+                        CreateDeidentifyTemplateRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new CreateDeidentifyTemplateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.CreateDeidentifyTemplateRequest
@@ -37106,6 +37357,8 @@
                                 $root.google.privacy.dlp.v2.DeidentifyTemplate.encode(message.deidentifyTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.templateId);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.locationId);
                             return writer;
                         };
     
@@ -37148,6 +37401,9 @@
                                     break;
                                 case 3:
                                     message.templateId = reader.string();
+                                    break;
+                                case 4:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -37195,6 +37451,9 @@
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 if (!$util.isString(message.templateId))
                                     return "templateId: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -37219,6 +37478,8 @@
                             }
                             if (object.templateId != null)
                                 message.templateId = String(object.templateId);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -37239,6 +37500,7 @@
                                 object.parent = "";
                                 object.deidentifyTemplate = null;
                                 object.templateId = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -37246,6 +37508,8 @@
                                 object.deidentifyTemplate = $root.google.privacy.dlp.v2.DeidentifyTemplate.toObject(message.deidentifyTemplate, options);
                             if (message.templateId != null && message.hasOwnProperty("templateId"))
                                 object.templateId = message.templateId;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -37702,6 +37966,7 @@
                          * @property {string|null} [pageToken] ListDeidentifyTemplatesRequest pageToken
                          * @property {number|null} [pageSize] ListDeidentifyTemplatesRequest pageSize
                          * @property {string|null} [orderBy] ListDeidentifyTemplatesRequest orderBy
+                         * @property {string|null} [locationId] ListDeidentifyTemplatesRequest locationId
                          */
     
                         /**
@@ -37752,6 +38017,14 @@
                         ListDeidentifyTemplatesRequest.prototype.orderBy = "";
     
                         /**
+                         * ListDeidentifyTemplatesRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListDeidentifyTemplatesRequest
+                         * @instance
+                         */
+                        ListDeidentifyTemplatesRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListDeidentifyTemplatesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListDeidentifyTemplatesRequest
@@ -37783,6 +38056,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
                             return writer;
                         };
     
@@ -37828,6 +38103,9 @@
                                     break;
                                 case 4:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 5:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -37876,6 +38154,9 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -37899,6 +38180,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -37920,6 +38203,7 @@
                                 object.pageToken = "";
                                 object.pageSize = 0;
                                 object.orderBy = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -37929,6 +38213,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -39915,6 +40201,7 @@
                          * @property {string|null} [parent] CreateStoredInfoTypeRequest parent
                          * @property {google.privacy.dlp.v2.IStoredInfoTypeConfig|null} [config] CreateStoredInfoTypeRequest config
                          * @property {string|null} [storedInfoTypeId] CreateStoredInfoTypeRequest storedInfoTypeId
+                         * @property {string|null} [locationId] CreateStoredInfoTypeRequest locationId
                          */
     
                         /**
@@ -39957,6 +40244,14 @@
                         CreateStoredInfoTypeRequest.prototype.storedInfoTypeId = "";
     
                         /**
+                         * CreateStoredInfoTypeRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.CreateStoredInfoTypeRequest
+                         * @instance
+                         */
+                        CreateStoredInfoTypeRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new CreateStoredInfoTypeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.CreateStoredInfoTypeRequest
@@ -39986,6 +40281,8 @@
                                 $root.google.privacy.dlp.v2.StoredInfoTypeConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.storedInfoTypeId != null && message.hasOwnProperty("storedInfoTypeId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.storedInfoTypeId);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.locationId);
                             return writer;
                         };
     
@@ -40028,6 +40325,9 @@
                                     break;
                                 case 3:
                                     message.storedInfoTypeId = reader.string();
+                                    break;
+                                case 4:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -40075,6 +40375,9 @@
                             if (message.storedInfoTypeId != null && message.hasOwnProperty("storedInfoTypeId"))
                                 if (!$util.isString(message.storedInfoTypeId))
                                     return "storedInfoTypeId: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -40099,6 +40402,8 @@
                             }
                             if (object.storedInfoTypeId != null)
                                 message.storedInfoTypeId = String(object.storedInfoTypeId);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -40119,6 +40424,7 @@
                                 object.parent = "";
                                 object.config = null;
                                 object.storedInfoTypeId = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -40126,6 +40432,8 @@
                                 object.config = $root.google.privacy.dlp.v2.StoredInfoTypeConfig.toObject(message.config, options);
                             if (message.storedInfoTypeId != null && message.hasOwnProperty("storedInfoTypeId"))
                                 object.storedInfoTypeId = message.storedInfoTypeId;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     
@@ -40582,6 +40890,7 @@
                          * @property {string|null} [pageToken] ListStoredInfoTypesRequest pageToken
                          * @property {number|null} [pageSize] ListStoredInfoTypesRequest pageSize
                          * @property {string|null} [orderBy] ListStoredInfoTypesRequest orderBy
+                         * @property {string|null} [locationId] ListStoredInfoTypesRequest locationId
                          */
     
                         /**
@@ -40632,6 +40941,14 @@
                         ListStoredInfoTypesRequest.prototype.orderBy = "";
     
                         /**
+                         * ListStoredInfoTypesRequest locationId.
+                         * @member {string} locationId
+                         * @memberof google.privacy.dlp.v2.ListStoredInfoTypesRequest
+                         * @instance
+                         */
+                        ListStoredInfoTypesRequest.prototype.locationId = "";
+    
+                        /**
                          * Creates a new ListStoredInfoTypesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.ListStoredInfoTypesRequest
@@ -40663,6 +40980,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.locationId);
                             return writer;
                         };
     
@@ -40708,6 +41027,9 @@
                                     break;
                                 case 4:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 5:
+                                    message.locationId = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -40756,6 +41078,9 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
                             return null;
                         };
     
@@ -40779,6 +41104,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
                             return message;
                         };
     
@@ -40800,6 +41127,7 @@
                                 object.pageToken = "";
                                 object.pageSize = 0;
                                 object.orderBy = "";
+                                object.locationId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -40809,6 +41137,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
                             return object;
                         };
     

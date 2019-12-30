@@ -588,6 +588,10 @@ const BoundingBox = {
  * @property {string} parent
  *   The parent resource name, for example projects/my-project-id.
  *
+ * @property {string} locationId
+ *   The geographic location to process the request. Reserved for future
+ *   extensions.
+ *
  * @property {Object} inspectConfig
  *   Configuration for the inspector.
  *
@@ -727,6 +731,10 @@ const RedactImageResponse = {
  *   template. Repeated fields are appended. Singular sub-messages and groups
  *   are recursively merged.
  *
+ * @property {string} locationId
+ *   The geographic location to process de-identification. Reserved for future
+ *   extensions.
+ *
  * @typedef DeidentifyContentRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.DeidentifyContentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -801,6 +809,10 @@ const DeidentifyContentResponse = {
  *   template. Repeated fields are appended. Singular sub-messages and groups
  *   are recursively merged.
  *
+ * @property {string} locationId
+ *   The geographic location to process content reidentification.  Reserved for
+ *   future extensions.
+ *
  * @typedef ReidentifyContentRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ReidentifyContentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -853,6 +865,10 @@ const ReidentifyContentResponse = {
  *   that are set in this request will replace their corresponding fields in the
  *   template. Repeated fields are appended. Singular sub-messages and groups
  *   are recursively merged.
+ *
+ * @property {string} locationId
+ *   The geographic location to process content inspection. Reserved for future
+ *   extensions.
  *
  * @typedef InspectContentRequest
  * @memberof google.privacy.dlp.v2
@@ -1074,6 +1090,10 @@ const InfoTypeDescription = {
  * @property {string} filter
  *   Optional filter to only return infoTypes supported by certain parts of the
  *   API. Defaults to supported_by=INSPECT.
+ *
+ * @property {string} locationId
+ *   The geographic location to list info types. Reserved for future
+ *   extensions.
  *
  * @typedef ListInfoTypesRequest
  * @memberof google.privacy.dlp.v2
@@ -2688,14 +2708,15 @@ const KmsWrappedCryptoKey = {
  *
  * @property {Object} context
  *   Points to the field that contains the context, for example, an entity id.
- *   If set, must also set method. If set, shift will be consistent for the
+ *   If set, must also set cryptoKey. If set, shift will be consistent for the
  *   given context.
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
  * @property {Object} cryptoKey
  *   Causes the shift to be computed based on this key and the context. This
- *   results in the same shift for the same context and crypto_key.
+ *   results in the same shift for the same context and crypto_key. If
+ *   set, must also set context. Can only be applied to table items.
  *
  *   This object should have the same structure as [CryptoKey]{@link google.privacy.dlp.v2.CryptoKey}
  *
@@ -3077,12 +3098,12 @@ const Schedule = {
  *   Short description (max 256 chars).
  *
  * @property {Object} createTime
- *   The creation timestamp of a inspectTemplate, output only field.
+ *   The creation timestamp of an inspectTemplate, output only field.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The last update timestamp of a inspectTemplate, output only field.
+ *   The last update timestamp of an inspectTemplate, output only field.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -3100,7 +3121,7 @@ const InspectTemplate = {
 };
 
 /**
- * The DeidentifyTemplates contains instructions on how to deidentify content.
+ * DeidentifyTemplates contains instructions on how to de-identify content.
  * See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
  *
  * @property {string} name
@@ -3117,12 +3138,12 @@ const InspectTemplate = {
  *   Short description (max 256 chars).
  *
  * @property {Object} createTime
- *   The creation timestamp of a inspectTemplate, output only field.
+ *   The creation timestamp of an inspectTemplate, output only field.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The last update timestamp of a inspectTemplate, output only field.
+ *   The last update timestamp of an inspectTemplate, output only field.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -3426,6 +3447,10 @@ const Action = {
  *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
  *   characters. Can be empty to allow the system to generate one.
  *
+ * @property {string} locationId
+ *   The geographic location to store the inspection template. Reserved for
+ *   future extensions.
+ *
  * @typedef CreateInspectTemplateRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateInspectTemplateRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3506,6 +3531,10 @@ const GetInspectTemplateRequest = {
  *   - `name`: corresponds to template's name.
  *   - `display_name`: corresponds to template's display name.
  *
+ * @property {string} locationId
+ *   The geographic location where inspection templates will be retrieved from.
+ *   Use `-` for all locations. Reserved for future extensions.
+ *
  * @typedef ListInspectTemplatesRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInspectTemplatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3566,6 +3595,10 @@ const DeleteInspectTemplateRequest = {
  *   numbers, and hyphens; that is, it must match the regular
  *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
  *   characters. Can be empty to allow the system to generate one.
+ *
+ * @property {string} locationId
+ *   The geographic location to store the job trigger. Reserved for
+ *   future extensions.
  *
  * @typedef CreateJobTriggerRequest
  * @memberof google.privacy.dlp.v2
@@ -3650,6 +3683,10 @@ const GetJobTriggerRequest = {
  *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
  *   characters. Can be empty to allow the system to generate one.
  *
+ * @property {string} locationId
+ *   The geographic location to store and process the job. Reserved for
+ *   future extensions.
+ *
  * @typedef CreateDlpJobRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateDlpJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3714,6 +3751,10 @@ const CreateDlpJobRequest = {
  *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
  *
  *   The length of this field should be no more than 500 characters.
+ *
+ * @property {string} locationId
+ *   The geographic location where job triggers will be retrieved from.
+ *   Use `-` for all locations. Reserved for future extensions.
  *
  * @typedef ListJobTriggersRequest
  * @memberof google.privacy.dlp.v2
@@ -3954,6 +3995,10 @@ const GetDlpJobRequest = {
  *   - `name`: corresponds to job's name.
  *   - `state`: corresponds to `state`
  *
+ * @property {string} locationId
+ *   The geographic location where jobs will be retrieved from.
+ *   Use `-` for all locations. Reserved for future extensions.
+ *
  * @typedef ListDlpJobsRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDlpJobsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -4026,6 +4071,10 @@ const DeleteDlpJobRequest = {
  *   numbers, and hyphens; that is, it must match the regular
  *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
  *   characters. Can be empty to allow the system to generate one.
+ *
+ * @property {string} locationId
+ *   The geographic location to store the deidentification template. Reserved
+ *   for future extensions.
  *
  * @typedef CreateDeidentifyTemplateRequest
  * @memberof google.privacy.dlp.v2
@@ -4106,6 +4155,10 @@ const GetDeidentifyTemplateRequest = {
  *   - `update_time`: corresponds to time the template was last updated.
  *   - `name`: corresponds to template's name.
  *   - `display_name`: corresponds to template's display name.
+ *
+ * @property {string} locationId
+ *   The geographic location where deidentifications templates will be retrieved
+ *   from. Use `-` for all locations. Reserved for future extensions.
  *
  * @typedef ListDeidentifyTemplatesRequest
  * @memberof google.privacy.dlp.v2
@@ -4201,7 +4254,9 @@ const LargeCustomDictionaryStats = {
 };
 
 /**
- * Configuration for a StoredInfoType.
+ * Configuration for stored infoTypes. All fields and subfield are provided
+ * by the user. For more information, see
+ * https://cloud.google.com/dlp/docs/creating-custom-infotypes.
  *
  * @property {string} displayName
  *   Display name of the StoredInfoType (max 256 characters).
@@ -4331,6 +4386,10 @@ const StoredInfoType = {
  *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
  *   characters. Can be empty to allow the system to generate one.
  *
+ * @property {string} locationId
+ *   The geographic location to store the stored infoType. Reserved for
+ *   future extensions.
+ *
  * @typedef CreateStoredInfoTypeRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.CreateStoredInfoTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -4413,6 +4472,10 @@ const GetStoredInfoTypeRequest = {
  *   - `state`: corresponds to the state of the resource.
  *   - `name`: corresponds to resource name.
  *   - `display_name`: corresponds to info type's display name.
+ *
+ * @property {string} locationId
+ *   The geographic location where stored infoTypes will be retrieved from.
+ *   Use `-` for all locations. Reserved for future extensions.
  *
  * @typedef ListStoredInfoTypesRequest
  * @memberof google.privacy.dlp.v2

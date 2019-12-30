@@ -2876,6 +2876,9 @@ export namespace google {
                     /** RedactImageRequest parent */
                     parent?: (string|null);
 
+                    /** RedactImageRequest locationId */
+                    locationId?: (string|null);
+
                     /** RedactImageRequest inspectConfig */
                     inspectConfig?: (google.privacy.dlp.v2.IInspectConfig|null);
 
@@ -2900,6 +2903,9 @@ export namespace google {
 
                     /** RedactImageRequest parent. */
                     public parent: string;
+
+                    /** RedactImageRequest locationId. */
+                    public locationId: string;
 
                     /** RedactImageRequest inspectConfig. */
                     public inspectConfig?: (google.privacy.dlp.v2.IInspectConfig|null);
@@ -3316,6 +3322,9 @@ export namespace google {
 
                     /** DeidentifyContentRequest deidentifyTemplateName */
                     deidentifyTemplateName?: (string|null);
+
+                    /** DeidentifyContentRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a DeidentifyContentRequest. */
@@ -3344,6 +3353,9 @@ export namespace google {
 
                     /** DeidentifyContentRequest deidentifyTemplateName. */
                     public deidentifyTemplateName: string;
+
+                    /** DeidentifyContentRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new DeidentifyContentRequest instance using the specified properties.
@@ -3532,6 +3544,9 @@ export namespace google {
 
                     /** ReidentifyContentRequest reidentifyTemplateName */
                     reidentifyTemplateName?: (string|null);
+
+                    /** ReidentifyContentRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ReidentifyContentRequest. */
@@ -3560,6 +3575,9 @@ export namespace google {
 
                     /** ReidentifyContentRequest reidentifyTemplateName. */
                     public reidentifyTemplateName: string;
+
+                    /** ReidentifyContentRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ReidentifyContentRequest instance using the specified properties.
@@ -3742,6 +3760,9 @@ export namespace google {
 
                     /** InspectContentRequest inspectTemplateName */
                     inspectTemplateName?: (string|null);
+
+                    /** InspectContentRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents an InspectContentRequest. */
@@ -3764,6 +3785,9 @@ export namespace google {
 
                     /** InspectContentRequest inspectTemplateName. */
                     public inspectTemplateName: string;
+
+                    /** InspectContentRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new InspectContentRequest instance using the specified properties.
@@ -4547,6 +4571,9 @@ export namespace google {
 
                     /** ListInfoTypesRequest filter */
                     filter?: (string|null);
+
+                    /** ListInfoTypesRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListInfoTypesRequest. */
@@ -4563,6 +4590,9 @@ export namespace google {
 
                     /** ListInfoTypesRequest filter. */
                     public filter: string;
+
+                    /** ListInfoTypesRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListInfoTypesRequest instance using the specified properties.
@@ -12855,6 +12885,9 @@ export namespace google {
 
                     /** CreateInspectTemplateRequest templateId */
                     templateId?: (string|null);
+
+                    /** CreateInspectTemplateRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a CreateInspectTemplateRequest. */
@@ -12874,6 +12907,9 @@ export namespace google {
 
                     /** CreateInspectTemplateRequest templateId. */
                     public templateId: string;
+
+                    /** CreateInspectTemplateRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new CreateInspectTemplateRequest instance using the specified properties.
@@ -13152,6 +13188,9 @@ export namespace google {
 
                     /** ListInspectTemplatesRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListInspectTemplatesRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListInspectTemplatesRequest. */
@@ -13174,6 +13213,9 @@ export namespace google {
 
                     /** ListInspectTemplatesRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListInspectTemplatesRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListInspectTemplatesRequest instance using the specified properties.
@@ -13443,6 +13485,9 @@ export namespace google {
 
                     /** CreateJobTriggerRequest triggerId */
                     triggerId?: (string|null);
+
+                    /** CreateJobTriggerRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a CreateJobTriggerRequest. */
@@ -13462,6 +13507,9 @@ export namespace google {
 
                     /** CreateJobTriggerRequest triggerId. */
                     public triggerId: string;
+
+                    /** CreateJobTriggerRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new CreateJobTriggerRequest instance using the specified properties.
@@ -13830,6 +13878,9 @@ export namespace google {
 
                     /** CreateDlpJobRequest jobId */
                     jobId?: (string|null);
+
+                    /** CreateDlpJobRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a CreateDlpJobRequest. */
@@ -13852,6 +13903,9 @@ export namespace google {
 
                     /** CreateDlpJobRequest jobId. */
                     public jobId: string;
+
+                    /** CreateDlpJobRequest locationId. */
+                    public locationId: string;
 
                     /** CreateDlpJobRequest job. */
                     public job?: ("inspectJob"|"riskJob");
@@ -13944,6 +13998,9 @@ export namespace google {
 
                     /** ListJobTriggersRequest filter */
                     filter?: (string|null);
+
+                    /** ListJobTriggersRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListJobTriggersRequest. */
@@ -13969,6 +14026,9 @@ export namespace google {
 
                     /** ListJobTriggersRequest filter. */
                     public filter: string;
+
+                    /** ListJobTriggersRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListJobTriggersRequest instance using the specified properties.
@@ -14585,18 +14645,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** RelationalOperator enum. */
-                enum RelationalOperator {
-                    RELATIONAL_OPERATOR_UNSPECIFIED = 0,
-                    EQUAL_TO = 1,
-                    NOT_EQUAL_TO = 2,
-                    GREATER_THAN = 3,
-                    LESS_THAN = 4,
-                    GREATER_THAN_OR_EQUALS = 5,
-                    LESS_THAN_OR_EQUALS = 6,
-                    EXISTS = 7
-                }
-
                 /** Properties of a ListDlpJobsRequest. */
                 interface IListDlpJobsRequest {
 
@@ -14617,6 +14665,9 @@ export namespace google {
 
                     /** ListDlpJobsRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListDlpJobsRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListDlpJobsRequest. */
@@ -14645,6 +14696,9 @@ export namespace google {
 
                     /** ListDlpJobsRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListDlpJobsRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListDlpJobsRequest instance using the specified properties.
@@ -14715,6 +14769,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** RelationalOperator enum. */
+                enum RelationalOperator {
+                    RELATIONAL_OPERATOR_UNSPECIFIED = 0,
+                    EQUAL_TO = 1,
+                    NOT_EQUAL_TO = 2,
+                    GREATER_THAN = 3,
+                    LESS_THAN = 4,
+                    GREATER_THAN_OR_EQUALS = 5,
+                    LESS_THAN_OR_EQUALS = 6,
+                    EXISTS = 7
                 }
 
                 /** Properties of a ListDlpJobsResponse. */
@@ -15004,6 +15070,9 @@ export namespace google {
 
                     /** CreateDeidentifyTemplateRequest templateId */
                     templateId?: (string|null);
+
+                    /** CreateDeidentifyTemplateRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a CreateDeidentifyTemplateRequest. */
@@ -15023,6 +15092,9 @@ export namespace google {
 
                     /** CreateDeidentifyTemplateRequest templateId. */
                     public templateId: string;
+
+                    /** CreateDeidentifyTemplateRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new CreateDeidentifyTemplateRequest instance using the specified properties.
@@ -15301,6 +15373,9 @@ export namespace google {
 
                     /** ListDeidentifyTemplatesRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListDeidentifyTemplatesRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListDeidentifyTemplatesRequest. */
@@ -15323,6 +15398,9 @@ export namespace google {
 
                     /** ListDeidentifyTemplatesRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListDeidentifyTemplatesRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListDeidentifyTemplatesRequest instance using the specified properties.
@@ -16201,6 +16279,9 @@ export namespace google {
 
                     /** CreateStoredInfoTypeRequest storedInfoTypeId */
                     storedInfoTypeId?: (string|null);
+
+                    /** CreateStoredInfoTypeRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a CreateStoredInfoTypeRequest. */
@@ -16220,6 +16301,9 @@ export namespace google {
 
                     /** CreateStoredInfoTypeRequest storedInfoTypeId. */
                     public storedInfoTypeId: string;
+
+                    /** CreateStoredInfoTypeRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new CreateStoredInfoTypeRequest instance using the specified properties.
@@ -16498,6 +16582,9 @@ export namespace google {
 
                     /** ListStoredInfoTypesRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListStoredInfoTypesRequest locationId */
+                    locationId?: (string|null);
                 }
 
                 /** Represents a ListStoredInfoTypesRequest. */
@@ -16520,6 +16607,9 @@ export namespace google {
 
                     /** ListStoredInfoTypesRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListStoredInfoTypesRequest locationId. */
+                    public locationId: string;
 
                     /**
                      * Creates a new ListStoredInfoTypesRequest instance using the specified properties.

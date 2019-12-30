@@ -27,7 +27,9 @@
                           "responseType": "InspectContentResponse",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:inspect",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:inspect",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "RedactImage": {
@@ -35,7 +37,9 @@
                           "responseType": "RedactImageResponse",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/image:redact",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/image:redact",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "DeidentifyContent": {
@@ -43,7 +47,9 @@
                           "responseType": "DeidentifyContentResponse",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:deidentify",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:deidentify",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "ReidentifyContent": {
@@ -51,14 +57,17 @@
                           "responseType": "ReidentifyContentResponse",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/content:reidentify",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/content:reidentify",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "ListInfoTypes": {
                           "requestType": "ListInfoTypesRequest",
                           "responseType": "ListInfoTypesResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/infoTypes"
+                            "(google.api.http).get": "/v2/infoTypes",
+                            "(google.api.http).additional_bindings.get": "/v2/locations/{location_id}/infoTypes"
                           }
                         },
                         "CreateInspectTemplate": {
@@ -67,7 +76,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/inspectTemplates",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -77,7 +86,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/inspectTemplates/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -86,7 +95,7 @@
                           "responseType": "InspectTemplate",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/inspectTemplates/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
                           }
                         },
                         "ListInspectTemplates": {
@@ -94,7 +103,7 @@
                           "responseType": "ListInspectTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/inspectTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/inspectTemplates"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates"
                           }
                         },
                         "DeleteInspectTemplate": {
@@ -102,7 +111,7 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/inspectTemplates/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
                           }
                         },
                         "CreateDeidentifyTemplate": {
@@ -111,7 +120,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/deidentifyTemplates",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/deidentifyTemplates",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -121,7 +130,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{name=organizations/*/deidentifyTemplates/*}",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/deidentifyTemplates/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -130,7 +139,7 @@
                           "responseType": "DeidentifyTemplate",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/deidentifyTemplates/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/deidentifyTemplates/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
                           }
                         },
                         "ListDeidentifyTemplates": {
@@ -138,7 +147,7 @@
                           "responseType": "ListDeidentifyTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/deidentifyTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/deidentifyTemplates"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates"
                           }
                         },
                         "DeleteDeidentifyTemplate": {
@@ -146,7 +155,7 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/deidentifyTemplates/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/deidentifyTemplates/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
                           }
                         },
                         "CreateJobTrigger": {
@@ -154,7 +163,9 @@
                           "responseType": "JobTrigger",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/jobTriggers",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "UpdateJobTrigger": {
@@ -162,28 +173,33 @@
                           "responseType": "JobTrigger",
                           "options": {
                             "(google.api.http).patch": "/v2/{name=projects/*/jobTriggers/*}",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "GetJobTrigger": {
                           "requestType": "GetJobTriggerRequest",
                           "responseType": "JobTrigger",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/jobTriggers/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
                           }
                         },
                         "ListJobTriggers": {
                           "requestType": "ListJobTriggersRequest",
                           "responseType": "ListJobTriggersResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers"
+                            "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers"
                           }
                         },
                         "DeleteJobTrigger": {
                           "requestType": "DeleteJobTriggerRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/jobTriggers/*}"
+                            "(google.api.http).delete": "/v2/{name=projects/*/jobTriggers/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
                           }
                         },
                         "ActivateJobTrigger": {
@@ -191,7 +207,9 @@
                           "responseType": "DlpJob",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/jobTriggers/*}:activate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/jobTriggers/*}:activate",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "CreateDlpJob": {
@@ -199,28 +217,33 @@
                           "responseType": "DlpJob",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*}/dlpJobs",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "ListDlpJobs": {
                           "requestType": "ListDlpJobsRequest",
                           "responseType": "ListDlpJobsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs"
+                            "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs"
                           }
                         },
                         "GetDlpJob": {
                           "requestType": "GetDlpJobRequest",
                           "responseType": "DlpJob",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/dlpJobs/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/dlpJobs/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
                           }
                         },
                         "DeleteDlpJob": {
                           "requestType": "DeleteDlpJobRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/dlpJobs/*}"
+                            "(google.api.http).delete": "/v2/{name=projects/*/dlpJobs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
                           }
                         },
                         "CancelDlpJob": {
@@ -228,7 +251,9 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/dlpJobs/*}:cancel",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{name=projects/*/locations/*/dlpJobs/*}:cancel",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "CreateStoredInfoType": {
@@ -237,7 +262,7 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/storedInfoTypes",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/storedInfoTypes",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -247,7 +272,7 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{name=organizations/*/storedInfoTypes/*}",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/storedInfoTypes/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
@@ -256,7 +281,7 @@
                           "responseType": "StoredInfoType",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/storedInfoTypes/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/storedInfoTypes/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
                           }
                         },
                         "ListStoredInfoTypes": {
@@ -264,7 +289,7 @@
                           "responseType": "ListStoredInfoTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/storedInfoTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/storedInfoTypes"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes"
                           }
                         },
                         "DeleteStoredInfoType": {
@@ -272,7 +297,7 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/storedInfoTypes/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/storedInfoTypes/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
                           }
                         }
                       }
@@ -690,6 +715,10 @@
                             "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
+                        "locationId": {
+                          "type": "string",
+                          "id": 8
+                        },
                         "inspectConfig": {
                           "type": "InspectConfig",
                           "id": 2
@@ -795,6 +824,10 @@
                         "deidentifyTemplateName": {
                           "type": "string",
                           "id": 6
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -839,6 +872,10 @@
                         "reidentifyTemplateName": {
                           "type": "string",
                           "id": 6
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -874,6 +911,10 @@
                         "inspectTemplateName": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -1001,6 +1042,10 @@
                         "filter": {
                           "type": "string",
                           "id": 2
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -2532,6 +2577,10 @@
                         "templateId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -2588,6 +2637,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -2633,6 +2686,10 @@
                         "triggerId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -2709,6 +2766,10 @@
                         "jobId": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -2737,6 +2798,10 @@
                         "filter": {
                           "type": "string",
                           "id": 5
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -2867,18 +2932,6 @@
                         }
                       }
                     },
-                    "RelationalOperator": {
-                      "values": {
-                        "RELATIONAL_OPERATOR_UNSPECIFIED": 0,
-                        "EQUAL_TO": 1,
-                        "NOT_EQUAL_TO": 2,
-                        "GREATER_THAN": 3,
-                        "LESS_THAN": 4,
-                        "GREATER_THAN_OR_EQUALS": 5,
-                        "LESS_THAN_OR_EQUALS": 6,
-                        "EXISTS": 7
-                      }
-                    },
                     "ListDlpJobsRequest": {
                       "fields": {
                         "parent": {
@@ -2908,7 +2961,23 @@
                         "orderBy": {
                           "type": "string",
                           "id": 6
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 7
                         }
+                      }
+                    },
+                    "RelationalOperator": {
+                      "values": {
+                        "RELATIONAL_OPERATOR_UNSPECIFIED": 0,
+                        "EQUAL_TO": 1,
+                        "NOT_EQUAL_TO": 2,
+                        "GREATER_THAN": 3,
+                        "LESS_THAN": 4,
+                        "GREATER_THAN_OR_EQUALS": 5,
+                        "LESS_THAN_OR_EQUALS": 6,
+                        "EXISTS": 7
                       }
                     },
                     "ListDlpJobsResponse": {
@@ -2965,6 +3034,10 @@
                         "templateId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -3021,6 +3094,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -3182,6 +3259,10 @@
                         "storedInfoTypeId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -3238,6 +3319,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
