@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as bunyan from 'bunyan';
 import * as uuid from 'uuid';
 import * as types from '../src/types/core';
