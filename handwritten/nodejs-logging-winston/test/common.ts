@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as nodeutil from 'util';
 import * as types from '../src/types/core';
 

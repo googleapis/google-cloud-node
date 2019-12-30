@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import delay from 'delay';
 import * as uuid from 'uuid';
 import {express as elb} from '../src/index';
