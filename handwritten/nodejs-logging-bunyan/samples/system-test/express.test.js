@@ -16,6 +16,7 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it, after} = require('mocha');
 const {spawn} = require('child_process');
 const delay = require('delay');
 const got = require('got');
@@ -23,13 +24,11 @@ const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 
 const PORT = process.env.PORT || 8080;
-
-after(() => got(`http://localhost:${PORT}/shutdown`));
-
 const lb = require('@google-cloud/logging-bunyan');
 const {APP_LOG_SUFFIX} = lb.express;
 
 describe('express samples', () => {
+  after(() => got(`http://localhost:${PORT}/shutdown`));
   it('should write using bunyan', async () => {
     // Start the express server.
     spawn(process.execPath, ['express.js'], {

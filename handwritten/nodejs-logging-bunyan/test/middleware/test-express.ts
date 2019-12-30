@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {GCPEnv} from 'google-auth-library';
 import * as proxyquire from 'proxyquire';
 

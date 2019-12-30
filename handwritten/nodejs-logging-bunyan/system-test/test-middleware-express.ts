@@ -17,6 +17,7 @@
 /* AN EXAMPLE RATHER THAN A TEST AT THIS POINT */
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import delay from 'delay';
 import * as uuid from 'uuid';
 
