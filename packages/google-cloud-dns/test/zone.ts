@@ -16,6 +16,7 @@ import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
 import * as uuid from 'uuid';
