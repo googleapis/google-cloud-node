@@ -1,4 +1,4 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2017 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
 'use strict';
 
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
 const cp = require('child_process');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('quickstart', () => {
-  it('should return a list of resources', async () => {
+  it('should return a list of resources', () => {
     const stdout = execSync('node quickstart');
     assert.match(stdout, /^Data sources/);
   });

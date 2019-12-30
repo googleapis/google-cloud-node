@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('DataTransferServiceSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
