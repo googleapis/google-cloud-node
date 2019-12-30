@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {createLogger} from '../../src/logger';
 
 describe('logger', () => {
