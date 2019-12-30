@@ -15,6 +15,7 @@
 'use strict';
 
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
 
 const projectId = process.env.GCLOUD_PROJECT;
 

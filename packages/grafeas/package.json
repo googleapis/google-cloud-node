@@ -43,10 +43,10 @@
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "eslint . --fix",
     "lint": "eslint .",
-    "test": "c8 mocha test/*.js",
+    "test": "c8 mocha",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
-    "samples-test": "c8 mocha samples/test/*.js",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "c8 mocha --timeout=150000 system-test/*.js"
   },
   "license": "Apache-2.0",
