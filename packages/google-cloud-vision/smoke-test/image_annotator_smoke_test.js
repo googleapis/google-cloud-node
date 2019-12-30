@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('ImageAnnotatorSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const vision = require('../src');
