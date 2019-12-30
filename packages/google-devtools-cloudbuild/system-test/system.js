@@ -16,6 +16,7 @@
 'use strict';
 
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
 const {CloudBuildClient} = require('../');
 const PROJECT_ID = process.env.GCLOUD_PROJECT;
 const cb = new CloudBuildClient();
