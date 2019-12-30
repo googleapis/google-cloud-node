@@ -23,6 +23,7 @@ import {
 import {MakeAuthenticatedRequestFactoryConfig} from '@google-cloud/common/build/src/util';
 import arrify = require('arrify');
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 import * as root from '../src';
