@@ -12,35 +12,53 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const path = require('path');
+
 module.exports = {
-    entry: './src/browser.js',
-    output: {
-      library: "workflows",
-      filename: "./workflows.js"
+  entry: './src/index.ts',
+  output: {
+    library: 'Workflows',
+    filename: './workflows.js',
+  },
+  node: {
+    child_process: 'empty',
+    fs: 'empty',
+    crypto: 'empty',
+  },
+  resolve: {
+    alias: {
+      '../../../package.json': path.resolve(__dirname, 'package.json'),
     },
-    node: {
-      child_process: 'empty',
-      fs: 'empty',
-      crypto: 'empty',
-    },
-    resolve: {
-      extensions: ['.js', '.json']
-    },
-    module: {
-      rules: [
-        {
-          test: /node_modules[\\/]retry-request[\\/]/,
-          use: 'null-loader'
-        },
-        {
-          test: /node_modules[\\/]https-proxy-agent[\\/]/,
-          use: 'null-loader'
-        },
-        {
-          test: /node_modules[\\/]gtoken[\\/]/,
-          use: 'null-loader'
-        },
-      ]
-    },
-    mode: 'production'
+    extensions: ['.js', '.json', '.ts'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /node_modules[\\/]@grpc[\\/]grpc-js/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]grpc/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]retry-request/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]https?-proxy-agent/,
+        use: 'null-loader'
+      },
+      {
+        test: /node_modules[\\/]gtoken/,
+        use: 'null-loader'
+      },
+    ],
+  },
+  mode: 'production',
 };

@@ -1,0 +1,46 @@
+{
+  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "name": "@google-cloud/workflows",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "Workflows API client for Node.js",
+  "main": "src/index.js",
+  "browser": "src/browser.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google workflows",
+    "workflows",
+    "Workflows API"
+  ],
+  "dependencies": {
+    "google-gax": "^1.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "null-loader": "^3.0.0",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6"
+  },
+  "scripts": {
+    "compile-protos": "compileProtos ./src",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}

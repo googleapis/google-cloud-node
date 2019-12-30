@@ -1,3 +1,18 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import * as Long from "long";
 import * as $protobuf from "protobufjs";
 /** Namespace google. */
 export namespace google {
@@ -166,6 +181,9 @@ export namespace google {
 
                     /** Workflow labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Workflow serviceAccount */
+                    serviceAccount?: (string|null);
                 }
 
                 /** Represents a Workflow. */
@@ -200,6 +218,9 @@ export namespace google {
 
                     /** Workflow labels. */
                     public labels: { [k: string]: string };
+
+                    /** Workflow serviceAccount. */
+                    public serviceAccount: string;
 
                     /** Workflow sourceCode. */
                     public sourceCode?: "sourceContents";
@@ -1376,6 +1397,12 @@ export namespace google {
 
             /** ResourceDescriptor history */
             history?: (google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
         }
 
         /** Represents a ResourceDescriptor. */
@@ -1398,6 +1425,12 @@ export namespace google {
 
             /** ResourceDescriptor history. */
             public history: google.api.ResourceDescriptor.History;
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
 
             /**
              * Creates a new ResourceDescriptor instance using the specified properties.
@@ -3135,6 +3168,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */

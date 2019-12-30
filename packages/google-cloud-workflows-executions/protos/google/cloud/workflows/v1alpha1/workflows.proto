@@ -142,6 +142,18 @@ message Workflow {
 
   // Labels associated with this workflow.
   map<string, string> labels = 8;
+
+  // Name of the service account associated with the latest workflow version.
+  // This service account represents the identity of the workflow and determines
+  // what permissions the workflow has.
+  // It should have the following format:
+  // `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+  // Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+  // the account. The `ACCOUNT` value can be the `email` address or the
+  // `unique_id` of the service account.
+  //
+  // If not provided, workflow will use the project's default service account.
+  string service_account = 9;
 }
 
 // Request for the `ListWorkflows` method.
@@ -214,7 +226,7 @@ message CreateWorkflowRequest {
   // Required. The ID of the workflow to be created. It has to fulfil the
   // following requirements:
   //
-  // * Must contain only lowercase letters, numbers, and hyphens.
+  // * Must contain only letters, numbers, underscores and hyphens.
   // * Must start with a letter.
   // * Must be between 1-64 characters.
   // * Must end with a number or a letter.
