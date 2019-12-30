@@ -1,4 +1,4 @@
-// Copyright 2019, Google LLC All rights reserved.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 'use strict';
 
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
 const {execSync} = require('child_process');
 
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});
