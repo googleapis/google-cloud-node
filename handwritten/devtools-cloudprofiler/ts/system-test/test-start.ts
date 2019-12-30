@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import delay from 'delay';
 import * as nock from 'nock';
 import {promisify} from 'util';
