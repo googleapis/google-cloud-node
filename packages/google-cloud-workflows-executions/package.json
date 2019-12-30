@@ -1,5 +1,5 @@
 {
-  "name": "workflows",
+  "name": "@google-cloud/workflows",
   "version": "0.2.0",
   "description": "Workflows client for Node.js",
   "repository": "googleapis/nodejs-workflows",

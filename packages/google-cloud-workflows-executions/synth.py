@@ -29,7 +29,7 @@ for version in versions:
     version=version,
     private=True)
 
-s.copy(library, excludes=['README.md'])
+s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
