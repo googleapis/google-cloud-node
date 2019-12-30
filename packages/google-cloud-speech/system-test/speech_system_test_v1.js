@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const {describe, it} = require('mocha');
 const path = require('path');
 const speech = require(path.join(process.cwd(), 'build', 'src'));
 const fs = require('fs');

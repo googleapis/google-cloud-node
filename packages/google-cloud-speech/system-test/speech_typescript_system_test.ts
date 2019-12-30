@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as speech from '../src';
 import * as fs from 'fs';
 import * as path from 'path';

@@ -17,6 +17,7 @@
 'use strict';
 
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
 

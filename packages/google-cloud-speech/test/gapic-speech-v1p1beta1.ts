@@ -18,6 +18,7 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 const speechModule = require('../src');
 
 import {PassThrough} from 'stream';
