@@ -168,6 +168,10 @@
                       "type": "google.protobuf.BoolValue",
                       "id": 17
                     },
+                    "validity": {
+                      "type": "google.rpc.Status",
+                      "id": 18
+                    },
                     "notificationChannels": {
                       "rule": "repeated",
                       "type": "string",
@@ -2067,6 +2071,9 @@
                   }
                 },
                 "InternalChecker": {
+                  "options": {
+                    "deprecated": true
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
@@ -2087,7 +2094,29 @@
                     "peerProjectId": {
                       "type": "string",
                       "id": 6
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 7
                     }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "UNSPECIFIED": 0,
+                        "CREATING": 1,
+                        "RUNNING": 2
+                      }
+                    }
+                  }
+                },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4
                   }
                 },
                 "UptimeCheckConfig": {
@@ -2150,12 +2179,18 @@
                     },
                     "isInternal": {
                       "type": "bool",
-                      "id": 15
+                      "id": 15,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "internalCheckers": {
                       "rule": "repeated",
                       "type": "InternalChecker",
-                      "id": 14
+                      "id": 14,
+                      "options": {
+                        "deprecated": true
+                      }
                     }
                   },
                   "nested": {
@@ -2197,6 +2232,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 6
+                        },
+                        "validateSsl": {
+                          "type": "bool",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -2227,6 +2266,21 @@
                         "content": {
                           "type": "string",
                           "id": 1
+                        },
+                        "matcher": {
+                          "type": "ContentMatcherOption",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ContentMatcherOption": {
+                          "values": {
+                            "CONTENT_MATCHER_OPTION_UNSPECIFIED": 0,
+                            "CONTAINS_STRING": 1,
+                            "NOT_CONTAINS_STRING": 2,
+                            "MATCHES_REGEX": 3,
+                            "NOT_MATCHES_REGEX": 4
+                          }
                         }
                       }
                     }
@@ -2246,15 +2300,6 @@
                       "type": "string",
                       "id": 3
                     }
-                  }
-                },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
                   }
                 },
                 "GroupResourceType": {

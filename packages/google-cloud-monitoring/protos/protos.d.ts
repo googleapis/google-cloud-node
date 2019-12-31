@@ -1,3 +1,18 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import * as Long from "long";
 import * as $protobuf from "protobufjs";
 /** Namespace google. */
 export namespace google {
@@ -743,6 +758,9 @@ export namespace google {
                 /** AlertPolicy enabled */
                 enabled?: (google.protobuf.IBoolValue|null);
 
+                /** AlertPolicy validity */
+                validity?: (google.rpc.IStatus|null);
+
                 /** AlertPolicy notificationChannels */
                 notificationChannels?: (string[]|null);
 
@@ -782,6 +800,9 @@ export namespace google {
 
                 /** AlertPolicy enabled. */
                 public enabled?: (google.protobuf.IBoolValue|null);
+
+                /** AlertPolicy validity. */
+                public validity?: (google.rpc.IStatus|null);
 
                 /** AlertPolicy notificationChannels. */
                 public notificationChannels: string[];
@@ -10738,6 +10759,9 @@ export namespace google {
 
                 /** InternalChecker peerProjectId */
                 peerProjectId?: (string|null);
+
+                /** InternalChecker state */
+                state?: (google.monitoring.v3.InternalChecker.State|null);
             }
 
             /** Represents an InternalChecker. */
@@ -10763,6 +10787,9 @@ export namespace google {
 
                 /** InternalChecker peerProjectId. */
                 public peerProjectId: string;
+
+                /** InternalChecker state. */
+                public state: google.monitoring.v3.InternalChecker.State;
 
                 /**
                  * Creates a new InternalChecker instance using the specified properties.
@@ -10833,6 +10860,25 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
+            }
+
+            namespace InternalChecker {
+
+                /** State enum. */
+                enum State {
+                    UNSPECIFIED = 0,
+                    CREATING = 1,
+                    RUNNING = 2
+                }
+            }
+
+            /** UptimeCheckRegion enum. */
+            enum UptimeCheckRegion {
+                REGION_UNSPECIFIED = 0,
+                USA = 1,
+                EUROPE = 2,
+                SOUTH_AMERICA = 3,
+                ASIA_PACIFIC = 4
             }
 
             /** Properties of an UptimeCheckConfig. */
@@ -11115,6 +11161,9 @@ export namespace google {
 
                     /** HttpCheck headers */
                     headers?: ({ [k: string]: string }|null);
+
+                    /** HttpCheck validateSsl */
+                    validateSsl?: (boolean|null);
                 }
 
                 /** Represents a HttpCheck. */
@@ -11143,6 +11192,9 @@ export namespace google {
 
                     /** HttpCheck headers. */
                     public headers: { [k: string]: string };
+
+                    /** HttpCheck validateSsl. */
+                    public validateSsl: boolean;
 
                     /**
                      * Creates a new HttpCheck instance using the specified properties.
@@ -11409,6 +11461,9 @@ export namespace google {
 
                     /** ContentMatcher content */
                     content?: (string|null);
+
+                    /** ContentMatcher matcher */
+                    matcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null);
                 }
 
                 /** Represents a ContentMatcher. */
@@ -11422,6 +11477,9 @@ export namespace google {
 
                     /** ContentMatcher content. */
                     public content: string;
+
+                    /** ContentMatcher matcher. */
+                    public matcher: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption;
 
                     /**
                      * Creates a new ContentMatcher instance using the specified properties.
@@ -11492,6 +11550,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace ContentMatcher {
+
+                    /** ContentMatcherOption enum. */
+                    enum ContentMatcherOption {
+                        CONTENT_MATCHER_OPTION_UNSPECIFIED = 0,
+                        CONTAINS_STRING = 1,
+                        NOT_CONTAINS_STRING = 2,
+                        MATCHES_REGEX = 3,
+                        NOT_MATCHES_REGEX = 4
+                    }
                 }
             }
 
@@ -11595,15 +11665,6 @@ export namespace google {
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
-            }
-
-            /** UptimeCheckRegion enum. */
-            enum UptimeCheckRegion {
-                REGION_UNSPECIFIED = 0,
-                USA = 1,
-                EUROPE = 2,
-                SOUTH_AMERICA = 3,
-                ASIA_PACIFIC = 4
             }
 
             /** GroupResourceType enum. */

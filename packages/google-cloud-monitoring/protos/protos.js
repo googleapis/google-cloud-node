@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 (function(global, factory) { /* global define, require, module */
 
@@ -1572,6 +1586,7 @@
                      * @property {Array.<google.monitoring.v3.AlertPolicy.ICondition>|null} [conditions] AlertPolicy conditions
                      * @property {google.monitoring.v3.AlertPolicy.ConditionCombinerType|null} [combiner] AlertPolicy combiner
                      * @property {google.protobuf.IBoolValue|null} [enabled] AlertPolicy enabled
+                     * @property {google.rpc.IStatus|null} [validity] AlertPolicy validity
                      * @property {Array.<string>|null} [notificationChannels] AlertPolicy notificationChannels
                      * @property {google.monitoring.v3.IMutationRecord|null} [creationRecord] AlertPolicy creationRecord
                      * @property {google.monitoring.v3.IMutationRecord|null} [mutationRecord] AlertPolicy mutationRecord
@@ -1652,6 +1667,14 @@
                     AlertPolicy.prototype.enabled = null;
     
                     /**
+                     * AlertPolicy validity.
+                     * @member {google.rpc.IStatus|null|undefined} validity
+                     * @memberof google.monitoring.v3.AlertPolicy
+                     * @instance
+                     */
+                    AlertPolicy.prototype.validity = null;
+    
+                    /**
                      * AlertPolicy notificationChannels.
                      * @member {Array.<string>} notificationChannels
                      * @memberof google.monitoring.v3.AlertPolicy
@@ -1722,6 +1745,8 @@
                                 writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             $root.google.protobuf.BoolValue.encode(message.enabled, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.validity != null && message.hasOwnProperty("validity"))
+                            $root.google.rpc.Status.encode(message.validity, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                         return writer;
                     };
     
@@ -1783,6 +1808,9 @@
                                 break;
                             case 17:
                                 message.enabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                break;
+                            case 18:
+                                message.validity = $root.google.rpc.Status.decode(reader, reader.uint32());
                                 break;
                             case 14:
                                 if (!(message.notificationChannels && message.notificationChannels.length))
@@ -1873,6 +1901,11 @@
                             if (error)
                                 return "enabled." + error;
                         }
+                        if (message.validity != null && message.hasOwnProperty("validity")) {
+                            var error = $root.google.rpc.Status.verify(message.validity);
+                            if (error)
+                                return "validity." + error;
+                        }
                         if (message.notificationChannels != null && message.hasOwnProperty("notificationChannels")) {
                             if (!Array.isArray(message.notificationChannels))
                                 return "notificationChannels: array expected";
@@ -1954,6 +1987,11 @@
                                 throw TypeError(".google.monitoring.v3.AlertPolicy.enabled: object expected");
                             message.enabled = $root.google.protobuf.BoolValue.fromObject(object.enabled);
                         }
+                        if (object.validity != null) {
+                            if (typeof object.validity !== "object")
+                                throw TypeError(".google.monitoring.v3.AlertPolicy.validity: object expected");
+                            message.validity = $root.google.rpc.Status.fromObject(object.validity);
+                        }
                         if (object.notificationChannels) {
                             if (!Array.isArray(object.notificationChannels))
                                 throw TypeError(".google.monitoring.v3.AlertPolicy.notificationChannels: array expected");
@@ -2001,6 +2039,7 @@
                             object.mutationRecord = null;
                             object.documentation = null;
                             object.enabled = null;
+                            object.validity = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -2032,6 +2071,8 @@
                         }
                         if (message.enabled != null && message.hasOwnProperty("enabled"))
                             object.enabled = $root.google.protobuf.BoolValue.toObject(message.enabled, options);
+                        if (message.validity != null && message.hasOwnProperty("validity"))
+                            object.validity = $root.google.rpc.Status.toObject(message.validity, options);
                         return object;
                     };
     
@@ -25044,6 +25085,7 @@
                      * @property {string|null} [network] InternalChecker network
                      * @property {string|null} [gcpZone] InternalChecker gcpZone
                      * @property {string|null} [peerProjectId] InternalChecker peerProjectId
+                     * @property {google.monitoring.v3.InternalChecker.State|null} [state] InternalChecker state
                      */
     
                     /**
@@ -25102,6 +25144,14 @@
                     InternalChecker.prototype.peerProjectId = "";
     
                     /**
+                     * InternalChecker state.
+                     * @member {google.monitoring.v3.InternalChecker.State} state
+                     * @memberof google.monitoring.v3.InternalChecker
+                     * @instance
+                     */
+                    InternalChecker.prototype.state = 0;
+    
+                    /**
                      * Creates a new InternalChecker instance using the specified properties.
                      * @function create
                      * @memberof google.monitoring.v3.InternalChecker
@@ -25135,6 +25185,8 @@
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.gcpZone);
                         if (message.peerProjectId != null && message.hasOwnProperty("peerProjectId"))
                             writer.uint32(/* id 6, wireType 2 =*/50).string(message.peerProjectId);
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
                         return writer;
                     };
     
@@ -25183,6 +25235,9 @@
                                 break;
                             case 6:
                                 message.peerProjectId = reader.string();
+                                break;
+                            case 7:
+                                message.state = reader.int32();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -25234,6 +25289,15 @@
                         if (message.peerProjectId != null && message.hasOwnProperty("peerProjectId"))
                             if (!$util.isString(message.peerProjectId))
                                 return "peerProjectId: string expected";
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -25259,6 +25323,20 @@
                             message.gcpZone = String(object.gcpZone);
                         if (object.peerProjectId != null)
                             message.peerProjectId = String(object.peerProjectId);
+                        switch (object.state) {
+                        case "UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "CREATING":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "RUNNING":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -25281,6 +25359,7 @@
                             object.network = "";
                             object.gcpZone = "";
                             object.peerProjectId = "";
+                            object.state = options.enums === String ? "UNSPECIFIED" : 0;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -25292,6 +25371,8 @@
                             object.gcpZone = message.gcpZone;
                         if (message.peerProjectId != null && message.hasOwnProperty("peerProjectId"))
                             object.peerProjectId = message.peerProjectId;
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.google.monitoring.v3.InternalChecker.State[message.state] : message.state;
                         return object;
                     };
     
@@ -25306,7 +25387,43 @@
                         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                     };
     
+                    /**
+                     * State enum.
+                     * @name google.monitoring.v3.InternalChecker.State
+                     * @enum {string}
+                     * @property {number} UNSPECIFIED=0 UNSPECIFIED value
+                     * @property {number} CREATING=1 CREATING value
+                     * @property {number} RUNNING=2 RUNNING value
+                     */
+                    InternalChecker.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATING"] = 1;
+                        values[valuesById[2] = "RUNNING"] = 2;
+                        return values;
+                    })();
+    
                     return InternalChecker;
+                })();
+    
+                /**
+                 * UptimeCheckRegion enum.
+                 * @name google.monitoring.v3.UptimeCheckRegion
+                 * @enum {string}
+                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
+                 * @property {number} USA=1 USA value
+                 * @property {number} EUROPE=2 EUROPE value
+                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
+                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
+                 */
+                v3.UptimeCheckRegion = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "USA"] = 1;
+                    values[valuesById[2] = "EUROPE"] = 2;
+                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
+                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
+                    return values;
                 })();
     
                 v3.UptimeCheckConfig = (function() {
@@ -26154,6 +26271,7 @@
                          * @property {google.monitoring.v3.UptimeCheckConfig.HttpCheck.IBasicAuthentication|null} [authInfo] HttpCheck authInfo
                          * @property {boolean|null} [maskHeaders] HttpCheck maskHeaders
                          * @property {Object.<string,string>|null} [headers] HttpCheck headers
+                         * @property {boolean|null} [validateSsl] HttpCheck validateSsl
                          */
     
                         /**
@@ -26221,6 +26339,14 @@
                         HttpCheck.prototype.headers = $util.emptyObject;
     
                         /**
+                         * HttpCheck validateSsl.
+                         * @member {boolean} validateSsl
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
+                         * @instance
+                         */
+                        HttpCheck.prototype.validateSsl = false;
+    
+                        /**
                          * Creates a new HttpCheck instance using the specified properties.
                          * @function create
                          * @memberof google.monitoring.v3.UptimeCheckConfig.HttpCheck
@@ -26257,6 +26383,8 @@
                             if (message.headers != null && message.hasOwnProperty("headers"))
                                 for (var keys = Object.keys(message.headers), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.headers[keys[i]]).ldelim();
+                            if (message.validateSsl != null && message.hasOwnProperty("validateSsl"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.validateSsl);
                             return writer;
                         };
     
@@ -26313,6 +26441,9 @@
                                     key = reader.string();
                                     reader.pos++;
                                     message.headers[key] = reader.string();
+                                    break;
+                                case 7:
+                                    message.validateSsl = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -26374,6 +26505,9 @@
                                     if (!$util.isString(message.headers[key[i]]))
                                         return "headers: string{k:string} expected";
                             }
+                            if (message.validateSsl != null && message.hasOwnProperty("validateSsl"))
+                                if (typeof message.validateSsl !== "boolean")
+                                    return "validateSsl: boolean expected";
                             return null;
                         };
     
@@ -26409,6 +26543,8 @@
                                 for (var keys = Object.keys(object.headers), i = 0; i < keys.length; ++i)
                                     message.headers[keys[i]] = String(object.headers[keys[i]]);
                             }
+                            if (object.validateSsl != null)
+                                message.validateSsl = Boolean(object.validateSsl);
                             return message;
                         };
     
@@ -26433,6 +26569,7 @@
                                 object.port = 0;
                                 object.authInfo = null;
                                 object.maskHeaders = false;
+                                object.validateSsl = false;
                             }
                             if (message.useSsl != null && message.hasOwnProperty("useSsl"))
                                 object.useSsl = message.useSsl;
@@ -26450,6 +26587,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.headers[keys2[j]] = message.headers[keys2[j]];
                             }
+                            if (message.validateSsl != null && message.hasOwnProperty("validateSsl"))
+                                object.validateSsl = message.validateSsl;
                             return object;
                         };
     
@@ -26871,6 +27010,7 @@
                          * @memberof google.monitoring.v3.UptimeCheckConfig
                          * @interface IContentMatcher
                          * @property {string|null} [content] ContentMatcher content
+                         * @property {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null} [matcher] ContentMatcher matcher
                          */
     
                         /**
@@ -26895,6 +27035,14 @@
                          * @instance
                          */
                         ContentMatcher.prototype.content = "";
+    
+                        /**
+                         * ContentMatcher matcher.
+                         * @member {google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption} matcher
+                         * @memberof google.monitoring.v3.UptimeCheckConfig.ContentMatcher
+                         * @instance
+                         */
+                        ContentMatcher.prototype.matcher = 0;
     
                         /**
                          * Creates a new ContentMatcher instance using the specified properties.
@@ -26922,6 +27070,8 @@
                                 writer = $Writer.create();
                             if (message.content != null && message.hasOwnProperty("content"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
+                            if (message.matcher != null && message.hasOwnProperty("matcher"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.matcher);
                             return writer;
                         };
     
@@ -26958,6 +27108,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.content = reader.string();
+                                    break;
+                                case 2:
+                                    message.matcher = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -26997,6 +27150,17 @@
                             if (message.content != null && message.hasOwnProperty("content"))
                                 if (!$util.isString(message.content))
                                     return "content: string expected";
+                            if (message.matcher != null && message.hasOwnProperty("matcher"))
+                                switch (message.matcher) {
+                                default:
+                                    return "matcher: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -27014,6 +27178,28 @@
                             var message = new $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher();
                             if (object.content != null)
                                 message.content = String(object.content);
+                            switch (object.matcher) {
+                            case "CONTENT_MATCHER_OPTION_UNSPECIFIED":
+                            case 0:
+                                message.matcher = 0;
+                                break;
+                            case "CONTAINS_STRING":
+                            case 1:
+                                message.matcher = 1;
+                                break;
+                            case "NOT_CONTAINS_STRING":
+                            case 2:
+                                message.matcher = 2;
+                                break;
+                            case "MATCHES_REGEX":
+                            case 3:
+                                message.matcher = 3;
+                                break;
+                            case "NOT_MATCHES_REGEX":
+                            case 4:
+                                message.matcher = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -27030,10 +27216,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.content = "";
+                                object.matcher = options.enums === String ? "CONTENT_MATCHER_OPTION_UNSPECIFIED" : 0;
+                            }
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = message.content;
+                            if (message.matcher != null && message.hasOwnProperty("matcher"))
+                                object.matcher = options.enums === String ? $root.google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption[message.matcher] : message.matcher;
                             return object;
                         };
     
@@ -27047,6 +27237,26 @@
                         ContentMatcher.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * ContentMatcherOption enum.
+                         * @name google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption
+                         * @enum {string}
+                         * @property {number} CONTENT_MATCHER_OPTION_UNSPECIFIED=0 CONTENT_MATCHER_OPTION_UNSPECIFIED value
+                         * @property {number} CONTAINS_STRING=1 CONTAINS_STRING value
+                         * @property {number} NOT_CONTAINS_STRING=2 NOT_CONTAINS_STRING value
+                         * @property {number} MATCHES_REGEX=3 MATCHES_REGEX value
+                         * @property {number} NOT_MATCHES_REGEX=4 NOT_MATCHES_REGEX value
+                         */
+                        ContentMatcher.ContentMatcherOption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONTENT_MATCHER_OPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTAINS_STRING"] = 1;
+                            values[valuesById[2] = "NOT_CONTAINS_STRING"] = 2;
+                            values[valuesById[3] = "MATCHES_REGEX"] = 3;
+                            values[valuesById[4] = "NOT_MATCHES_REGEX"] = 4;
+                            return values;
+                        })();
     
                         return ContentMatcher;
                     })();
@@ -27312,26 +27522,6 @@
                     };
     
                     return UptimeCheckIp;
-                })();
-    
-                /**
-                 * UptimeCheckRegion enum.
-                 * @name google.monitoring.v3.UptimeCheckRegion
-                 * @enum {string}
-                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
-                 * @property {number} USA=1 USA value
-                 * @property {number} EUROPE=2 EUROPE value
-                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
-                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
-                 */
-                v3.UptimeCheckRegion = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "USA"] = 1;
-                    values[valuesById[2] = "EUROPE"] = 2;
-                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
-                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
-                    return values;
                 })();
     
                 /**
