@@ -27,13 +27,11 @@
     "Data Labeling API"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
-    "test-no-cover": "mocha test/*.js",
-    "test": "npm run cover",
+    "test": "c8 mocha",
     "fix": "eslint --fix '**/*.js'",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
@@ -54,7 +52,7 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
     "mocha": "^6.2.2",
-    "nyc": "^15.0.0",
+    "c8": "^7.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6"
   }
