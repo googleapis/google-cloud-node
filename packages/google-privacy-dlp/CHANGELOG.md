@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.8.0...v1.9.0) (2019-12-30)
+
+
+### Features
+
+* introduces locationId ([745f3c1](https://www.github.com/googleapis/nodejs-dlp/commit/745f3c1112e8968dd088e8c5cd90863ecbad6679))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.7.1...v1.8.0) (2019-12-05)
 
 
