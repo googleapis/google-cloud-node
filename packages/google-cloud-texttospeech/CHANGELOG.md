@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.0...v2.1.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* increase timeout from 20s to 60s ([#312](https://www.github.com/googleapis/nodejs-text-to-speech/issues/312)) ([ea9f75c](https://www.github.com/googleapis/nodejs-text-to-speech/commit/ea9f75c383351724ae0f5186073c5289d2f8996a))
+* move region tag to encompass catch ([#320](https://www.github.com/googleapis/nodejs-text-to-speech/issues/320)) ([988c5f5](https://www.github.com/googleapis/nodejs-text-to-speech/commit/988c5f55859bca543a79800d6eb4668dafeec70f))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.0.2...v2.1.0) (2019-12-11)
 
 
