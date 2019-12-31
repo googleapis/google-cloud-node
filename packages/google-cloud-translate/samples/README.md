@@ -82,6 +82,12 @@ For example, to run the `translate_list_codes_beta` sample, you would run the fo
 node v3beta1/translate_list_codes_beta.js "your_project_id"
 ```
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -95,7 +101,7 @@ View the [source code](https://github.com/googleapis/nodejs-translate/blob/maste
 __Usage:__
 
 
-`node hybridGlossaries.js`
+`node samples/hybridGlossaries.js`
 
 
 -----
@@ -112,7 +118,7 @@ View the [source code](https://github.com/googleapis/nodejs-translate/blob/maste
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -129,7 +135,7 @@ View the [source code](https://github.com/googleapis/nodejs-translate/blob/maste
 __Usage:__
 
 
-`node translate.js`
+`node samples/translate.js`
 
 
 
