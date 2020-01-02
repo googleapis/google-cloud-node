@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.7.2...v1.8.0) (2020-01-02)
+
+
+### Features
+
+* add new resource descriptors ([#491](https://www.github.com/googleapis/nodejs-vision/issues/491)) ([95037bf](https://www.github.com/googleapis/nodejs-vision/commit/95037bf3c9236902ab31c23fd51a236e23100e91))
+* **samples:** add sample of configuring alternate apiEndpoint ([#473](https://www.github.com/googleapis/nodejs-vision/issues/473)) ([fa01482](https://www.github.com/googleapis/nodejs-vision/commit/fa01482648c93d7a57b5f7159a995a6b13e4f941))
+
+
+### Bug Fixes
+
+* **deps:** TypeScript 3.7.0 causes breaking change in typings ([#497](https://www.github.com/googleapis/nodejs-vision/issues/497)) ([30aa9ff](https://www.github.com/googleapis/nodejs-vision/commit/30aa9ffbdd3cdb8e28c300f7b9223f60fdb61d7e))
+
 ### [1.7.2](https://www.github.com/googleapis/nodejs-vision/compare/v1.7.1...v1.7.2) (2019-11-18)
 
 
