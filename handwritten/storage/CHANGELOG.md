@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.1.3...v4.2.0) (2020-01-02)
+
+
+### Features
+
+* **iam:** getIamPolicy to support requestedPolicyVersion ([#960](https://www.github.com/googleapis/nodejs-storage/issues/960)) ([0f38f75](https://www.github.com/googleapis/nodejs-storage/commit/0f38f7597f5e671b4c08830f8d457f9ca2c03cd1))
+* add support for Archive storage class ([#908](https://www.github.com/googleapis/nodejs-storage/issues/908)) ([63f63f4](https://www.github.com/googleapis/nodejs-storage/commit/63f63f448d2d220b1e77a7dcd379f7ac7fc22af3))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([#952](https://www.github.com/googleapis/nodejs-storage/issues/952)) ([1fea60c](https://www.github.com/googleapis/nodejs-storage/commit/1fea60c04fd9762c5506c22df0992cdb8fce4ea0))
+* add createBucket file and updated relevant test ([#940](https://www.github.com/googleapis/nodejs-storage/issues/940)) ([913b43e](https://www.github.com/googleapis/nodejs-storage/commit/913b43e66bb10bd5dbf6b0bca9e65edd48b54234))
+* update PolicyDocument types ([#944](https://www.github.com/googleapis/nodejs-storage/issues/944)) ([b1c05b2](https://www.github.com/googleapis/nodejs-storage/commit/b1c05b27029215c8bc313a8f4f16ff13d5af2391))
+
 ### [4.1.3](https://www.github.com/googleapis/nodejs-storage/compare/v4.1.2...v4.1.3) (2019-11-18)
 
 
