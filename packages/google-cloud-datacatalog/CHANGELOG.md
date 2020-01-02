@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.5.1...v1.6.0) (2020-01-02)
+
+
+### Features
+
+* add support for marking a tag template field as required when creating a new tag template; add support for updating a tag template field from required to optional ([0b589b4](https://www.github.com/googleapis/nodejs-datacatalog/commit/0b589b4a18ce1d6f6a80412c4f608690f02be711))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.5.0...v1.5.1) (2019-12-20)
 
 
