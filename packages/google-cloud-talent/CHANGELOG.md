@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [1.6.2](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.1...v1.6.2) (2019-12-31)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([1166c22](https://www.github.com/googleapis/nodejs-talent/commit/1166c22a68aab561c0dcf85ae051f6d1cdc66c88))
+* adds missing proto import ([220bec0](https://www.github.com/googleapis/nodejs-talent/commit/220bec0d190419ab24724eb678002a734dc2488d))
+* import long type into proto ts declaration file ([#127](https://www.github.com/googleapis/nodejs-talent/issues/127)) ([c4b9e4a](https://www.github.com/googleapis/nodejs-talent/commit/c4b9e4a12bbbe0ff55b3fd6c9fd73ea180013d26))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.0...v1.6.1) (2019-11-15)
 
 
