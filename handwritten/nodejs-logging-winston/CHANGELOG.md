@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [3.0.3](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.2...v3.0.3) (2020-01-02)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to GA ([#416](https://www.github.com/googleapis/nodejs-logging-winston/issues/416)) ([4832f31](https://www.github.com/googleapis/nodejs-logging-winston/commit/4832f310c149119c2f4ece980015fd2f11d5cb08))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.1...v3.0.2) (2019-12-12)
 
 
