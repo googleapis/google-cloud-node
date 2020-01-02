@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.6.1...v1.7.0) (2019-12-31)
+
+
+### Features
+
+* adds ContentMatcherOption ([#336](https://www.github.com/googleapis/nodejs-monitoring/issues/336)) ([003b8f7](https://www.github.com/googleapis/nodejs-monitoring/commit/003b8f7bc30c79b11aa393f0272e2554761707d4))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.6.0...v1.6.1) (2019-12-05)
 
 
