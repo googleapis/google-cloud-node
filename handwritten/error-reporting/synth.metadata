@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-10-30T22:17:49.804850Z",
+  "updateTime": "2019-12-21T12:17:08.343780Z",
   "sources": [
     {
       "template": {
@@ -7,6 +7,434 @@
         "origin": "synthtool.gcp",
         "version": "2019.10.17"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".readme-partials.yaml"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": ".compodocrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "src/build-stack-trace.ts"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/logger.ts"
+    },
+    {
+      "path": "src/populate-error-message.ts"
+    },
+    {
+      "path": "src/configuration.ts"
+    },
+    {
+      "path": "src/classes/error-message.ts"
+    },
+    {
+      "path": "src/classes/request-information-container.ts"
+    },
+    {
+      "path": "src/interfaces/restify.ts"
+    },
+    {
+      "path": "src/interfaces/koa.ts"
+    },
+    {
+      "path": "src/interfaces/manual.ts"
+    },
+    {
+      "path": "src/interfaces/express.ts"
+    },
+    {
+      "path": "src/interfaces/hapi.ts"
+    },
+    {
+      "path": "src/interfaces/koa2.ts"
+    },
+    {
+      "path": "src/interfaces/message-builder.ts"
+    },
+    {
+      "path": "src/request-extractors/koa.ts"
+    },
+    {
+      "path": "src/request-extractors/manual.ts"
+    },
+    {
+      "path": "src/request-extractors/express.ts"
+    },
+    {
+      "path": "src/request-extractors/hapi.ts"
+    },
+    {
+      "path": "src/google-apis/auth-client.ts"
+    },
+    {
+      "path": "__pycache__/synth.cpython-36.pyc"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/explicitSetup.js"
+    },
+    {
+      "path": "samples/implicitSetup.js"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/manual.js"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/express.js"
+    },
+    {
+      "path": "samples/test/snippets.test.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "doc/images/errors-overview.png"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": "utils/fuzzer.ts"
+    },
+    {
+      "path": "utils/errors-api-transport.ts"
+    },
+    {
+      "path": ".kokoro/pre-system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".git/packed-refs"
+    },
+    {
+      "path": ".git/HEAD"
+    },
+    {
+      "path": ".git/config"
+    },
+    {
+      "path": ".git/index"
+    },
+    {
+      "path": ".git/shallow"
+    },
+    {
+      "path": ".git/logs/HEAD"
+    },
+    {
+      "path": ".git/logs/refs/remotes/origin/HEAD"
+    },
+    {
+      "path": ".git/logs/refs/heads/autosynth"
+    },
+    {
+      "path": ".git/logs/refs/heads/master"
+    },
+    {
+      "path": ".git/refs/tags/v1.1.3"
+    },
+    {
+      "path": ".git/refs/remotes/origin/HEAD"
+    },
+    {
+      "path": ".git/refs/heads/autosynth"
+    },
+    {
+      "path": ".git/refs/heads/master"
+    },
+    {
+      "path": ".git/objects/pack/pack-ff441abdcb3eb9efae52378e730d682011485f71.idx"
+    },
+    {
+      "path": ".git/objects/pack/pack-ff441abdcb3eb9efae52378e730d682011485f71.pack"
+    },
+    {
+      "path": "test/util.ts"
+    },
+    {
+      "path": "test/.eslintrc.yml"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "test/fixtures/gcloud-credentials.json"
+    },
+    {
+      "path": "test/fixtures/configuration.ts"
+    },
+    {
+      "path": "test/test-servers/koa_scaffold_server.ts"
+    },
+    {
+      "path": "test/test-servers/koa2_scaffold_server.ts"
+    },
+    {
+      "path": "test/test-servers/express_scaffold_server.ts"
+    },
+    {
+      "path": "test/test-servers/restify_scaffold_server.ts"
+    },
+    {
+      "path": "test/test-servers/manual_scaffold_server.ts"
+    },
+    {
+      "path": "test/test-servers/hapi_scaffold_server.ts"
+    },
+    {
+      "path": "test/unit/build-stack-trace.ts"
+    },
+    {
+      "path": "test/unit/service-configuration.ts"
+    },
+    {
+      "path": "test/unit/logger.ts"
+    },
+    {
+      "path": "test/unit/populate-error-message.ts"
+    },
+    {
+      "path": "test/unit/configuration.ts"
+    },
+    {
+      "path": "test/unit/classes/error-message.ts"
+    },
+    {
+      "path": "test/unit/classes/request-information-container.ts"
+    },
+    {
+      "path": "test/unit/interfaces/restify.ts"
+    },
+    {
+      "path": "test/unit/interfaces/manual.ts"
+    },
+    {
+      "path": "test/unit/interfaces/express.ts"
+    },
+    {
+      "path": "test/unit/interfaces/hapi.ts"
+    },
+    {
+      "path": "test/unit/request-extractors/koa.ts"
+    },
+    {
+      "path": "test/unit/request-extractors/manual.ts"
+    },
+    {
+      "path": "test/unit/request-extractors/express.ts"
+    },
+    {
+      "path": "test/unit/request-extractors/hapi.ts"
+    },
+    {
+      "path": "test/unit/google-apis/auth-client.ts"
+    },
+    {
+      "path": "system-test/error-reporting.ts"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/test-install.ts"
     }
   ]
 }
