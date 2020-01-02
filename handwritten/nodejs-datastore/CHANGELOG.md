@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [5.0.3](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.2...v5.0.3) (2019-12-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @grpc/grpc-js to v0.6.15 ([#555](https://www.github.com/googleapis/nodejs-datastore/issues/555)) ([c015c1c](https://www.github.com/googleapis/nodejs-datastore/commit/c015c1c9142a7f3ad5cb26799fbd533aeae09b23))
+* **deps:** update dependency sinon to v8 ([#560](https://www.github.com/googleapis/nodejs-datastore/issues/560)) ([2d78de4](https://www.github.com/googleapis/nodejs-datastore/commit/2d78de40ab0866f773ea756b8e4b101ea8901b39))
+
 ### [5.0.2](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.1...v5.0.2) (2019-12-12)
 
 
