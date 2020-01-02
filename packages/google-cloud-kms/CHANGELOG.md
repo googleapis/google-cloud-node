@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.5.3...v1.6.0) (2019-12-31)
+
+
+### Features
+
+* **samples:** add asymmetric samples ([#241](https://www.github.com/googleapis/nodejs-kms/issues/241)) ([563b941](https://www.github.com/googleapis/nodejs-kms/commit/563b94187df53d5e4a2ab5a07bb7d2d8dad086b5))
+
+
+### Bug Fixes
+
+* remove superfluous base64-encoding/decoding ([#242](https://www.github.com/googleapis/nodejs-kms/issues/242)) ([aad6cc4](https://www.github.com/googleapis/nodejs-kms/commit/aad6cc451952f42b96d752f31399a2c364f07610))
+* **deps:** TypeScript 3.7.0 causes breaking change in typings ([#246](https://www.github.com/googleapis/nodejs-kms/issues/246)) ([d274c2a](https://www.github.com/googleapis/nodejs-kms/commit/d274c2aa336ffa57bc517cabd00cabdead0e518b))
+
 ### [1.5.3](https://www.github.com/googleapis/nodejs-kms/compare/v1.5.2...v1.5.3) (2019-11-18)
 
 
