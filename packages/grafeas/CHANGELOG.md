@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.2...v2.3.3) (2020-01-02)
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([e05d7ff](https://www.github.com/googleapis/nodejs-grafeas/commit/e05d7ff66b12d2b14a7e65fba355f64f5ce578f0))
+* **docs:** bump release level to GA ([#64](https://www.github.com/googleapis/nodejs-grafeas/issues/64)) ([7dcae38](https://www.github.com/googleapis/nodejs-grafeas/commit/7dcae38bf3dd3f52656c98b7f342a068e0bc4577))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.1...v2.3.2) (2019-11-14)
 
 
