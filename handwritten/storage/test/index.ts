@@ -495,6 +495,15 @@ describe('Storage', () => {
     });
 
     describe('storage classes', () => {
+      it('should expand metadata.archive', done => {
+        storage.request = (reqOpts: DecorateRequestOptions) => {
+          assert.strictEqual(reqOpts.json.storageClass, 'ARCHIVE');
+          done();
+        };
+
+        storage.createBucket(BUCKET_NAME, {archive: true}, assert.ifError);
+      });
+
       it('should expand metadata.coldline', done => {
         storage.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.json.storageClass, 'COLDLINE');

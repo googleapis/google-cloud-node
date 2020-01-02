@@ -62,6 +62,7 @@ export interface BucketOptions {
 }
 
 export interface CreateBucketRequest {
+  archive?: boolean;
   coldline?: boolean;
   dra?: boolean;
   multiRegional?: boolean;
@@ -474,6 +475,7 @@ export class Storage extends Service {
    * Metadata to set for the bucket.
    *
    * @typedef {object} CreateBucketRequest
+   * @property {boolean} [archive=false] Specify the storage class as Archive.
    * @property {boolean} [coldline=false] Specify the storage class as Coldline.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
@@ -585,6 +587,7 @@ export class Storage extends Service {
     };
 
     const storageClasses = {
+      archive: 'ARCHIVE',
       coldline: 'COLDLINE',
       dra: 'DURABLE_REDUCED_AVAILABILITY',
       multiRegional: 'MULTI_REGIONAL',
