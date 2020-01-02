@@ -26,6 +26,1980 @@ export namespace google {
             /** Namespace v1beta1. */
             namespace v1beta1 {
 
+                /** Properties of a SystemTimestamps. */
+                interface ISystemTimestamps {
+
+                    /** SystemTimestamps createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SystemTimestamps. */
+                class SystemTimestamps implements ISystemTimestamps {
+
+                    /**
+                     * Constructs a new SystemTimestamps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps);
+
+                    /** SystemTimestamps createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SystemTimestamps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SystemTimestamps instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                     * @param message SystemTimestamps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                     * @param message SystemTimestamps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SystemTimestamps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SystemTimestamps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SystemTimestamps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Verifies a SystemTimestamps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SystemTimestamps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
+                     * @param message SystemTimestamps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.SystemTimestamps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SystemTimestamps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Schema. */
+                interface ISchema {
+
+                    /** Schema columns */
+                    columns?: (google.cloud.datacatalog.v1beta1.IColumnSchema[]|null);
+                }
+
+                /** Represents a Schema. */
+                class Schema implements ISchema {
+
+                    /**
+                     * Constructs a new Schema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISchema);
+
+                    /** Schema columns. */
+                    public columns: google.cloud.datacatalog.v1beta1.IColumnSchema[];
+
+                    /**
+                     * Creates a new Schema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Schema instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISchema): google.cloud.datacatalog.v1beta1.Schema;
+
+                    /**
+                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.Schema;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.Schema;
+
+                    /**
+                     * Verifies a Schema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Schema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.Schema;
+
+                    /**
+                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
+                     * @param message Schema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Schema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ColumnSchema. */
+                interface IColumnSchema {
+
+                    /** ColumnSchema column */
+                    column?: (string|null);
+
+                    /** ColumnSchema type */
+                    type?: (string|null);
+
+                    /** ColumnSchema description */
+                    description?: (string|null);
+
+                    /** ColumnSchema mode */
+                    mode?: (string|null);
+
+                    /** ColumnSchema subcolumns */
+                    subcolumns?: (google.cloud.datacatalog.v1beta1.IColumnSchema[]|null);
+                }
+
+                /** Represents a ColumnSchema. */
+                class ColumnSchema implements IColumnSchema {
+
+                    /**
+                     * Constructs a new ColumnSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IColumnSchema);
+
+                    /** ColumnSchema column. */
+                    public column: string;
+
+                    /** ColumnSchema type. */
+                    public type: string;
+
+                    /** ColumnSchema description. */
+                    public description: string;
+
+                    /** ColumnSchema mode. */
+                    public mode: string;
+
+                    /** ColumnSchema subcolumns. */
+                    public subcolumns: google.cloud.datacatalog.v1beta1.IColumnSchema[];
+
+                    /**
+                     * Creates a new ColumnSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnSchema instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IColumnSchema): google.cloud.datacatalog.v1beta1.ColumnSchema;
+
+                    /**
+                     * Encodes the specified ColumnSchema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
+                     * @param message ColumnSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
+                     * @param message ColumnSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ColumnSchema;
+
+                    /**
+                     * Decodes a ColumnSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ColumnSchema;
+
+                    /**
+                     * Verifies a ColumnSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ColumnSchema;
+
+                    /**
+                     * Creates a plain object from a ColumnSchema message. Also converts values to other types if specified.
+                     * @param message ColumnSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ColumnSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a PolicyTagManager */
+                class PolicyTagManager extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PolicyTagManager service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PolicyTagManager service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTagManager;
+
+                    /**
+                     * Calls CreateTaxonomy.
+                     * @param request CreateTaxonomyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Taxonomy
+                     */
+                    public createTaxonomy(request: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomyCallback): void;
+
+                    /**
+                     * Calls CreateTaxonomy.
+                     * @param request CreateTaxonomyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTaxonomy(request: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
+
+                    /**
+                     * Calls DeleteTaxonomy.
+                     * @param request DeleteTaxonomyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTaxonomy(request: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomyCallback): void;
+
+                    /**
+                     * Calls DeleteTaxonomy.
+                     * @param request DeleteTaxonomyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTaxonomy(request: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateTaxonomy.
+                     * @param request UpdateTaxonomyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Taxonomy
+                     */
+                    public updateTaxonomy(request: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomyCallback): void;
+
+                    /**
+                     * Calls UpdateTaxonomy.
+                     * @param request UpdateTaxonomyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTaxonomy(request: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
+
+                    /**
+                     * Calls ListTaxonomies.
+                     * @param request ListTaxonomiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTaxonomiesResponse
+                     */
+                    public listTaxonomies(request: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomiesCallback): void;
+
+                    /**
+                     * Calls ListTaxonomies.
+                     * @param request ListTaxonomiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTaxonomies(request: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>;
+
+                    /**
+                     * Calls GetTaxonomy.
+                     * @param request GetTaxonomyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Taxonomy
+                     */
+                    public getTaxonomy(request: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomyCallback): void;
+
+                    /**
+                     * Calls GetTaxonomy.
+                     * @param request GetTaxonomyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTaxonomy(request: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
+
+                    /**
+                     * Calls CreatePolicyTag.
+                     * @param request CreatePolicyTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PolicyTag
+                     */
+                    public createPolicyTag(request: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTagCallback): void;
+
+                    /**
+                     * Calls CreatePolicyTag.
+                     * @param request CreatePolicyTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPolicyTag(request: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
+
+                    /**
+                     * Calls DeletePolicyTag.
+                     * @param request DeletePolicyTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deletePolicyTag(request: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTagCallback): void;
+
+                    /**
+                     * Calls DeletePolicyTag.
+                     * @param request DeletePolicyTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePolicyTag(request: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdatePolicyTag.
+                     * @param request UpdatePolicyTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PolicyTag
+                     */
+                    public updatePolicyTag(request: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTagCallback): void;
+
+                    /**
+                     * Calls UpdatePolicyTag.
+                     * @param request UpdatePolicyTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePolicyTag(request: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
+
+                    /**
+                     * Calls ListPolicyTags.
+                     * @param request ListPolicyTagsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPolicyTagsResponse
+                     */
+                    public listPolicyTags(request: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTagsCallback): void;
+
+                    /**
+                     * Calls ListPolicyTags.
+                     * @param request ListPolicyTagsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPolicyTags(request: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest): Promise<google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>;
+
+                    /**
+                     * Calls GetPolicyTag.
+                     * @param request GetPolicyTagRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PolicyTag
+                     */
+                    public getPolicyTag(request: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTagCallback): void;
+
+                    /**
+                     * Calls GetPolicyTag.
+                     * @param request GetPolicyTagRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPolicyTag(request: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetIamPolicyCallback): void;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.SetIamPolicyCallback): void;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.TestIamPermissionsCallback): void;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                }
+
+                namespace PolicyTagManager {
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createTaxonomy}.
+                     * @param error Error, if any
+                     * @param [response] Taxonomy
+                     */
+                    type CreateTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deleteTaxonomy}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTaxonomyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updateTaxonomy}.
+                     * @param error Error, if any
+                     * @param [response] Taxonomy
+                     */
+                    type UpdateTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listTaxonomies}.
+                     * @param error Error, if any
+                     * @param [response] ListTaxonomiesResponse
+                     */
+                    type ListTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getTaxonomy}.
+                     * @param error Error, if any
+                     * @param [response] Taxonomy
+                     */
+                    type GetTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createPolicyTag}.
+                     * @param error Error, if any
+                     * @param [response] PolicyTag
+                     */
+                    type CreatePolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deletePolicyTag}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeletePolicyTagCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updatePolicyTag}.
+                     * @param error Error, if any
+                     * @param [response] PolicyTag
+                     */
+                    type UpdatePolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listPolicyTags}.
+                     * @param error Error, if any
+                     * @param [response] ListPolicyTagsResponse
+                     */
+                    type ListPolicyTagsCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getPolicyTag}.
+                     * @param error Error, if any
+                     * @param [response] PolicyTag
+                     */
+                    type GetPolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#setIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#testIamPermissions}.
+                     * @param error Error, if any
+                     * @param [response] TestIamPermissionsResponse
+                     */
+                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                }
+
+                /** Properties of a Taxonomy. */
+                interface ITaxonomy {
+
+                    /** Taxonomy name */
+                    name?: (string|null);
+
+                    /** Taxonomy displayName */
+                    displayName?: (string|null);
+
+                    /** Taxonomy description */
+                    description?: (string|null);
+
+                    /** Taxonomy activatedPolicyTypes */
+                    activatedPolicyTypes?: (google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[]|null);
+                }
+
+                /** Represents a Taxonomy. */
+                class Taxonomy implements ITaxonomy {
+
+                    /**
+                     * Constructs a new Taxonomy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ITaxonomy);
+
+                    /** Taxonomy name. */
+                    public name: string;
+
+                    /** Taxonomy displayName. */
+                    public displayName: string;
+
+                    /** Taxonomy description. */
+                    public description: string;
+
+                    /** Taxonomy activatedPolicyTypes. */
+                    public activatedPolicyTypes: google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[];
+
+                    /**
+                     * Creates a new Taxonomy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Taxonomy instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ITaxonomy): google.cloud.datacatalog.v1beta1.Taxonomy;
+
+                    /**
+                     * Encodes the specified Taxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
+                     * @param message Taxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ITaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Taxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
+                     * @param message Taxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ITaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Taxonomy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Taxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.Taxonomy;
+
+                    /**
+                     * Decodes a Taxonomy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Taxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.Taxonomy;
+
+                    /**
+                     * Verifies a Taxonomy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Taxonomy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Taxonomy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.Taxonomy;
+
+                    /**
+                     * Creates a plain object from a Taxonomy message. Also converts values to other types if specified.
+                     * @param message Taxonomy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.Taxonomy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Taxonomy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Taxonomy {
+
+                    /** PolicyType enum. */
+                    enum PolicyType {
+                        POLICY_TYPE_UNSPECIFIED = 0,
+                        FINE_GRAINED_ACCESS_CONTROL = 1
+                    }
+                }
+
+                /** Properties of a PolicyTag. */
+                interface IPolicyTag {
+
+                    /** PolicyTag name */
+                    name?: (string|null);
+
+                    /** PolicyTag displayName */
+                    displayName?: (string|null);
+
+                    /** PolicyTag description */
+                    description?: (string|null);
+
+                    /** PolicyTag parentPolicyTag */
+                    parentPolicyTag?: (string|null);
+
+                    /** PolicyTag childPolicyTags */
+                    childPolicyTags?: (string[]|null);
+                }
+
+                /** Represents a PolicyTag. */
+                class PolicyTag implements IPolicyTag {
+
+                    /**
+                     * Constructs a new PolicyTag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IPolicyTag);
+
+                    /** PolicyTag name. */
+                    public name: string;
+
+                    /** PolicyTag displayName. */
+                    public displayName: string;
+
+                    /** PolicyTag description. */
+                    public description: string;
+
+                    /** PolicyTag parentPolicyTag. */
+                    public parentPolicyTag: string;
+
+                    /** PolicyTag childPolicyTags. */
+                    public childPolicyTags: string[];
+
+                    /**
+                     * Creates a new PolicyTag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyTag instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IPolicyTag): google.cloud.datacatalog.v1beta1.PolicyTag;
+
+                    /**
+                     * Encodes the specified PolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
+                     * @param message PolicyTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
+                     * @param message PolicyTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyTag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.PolicyTag;
+
+                    /**
+                     * Decodes a PolicyTag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.PolicyTag;
+
+                    /**
+                     * Verifies a PolicyTag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyTag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyTag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.PolicyTag;
+
+                    /**
+                     * Creates a plain object from a PolicyTag message. Also converts values to other types if specified.
+                     * @param message PolicyTag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.PolicyTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyTag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateTaxonomyRequest. */
+                interface ICreateTaxonomyRequest {
+
+                    /** CreateTaxonomyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTaxonomyRequest taxonomy */
+                    taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
+                }
+
+                /** Represents a CreateTaxonomyRequest. */
+                class CreateTaxonomyRequest implements ICreateTaxonomyRequest {
+
+                    /**
+                     * Constructs a new CreateTaxonomyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest);
+
+                    /** CreateTaxonomyRequest parent. */
+                    public parent: string;
+
+                    /** CreateTaxonomyRequest taxonomy. */
+                    public taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
+
+                    /**
+                     * Creates a new CreateTaxonomyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTaxonomyRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
+
+                    /**
+                     * Encodes the specified CreateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
+                     * @param message CreateTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
+                     * @param message CreateTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTaxonomyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
+
+                    /**
+                     * Decodes a CreateTaxonomyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
+
+                    /**
+                     * Verifies a CreateTaxonomyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTaxonomyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTaxonomyRequest message. Also converts values to other types if specified.
+                     * @param message CreateTaxonomyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTaxonomyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteTaxonomyRequest. */
+                interface IDeleteTaxonomyRequest {
+
+                    /** DeleteTaxonomyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteTaxonomyRequest. */
+                class DeleteTaxonomyRequest implements IDeleteTaxonomyRequest {
+
+                    /**
+                     * Constructs a new DeleteTaxonomyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest);
+
+                    /** DeleteTaxonomyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteTaxonomyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTaxonomyRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
+
+                    /**
+                     * Encodes the specified DeleteTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
+                     * @param message DeleteTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
+                     * @param message DeleteTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
+
+                    /**
+                     * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
+
+                    /**
+                     * Verifies a DeleteTaxonomyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTaxonomyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTaxonomyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTaxonomyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTaxonomyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateTaxonomyRequest. */
+                interface IUpdateTaxonomyRequest {
+
+                    /** UpdateTaxonomyRequest taxonomy */
+                    taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
+
+                    /** UpdateTaxonomyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateTaxonomyRequest. */
+                class UpdateTaxonomyRequest implements IUpdateTaxonomyRequest {
+
+                    /**
+                     * Constructs a new UpdateTaxonomyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest);
+
+                    /** UpdateTaxonomyRequest taxonomy. */
+                    public taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
+
+                    /** UpdateTaxonomyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateTaxonomyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTaxonomyRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
+
+                    /**
+                     * Encodes the specified UpdateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
+                     * @param message UpdateTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
+                     * @param message UpdateTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
+
+                    /**
+                     * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
+
+                    /**
+                     * Verifies an UpdateTaxonomyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTaxonomyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTaxonomyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTaxonomyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTaxonomyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListTaxonomiesRequest. */
+                interface IListTaxonomiesRequest {
+
+                    /** ListTaxonomiesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTaxonomiesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTaxonomiesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListTaxonomiesRequest. */
+                class ListTaxonomiesRequest implements IListTaxonomiesRequest {
+
+                    /**
+                     * Constructs a new ListTaxonomiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest);
+
+                    /** ListTaxonomiesRequest parent. */
+                    public parent: string;
+
+                    /** ListTaxonomiesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTaxonomiesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListTaxonomiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTaxonomiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
+
+                    /**
+                     * Encodes the specified ListTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
+                     * @param message ListTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
+                     * @param message ListTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTaxonomiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
+
+                    /**
+                     * Decodes a ListTaxonomiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
+
+                    /**
+                     * Verifies a ListTaxonomiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTaxonomiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
+
+                    /**
+                     * Creates a plain object from a ListTaxonomiesRequest message. Also converts values to other types if specified.
+                     * @param message ListTaxonomiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTaxonomiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListTaxonomiesResponse. */
+                interface IListTaxonomiesResponse {
+
+                    /** ListTaxonomiesResponse taxonomies */
+                    taxonomies?: (google.cloud.datacatalog.v1beta1.ITaxonomy[]|null);
+
+                    /** ListTaxonomiesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListTaxonomiesResponse. */
+                class ListTaxonomiesResponse implements IListTaxonomiesResponse {
+
+                    /**
+                     * Constructs a new ListTaxonomiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse);
+
+                    /** ListTaxonomiesResponse taxonomies. */
+                    public taxonomies: google.cloud.datacatalog.v1beta1.ITaxonomy[];
+
+                    /** ListTaxonomiesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListTaxonomiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTaxonomiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
+
+                    /**
+                     * Encodes the specified ListTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
+                     * @param message ListTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
+                     * @param message ListTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTaxonomiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
+
+                    /**
+                     * Decodes a ListTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
+
+                    /**
+                     * Verifies a ListTaxonomiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTaxonomiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
+
+                    /**
+                     * Creates a plain object from a ListTaxonomiesResponse message. Also converts values to other types if specified.
+                     * @param message ListTaxonomiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTaxonomiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetTaxonomyRequest. */
+                interface IGetTaxonomyRequest {
+
+                    /** GetTaxonomyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTaxonomyRequest. */
+                class GetTaxonomyRequest implements IGetTaxonomyRequest {
+
+                    /**
+                     * Constructs a new GetTaxonomyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest);
+
+                    /** GetTaxonomyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTaxonomyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTaxonomyRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
+
+                    /**
+                     * Encodes the specified GetTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
+                     * @param message GetTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
+                     * @param message GetTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTaxonomyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
+
+                    /**
+                     * Decodes a GetTaxonomyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
+
+                    /**
+                     * Verifies a GetTaxonomyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTaxonomyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
+
+                    /**
+                     * Creates a plain object from a GetTaxonomyRequest message. Also converts values to other types if specified.
+                     * @param message GetTaxonomyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GetTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTaxonomyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreatePolicyTagRequest. */
+                interface ICreatePolicyTagRequest {
+
+                    /** CreatePolicyTagRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePolicyTagRequest policyTag */
+                    policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
+                }
+
+                /** Represents a CreatePolicyTagRequest. */
+                class CreatePolicyTagRequest implements ICreatePolicyTagRequest {
+
+                    /**
+                     * Constructs a new CreatePolicyTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest);
+
+                    /** CreatePolicyTagRequest parent. */
+                    public parent: string;
+
+                    /** CreatePolicyTagRequest policyTag. */
+                    public policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
+
+                    /**
+                     * Creates a new CreatePolicyTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePolicyTagRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
+
+                    /**
+                     * Encodes the specified CreatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
+                     * @param message CreatePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
+                     * @param message CreatePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePolicyTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
+
+                    /**
+                     * Decodes a CreatePolicyTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
+
+                    /**
+                     * Verifies a CreatePolicyTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePolicyTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePolicyTagRequest message. Also converts values to other types if specified.
+                     * @param message CreatePolicyTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePolicyTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeletePolicyTagRequest. */
+                interface IDeletePolicyTagRequest {
+
+                    /** DeletePolicyTagRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeletePolicyTagRequest. */
+                class DeletePolicyTagRequest implements IDeletePolicyTagRequest {
+
+                    /**
+                     * Constructs a new DeletePolicyTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest);
+
+                    /** DeletePolicyTagRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeletePolicyTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePolicyTagRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
+
+                    /**
+                     * Encodes the specified DeletePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
+                     * @param message DeletePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
+                     * @param message DeletePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePolicyTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
+
+                    /**
+                     * Decodes a DeletePolicyTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
+
+                    /**
+                     * Verifies a DeletePolicyTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePolicyTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePolicyTagRequest message. Also converts values to other types if specified.
+                     * @param message DeletePolicyTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePolicyTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdatePolicyTagRequest. */
+                interface IUpdatePolicyTagRequest {
+
+                    /** UpdatePolicyTagRequest policyTag */
+                    policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
+
+                    /** UpdatePolicyTagRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePolicyTagRequest. */
+                class UpdatePolicyTagRequest implements IUpdatePolicyTagRequest {
+
+                    /**
+                     * Constructs a new UpdatePolicyTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest);
+
+                    /** UpdatePolicyTagRequest policyTag. */
+                    public policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
+
+                    /** UpdatePolicyTagRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePolicyTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePolicyTagRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
+
+                    /**
+                     * Encodes the specified UpdatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
+                     * @param message UpdatePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
+                     * @param message UpdatePolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
+
+                    /**
+                     * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
+
+                    /**
+                     * Verifies an UpdatePolicyTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePolicyTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePolicyTagRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePolicyTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePolicyTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListPolicyTagsRequest. */
+                interface IListPolicyTagsRequest {
+
+                    /** ListPolicyTagsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPolicyTagsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPolicyTagsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPolicyTagsRequest. */
+                class ListPolicyTagsRequest implements IListPolicyTagsRequest {
+
+                    /**
+                     * Constructs a new ListPolicyTagsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest);
+
+                    /** ListPolicyTagsRequest parent. */
+                    public parent: string;
+
+                    /** ListPolicyTagsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPolicyTagsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPolicyTagsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPolicyTagsRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
+
+                    /**
+                     * Encodes the specified ListPolicyTagsRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
+                     * @param message ListPolicyTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPolicyTagsRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
+                     * @param message ListPolicyTagsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPolicyTagsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPolicyTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
+
+                    /**
+                     * Decodes a ListPolicyTagsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPolicyTagsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
+
+                    /**
+                     * Verifies a ListPolicyTagsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPolicyTagsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPolicyTagsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPolicyTagsRequest message. Also converts values to other types if specified.
+                     * @param message ListPolicyTagsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPolicyTagsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListPolicyTagsResponse. */
+                interface IListPolicyTagsResponse {
+
+                    /** ListPolicyTagsResponse policyTags */
+                    policyTags?: (google.cloud.datacatalog.v1beta1.IPolicyTag[]|null);
+
+                    /** ListPolicyTagsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPolicyTagsResponse. */
+                class ListPolicyTagsResponse implements IListPolicyTagsResponse {
+
+                    /**
+                     * Constructs a new ListPolicyTagsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse);
+
+                    /** ListPolicyTagsResponse policyTags. */
+                    public policyTags: google.cloud.datacatalog.v1beta1.IPolicyTag[];
+
+                    /** ListPolicyTagsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPolicyTagsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPolicyTagsResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
+
+                    /**
+                     * Encodes the specified ListPolicyTagsResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
+                     * @param message ListPolicyTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPolicyTagsResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
+                     * @param message ListPolicyTagsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPolicyTagsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPolicyTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
+
+                    /**
+                     * Decodes a ListPolicyTagsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPolicyTagsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
+
+                    /**
+                     * Verifies a ListPolicyTagsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPolicyTagsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPolicyTagsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPolicyTagsResponse message. Also converts values to other types if specified.
+                     * @param message ListPolicyTagsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPolicyTagsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetPolicyTagRequest. */
+                interface IGetPolicyTagRequest {
+
+                    /** GetPolicyTagRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPolicyTagRequest. */
+                class GetPolicyTagRequest implements IGetPolicyTagRequest {
+
+                    /**
+                     * Constructs a new GetPolicyTagRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest);
+
+                    /** GetPolicyTagRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPolicyTagRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPolicyTagRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
+
+                    /**
+                     * Encodes the specified GetPolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
+                     * @param message GetPolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
+                     * @param message GetPolicyTagRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPolicyTagRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
+
+                    /**
+                     * Decodes a GetPolicyTagRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPolicyTagRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
+
+                    /**
+                     * Verifies a GetPolicyTagRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPolicyTagRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPolicyTagRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
+
+                    /**
+                     * Creates a plain object from a GetPolicyTagRequest message. Also converts values to other types if specified.
+                     * @param message GetPolicyTagRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GetPolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPolicyTagRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Tag. */
                 interface ITag {
 
@@ -472,6 +2446,9 @@ export namespace google {
 
                     /** TagTemplateField type */
                     type?: (google.cloud.datacatalog.v1beta1.IFieldType|null);
+
+                    /** TagTemplateField isRequired */
+                    isRequired?: (boolean|null);
                 }
 
                 /** Represents a TagTemplateField. */
@@ -491,6 +2468,9 @@ export namespace google {
 
                     /** TagTemplateField type. */
                     public type?: (google.cloud.datacatalog.v1beta1.IFieldType|null);
+
+                    /** TagTemplateField isRequired. */
+                    public isRequired: boolean;
 
                     /**
                      * Creates a new TagTemplateField instance using the specified properties.
@@ -855,626 +2835,6 @@ export namespace google {
                         BOOL = 3,
                         TIMESTAMP = 4
                     }
-                }
-
-                /** Properties of a SystemTimestamps. */
-                interface ISystemTimestamps {
-
-                    /** SystemTimestamps createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps expireTime */
-                    expireTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a SystemTimestamps. */
-                class SystemTimestamps implements ISystemTimestamps {
-
-                    /**
-                     * Constructs a new SystemTimestamps.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps);
-
-                    /** SystemTimestamps createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps expireTime. */
-                    public expireTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new SystemTimestamps instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SystemTimestamps instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                     * @param message SystemTimestamps message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                     * @param message SystemTimestamps message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SystemTimestamps message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SystemTimestamps
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SystemTimestamps
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Verifies a SystemTimestamps message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SystemTimestamps
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
-                     * @param message SystemTimestamps
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.SystemTimestamps, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SystemTimestamps to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GcsFilesetSpec. */
-                interface IGcsFilesetSpec {
-
-                    /** GcsFilesetSpec filePatterns */
-                    filePatterns?: (string[]|null);
-
-                    /** GcsFilesetSpec sampleGcsFileSpecs */
-                    sampleGcsFileSpecs?: (google.cloud.datacatalog.v1beta1.IGcsFileSpec[]|null);
-                }
-
-                /** Represents a GcsFilesetSpec. */
-                class GcsFilesetSpec implements IGcsFilesetSpec {
-
-                    /**
-                     * Constructs a new GcsFilesetSpec.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec);
-
-                    /** GcsFilesetSpec filePatterns. */
-                    public filePatterns: string[];
-
-                    /** GcsFilesetSpec sampleGcsFileSpecs. */
-                    public sampleGcsFileSpecs: google.cloud.datacatalog.v1beta1.IGcsFileSpec[];
-
-                    /**
-                     * Creates a new GcsFilesetSpec instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsFilesetSpec instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
-
-                    /**
-                     * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
-                     * @param message GcsFilesetSpec message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
-                     * @param message GcsFilesetSpec message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsFilesetSpec message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsFilesetSpec
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
-
-                    /**
-                     * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsFilesetSpec
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
-
-                    /**
-                     * Verifies a GcsFilesetSpec message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsFilesetSpec
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
-
-                    /**
-                     * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
-                     * @param message GcsFilesetSpec
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFilesetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsFilesetSpec to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GcsFileSpec. */
-                interface IGcsFileSpec {
-
-                    /** GcsFileSpec filePath */
-                    filePath?: (string|null);
-
-                    /** GcsFileSpec gcsTimestamps */
-                    gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
-
-                    /** GcsFileSpec sizeBytes */
-                    sizeBytes?: (number|Long|null);
-                }
-
-                /** Represents a GcsFileSpec. */
-                class GcsFileSpec implements IGcsFileSpec {
-
-                    /**
-                     * Constructs a new GcsFileSpec.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec);
-
-                    /** GcsFileSpec filePath. */
-                    public filePath: string;
-
-                    /** GcsFileSpec gcsTimestamps. */
-                    public gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
-
-                    /** GcsFileSpec sizeBytes. */
-                    public sizeBytes: (number|Long);
-
-                    /**
-                     * Creates a new GcsFileSpec instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsFileSpec instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec): google.cloud.datacatalog.v1beta1.GcsFileSpec;
-
-                    /**
-                     * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
-                     * @param message GcsFileSpec message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
-                     * @param message GcsFileSpec message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsFileSpec message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsFileSpec
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFileSpec;
-
-                    /**
-                     * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsFileSpec
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFileSpec;
-
-                    /**
-                     * Verifies a GcsFileSpec message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsFileSpec
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFileSpec;
-
-                    /**
-                     * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
-                     * @param message GcsFileSpec
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFileSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsFileSpec to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Schema. */
-                interface ISchema {
-
-                    /** Schema columns */
-                    columns?: (google.cloud.datacatalog.v1beta1.IColumnSchema[]|null);
-                }
-
-                /** Represents a Schema. */
-                class Schema implements ISchema {
-
-                    /**
-                     * Constructs a new Schema.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISchema);
-
-                    /** Schema columns. */
-                    public columns: google.cloud.datacatalog.v1beta1.IColumnSchema[];
-
-                    /**
-                     * Creates a new Schema instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Schema instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISchema): google.cloud.datacatalog.v1beta1.Schema;
-
-                    /**
-                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Schema message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Schema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.Schema;
-
-                    /**
-                     * Decodes a Schema message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Schema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.Schema;
-
-                    /**
-                     * Verifies a Schema message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Schema
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.Schema;
-
-                    /**
-                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
-                     * @param message Schema
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Schema to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ColumnSchema. */
-                interface IColumnSchema {
-
-                    /** ColumnSchema column */
-                    column?: (string|null);
-
-                    /** ColumnSchema type */
-                    type?: (string|null);
-
-                    /** ColumnSchema description */
-                    description?: (string|null);
-
-                    /** ColumnSchema mode */
-                    mode?: (string|null);
-
-                    /** ColumnSchema subcolumns */
-                    subcolumns?: (google.cloud.datacatalog.v1beta1.IColumnSchema[]|null);
-                }
-
-                /** Represents a ColumnSchema. */
-                class ColumnSchema implements IColumnSchema {
-
-                    /**
-                     * Constructs a new ColumnSchema.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IColumnSchema);
-
-                    /** ColumnSchema column. */
-                    public column: string;
-
-                    /** ColumnSchema type. */
-                    public type: string;
-
-                    /** ColumnSchema description. */
-                    public description: string;
-
-                    /** ColumnSchema mode. */
-                    public mode: string;
-
-                    /** ColumnSchema subcolumns. */
-                    public subcolumns: google.cloud.datacatalog.v1beta1.IColumnSchema[];
-
-                    /**
-                     * Creates a new ColumnSchema instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ColumnSchema instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IColumnSchema): google.cloud.datacatalog.v1beta1.ColumnSchema;
-
-                    /**
-                     * Encodes the specified ColumnSchema message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
-                     * @param message ColumnSchema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ColumnSchema message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ColumnSchema.verify|verify} messages.
-                     * @param message ColumnSchema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IColumnSchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ColumnSchema message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ColumnSchema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ColumnSchema;
-
-                    /**
-                     * Decodes a ColumnSchema message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ColumnSchema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ColumnSchema;
-
-                    /**
-                     * Verifies a ColumnSchema message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ColumnSchema message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ColumnSchema
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ColumnSchema;
-
-                    /**
-                     * Creates a plain object from a ColumnSchema message. Also converts values to other types if specified.
-                     * @param message ColumnSchema
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ColumnSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ColumnSchema to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a SearchCatalogResult. */
-                interface ISearchCatalogResult {
-
-                    /** SearchCatalogResult searchResultType */
-                    searchResultType?: (google.cloud.datacatalog.v1beta1.SearchResultType|null);
-
-                    /** SearchCatalogResult searchResultSubtype */
-                    searchResultSubtype?: (string|null);
-
-                    /** SearchCatalogResult relativeResourceName */
-                    relativeResourceName?: (string|null);
-
-                    /** SearchCatalogResult linkedResource */
-                    linkedResource?: (string|null);
-                }
-
-                /** Represents a SearchCatalogResult. */
-                class SearchCatalogResult implements ISearchCatalogResult {
-
-                    /**
-                     * Constructs a new SearchCatalogResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISearchCatalogResult);
-
-                    /** SearchCatalogResult searchResultType. */
-                    public searchResultType: google.cloud.datacatalog.v1beta1.SearchResultType;
-
-                    /** SearchCatalogResult searchResultSubtype. */
-                    public searchResultSubtype: string;
-
-                    /** SearchCatalogResult relativeResourceName. */
-                    public relativeResourceName: string;
-
-                    /** SearchCatalogResult linkedResource. */
-                    public linkedResource: string;
-
-                    /**
-                     * Creates a new SearchCatalogResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchCatalogResult instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISearchCatalogResult): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
-
-                    /**
-                     * Encodes the specified SearchCatalogResult message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
-                     * @param message SearchCatalogResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISearchCatalogResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchCatalogResult message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
-                     * @param message SearchCatalogResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISearchCatalogResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchCatalogResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchCatalogResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
-
-                    /**
-                     * Decodes a SearchCatalogResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchCatalogResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
-
-                    /**
-                     * Verifies a SearchCatalogResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchCatalogResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchCatalogResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
-
-                    /**
-                     * Creates a plain object from a SearchCatalogResult message. Also converts values to other types if specified.
-                     * @param message SearchCatalogResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.SearchCatalogResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchCatalogResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** SearchResultType enum. */
-                enum SearchResultType {
-                    SEARCH_RESULT_TYPE_UNSPECIFIED = 0,
-                    ENTRY = 1,
-                    TAG_TEMPLATE = 2,
-                    ENTRY_GROUP = 3
                 }
 
                 /** Properties of a BigQueryTableSpec. */
@@ -1866,6 +3226,1064 @@ export namespace google {
 
                     /**
                      * Converts this BigQueryDateShardedSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchCatalogResult. */
+                interface ISearchCatalogResult {
+
+                    /** SearchCatalogResult searchResultType */
+                    searchResultType?: (google.cloud.datacatalog.v1beta1.SearchResultType|null);
+
+                    /** SearchCatalogResult searchResultSubtype */
+                    searchResultSubtype?: (string|null);
+
+                    /** SearchCatalogResult relativeResourceName */
+                    relativeResourceName?: (string|null);
+
+                    /** SearchCatalogResult linkedResource */
+                    linkedResource?: (string|null);
+                }
+
+                /** Represents a SearchCatalogResult. */
+                class SearchCatalogResult implements ISearchCatalogResult {
+
+                    /**
+                     * Constructs a new SearchCatalogResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISearchCatalogResult);
+
+                    /** SearchCatalogResult searchResultType. */
+                    public searchResultType: google.cloud.datacatalog.v1beta1.SearchResultType;
+
+                    /** SearchCatalogResult searchResultSubtype. */
+                    public searchResultSubtype: string;
+
+                    /** SearchCatalogResult relativeResourceName. */
+                    public relativeResourceName: string;
+
+                    /** SearchCatalogResult linkedResource. */
+                    public linkedResource: string;
+
+                    /**
+                     * Creates a new SearchCatalogResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchCatalogResult instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISearchCatalogResult): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
+
+                    /**
+                     * Encodes the specified SearchCatalogResult message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
+                     * @param message SearchCatalogResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISearchCatalogResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchCatalogResult message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SearchCatalogResult.verify|verify} messages.
+                     * @param message SearchCatalogResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISearchCatalogResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchCatalogResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchCatalogResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
+
+                    /**
+                     * Decodes a SearchCatalogResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchCatalogResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
+
+                    /**
+                     * Verifies a SearchCatalogResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchCatalogResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchCatalogResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SearchCatalogResult;
+
+                    /**
+                     * Creates a plain object from a SearchCatalogResult message. Also converts values to other types if specified.
+                     * @param message SearchCatalogResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.SearchCatalogResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchCatalogResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** SearchResultType enum. */
+                enum SearchResultType {
+                    SEARCH_RESULT_TYPE_UNSPECIFIED = 0,
+                    ENTRY = 1,
+                    TAG_TEMPLATE = 2,
+                    ENTRY_GROUP = 3
+                }
+
+                /** Properties of a GcsFilesetSpec. */
+                interface IGcsFilesetSpec {
+
+                    /** GcsFilesetSpec filePatterns */
+                    filePatterns?: (string[]|null);
+
+                    /** GcsFilesetSpec sampleGcsFileSpecs */
+                    sampleGcsFileSpecs?: (google.cloud.datacatalog.v1beta1.IGcsFileSpec[]|null);
+                }
+
+                /** Represents a GcsFilesetSpec. */
+                class GcsFilesetSpec implements IGcsFilesetSpec {
+
+                    /**
+                     * Constructs a new GcsFilesetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec);
+
+                    /** GcsFilesetSpec filePatterns. */
+                    public filePatterns: string[];
+
+                    /** GcsFilesetSpec sampleGcsFileSpecs. */
+                    public sampleGcsFileSpecs: google.cloud.datacatalog.v1beta1.IGcsFileSpec[];
+
+                    /**
+                     * Creates a new GcsFilesetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsFilesetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                     * @param message GcsFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                     * @param message GcsFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsFilesetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Verifies a GcsFilesetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsFilesetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
+                     * @param message GcsFilesetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFilesetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsFilesetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GcsFileSpec. */
+                interface IGcsFileSpec {
+
+                    /** GcsFileSpec filePath */
+                    filePath?: (string|null);
+
+                    /** GcsFileSpec gcsTimestamps */
+                    gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** GcsFileSpec sizeBytes */
+                    sizeBytes?: (number|Long|null);
+                }
+
+                /** Represents a GcsFileSpec. */
+                class GcsFileSpec implements IGcsFileSpec {
+
+                    /**
+                     * Constructs a new GcsFileSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec);
+
+                    /** GcsFileSpec filePath. */
+                    public filePath: string;
+
+                    /** GcsFileSpec gcsTimestamps. */
+                    public gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** GcsFileSpec sizeBytes. */
+                    public sizeBytes: (number|Long);
+
+                    /**
+                     * Creates a new GcsFileSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsFileSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                     * @param message GcsFileSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                     * @param message GcsFileSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsFileSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsFileSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsFileSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Verifies a GcsFileSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsFileSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
+                     * @param message GcsFileSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFileSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsFileSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a PolicyTagManagerSerialization */
+                class PolicyTagManagerSerialization extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PolicyTagManagerSerialization service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PolicyTagManagerSerialization service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTagManagerSerialization;
+
+                    /**
+                     * Calls ImportTaxonomies.
+                     * @param request ImportTaxonomiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ImportTaxonomiesResponse
+                     */
+                    public importTaxonomies(request: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomiesCallback): void;
+
+                    /**
+                     * Calls ImportTaxonomies.
+                     * @param request ImportTaxonomiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importTaxonomies(request: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>;
+
+                    /**
+                     * Calls ExportTaxonomies.
+                     * @param request ExportTaxonomiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExportTaxonomiesResponse
+                     */
+                    public exportTaxonomies(request: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomiesCallback): void;
+
+                    /**
+                     * Calls ExportTaxonomies.
+                     * @param request ExportTaxonomiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportTaxonomies(request: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>;
+                }
+
+                namespace PolicyTagManagerSerialization {
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#importTaxonomies}.
+                     * @param error Error, if any
+                     * @param [response] ImportTaxonomiesResponse
+                     */
+                    type ImportTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#exportTaxonomies}.
+                     * @param error Error, if any
+                     * @param [response] ExportTaxonomiesResponse
+                     */
+                    type ExportTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse) => void;
+                }
+
+                /** Properties of a SerializedTaxonomy. */
+                interface ISerializedTaxonomy {
+
+                    /** SerializedTaxonomy displayName */
+                    displayName?: (string|null);
+
+                    /** SerializedTaxonomy description */
+                    description?: (string|null);
+
+                    /** SerializedTaxonomy policyTags */
+                    policyTags?: (google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[]|null);
+                }
+
+                /** Represents a SerializedTaxonomy. */
+                class SerializedTaxonomy implements ISerializedTaxonomy {
+
+                    /**
+                     * Constructs a new SerializedTaxonomy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy);
+
+                    /** SerializedTaxonomy displayName. */
+                    public displayName: string;
+
+                    /** SerializedTaxonomy description. */
+                    public description: string;
+
+                    /** SerializedTaxonomy policyTags. */
+                    public policyTags: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[];
+
+                    /**
+                     * Creates a new SerializedTaxonomy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SerializedTaxonomy instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
+
+                    /**
+                     * Encodes the specified SerializedTaxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
+                     * @param message SerializedTaxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SerializedTaxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
+                     * @param message SerializedTaxonomy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SerializedTaxonomy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SerializedTaxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
+
+                    /**
+                     * Decodes a SerializedTaxonomy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SerializedTaxonomy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
+
+                    /**
+                     * Verifies a SerializedTaxonomy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SerializedTaxonomy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SerializedTaxonomy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
+
+                    /**
+                     * Creates a plain object from a SerializedTaxonomy message. Also converts values to other types if specified.
+                     * @param message SerializedTaxonomy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.SerializedTaxonomy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SerializedTaxonomy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SerializedPolicyTag. */
+                interface ISerializedPolicyTag {
+
+                    /** SerializedPolicyTag displayName */
+                    displayName?: (string|null);
+
+                    /** SerializedPolicyTag description */
+                    description?: (string|null);
+
+                    /** SerializedPolicyTag childPolicyTags */
+                    childPolicyTags?: (google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[]|null);
+                }
+
+                /** Represents a SerializedPolicyTag. */
+                class SerializedPolicyTag implements ISerializedPolicyTag {
+
+                    /**
+                     * Constructs a new SerializedPolicyTag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag);
+
+                    /** SerializedPolicyTag displayName. */
+                    public displayName: string;
+
+                    /** SerializedPolicyTag description. */
+                    public description: string;
+
+                    /** SerializedPolicyTag childPolicyTags. */
+                    public childPolicyTags: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[];
+
+                    /**
+                     * Creates a new SerializedPolicyTag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SerializedPolicyTag instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
+
+                    /**
+                     * Encodes the specified SerializedPolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
+                     * @param message SerializedPolicyTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SerializedPolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
+                     * @param message SerializedPolicyTag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SerializedPolicyTag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SerializedPolicyTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
+
+                    /**
+                     * Decodes a SerializedPolicyTag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SerializedPolicyTag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
+
+                    /**
+                     * Verifies a SerializedPolicyTag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SerializedPolicyTag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SerializedPolicyTag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
+
+                    /**
+                     * Creates a plain object from a SerializedPolicyTag message. Also converts values to other types if specified.
+                     * @param message SerializedPolicyTag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.SerializedPolicyTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SerializedPolicyTag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportTaxonomiesRequest. */
+                interface IImportTaxonomiesRequest {
+
+                    /** ImportTaxonomiesRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportTaxonomiesRequest inlineSource */
+                    inlineSource?: (google.cloud.datacatalog.v1beta1.IInlineSource|null);
+                }
+
+                /** Represents an ImportTaxonomiesRequest. */
+                class ImportTaxonomiesRequest implements IImportTaxonomiesRequest {
+
+                    /**
+                     * Constructs a new ImportTaxonomiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest);
+
+                    /** ImportTaxonomiesRequest parent. */
+                    public parent: string;
+
+                    /** ImportTaxonomiesRequest inlineSource. */
+                    public inlineSource?: (google.cloud.datacatalog.v1beta1.IInlineSource|null);
+
+                    /** ImportTaxonomiesRequest source. */
+                    public source?: "inlineSource";
+
+                    /**
+                     * Creates a new ImportTaxonomiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportTaxonomiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
+
+                    /**
+                     * Encodes the specified ImportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
+                     * @param message ImportTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
+                     * @param message ImportTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
+
+                    /**
+                     * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
+
+                    /**
+                     * Verifies an ImportTaxonomiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportTaxonomiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
+
+                    /**
+                     * Creates a plain object from an ImportTaxonomiesRequest message. Also converts values to other types if specified.
+                     * @param message ImportTaxonomiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportTaxonomiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an InlineSource. */
+                interface IInlineSource {
+
+                    /** InlineSource taxonomies */
+                    taxonomies?: (google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[]|null);
+                }
+
+                /** Represents an InlineSource. */
+                class InlineSource implements IInlineSource {
+
+                    /**
+                     * Constructs a new InlineSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IInlineSource);
+
+                    /** InlineSource taxonomies. */
+                    public taxonomies: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[];
+
+                    /**
+                     * Creates a new InlineSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InlineSource instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IInlineSource): google.cloud.datacatalog.v1beta1.InlineSource;
+
+                    /**
+                     * Encodes the specified InlineSource message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
+                     * @param message InlineSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InlineSource message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
+                     * @param message InlineSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InlineSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InlineSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.InlineSource;
+
+                    /**
+                     * Decodes an InlineSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InlineSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.InlineSource;
+
+                    /**
+                     * Verifies an InlineSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InlineSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InlineSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.InlineSource;
+
+                    /**
+                     * Creates a plain object from an InlineSource message. Also converts values to other types if specified.
+                     * @param message InlineSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.InlineSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InlineSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportTaxonomiesResponse. */
+                interface IImportTaxonomiesResponse {
+
+                    /** ImportTaxonomiesResponse taxonomies */
+                    taxonomies?: (google.cloud.datacatalog.v1beta1.ITaxonomy[]|null);
+                }
+
+                /** Represents an ImportTaxonomiesResponse. */
+                class ImportTaxonomiesResponse implements IImportTaxonomiesResponse {
+
+                    /**
+                     * Constructs a new ImportTaxonomiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse);
+
+                    /** ImportTaxonomiesResponse taxonomies. */
+                    public taxonomies: google.cloud.datacatalog.v1beta1.ITaxonomy[];
+
+                    /**
+                     * Creates a new ImportTaxonomiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportTaxonomiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
+
+                    /**
+                     * Encodes the specified ImportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
+                     * @param message ImportTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
+                     * @param message ImportTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
+
+                    /**
+                     * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
+
+                    /**
+                     * Verifies an ImportTaxonomiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportTaxonomiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
+
+                    /**
+                     * Creates a plain object from an ImportTaxonomiesResponse message. Also converts values to other types if specified.
+                     * @param message ImportTaxonomiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportTaxonomiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportTaxonomiesRequest. */
+                interface IExportTaxonomiesRequest {
+
+                    /** ExportTaxonomiesRequest parent */
+                    parent?: (string|null);
+
+                    /** ExportTaxonomiesRequest taxonomies */
+                    taxonomies?: (string[]|null);
+
+                    /** ExportTaxonomiesRequest serializedTaxonomies */
+                    serializedTaxonomies?: (boolean|null);
+                }
+
+                /** Represents an ExportTaxonomiesRequest. */
+                class ExportTaxonomiesRequest implements IExportTaxonomiesRequest {
+
+                    /**
+                     * Constructs a new ExportTaxonomiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest);
+
+                    /** ExportTaxonomiesRequest parent. */
+                    public parent: string;
+
+                    /** ExportTaxonomiesRequest taxonomies. */
+                    public taxonomies: string[];
+
+                    /** ExportTaxonomiesRequest serializedTaxonomies. */
+                    public serializedTaxonomies: boolean;
+
+                    /** ExportTaxonomiesRequest destination. */
+                    public destination?: "serializedTaxonomies";
+
+                    /**
+                     * Creates a new ExportTaxonomiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportTaxonomiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
+
+                    /**
+                     * Encodes the specified ExportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
+                     * @param message ExportTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
+                     * @param message ExportTaxonomiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
+
+                    /**
+                     * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportTaxonomiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
+
+                    /**
+                     * Verifies an ExportTaxonomiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportTaxonomiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
+
+                    /**
+                     * Creates a plain object from an ExportTaxonomiesRequest message. Also converts values to other types if specified.
+                     * @param message ExportTaxonomiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportTaxonomiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportTaxonomiesResponse. */
+                interface IExportTaxonomiesResponse {
+
+                    /** ExportTaxonomiesResponse taxonomies */
+                    taxonomies?: (google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[]|null);
+                }
+
+                /** Represents an ExportTaxonomiesResponse. */
+                class ExportTaxonomiesResponse implements IExportTaxonomiesResponse {
+
+                    /**
+                     * Constructs a new ExportTaxonomiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse);
+
+                    /** ExportTaxonomiesResponse taxonomies. */
+                    public taxonomies: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[];
+
+                    /**
+                     * Creates a new ExportTaxonomiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportTaxonomiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
+
+                    /**
+                     * Encodes the specified ExportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
+                     * @param message ExportTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
+                     * @param message ExportTaxonomiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
+
+                    /**
+                     * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportTaxonomiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
+
+                    /**
+                     * Verifies an ExportTaxonomiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportTaxonomiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
+
+                    /**
+                     * Creates a plain object from an ExportTaxonomiesResponse message. Also converts values to other types if specified.
+                     * @param message ExportTaxonomiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportTaxonomiesResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -5004,2418 +7422,6 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
-
-                /** Represents a PolicyTagManager */
-                class PolicyTagManager extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new PolicyTagManager service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new PolicyTagManager service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTagManager;
-
-                    /**
-                     * Calls CreateTaxonomy.
-                     * @param request CreateTaxonomyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Taxonomy
-                     */
-                    public createTaxonomy(request: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.CreateTaxonomyCallback): void;
-
-                    /**
-                     * Calls CreateTaxonomy.
-                     * @param request CreateTaxonomyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createTaxonomy(request: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
-
-                    /**
-                     * Calls DeleteTaxonomy.
-                     * @param request DeleteTaxonomyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteTaxonomy(request: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.DeleteTaxonomyCallback): void;
-
-                    /**
-                     * Calls DeleteTaxonomy.
-                     * @param request DeleteTaxonomyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteTaxonomy(request: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls UpdateTaxonomy.
-                     * @param request UpdateTaxonomyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Taxonomy
-                     */
-                    public updateTaxonomy(request: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdateTaxonomyCallback): void;
-
-                    /**
-                     * Calls UpdateTaxonomy.
-                     * @param request UpdateTaxonomyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateTaxonomy(request: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
-
-                    /**
-                     * Calls ListTaxonomies.
-                     * @param request ListTaxonomiesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListTaxonomiesResponse
-                     */
-                    public listTaxonomies(request: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.ListTaxonomiesCallback): void;
-
-                    /**
-                     * Calls ListTaxonomies.
-                     * @param request ListTaxonomiesRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listTaxonomies(request: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse>;
-
-                    /**
-                     * Calls GetTaxonomy.
-                     * @param request GetTaxonomyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Taxonomy
-                     */
-                    public getTaxonomy(request: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetTaxonomyCallback): void;
-
-                    /**
-                     * Calls GetTaxonomy.
-                     * @param request GetTaxonomyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getTaxonomy(request: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest): Promise<google.cloud.datacatalog.v1beta1.Taxonomy>;
-
-                    /**
-                     * Calls CreatePolicyTag.
-                     * @param request CreatePolicyTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and PolicyTag
-                     */
-                    public createPolicyTag(request: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.CreatePolicyTagCallback): void;
-
-                    /**
-                     * Calls CreatePolicyTag.
-                     * @param request CreatePolicyTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createPolicyTag(request: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
-
-                    /**
-                     * Calls DeletePolicyTag.
-                     * @param request DeletePolicyTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deletePolicyTag(request: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.DeletePolicyTagCallback): void;
-
-                    /**
-                     * Calls DeletePolicyTag.
-                     * @param request DeletePolicyTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deletePolicyTag(request: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls UpdatePolicyTag.
-                     * @param request UpdatePolicyTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and PolicyTag
-                     */
-                    public updatePolicyTag(request: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.UpdatePolicyTagCallback): void;
-
-                    /**
-                     * Calls UpdatePolicyTag.
-                     * @param request UpdatePolicyTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updatePolicyTag(request: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
-
-                    /**
-                     * Calls ListPolicyTags.
-                     * @param request ListPolicyTagsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListPolicyTagsResponse
-                     */
-                    public listPolicyTags(request: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.ListPolicyTagsCallback): void;
-
-                    /**
-                     * Calls ListPolicyTags.
-                     * @param request ListPolicyTagsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listPolicyTags(request: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest): Promise<google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse>;
-
-                    /**
-                     * Calls GetPolicyTag.
-                     * @param request GetPolicyTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and PolicyTag
-                     */
-                    public getPolicyTag(request: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetPolicyTagCallback): void;
-
-                    /**
-                     * Calls GetPolicyTag.
-                     * @param request GetPolicyTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getPolicyTag(request: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest): Promise<google.cloud.datacatalog.v1beta1.PolicyTag>;
-
-                    /**
-                     * Calls GetIamPolicy.
-                     * @param request GetIamPolicyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Policy
-                     */
-                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.GetIamPolicyCallback): void;
-
-                    /**
-                     * Calls GetIamPolicy.
-                     * @param request GetIamPolicyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
-
-                    /**
-                     * Calls SetIamPolicy.
-                     * @param request SetIamPolicyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Policy
-                     */
-                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.SetIamPolicyCallback): void;
-
-                    /**
-                     * Calls SetIamPolicy.
-                     * @param request SetIamPolicyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
-
-                    /**
-                     * Calls TestIamPermissions.
-                     * @param request TestIamPermissionsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
-                     */
-                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManager.TestIamPermissionsCallback): void;
-
-                    /**
-                     * Calls TestIamPermissions.
-                     * @param request TestIamPermissionsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
-                }
-
-                namespace PolicyTagManager {
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createTaxonomy}.
-                     * @param error Error, if any
-                     * @param [response] Taxonomy
-                     */
-                    type CreateTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deleteTaxonomy}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteTaxonomyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updateTaxonomy}.
-                     * @param error Error, if any
-                     * @param [response] Taxonomy
-                     */
-                    type UpdateTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listTaxonomies}.
-                     * @param error Error, if any
-                     * @param [response] ListTaxonomiesResponse
-                     */
-                    type ListTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getTaxonomy}.
-                     * @param error Error, if any
-                     * @param [response] Taxonomy
-                     */
-                    type GetTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Taxonomy) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#createPolicyTag}.
-                     * @param error Error, if any
-                     * @param [response] PolicyTag
-                     */
-                    type CreatePolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#deletePolicyTag}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeletePolicyTagCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#updatePolicyTag}.
-                     * @param error Error, if any
-                     * @param [response] PolicyTag
-                     */
-                    type UpdatePolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#listPolicyTags}.
-                     * @param error Error, if any
-                     * @param [response] ListPolicyTagsResponse
-                     */
-                    type ListPolicyTagsCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getPolicyTag}.
-                     * @param error Error, if any
-                     * @param [response] PolicyTag
-                     */
-                    type GetPolicyTagCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.PolicyTag) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#getIamPolicy}.
-                     * @param error Error, if any
-                     * @param [response] Policy
-                     */
-                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#setIamPolicy}.
-                     * @param error Error, if any
-                     * @param [response] Policy
-                     */
-                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManager#testIamPermissions}.
-                     * @param error Error, if any
-                     * @param [response] TestIamPermissionsResponse
-                     */
-                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
-                }
-
-                /** Properties of a Taxonomy. */
-                interface ITaxonomy {
-
-                    /** Taxonomy name */
-                    name?: (string|null);
-
-                    /** Taxonomy displayName */
-                    displayName?: (string|null);
-
-                    /** Taxonomy description */
-                    description?: (string|null);
-
-                    /** Taxonomy activatedPolicyTypes */
-                    activatedPolicyTypes?: (google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[]|null);
-                }
-
-                /** Represents a Taxonomy. */
-                class Taxonomy implements ITaxonomy {
-
-                    /**
-                     * Constructs a new Taxonomy.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ITaxonomy);
-
-                    /** Taxonomy name. */
-                    public name: string;
-
-                    /** Taxonomy displayName. */
-                    public displayName: string;
-
-                    /** Taxonomy description. */
-                    public description: string;
-
-                    /** Taxonomy activatedPolicyTypes. */
-                    public activatedPolicyTypes: google.cloud.datacatalog.v1beta1.Taxonomy.PolicyType[];
-
-                    /**
-                     * Creates a new Taxonomy instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Taxonomy instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ITaxonomy): google.cloud.datacatalog.v1beta1.Taxonomy;
-
-                    /**
-                     * Encodes the specified Taxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
-                     * @param message Taxonomy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ITaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Taxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.Taxonomy.verify|verify} messages.
-                     * @param message Taxonomy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ITaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Taxonomy message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Taxonomy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.Taxonomy;
-
-                    /**
-                     * Decodes a Taxonomy message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Taxonomy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.Taxonomy;
-
-                    /**
-                     * Verifies a Taxonomy message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Taxonomy message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Taxonomy
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.Taxonomy;
-
-                    /**
-                     * Creates a plain object from a Taxonomy message. Also converts values to other types if specified.
-                     * @param message Taxonomy
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.Taxonomy, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Taxonomy to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Taxonomy {
-
-                    /** PolicyType enum. */
-                    enum PolicyType {
-                        POLICY_TYPE_UNSPECIFIED = 0,
-                        FINE_GRAINED_ACCESS_CONTROL = 1
-                    }
-                }
-
-                /** Properties of a PolicyTag. */
-                interface IPolicyTag {
-
-                    /** PolicyTag name */
-                    name?: (string|null);
-
-                    /** PolicyTag displayName */
-                    displayName?: (string|null);
-
-                    /** PolicyTag description */
-                    description?: (string|null);
-
-                    /** PolicyTag parentPolicyTag */
-                    parentPolicyTag?: (string|null);
-
-                    /** PolicyTag childPolicyTags */
-                    childPolicyTags?: (string[]|null);
-                }
-
-                /** Represents a PolicyTag. */
-                class PolicyTag implements IPolicyTag {
-
-                    /**
-                     * Constructs a new PolicyTag.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IPolicyTag);
-
-                    /** PolicyTag name. */
-                    public name: string;
-
-                    /** PolicyTag displayName. */
-                    public displayName: string;
-
-                    /** PolicyTag description. */
-                    public description: string;
-
-                    /** PolicyTag parentPolicyTag. */
-                    public parentPolicyTag: string;
-
-                    /** PolicyTag childPolicyTags. */
-                    public childPolicyTags: string[];
-
-                    /**
-                     * Creates a new PolicyTag instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PolicyTag instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IPolicyTag): google.cloud.datacatalog.v1beta1.PolicyTag;
-
-                    /**
-                     * Encodes the specified PolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
-                     * @param message PolicyTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.PolicyTag.verify|verify} messages.
-                     * @param message PolicyTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PolicyTag message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PolicyTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.PolicyTag;
-
-                    /**
-                     * Decodes a PolicyTag message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PolicyTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.PolicyTag;
-
-                    /**
-                     * Verifies a PolicyTag message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PolicyTag message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PolicyTag
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.PolicyTag;
-
-                    /**
-                     * Creates a plain object from a PolicyTag message. Also converts values to other types if specified.
-                     * @param message PolicyTag
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.PolicyTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PolicyTag to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a CreateTaxonomyRequest. */
-                interface ICreateTaxonomyRequest {
-
-                    /** CreateTaxonomyRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateTaxonomyRequest taxonomy */
-                    taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
-                }
-
-                /** Represents a CreateTaxonomyRequest. */
-                class CreateTaxonomyRequest implements ICreateTaxonomyRequest {
-
-                    /**
-                     * Constructs a new CreateTaxonomyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest);
-
-                    /** CreateTaxonomyRequest parent. */
-                    public parent: string;
-
-                    /** CreateTaxonomyRequest taxonomy. */
-                    public taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
-
-                    /**
-                     * Creates a new CreateTaxonomyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateTaxonomyRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
-
-                    /**
-                     * Encodes the specified CreateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
-                     * @param message CreateTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest.verify|verify} messages.
-                     * @param message CreateTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateTaxonomyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
-
-                    /**
-                     * Decodes a CreateTaxonomyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
-
-                    /**
-                     * Verifies a CreateTaxonomyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateTaxonomyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest;
-
-                    /**
-                     * Creates a plain object from a CreateTaxonomyRequest message. Also converts values to other types if specified.
-                     * @param message CreateTaxonomyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreateTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateTaxonomyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeleteTaxonomyRequest. */
-                interface IDeleteTaxonomyRequest {
-
-                    /** DeleteTaxonomyRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteTaxonomyRequest. */
-                class DeleteTaxonomyRequest implements IDeleteTaxonomyRequest {
-
-                    /**
-                     * Constructs a new DeleteTaxonomyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest);
-
-                    /** DeleteTaxonomyRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteTaxonomyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteTaxonomyRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
-
-                    /**
-                     * Encodes the specified DeleteTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
-                     * @param message DeleteTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest.verify|verify} messages.
-                     * @param message DeleteTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeleteTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
-
-                    /**
-                     * Decodes a DeleteTaxonomyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
-
-                    /**
-                     * Verifies a DeleteTaxonomyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteTaxonomyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteTaxonomyRequest message. Also converts values to other types if specified.
-                     * @param message DeleteTaxonomyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeleteTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteTaxonomyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateTaxonomyRequest. */
-                interface IUpdateTaxonomyRequest {
-
-                    /** UpdateTaxonomyRequest taxonomy */
-                    taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
-
-                    /** UpdateTaxonomyRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateTaxonomyRequest. */
-                class UpdateTaxonomyRequest implements IUpdateTaxonomyRequest {
-
-                    /**
-                     * Constructs a new UpdateTaxonomyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest);
-
-                    /** UpdateTaxonomyRequest taxonomy. */
-                    public taxonomy?: (google.cloud.datacatalog.v1beta1.ITaxonomy|null);
-
-                    /** UpdateTaxonomyRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateTaxonomyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateTaxonomyRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
-
-                    /**
-                     * Encodes the specified UpdateTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
-                     * @param message UpdateTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest.verify|verify} messages.
-                     * @param message UpdateTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUpdateTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
-
-                    /**
-                     * Decodes an UpdateTaxonomyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
-
-                    /**
-                     * Verifies an UpdateTaxonomyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateTaxonomyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateTaxonomyRequest message. Also converts values to other types if specified.
-                     * @param message UpdateTaxonomyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.UpdateTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateTaxonomyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListTaxonomiesRequest. */
-                interface IListTaxonomiesRequest {
-
-                    /** ListTaxonomiesRequest parent */
-                    parent?: (string|null);
-
-                    /** ListTaxonomiesRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListTaxonomiesRequest pageToken */
-                    pageToken?: (string|null);
-                }
-
-                /** Represents a ListTaxonomiesRequest. */
-                class ListTaxonomiesRequest implements IListTaxonomiesRequest {
-
-                    /**
-                     * Constructs a new ListTaxonomiesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest);
-
-                    /** ListTaxonomiesRequest parent. */
-                    public parent: string;
-
-                    /** ListTaxonomiesRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListTaxonomiesRequest pageToken. */
-                    public pageToken: string;
-
-                    /**
-                     * Creates a new ListTaxonomiesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListTaxonomiesRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
-
-                    /**
-                     * Encodes the specified ListTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
-                     * @param message ListTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest.verify|verify} messages.
-                     * @param message ListTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListTaxonomiesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
-
-                    /**
-                     * Decodes a ListTaxonomiesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
-
-                    /**
-                     * Verifies a ListTaxonomiesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListTaxonomiesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest;
-
-                    /**
-                     * Creates a plain object from a ListTaxonomiesRequest message. Also converts values to other types if specified.
-                     * @param message ListTaxonomiesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListTaxonomiesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListTaxonomiesResponse. */
-                interface IListTaxonomiesResponse {
-
-                    /** ListTaxonomiesResponse taxonomies */
-                    taxonomies?: (google.cloud.datacatalog.v1beta1.ITaxonomy[]|null);
-
-                    /** ListTaxonomiesResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListTaxonomiesResponse. */
-                class ListTaxonomiesResponse implements IListTaxonomiesResponse {
-
-                    /**
-                     * Constructs a new ListTaxonomiesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse);
-
-                    /** ListTaxonomiesResponse taxonomies. */
-                    public taxonomies: google.cloud.datacatalog.v1beta1.ITaxonomy[];
-
-                    /** ListTaxonomiesResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListTaxonomiesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListTaxonomiesResponse instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
-
-                    /**
-                     * Encodes the specified ListTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
-                     * @param message ListTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse.verify|verify} messages.
-                     * @param message ListTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListTaxonomiesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
-
-                    /**
-                     * Decodes a ListTaxonomiesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
-
-                    /**
-                     * Verifies a ListTaxonomiesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListTaxonomiesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse;
-
-                    /**
-                     * Creates a plain object from a ListTaxonomiesResponse message. Also converts values to other types if specified.
-                     * @param message ListTaxonomiesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListTaxonomiesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetTaxonomyRequest. */
-                interface IGetTaxonomyRequest {
-
-                    /** GetTaxonomyRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetTaxonomyRequest. */
-                class GetTaxonomyRequest implements IGetTaxonomyRequest {
-
-                    /**
-                     * Constructs a new GetTaxonomyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest);
-
-                    /** GetTaxonomyRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetTaxonomyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetTaxonomyRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
-
-                    /**
-                     * Encodes the specified GetTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
-                     * @param message GetTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetTaxonomyRequest.verify|verify} messages.
-                     * @param message GetTaxonomyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGetTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetTaxonomyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
-
-                    /**
-                     * Decodes a GetTaxonomyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetTaxonomyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
-
-                    /**
-                     * Verifies a GetTaxonomyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetTaxonomyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GetTaxonomyRequest;
-
-                    /**
-                     * Creates a plain object from a GetTaxonomyRequest message. Also converts values to other types if specified.
-                     * @param message GetTaxonomyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.GetTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetTaxonomyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a CreatePolicyTagRequest. */
-                interface ICreatePolicyTagRequest {
-
-                    /** CreatePolicyTagRequest parent */
-                    parent?: (string|null);
-
-                    /** CreatePolicyTagRequest policyTag */
-                    policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
-                }
-
-                /** Represents a CreatePolicyTagRequest. */
-                class CreatePolicyTagRequest implements ICreatePolicyTagRequest {
-
-                    /**
-                     * Constructs a new CreatePolicyTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest);
-
-                    /** CreatePolicyTagRequest parent. */
-                    public parent: string;
-
-                    /** CreatePolicyTagRequest policyTag. */
-                    public policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
-
-                    /**
-                     * Creates a new CreatePolicyTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreatePolicyTagRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
-
-                    /**
-                     * Encodes the specified CreatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
-                     * @param message CreatePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest.verify|verify} messages.
-                     * @param message CreatePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreatePolicyTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreatePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
-
-                    /**
-                     * Decodes a CreatePolicyTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreatePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
-
-                    /**
-                     * Verifies a CreatePolicyTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreatePolicyTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest;
-
-                    /**
-                     * Creates a plain object from a CreatePolicyTagRequest message. Also converts values to other types if specified.
-                     * @param message CreatePolicyTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreatePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreatePolicyTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeletePolicyTagRequest. */
-                interface IDeletePolicyTagRequest {
-
-                    /** DeletePolicyTagRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeletePolicyTagRequest. */
-                class DeletePolicyTagRequest implements IDeletePolicyTagRequest {
-
-                    /**
-                     * Constructs a new DeletePolicyTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest);
-
-                    /** DeletePolicyTagRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeletePolicyTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeletePolicyTagRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
-
-                    /**
-                     * Encodes the specified DeletePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
-                     * @param message DeletePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeletePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest.verify|verify} messages.
-                     * @param message DeletePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeletePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeletePolicyTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeletePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
-
-                    /**
-                     * Decodes a DeletePolicyTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeletePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
-
-                    /**
-                     * Verifies a DeletePolicyTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeletePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeletePolicyTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest;
-
-                    /**
-                     * Creates a plain object from a DeletePolicyTagRequest message. Also converts values to other types if specified.
-                     * @param message DeletePolicyTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeletePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeletePolicyTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdatePolicyTagRequest. */
-                interface IUpdatePolicyTagRequest {
-
-                    /** UpdatePolicyTagRequest policyTag */
-                    policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
-
-                    /** UpdatePolicyTagRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdatePolicyTagRequest. */
-                class UpdatePolicyTagRequest implements IUpdatePolicyTagRequest {
-
-                    /**
-                     * Constructs a new UpdatePolicyTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest);
-
-                    /** UpdatePolicyTagRequest policyTag. */
-                    public policyTag?: (google.cloud.datacatalog.v1beta1.IPolicyTag|null);
-
-                    /** UpdatePolicyTagRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdatePolicyTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdatePolicyTagRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
-
-                    /**
-                     * Encodes the specified UpdatePolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
-                     * @param message UpdatePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdatePolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest.verify|verify} messages.
-                     * @param message UpdatePolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IUpdatePolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdatePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
-
-                    /**
-                     * Decodes an UpdatePolicyTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdatePolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
-
-                    /**
-                     * Verifies an UpdatePolicyTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdatePolicyTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdatePolicyTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest;
-
-                    /**
-                     * Creates a plain object from an UpdatePolicyTagRequest message. Also converts values to other types if specified.
-                     * @param message UpdatePolicyTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.UpdatePolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdatePolicyTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListPolicyTagsRequest. */
-                interface IListPolicyTagsRequest {
-
-                    /** ListPolicyTagsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListPolicyTagsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListPolicyTagsRequest pageToken */
-                    pageToken?: (string|null);
-                }
-
-                /** Represents a ListPolicyTagsRequest. */
-                class ListPolicyTagsRequest implements IListPolicyTagsRequest {
-
-                    /**
-                     * Constructs a new ListPolicyTagsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest);
-
-                    /** ListPolicyTagsRequest parent. */
-                    public parent: string;
-
-                    /** ListPolicyTagsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListPolicyTagsRequest pageToken. */
-                    public pageToken: string;
-
-                    /**
-                     * Creates a new ListPolicyTagsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListPolicyTagsRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
-
-                    /**
-                     * Encodes the specified ListPolicyTagsRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
-                     * @param message ListPolicyTagsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListPolicyTagsRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest.verify|verify} messages.
-                     * @param message ListPolicyTagsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListPolicyTagsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListPolicyTagsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
-
-                    /**
-                     * Decodes a ListPolicyTagsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListPolicyTagsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
-
-                    /**
-                     * Verifies a ListPolicyTagsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListPolicyTagsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListPolicyTagsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest;
-
-                    /**
-                     * Creates a plain object from a ListPolicyTagsRequest message. Also converts values to other types if specified.
-                     * @param message ListPolicyTagsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListPolicyTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListPolicyTagsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListPolicyTagsResponse. */
-                interface IListPolicyTagsResponse {
-
-                    /** ListPolicyTagsResponse policyTags */
-                    policyTags?: (google.cloud.datacatalog.v1beta1.IPolicyTag[]|null);
-
-                    /** ListPolicyTagsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListPolicyTagsResponse. */
-                class ListPolicyTagsResponse implements IListPolicyTagsResponse {
-
-                    /**
-                     * Constructs a new ListPolicyTagsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse);
-
-                    /** ListPolicyTagsResponse policyTags. */
-                    public policyTags: google.cloud.datacatalog.v1beta1.IPolicyTag[];
-
-                    /** ListPolicyTagsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListPolicyTagsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListPolicyTagsResponse instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
-
-                    /**
-                     * Encodes the specified ListPolicyTagsResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
-                     * @param message ListPolicyTagsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListPolicyTagsResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse.verify|verify} messages.
-                     * @param message ListPolicyTagsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IListPolicyTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListPolicyTagsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListPolicyTagsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
-
-                    /**
-                     * Decodes a ListPolicyTagsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListPolicyTagsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
-
-                    /**
-                     * Verifies a ListPolicyTagsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListPolicyTagsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListPolicyTagsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse;
-
-                    /**
-                     * Creates a plain object from a ListPolicyTagsResponse message. Also converts values to other types if specified.
-                     * @param message ListPolicyTagsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ListPolicyTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListPolicyTagsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetPolicyTagRequest. */
-                interface IGetPolicyTagRequest {
-
-                    /** GetPolicyTagRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetPolicyTagRequest. */
-                class GetPolicyTagRequest implements IGetPolicyTagRequest {
-
-                    /**
-                     * Constructs a new GetPolicyTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest);
-
-                    /** GetPolicyTagRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetPolicyTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetPolicyTagRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
-
-                    /**
-                     * Encodes the specified GetPolicyTagRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
-                     * @param message GetPolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetPolicyTagRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetPolicyTagRequest.verify|verify} messages.
-                     * @param message GetPolicyTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGetPolicyTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetPolicyTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetPolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
-
-                    /**
-                     * Decodes a GetPolicyTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetPolicyTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
-
-                    /**
-                     * Verifies a GetPolicyTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetPolicyTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetPolicyTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GetPolicyTagRequest;
-
-                    /**
-                     * Creates a plain object from a GetPolicyTagRequest message. Also converts values to other types if specified.
-                     * @param message GetPolicyTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.GetPolicyTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetPolicyTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Represents a PolicyTagManagerSerialization */
-                class PolicyTagManagerSerialization extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new PolicyTagManagerSerialization service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new PolicyTagManagerSerialization service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTagManagerSerialization;
-
-                    /**
-                     * Calls ImportTaxonomies.
-                     * @param request ImportTaxonomiesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ImportTaxonomiesResponse
-                     */
-                    public importTaxonomies(request: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ImportTaxonomiesCallback): void;
-
-                    /**
-                     * Calls ImportTaxonomies.
-                     * @param request ImportTaxonomiesRequest message or plain object
-                     * @returns Promise
-                     */
-                    public importTaxonomies(request: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse>;
-
-                    /**
-                     * Calls ExportTaxonomies.
-                     * @param request ExportTaxonomiesRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ExportTaxonomiesResponse
-                     */
-                    public exportTaxonomies(request: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, callback: google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization.ExportTaxonomiesCallback): void;
-
-                    /**
-                     * Calls ExportTaxonomies.
-                     * @param request ExportTaxonomiesRequest message or plain object
-                     * @returns Promise
-                     */
-                    public exportTaxonomies(request: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest): Promise<google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse>;
-                }
-
-                namespace PolicyTagManagerSerialization {
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#importTaxonomies}.
-                     * @param error Error, if any
-                     * @param [response] ImportTaxonomiesResponse
-                     */
-                    type ImportTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.PolicyTagManagerSerialization#exportTaxonomies}.
-                     * @param error Error, if any
-                     * @param [response] ExportTaxonomiesResponse
-                     */
-                    type ExportTaxonomiesCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse) => void;
-                }
-
-                /** Properties of a SerializedTaxonomy. */
-                interface ISerializedTaxonomy {
-
-                    /** SerializedTaxonomy displayName */
-                    displayName?: (string|null);
-
-                    /** SerializedTaxonomy description */
-                    description?: (string|null);
-
-                    /** SerializedTaxonomy policyTags */
-                    policyTags?: (google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[]|null);
-                }
-
-                /** Represents a SerializedTaxonomy. */
-                class SerializedTaxonomy implements ISerializedTaxonomy {
-
-                    /**
-                     * Constructs a new SerializedTaxonomy.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy);
-
-                    /** SerializedTaxonomy displayName. */
-                    public displayName: string;
-
-                    /** SerializedTaxonomy description. */
-                    public description: string;
-
-                    /** SerializedTaxonomy policyTags. */
-                    public policyTags: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[];
-
-                    /**
-                     * Creates a new SerializedTaxonomy instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SerializedTaxonomy instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
-
-                    /**
-                     * Encodes the specified SerializedTaxonomy message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
-                     * @param message SerializedTaxonomy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SerializedTaxonomy message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedTaxonomy.verify|verify} messages.
-                     * @param message SerializedTaxonomy message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SerializedTaxonomy message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SerializedTaxonomy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
-
-                    /**
-                     * Decodes a SerializedTaxonomy message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SerializedTaxonomy
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
-
-                    /**
-                     * Verifies a SerializedTaxonomy message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SerializedTaxonomy message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SerializedTaxonomy
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SerializedTaxonomy;
-
-                    /**
-                     * Creates a plain object from a SerializedTaxonomy message. Also converts values to other types if specified.
-                     * @param message SerializedTaxonomy
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.SerializedTaxonomy, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SerializedTaxonomy to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a SerializedPolicyTag. */
-                interface ISerializedPolicyTag {
-
-                    /** SerializedPolicyTag displayName */
-                    displayName?: (string|null);
-
-                    /** SerializedPolicyTag description */
-                    description?: (string|null);
-
-                    /** SerializedPolicyTag childPolicyTags */
-                    childPolicyTags?: (google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[]|null);
-                }
-
-                /** Represents a SerializedPolicyTag. */
-                class SerializedPolicyTag implements ISerializedPolicyTag {
-
-                    /**
-                     * Constructs a new SerializedPolicyTag.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag);
-
-                    /** SerializedPolicyTag displayName. */
-                    public displayName: string;
-
-                    /** SerializedPolicyTag description. */
-                    public description: string;
-
-                    /** SerializedPolicyTag childPolicyTags. */
-                    public childPolicyTags: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag[];
-
-                    /**
-                     * Creates a new SerializedPolicyTag instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SerializedPolicyTag instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
-
-                    /**
-                     * Encodes the specified SerializedPolicyTag message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
-                     * @param message SerializedPolicyTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SerializedPolicyTag message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SerializedPolicyTag.verify|verify} messages.
-                     * @param message SerializedPolicyTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISerializedPolicyTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SerializedPolicyTag message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SerializedPolicyTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
-
-                    /**
-                     * Decodes a SerializedPolicyTag message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SerializedPolicyTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
-
-                    /**
-                     * Verifies a SerializedPolicyTag message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SerializedPolicyTag message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SerializedPolicyTag
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SerializedPolicyTag;
-
-                    /**
-                     * Creates a plain object from a SerializedPolicyTag message. Also converts values to other types if specified.
-                     * @param message SerializedPolicyTag
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.SerializedPolicyTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SerializedPolicyTag to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ImportTaxonomiesRequest. */
-                interface IImportTaxonomiesRequest {
-
-                    /** ImportTaxonomiesRequest parent */
-                    parent?: (string|null);
-
-                    /** ImportTaxonomiesRequest inlineSource */
-                    inlineSource?: (google.cloud.datacatalog.v1beta1.IInlineSource|null);
-                }
-
-                /** Represents an ImportTaxonomiesRequest. */
-                class ImportTaxonomiesRequest implements IImportTaxonomiesRequest {
-
-                    /**
-                     * Constructs a new ImportTaxonomiesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest);
-
-                    /** ImportTaxonomiesRequest parent. */
-                    public parent: string;
-
-                    /** ImportTaxonomiesRequest inlineSource. */
-                    public inlineSource?: (google.cloud.datacatalog.v1beta1.IInlineSource|null);
-
-                    /** ImportTaxonomiesRequest source. */
-                    public source?: "inlineSource";
-
-                    /**
-                     * Creates a new ImportTaxonomiesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ImportTaxonomiesRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
-
-                    /**
-                     * Encodes the specified ImportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
-                     * @param message ImportTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ImportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest.verify|verify} messages.
-                     * @param message ImportTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ImportTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
-
-                    /**
-                     * Decodes an ImportTaxonomiesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ImportTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
-
-                    /**
-                     * Verifies an ImportTaxonomiesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ImportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ImportTaxonomiesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest;
-
-                    /**
-                     * Creates a plain object from an ImportTaxonomiesRequest message. Also converts values to other types if specified.
-                     * @param message ImportTaxonomiesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ImportTaxonomiesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an InlineSource. */
-                interface IInlineSource {
-
-                    /** InlineSource taxonomies */
-                    taxonomies?: (google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[]|null);
-                }
-
-                /** Represents an InlineSource. */
-                class InlineSource implements IInlineSource {
-
-                    /**
-                     * Constructs a new InlineSource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IInlineSource);
-
-                    /** InlineSource taxonomies. */
-                    public taxonomies: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[];
-
-                    /**
-                     * Creates a new InlineSource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns InlineSource instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IInlineSource): google.cloud.datacatalog.v1beta1.InlineSource;
-
-                    /**
-                     * Encodes the specified InlineSource message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
-                     * @param message InlineSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified InlineSource message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.InlineSource.verify|verify} messages.
-                     * @param message InlineSource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an InlineSource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns InlineSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.InlineSource;
-
-                    /**
-                     * Decodes an InlineSource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns InlineSource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.InlineSource;
-
-                    /**
-                     * Verifies an InlineSource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an InlineSource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns InlineSource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.InlineSource;
-
-                    /**
-                     * Creates a plain object from an InlineSource message. Also converts values to other types if specified.
-                     * @param message InlineSource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.InlineSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this InlineSource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ImportTaxonomiesResponse. */
-                interface IImportTaxonomiesResponse {
-
-                    /** ImportTaxonomiesResponse taxonomies */
-                    taxonomies?: (google.cloud.datacatalog.v1beta1.ITaxonomy[]|null);
-                }
-
-                /** Represents an ImportTaxonomiesResponse. */
-                class ImportTaxonomiesResponse implements IImportTaxonomiesResponse {
-
-                    /**
-                     * Constructs a new ImportTaxonomiesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse);
-
-                    /** ImportTaxonomiesResponse taxonomies. */
-                    public taxonomies: google.cloud.datacatalog.v1beta1.ITaxonomy[];
-
-                    /**
-                     * Creates a new ImportTaxonomiesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ImportTaxonomiesResponse instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
-
-                    /**
-                     * Encodes the specified ImportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
-                     * @param message ImportTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ImportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse.verify|verify} messages.
-                     * @param message ImportTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IImportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ImportTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
-
-                    /**
-                     * Decodes an ImportTaxonomiesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ImportTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
-
-                    /**
-                     * Verifies an ImportTaxonomiesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ImportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ImportTaxonomiesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse;
-
-                    /**
-                     * Creates a plain object from an ImportTaxonomiesResponse message. Also converts values to other types if specified.
-                     * @param message ImportTaxonomiesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ImportTaxonomiesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ExportTaxonomiesRequest. */
-                interface IExportTaxonomiesRequest {
-
-                    /** ExportTaxonomiesRequest parent */
-                    parent?: (string|null);
-
-                    /** ExportTaxonomiesRequest taxonomies */
-                    taxonomies?: (string[]|null);
-
-                    /** ExportTaxonomiesRequest serializedTaxonomies */
-                    serializedTaxonomies?: (boolean|null);
-                }
-
-                /** Represents an ExportTaxonomiesRequest. */
-                class ExportTaxonomiesRequest implements IExportTaxonomiesRequest {
-
-                    /**
-                     * Constructs a new ExportTaxonomiesRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest);
-
-                    /** ExportTaxonomiesRequest parent. */
-                    public parent: string;
-
-                    /** ExportTaxonomiesRequest taxonomies. */
-                    public taxonomies: string[];
-
-                    /** ExportTaxonomiesRequest serializedTaxonomies. */
-                    public serializedTaxonomies: boolean;
-
-                    /** ExportTaxonomiesRequest destination. */
-                    public destination?: "serializedTaxonomies";
-
-                    /**
-                     * Creates a new ExportTaxonomiesRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportTaxonomiesRequest instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
-
-                    /**
-                     * Encodes the specified ExportTaxonomiesRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
-                     * @param message ExportTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportTaxonomiesRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest.verify|verify} messages.
-                     * @param message ExportTaxonomiesRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
-
-                    /**
-                     * Decodes an ExportTaxonomiesRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportTaxonomiesRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
-
-                    /**
-                     * Verifies an ExportTaxonomiesRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportTaxonomiesRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportTaxonomiesRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest;
-
-                    /**
-                     * Creates a plain object from an ExportTaxonomiesRequest message. Also converts values to other types if specified.
-                     * @param message ExportTaxonomiesRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportTaxonomiesRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ExportTaxonomiesResponse. */
-                interface IExportTaxonomiesResponse {
-
-                    /** ExportTaxonomiesResponse taxonomies */
-                    taxonomies?: (google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[]|null);
-                }
-
-                /** Represents an ExportTaxonomiesResponse. */
-                class ExportTaxonomiesResponse implements IExportTaxonomiesResponse {
-
-                    /**
-                     * Constructs a new ExportTaxonomiesResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse);
-
-                    /** ExportTaxonomiesResponse taxonomies. */
-                    public taxonomies: google.cloud.datacatalog.v1beta1.ISerializedTaxonomy[];
-
-                    /**
-                     * Creates a new ExportTaxonomiesResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportTaxonomiesResponse instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
-
-                    /**
-                     * Encodes the specified ExportTaxonomiesResponse message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
-                     * @param message ExportTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportTaxonomiesResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse.verify|verify} messages.
-                     * @param message ExportTaxonomiesResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IExportTaxonomiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
-
-                    /**
-                     * Decodes an ExportTaxonomiesResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportTaxonomiesResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
-
-                    /**
-                     * Verifies an ExportTaxonomiesResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportTaxonomiesResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportTaxonomiesResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse;
-
-                    /**
-                     * Creates a plain object from an ExportTaxonomiesResponse message. Also converts values to other types if specified.
-                     * @param message ExportTaxonomiesResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportTaxonomiesResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
             }
         }
     }
@@ -7431,232 +7437,6 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a Http. */
@@ -7993,6 +7773,232 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: google.api.ResourceDescriptor.History;
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
