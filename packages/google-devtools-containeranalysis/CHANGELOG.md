@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.6.1...v1.7.0) (2020-01-02)
+
+
+### Features
+
+* add options for attestation and vulnerability requests ([#114](https://www.github.com/googleapis/nodejs-containeranalysis/issues/114)) ([1c3c4b0](https://www.github.com/googleapis/nodejs-containeranalysis/commit/1c3c4b08b5b3560a5d583a876417f21895badfd1))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.6.0...v1.6.1) (2019-12-05)
 
 
