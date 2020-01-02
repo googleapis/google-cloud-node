@@ -28,6 +28,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-vision#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -41,7 +47,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node async-batch-annotate-images.js`
+`node samples/async-batch-annotate-images.js`
 
 
 -----
@@ -58,7 +64,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node batch-annotate-files-gcs.js`
+`node samples/batch-annotate-files-gcs.js`
 
 
 -----
@@ -75,7 +81,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node batch-annotate-files.js`
+`node samples/batch-annotate-files.js`
 
 
 -----
@@ -92,7 +98,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node detect.js`
+`node samples/detect.js`
 
 
 -----
@@ -109,7 +115,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node detect.v1p1beta1.js`
+`node samples/detect.v1p1beta1.js`
 
 
 -----
@@ -126,7 +132,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node detect.v1p3beta1.js`
+`node samples/detect.v1p3beta1.js`
 
 
 -----
@@ -143,7 +149,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node faceDetection.js`
+`node samples/faceDetection.js`
 
 
 -----
@@ -160,7 +166,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -177,7 +183,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node setEndpoint.js`
+`node samples/setEndpoint.js`
 
 
 -----
@@ -194,7 +200,7 @@ View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/s
 __Usage:__
 
 
-`node textDetection.js`
+`node samples/textDetection.js`
 
 
 
