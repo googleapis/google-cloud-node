@@ -66,8 +66,8 @@
  *   This object should have the same structure as [Condition]{@link google.monitoring.v3.Condition}
  *
  * @property {number} combiner
- *   How to combine the results of multiple conditions
- *   to determine if an incident should be opened.
+ *   How to combine the results of multiple conditions to determine if an
+ *   incident should be opened.
  *
  *   The number should be among the values of [ConditionCombinerType]{@link google.monitoring.v3.ConditionCombinerType}
  *
