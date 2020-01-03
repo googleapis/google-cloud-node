@@ -10,11 +10,303 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/tasks/v2;tasks",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TaskProto",
+                    "java_outer_classname": "CloudTasksProto",
                     "java_package": "com.google.cloud.tasks.v2",
                     "objc_class_prefix": "TASKS"
                   },
                   "nested": {
+                    "HttpRequest": {
+                      "oneofs": {
+                        "authorizationHeader": {
+                          "oneof": [
+                            "oauthToken",
+                            "oidcToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 2
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 4
+                        },
+                        "oauthToken": {
+                          "type": "OAuthToken",
+                          "id": 5
+                        },
+                        "oidcToken": {
+                          "type": "OidcToken",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AppEngineHttpRequest": {
+                      "fields": {
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 1
+                        },
+                        "appEngineRouting": {
+                          "type": "AppEngineRouting",
+                          "id": 2
+                        },
+                        "relativeUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AppEngineRouting": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "HttpMethod": {
+                      "values": {
+                        "HTTP_METHOD_UNSPECIFIED": 0,
+                        "POST": 1,
+                        "GET": 2,
+                        "HEAD": 3,
+                        "PUT": 4,
+                        "DELETE": 5,
+                        "PATCH": 6,
+                        "OPTIONS": 7
+                      }
+                    },
+                    "OAuthToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OidcToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Queue": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "appEngineRoutingOverride": {
+                          "type": "AppEngineRouting",
+                          "id": 2
+                        },
+                        "rateLimits": {
+                          "type": "RateLimits",
+                          "id": 3
+                        },
+                        "retryConfig": {
+                          "type": "RetryConfig",
+                          "id": 4
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5
+                        },
+                        "purgeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "PAUSED": 2,
+                            "DISABLED": 3
+                          }
+                        }
+                      }
+                    },
+                    "RateLimits": {
+                      "fields": {
+                        "maxDispatchesPerSecond": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "maxBurstSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "maxConcurrentDispatches": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RetryConfig": {
+                      "fields": {
+                        "maxAttempts": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "maxRetryDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "minBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "maxBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "maxDoublings": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "Task": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Task",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}/tasks/{task}"
+                      },
+                      "oneofs": {
+                        "messageType": {
+                          "oneof": [
+                            "appEngineHttpRequest",
+                            "httpRequest"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "appEngineHttpRequest": {
+                          "type": "AppEngineHttpRequest",
+                          "id": 2
+                        },
+                        "httpRequest": {
+                          "type": "HttpRequest",
+                          "id": 3
+                        },
+                        "scheduleTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "dispatchDeadline": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6
+                        },
+                        "dispatchCount": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "responseCount": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "firstAttempt": {
+                          "type": "Attempt",
+                          "id": 9
+                        },
+                        "lastAttempt": {
+                          "type": "Attempt",
+                          "id": 10
+                        },
+                        "view": {
+                          "type": "View",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "VIEW_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "FULL": 2
+                          }
+                        }
+                      }
+                    },
+                    "Attempt": {
+                      "fields": {
+                        "scheduleTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "dispatchTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "responseTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "responseStatus": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
                     "CloudTasks": {
                       "options": {
                         "(google.api.default_host)": "cloudtasks.googleapis.com",
@@ -395,126 +687,38 @@
                           "id": 2
                         }
                       }
+                    }
+                  }
+                },
+                "v2beta2": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/tasks/v2beta2;tasks",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "CloudTasksProto",
+                    "java_package": "com.google.cloud.tasks.v2beta2",
+                    "objc_class_prefix": "TASKS"
+                  },
+                  "nested": {
+                    "PullTarget": {
+                      "fields": {}
                     },
-                    "Queue": {
-                      "options": {
-                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
-                      },
+                    "PullMessage": {
                       "fields": {
-                        "name": {
-                          "type": "string",
+                        "payload": {
+                          "type": "bytes",
                           "id": 1
                         },
+                        "tag": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AppEngineHttpTarget": {
+                      "fields": {
                         "appEngineRoutingOverride": {
                           "type": "AppEngineRouting",
-                          "id": 2
-                        },
-                        "rateLimits": {
-                          "type": "RateLimits",
-                          "id": 3
-                        },
-                        "retryConfig": {
-                          "type": "RetryConfig",
-                          "id": 4
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5
-                        },
-                        "purgeTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "RUNNING": 1,
-                            "PAUSED": 2,
-                            "DISABLED": 3
-                          }
-                        }
-                      }
-                    },
-                    "RateLimits": {
-                      "fields": {
-                        "maxDispatchesPerSecond": {
-                          "type": "double",
                           "id": 1
-                        },
-                        "maxBurstSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "maxConcurrentDispatches": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "RetryConfig": {
-                      "fields": {
-                        "maxAttempts": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "maxRetryDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        },
-                        "minBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 3
-                        },
-                        "maxBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 4
-                        },
-                        "maxDoublings": {
-                          "type": "int32",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "HttpRequest": {
-                      "oneofs": {
-                        "authorizationHeader": {
-                          "oneof": [
-                            "oauthToken",
-                            "oidcToken"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "url": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "httpMethod": {
-                          "type": "HttpMethod",
-                          "id": 2
-                        },
-                        "headers": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "body": {
-                          "type": "bytes",
-                          "id": 4
-                        },
-                        "oauthToken": {
-                          "type": "OAuthToken",
-                          "id": 5
-                        },
-                        "oidcToken": {
-                          "type": "OidcToken",
-                          "id": 6
                         }
                       }
                     },
@@ -528,7 +732,7 @@
                           "type": "AppEngineRouting",
                           "id": 2
                         },
-                        "relativeUri": {
+                        "relativeUrl": {
                           "type": "string",
                           "id": 3
                         },
@@ -537,7 +741,7 @@
                           "type": "string",
                           "id": 4
                         },
-                        "body": {
+                        "payload": {
                           "type": "bytes",
                           "id": 5
                         }
@@ -570,32 +774,112 @@
                         "GET": 2,
                         "HEAD": 3,
                         "PUT": 4,
-                        "DELETE": 5,
-                        "PATCH": 6,
-                        "OPTIONS": 7
+                        "DELETE": 5
                       }
                     },
-                    "OAuthToken": {
+                    "Queue": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
+                      },
+                      "oneofs": {
+                        "targetType": {
+                          "oneof": [
+                            "appEngineHttpTarget",
+                            "pullTarget"
+                          ]
+                        }
+                      },
                       "fields": {
-                        "serviceAccountEmail": {
+                        "name": {
                           "type": "string",
                           "id": 1
                         },
-                        "scope": {
-                          "type": "string",
-                          "id": 2
+                        "appEngineHttpTarget": {
+                          "type": "AppEngineHttpTarget",
+                          "id": 3
+                        },
+                        "pullTarget": {
+                          "type": "PullTarget",
+                          "id": 4
+                        },
+                        "rateLimits": {
+                          "type": "RateLimits",
+                          "id": 5
+                        },
+                        "retryConfig": {
+                          "type": "RetryConfig",
+                          "id": 6
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7
+                        },
+                        "purgeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "PAUSED": 2,
+                            "DISABLED": 3
+                          }
                         }
                       }
                     },
-                    "OidcToken": {
+                    "RateLimits": {
                       "fields": {
-                        "serviceAccountEmail": {
-                          "type": "string",
+                        "maxTasksDispatchedPerSecond": {
+                          "type": "double",
                           "id": 1
                         },
-                        "audience": {
-                          "type": "string",
+                        "maxBurstSize": {
+                          "type": "int32",
                           "id": 2
+                        },
+                        "maxConcurrentTasks": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RetryConfig": {
+                      "oneofs": {
+                        "numAttempts": {
+                          "oneof": [
+                            "maxAttempts",
+                            "unlimitedAttempts"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "maxAttempts": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "unlimitedAttempts": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "maxRetryDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "minBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "maxBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "maxDoublings": {
+                          "type": "int32",
+                          "id": 6
                         }
                       }
                     },
@@ -605,10 +889,10 @@
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}/tasks/{task}"
                       },
                       "oneofs": {
-                        "messageType": {
+                        "payloadType": {
                           "oneof": [
                             "appEngineHttpRequest",
-                            "httpRequest"
+                            "pullMessage"
                           ]
                         }
                       },
@@ -619,43 +903,27 @@
                         },
                         "appEngineHttpRequest": {
                           "type": "AppEngineHttpRequest",
-                          "id": 2
-                        },
-                        "httpRequest": {
-                          "type": "HttpRequest",
                           "id": 3
+                        },
+                        "pullMessage": {
+                          "type": "PullMessage",
+                          "id": 4
                         },
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 5
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "dispatchDeadline": {
-                          "type": "google.protobuf.Duration",
                           "id": 6
                         },
-                        "dispatchCount": {
-                          "type": "int32",
+                        "status": {
+                          "type": "TaskStatus",
                           "id": 7
-                        },
-                        "responseCount": {
-                          "type": "int32",
-                          "id": 8
-                        },
-                        "firstAttempt": {
-                          "type": "Attempt",
-                          "id": 9
-                        },
-                        "lastAttempt": {
-                          "type": "Attempt",
-                          "id": 10
                         },
                         "view": {
                           "type": "View",
-                          "id": 11
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -668,7 +936,27 @@
                         }
                       }
                     },
-                    "Attempt": {
+                    "TaskStatus": {
+                      "fields": {
+                        "attemptDispatchCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "attemptResponseCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "firstAttemptStatus": {
+                          "type": "AttemptStatus",
+                          "id": 3
+                        },
+                        "lastAttemptStatus": {
+                          "type": "AttemptStatus",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AttemptStatus": {
                       "fields": {
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",
@@ -687,18 +975,7 @@
                           "id": 4
                         }
                       }
-                    }
-                  }
-                },
-                "v2beta2": {
-                  "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/tasks/v2beta2;tasks",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "TaskProto",
-                    "java_package": "com.google.cloud.tasks.v2beta2",
-                    "objc_class_prefix": "TASKS"
-                  },
-                  "nested": {
+                    },
                     "CloudTasks": {
                       "options": {
                         "(google.api.default_host)": "cloudtasks.googleapis.com",
@@ -1227,129 +1504,56 @@
                           "id": 2
                         }
                       }
-                    },
-                    "Queue": {
-                      "options": {
-                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
-                      },
+                    }
+                  }
+                },
+                "v2beta3": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/tasks/v2beta3;tasks",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "CloudTasksProto",
+                    "java_package": "com.google.cloud.tasks.v2beta3",
+                    "objc_class_prefix": "TASKS"
+                  },
+                  "nested": {
+                    "HttpRequest": {
                       "oneofs": {
-                        "targetType": {
+                        "authorizationHeader": {
                           "oneof": [
-                            "appEngineHttpTarget",
-                            "pullTarget"
+                            "oauthToken",
+                            "oidcToken"
                           ]
                         }
                       },
                       "fields": {
-                        "name": {
+                        "url": {
                           "type": "string",
                           "id": 1
                         },
-                        "appEngineHttpTarget": {
-                          "type": "AppEngineHttpTarget",
-                          "id": 3
-                        },
-                        "pullTarget": {
-                          "type": "PullTarget",
-                          "id": 4
-                        },
-                        "rateLimits": {
-                          "type": "RateLimits",
-                          "id": 5
-                        },
-                        "retryConfig": {
-                          "type": "RetryConfig",
-                          "id": 6
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 7
-                        },
-                        "purgeTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "RUNNING": 1,
-                            "PAUSED": 2,
-                            "DISABLED": 3
-                          }
-                        }
-                      }
-                    },
-                    "RateLimits": {
-                      "fields": {
-                        "maxTasksDispatchedPerSecond": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "maxBurstSize": {
-                          "type": "int32",
+                        "httpMethod": {
+                          "type": "HttpMethod",
                           "id": 2
                         },
-                        "maxConcurrentTasks": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "RetryConfig": {
-                      "oneofs": {
-                        "numAttempts": {
-                          "oneof": [
-                            "maxAttempts",
-                            "unlimitedAttempts"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "maxAttempts": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "unlimitedAttempts": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "maxRetryDuration": {
-                          "type": "google.protobuf.Duration",
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
                           "id": 3
                         },
-                        "minBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 4
-                        },
-                        "maxBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 5
-                        },
-                        "maxDoublings": {
-                          "type": "int32",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "PullTarget": {
-                      "fields": {}
-                    },
-                    "PullMessage": {
-                      "fields": {
-                        "payload": {
+                        "body": {
                           "type": "bytes",
-                          "id": 1
+                          "id": 4
                         },
-                        "tag": {
-                          "type": "string",
-                          "id": 2
+                        "oauthToken": {
+                          "type": "OAuthToken",
+                          "id": 5
+                        },
+                        "oidcToken": {
+                          "type": "OidcToken",
+                          "id": 6
                         }
                       }
                     },
-                    "AppEngineHttpTarget": {
+                    "AppEngineHttpQueue": {
                       "fields": {
                         "appEngineRoutingOverride": {
                           "type": "AppEngineRouting",
@@ -1367,7 +1571,7 @@
                           "type": "AppEngineRouting",
                           "id": 2
                         },
-                        "relativeUrl": {
+                        "relativeUri": {
                           "type": "string",
                           "id": 3
                         },
@@ -1376,7 +1580,7 @@
                           "type": "string",
                           "id": 4
                         },
-                        "payload": {
+                        "body": {
                           "type": "bytes",
                           "id": 5
                         }
@@ -1409,7 +1613,134 @@
                         "GET": 2,
                         "HEAD": 3,
                         "PUT": 4,
-                        "DELETE": 5
+                        "DELETE": 5,
+                        "PATCH": 6,
+                        "OPTIONS": 7
+                      }
+                    },
+                    "OAuthToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OidcToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Queue": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
+                      },
+                      "oneofs": {
+                        "queueType": {
+                          "oneof": [
+                            "appEngineHttpQueue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "appEngineHttpQueue": {
+                          "type": "AppEngineHttpQueue",
+                          "id": 3
+                        },
+                        "rateLimits": {
+                          "type": "RateLimits",
+                          "id": 4
+                        },
+                        "retryConfig": {
+                          "type": "RetryConfig",
+                          "id": 5
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6
+                        },
+                        "purgeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "stackdriverLoggingConfig": {
+                          "type": "StackdriverLoggingConfig",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "PAUSED": 2,
+                            "DISABLED": 3
+                          }
+                        }
+                      }
+                    },
+                    "RateLimits": {
+                      "fields": {
+                        "maxDispatchesPerSecond": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "maxBurstSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "maxConcurrentDispatches": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RetryConfig": {
+                      "fields": {
+                        "maxAttempts": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "maxRetryDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "minBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "maxBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "maxDoublings": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "StackdriverLoggingConfig": {
+                      "fields": {
+                        "samplingRatio": {
+                          "type": "double",
+                          "id": 1
+                        }
                       }
                     },
                     "Task": {
@@ -1421,7 +1752,7 @@
                         "payloadType": {
                           "oneof": [
                             "appEngineHttpRequest",
-                            "pullMessage"
+                            "httpRequest"
                           ]
                         }
                       },
@@ -1434,25 +1765,41 @@
                           "type": "AppEngineHttpRequest",
                           "id": 3
                         },
-                        "pullMessage": {
-                          "type": "PullMessage",
-                          "id": 4
+                        "httpRequest": {
+                          "type": "HttpRequest",
+                          "id": 11
                         },
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 4
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "dispatchDeadline": {
+                          "type": "google.protobuf.Duration",
+                          "id": 12
+                        },
+                        "dispatchCount": {
+                          "type": "int32",
                           "id": 6
                         },
-                        "status": {
-                          "type": "TaskStatus",
+                        "responseCount": {
+                          "type": "int32",
                           "id": 7
+                        },
+                        "firstAttempt": {
+                          "type": "Attempt",
+                          "id": 8
+                        },
+                        "lastAttempt": {
+                          "type": "Attempt",
+                          "id": 9
                         },
                         "view": {
                           "type": "View",
-                          "id": 8
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -1465,27 +1812,7 @@
                         }
                       }
                     },
-                    "TaskStatus": {
-                      "fields": {
-                        "attemptDispatchCount": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "attemptResponseCount": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "firstAttemptStatus": {
-                          "type": "AttemptStatus",
-                          "id": 3
-                        },
-                        "lastAttemptStatus": {
-                          "type": "AttemptStatus",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "AttemptStatus": {
+                    "Attempt": {
                       "fields": {
                         "scheduleTime": {
                           "type": "google.protobuf.Timestamp",
@@ -1504,18 +1831,7 @@
                           "id": 4
                         }
                       }
-                    }
-                  }
-                },
-                "v2beta3": {
-                  "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/tasks/v2beta3;tasks",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "TaskProto",
-                    "java_package": "com.google.cloud.tasks.v2beta3",
-                    "objc_class_prefix": "TASKS"
-                  },
-                  "nested": {
+                    },
                     "CloudTasks": {
                       "options": {
                         "(google.api.default_host)": "cloudtasks.googleapis.com",
@@ -1896,322 +2212,6 @@
                           "id": 2
                         }
                       }
-                    },
-                    "Queue": {
-                      "options": {
-                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
-                      },
-                      "oneofs": {
-                        "queueType": {
-                          "oneof": [
-                            "appEngineHttpQueue"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "appEngineHttpQueue": {
-                          "type": "AppEngineHttpQueue",
-                          "id": 3
-                        },
-                        "rateLimits": {
-                          "type": "RateLimits",
-                          "id": 4
-                        },
-                        "retryConfig": {
-                          "type": "RetryConfig",
-                          "id": 5
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 6
-                        },
-                        "purgeTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "stackdriverLoggingConfig": {
-                          "type": "StackdriverLoggingConfig",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "RUNNING": 1,
-                            "PAUSED": 2,
-                            "DISABLED": 3
-                          }
-                        }
-                      }
-                    },
-                    "RateLimits": {
-                      "fields": {
-                        "maxDispatchesPerSecond": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "maxBurstSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "maxConcurrentDispatches": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "RetryConfig": {
-                      "fields": {
-                        "maxAttempts": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "maxRetryDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        },
-                        "minBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 3
-                        },
-                        "maxBackoff": {
-                          "type": "google.protobuf.Duration",
-                          "id": 4
-                        },
-                        "maxDoublings": {
-                          "type": "int32",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "StackdriverLoggingConfig": {
-                      "fields": {
-                        "samplingRatio": {
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "HttpRequest": {
-                      "oneofs": {
-                        "authorizationHeader": {
-                          "oneof": [
-                            "oauthToken",
-                            "oidcToken"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "url": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "httpMethod": {
-                          "type": "HttpMethod",
-                          "id": 2
-                        },
-                        "headers": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "body": {
-                          "type": "bytes",
-                          "id": 4
-                        },
-                        "oauthToken": {
-                          "type": "OAuthToken",
-                          "id": 5
-                        },
-                        "oidcToken": {
-                          "type": "OidcToken",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "AppEngineHttpQueue": {
-                      "fields": {
-                        "appEngineRoutingOverride": {
-                          "type": "AppEngineRouting",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AppEngineHttpRequest": {
-                      "fields": {
-                        "httpMethod": {
-                          "type": "HttpMethod",
-                          "id": 1
-                        },
-                        "appEngineRouting": {
-                          "type": "AppEngineRouting",
-                          "id": 2
-                        },
-                        "relativeUri": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "headers": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 4
-                        },
-                        "body": {
-                          "type": "bytes",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "AppEngineRouting": {
-                      "fields": {
-                        "service": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "version": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "instance": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "host": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "HttpMethod": {
-                      "values": {
-                        "HTTP_METHOD_UNSPECIFIED": 0,
-                        "POST": 1,
-                        "GET": 2,
-                        "HEAD": 3,
-                        "PUT": 4,
-                        "DELETE": 5,
-                        "PATCH": 6,
-                        "OPTIONS": 7
-                      }
-                    },
-                    "OAuthToken": {
-                      "fields": {
-                        "serviceAccountEmail": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "scope": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "OidcToken": {
-                      "fields": {
-                        "serviceAccountEmail": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "audience": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Task": {
-                      "options": {
-                        "(google.api.resource).type": "cloudtasks.googleapis.com/Task",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}/tasks/{task}"
-                      },
-                      "oneofs": {
-                        "payloadType": {
-                          "oneof": [
-                            "appEngineHttpRequest",
-                            "httpRequest"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "appEngineHttpRequest": {
-                          "type": "AppEngineHttpRequest",
-                          "id": 3
-                        },
-                        "httpRequest": {
-                          "type": "HttpRequest",
-                          "id": 11
-                        },
-                        "scheduleTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "dispatchDeadline": {
-                          "type": "google.protobuf.Duration",
-                          "id": 12
-                        },
-                        "dispatchCount": {
-                          "type": "int32",
-                          "id": 6
-                        },
-                        "responseCount": {
-                          "type": "int32",
-                          "id": 7
-                        },
-                        "firstAttempt": {
-                          "type": "Attempt",
-                          "id": 8
-                        },
-                        "lastAttempt": {
-                          "type": "Attempt",
-                          "id": 9
-                        },
-                        "view": {
-                          "type": "View",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "View": {
-                          "values": {
-                            "VIEW_UNSPECIFIED": 0,
-                            "BASIC": 1,
-                            "FULL": 2
-                          }
-                        }
-                      }
-                    },
-                    "Attempt": {
-                      "fields": {
-                        "scheduleTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "dispatchTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "responseTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "responseStatus": {
-                          "type": "google.rpc.Status",
-                          "id": 4
-                        }
-                      }
                     }
                   }
                 }
@@ -2223,12 +2223,28 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -2316,42 +2332,16 @@
                 }
               }
             },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5
-              }
-            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
               "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
             },
             "resource": {
               "type": "google.api.ResourceDescriptor",
@@ -2376,6 +2366,14 @@
                 "history": {
                   "type": "History",
                   "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
                 }
               },
               "nested": {
@@ -2399,6 +2397,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -3419,11 +3433,18 @@
                   "fields": {
                     "resource": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
                     },
                     "policy": {
                       "type": "Policy",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -3431,10 +3452,14 @@
                   "fields": {
                     "resource": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
                     },
                     "options": {
-                      "type": "google.iam.v1.GetPolicyOptions",
+                      "type": "GetPolicyOptions",
                       "id": 2
                     }
                   }
@@ -3443,12 +3468,19 @@
                   "fields": {
                     "resource": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "*"
+                      }
                     },
                     "permissions": {
                       "rule": "repeated",
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },

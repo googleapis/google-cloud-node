@@ -13,6 +13,7 @@
 // limitations under the License.
 
 'use strict';
+/*eslint no-warning-comments: [0, { "terms": ["todo", "fixme"], "location": "anywhere" }]*/
 
 /**
  * Create a task for a given queue with an arbitrary payload.

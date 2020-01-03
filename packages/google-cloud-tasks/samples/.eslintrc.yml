@@ -2,3 +2,5 @@
 rules:
   no-console: off
   node/no-missing-require: off
+parserOptions:
+  ecmaVersion: 8

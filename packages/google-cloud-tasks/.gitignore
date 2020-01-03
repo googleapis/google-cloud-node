@@ -7,3 +7,4 @@ docs/
 .DS_Store
 package-lock.json
 __pycache__
+build/
