@@ -205,6 +205,9 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     for (const methodName of recaptchaEnterpriseServiceV1Beta1StubMethods) {
       const innerCallPromise = this.recaptchaEnterpriseServiceV1Beta1Stub.then(
         stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -225,9 +228,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
         callOptions?: CallOptions,
         callback?: APICallback
       ) => {
-        if (this._terminated) {
-          return Promise.reject('The client has already been closed.');
-        }
         return apiCall(argument, callOptions, callback);
       };
     }
