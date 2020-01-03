@@ -14,6 +14,8 @@
 
 'use strict';
 
+const {describe, it} = require('mocha');
+
 describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const videoIntelligence = require('../src');

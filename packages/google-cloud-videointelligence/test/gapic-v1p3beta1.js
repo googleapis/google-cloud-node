@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const {describe, it} = require('mocha');
 const {PassThrough} = require('stream');
 
 const videoIntelligenceModule = require('../src');
