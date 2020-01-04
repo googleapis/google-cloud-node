@@ -147,9 +147,12 @@ const GetSourceRequest = {
  *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
  *   * security_marks.marks: `=`, `:`
  *   * security_center_properties.resource_name: `=`, `:`
+ *   * security_center_properties.resource_display_name: `=`, `:`
  *   * security_center_properties.resource_type: `=`, `:`
  *   * security_center_properties.resource_parent: `=`, `:`
+ *   * security_center_properties.resource_parent_display_name: `=`, `:`
  *   * security_center_properties.resource_project: `=`, `:`
+ *   * security_center_properties.resource_project_display_name: `=`, `:`
  *   * security_center_properties.resource_owners: `=`, `:`
  *
  *   For example, `resource_properties.size = 100` is a valid filter string.
@@ -163,12 +166,16 @@ const GetSourceRequest = {
  *   The following fields are supported when compare_duration is not set:
  *
  *   * security_center_properties.resource_project
+ *   * security_center_properties.resource_project_display_name
  *   * security_center_properties.resource_type
  *   * security_center_properties.resource_parent
+ *   * security_center_properties.resource_parent_display_name
  *
  *   The following fields are supported when compare_duration is set:
  *
  *   * security_center_properties.resource_type
+ *   * security_center_properties.resource_project_display_name
+ *   * security_center_properties.resource_parent_display_name
  *
  * @property {Object} compareDuration
  *   When compare_duration is set, the GroupResult's "state_change" property is
@@ -527,9 +534,12 @@ const ListSourcesResponse = {
  *   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
  *   * security_marks.marks: `=`, `:`
  *   * security_center_properties.resource_name: `=`, `:`
+ *   * security_center_properties.resource_display_name: `=`, `:`
  *   * security_center_properties.resource_type: `=`, `:`
  *   * security_center_properties.resource_parent: `=`, `:`
+ *   * security_center_properties.resource_parent_display_name: `=`, `:`
  *   * security_center_properties.resource_project: `=`, `:`
+ *   * security_center_properties.resource_project_display_name: `=`, `:`
  *   * security_center_properties.resource_owners: `=`, `:`
  *
  *   For example, `resource_properties.size = 100` is a valid filter string.
@@ -550,8 +560,11 @@ const ListSourcesResponse = {
  *   resource_properties
  *   security_marks.marks
  *   security_center_properties.resource_name
+ *   security_center_properties.resource_display_name
  *   security_center_properties.resource_parent
+ *   security_center_properties.resource_parent_display_name
  *   security_center_properties.resource_project
+ *   security_center_properties.resource_project_display_name
  *   security_center_properties.resource_type
  *
  * @property {Object} readTime
@@ -870,12 +883,45 @@ const ListFindingsResponse = {
    *
    *   The number should be among the values of [StateChange]{@link google.cloud.securitycenter.v1.StateChange}
    *
+   * @property {Object} resource
+   *   Output only. Resource that is associated with this finding.
+   *
+   *   This object should have the same structure as [Resource]{@link google.cloud.securitycenter.v1.Resource}
+   *
    * @typedef ListFindingsResult
    * @memberof google.cloud.securitycenter.v1
    * @see [google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/securitycenter/v1/securitycenter_service.proto}
    */
   ListFindingsResult: {
     // This is for documentation. Actual contents will be loaded by gRPC.
+
+    /**
+     * Information related to the Google Cloud Platform (GCP) resource that is
+     * associated with this finding.
+     *
+     * @property {string} name
+     *   The full resource name of the resource. See:
+     *   https://cloud.google.com/apis/design/resource_names#full_resource_name
+     *
+     * @property {string} projectName
+     *   The full resource name of project that the resource belongs to.
+     *
+     * @property {string} projectDisplayName
+     *   The human readable name of project that the resource belongs to.
+     *
+     * @property {string} parentName
+     *   The full resource name of resource's parent.
+     *
+     * @property {string} parentDisplayName
+     *   The human readable name of resource's parent.
+     *
+     * @typedef Resource
+     * @memberof google.cloud.securitycenter.v1
+     * @see [google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/securitycenter/v1/securitycenter_service.proto}
+     */
+    Resource: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
 
     /**
      * The change in state of the finding.

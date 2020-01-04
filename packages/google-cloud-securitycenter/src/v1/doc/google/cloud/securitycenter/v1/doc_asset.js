@@ -96,6 +96,15 @@ const Asset = {
    * @property {string[]} resourceOwners
    *   Owners of the Google Cloud resource.
    *
+   * @property {string} resourceDisplayName
+   *   The user defined display name for this resource.
+   *
+   * @property {string} resourceParentDisplayName
+   *   The user defined display name for the parent of this resource.
+   *
+   * @property {string} resourceProjectDisplayName
+   *   The user defined display name for the project of this resource.
+   *
    * @typedef SecurityCenterProperties
    * @memberof google.cloud.securitycenter.v1
    * @see [google.cloud.securitycenter.v1.Asset.SecurityCenterProperties definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/securitycenter/v1/asset.proto}
