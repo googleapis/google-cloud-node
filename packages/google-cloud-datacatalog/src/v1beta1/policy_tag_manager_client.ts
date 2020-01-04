@@ -217,6 +217,9 @@ export class PolicyTagManagerClient {
     for (const methodName of policyTagManagerStubMethods) {
       const innerCallPromise = this.policyTagManagerStub.then(
         stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -237,9 +240,6 @@ export class PolicyTagManagerClient {
         callOptions?: CallOptions,
         callback?: APICallback
       ) => {
-        if (this._terminated) {
-          return Promise.reject('The client has already been closed.');
-        }
         return apiCall(argument, callOptions, callback);
       };
     }
@@ -1550,7 +1550,7 @@ export class PolicyTagManagerClient {
    * @param {string} taxonomy
    * @returns {string} Resource name string.
    */
-  policytagPath(project: string, location: string, taxonomy: string) {
+  policyTagPath(project: string, location: string, taxonomy: string) {
     return this._pathTemplates.policytagPathTemplate.render({
       project,
       location,

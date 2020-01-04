@@ -42,7 +42,7 @@ for version in versions:
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates)
+s.copy(templates, excludes=['.github/release-please.yml'])
 
 # Fix broken links to cloud.google.com documentation
 s.replace('src/v1beta1/*.ts', '/data-catalog/docs/', 'https://cloud.google.com/data-catalog/docs/')

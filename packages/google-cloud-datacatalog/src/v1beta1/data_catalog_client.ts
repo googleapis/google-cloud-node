@@ -237,6 +237,9 @@ export class DataCatalogClient {
     for (const methodName of dataCatalogStubMethods) {
       const innerCallPromise = this.dataCatalogStub.then(
         stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -257,9 +260,6 @@ export class DataCatalogClient {
         callOptions?: CallOptions,
         callback?: APICallback
       ) => {
-        if (this._terminated) {
-          return Promise.reject('The client has already been closed.');
-        }
         return apiCall(argument, callOptions, callback);
       };
     }
@@ -2681,7 +2681,7 @@ export class DataCatalogClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  entrygroupPath(project: string, location: string) {
+  entryGroupPath(project: string, location: string) {
     return this._pathTemplates.entrygroupPathTemplate.render({
       project,
       location,
@@ -2768,7 +2768,7 @@ export class DataCatalogClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  tagtemplatePath(project: string, location: string) {
+  tagTemplatePath(project: string, location: string) {
     return this._pathTemplates.tagtemplatePathTemplate.render({
       project,
       location,
@@ -2869,7 +2869,7 @@ export class DataCatalogClient {
    * @param {string} field
    * @returns {string} Resource name string.
    */
-  tagtemplatefieldPath(project: string, location: string, field: string) {
+  tagTemplateFieldPath(project: string, location: string, field: string) {
     return this._pathTemplates.tagtemplatefieldPathTemplate.render({
       project,
       location,
