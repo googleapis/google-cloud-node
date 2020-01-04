@@ -24,6 +24,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-speech#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -37,7 +43,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node MicrophoneStream.js`
+`node samples/MicrophoneStream.js`
 
 
 -----
@@ -54,7 +60,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node betaFeatures.js`
+`node samples/betaFeatures.js`
 
 
 -----
@@ -71,7 +77,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node infiniteStreaming.js`
+`node samples/infiniteStreaming.js`
 
 
 -----
@@ -88,7 +94,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -105,7 +111,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node recognize.js`
+`node samples/recognize.js`
 
 
 -----
@@ -122,7 +128,7 @@ View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/s
 __Usage:__
 
 
-`node recognize.v1p1beta1.js`
+`node samples/recognize.v1p1beta1.js`
 
 
 
