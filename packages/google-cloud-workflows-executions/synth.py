@@ -26,6 +26,9 @@ versions = ['v1alpha1']
 for version in versions:
   library = gapic.typescript_library(
     'workflows',
+    generator_args={
+      'package-name': '@google-cloud/workflows'
+    },
     version=version,
     private=True)
 

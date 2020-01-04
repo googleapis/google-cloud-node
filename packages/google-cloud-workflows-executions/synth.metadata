@@ -1,12 +1,12 @@
 {
-  "updateTime": "2019-12-30T23:10:08.083216Z",
+  "updateTime": "2020-01-04T00:54:57.530503Z",
   "sources": [
     {
       "git": {
         "name": "googleapis-private",
         "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "06c5c6e9caf01113977cf4105cb1b6844771f8f9",
-        "internalRef": "286483368"
+        "sha": "c7bc200d62915541e1fd3c3ff6345f92269a3251",
+        "internalRef": "288042994"
       }
     },
     {
@@ -94,9 +94,6 @@
     },
     {
       "path": "protos/google/cloud/workflows/v1alpha1/workflows.proto"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
     },
     {
       "path": "system-test/install.ts"
@@ -208,9 +205,6 @@
     },
     {
       "path": ".kokoro/release/docs.sh"
-    },
-    {
-      "path": "__pycache__/synth.cpython-37.pyc"
     },
     {
       "path": ".github/PULL_REQUEST_TEMPLATE.md"
@@ -574,6 +568,9 @@
     },
     {
       "path": "node_modules/google-gax/node_modules/@grpc/grpc-js/package.json"
+    },
+    {
+      "path": "node_modules/google-gax/node_modules/@grpc/grpc-js/node_modules/semver/package.json"
     },
     {
       "path": "node_modules/google-gax/node_modules/lru-cache/package.json"
@@ -3460,6 +3457,12 @@
     },
     {
       "path": "node_modules/typescript/package.json"
+    },
+    {
+      "path": "node_modules/@types/fs-extra/package.json"
+    },
+    {
+      "path": "node_modules/@types/fs-extra/node_modules/@types/node/package.json"
     },
     {
       "path": "node_modules/@types/mocha/package.json"
