@@ -1,0 +1,11 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "https://www.npmjs.org/package/@google-cloud/monitoring-dashboards",
+    "https://googleapis.dev/nodejs/monitoring-dashboards/latest",
+    "https://github.com/googleapis/nodejs-monitoring-dashboards/blob/master/samples/quickstart.js",
+    "https://github.com/googleapis/nodejs-monitoring-dashboards/tree/master/samples"
+  ]
+}

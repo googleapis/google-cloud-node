@@ -1,0 +1,13 @@
+[
+  "../../protos/google/monitoring/dashboard/v1/common.proto",
+  "../../protos/google/monitoring/dashboard/v1/metrics.proto",
+  "../../protos/google/monitoring/dashboard/v1/drilldowns.proto",
+  "../../protos/google/monitoring/dashboard/v1/text.proto",
+  "../../protos/google/monitoring/dashboard/v1/scorecard.proto",
+  "../../protos/google/monitoring/dashboard/v1/xychart.proto",
+  "../../protos/google/monitoring/dashboard/v1/widget.proto",
+  "../../protos/google/monitoring/dashboard/v1/layouts.proto",
+  "../../protos/google/monitoring/dashboard/v1/dashboard.proto",
+  "../../protos/google/monitoring/dashboard/v1/service.proto",
+  "../../protos/google/monitoring/dashboard/v1/dashboards_service.proto"
+]

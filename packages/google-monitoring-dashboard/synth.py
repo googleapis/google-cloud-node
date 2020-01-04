@@ -25,40 +25,21 @@ gapic = gcp.GAPICMicrogenerator()
 versions = ['v1']
 for version in versions:
   library = gapic.typescript_library(
-    '@google-cloud/monitoring-dashboard',
+    'monitoring-dashboard',
     generator_args={
+      'package-name': '@google-cloud/monitoring-dashboards'
     },
     proto_path='/google/monitoring/dashboard/v1',
     version=version)
-s.copy(library, excludes=['README.md'])
+s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=[])
+s.copy(templates, excludes=['.github/release-please.yml'])
 
 # Node.js specific cleanup
-subprocess.run(['rm', '-rf', './system-test/fixtures'])
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
 
-# Add missing jsdoc annotations:
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""/**
- * @namespace google
- */
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.longrunning
- */""")
-s.replace("src/index.js",
-r"namespace google.cloud.cloudbuild",
-r"namespace google.devtools.cloudbuild")

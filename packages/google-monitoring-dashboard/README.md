@@ -5,13 +5,13 @@
 # [Monitoring Dashboards: Node.js Client](https://github.com/googleapis/nodejs-monitoring-dashboards)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/dashboard.svg)](https://www.npmjs.org/package/dashboard)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/monitoring-dashboards.svg)](https://www.npmjs.org/package/@google-cloud/monitoring-dashboards)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-monitoring-dashboards/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-monitoring-dashboards)
 
 
 
 
-Dashboard client for Node.js
+interact with dashboards for viewing and analyzing metric data
 
 
 * [Monitoring Dashboards Node.js Client API Reference][client-docs]
@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -48,10 +48,46 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install dashboard
+npm install @google-cloud/monitoring-dashboards
 ```
 
 
+### Using the client library
+
+```javascript
+  // Imports the Google Cloud client library
+  const {
+    DashboardsServiceClient,
+  } = require('@google-cloud/monitoring-dashboards');
+
+  // Creates a client
+  const ds = new DashboardsServiceClient();
+
+  // parent = 'projects/my-project', // Project to list dashboards for.
+
+  async function listDashboards() {
+    const [dashboards] = await ds.listDashboards({
+      parent,
+    });
+    console.info('Listing Dashboards:');
+    for (const dashboard of dashboards) {
+      console.info(`\t${dashboard.displayName}`);
+    }
+  }
+  listDashboards();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring-dashboards/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-monitoring-dashboards/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring-dashboards&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -86,7 +122,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-monitoring-dashboards/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/dashboard/latest
+[client-docs]: https://googleapis.dev/nodejs/monitoring-dashboards/latest
 [product-docs]: https://cloud.google.com/monitoring/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
