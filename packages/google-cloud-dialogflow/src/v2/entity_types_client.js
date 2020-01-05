@@ -1150,6 +1150,7 @@ class EntityTypesClient {
    * method does not affect entities in the entity type that aren't explicitly
    * specified in the request.
    *
+   *
    * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
@@ -1280,6 +1281,7 @@ class EntityTypesClient {
 
   /**
    * Deletes entities in the specified entity type.
+   *
    *
    * Operation <response: google.protobuf.Empty>
    *

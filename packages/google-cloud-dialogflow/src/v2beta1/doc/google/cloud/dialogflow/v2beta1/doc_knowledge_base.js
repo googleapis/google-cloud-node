@@ -86,7 +86,7 @@ const ListKnowledgeBasesResponse = {
 };
 
 /**
- * Request message for KnowledgeBase.GetDocument.
+ * Request message for KnowledgeBases.GetKnowledgeBase.
  *
  * @property {string} name
  *   Required. The name of the knowledge base to retrieve.

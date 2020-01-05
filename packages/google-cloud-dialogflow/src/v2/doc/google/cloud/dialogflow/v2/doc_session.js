@@ -277,9 +277,13 @@ const QueryInput = {
  *   the greatest `knowledgeAnswers.match_confidence` value in the list.
  *
  * @property {Object} diagnosticInfo
- *   The free-form diagnostic info. For example, this field could contain
- *   webhook call latency. The string keys of the Struct's fields map can change
- *   without notice.
+ *   Free-form diagnostic information for the associated detect intent request.
+ *   The fields of this data can change without notice, so you should not write
+ *   code that depends on its structure.
+ *   The data may contain:
+ *
+ *   - webhook call latency
+ *   - webhook errors
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
  *
@@ -299,23 +303,26 @@ const QueryResult = {
 
 /**
  * The top-level message sent by the client to the
- * StreamingDetectIntent method.
+ * Sessions.StreamingDetectIntent method.
  *
  * Multiple request messages should be sent in order:
  *
- * 1.  The first message must contain StreamingDetectIntentRequest.session,
- *     [StreamingDetectIntentRequest.query_input] plus optionally
- *     [StreamingDetectIntentRequest.query_params]. If the client wants to
- *     receive an audio response, it should also contain
- *     StreamingDetectIntentRequest.output_audio_config. The message
- *     must not contain StreamingDetectIntentRequest.input_audio.
- * 2.  If StreamingDetectIntentRequest.query_input was set to
- *     StreamingDetectIntentRequest.query_input.audio_config, all subsequent
- *     messages must contain [StreamingDetectIntentRequest.input_audio] to
- *     continue with Speech recognition.
+ * 1.  The first message must contain
+ * session,
+ *     query_input plus optionally
+ *     query_params. If the client
+ *     wants to receive an audio response, it should also contain
+ *     output_audio_config.
+ *     The message must not contain
+ *     input_audio.
+ * 2.  If query_input was set to
+ *     query_input.audio_config, all subsequent
+ *     messages must contain
+ *     input_audio to continue with
+ *     Speech recognition.
  *     If you decide to rather detect an intent from text input after you
  *     already started Speech recognition, please send a message with
- *     StreamingDetectIntentRequest.query_input.text.
+ *     query_input.text.
  *
  *     However, note that:
  *
@@ -493,6 +500,19 @@ const StreamingDetectIntentResponse = {
  *
  *   This field is typically only provided if `is_final` is true and you should
  *   not rely on it being accurate or even set.
+ *
+ * @property {Object[]} speechWordInfo
+ *   Word-specific information for the words recognized by Speech in
+ *   transcript. Populated if and only if `message_type` = `TRANSCRIPT` and
+ *   [InputAudioConfig.enable_word_info] is set.
+ *
+ *   This object should have the same structure as [SpeechWordInfo]{@link google.cloud.dialogflow.v2.SpeechWordInfo}
+ *
+ * @property {Object} speechEndOffset
+ *   Time offset of the end of this Speech recognition result relative to the
+ *   beginning of the audio. Only populated for `message_type` = `TRANSCRIPT`.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.dialogflow.v2

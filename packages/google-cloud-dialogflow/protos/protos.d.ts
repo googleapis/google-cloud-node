@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8842,6 +8842,218 @@ export namespace google {
                     AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
+                /** Properties of a SpeechContext. */
+                interface ISpeechContext {
+
+                    /** SpeechContext phrases */
+                    phrases?: (string[]|null);
+
+                    /** SpeechContext boost */
+                    boost?: (number|null);
+                }
+
+                /** Represents a SpeechContext. */
+                class SpeechContext implements ISpeechContext {
+
+                    /**
+                     * Constructs a new SpeechContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ISpeechContext);
+
+                    /** SpeechContext phrases. */
+                    public phrases: string[];
+
+                    /** SpeechContext boost. */
+                    public boost: number;
+
+                    /**
+                     * Creates a new SpeechContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechContext instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ISpeechContext): google.cloud.dialogflow.v2.SpeechContext;
+
+                    /**
+                     * Encodes the specified SpeechContext message. Does not implicitly {@link google.cloud.dialogflow.v2.SpeechContext.verify|verify} messages.
+                     * @param message SpeechContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ISpeechContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechContext message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SpeechContext.verify|verify} messages.
+                     * @param message SpeechContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISpeechContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SpeechContext;
+
+                    /**
+                     * Decodes a SpeechContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SpeechContext;
+
+                    /**
+                     * Verifies a SpeechContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SpeechContext;
+
+                    /**
+                     * Creates a plain object from a SpeechContext message. Also converts values to other types if specified.
+                     * @param message SpeechContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.SpeechContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** SpeechModelVariant enum. */
+                enum SpeechModelVariant {
+                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
+                    USE_BEST_AVAILABLE = 1,
+                    USE_STANDARD = 2,
+                    USE_ENHANCED = 3
+                }
+
+                /** Properties of a SpeechWordInfo. */
+                interface ISpeechWordInfo {
+
+                    /** SpeechWordInfo word */
+                    word?: (string|null);
+
+                    /** SpeechWordInfo startOffset */
+                    startOffset?: (google.protobuf.IDuration|null);
+
+                    /** SpeechWordInfo endOffset */
+                    endOffset?: (google.protobuf.IDuration|null);
+
+                    /** SpeechWordInfo confidence */
+                    confidence?: (number|null);
+                }
+
+                /** Represents a SpeechWordInfo. */
+                class SpeechWordInfo implements ISpeechWordInfo {
+
+                    /**
+                     * Constructs a new SpeechWordInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dialogflow.v2.ISpeechWordInfo);
+
+                    /** SpeechWordInfo word. */
+                    public word: string;
+
+                    /** SpeechWordInfo startOffset. */
+                    public startOffset?: (google.protobuf.IDuration|null);
+
+                    /** SpeechWordInfo endOffset. */
+                    public endOffset?: (google.protobuf.IDuration|null);
+
+                    /** SpeechWordInfo confidence. */
+                    public confidence: number;
+
+                    /**
+                     * Creates a new SpeechWordInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechWordInfo instance
+                     */
+                    public static create(properties?: google.cloud.dialogflow.v2.ISpeechWordInfo): google.cloud.dialogflow.v2.SpeechWordInfo;
+
+                    /**
+                     * Encodes the specified SpeechWordInfo message. Does not implicitly {@link google.cloud.dialogflow.v2.SpeechWordInfo.verify|verify} messages.
+                     * @param message SpeechWordInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dialogflow.v2.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechWordInfo message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2.SpeechWordInfo.verify|verify} messages.
+                     * @param message SpeechWordInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dialogflow.v2.ISpeechWordInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechWordInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechWordInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2.SpeechWordInfo;
+
+                    /**
+                     * Decodes a SpeechWordInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechWordInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2.SpeechWordInfo;
+
+                    /**
+                     * Verifies a SpeechWordInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechWordInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechWordInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2.SpeechWordInfo;
+
+                    /**
+                     * Creates a plain object from a SpeechWordInfo message. Also converts values to other types if specified.
+                     * @param message SpeechWordInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dialogflow.v2.SpeechWordInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechWordInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an InputAudioConfig. */
                 interface IInputAudioConfig {
 
@@ -8854,8 +9066,17 @@ export namespace google {
                     /** InputAudioConfig languageCode */
                     languageCode?: (string|null);
 
+                    /** InputAudioConfig enableWordInfo */
+                    enableWordInfo?: (boolean|null);
+
                     /** InputAudioConfig phraseHints */
                     phraseHints?: (string[]|null);
+
+                    /** InputAudioConfig speechContexts */
+                    speechContexts?: (google.cloud.dialogflow.v2.ISpeechContext[]|null);
+
+                    /** InputAudioConfig model */
+                    model?: (string|null);
 
                     /** InputAudioConfig modelVariant */
                     modelVariant?: (google.cloud.dialogflow.v2.SpeechModelVariant|null);
@@ -8882,8 +9103,17 @@ export namespace google {
                     /** InputAudioConfig languageCode. */
                     public languageCode: string;
 
+                    /** InputAudioConfig enableWordInfo. */
+                    public enableWordInfo: boolean;
+
                     /** InputAudioConfig phraseHints. */
                     public phraseHints: string[];
+
+                    /** InputAudioConfig speechContexts. */
+                    public speechContexts: google.cloud.dialogflow.v2.ISpeechContext[];
+
+                    /** InputAudioConfig model. */
+                    public model: string;
 
                     /** InputAudioConfig modelVariant. */
                     public modelVariant: google.cloud.dialogflow.v2.SpeechModelVariant;
@@ -8962,12 +9192,12 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SpeechModelVariant enum. */
-                enum SpeechModelVariant {
-                    SPEECH_MODEL_VARIANT_UNSPECIFIED = 0,
-                    USE_BEST_AVAILABLE = 1,
-                    USE_STANDARD = 2,
-                    USE_ENHANCED = 3
+                /** SsmlVoiceGender enum. */
+                enum SsmlVoiceGender {
+                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
+                    SSML_VOICE_GENDER_MALE = 1,
+                    SSML_VOICE_GENDER_FEMALE = 2,
+                    SSML_VOICE_GENDER_NEUTRAL = 3
                 }
 
                 /** Properties of a VoiceSelectionParams. */
@@ -9180,12 +9410,12 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** SsmlVoiceGender enum. */
-                enum SsmlVoiceGender {
-                    SSML_VOICE_GENDER_UNSPECIFIED = 0,
-                    SSML_VOICE_GENDER_MALE = 1,
-                    SSML_VOICE_GENDER_FEMALE = 2,
-                    SSML_VOICE_GENDER_NEUTRAL = 3
+                /** OutputAudioEncoding enum. */
+                enum OutputAudioEncoding {
+                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
+                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
+                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
+                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
                 }
 
                 /** Properties of an OutputAudioConfig. */
@@ -9288,14 +9518,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** OutputAudioEncoding enum. */
-                enum OutputAudioEncoding {
-                    OUTPUT_AUDIO_ENCODING_UNSPECIFIED = 0,
-                    OUTPUT_AUDIO_ENCODING_LINEAR_16 = 1,
-                    OUTPUT_AUDIO_ENCODING_MP3 = 2,
-                    OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
                 }
 
                 /** Represents a SessionEntityTypes */
@@ -11062,6 +11284,12 @@ export namespace google {
 
                     /** StreamingRecognitionResult confidence */
                     confidence?: (number|null);
+
+                    /** StreamingRecognitionResult speechWordInfo */
+                    speechWordInfo?: (google.cloud.dialogflow.v2.ISpeechWordInfo[]|null);
+
+                    /** StreamingRecognitionResult speechEndOffset */
+                    speechEndOffset?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a StreamingRecognitionResult. */
@@ -11084,6 +11312,12 @@ export namespace google {
 
                     /** StreamingRecognitionResult confidence. */
                     public confidence: number;
+
+                    /** StreamingRecognitionResult speechWordInfo. */
+                    public speechWordInfo: google.cloud.dialogflow.v2.ISpeechWordInfo[];
+
+                    /** StreamingRecognitionResult speechEndOffset. */
+                    public speechEndOffset?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new StreamingRecognitionResult instance using the specified properties.

@@ -25,6 +25,13 @@
  *   The `Context ID` is always converted to lowercase, may only contain
  *   characters in [a-zA-Z0-9_-%] and may be at most 250 bytes long.
  *
+ *   The following context names are reserved for internal use by Dialogflow.
+ *   You should not use these contexts or create contexts with these names:
+ *
+ *   * `__system_counters__`
+ *   * `*_id_dialog_context`
+ *   * `*_dialog_params_size`
+ *
  * @property {number} lifespanCount
  *   Optional. The number of conversational query requests after which the
  *   context expires. If set to `0` (the default) the context expires

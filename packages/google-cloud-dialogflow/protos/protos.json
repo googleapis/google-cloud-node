@@ -2394,6 +2394,47 @@
                         "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
+                    "SpeechContext": {
+                      "fields": {
+                        "phrases": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "boost": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SpeechModelVariant": {
+                      "values": {
+                        "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
+                        "USE_BEST_AVAILABLE": 1,
+                        "USE_STANDARD": 2,
+                        "USE_ENHANCED": 3
+                      }
+                    },
+                    "SpeechWordInfo": {
+                      "fields": {
+                        "word": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "startOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "endOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
                     "InputAudioConfig": {
                       "fields": {
                         "audioEncoding": {
@@ -2408,10 +2449,36 @@
                           "type": "string",
                           "id": 3
                         },
+                        "enableWordInfo": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "phraseHints": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "speechContexts": {
+                          "rule": "repeated",
+                          "type": "SpeechContext",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "modelVariant": {
                           "type": "SpeechModelVariant",
@@ -2423,12 +2490,12 @@
                         }
                       }
                     },
-                    "SpeechModelVariant": {
+                    "SsmlVoiceGender": {
                       "values": {
-                        "SPEECH_MODEL_VARIANT_UNSPECIFIED": 0,
-                        "USE_BEST_AVAILABLE": 1,
-                        "USE_STANDARD": 2,
-                        "USE_ENHANCED": 3
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "SSML_VOICE_GENDER_MALE": 1,
+                        "SSML_VOICE_GENDER_FEMALE": 2,
+                        "SSML_VOICE_GENDER_NEUTRAL": 3
                       }
                     },
                     "VoiceSelectionParams": {
@@ -2468,12 +2535,12 @@
                         }
                       }
                     },
-                    "SsmlVoiceGender": {
+                    "OutputAudioEncoding": {
                       "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "SSML_VOICE_GENDER_MALE": 1,
-                        "SSML_VOICE_GENDER_FEMALE": 2,
-                        "SSML_VOICE_GENDER_NEUTRAL": 3
+                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
+                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
+                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
                       }
                     },
                     "OutputAudioConfig": {
@@ -2490,14 +2557,6 @@
                           "type": "SynthesizeSpeechConfig",
                           "id": 3
                         }
-                      }
-                    },
-                    "OutputAudioEncoding": {
-                      "values": {
-                        "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
-                        "OUTPUT_AUDIO_ENCODING_MP3": 2,
-                        "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3
                       }
                     },
                     "SessionEntityTypes": {
@@ -3010,6 +3069,15 @@
                         "confidence": {
                           "type": "float",
                           "id": 4
+                        },
+                        "speechWordInfo": {
+                          "rule": "repeated",
+                          "type": "SpeechWordInfo",
+                          "id": 7
+                        },
+                        "speechEndOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -5571,7 +5639,11 @@
                         "phraseHints": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "speechContexts": {
                           "rule": "repeated",
