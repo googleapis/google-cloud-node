@@ -22,6 +22,7 @@ import {
   ServiceObjectConfig,
 } from '@google-cloud/common';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 let promisified = false;

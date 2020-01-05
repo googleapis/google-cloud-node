@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as dateFormat from 'date-and-time';
 import * as fs from 'fs';
 import {OutgoingHttpHeaders} from 'http';

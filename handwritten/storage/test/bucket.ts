@@ -21,6 +21,7 @@ import {
 } from '@google-cloud/common';
 import arrify = require('arrify');
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as mime from 'mime-types';
 import pLimit from 'p-limit';
 import * as path from 'path';

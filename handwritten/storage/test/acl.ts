@@ -14,6 +14,7 @@
 
 import {DecorateRequestOptions, Metadata, util} from '@google-cloud/common';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 // tslint:disable-next-line:variable-name no-any

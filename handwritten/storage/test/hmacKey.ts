@@ -15,6 +15,7 @@
 import * as sinon from 'sinon';
 import * as proxyquire from 'proxyquire';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import {util, ServiceObject} from '@google-cloud/common';
 
 // tslint:disable-next-line: no-any

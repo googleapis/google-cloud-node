@@ -21,6 +21,7 @@ import {
 } from '@google-cloud/common';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as crypto from 'crypto';
 import * as duplexify from 'duplexify';
 import * as extend from 'extend';

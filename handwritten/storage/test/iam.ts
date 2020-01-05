@@ -14,6 +14,7 @@
 
 import {DecorateRequestOptions, util} from '@google-cloud/common';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 
 describe('storage/iam', () => {
