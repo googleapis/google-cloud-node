@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-12-21T12:11:26.594093Z",
+  "updateTime": "2020-01-04T12:10:24.097077Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.42.3",
-        "dockerImage": "googleapis/artman@sha256:feed210b5723c6f524b52ef6d7740a030f2d1a8f7c29a71c5e5b4481ceaad7f5"
+        "version": "0.43.0",
+        "dockerImage": "googleapis/artman@sha256:264654a37596a44b0668b8ce6ac41082d713f6ee150b3fc6425fa78cc64e4f20"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1a380ea21dea9b6ac6ad28c60ad96d9d73574e19",
-        "internalRef": "286616241"
+        "sha": "91ef2d9dd69807b0b79555f22566fb2d81e49ff9",
+        "internalRef": "287999179"
       }
     },
     {
@@ -48,34 +48,37 @@
   ],
   "newFiles": [
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "README.md"
-    },
-    {
       "path": "package.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
-      "path": ".gitignore"
-    },
-    {
-      "path": "CODE_OF_CONDUCT.md"
     },
     {
       "path": "webpack.config.js"
     },
     {
-      "path": "CONTRIBUTING.md"
+      "path": ".prettierignore"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": ".repo-metadata.json"
     },
     {
       "path": ".prettierrc"
     },
     {
-      "path": "package-lock.json"
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "synth.py"
     },
     {
       "path": ".eslintignore"
@@ -84,19 +87,22 @@
       "path": "linkinator.config.json"
     },
     {
+      "path": "package-lock.json"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
       "path": ".eslintrc.yml"
     },
     {
-      "path": "renovate.json"
+      "path": "README.md"
     },
     {
       "path": "synth.metadata"
     },
     {
-      "path": ".prettierignore"
-    },
-    {
-      "path": "synth.py"
+      "path": ".gitignore"
     },
     {
       "path": "codecov.yaml"
@@ -105,1198 +111,295 @@
       "path": ".jsdoc.js"
     },
     {
-      "path": "LICENSE"
-    },
-    {
-      "path": ".nycrc"
-    },
-    {
-      "path": "src/browser.js"
-    },
-    {
-      "path": "src/extra_proto_list.json"
-    },
-    {
-      "path": "src/index.js"
-    },
-    {
-      "path": "src/v1/auto_ml_client.js"
-    },
-    {
-      "path": "src/v1/index.js"
-    },
-    {
-      "path": "src/v1/prediction_service_proto_list.json"
-    },
-    {
-      "path": "src/v1/auto_ml_client_config.json"
-    },
-    {
-      "path": "src/v1/prediction_service_client_config.json"
-    },
-    {
-      "path": "src/v1/prediction_service_client.js"
-    },
-    {
-      "path": "src/v1/auto_ml_proto_list.json"
-    },
-    {
-      "path": "src/v1/doc/google/longrunning/doc_operations.js"
-    },
-    {
-      "path": "src/v1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_prediction_service.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_io.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_text.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_translation.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_extraction.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_sentiment.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_image.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_segment.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_geometry.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_dataset.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_payload.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_classification.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_model.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_data_items.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_spec.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_detection.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_model_evaluation.js"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/automl/v1/doc_service.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_any.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
-    },
-    {
-      "path": "src/v1beta1/auto_ml_client.js"
-    },
-    {
-      "path": "src/v1beta1/index.js"
-    },
-    {
-      "path": "src/v1beta1/prediction_service_proto_list.json"
-    },
-    {
-      "path": "src/v1beta1/auto_ml_client_config.json"
-    },
-    {
-      "path": "src/v1beta1/prediction_service_client_config.json"
-    },
-    {
-      "path": "src/v1beta1/prediction_service_client.js"
-    },
-    {
-      "path": "src/v1beta1/auto_ml_proto_list.json"
-    },
-    {
-      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_prediction_service.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_io.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_table_spec.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_translation.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_extraction.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_temporal.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_types.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_sentiment.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_column_spec.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_regression.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_image.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_segment.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_geometry.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_dataset.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_payload.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_classification.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_items.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_spec.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_detection.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model_evaluation.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_service.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_ranges.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_video.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_stats.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_tables.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_struct.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_field_mask.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_duration.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
-    },
-    {
-      "path": "__pycache__/synth.cpython-36.pyc"
-    },
-    {
-      "path": "samples/import_dataset.js"
-    },
-    {
-      "path": "samples/README.md"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/list_datasets.js"
-    },
-    {
-      "path": "samples/get_dataset.js"
-    },
-    {
-      "path": "samples/language_entity_extraction_create_model.js"
-    },
-    {
-      "path": "samples/language_sentiment_analysis_predict.js"
-    },
-    {
-      "path": "samples/language_entity_extraction_predict.js"
-    },
-    {
-      "path": "samples/translate_create_model.js"
-    },
-    {
-      "path": "samples/translate_create_dataset.js"
-    },
-    {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
-      "path": "samples/translate_predict.js"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/language_sentiment_analysis_create_dataset.js"
-    },
-    {
-      "path": "samples/language_entity_extraction_create_dataset.js"
-    },
-    {
-      "path": "samples/export_dataset.js"
-    },
-    {
-      "path": "samples/delete_dataset.js"
-    },
-    {
-      "path": "samples/language_sentiment_analysis_create_model.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/list-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/display-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/export-data.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/get-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/video-intelligence/classification/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/automlVisionModel.js"
-    },
-    {
-      "path": "samples/vision/automlVisionDataset.js"
-    },
-    {
-      "path": "samples/vision/automlVisionPredict.js"
-    },
-    {
-      "path": "samples/vision/resources/songbird.jpg"
-    },
-    {
-      "path": "samples/vision/resources/testImage.jpg"
-    },
-    {
-      "path": "samples/vision/resources/testImage2.jpg"
-    },
-    {
-      "path": "samples/vision/resources/flowerTraindata20lines.csv"
-    },
-    {
-      "path": "samples/vision/object-detection/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/list-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/undeploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/deploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/display-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/export-data.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/get-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/vision/object-detection/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/test/automlVision.test.js"
-    },
-    {
-      "path": "samples/test/translate_create_model.test.js"
-    },
-    {
-      "path": "samples/test/automlVideoIntelligenceClassificationDataset.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlTablesModel.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/language_sentiment_analysis_create_model.test.js"
-    },
-    {
-      "path": "samples/test/list_datasets.test.js"
-    },
-    {
-      "path": "samples/test/language_entity_extraction_create_model.test.js"
-    },
-    {
-      "path": "samples/test/setEndpoint.test.js"
-    },
-    {
-      "path": "samples/test/automlLanguageEntityPrediction.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlTablesPredict.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/import_dataset.test.js"
-    },
-    {
-      "path": "samples/test/delete_dataset.test.js"
-    },
-    {
-      "path": "samples/test/.eslintrc.yml"
-    },
-    {
-      "path": "samples/test/automlTranslation.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/translate_create_dataset.test.js"
-    },
-    {
-      "path": "samples/test/automlVisionObjectDetectionPredict.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlTablesDataset.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlLanguageEntityDataSet.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlVisionObjectDetectionDataset.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlVideoIntelligenceClassificationPredict.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/language_entity_extraction_predict.test.js"
-    },
-    {
-      "path": "samples/test/language_entity_extraction_create_dataset.test.js"
-    },
-    {
-      "path": "samples/test/automlVisionObjectDetectionModel.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/language_sentiment_analysis_create_dataset.test.js"
-    },
-    {
-      "path": "samples/test/export_dataset.test.js"
-    },
-    {
-      "path": "samples/test/automlLanguageSentimentModel.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlLanguageEntityModel.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlLanguageSentimentPrediction.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/language_sentiment_analysis_predict.test.js"
-    },
-    {
-      "path": "samples/test/get_dataset.test.js"
-    },
-    {
-      "path": "samples/test/translate_predict.test.js"
-    },
-    {
-      "path": "samples/test/automlVideoIntelligenceClassificationModel.v1beta1.test.js"
-    },
-    {
-      "path": "samples/test/automlLangaugeSentimentDataSet.v1beta1.test.js"
-    },
-    {
-      "path": "samples/tables/get-table-spec.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/predict-gcs-source-gcs-dest.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/undeploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/deploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/export-evaluated-examples.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/display-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-table-specs.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/get-column-spec.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/update-column-spec.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/get-model-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-column-specs.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/predict-bq-source-bq-dest.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/predict-gcs-source-bq-dest.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/export-data-to-bigquery.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/export-data-to-csv.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/predict-bq-source-gcs-dest.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/tables/update-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/list-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/undeploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/deploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/display-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/get-model-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/export-data.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/sentiment-analysis/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/list-operations-status.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/undeploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/deploy-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/display-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/get-model-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/export-data.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/language/entity-extraction/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/resources/input.txt"
-    },
-    {
-      "path": "samples/translate/datasets/get-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/datasets/list-datasets.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/datasets/import-data.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/datasets/delete-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/datasets/create-dataset.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/prediction/predict.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/delete-model.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/get-operation-status.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/get-model-evaluation.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/list-model-evaluations.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/create-model.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/get-model.v1beta1.js"
-    },
-    {
-      "path": "samples/translate/models/list-models.v1beta1.js"
-    },
-    {
-      "path": "samples/beta/setEndpoint.js"
-    },
-    {
       "path": ".github/PULL_REQUEST_TEMPLATE.md"
     },
     {
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
     },
     {
       "path": ".github/ISSUE_TEMPLATE/feature_request.md"
     },
     {
-      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
     },
     {
-      "path": ".kokoro/test.sh"
+      "path": "node_modules/uc.micro/package.json"
     },
     {
-      "path": ".kokoro/docs.sh"
+      "path": "node_modules/eastasianwidth/package.json"
     },
     {
-      "path": ".kokoro/samples-test.sh"
+      "path": "node_modules/defer-to-connect/package.json"
     },
     {
-      "path": ".kokoro/.gitattributes"
-    },
-    {
-      "path": ".kokoro/trampoline.sh"
-    },
-    {
-      "path": ".kokoro/lint.sh"
-    },
-    {
-      "path": ".kokoro/publish.sh"
-    },
-    {
-      "path": ".kokoro/test.bat"
-    },
-    {
-      "path": ".kokoro/common.cfg"
-    },
-    {
-      "path": ".kokoro/system-test.sh"
-    },
-    {
-      "path": ".kokoro/release/docs.cfg"
-    },
-    {
-      "path": ".kokoro/release/docs.sh"
-    },
-    {
-      "path": ".kokoro/release/publish.cfg"
-    },
-    {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/lint.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/docs.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/test.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/system-test.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/samples-test.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node10/common.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node8/test.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node8/common.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node12/test.cfg"
-    },
-    {
-      "path": ".kokoro/continuous/node12/common.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/lint.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/docs.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/system-test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/samples-test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node10/common.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node8/test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node8/common.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node12/test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/node12/common.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/windows/test.cfg"
-    },
-    {
-      "path": ".kokoro/presubmit/windows/common.cfg"
-    },
-    {
-      "path": "protos/protos.json"
-    },
-    {
-      "path": "protos/protos.js"
-    },
-    {
-      "path": "protos/protos.d.ts"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/prediction_service.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/text.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/text_extraction.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/io.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/detection.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/annotation_spec.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/model_evaluation.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/image.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/annotation_payload.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/service.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/text_segment.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/translation.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/text_sentiment.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/classification.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/model.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/geometry.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/operations.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/data_items.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1/dataset.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/data_types.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/data_stats.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/column_spec.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/prediction_service.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/ranges.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/text.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/text_extraction.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/io.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/detection.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/annotation_spec.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/tables.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/model_evaluation.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/image.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/annotation_payload.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/service.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/video.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/text_segment.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/translation.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/text_sentiment.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/regression.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/classification.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/temporal.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/model.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/geometry.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/operations.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/data_items.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/table_spec.proto"
-    },
-    {
-      "path": "protos/google/cloud/automl/v1beta1/dataset.proto"
-    },
-    {
-      "path": ".git/packed-refs"
-    },
-    {
-      "path": ".git/HEAD"
-    },
-    {
-      "path": ".git/config"
-    },
-    {
-      "path": ".git/index"
-    },
-    {
-      "path": ".git/shallow"
-    },
-    {
-      "path": ".git/logs/HEAD"
-    },
-    {
-      "path": ".git/logs/refs/remotes/origin/HEAD"
-    },
-    {
-      "path": ".git/logs/refs/heads/autosynth"
-    },
-    {
-      "path": ".git/logs/refs/heads/master"
-    },
-    {
-      "path": ".git/refs/remotes/origin/HEAD"
-    },
-    {
-      "path": ".git/refs/heads/autosynth"
-    },
-    {
-      "path": ".git/refs/heads/master"
-    },
-    {
-      "path": ".git/objects/pack/pack-9b284947ff5b75c43b6f85fed15f0aa3231d9137.pack"
-    },
-    {
-      "path": ".git/objects/pack/pack-9b284947ff5b75c43b6f85fed15f0aa3231d9137.idx"
-    },
-    {
-      "path": "test/.eslintrc.yml"
-    },
-    {
-      "path": "test/gapic-v1beta1.js"
-    },
-    {
-      "path": "test/gapic-v1.js"
-    },
-    {
-      "path": "test/mocha.opts"
-    },
-    {
-      "path": "system-test/automl.js"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
-    },
-    {
-      "path": "node_modules/strip-bom/package.json"
-    },
-    {
-      "path": "node_modules/string-width/package.json"
-    },
-    {
-      "path": "node_modules/is-callable/package.json"
-    },
-    {
-      "path": "node_modules/util-deprecate/package.json"
-    },
-    {
-      "path": "node_modules/require-directory/package.json"
-    },
-    {
-      "path": "node_modules/update-notifier/package.json"
-    },
-    {
-      "path": "node_modules/esprima/package.json"
-    },
-    {
-      "path": "node_modules/string_decoder/package.json"
-    },
-    {
-      "path": "node_modules/mocha/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/locate-path/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/find-up/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/yargs-parser/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/supports-color/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/which/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/path-exists/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/p-locate/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/glob/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/ms/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/strip-json-comments/package.json"
-    },
-    {
-      "path": "node_modules/mocha/node_modules/yargs/package.json"
+      "path": "node_modules/object-is/package.json"
     },
     {
       "path": "node_modules/is-arguments/package.json"
     },
     {
-      "path": "node_modules/core-util-is/package.json"
+      "path": "node_modules/eventemitter3/package.json"
     },
     {
-      "path": "node_modules/wrap-ansi/package.json"
+      "path": "node_modules/long/package.json"
     },
     {
-      "path": "node_modules/minimist-options/package.json"
+      "path": "node_modules/lodash/package.json"
     },
     {
-      "path": "node_modules/minimist-options/node_modules/arrify/package.json"
+      "path": "node_modules/diff/package.json"
     },
     {
-      "path": "node_modules/underscore/package.json"
+      "path": "node_modules/has-flag/package.json"
     },
     {
-      "path": "node_modules/keyv/package.json"
+      "path": "node_modules/prelude-ls/package.json"
     },
     {
-      "path": "node_modules/glob-parent/package.json"
+      "path": "node_modules/source-map/package.json"
     },
     {
-      "path": "node_modules/walkdir/package.json"
+      "path": "node_modules/spdx-correct/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/codegen/package.json"
+      "path": "node_modules/normalize-url/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/inquire/package.json"
+      "path": "node_modules/tmp/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/float/package.json"
+      "path": "node_modules/got/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/base64/package.json"
+      "path": "node_modules/agent-base/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/aspromise/package.json"
+      "path": "node_modules/process-nextick-args/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/eventemitter/package.json"
+      "path": "node_modules/google-gax/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/fetch/package.json"
+      "path": "node_modules/next-tick/package.json"
     },
     {
-      "path": "node_modules/@protobufjs/utf8/package.json"
+      "path": "node_modules/hosted-git-info/package.json"
+    },
+    {
+      "path": "node_modules/is-symbol/package.json"
+    },
+    {
+      "path": "node_modules/once/package.json"
+    },
+    {
+      "path": "node_modules/yargs-parser/package.json"
+    },
+    {
+      "path": "node_modules/ansi-escapes/package.json"
+    },
+    {
+      "path": "node_modules/gcp-metadata/package.json"
+    },
+    {
+      "path": "node_modules/espower-loader/package.json"
+    },
+    {
+      "path": "node_modules/validate-npm-package-license/package.json"
+    },
+    {
+      "path": "node_modules/doctrine/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-context-formatter/package.json"
+    },
+    {
+      "path": "node_modules/marked/package.json"
+    },
+    {
+      "path": "node_modules/jsdoc/package.json"
+    },
+    {
+      "path": "node_modules/jsdoc/node_modules/escape-string-regexp/package.json"
+    },
+    {
+      "path": "node_modules/flat-cache/package.json"
+    },
+    {
+      "path": "node_modules/flat-cache/node_modules/rimraf/package.json"
+    },
+    {
+      "path": "node_modules/is-npm/package.json"
+    },
+    {
+      "path": "node_modules/espower-location-detector/package.json"
+    },
+    {
+      "path": "node_modules/espower-location-detector/node_modules/source-map/package.json"
+    },
+    {
+      "path": "node_modules/base64-js/package.json"
+    },
+    {
+      "path": "node_modules/is-glob/package.json"
+    },
+    {
+      "path": "node_modules/taffydb/package.json"
+    },
+    {
+      "path": "node_modules/mocha/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/has-flag/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/yargs-parser/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/glob/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/ansi-styles/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/find-up/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/strip-json-comments/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/locate-path/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/yargs/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/supports-color/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/p-locate/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/path-exists/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/ms/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/color-name/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/color-convert/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/cliui/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/wrap-ansi/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/which/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/string-width/package.json"
+    },
+    {
+      "path": "node_modules/mocha/node_modules/emoji-regex/package.json"
+    },
+    {
+      "path": "node_modules/minimist/package.json"
+    },
+    {
+      "path": "node_modules/type/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/yargs-parser/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/ansi-styles/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/find-up/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/locate-path/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/yargs/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/p-locate/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/path-exists/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/color-name/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/color-convert/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/cliui/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/wrap-ansi/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/string-width/package.json"
+    },
+    {
+      "path": "node_modules/yargs-unparser/node_modules/emoji-regex/package.json"
+    },
+    {
+      "path": "node_modules/css-select/package.json"
+    },
+    {
+      "path": "node_modules/file-entry-cache/package.json"
+    },
+    {
+      "path": "node_modules/he/package.json"
+    },
+    {
+      "path": "node_modules/xmlcreate/package.json"
+    },
+    {
+      "path": "node_modules/https-proxy-agent/package.json"
+    },
+    {
+      "path": "node_modules/ecdsa-sig-formatter/package.json"
+    },
+    {
+      "path": "node_modules/nice-try/package.json"
+    },
+    {
+      "path": "node_modules/log-symbols/package.json"
+    },
+    {
+      "path": "node_modules/object.getownpropertydescriptors/package.json"
     },
     {
       "path": "node_modules/@protobufjs/path/package.json"
@@ -1305,49 +408,919 @@
       "path": "node_modules/@protobufjs/pool/package.json"
     },
     {
+      "path": "node_modules/@protobufjs/float/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/aspromise/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/fetch/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/utf8/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/codegen/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/inquire/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/base64/package.json"
+    },
+    {
+      "path": "node_modules/@protobufjs/eventemitter/package.json"
+    },
+    {
+      "path": "node_modules/gtoken/package.json"
+    },
+    {
+      "path": "node_modules/through2/package.json"
+    },
+    {
+      "path": "node_modules/p-limit/package.json"
+    },
+    {
+      "path": "node_modules/argparse/package.json"
+    },
+    {
+      "path": "node_modules/eslint-scope/package.json"
+    },
+    {
+      "path": "node_modules/extend/package.json"
+    },
+    {
+      "path": "node_modules/is-path-inside/package.json"
+    },
+    {
+      "path": "node_modules/destroy/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-formatter/package.json"
+    },
+    {
+      "path": "node_modules/read-pkg-up/package.json"
+    },
+    {
       "path": "node_modules/global-dirs/package.json"
     },
     {
-      "path": "node_modules/has-flag/package.json"
+      "path": "node_modules/fast-deep-equal/package.json"
     },
     {
-      "path": "node_modules/locate-path/package.json"
+      "path": "node_modules/mimic-fn/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-context-reducer-ast/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-context-reducer-ast/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/core-util-is/package.json"
+    },
+    {
+      "path": "node_modules/string.prototype.trimright/package.json"
+    },
+    {
+      "path": "node_modules/catharsis/package.json"
+    },
+    {
+      "path": "node_modules/node-fetch/package.json"
+    },
+    {
+      "path": "node_modules/linkinator/package.json"
+    },
+    {
+      "path": "node_modules/linkinator/node_modules/chalk/package.json"
+    },
+    {
+      "path": "node_modules/fresh/package.json"
+    },
+    {
+      "path": "node_modules/safer-buffer/package.json"
+    },
+    {
+      "path": "node_modules/is-stream-ended/package.json"
+    },
+    {
+      "path": "node_modules/mimic-response/package.json"
+    },
+    {
+      "path": "node_modules/requizzle/package.json"
+    },
+    {
+      "path": "node_modules/cacheable-request/package.json"
+    },
+    {
+      "path": "node_modules/cacheable-request/node_modules/lowercase-keys/package.json"
+    },
+    {
+      "path": "node_modules/cacheable-request/node_modules/get-stream/package.json"
+    },
+    {
+      "path": "node_modules/figures/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-util-string-width/package.json"
+    },
+    {
+      "path": "node_modules/multi-stage-sourcemap/package.json"
+    },
+    {
+      "path": "node_modules/multi-stage-sourcemap/node_modules/source-map/package.json"
+    },
+    {
+      "path": "node_modules/abort-controller/package.json"
+    },
+    {
+      "path": "node_modules/widest-line/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-es/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-es/node_modules/eslint-utils/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-es/node_modules/regexpp/package.json"
+    },
+    {
+      "path": "node_modules/boxen/package.json"
+    },
+    {
+      "path": "node_modules/boxen/node_modules/chalk/package.json"
+    },
+    {
+      "path": "node_modules/glob/package.json"
+    },
+    {
+      "path": "node_modules/buffer-equal-constant-time/package.json"
+    },
+    {
+      "path": "node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/acorn-es7-plugin/package.json"
+    },
+    {
+      "path": "node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/spdx-expression-parse/package.json"
+    },
+    {
+      "path": "node_modules/read-pkg/package.json"
+    },
+    {
+      "path": "node_modules/read-pkg/node_modules/type-fest/package.json"
+    },
+    {
+      "path": "node_modules/node-environment-flags/package.json"
+    },
+    {
+      "path": "node_modules/node-environment-flags/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/ansi-styles/package.json"
+    },
+    {
+      "path": "node_modules/escallmatch/package.json"
+    },
+    {
+      "path": "node_modules/escallmatch/node_modules/esprima/package.json"
+    },
+    {
+      "path": "node_modules/is-typedarray/package.json"
+    },
+    {
+      "path": "node_modules/callsites/package.json"
+    },
+    {
+      "path": "node_modules/safe-buffer/package.json"
+    },
+    {
+      "path": "node_modules/type-fest/package.json"
+    },
+    {
+      "path": "node_modules/espree/package.json"
+    },
+    {
+      "path": "node_modules/server-destroy/package.json"
+    },
+    {
+      "path": "node_modules/rc/package.json"
+    },
+    {
+      "path": "node_modules/rc/node_modules/minimist/package.json"
+    },
+    {
+      "path": "node_modules/rc/node_modules/strip-json-comments/package.json"
+    },
+    {
+      "path": "node_modules/fs.realpath/package.json"
+    },
+    {
+      "path": "node_modules/es6-set/package.json"
+    },
+    {
+      "path": "node_modules/es6-set/node_modules/es6-symbol/package.json"
+    },
+    {
+      "path": "node_modules/js-yaml/package.json"
+    },
+    {
+      "path": "node_modules/ajv/package.json"
+    },
+    {
+      "path": "node_modules/prettier-linter-helpers/package.json"
+    },
+    {
+      "path": "node_modules/p-finally/package.json"
+    },
+    {
+      "path": "node_modules/redent/package.json"
+    },
+    {
+      "path": "node_modules/diff-match-patch/package.json"
+    },
+    {
+      "path": "node_modules/signal-exit/package.json"
+    },
+    {
+      "path": "node_modules/core-js/package.json"
+    },
+    {
+      "path": "node_modules/package-json/package.json"
+    },
+    {
+      "path": "node_modules/package-json/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/indexof/package.json"
+    },
+    {
+      "path": "node_modules/eslint-utils/package.json"
+    },
+    {
+      "path": "node_modules/p-try/package.json"
+    },
+    {
+      "path": "node_modules/empower/package.json"
+    },
+    {
+      "path": "node_modules/external-editor/package.json"
+    },
+    {
+      "path": "node_modules/html-escaper/package.json"
+    },
+    {
+      "path": "node_modules/shebang-regex/package.json"
+    },
+    {
+      "path": "node_modules/regexpp/package.json"
+    },
+    {
+      "path": "node_modules/p-cancelable/package.json"
+    },
+    {
+      "path": "node_modules/set-blocking/package.json"
+    },
+    {
+      "path": "node_modules/es6-symbol/package.json"
+    },
+    {
+      "path": "node_modules/encodeurl/package.json"
+    },
+    {
+      "path": "node_modules/table/package.json"
+    },
+    {
+      "path": "node_modules/table/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/table/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/table/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/table/node_modules/string-width/package.json"
+    },
+    {
+      "path": "node_modules/table/node_modules/emoji-regex/package.json"
+    },
+    {
+      "path": "node_modules/has-symbols/package.json"
+    },
+    {
+      "path": "node_modules/escodegen/package.json"
+    },
+    {
+      "path": "node_modules/escodegen/node_modules/source-map/package.json"
+    },
+    {
+      "path": "node_modules/escodegen/node_modules/esprima/package.json"
+    },
+    {
+      "path": "node_modules/unpipe/package.json"
+    },
+    {
+      "path": "node_modules/dot-prop/package.json"
+    },
+    {
+      "path": "node_modules/es-abstract/package.json"
+    },
+    {
+      "path": "node_modules/update-notifier/package.json"
+    },
+    {
+      "path": "node_modules/update-notifier/node_modules/chalk/package.json"
+    },
+    {
+      "path": "node_modules/domutils/package.json"
+    },
+    {
+      "path": "node_modules/find-up/package.json"
+    },
+    {
+      "path": "node_modules/event-emitter/package.json"
+    },
+    {
+      "path": "node_modules/parse-json/package.json"
+    },
+    {
+      "path": "node_modules/linkify-it/package.json"
+    },
+    {
+      "path": "node_modules/ignore/package.json"
+    },
+    {
+      "path": "node_modules/cross-spawn/package.json"
+    },
+    {
+      "path": "node_modules/etag/package.json"
     },
     {
       "path": "node_modules/empower-assert/package.json"
     },
     {
-      "path": "node_modules/convert-source-map/package.json"
+      "path": "node_modules/is-extglob/package.json"
     },
     {
-      "path": "node_modules/require-main-filename/package.json"
+      "path": "node_modules/json-bigint/package.json"
     },
     {
-      "path": "node_modules/bluebird/package.json"
+      "path": "node_modules/strip-json-comments/package.json"
+    },
+    {
+      "path": "node_modules/traverse/package.json"
+    },
+    {
+      "path": "node_modules/escope/package.json"
+    },
+    {
+      "path": "node_modules/prettier/package.json"
+    },
+    {
+      "path": "node_modules/mime/package.json"
+    },
+    {
+      "path": "node_modules/google-auth-library/package.json"
+    },
+    {
+      "path": "node_modules/json-stable-stringify-without-jsonify/package.json"
     },
     {
       "path": "node_modules/string.prototype.trimleft/package.json"
     },
     {
-      "path": "node_modules/range-parser/package.json"
+      "path": "node_modules/get-stdin/package.json"
     },
     {
-      "path": "node_modules/espower-loader/package.json"
+      "path": "node_modules/espower/package.json"
     },
     {
-      "path": "node_modules/defer-to-connect/package.json"
+      "path": "node_modules/espower/node_modules/source-map/package.json"
     },
     {
-      "path": "node_modules/duplexer3/package.json"
+      "path": "node_modules/minimatch/package.json"
     },
     {
-      "path": "node_modules/indent-string/package.json"
+      "path": "node_modules/json-buffer/package.json"
+    },
+    {
+      "path": "node_modules/escape-string-regexp/package.json"
+    },
+    {
+      "path": "node_modules/nth-check/package.json"
+    },
+    {
+      "path": "node_modules/is-date-object/package.json"
+    },
+    {
+      "path": "node_modules/lowercase-keys/package.json"
+    },
+    {
+      "path": "node_modules/onetime/package.json"
+    },
+    {
+      "path": "node_modules/argv/package.json"
+    },
+    {
+      "path": "node_modules/codecov/package.json"
+    },
+    {
+      "path": "node_modules/uri-js/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-renderer-comparison/package.json"
+    },
+    {
+      "path": "node_modules/locate-path/package.json"
+    },
+    {
+      "path": "node_modules/text-table/package.json"
+    },
+    {
+      "path": "node_modules/p-timeout/package.json"
+    },
+    {
+      "path": "node_modules/progress/package.json"
+    },
+    {
+      "path": "node_modules/es5-ext/package.json"
+    },
+    {
+      "path": "node_modules/statuses/package.json"
+    },
+    {
+      "path": "node_modules/markdown-it-anchor/package.json"
+    },
+    {
+      "path": "node_modules/jsonexport/package.json"
+    },
+    {
+      "path": "node_modules/domhandler/package.json"
+    },
+    {
+      "path": "node_modules/mkdirp/package.json"
+    },
+    {
+      "path": "node_modules/is-installed-globally/package.json"
+    },
+    {
+      "path": "node_modules/http-cache-semantics/package.json"
+    },
+    {
+      "path": "node_modules/empower-core/package.json"
+    },
+    {
+      "path": "node_modules/string_decoder/package.json"
+    },
+    {
+      "path": "node_modules/htmlparser2/package.json"
+    },
+    {
+      "path": "node_modules/htmlparser2/node_modules/readable-stream/package.json"
+    },
+    {
+      "path": "node_modules/readable-stream/package.json"
+    },
+    {
+      "path": "node_modules/send/package.json"
+    },
+    {
+      "path": "node_modules/send/node_modules/mime/package.json"
+    },
+    {
+      "path": "node_modules/send/node_modules/debug/package.json"
+    },
+    {
+      "path": "node_modules/send/node_modules/debug/node_modules/ms/package.json"
+    },
+    {
+      "path": "node_modules/send/node_modules/ms/package.json"
+    },
+    {
+      "path": "node_modules/convert-source-map/package.json"
+    },
+    {
+      "path": "node_modules/js-tokens/package.json"
+    },
+    {
+      "path": "node_modules/es6-weak-map/package.json"
+    },
+    {
+      "path": "node_modules/array-filter/package.json"
+    },
+    {
+      "path": "node_modules/es6-map/package.json"
+    },
+    {
+      "path": "node_modules/to-readable-stream/package.json"
+    },
+    {
+      "path": "node_modules/type-name/package.json"
+    },
+    {
+      "path": "node_modules/regexp.prototype.flags/package.json"
+    },
+    {
+      "path": "node_modules/deep-equal/package.json"
+    },
+    {
+      "path": "node_modules/graceful-fs/package.json"
+    },
+    {
+      "path": "node_modules/chalk/package.json"
+    },
+    {
+      "path": "node_modules/chalk/node_modules/has-flag/package.json"
+    },
+    {
+      "path": "node_modules/chalk/node_modules/ansi-styles/package.json"
+    },
+    {
+      "path": "node_modules/chalk/node_modules/supports-color/package.json"
+    },
+    {
+      "path": "node_modules/chalk/node_modules/color-name/package.json"
+    },
+    {
+      "path": "node_modules/chalk/node_modules/color-convert/package.json"
+    },
+    {
+      "path": "node_modules/write/package.json"
+    },
+    {
+      "path": "node_modules/ext/package.json"
+    },
+    {
+      "path": "node_modules/ext/node_modules/type/package.json"
+    },
+    {
+      "path": "node_modules/yargs/package.json"
+    },
+    {
+      "path": "node_modules/through/package.json"
+    },
+    {
+      "path": "node_modules/jsdoc-fresh/package.json"
+    },
+    {
+      "path": "node_modules/jsdoc-fresh/node_modules/taffydb/package.json"
+    },
+    {
+      "path": "node_modules/parseurl/package.json"
+    },
+    {
+      "path": "node_modules/setprototypeof/package.json"
+    },
+    {
+      "path": "node_modules/jwa/package.json"
+    },
+    {
+      "path": "node_modules/camelcase/package.json"
+    },
+    {
+      "path": "node_modules/deep-extend/package.json"
+    },
+    {
+      "path": "node_modules/inflight/package.json"
+    },
+    {
+      "path": "node_modules/istanbul-reports/package.json"
+    },
+    {
+      "path": "node_modules/es6-iterator/package.json"
+    },
+    {
+      "path": "node_modules/run-async/package.json"
+    },
+    {
+      "path": "node_modules/@bcoe/v8-coverage/package.json"
+    },
+    {
+      "path": "node_modules/esquery/package.json"
+    },
+    {
+      "path": "node_modules/resolve/package.json"
+    },
+    {
+      "path": "node_modules/functional-red-black-tree/package.json"
+    },
+    {
+      "path": "node_modules/inquirer/package.json"
+    },
+    {
+      "path": "node_modules/inquirer/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/inquirer/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/json-schema-traverse/package.json"
+    },
+    {
+      "path": "node_modules/meow/package.json"
+    },
+    {
+      "path": "node_modules/es-to-primitive/package.json"
+    },
+    {
+      "path": "node_modules/ini/package.json"
+    },
+    {
+      "path": "node_modules/call-signature/package.json"
+    },
+    {
+      "path": "node_modules/dom-serializer/package.json"
+    },
+    {
+      "path": "node_modules/on-finished/package.json"
+    },
+    {
+      "path": "node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/ansi-colors/package.json"
+    },
+    {
+      "path": "node_modules/end-of-stream/package.json"
+    },
+    {
+      "path": "node_modules/require-main-filename/package.json"
+    },
+    {
+      "path": "node_modules/supports-color/package.json"
+    },
+    {
+      "path": "node_modules/eslint-visitor-keys/package.json"
+    },
+    {
+      "path": "node_modules/get-caller-file/package.json"
+    },
+    {
+      "path": "node_modules/brace-expansion/package.json"
+    },
+    {
+      "path": "node_modules/ignore-walk/package.json"
+    },
+    {
+      "path": "node_modules/urlgrey/package.json"
+    },
+    {
+      "path": "node_modules/balanced-match/package.json"
+    },
+    {
+      "path": "node_modules/markdown-it/package.json"
+    },
+    {
+      "path": "node_modules/rxjs/package.json"
+    },
+    {
+      "path": "node_modules/iconv-lite/package.json"
+    },
+    {
+      "path": "node_modules/is-plain-obj/package.json"
+    },
+    {
+      "path": "node_modules/fast-text-encoding/package.json"
+    },
+    {
+      "path": "node_modules/os-tmpdir/package.json"
+    },
+    {
+      "path": "node_modules/test-exclude/package.json"
+    },
+    {
+      "path": "node_modules/resolve-from/package.json"
+    },
+    {
+      "path": "node_modules/source-map-support/package.json"
+    },
+    {
+      "path": "node_modules/source-map-support/node_modules/source-map/package.json"
+    },
+    {
+      "path": "node_modules/punycode/package.json"
+    },
+    {
+      "path": "node_modules/ee-first/package.json"
+    },
+    {
+      "path": "node_modules/p-locate/package.json"
+    },
+    {
+      "path": "node_modules/@types/long/package.json"
+    },
+    {
+      "path": "node_modules/@types/minimist/package.json"
+    },
+    {
+      "path": "node_modules/@types/node/package.json"
+    },
+    {
+      "path": "node_modules/@types/istanbul-lib-coverage/package.json"
+    },
+    {
+      "path": "node_modules/@types/is-windows/package.json"
+    },
+    {
+      "path": "node_modules/@types/fs-extra/package.json"
+    },
+    {
+      "path": "node_modules/@types/color-name/package.json"
+    },
+    {
+      "path": "node_modules/@types/normalize-package-data/package.json"
+    },
+    {
+      "path": "node_modules/wide-align/package.json"
+    },
+    {
+      "path": "node_modules/wide-align/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/wide-align/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/wide-align/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/wide-align/node_modules/string-width/package.json"
+    },
+    {
+      "path": "node_modules/is-promise/package.json"
+    },
+    {
+      "path": "node_modules/spdx-exceptions/package.json"
+    },
+    {
+      "path": "node_modules/slice-ansi/package.json"
+    },
+    {
+      "path": "node_modules/slice-ansi/node_modules/ansi-styles/package.json"
+    },
+    {
+      "path": "node_modules/slice-ansi/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/slice-ansi/node_modules/color-name/package.json"
+    },
+    {
+      "path": "node_modules/slice-ansi/node_modules/color-convert/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-prettier/package.json"
+    },
+    {
+      "path": "node_modules/decompress-response/package.json"
+    },
+    {
+      "path": "node_modules/parent-module/package.json"
+    },
+    {
+      "path": "node_modules/jsdoc-region-tag/package.json"
+    },
+    {
+      "path": "node_modules/domelementtype/package.json"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/package.json"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/.airtap.yml"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/.travis.yml"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/index.js"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/LICENSE"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/README.md"
+    },
+    {
+      "path": "node_modules/typedarray-to-buffer/test/basic.js"
+    },
+    {
+      "path": "node_modules/sprintf-js/package.json"
+    },
+    {
+      "path": "node_modules/path-key/package.json"
+    },
+    {
+      "path": "node_modules/isarray/package.json"
+    },
+    {
+      "path": "node_modules/@grpc/grpc-js/package.json"
+    },
+    {
+      "path": "node_modules/@grpc/grpc-js/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/@grpc/proto-loader/package.json"
+    },
+    {
+      "path": "node_modules/responselike/package.json"
+    },
+    {
+      "path": "node_modules/istanbul-lib-coverage/package.json"
+    },
+    {
+      "path": "node_modules/minimist-options/package.json"
+    },
+    {
+      "path": "node_modules/minimist-options/node_modules/arrify/package.json"
+    },
+    {
+      "path": "node_modules/latest-version/package.json"
+    },
+    {
+      "path": "node_modules/amdefine/package.json"
+    },
+    {
+      "path": "node_modules/estraverse/package.json"
+    },
+    {
+      "path": "node_modules/http-errors/package.json"
+    },
+    {
+      "path": "node_modules/term-size/package.json"
+    },
+    {
+      "path": "node_modules/bluebird/package.json"
+    },
+    {
+      "path": "node_modules/natural-compare/package.json"
+    },
+    {
+      "path": "node_modules/xdg-basedir/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/node_modules/is-fullwidth-code-point/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/node_modules/string-width/package.json"
+    },
+    {
+      "path": "node_modules/ansi-align/node_modules/emoji-regex/package.json"
+    },
+    {
+      "path": "node_modules/js2xmlparser/package.json"
+    },
+    {
+      "path": "node_modules/teeny-request/package.json"
+    },
+    {
+      "path": "node_modules/teeny-request/node_modules/https-proxy-agent/package.json"
+    },
+    {
+      "path": "node_modules/espower-source/package.json"
+    },
+    {
+      "path": "node_modules/espower-source/node_modules/acorn/package.json"
+    },
+    {
+      "path": "node_modules/d/package.json"
+    },
+    {
+      "path": "node_modules/is-stream/package.json"
+    },
+    {
+      "path": "node_modules/debug/package.json"
+    },
+    {
+      "path": "node_modules/espurify/package.json"
+    },
+    {
+      "path": "node_modules/wrappy/package.json"
+    },
+    {
+      "path": "node_modules/import-fresh/package.json"
     },
     {
       "path": "node_modules/eslint/package.json"
     },
     {
-      "path": "node_modules/eslint/node_modules/cross-spawn/README.md"
+      "path": "node_modules/eslint/node_modules/strip-ansi/package.json"
+    },
+    {
+      "path": "node_modules/eslint/node_modules/shebang-regex/package.json"
     },
     {
       "path": "node_modules/eslint/node_modules/cross-spawn/package.json"
@@ -1362,10 +1335,19 @@
       "path": "node_modules/eslint/node_modules/cross-spawn/LICENSE"
     },
     {
-      "path": "node_modules/eslint/node_modules/cross-spawn/lib/parse.js"
+      "path": "node_modules/eslint/node_modules/cross-spawn/README.md"
+    },
+    {
+      "path": "node_modules/eslint/node_modules/cross-spawn/node_modules/semver/package.json"
     },
     {
       "path": "node_modules/eslint/node_modules/cross-spawn/lib/enoent.js"
+    },
+    {
+      "path": "node_modules/eslint/node_modules/cross-spawn/lib/parse.js"
+    },
+    {
+      "path": "node_modules/eslint/node_modules/cross-spawn/lib/util/readShebang.js"
     },
     {
       "path": "node_modules/eslint/node_modules/cross-spawn/lib/util/escape.js"
@@ -1374,979 +1356,31 @@
       "path": "node_modules/eslint/node_modules/cross-spawn/lib/util/resolveCommand.js"
     },
     {
-      "path": "node_modules/eslint/node_modules/cross-spawn/lib/util/readShebang.js"
-    },
-    {
-      "path": "node_modules/eslint/node_modules/cross-spawn/node_modules/semver/package.json"
-    },
-    {
       "path": "node_modules/eslint/node_modules/path-key/package.json"
-    },
-    {
-      "path": "node_modules/eslint/node_modules/which/package.json"
-    },
-    {
-      "path": "node_modules/eslint/node_modules/shebang-regex/package.json"
-    },
-    {
-      "path": "node_modules/eslint/node_modules/shebang-command/package.json"
     },
     {
       "path": "node_modules/eslint/node_modules/debug/package.json"
     },
     {
-      "path": "node_modules/got/package.json"
+      "path": "node_modules/eslint/node_modules/semver/package.json"
     },
     {
-      "path": "node_modules/got/node_modules/get-stream/package.json"
+      "path": "node_modules/eslint/node_modules/ansi-regex/package.json"
     },
     {
-      "path": "node_modules/estraverse/package.json"
+      "path": "node_modules/eslint/node_modules/shebang-command/package.json"
     },
     {
-      "path": "node_modules/mdurl/package.json"
-    },
-    {
-      "path": "node_modules/eslint-plugin-node/package.json"
-    },
-    {
-      "path": "node_modules/eslint-plugin-node/node_modules/ignore/package.json"
-    },
-    {
-      "path": "node_modules/resolve-from/package.json"
-    },
-    {
-      "path": "node_modules/type-name/package.json"
-    },
-    {
-      "path": "node_modules/lodash/package.json"
-    },
-    {
-      "path": "node_modules/strip-ansi/package.json"
-    },
-    {
-      "path": "node_modules/safe-buffer/package.json"
-    },
-    {
-      "path": "node_modules/@szmarczak/http-timer/package.json"
-    },
-    {
-      "path": "node_modules/parent-module/package.json"
-    },
-    {
-      "path": "node_modules/object-keys/package.json"
-    },
-    {
-      "path": "node_modules/write/package.json"
-    },
-    {
-      "path": "node_modules/configstore/package.json"
-    },
-    {
-      "path": "node_modules/configstore/node_modules/pify/package.json"
-    },
-    {
-      "path": "node_modules/configstore/node_modules/make-dir/package.json"
-    },
-    {
-      "path": "node_modules/v8-to-istanbul/package.json"
-    },
-    {
-      "path": "node_modules/v8-to-istanbul/node_modules/source-map/package.json"
-    },
-    {
-      "path": "node_modules/dot-prop/package.json"
-    },
-    {
-      "path": "node_modules/import-fresh/package.json"
-    },
-    {
-      "path": "node_modules/mute-stream/package.json"
-    },
-    {
-      "path": "node_modules/wide-align/package.json"
-    },
-    {
-      "path": "node_modules/wide-align/node_modules/string-width/package.json"
-    },
-    {
-      "path": "node_modules/wide-align/node_modules/strip-ansi/package.json"
-    },
-    {
-      "path": "node_modules/wide-align/node_modules/ansi-regex/package.json"
-    },
-    {
-      "path": "node_modules/eslint-scope/package.json"
-    },
-    {
-      "path": "node_modules/is-promise/package.json"
-    },
-    {
-      "path": "node_modules/es6-map/package.json"
-    },
-    {
-      "path": "node_modules/p-finally/package.json"
-    },
-    {
-      "path": "node_modules/es6-set/package.json"
-    },
-    {
-      "path": "node_modules/es6-set/node_modules/es6-symbol/package.json"
-    },
-    {
-      "path": "node_modules/array-find/package.json"
-    },
-    {
-      "path": "node_modules/js2xmlparser/package.json"
-    },
-    {
-      "path": "node_modules/istanbul-reports/package.json"
-    },
-    {
-      "path": "node_modules/indexof/package.json"
-    },
-    {
-      "path": "node_modules/progress/package.json"
-    },
-    {
-      "path": "node_modules/registry-url/package.json"
-    },
-    {
-      "path": "node_modules/google-gax/package.json"
-    },
-    {
-      "path": "node_modules/mimic-response/package.json"
-    },
-    {
-      "path": "node_modules/figures/package.json"
-    },
-    {
-      "path": "node_modules/eslint-config-prettier/package.json"
-    },
-    {
-      "path": "node_modules/argparse/package.json"
-    },
-    {
-      "path": "node_modules/type/package.json"
-    },
-    {
-      "path": "node_modules/domhandler/package.json"
-    },
-    {
-      "path": "node_modules/error-ex/package.json"
-    },
-    {
-      "path": "node_modules/ansi-colors/package.json"
-    },
-    {
-      "path": "node_modules/safer-buffer/package.json"
-    },
-    {
-      "path": "node_modules/type-fest/package.json"
-    },
-    {
-      "path": "node_modules/strip-indent/package.json"
-    },
-    {
-      "path": "node_modules/boxen/package.json"
-    },
-    {
-      "path": "node_modules/boxen/node_modules/type-fest/package.json"
-    },
-    {
-      "path": "node_modules/flat-cache/package.json"
-    },
-    {
-      "path": "node_modules/flat-cache/node_modules/rimraf/package.json"
-    },
-    {
-      "path": "node_modules/has-symbols/package.json"
-    },
-    {
-      "path": "node_modules/gcp-metadata/package.json"
-    },
-    {
-      "path": "node_modules/ansi-align/package.json"
-    },
-    {
-      "path": "node_modules/find-up/package.json"
-    },
-    {
-      "path": "node_modules/log-symbols/package.json"
-    },
-    {
-      "path": "node_modules/merge-estraverse-visitors/package.json"
-    },
-    {
-      "path": "node_modules/is-extglob/package.json"
-    },
-    {
-      "path": "node_modules/json-stable-stringify-without-jsonify/package.json"
-    },
-    {
-      "path": "node_modules/prettier/package.json"
-    },
-    {
-      "path": "node_modules/jsonexport/package.json"
-    },
-    {
-      "path": "node_modules/wrappy/package.json"
-    },
-    {
-      "path": "node_modules/npm-run-path/package.json"
-    },
-    {
-      "path": "node_modules/npm-run-path/node_modules/path-key/package.json"
-    },
-    {
-      "path": "node_modules/map-obj/package.json"
-    },
-    {
-      "path": "node_modules/term-size/package.json"
-    },
-    {
-      "path": "node_modules/destroy/package.json"
-    },
-    {
-      "path": "node_modules/growl/package.json"
-    },
-    {
-      "path": "node_modules/json-schema-traverse/package.json"
-    },
-    {
-      "path": "node_modules/taffydb/package.json"
-    },
-    {
-      "path": "node_modules/cross-spawn/package.json"
-    },
-    {
-      "path": "node_modules/loud-rejection/package.json"
-    },
-    {
-      "path": "node_modules/is-glob/package.json"
-    },
-    {
-      "path": "node_modules/get-stream/package.json"
-    },
-    {
-      "path": "node_modules/uglify-js/package.json"
-    },
-    {
-      "path": "node_modules/optimist/package.json"
-    },
-    {
-      "path": "node_modules/empower/package.json"
-    },
-    {
-      "path": "node_modules/cacheable-request/package.json"
-    },
-    {
-      "path": "node_modules/cacheable-request/node_modules/get-stream/package.json"
-    },
-    {
-      "path": "node_modules/cacheable-request/node_modules/lowercase-keys/package.json"
-    },
-    {
-      "path": "node_modules/is-ci/package.json"
-    },
-    {
-      "path": "node_modules/server-destroy/package.json"
-    },
-    {
-      "path": "node_modules/json-parse-better-errors/package.json"
-    },
-    {
-      "path": "node_modules/core-js/package.json"
-    },
-    {
-      "path": "node_modules/set-blocking/package.json"
-    },
-    {
-      "path": "node_modules/next-tick/package.json"
-    },
-    {
-      "path": "node_modules/catharsis/package.json"
-    },
-    {
-      "path": "node_modules/rimraf/package.json"
-    },
-    {
-      "path": "node_modules/agent-base/package.json"
-    },
-    {
-      "path": "node_modules/json-bigint/package.json"
-    },
-    {
-      "path": "node_modules/spdx-exceptions/package.json"
-    },
-    {
-      "path": "node_modules/color-name/package.json"
-    },
-    {
-      "path": "node_modules/through/package.json"
-    },
-    {
-      "path": "node_modules/jws/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/node_modules/string-width/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/node_modules/string-width/node_modules/strip-ansi/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/node_modules/ansi-regex/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/node_modules/emoji-regex/package.json"
-    },
-    {
-      "path": "node_modules/inquirer/node_modules/is-fullwidth-code-point/package.json"
-    },
-    {
-      "path": "node_modules/etag/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-formatter/package.json"
-    },
-    {
-      "path": "node_modules/text-table/package.json"
-    },
-    {
-      "path": "node_modules/color-convert/package.json"
-    },
-    {
-      "path": "node_modules/escope/package.json"
-    },
-    {
-      "path": "node_modules/ansi-regex/package.json"
-    },
-    {
-      "path": "node_modules/is-installed-globally/package.json"
-    },
-    {
-      "path": "node_modules/redent/package.json"
-    },
-    {
-      "path": "node_modules/is-buffer/package.json"
-    },
-    {
-      "path": "node_modules/esrecurse/package.json"
-    },
-    {
-      "path": "node_modules/decamelize/package.json"
-    },
-    {
-      "path": "node_modules/parse-json/package.json"
-    },
-    {
-      "path": "node_modules/mime/package.json"
-    },
-    {
-      "path": "node_modules/google-auth-library/package.json"
-    },
-    {
-      "path": "node_modules/ignore/package.json"
-    },
-    {
-      "path": "node_modules/depd/package.json"
-    },
-    {
-      "path": "node_modules/camelcase-keys/package.json"
-    },
-    {
-      "path": "node_modules/camelcase-keys/node_modules/camelcase/package.json"
-    },
-    {
-      "path": "node_modules/ansi-escapes/package.json"
-    },
-    {
-      "path": "node_modules/decompress-response/package.json"
-    },
-    {
-      "path": "node_modules/end-of-stream/package.json"
-    },
-    {
-      "path": "node_modules/diff-match-patch/package.json"
-    },
-    {
-      "path": "node_modules/amdefine/package.json"
-    },
-    {
-      "path": "node_modules/event-emitter/package.json"
-    },
-    {
-      "path": "node_modules/is-windows/package.json"
-    },
-    {
-      "path": "node_modules/diff/package.json"
-    },
-    {
-      "path": "node_modules/tmp/package.json"
-    },
-    {
-      "path": "node_modules/source-map/package.json"
-    },
-    {
-      "path": "node_modules/is-obj/package.json"
-    },
-    {
-      "path": "node_modules/yargs-parser/package.json"
-    },
-    {
-      "path": "node_modules/teeny-request/package.json"
-    },
-    {
-      "path": "node_modules/teeny-request/node_modules/https-proxy-agent/package.json"
-    },
-    {
-      "path": "node_modules/escape-string-regexp/package.json"
-    },
-    {
-      "path": "node_modules/es-abstract/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/has-flag/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/color-name/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/color-convert/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/supports-color/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/ansi-styles/package.json"
-    },
-    {
-      "path": "node_modules/linkinator/node_modules/chalk/package.json"
-    },
-    {
-      "path": "node_modules/import-lazy/package.json"
-    },
-    {
-      "path": "node_modules/inflight/package.json"
-    },
-    {
-      "path": "node_modules/concat-map/package.json"
-    },
-    {
-      "path": "node_modules/object.assign/package.json"
-    },
-    {
-      "path": "node_modules/es6-symbol/package.json"
-    },
-    {
-      "path": "node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/jsdoc-fresh/package.json"
-    },
-    {
-      "path": "node_modules/jsdoc-fresh/node_modules/taffydb/package.json"
-    },
-    {
-      "path": "node_modules/htmlparser2/package.json"
-    },
-    {
-      "path": "node_modules/htmlparser2/node_modules/readable-stream/package.json"
-    },
-    {
-      "path": "node_modules/cli-boxes/package.json"
-    },
-    {
-      "path": "node_modules/supports-color/package.json"
-    },
-    {
-      "path": "node_modules/path-key/package.json"
-    },
-    {
-      "path": "node_modules/lru-cache/package.json"
-    },
-    {
-      "path": "node_modules/rc/package.json"
-    },
-    {
-      "path": "node_modules/rc/node_modules/minimist/package.json"
-    },
-    {
-      "path": "node_modules/rc/node_modules/strip-json-comments/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/locate-path/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/find-up/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/yargs-parser/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/path-exists/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/p-locate/package.json"
-    },
-    {
-      "path": "node_modules/yargs-unparser/node_modules/yargs/package.json"
-    },
-    {
-      "path": "node_modules/abort-controller/package.json"
-    },
-    {
-      "path": "node_modules/http-errors/package.json"
-    },
-    {
-      "path": "node_modules/marked/package.json"
-    },
-    {
-      "path": "node_modules/is-plain-obj/package.json"
-    },
-    {
-      "path": "node_modules/minimatch/package.json"
-    },
-    {
-      "path": "node_modules/send/package.json"
-    },
-    {
-      "path": "node_modules/send/node_modules/mime/package.json"
-    },
-    {
-      "path": "node_modules/send/node_modules/ms/package.json"
-    },
-    {
-      "path": "node_modules/send/node_modules/debug/package.json"
-    },
-    {
-      "path": "node_modules/send/node_modules/debug/node_modules/ms/package.json"
-    },
-    {
-      "path": "node_modules/css-select/package.json"
-    },
-    {
-      "path": "node_modules/uri-js/package.json"
-    },
-    {
-      "path": "node_modules/google-p12-pem/package.json"
-    },
-    {
-      "path": "node_modules/spdx-license-ids/package.json"
-    },
-    {
-      "path": "node_modules/yallist/package.json"
-    },
-    {
-      "path": "node_modules/setprototypeof/package.json"
-    },
-    {
-      "path": "node_modules/hosted-git-info/package.json"
-    },
-    {
-      "path": "node_modules/argv/package.json"
-    },
-    {
-      "path": "node_modules/package-json/package.json"
-    },
-    {
-      "path": "node_modules/write-file-atomic/package.json"
-    },
-    {
-      "path": "node_modules/external-editor/package.json"
-    },
-    {
-      "path": "node_modules/@sindresorhus/is/package.json"
-    },
-    {
-      "path": "node_modules/lodash.camelcase/package.json"
-    },
-    {
-      "path": "node_modules/arrify/package.json"
-    },
-    {
-      "path": "node_modules/ansi-styles/package.json"
-    },
-    {
-      "path": "node_modules/parseurl/package.json"
-    },
-    {
-      "path": "node_modules/boolbase/package.json"
-    },
-    {
-      "path": "node_modules/cliui/package.json"
-    },
-    {
-      "path": "node_modules/balanced-match/package.json"
-    },
-    {
-      "path": "node_modules/acorn/package.json"
-    },
-    {
-      "path": "node_modules/load-json-file/package.json"
-    },
-    {
-      "path": "node_modules/load-json-file/node_modules/pify/package.json"
-    },
-    {
-      "path": "node_modules/widest-line/package.json"
-    },
-    {
-      "path": "node_modules/widest-line/node_modules/string-width/package.json"
-    },
-    {
-      "path": "node_modules/widest-line/node_modules/strip-ansi/package.json"
-    },
-    {
-      "path": "node_modules/widest-line/node_modules/ansi-regex/package.json"
-    },
-    {
-      "path": "node_modules/which/package.json"
-    },
-    {
-      "path": "node_modules/@bcoe/v8-coverage/package.json"
-    },
-    {
-      "path": "node_modules/prettier-linter-helpers/package.json"
-    },
-    {
-      "path": "node_modules/object-inspect/package.json"
-    },
-    {
-      "path": "node_modules/retry-request/package.json"
-    },
-    {
-      "path": "node_modules/retry-request/node_modules/debug/package.json"
-    },
-    {
-      "path": "node_modules/is-arrayish/package.json"
-    },
-    {
-      "path": "node_modules/shebang-regex/package.json"
-    },
-    {
-      "path": "node_modules/clone-response/package.json"
-    },
-    {
-      "path": "node_modules/deep-is/package.json"
-    },
-    {
-      "path": "node_modules/regexpp/package.json"
-    },
-    {
-      "path": "node_modules/node-forge/package.json"
-    },
-    {
-      "path": "node_modules/power-assert/package.json"
-    },
-    {
-      "path": "node_modules/path-is-absolute/package.json"
-    },
-    {
-      "path": "node_modules/ignore-walk/package.json"
-    },
-    {
-      "path": "node_modules/finalhandler/package.json"
-    },
-    {
-      "path": "node_modules/finalhandler/node_modules/ms/package.json"
-    },
-    {
-      "path": "node_modules/finalhandler/node_modules/debug/package.json"
-    },
-    {
-      "path": "node_modules/source-map-support/package.json"
-    },
-    {
-      "path": "node_modules/source-map-support/node_modules/source-map/package.json"
-    },
-    {
-      "path": "node_modules/buffer-equal-constant-time/package.json"
-    },
-    {
-      "path": "node_modules/path-parse/package.json"
-    },
-    {
-      "path": "node_modules/decamelize-keys/package.json"
-    },
-    {
-      "path": "node_modules/decamelize-keys/node_modules/map-obj/package.json"
-    },
-    {
-      "path": "node_modules/os-tmpdir/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-util-string-width/package.json"
-    },
-    {
-      "path": "node_modules/url-parse-lax/package.json"
-    },
-    {
-      "path": "node_modules/linkify-it/package.json"
-    },
-    {
-      "path": "node_modules/minimist/package.json"
-    },
-    {
-      "path": "node_modules/fresh/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-context-formatter/package.json"
-    },
-    {
-      "path": "node_modules/is-stream/package.json"
-    },
-    {
-      "path": "node_modules/call-matcher/package.json"
-    },
-    {
-      "path": "node_modules/is-stream-ended/package.json"
-    },
-    {
-      "path": "node_modules/slice-ansi/package.json"
-    },
-    {
-      "path": "node_modules/onetime/package.json"
-    },
-    {
-      "path": "node_modules/spdx-correct/package.json"
-    },
-    {
-      "path": "node_modules/fast-deep-equal/package.json"
-    },
-    {
-      "path": "node_modules/readable-stream/package.json"
-    },
-    {
-      "path": "node_modules/xdg-basedir/package.json"
-    },
-    {
-      "path": "node_modules/v8-compile-cache/package.json"
-    },
-    {
-      "path": "node_modules/callsites/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-renderer-assertion/package.json"
-    },
-    {
-      "path": "node_modules/pify/package.json"
-    },
-    {
-      "path": "node_modules/stream-shift/package.json"
-    },
-    {
-      "path": "node_modules/crypto-random-string/package.json"
-    },
-    {
-      "path": "node_modules/escodegen/package.json"
-    },
-    {
-      "path": "node_modules/escodegen/node_modules/esprima/package.json"
-    },
-    {
-      "path": "node_modules/entities/package.json"
-    },
-    {
-      "path": "node_modules/object.getownpropertydescriptors/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-renderer-file/package.json"
-    },
-    {
-      "path": "node_modules/unpipe/package.json"
-    },
-    {
-      "path": "node_modules/array-filter/package.json"
-    },
-    {
-      "path": "node_modules/furi/package.json"
-    },
-    {
-      "path": "node_modules/strip-eof/package.json"
-    },
-    {
-      "path": "node_modules/is-path-inside/package.json"
-    },
-    {
-      "path": "node_modules/ini/package.json"
-    },
-    {
-      "path": "node_modules/currently-unhandled/package.json"
-    },
-    {
-      "path": "node_modules/validate-npm-package-license/package.json"
-    },
-    {
-      "path": "node_modules/bignumber.js/package.json"
-    },
-    {
-      "path": "node_modules/is-yarn-global/package.json"
-    },
-    {
-      "path": "node_modules/lodash.has/package.json"
-    },
-    {
-      "path": "node_modules/camelcase/package.json"
-    },
-    {
-      "path": "node_modules/prelude-ls/package.json"
-    },
-    {
-      "path": "node_modules/codecov/package.json"
+      "path": "node_modules/eslint/node_modules/which/package.json"
     },
     {
       "path": "node_modules/es6-promise/package.json"
     },
     {
-      "path": "node_modules/doctrine/package.json"
+      "path": "node_modules/is-yarn-global/package.json"
     },
     {
-      "path": "node_modules/path-exists/package.json"
-    },
-    {
-      "path": "node_modules/deep-extend/package.json"
-    },
-    {
-      "path": "node_modules/nth-check/package.json"
-    },
-    {
-      "path": "node_modules/isarray/package.json"
-    },
-    {
-      "path": "node_modules/es-to-primitive/package.json"
-    },
-    {
-      "path": "node_modules/https-proxy-agent/package.json"
-    },
-    {
-      "path": "node_modules/eslint-plugin-es/package.json"
-    },
-    {
-      "path": "node_modules/eslint-plugin-es/node_modules/regexpp/package.json"
-    },
-    {
-      "path": "node_modules/path-type/package.json"
-    },
-    {
-      "path": "node_modules/path-type/node_modules/pify/package.json"
-    },
-    {
-      "path": "node_modules/fast-json-stable-stringify/package.json"
-    },
-    {
-      "path": "node_modules/p-locate/package.json"
-    },
-    {
-      "path": "node_modules/intelli-espower-loader/package.json"
-    },
-    {
-      "path": "node_modules/node-fetch/package.json"
-    },
-    {
-      "path": "node_modules/registry-auth-token/package.json"
-    },
-    {
-      "path": "node_modules/esutils/package.json"
-    },
-    {
-      "path": "node_modules/which-module/package.json"
-    },
-    {
-      "path": "node_modules/function-bind/package.json"
-    },
-    {
-      "path": "node_modules/trim-newlines/package.json"
-    },
-    {
-      "path": "node_modules/event-target-shim/package.json"
-    },
-    {
-      "path": "node_modules/on-finished/package.json"
-    },
-    {
-      "path": "node_modules/y18n/package.json"
-    },
-    {
-      "path": "node_modules/quick-lru/package.json"
-    },
-    {
-      "path": "node_modules/js-yaml/package.json"
-    },
-    {
-      "path": "node_modules/flat/package.json"
-    },
-    {
-      "path": "node_modules/normalize-package-data/package.json"
-    },
-    {
-      "path": "node_modules/normalize-package-data/node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/es6-iterator/package.json"
-    },
-    {
-      "path": "node_modules/mkdirp/package.json"
-    },
-    {
-      "path": "node_modules/mkdirp/node_modules/minimist/package.json"
-    },
-    {
-      "path": "node_modules/fast-text-encoding/package.json"
-    },
-    {
-      "path": "node_modules/acorn-es7-plugin/package.json"
-    },
-    {
-      "path": "node_modules/through2/package.json"
-    },
-    {
-      "path": "node_modules/eslint-visitor-keys/package.json"
-    },
-    {
-      "path": "node_modules/glob/package.json"
-    },
-    {
-      "path": "node_modules/inherits/package.json"
-    },
-    {
-      "path": "node_modules/string.prototype.trimright/package.json"
-    },
-    {
-      "path": "node_modules/punycode/package.json"
-    },
-    {
-      "path": "node_modules/es5-ext/package.json"
-    },
-    {
-      "path": "node_modules/is-date-object/package.json"
-    },
-    {
-      "path": "node_modules/sprintf-js/package.json"
-    },
-    {
-      "path": "node_modules/is-npm/package.json"
-    },
-    {
-      "path": "node_modules/has-yarn/package.json"
-    },
-    {
-      "path": "node_modules/get-stdin/package.json"
-    },
-    {
-      "path": "node_modules/shebang-command/package.json"
-    },
-    {
-      "path": "node_modules/empower-core/package.json"
+      "path": "node_modules/array-find/package.json"
     },
     {
       "path": "node_modules/imurmurhash/package.json"
@@ -2355,334 +1389,355 @@
       "path": "node_modules/globals/package.json"
     },
     {
-      "path": "node_modules/latest-version/package.json"
+      "path": "node_modules/is-ci/package.json"
     },
     {
-      "path": "node_modules/natural-compare/package.json"
+      "path": "node_modules/mdurl/package.json"
     },
     {
-      "path": "node_modules/commander/package.json"
-    },
-    {
-      "path": "node_modules/path-is-inside/package.json"
-    },
-    {
-      "path": "node_modules/rxjs/package.json"
-    },
-    {
-      "path": "node_modules/node-environment-flags/package.json"
-    },
-    {
-      "path": "node_modules/node-environment-flags/node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/p-limit/package.json"
-    },
-    {
-      "path": "node_modules/call-signature/package.json"
-    },
-    {
-      "path": "node_modules/istanbul-lib-coverage/package.json"
-    },
-    {
-      "path": "node_modules/neo-async/package.json"
-    },
-    {
-      "path": "node_modules/foreground-child/package.json"
-    },
-    {
-      "path": "node_modules/he/package.json"
-    },
-    {
-      "path": "node_modules/meow/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/locate-path/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/find-up/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/yargs-parser/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/camelcase/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/path-exists/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/p-locate/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/p-limit/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/p-try/package.json"
-    },
-    {
-      "path": "node_modules/meow/node_modules/read-pkg-up/package.json"
-    },
-    {
-      "path": "node_modules/toidentifier/package.json"
-    },
-    {
-      "path": "node_modules/execa/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/cross-spawn/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/lru-cache/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/yallist/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/which/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/shebang-regex/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/is-stream/package.json"
-    },
-    {
-      "path": "node_modules/execa/node_modules/shebang-command/package.json"
-    },
-    {
-      "path": "node_modules/levn/package.json"
-    },
-    {
-      "path": "node_modules/unique-string/package.json"
-    },
-    {
-      "path": "node_modules/gaxios/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-renderer-base/package.json"
-    },
-    {
-      "path": "node_modules/browser-stdout/package.json"
-    },
-    {
-      "path": "node_modules/regexp.prototype.flags/package.json"
-    },
-    {
-      "path": "node_modules/run-async/package.json"
-    },
-    {
-      "path": "node_modules/cheerio/package.json"
-    },
-    {
-      "path": "node_modules/eslint-utils/package.json"
-    },
-    {
-      "path": "node_modules/prepend-http/package.json"
-    },
-    {
-      "path": "node_modules/urlgrey/package.json"
-    },
-    {
-      "path": "node_modules/define-properties/package.json"
-    },
-    {
-      "path": "node_modules/p-timeout/package.json"
-    },
-    {
-      "path": "node_modules/cli-cursor/package.json"
-    },
-    {
-      "path": "node_modules/pump/package.json"
-    },
-    {
-      "path": "node_modules/stringifier/package.json"
-    },
-    {
-      "path": "node_modules/espower-location-detector/package.json"
-    },
-    {
-      "path": "node_modules/espower-location-detector/node_modules/source-map/package.json"
-    },
-    {
-      "path": "node_modules/escape-html/package.json"
-    },
-    {
-      "path": "node_modules/http-cache-semantics/package.json"
-    },
-    {
-      "path": "node_modules/to-readable-stream/package.json"
-    },
-    {
-      "path": "node_modules/eastasianwidth/package.json"
-    },
-    {
-      "path": "node_modules/chardet/package.json"
-    },
-    {
-      "path": "node_modules/js-tokens/package.json"
-    },
-    {
-      "path": "node_modules/chalk/package.json"
-    },
-    {
-      "path": "node_modules/chalk/node_modules/supports-color/package.json"
-    },
-    {
-      "path": "node_modules/is-regex/package.json"
-    },
-    {
-      "path": "node_modules/ajv/package.json"
-    },
-    {
-      "path": "node_modules/spdx-expression-parse/package.json"
-    },
-    {
-      "path": "node_modules/cli-width/package.json"
-    },
-    {
-      "path": "node_modules/ms/package.json"
-    },
-    {
-      "path": "node_modules/istanbul-lib-report/package.json"
-    },
-    {
-      "path": "node_modules/base64-js/package.json"
-    },
-    {
-      "path": "node_modules/encodeurl/package.json"
-    },
-    {
-      "path": "node_modules/json-buffer/package.json"
-    },
-    {
-      "path": "node_modules/file-entry-cache/package.json"
-    },
-    {
-      "path": "node_modules/gtoken/package.json"
-    },
-    {
-      "path": "node_modules/klaw/package.json"
-    },
-    {
-      "path": "node_modules/functional-red-black-tree/package.json"
-    },
-    {
-      "path": "node_modules/dom-serializer/package.json"
-    },
-    {
-      "path": "node_modules/is-symbol/package.json"
-    },
-    {
-      "path": "node_modules/@babel/parser/package.json"
-    },
-    {
-      "path": "node_modules/@babel/highlight/package.json"
-    },
-    {
-      "path": "node_modules/@babel/code-frame/package.json"
-    },
-    {
-      "path": "node_modules/type-check/package.json"
-    },
-    {
-      "path": "node_modules/iconv-lite/package.json"
+      "path": "node_modules/error-ex/package.json"
     },
     {
       "path": "node_modules/is-url/package.json"
     },
     {
-      "path": "node_modules/domutils/package.json"
+      "path": "node_modules/stream-shift/package.json"
     },
     {
-      "path": "node_modules/p-queue/package.json"
+      "path": "node_modules/ci-info/package.json"
     },
     {
-      "path": "node_modules/eventemitter3/package.json"
+      "path": "node_modules/path-exists/package.json"
     },
     {
-      "path": "node_modules/ext/package.json"
+      "path": "node_modules/esrecurse/package.json"
     },
     {
-      "path": "node_modules/ext/node_modules/type/package.json"
+      "path": "node_modules/lru-cache/package.json"
     },
     {
-      "path": "node_modules/deep-equal/package.json"
+      "path": "node_modules/trim-newlines/package.json"
     },
     {
-      "path": "node_modules/parse5/package.json"
+      "path": "node_modules/json-parse-better-errors/package.json"
     },
     {
-      "path": "node_modules/flatted/package.json"
+      "path": "node_modules/retry-request/package.json"
     },
     {
-      "path": "node_modules/once/package.json"
+      "path": "node_modules/retry-request/node_modules/debug/package.json"
     },
     {
-      "path": "node_modules/universal-deep-strict-equal/package.json"
+      "path": "node_modules/merge-estraverse-visitors/package.json"
     },
     {
-      "path": "node_modules/brace-expansion/package.json"
+      "path": "node_modules/arrify/package.json"
     },
     {
-      "path": "node_modules/jsdoc-region-tag/package.json"
+      "path": "node_modules/is-windows/package.json"
     },
     {
-      "path": "node_modules/markdown-it-anchor/package.json"
+      "path": "node_modules/call-matcher/package.json"
     },
     {
-      "path": "node_modules/traverse/package.json"
+      "path": "node_modules/furi/package.json"
     },
     {
-      "path": "node_modules/restore-cursor/package.json"
+      "path": "node_modules/v8-compile-cache/package.json"
     },
     {
-      "path": "node_modules/lodash.at/package.json"
+      "path": "node_modules/decamelize/package.json"
     },
     {
-      "path": "node_modules/graceful-fs/package.json"
+      "path": "node_modules/jws/package.json"
     },
     {
-      "path": "node_modules/responselike/package.json"
+      "path": "node_modules/unique-string/package.json"
     },
     {
-      "path": "node_modules/pseudomap/package.json"
+      "path": "node_modules/css-what/package.json"
     },
     {
-      "path": "node_modules/espurify/package.json"
+      "path": "node_modules/crypto-random-string/package.json"
     },
     {
-      "path": "node_modules/espree/package.json"
+      "path": "node_modules/url-parse-lax/package.json"
     },
     {
-      "path": "node_modules/power-assert-renderer-diagram/package.json"
+      "path": "node_modules/@istanbuljs/schema/package.json"
+    },
+    {
+      "path": "node_modules/ms/package.json"
+    },
+    {
+      "path": "node_modules/decamelize-keys/package.json"
+    },
+    {
+      "path": "node_modules/decamelize-keys/node_modules/map-obj/package.json"
+    },
+    {
+      "path": "node_modules/make-dir/package.json"
+    },
+    {
+      "path": "node_modules/make-dir/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/get-stream/package.json"
     },
     {
       "path": "node_modules/word-wrap/package.json"
     },
     {
-      "path": "node_modules/espower-source/package.json"
+      "path": "node_modules/keyv/package.json"
     },
     {
-      "path": "node_modules/espower-source/node_modules/acorn/package.json"
+      "path": "node_modules/semver/package.json"
     },
     {
-      "path": "node_modules/normalize-url/package.json"
+      "path": "node_modules/esutils/package.json"
     },
     {
-      "path": "node_modules/wordwrap/package.json"
+      "path": "node_modules/intelli-espower-loader/package.json"
     },
     {
-      "path": "node_modules/ee-first/package.json"
+      "path": "node_modules/color-name/package.json"
     },
     {
-      "path": "node_modules/table/package.json"
+      "path": "node_modules/object-keys/package.json"
     },
     {
-      "path": "node_modules/handlebars/package.json"
+      "path": "node_modules/event-target-shim/package.json"
     },
     {
-      "path": "node_modules/es6-weak-map/package.json"
+      "path": "node_modules/stringifier/package.json"
+    },
+    {
+      "path": "node_modules/write-file-atomic/package.json"
+    },
+    {
+      "path": "node_modules/is-regex/package.json"
+    },
+    {
+      "path": "node_modules/google-p12-pem/package.json"
+    },
+    {
+      "path": "node_modules/v8-to-istanbul/package.json"
+    },
+    {
+      "path": "node_modules/@szmarczak/http-timer/package.json"
+    },
+    {
+      "path": "node_modules/growl/package.json"
+    },
+    {
+      "path": "node_modules/flat/package.json"
+    },
+    {
+      "path": "node_modules/path-is-absolute/package.json"
+    },
+    {
+      "path": "node_modules/path-parse/package.json"
+    },
+    {
+      "path": "node_modules/node-forge/package.json"
+    },
+    {
+      "path": "node_modules/levn/package.json"
+    },
+    {
+      "path": "node_modules/chardet/package.json"
+    },
+    {
+      "path": "node_modules/lodash.camelcase/package.json"
+    },
+    {
+      "path": "node_modules/walkdir/package.json"
+    },
+    {
+      "path": "node_modules/foreground-child/package.json"
+    },
+    {
+      "path": "node_modules/quick-lru/package.json"
+    },
+    {
+      "path": "node_modules/serve-static/package.json"
+    },
+    {
+      "path": "node_modules/which-module/package.json"
+    },
+    {
+      "path": "node_modules/power-assert/package.json"
+    },
+    {
+      "path": "node_modules/is-buffer/package.json"
+    },
+    {
+      "path": "node_modules/fast-levenshtein/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-context-traversal/package.json"
+    },
+    {
+      "path": "node_modules/range-parser/package.json"
+    },
+    {
+      "path": "node_modules/type-check/package.json"
+    },
+    {
+      "path": "node_modules/normalize-package-data/package.json"
+    },
+    {
+      "path": "node_modules/normalize-package-data/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/registry-auth-token/package.json"
+    },
+    {
+      "path": "node_modules/deep-is/package.json"
+    },
+    {
+      "path": "node_modules/cli-boxes/package.json"
+    },
+    {
+      "path": "node_modules/finalhandler/package.json"
+    },
+    {
+      "path": "node_modules/finalhandler/node_modules/debug/package.json"
+    },
+    {
+      "path": "node_modules/finalhandler/node_modules/ms/package.json"
+    },
+    {
+      "path": "node_modules/optionator/package.json"
+    },
+    {
+      "path": "node_modules/lodash.has/package.json"
+    },
+    {
+      "path": "node_modules/xtend/package.json"
+    },
+    {
+      "path": "node_modules/util-deprecate/package.json"
+    },
+    {
+      "path": "node_modules/concat-map/package.json"
+    },
+    {
+      "path": "node_modules/duplexify/package.json"
+    },
+    {
+      "path": "node_modules/ansi-regex/package.json"
+    },
+    {
+      "path": "node_modules/hard-rejection/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-renderer-file/package.json"
+    },
+    {
+      "path": "node_modules/gaxios/package.json"
+    },
+    {
+      "path": "node_modules/y18n/package.json"
+    },
+    {
+      "path": "node_modules/clone-response/package.json"
+    },
+    {
+      "path": "node_modules/is-obj/package.json"
+    },
+    {
+      "path": "node_modules/toidentifier/package.json"
+    },
+    {
+      "path": "node_modules/esprima/package.json"
+    },
+    {
+      "path": "node_modules/is-callable/package.json"
+    },
+    {
+      "path": "node_modules/camelcase-keys/package.json"
+    },
+    {
+      "path": "node_modules/is-arrayish/package.json"
+    },
+    {
+      "path": "node_modules/fast-diff/package.json"
+    },
+    {
+      "path": "node_modules/configstore/package.json"
+    },
+    {
+      "path": "node_modules/universal-deep-strict-equal/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-renderer-assertion/package.json"
+    },
+    {
+      "path": "node_modules/glob-parent/package.json"
+    },
+    {
+      "path": "node_modules/object.assign/package.json"
+    },
+    {
+      "path": "node_modules/color-convert/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-node/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-node/node_modules/eslint-utils/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-node/node_modules/ignore/package.json"
+    },
+    {
+      "path": "node_modules/eslint-plugin-node/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/cliui/package.json"
+    },
+    {
+      "path": "node_modules/cheerio/package.json"
+    },
+    {
+      "path": "node_modules/flatted/package.json"
+    },
+    {
+      "path": "node_modules/parse5/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-renderer-base/package.json"
+    },
+    {
+      "path": "node_modules/es6-promisify/package.json"
+    },
+    {
+      "path": "node_modules/shebang-command/package.json"
+    },
+    {
+      "path": "node_modules/indent-string/package.json"
+    },
+    {
+      "path": "node_modules/tslib/package.json"
+    },
+    {
+      "path": "node_modules/prepend-http/package.json"
+    },
+    {
+      "path": "node_modules/fast-json-stable-stringify/package.json"
+    },
+    {
+      "path": "node_modules/semver-diff/package.json"
+    },
+    {
+      "path": "node_modules/semver-diff/node_modules/semver/package.json"
+    },
+    {
+      "path": "node_modules/cli-width/package.json"
+    },
+    {
+      "path": "node_modules/escape-html/package.json"
     },
     {
       "path": "node_modules/protobufjs/package.json"
@@ -2694,16 +1749,25 @@
       "path": "node_modules/protobufjs/cli/package-lock.json"
     },
     {
-      "path": "node_modules/protobufjs/cli/node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/protobufjs/cli/node_modules/acorn/package.json"
+      "path": "node_modules/protobufjs/cli/node_modules/source-map/package.json"
     },
     {
       "path": "node_modules/protobufjs/cli/node_modules/minimist/package.json"
     },
     {
+      "path": "node_modules/protobufjs/cli/node_modules/commander/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/acorn/package.json"
+    },
+    {
       "path": "node_modules/protobufjs/cli/node_modules/espree/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/uglify-js/package.json"
+    },
+    {
+      "path": "node_modules/protobufjs/cli/node_modules/semver/package.json"
     },
     {
       "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/package.json"
@@ -2712,244 +1776,1222 @@
       "path": "node_modules/protobufjs/cli/node_modules/acorn-jsx/node_modules/acorn/package.json"
     },
     {
-      "path": "node_modules/espower/package.json"
+      "path": "node_modules/has/package.json"
     },
     {
-      "path": "node_modules/espower/node_modules/source-map/package.json"
+      "path": "node_modules/boolbase/package.json"
     },
     {
-      "path": "node_modules/strip-json-comments/package.json"
-    },
-    {
-      "path": "node_modules/process-nextick-args/package.json"
-    },
-    {
-      "path": "node_modules/uuid/package.json"
-    },
-    {
-      "path": "node_modules/array-find-index/package.json"
-    },
-    {
-      "path": "node_modules/astral-regex/package.json"
-    },
-    {
-      "path": "node_modules/@grpc/proto-loader/package.json"
-    },
-    {
-      "path": "node_modules/@grpc/grpc-js/package.json"
-    },
-    {
-      "path": "node_modules/test-exclude/package.json"
-    },
-    {
-      "path": "node_modules/es6-promisify/package.json"
-    },
-    {
-      "path": "node_modules/p-try/package.json"
-    },
-    {
-      "path": "node_modules/optionator/package.json"
-    },
-    {
-      "path": "node_modules/requizzle/package.json"
-    },
-    {
-      "path": "node_modules/c8/package.json"
-    },
-    {
-      "path": "node_modules/fast-levenshtein/package.json"
-    },
-    {
-      "path": "node_modules/statuses/package.json"
-    },
-    {
-      "path": "node_modules/semver-diff/package.json"
-    },
-    {
-      "path": "node_modules/semver-diff/node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/signal-exit/package.json"
-    },
-    {
-      "path": "node_modules/jsdoc/package.json"
-    },
-    {
-      "path": "node_modules/jsdoc/node_modules/escape-string-regexp/package.json"
-    },
-    {
-      "path": "node_modules/duplexify/package.json"
-    },
-    {
-      "path": "node_modules/object-is/package.json"
-    },
-    {
-      "path": "node_modules/tslib/package.json"
-    },
-    {
-      "path": "node_modules/extend/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-context-reducer-ast/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-context-reducer-ast/node_modules/acorn/package.json"
-    },
-    {
-      "path": "node_modules/css-what/package.json"
-    },
-    {
-      "path": "node_modules/power-assert-renderer-comparison/package.json"
-    },
-    {
-      "path": "node_modules/ecdsa-sig-formatter/package.json"
-    },
-    {
-      "path": "node_modules/markdown-it/package.json"
-    },
-    {
-      "path": "node_modules/domelementtype/package.json"
-    },
-    {
-      "path": "node_modules/ci-info/package.json"
-    },
-    {
-      "path": "node_modules/@types/color-name/package.json"
-    },
-    {
-      "path": "node_modules/@types/is-windows/package.json"
-    },
-    {
-      "path": "node_modules/@types/istanbul-lib-coverage/package.json"
-    },
-    {
-      "path": "node_modules/@types/node/package.json"
-    },
-    {
-      "path": "node_modules/@types/long/package.json"
-    },
-    {
-      "path": "node_modules/serve-static/package.json"
-    },
-    {
-      "path": "node_modules/make-dir/package.json"
-    },
-    {
-      "path": "node_modules/make-dir/node_modules/semver/package.json"
-    },
-    {
-      "path": "node_modules/esquery/package.json"
-    },
-    {
-      "path": "node_modules/emoji-regex/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg/package.json"
-    },
-    {
-      "path": "node_modules/fast-diff/package.json"
-    },
-    {
-      "path": "node_modules/xtend/package.json"
-    },
-    {
-      "path": "node_modules/resolve/package.json"
-    },
-    {
-      "path": "node_modules/lowercase-keys/package.json"
-    },
-    {
-      "path": "node_modules/is-fullwidth-code-point/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg-up/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg-up/node_modules/locate-path/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg-up/node_modules/find-up/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg-up/node_modules/path-exists/package.json"
-    },
-    {
-      "path": "node_modules/read-pkg-up/node_modules/p-locate/package.json"
-    },
-    {
-      "path": "node_modules/p-cancelable/package.json"
+      "path": "node_modules/@sindresorhus/is/package.json"
     },
     {
       "path": "node_modules/acorn-jsx/package.json"
     },
     {
-      "path": "node_modules/power-assert-context-traversal/package.json"
+      "path": "node_modules/mute-stream/package.json"
     },
     {
-      "path": "node_modules/long/package.json"
+      "path": "node_modules/p-queue/package.json"
     },
     {
-      "path": "node_modules/d/package.json"
+      "path": "node_modules/cli-cursor/package.json"
     },
     {
-      "path": "node_modules/debug/package.json"
+      "path": "node_modules/bignumber.js/package.json"
     },
     {
-      "path": "node_modules/mimic-fn/package.json"
+      "path": "node_modules/wrap-ansi/package.json"
+    },
+    {
+      "path": "node_modules/require-directory/package.json"
+    },
+    {
+      "path": "node_modules/uuid/package.json"
+    },
+    {
+      "path": "node_modules/c8/package.json"
+    },
+    {
+      "path": "node_modules/eslint-config-prettier/package.json"
+    },
+    {
+      "path": "node_modules/function-bind/package.json"
+    },
+    {
+      "path": "node_modules/istanbul-lib-report/package.json"
+    },
+    {
+      "path": "node_modules/object-inspect/package.json"
+    },
+    {
+      "path": "node_modules/entities/package.json"
+    },
+    {
+      "path": "node_modules/define-properties/package.json"
+    },
+    {
+      "path": "node_modules/has-yarn/package.json"
+    },
+    {
+      "path": "node_modules/min-indent/package.json"
+    },
+    {
+      "path": "node_modules/underscore/package.json"
+    },
+    {
+      "path": "node_modules/power-assert-renderer-diagram/package.json"
+    },
+    {
+      "path": "node_modules/browser-stdout/package.json"
+    },
+    {
+      "path": "node_modules/registry-url/package.json"
+    },
+    {
+      "path": "node_modules/which/package.json"
+    },
+    {
+      "path": "node_modules/@babel/highlight/package.json"
+    },
+    {
+      "path": "node_modules/@babel/code-frame/package.json"
+    },
+    {
+      "path": "node_modules/@babel/parser/package.json"
+    },
+    {
+      "path": "node_modules/strip-indent/package.json"
+    },
+    {
+      "path": "node_modules/map-obj/package.json"
+    },
+    {
+      "path": "node_modules/duplexer3/package.json"
     },
     {
       "path": "node_modules/isexe/package.json"
     },
     {
-      "path": "node_modules/multi-stage-sourcemap/package.json"
+      "path": "node_modules/klaw/package.json"
     },
     {
-      "path": "node_modules/multi-stage-sourcemap/node_modules/source-map/package.json"
+      "path": "node_modules/inherits/package.json"
     },
     {
-      "path": "node_modules/uc.micro/package.json"
+      "path": "node_modules/lodash.at/package.json"
     },
     {
-      "path": "node_modules/fs.realpath/package.json"
+      "path": "node_modules/pump/package.json"
     },
     {
-      "path": "node_modules/eslint-plugin-prettier/package.json"
+      "path": "node_modules/spdx-license-ids/package.json"
     },
     {
-      "path": "node_modules/yargs/package.json"
+      "path": "node_modules/depd/package.json"
     },
     {
-      "path": "node_modules/yargs/node_modules/locate-path/package.json"
+      "path": "node_modules/import-lazy/package.json"
     },
     {
-      "path": "node_modules/yargs/node_modules/find-up/package.json"
+      "path": "node_modules/string-width/package.json"
     },
     {
-      "path": "node_modules/yargs/node_modules/path-exists/package.json"
+      "path": "node_modules/lines-and-columns/package.json"
     },
     {
-      "path": "node_modules/yargs/node_modules/p-locate/package.json"
+      "path": "node_modules/astral-regex/package.json"
     },
     {
-      "path": "node_modules/nice-try/package.json"
+      "path": "node_modules/rimraf/package.json"
     },
     {
-      "path": "node_modules/has/package.json"
+      "path": "node_modules/restore-cursor/package.json"
     },
     {
-      "path": "node_modules/xmlcreate/package.json"
+      "path": "node_modules/yallist/package.json"
     },
     {
-      "path": "node_modules/escallmatch/package.json"
+      "path": "node_modules/emoji-regex/package.json"
     },
     {
-      "path": "node_modules/escallmatch/node_modules/esprima/package.json"
+      "path": "system-test/automl.js"
     },
     {
-      "path": "node_modules/get-caller-file/package.json"
+      "path": ".git/config"
     },
     {
-      "path": "node_modules/jwa/package.json"
+      "path": ".git/index"
+    },
+    {
+      "path": ".git/packed-refs"
+    },
+    {
+      "path": ".git/HEAD"
+    },
+    {
+      "path": ".git/refs/heads/autosynth"
+    },
+    {
+      "path": ".git/refs/heads/master"
+    },
+    {
+      "path": ".git/refs/remotes/origin/HEAD"
+    },
+    {
+      "path": ".git/objects/pack/pack-0755c1777af781f6eca60ed6df2a8213556f506c.idx"
+    },
+    {
+      "path": ".git/objects/pack/pack-0755c1777af781f6eca60ed6df2a8213556f506c.pack"
+    },
+    {
+      "path": ".git/logs/HEAD"
+    },
+    {
+      "path": ".git/logs/refs/heads/autosynth"
+    },
+    {
+      "path": ".git/logs/refs/heads/master"
+    },
+    {
+      "path": ".git/logs/refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "src/index.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/extra_proto_list.json"
+    },
+    {
+      "path": "src/v1/auto_ml_proto_list.json"
+    },
+    {
+      "path": "src/v1/prediction_service_client.js"
+    },
+    {
+      "path": "src/v1/index.js"
+    },
+    {
+      "path": "src/v1/auto_ml_client_config.json"
+    },
+    {
+      "path": "src/v1/prediction_service_client_config.json"
+    },
+    {
+      "path": "src/v1/prediction_service_proto_list.json"
+    },
+    {
+      "path": "src/v1/auto_ml_client.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_classification.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_image.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_service.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_segment.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_extraction.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_sentiment.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_dataset.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_model_evaluation.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_payload.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_translation.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_model.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_prediction_service.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_detection.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_io.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_data_items.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_geometry.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_spec.js"
+    },
+    {
+      "path": "src/v1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_client.js"
+    },
+    {
+      "path": "src/v1beta1/index.js"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_client_config.json"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_client_config.json"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_client.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_classification.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_image.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_column_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_video.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_segment.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_extraction.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_sentiment.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_temporal.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_types.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_dataset.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_regression.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model_evaluation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_stats.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_payload.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_tables.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_translation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_ranges.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_prediction_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_table_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_detection.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_io.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_items.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_geometry.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/geometry.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/data_items.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/image.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_segment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/translation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/classification.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/annotation_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/detection.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/model.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_extraction.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/io.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/prediction_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/annotation_payload.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/model_evaluation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/dataset.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_sentiment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/operations.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_types.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/geometry.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_items.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/regression.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/video.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/image.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/table_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/temporal.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_segment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/translation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/classification.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/annotation_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/detection.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/model.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_extraction.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/io.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/prediction_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/annotation_payload.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/model_evaluation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_stats.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/column_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/ranges.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/tables.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/dataset.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_sentiment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/operations.proto"
+    },
+    {
+      "path": "__pycache__/synth.cpython-36.pyc"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/export_dataset.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_predict.js"
+    },
+    {
+      "path": "samples/translate_create_dataset.js"
+    },
+    {
+      "path": "samples/import_dataset.js"
+    },
+    {
+      "path": "samples/translate_predict.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_create_model.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_create_dataset.js"
+    },
+    {
+      "path": "samples/delete_dataset.js"
+    },
+    {
+      "path": "samples/list_datasets.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_create_dataset.js"
+    },
+    {
+      "path": "samples/vision_classification_deploy_model_node_count.js"
+    },
+    {
+      "path": "samples/get_dataset.js"
+    },
+    {
+      "path": "samples/translate_create_model.js"
+    },
+    {
+      "path": "samples/vision_classification_create_model.js"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_create_model.js"
+    },
+    {
+      "path": "samples/vision_classification_predict.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_predict.js"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/vision_classification_create_dataset.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-operations-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/beta/setEndpoint.js"
+    },
+    {
+      "path": "samples/vision/automlVisionModel.js"
+    },
+    {
+      "path": "samples/vision/automlVisionDataset.js"
+    },
+    {
+      "path": "samples/vision/automlVisionPredict.js"
+    },
+    {
+      "path": "samples/vision/resources/testImage2.jpg"
+    },
+    {
+      "path": "samples/vision/resources/flowerTraindata20lines.csv"
+    },
+    {
+      "path": "samples/vision/resources/testImage.jpg"
+    },
+    {
+      "path": "samples/vision/resources/songbird.jpg"
+    },
+    {
+      "path": "samples/vision/object-detection/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/resources/input.txt"
+    },
+    {
+      "path": "samples/resources/test.png"
+    },
+    {
+      "path": "samples/tables/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-table-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-evaluated-examples.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-gcs-source-gcs-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-bq-source-gcs-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/update-column-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-data-to-bigquery.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-gcs-source-bq-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-data-to-csv.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-column-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-column-specs.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-table-specs.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/update-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-bq-source-bq-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/prediction/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_create_model.test.js"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/translate_predict.test.js"
+    },
+    {
+      "path": "samples/test/list_datasets.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/setEndpoint.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_predict.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityDataSet.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVision.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/get_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_predict.test.js"
+    },
+    {
+      "path": "samples/test/translate_create_model.test.js"
+    },
+    {
+      "path": "samples/test/automlTranslation.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageSentimentPrediction.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLangaugeSentimentDataSet.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/delete_dataset.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_deploy_model_node_count.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_create_model.test.js"
+    },
+    {
+      "path": "samples/test/translate_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityPrediction.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/export_dataset.test.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageSentimentModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_create_model.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_predict.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/import_dataset.test.js"
+    },
+    {
+      "path": "test/gapic-v1.js"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "test/gapic-v1beta1.js"
     }
   ]
 }
