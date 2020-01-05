@@ -136,6 +136,7 @@ describe('Compute', () => {
         },
         maxNumReplicas: 5,
         minNumReplicas: 1,
+        mode: 'ON',
       });
     });
 
