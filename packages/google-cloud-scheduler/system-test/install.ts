@@ -18,6 +18,7 @@
 
 import {packNTest} from 'pack-n-play';
 import {readFileSync} from 'fs';
+import {describe, it} from 'mocha';
 
 describe('typescript consumer tests', () => {
   it('should have correct type signature for typescript users', async function() {
