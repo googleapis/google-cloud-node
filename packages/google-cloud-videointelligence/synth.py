@@ -19,7 +19,7 @@ for version in versions:
     )
 
     # skip index, protos, package.json, and README.md
-    s.copy(library, excludes=["package.json", "README.md", "src/index.js"])
+    s.copy(library, excludes=["package.json", "README.md", "src/index.js", "smoke-test/video_intelligence_service_smoke_test.js"])
 
 #
 # Generator emitted unused helper mockSimpleGrpcMethod, add a temporary
