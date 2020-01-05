@@ -29,6 +29,7 @@ const VERSION = require('../../package.json').version;
  * * KeyRing
  * * CryptoKey
  * * CryptoKeyVersion
+ * * ImportJob
  *
  * If you are using manual gRPC libraries, see
  * [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
@@ -340,10 +341,15 @@ class KeyManagementServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order.  For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -458,10 +464,15 @@ class KeyManagementServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order.  For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -509,10 +520,15 @@ class KeyManagementServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -627,10 +643,15 @@ class KeyManagementServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -682,10 +703,15 @@ class KeyManagementServiceClient {
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -804,10 +830,15 @@ class KeyManagementServiceClient {
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -859,10 +890,15 @@ class KeyManagementServiceClient {
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -985,10 +1021,15 @@ class KeyManagementServiceClient {
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {string} [request.filter]
-   *   Optional. Only include resources that match the filter in the response.
+   *   Optional. Only include resources that match the filter in the response. For
+   *   more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {string} [request.orderBy]
    *   Optional. Specify how the results should be sorted. If not specified, the
-   *   results will be sorted in the default order.
+   *   results will be sorted in the default order. For more information, see
+   *   [Sorting and filtering list
+   *   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1027,7 +1068,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the KeyRing to get.
+   *   Required. The name of the KeyRing to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1081,7 +1122,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the ImportJob to get.
+   *   Required. The name of the ImportJob to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1136,7 +1177,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKey to get.
+   *   Required. The name of the CryptoKey to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1190,7 +1231,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKeyVersion to get.
+   *   Required. The name of the CryptoKeyVersion to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1250,7 +1291,7 @@ class KeyManagementServiceClient {
    *   Required. It must be unique within a location and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {Object} request.keyRing
-   *   A KeyRing with initial field values.
+   *   Required. A KeyRing with initial field values.
    *
    *   This object should have the same structure as [KeyRing]{@link google.cloud.kms.v1.KeyRing}
    * @param {Object} [options]
@@ -1399,7 +1440,7 @@ class KeyManagementServiceClient {
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
    * @param {Object} request.cryptoKey
-   *   A CryptoKey with initial field values.
+   *   Required. A CryptoKey with initial field values.
    *
    *   This object should have the same structure as [CryptoKey]{@link google.cloud.kms.v1.CryptoKey}
    * @param {boolean} [request.skipInitialVersionCreation]
@@ -1488,7 +1529,7 @@ class KeyManagementServiceClient {
    *   Required. The name of the CryptoKey associated with
    *   the CryptoKeyVersions.
    * @param {Object} request.cryptoKeyVersion
-   *   A CryptoKeyVersion with initial field values.
+   *   Required. A CryptoKeyVersion with initial field values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} [options]
@@ -1586,6 +1627,11 @@ class KeyManagementServiceClient {
    *     </li>
    *   </ol>
    *
+   *   If importing symmetric key material, it is expected that the unwrapped
+   *   key contains plain bytes. If importing asymmetric key material, it is
+   *   expected that the unwrapped key is in PKCS#8-encoded DER format (the
+   *   PrivateKeyInfo structure from RFC 5208).
+   *
    *   This format is the same as the format produced by PKCS#11 mechanism
    *   CKM_RSA_AES_KEY_WRAP.
    * @param {Object} [options]
@@ -1652,11 +1698,11 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.cryptoKey
-   *   CryptoKey with updated values.
+   *   Required. CryptoKey with updated values.
    *
    *   This object should have the same structure as [CryptoKey]{@link google.cloud.kms.v1.CryptoKey}
    * @param {Object} request.updateMask
-   *   Required list of fields to be updated in this request.
+   *   Required. List of fields to be updated in this request.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -1723,11 +1769,11 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.cryptoKeyVersion
-   *   CryptoKeyVersion with updated values.
+   *   Required. CryptoKeyVersion with updated values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} request.updateMask
-   *   Required list of fields to be updated in this request.
+   *   Required. List of fields to be updated in this request.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -1809,7 +1855,7 @@ class KeyManagementServiceClient {
    *   plaintext and additional_authenticated_data fields must be no larger than
    *   8KiB.
    * @param {Buffer} [request.additionalAuthenticatedData]
-   *   Optional data that, if specified, must also be provided during decryption
+   *   Optional. Optional data that, if specified, must also be provided during decryption
    *   through DecryptRequest.additional_authenticated_data.
    *
    *   The maximum size depends on the key version's
@@ -1883,7 +1929,7 @@ class KeyManagementServiceClient {
    *   Required. The encrypted data originally returned in
    *   EncryptResponse.ciphertext.
    * @param {Buffer} [request.additionalAuthenticatedData]
-   *   Optional data that must match the data originally supplied in
+   *   Optional. Optional data that must match the data originally supplied in
    *   EncryptRequest.additional_authenticated_data.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1945,9 +1991,9 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKey to update.
+   *   Required. The resource name of the CryptoKey to update.
    * @param {string} request.cryptoKeyVersionId
-   *   The id of the child CryptoKeyVersion to use as primary.
+   *   Required. The id of the child CryptoKeyVersion to use as primary.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2021,7 +2067,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKeyVersion to destroy.
+   *   Required. The resource name of the CryptoKeyVersion to destroy.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2085,7 +2131,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKeyVersion to restore.
+   *   Required. The resource name of the CryptoKeyVersion to restore.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -2146,7 +2192,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKeyVersion public key to
+   *   Required. The name of the CryptoKeyVersion public key to
    *   get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2330,6 +2376,9 @@ class KeyManagementServiceClient {
   /**
    * Sets the access control policy on the specified resource. Replaces
    * any existing policy.
+   *
+   * Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and
+   * PERMISSION_DENIED
    *
    * @param {Object} request
    *   The request object that will be sent.

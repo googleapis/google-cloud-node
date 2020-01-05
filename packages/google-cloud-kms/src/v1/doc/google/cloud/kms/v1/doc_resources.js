@@ -54,14 +54,14 @@ const KeyRing = {
  *   The CryptoKey's primary version can be updated via
  *   UpdateCryptoKeyPrimaryVersion.
  *
- *   All keys with purpose
- *   ENCRYPT_DECRYPT have a
+ *   Keys with purpose
+ *   ENCRYPT_DECRYPT may have a
  *   primary. For other keys, this field will be omitted.
  *
  *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
  *
  * @property {number} purpose
- *   The immutable purpose of this CryptoKey.
+ *   Immutable. The immutable purpose of this CryptoKey.
  *
  *   The number should be among the values of [CryptoKeyPurpose]{@link google.cloud.kms.v1.CryptoKeyPurpose}
  *
@@ -89,7 +89,8 @@ const KeyRing = {
  *
  * @property {Object} rotationPeriod
  *   next_rotation_time will be advanced by this period when the service
- *   automatically rotates a key. Must be at least one day.
+ *   automatically rotates a key. Must be at least 24 hours and at most
+ *   876,000 hours.
  *
  *   If rotation_period is set, next_rotation_time must also be set.
  *
@@ -591,14 +592,12 @@ const PublicKey = {
  *   `projects/* /locations/* /keyRings/* /importJobs/*`.
  *
  * @property {number} importMethod
- *   Required and immutable. The wrapping method to be used for incoming
- *   key material.
+ *   Required. Immutable. The wrapping method to be used for incoming key material.
  *
  *   The number should be among the values of [ImportMethod]{@link google.cloud.kms.v1.ImportMethod}
  *
  * @property {number} protectionLevel
- *   Required and immutable. The protection level of the ImportJob. This
- *   must match the
+ *   Required. Immutable. The protection level of the ImportJob. This must match the
  *   protection_level of the
  *   version_template on the CryptoKey you
  *   attempt to import into.
@@ -768,5 +767,10 @@ const ProtectionLevel = {
   /**
    * Crypto operations are performed in a Hardware Security Module.
    */
-  HSM: 2
+  HSM: 2,
+
+  /**
+   * Crypto operations are performed by an external key manager.
+   */
+  EXTERNAL: 3
 };

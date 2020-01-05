@@ -27,35 +27,40 @@
                           "requestType": "ListKeyRingsRequest",
                           "responseType": "ListKeyRingsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyRings"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/keyRings",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "ListCryptoKeys": {
                           "requestType": "ListCryptoKeysRequest",
                           "responseType": "ListCryptoKeysResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "ListCryptoKeyVersions": {
                           "requestType": "ListCryptoKeyVersionsRequest",
                           "responseType": "ListCryptoKeyVersionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "ListImportJobs": {
                           "requestType": "ListImportJobsRequest",
                           "responseType": "ListImportJobsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetKeyRing": {
                           "requestType": "GetKeyRingRequest",
                           "responseType": "KeyRing",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetCryptoKey": {
@@ -91,7 +96,8 @@
                           "responseType": "KeyRing",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/keyRings",
-                            "(google.api.http).body": "key_ring"
+                            "(google.api.http).body": "key_ring",
+                            "(google.api.method_signature)": "parent,key_ring_id,key_ring"
                           }
                         },
                         "CreateCryptoKey": {
@@ -99,7 +105,8 @@
                           "responseType": "CryptoKey",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/cryptoKeys",
-                            "(google.api.http).body": "crypto_key"
+                            "(google.api.http).body": "crypto_key",
+                            "(google.api.method_signature)": "parent,crypto_key_id,crypto_key"
                           }
                         },
                         "CreateCryptoKeyVersion": {
@@ -107,7 +114,8 @@
                           "responseType": "CryptoKeyVersion",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions",
-                            "(google.api.http).body": "crypto_key_version"
+                            "(google.api.http).body": "crypto_key_version",
+                            "(google.api.method_signature)": "parent,crypto_key_version"
                           }
                         },
                         "ImportCryptoKeyVersion": {
@@ -123,7 +131,8 @@
                           "responseType": "ImportJob",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs",
-                            "(google.api.http).body": "import_job"
+                            "(google.api.http).body": "import_job",
+                            "(google.api.method_signature)": "parent,import_job_id,import_job"
                           }
                         },
                         "UpdateCryptoKey": {
@@ -131,7 +140,8 @@
                           "responseType": "CryptoKey",
                           "options": {
                             "(google.api.http).patch": "/v1/{crypto_key.name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
-                            "(google.api.http).body": "crypto_key"
+                            "(google.api.http).body": "crypto_key",
+                            "(google.api.method_signature)": "crypto_key,update_mask"
                           }
                         },
                         "UpdateCryptoKeyVersion": {
@@ -139,7 +149,8 @@
                           "responseType": "CryptoKeyVersion",
                           "options": {
                             "(google.api.http).patch": "/v1/{crypto_key_version.name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
-                            "(google.api.http).body": "crypto_key_version"
+                            "(google.api.http).body": "crypto_key_version",
+                            "(google.api.method_signature)": "crypto_key_version,update_mask"
                           }
                         },
                         "Encrypt": {
@@ -147,7 +158,8 @@
                           "responseType": "EncryptResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/**}:encrypt",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,plaintext"
                           }
                         },
                         "Decrypt": {
@@ -155,7 +167,8 @@
                           "responseType": "DecryptResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:decrypt",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ciphertext"
                           }
                         },
                         "AsymmetricSign": {
@@ -163,7 +176,8 @@
                           "responseType": "AsymmetricSignResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricSign",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,digest"
                           }
                         },
                         "AsymmetricDecrypt": {
@@ -171,7 +185,8 @@
                           "responseType": "AsymmetricDecryptResponse",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:asymmetricDecrypt",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ciphertext"
                           }
                         },
                         "UpdateCryptoKeyPrimaryVersion": {
@@ -179,7 +194,8 @@
                           "responseType": "CryptoKey",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}:updatePrimaryVersion",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,crypto_key_version_id"
                           }
                         },
                         "DestroyCryptoKeyVersion": {
@@ -187,7 +203,8 @@
                           "responseType": "CryptoKeyVersion",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:destroy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "RestoreCryptoKeyVersion": {
@@ -195,7 +212,8 @@
                           "responseType": "CryptoKeyVersion",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:restore",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         }
                       }
@@ -204,23 +222,39 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -228,15 +262,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "versionView": {
                           "type": "CryptoKeyVersion.CryptoKeyVersionView",
@@ -244,11 +288,17 @@
                         },
                         "filter": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -256,15 +306,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "view": {
                           "type": "CryptoKeyVersion.CryptoKeyVersionView",
@@ -272,11 +332,17 @@
                         },
                         "filter": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -284,23 +350,39 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -376,7 +458,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         }
                       }
                     },
@@ -384,7 +470,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         }
                       }
                     },
@@ -392,7 +482,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         }
                       }
                     },
@@ -400,7 +494,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         }
                       }
                     },
@@ -408,7 +506,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
+                          }
                         }
                       }
                     },
@@ -416,15 +518,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "keyRingId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "keyRing": {
                           "type": "KeyRing",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -432,15 +544,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         },
                         "cryptoKeyId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "cryptoKey": {
                           "type": "CryptoKey",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "skipInitialVersionCreation": {
                           "type": "bool",
@@ -452,11 +574,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "cryptoKeyVersion": {
                           "type": "CryptoKeyVersion",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -471,15 +600,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "algorithm": {
                           "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "importJob": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "rsaAesWrappedKey": {
                           "type": "bytes",
@@ -491,15 +630,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/KeyRing"
+                          }
                         },
                         "importJobId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "importJob": {
                           "type": "ImportJob",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -507,11 +656,18 @@
                       "fields": {
                         "cryptoKey": {
                           "type": "CryptoKey",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -519,11 +675,18 @@
                       "fields": {
                         "cryptoKeyVersion": {
                           "type": "CryptoKeyVersion",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -531,15 +694,25 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "plaintext": {
                           "type": "bytes",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "additionalAuthenticatedData": {
                           "type": "bytes",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -547,15 +720,25 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "ciphertext": {
                           "type": "bytes",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "additionalAuthenticatedData": {
                           "type": "bytes",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -563,11 +746,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         },
                         "digest": {
                           "type": "Digest",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -575,11 +765,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         },
                         "ciphertext": {
                           "type": "bytes",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -623,11 +820,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
                         },
                         "cryptoKeyVersionId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -635,7 +839,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         }
                       }
                     },
@@ -643,7 +851,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         }
                       }
                     },
@@ -681,18 +893,32 @@
                       }
                     },
                     "KeyRing": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
                     "CryptoKey": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKey",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+                      },
                       "oneofs": {
                         "rotationSchedule": {
                           "oneof": [
@@ -703,19 +929,31 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "primary": {
                           "type": "CryptoKeyVersion",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "purpose": {
                           "type": "CryptoKeyPurpose",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "nextRotationTime": {
                           "type": "google.protobuf.Timestamp",
@@ -754,7 +992,10 @@
                         },
                         "algorithm": {
                           "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -762,11 +1003,17 @@
                       "fields": {
                         "format": {
                           "type": "AttestationFormat",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "content": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -780,10 +1027,17 @@
                       }
                     },
                     "CryptoKeyVersion": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "CryptoKeyVersionState",
@@ -791,43 +1045,73 @@
                         },
                         "protectionLevel": {
                           "type": "ProtectionLevel",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "algorithm": {
                           "type": "CryptoKeyVersionAlgorithm",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "attestation": {
                           "type": "KeyOperationAttestation",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "generateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "destroyTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "destroyEventTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "importJob": {
                           "type": "string",
-                          "id": 14
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "importTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 15
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "importFailureReason": {
                           "type": "string",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -883,54 +1167,81 @@
                         }
                       }
                     },
-                    "ProtectionLevel": {
-                      "values": {
-                        "PROTECTION_LEVEL_UNSPECIFIED": 0,
-                        "SOFTWARE": 1,
-                        "HSM": 2
-                      }
-                    },
                     "ImportJob": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/ImportJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "importMethod": {
                           "type": "ImportMethod",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "protectionLevel": {
                           "type": "ProtectionLevel",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "generateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "expireTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "expireEventTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "state": {
                           "type": "ImportJobState",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "publicKey": {
                           "type": "WrappingPublicKey",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "attestation": {
                           "type": "KeyOperationAttestation",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -958,6 +1269,14 @@
                           }
                         }
                       }
+                    },
+                    "ProtectionLevel": {
+                      "values": {
+                        "PROTECTION_LEVEL_UNSPECIFIED": 0,
+                        "SOFTWARE": 1,
+                        "HSM": 2,
+                        "EXTERNAL": 3
+                      }
                     }
                   }
                 }
@@ -969,7 +1288,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1077,6 +1396,88 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },
