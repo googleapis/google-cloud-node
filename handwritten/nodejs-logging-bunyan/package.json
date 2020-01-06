@@ -76,7 +76,7 @@
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.0",
     "post-install-check": "0.0.1",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6",
