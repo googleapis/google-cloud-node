@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.0...v1.3.1) (2020-01-06)
+
+
+### Bug Fixes
+
+* increase timeout from 20s to 60s ([#35](https://www.github.com/googleapis/nodejs-cloudbuild/issues/35)) ([b9d7f10](https://www.github.com/googleapis/nodejs-cloudbuild/commit/b9d7f1089bd3dc0f3d53f54015b12bd2bf036c62))
+* wait for client before checking for terminate ([35c1905](https://www.github.com/googleapis/nodejs-cloudbuild/commit/35c19050bd7594301df14ffa182fc6e6e73c1d64))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.2.0...v1.3.0) (2019-12-11)
 
 
