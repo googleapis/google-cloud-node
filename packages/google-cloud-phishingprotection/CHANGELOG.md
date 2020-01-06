@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.4.0...v1.5.0) (2020-01-03)
+
+
+### Features
+
+* move to typescript code generation ([#66](https://www.github.com/googleapis/nodejs-phishing-protection/issues/66)) ([9a8ee35](https://www.github.com/googleapis/nodejs-phishing-protection/commit/9a8ee35359e586ecf49b4ab67ade5705580fa496))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.3.2...v1.4.0) (2019-12-05)
 
 
