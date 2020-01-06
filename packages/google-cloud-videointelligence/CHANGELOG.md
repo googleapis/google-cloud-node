@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.6.4](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.3...v2.6.4) (2020-01-06)
+
+
+### Bug Fixes
+
+* no need to have smoke test here ([4922079](https://www.github.com/googleapis/nodejs-video-intelligence/commit/49220790cd78a3079efbb0705472dd52f59f04ff))
+
 ### [2.6.3](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.2...v2.6.3) (2019-12-05)
 
 
