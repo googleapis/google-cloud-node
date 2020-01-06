@@ -1,6 +1,6 @@
 {
   "name": "video",
-  "name_pretty": "Google Cloud Video Intelligence API",
+  "name_pretty": "Google Cloud Video Intelligence",
   "product_documentation": "https://cloud.google.com/video-intelligence",
   "client_documentation": "https://googleapis.dev/nodejs/video/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5084810",
