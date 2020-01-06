@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.5](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.4...v1.4.5) (2020-01-06)
+
+
+### Bug Fixes
+
+* overhauled quickstart ([#280](https://www.github.com/googleapis/nodejs-dataproc/issues/280)) ([6d2fb1e](https://www.github.com/googleapis/nodejs-dataproc/commit/6d2fb1ea4bf3bced3ca7a91300e65d343c18a678))
+
 ### [1.4.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.3...v1.4.4) (2019-12-05)
 
 
