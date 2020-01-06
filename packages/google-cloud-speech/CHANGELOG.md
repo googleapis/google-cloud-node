@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.5.4](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.3...v3.5.4) (2020-01-05)
+
+
+### Bug Fixes
+
+* better client close(), update .nycrc, require mocha explicitly ([824e75c](https://www.github.com/googleapis/nodejs-speech/commit/824e75cf8688b7ea22e6abda3167cabd7923bc5b))
+* increase timeout from 20s to 60s ([#490](https://www.github.com/googleapis/nodejs-speech/issues/490)) ([d822f90](https://www.github.com/googleapis/nodejs-speech/commit/d822f9098ed97c9ef45d93e09134d9a16d6ea11e))
+
 ### [3.5.3](https://www.github.com/googleapis/nodejs-speech/compare/v3.5.2...v3.5.3) (2019-12-12)
 
 
