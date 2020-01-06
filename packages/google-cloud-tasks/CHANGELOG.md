@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.6.1...v1.7.0) (2020-01-05)
+
+
+### Features
+
+* move library to typescript code generation ([#317](https://www.github.com/googleapis/nodejs-tasks/issues/317)) ([7dda287](https://www.github.com/googleapis/nodejs-tasks/commit/7dda2873c93295ccf19c6dc66daf4625cbe115bb))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([124594b](https://www.github.com/googleapis/nodejs-tasks/commit/124594b3f00287c3a6f33c158aa4117dd03c52ca))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.6.0...v1.6.1) (2019-11-18)
 
 
