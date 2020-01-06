@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.3...v1.4.0) (2020-01-05)
+
+
+### Features
+
+* add plural and singular resource descriptor ([564d3fc](https://www.github.com/googleapis/nodejs-scheduler/commit/564d3fcc61192400f52a65dfdb661a5898e8441b))
+* move to typescript code generation ([#167](https://www.github.com/googleapis/nodejs-scheduler/issues/167)) ([b30417d](https://www.github.com/googleapis/nodejs-scheduler/commit/b30417d8935212453642a2db59338976c799f751))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([9c70dba](https://www.github.com/googleapis/nodejs-scheduler/commit/9c70dbab336711268fc3d7e37a4000b8a69cfc47))
+* better client close(), update .nycrc, require mocha explicitly ([edce92c](https://www.github.com/googleapis/nodejs-scheduler/commit/edce92c64c036563d3d590ce620740bb12a2493b))
+
 ### [1.3.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.2...v1.3.3) (2019-11-15)
 
 
