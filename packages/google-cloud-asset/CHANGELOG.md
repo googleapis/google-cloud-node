@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.5.0...v1.6.0) (2020-01-06)
+
+
+### Features
+
+* **samples:** update real time feed api sample code to use v1 API surface ([f15d2e2](https://www.github.com/googleapis/nodejs-asset/commit/f15d2e2cb4ff56bcc0fe5d83a090f5c92e4b25df))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.4.2...v1.5.0) (2019-12-06)
 
 
