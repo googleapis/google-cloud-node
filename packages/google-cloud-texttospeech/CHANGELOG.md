@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.1...v2.1.2) (2020-01-03)
+
+
+### Bug Fixes
+
+* "client already closed" error fires earlier ([41b39bc](https://www.github.com/googleapis/nodejs-text-to-speech/commit/41b39bce3a598e6034a4b63c122b1ce89ddec5b5))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.0...v2.1.1) (2019-12-30)
 
 
