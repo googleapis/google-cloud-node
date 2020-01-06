@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.7.0](https://www.github.com/googleapis/nodejs-language/compare/v3.6.3...v3.7.0) (2020-01-03)
+
+
+### Features
+
+* move library to typescript code generation ([#338](https://www.github.com/googleapis/nodejs-language/issues/338)) ([8317b02](https://www.github.com/googleapis/nodejs-language/commit/8317b02ad94724b3eee93895131e89cc9dc1e5cd))
+
+
+### Bug Fixes
+
+* closing a client twice throws error earlier ([9bf7e7c](https://www.github.com/googleapis/nodejs-language/commit/9bf7e7cbe0e34bbb49f920882a06e6739e7075d9))
+
 ### [3.6.3](https://www.github.com/googleapis/nodejs-language/compare/v3.6.2...v3.6.3) (2019-12-05)
 
 
