@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.4.0...v1.5.0) (2020-01-06)
+
+
+### Features
+
+* move to typescript code micro-generator ([#260](https://www.github.com/googleapis/nodejs-cloud-container/issues/260)) ([e2b189a](https://www.github.com/googleapis/nodejs-cloud-container/commit/e2b189a57ce1df87f9ad2123f48f665469812ad9))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([bcc3eaa](https://www.github.com/googleapis/nodejs-cloud-container/commit/bcc3eaa20adc266db2a641834cc5f8561e03b825))
+* better client close(), update .nycrc ([41c6125](https://www.github.com/googleapis/nodejs-cloud-container/commit/41c6125b56c61ebed870fdb0daa01c29dd71c832))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.3.1...v1.4.0) (2019-11-14)
 
 
