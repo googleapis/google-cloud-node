@@ -62,7 +62,7 @@
     "jsdoc-fresh": "^1.0.1",
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^1.5.0",
-    "mocha": "^6.0.0",
+    "mocha": "^7.0.0",
     "c8": "^7.0.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4",
