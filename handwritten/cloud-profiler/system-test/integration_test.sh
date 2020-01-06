@@ -20,7 +20,7 @@ COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REPO=$(git config --get remote.origin.url)
 export GCLOUD_TESTS_NODEJS_PROJECT_ID="cloud-profiler-e2e"
-export GCLOUD_TESTS_NODEJS_ZONE="us-east1-b"
+export GCLOUD_TESTS_NODEJS_ZONE="us-east4-b"
 export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 
 # Move test to go path.
