@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.4](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.3...v5.1.4) (2020-01-04)
+
+
+### Bug Fixes
+
+* better client close(), update .nycrc ([f476326](https://www.github.com/googleapis/nodejs-translate/commit/f476326b19e41253ba054cdfa5b7fcdfcb8dc1b2))
+* increase timeout from 20s to 60s ([#411](https://www.github.com/googleapis/nodejs-translate/issues/411)) ([40241fe](https://www.github.com/googleapis/nodejs-translate/commit/40241fea93a2315eae8344c58a9ffed87392eda4))
+* suppress unhandled promise rejection errors ([#417](https://www.github.com/googleapis/nodejs-translate/issues/417)) ([8eb6558](https://www.github.com/googleapis/nodejs-translate/commit/8eb655862b2d9c92f28f5b96eb1158dce3af704c))
+
 ### [5.1.3](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.2...v5.1.3) (2019-12-16)
 
 
