@@ -86,7 +86,7 @@
     "lodash.pick": "^4.4.0",
     "lodash.random": "^3.2.0",
     "lodash.without": "^4.4.0",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.0",
     "nock": "^11.3.2",
     "post-install-check": "0.0.1",
     "power-assert": "^1.6.1",
