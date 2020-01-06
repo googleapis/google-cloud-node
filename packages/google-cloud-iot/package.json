@@ -59,7 +59,7 @@
     "linkinator": "^1.5.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.7",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.0",
     "null-loader": "^3.0.0",
     "pack-n-play": "^1.0.0-2",
     "ts-loader": "^6.2.1",
