@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.1...v1.4.2) (2020-01-05)
+
+
+### Bug Fixes
+
+* better client close(), update .nycrc, require mocha explicitly ([f7367eb](https://www.github.com/googleapis/nodejs-redis/commit/f7367eb9ce5db152c0b68e65aa81a1baab842d2b))
+* increase timeout from 20s to 60s ([#247](https://www.github.com/googleapis/nodejs-redis/issues/247)) ([bc939d9](https://www.github.com/googleapis/nodejs-redis/commit/bc939d9da53d9a13da0f382797ce11c8c77b4371))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.0...v1.4.1) (2019-12-11)
 
 
