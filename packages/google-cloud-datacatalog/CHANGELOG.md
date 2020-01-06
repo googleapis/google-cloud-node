@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.0...v1.6.1) (2020-01-04)
+
+
+### Bug Fixes
+
+* better close() in client ([#87](https://www.github.com/googleapis/nodejs-datacatalog/issues/87)) ([fb41332](https://www.github.com/googleapis/nodejs-datacatalog/commit/fb41332b1601f8825c0a6a91565566339471a199))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.5.1...v1.6.0) (2020-01-02)
 
 
