@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.5.0...v1.6.0) (2020-01-05)
+
+
+### Features
+
+* move to typescript code generation ([#236](https://www.github.com/googleapis/nodejs-iot/issues/236)) ([beb3f18](https://www.github.com/googleapis/nodejs-iot/commit/beb3f18b32715b9cc72e7905bde8fffac58c494f))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([d5f5ff2](https://www.github.com/googleapis/nodejs-iot/commit/d5f5ff2bbc885b7bcc6798c3620643407782d8fc))
+* better client close(), update .nycrc, require mocha explicitly ([2ca2d37](https://www.github.com/googleapis/nodejs-iot/commit/2ca2d378bcafe0d821506e0696e973d14c91af31))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.4.0...v1.5.0) (2019-11-20)
 
 
