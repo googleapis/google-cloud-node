@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.0...v2.3.1) (2020-01-05)
+
+
+### Bug Fixes
+
+* proto files updated with proto annotations ([#182](https://www.github.com/googleapis/nodejs-security-center/issues/182)) ([010f3de](https://www.github.com/googleapis/nodejs-security-center/commit/010f3de382300787a3e383d5c55ec1f0dcc2536a))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.2.2...v2.3.0) (2019-12-10)
 
 
