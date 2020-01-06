@@ -77,7 +77,7 @@
     "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
     "linkinator": "^1.5.0",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.0",
     "post-install-check": "0.0.1",
     "prettier": "^1.18.2",
     "proxyquire": "^2.1.0",
