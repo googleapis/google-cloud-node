@@ -141,6 +141,20 @@ describe('Storage', () => {
       );
     });
 
+    it('should not modify options argument', () => {
+      const options = {
+        projectId: PROJECT_ID,
+      };
+      const expectedCalledWith = Object.assign({}, options, {
+        apiEndpoint: 'storage.googleapis.com',
+      });
+      storage = new Storage(options);
+      const calledWith = storage.calledWith_[1];
+      assert.notStrictEqual(calledWith, options);
+      assert.notDeepStrictEqual(calledWith, options);
+      assert.deepStrictEqual(calledWith, expectedCalledWith);
+    });
+
     it('should propagate the apiEndpoint option', () => {
       const apiEndpoint = 'some.fake.endpoint';
       storage = new Storage({

@@ -372,12 +372,14 @@ export class Storage extends Service {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'storage.googleapis.com';
+    options = Object.assign({}, options, {
+      apiEndpoint: options.apiEndpoint || 'storage.googleapis.com',
+    });
     const url =
       process.env.STORAGE_EMULATOR_HOST ||
       `https://${options.apiEndpoint}/storage/v1`;
     const config = {
-      apiEndpoint: options.apiEndpoint,
+      apiEndpoint: options.apiEndpoint!,
       baseUrl: url,
       projectIdRequired: false,
       scopes: [
