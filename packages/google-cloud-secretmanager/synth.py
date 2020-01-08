@@ -32,7 +32,7 @@ for version in versions:
     },
     proto_path='/google/cloud/secrets/v1beta1',
     version=version)
-s.copy(library, excludes=['package.json', 'README.md', '.github/release-please.yml'])
+s.copy(library, excludes=['package.json', 'README.md'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
