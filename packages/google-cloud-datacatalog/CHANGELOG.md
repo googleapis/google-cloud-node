@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.6.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.1...v1.6.2) (2020-01-08)
+
+
+### Bug Fixes
+
+* **build:** switch back to using autorelease for tagging ([#91](https://www.github.com/googleapis/nodejs-datacatalog/issues/91)) ([2a0f1f7](https://www.github.com/googleapis/nodejs-datacatalog/commit/2a0f1f7ccb62e1f6ac53acbf6eb14706228532c0))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.0...v1.6.1) (2020-01-04)
 
 
