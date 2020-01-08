@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,31 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """This script is used to synthesize generated parts of this library."""
-
 import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 import logging
-
 logging.basicConfig(level=logging.DEBUG)
-
-# run the gapic generator
-gapic = gcp.GAPICGenerator()
+# Run the gapic generator
+gapic = gcp.GAPICMicrogenerator()
+name = 'bigquerystorage'
 versions = ['v1beta1']
 for version in versions:
- library = gapic.node_library(
-   'bigquery_storage',
-   version,
-   config_path="/google/cloud/bigquery/storage/" "artman_bigquerystorage_v1beta1.yaml",
-   artman_output_name="bigquerystorage-v1beta1",
-   include_protos=True,)
- s.copy(library, excludes=[])
-
+    library = gapic.typescript_library(
+        name,
+        version,
+        proto_path=f'google/cloud/bigquery/storage/{version}',
+        generator_args={
+            'grpc-service-config': f'google/cloud/bigquery/storage/{version}/{name}_grpc_service_config.json',
+            'package-name': f'@google-cloud/bigquery-storage',
+        },
+    )
+    s.copy(library, excludes=['README.md'])
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
-
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
