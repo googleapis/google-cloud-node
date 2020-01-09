@@ -514,7 +514,7 @@ export class CloudSchedulerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      job_name: request.job!.name || '',
+      'job.name': request.job!.name || '',
     });
     return this._innerApiCalls.updateJob(request, options, callback);
   }
