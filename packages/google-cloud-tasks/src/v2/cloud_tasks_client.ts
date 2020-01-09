@@ -552,7 +552,7 @@ export class CloudTasksClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      queue_name: request.queue!.name || '',
+      'queue.name': request.queue!.name || '',
     });
     return this._innerApiCalls.updateQueue(request, options, callback);
   }
