@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.1.0...v1.1.1) (2020-01-08)
+
+
+### Bug Fixes
+
+* **build:** switches to using autorelease for docs ([#22](https://www.github.com/googleapis/nodejs-secret-manager/issues/22)) ([db6b60f](https://www.github.com/googleapis/nodejs-secret-manager/commit/db6b60f9ea92be1e36413b4f31428231639e5431))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.0.3...v1.1.0) (2019-12-23)
 
 ### Features
