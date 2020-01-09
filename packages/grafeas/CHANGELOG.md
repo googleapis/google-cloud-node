@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.3...v2.4.0) (2020-01-09)
+
+
+### Features
+
+* proto update: UpgradeNotes added ([86f2d90](https://www.github.com/googleapis/nodejs-grafeas/commit/86f2d90ea924f6067e08299635e051c5dd03a1a2))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.2...v2.3.3) (2020-01-02)
 
 
