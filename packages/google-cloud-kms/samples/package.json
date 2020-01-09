@@ -14,7 +14,7 @@
     "test": "mocha system-test"
   },
   "dependencies": {
-    "@google-cloud/kms": "^1.6.1"
+    "@google-cloud/kms": "^1.6.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
