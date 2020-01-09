@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-iot/compare/v1.6.0...v1.6.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* proper routing headers ([2fcf0f3](https://www.github.com/googleapis/nodejs-iot/commit/2fcf0f312ef16f6b7a3f149a14fb1bcf35140644))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.5.0...v1.6.0) (2020-01-05)
 
 
