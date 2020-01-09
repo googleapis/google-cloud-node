@@ -658,8 +658,7 @@
                           "type": "CryptoKey",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "updateMask": {
@@ -677,8 +676,7 @@
                           "type": "CryptoKeyVersion",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "updateMask": {
