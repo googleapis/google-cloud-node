@@ -137,5 +137,10 @@ const NoteKind = {
   /**
    * This represents a logical "role" that can attest to artifacts.
    */
-  ATTESTATION: 7
+  ATTESTATION: 7,
+
+  /**
+   * This represents an available package upgrade.
+   */
+  UPGRADE: 8
 };

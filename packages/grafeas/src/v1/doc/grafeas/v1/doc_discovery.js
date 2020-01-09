@@ -54,6 +54,14 @@ const DiscoveryNote = {
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
+ * @property {string} cpe
+ *   The CPE of the resource being scanned.
+ *
+ * @property {Object} lastScanTime
+ *   The last time this resource was scanned.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
  * @typedef DiscoveryOccurrence
  * @memberof grafeas.v1
  * @see [grafeas.v1.DiscoveryOccurrence definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/grafeas/v1/discovery.proto}

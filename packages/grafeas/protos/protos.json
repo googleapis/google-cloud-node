@@ -16,21 +16,24 @@
                   "requestType": "GetOccurrenceRequest",
                   "responseType": "Occurrence",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}"
+                    "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "ListOccurrences": {
                   "requestType": "ListOccurrencesRequest",
                   "responseType": "ListOccurrencesResponse",
                   "options": {
-                    "(google.api.http).get": "/v1/{parent=projects/*}/occurrences"
+                    "(google.api.http).get": "/v1/{parent=projects/*}/occurrences",
+                    "(google.api.method_signature)": "parent,filter"
                   }
                 },
                 "DeleteOccurrence": {
                   "requestType": "DeleteOccurrenceRequest",
                   "responseType": "google.protobuf.Empty",
                   "options": {
-                    "(google.api.http).delete": "/v1/{name=projects/*/occurrences/*}"
+                    "(google.api.http).delete": "/v1/{name=projects/*/occurrences/*}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "CreateOccurrence": {
@@ -38,7 +41,8 @@
                   "responseType": "Occurrence",
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences",
-                    "(google.api.http).body": "occurrence"
+                    "(google.api.http).body": "occurrence",
+                    "(google.api.method_signature)": "parent,occurrence"
                   }
                 },
                 "BatchCreateOccurrences": {
@@ -46,7 +50,8 @@
                   "responseType": "BatchCreateOccurrencesResponse",
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences:batchCreate",
-                    "(google.api.http).body": "*"
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "parent,occurrences"
                   }
                 },
                 "UpdateOccurrence": {
@@ -54,35 +59,40 @@
                   "responseType": "Occurrence",
                   "options": {
                     "(google.api.http).patch": "/v1/{name=projects/*/occurrences/*}",
-                    "(google.api.http).body": "occurrence"
+                    "(google.api.http).body": "occurrence",
+                    "(google.api.method_signature)": "name,occurrence,update_mask"
                   }
                 },
                 "GetOccurrenceNote": {
                   "requestType": "GetOccurrenceNoteRequest",
                   "responseType": "Note",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}/notes"
+                    "(google.api.http).get": "/v1/{name=projects/*/occurrences/*}/notes",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "GetNote": {
                   "requestType": "GetNoteRequest",
                   "responseType": "Note",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=projects/*/notes/*}"
+                    "(google.api.http).get": "/v1/{name=projects/*/notes/*}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "ListNotes": {
                   "requestType": "ListNotesRequest",
                   "responseType": "ListNotesResponse",
                   "options": {
-                    "(google.api.http).get": "/v1/{parent=projects/*}/notes"
+                    "(google.api.http).get": "/v1/{parent=projects/*}/notes",
+                    "(google.api.method_signature)": "parent,filter"
                   }
                 },
                 "DeleteNote": {
                   "requestType": "DeleteNoteRequest",
                   "responseType": "google.protobuf.Empty",
                   "options": {
-                    "(google.api.http).delete": "/v1/{name=projects/*/notes/*}"
+                    "(google.api.http).delete": "/v1/{name=projects/*/notes/*}",
+                    "(google.api.method_signature)": "name"
                   }
                 },
                 "CreateNote": {
@@ -90,7 +100,8 @@
                   "responseType": "Note",
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes",
-                    "(google.api.http).body": "note"
+                    "(google.api.http).body": "note",
+                    "(google.api.method_signature)": "parent,note_id,note"
                   }
                 },
                 "BatchCreateNotes": {
@@ -98,7 +109,8 @@
                   "responseType": "BatchCreateNotesResponse",
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes:batchCreate",
-                    "(google.api.http).body": "*"
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "parent,notes"
                   }
                 },
                 "UpdateNote": {
@@ -106,19 +118,25 @@
                   "responseType": "Note",
                   "options": {
                     "(google.api.http).patch": "/v1/{name=projects/*/notes/*}",
-                    "(google.api.http).body": "note"
+                    "(google.api.http).body": "note",
+                    "(google.api.method_signature)": "name,note,update_mask"
                   }
                 },
                 "ListNoteOccurrences": {
                   "requestType": "ListNoteOccurrencesRequest",
                   "responseType": "ListNoteOccurrencesResponse",
                   "options": {
-                    "(google.api.http).get": "/v1/{name=projects/*/notes/*}/occurrences"
+                    "(google.api.http).get": "/v1/{name=projects/*/notes/*}/occurrences",
+                    "(google.api.method_signature)": "name,filter"
                   }
                 }
               }
             },
             "Occurrence": {
+              "options": {
+                "(google.api.resource).type": "grafeas.io/Occurrence",
+                "(google.api.resource).pattern": "projects/{project}/occurrences/{occurrence}"
+              },
               "oneofs": {
                 "details": {
                   "oneof": [
@@ -128,7 +146,8 @@
                     "package",
                     "deployment",
                     "discovery",
-                    "attestation"
+                    "attestation",
+                    "upgrade"
                   ]
                 }
               },
@@ -188,10 +207,18 @@
                 "attestation": {
                   "type": "grafeas.v1.AttestationOccurrence",
                   "id": 14
+                },
+                "upgrade": {
+                  "type": "grafeas.v1.UpgradeOccurrence",
+                  "id": 15
                 }
               }
             },
             "Note": {
+              "options": {
+                "(google.api.resource).type": "grafeas.io/Note",
+                "(google.api.resource).pattern": "projects/{project}/notes/{note}"
+              },
               "oneofs": {
                 "type": {
                   "oneof": [
@@ -201,7 +228,8 @@
                     "package",
                     "deployment",
                     "discovery",
-                    "attestation"
+                    "attestation",
+                    "upgrade"
                   ]
                 }
               },
@@ -271,6 +299,10 @@
                 "attestation": {
                   "type": "grafeas.v1.AttestationNote",
                   "id": 16
+                },
+                "upgrade": {
+                  "type": "grafeas.v1.UpgradeNote",
+                  "id": 17
                 }
               }
             },
@@ -278,7 +310,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Occurrence"
+                  }
                 }
               }
             },
@@ -286,7 +322,11 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "filter": {
                   "type": "string",
@@ -319,7 +359,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Occurrence"
+                  }
                 }
               }
             },
@@ -327,11 +371,18 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "occurrence": {
                   "type": "Occurrence",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 }
               }
             },
@@ -339,11 +390,18 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Occurrence"
+                  }
                 },
                 "occurrence": {
                   "type": "Occurrence",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 },
                 "updateMask": {
                   "type": "google.protobuf.FieldMask",
@@ -355,7 +413,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Note"
+                  }
                 }
               }
             },
@@ -363,7 +425,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Occurrence"
+                  }
                 }
               }
             },
@@ -371,7 +437,11 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "filter": {
                   "type": "string",
@@ -404,7 +474,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Note"
+                  }
                 }
               }
             },
@@ -412,15 +486,25 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "noteId": {
                   "type": "string",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 },
                 "note": {
                   "type": "Note",
-                  "id": 3
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 }
               }
             },
@@ -428,11 +512,18 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Note"
+                  }
                 },
                 "note": {
                   "type": "Note",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 },
                 "updateMask": {
                   "type": "google.protobuf.FieldMask",
@@ -444,7 +535,11 @@
               "fields": {
                 "name": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "grafeas.io/Note"
+                  }
                 },
                 "filter": {
                   "type": "string",
@@ -477,12 +572,19 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "notes": {
                   "keyType": "string",
                   "type": "Note",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 }
               }
             },
@@ -499,12 +601,19 @@
               "fields": {
                 "parent": {
                   "type": "string",
-                  "id": 1
+                  "id": 1,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED",
+                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                  }
                 },
                 "occurrences": {
                   "rule": "repeated",
                   "type": "Occurrence",
-                  "id": 2
+                  "id": 2,
+                  "options": {
+                    "(google.api.field_behavior)": "REQUIRED"
+                  }
                 }
               }
             },
@@ -557,7 +666,8 @@
                 "PACKAGE": 4,
                 "DEPLOYMENT": 5,
                 "DISCOVERY": 6,
-                "ATTESTATION": 7
+                "ATTESTATION": 7,
+                "UPGRADE": 8
               }
             },
             "RelatedUrl": {
@@ -975,6 +1085,14 @@
                 "analysisStatusError": {
                   "type": "google.rpc.Status",
                   "id": 3
+                },
+                "cpe": {
+                  "type": "string",
+                  "id": 4
+                },
+                "lastScanTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 5
                 }
               },
               "nested": {
@@ -1170,6 +1288,128 @@
                 }
               }
             },
+            "UpgradeNote": {
+              "fields": {
+                "package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "grafeas.v1.Version",
+                  "id": 2
+                },
+                "distributions": {
+                  "rule": "repeated",
+                  "type": "UpgradeDistribution",
+                  "id": 3
+                },
+                "windowsUpdate": {
+                  "type": "WindowsUpdate",
+                  "id": 4
+                }
+              }
+            },
+            "UpgradeDistribution": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "classification": {
+                  "type": "string",
+                  "id": 2
+                },
+                "severity": {
+                  "type": "string",
+                  "id": 3
+                },
+                "cve": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "WindowsUpdate": {
+              "fields": {
+                "identity": {
+                  "type": "Identity",
+                  "id": 1
+                },
+                "title": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "categories": {
+                  "rule": "repeated",
+                  "type": "Category",
+                  "id": 4
+                },
+                "kbArticleIds": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "supportUrl": {
+                  "type": "string",
+                  "id": 6
+                },
+                "lastPublishedTimestamp": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 7
+                }
+              },
+              "nested": {
+                "Identity": {
+                  "fields": {
+                    "updateId": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "revision": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                },
+                "Category": {
+                  "fields": {
+                    "categoryId": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "UpgradeOccurrence": {
+              "fields": {
+                "package": {
+                  "type": "string",
+                  "id": 1
+                },
+                "parsedVersion": {
+                  "type": "grafeas.v1.Version",
+                  "id": 3
+                },
+                "distribution": {
+                  "type": "UpgradeDistribution",
+                  "id": 4
+                },
+                "windowsUpdate": {
+                  "type": "WindowsUpdate",
+                  "id": 5
+                }
+              }
+            },
             "Severity": {
               "values": {
                 "SEVERITY_UNSPECIFIED": 0,
@@ -1203,6 +1443,10 @@
                   "rule": "repeated",
                   "type": "WindowsDetail",
                   "id": 5
+                },
+                "sourceUpdateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6
                 }
               },
               "nested": {
@@ -1251,6 +1495,10 @@
                     "isObsolete": {
                       "type": "bool",
                       "id": 11
+                    },
+                    "sourceUpdateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 12
                     }
                   }
                 },
@@ -1473,7 +1721,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1561,6 +1809,104 @@
                   "id": 1
                 },
                 "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
                   "type": "string",
                   "id": 2
                 }

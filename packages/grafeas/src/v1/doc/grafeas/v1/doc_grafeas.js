@@ -87,6 +87,11 @@
  *
  *   This object should have the same structure as [AttestationOccurrence]{@link grafeas.v1.AttestationOccurrence}
  *
+ * @property {Object} upgrade
+ *   Describes an available package upgrade on the linked resource.
+ *
+ *   This object should have the same structure as [UpgradeOccurrence]{@link grafeas.v1.UpgradeOccurrence}
+ *
  * @typedef Occurrence
  * @memberof grafeas.v1
  * @see [grafeas.v1.Occurrence definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/grafeas/v1/grafeas.proto}
@@ -174,6 +179,11 @@ const Occurrence = {
  *
  *   This object should have the same structure as [AttestationNote]{@link grafeas.v1.AttestationNote}
  *
+ * @property {Object} upgrade
+ *   A note describing available package upgrades.
+ *
+ *   This object should have the same structure as [UpgradeNote]{@link grafeas.v1.UpgradeNote}
+ *
  * @typedef Note
  * @memberof grafeas.v1
  * @see [grafeas.v1.Note definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/grafeas/v1/grafeas.proto}
@@ -244,7 +254,7 @@ const ListOccurrencesResponse = {
 };
 
 /**
- * Request to delete a occurrence.
+ * Request to delete an occurrence.
  *
  * @property {string} name
  *   The name of the occurrence in the form of

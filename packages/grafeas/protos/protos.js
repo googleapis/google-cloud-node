@@ -565,6 +565,7 @@
                  * @property {grafeas.v1.IDeploymentOccurrence|null} [deployment] Occurrence deployment
                  * @property {grafeas.v1.IDiscoveryOccurrence|null} [discovery] Occurrence discovery
                  * @property {grafeas.v1.IAttestationOccurrence|null} [attestation] Occurrence attestation
+                 * @property {grafeas.v1.IUpgradeOccurrence|null} [upgrade] Occurrence upgrade
                  */
     
                 /**
@@ -694,17 +695,25 @@
                  */
                 Occurrence.prototype.attestation = null;
     
+                /**
+                 * Occurrence upgrade.
+                 * @member {grafeas.v1.IUpgradeOccurrence|null|undefined} upgrade
+                 * @memberof grafeas.v1.Occurrence
+                 * @instance
+                 */
+                Occurrence.prototype.upgrade = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
                 /**
                  * Occurrence details.
-                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|undefined} details
+                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|undefined} details
                  * @memberof grafeas.v1.Occurrence
                  * @instance
                  */
                 Object.defineProperty(Occurrence.prototype, "details", {
-                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation"]),
+                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -760,6 +769,8 @@
                         $root.grafeas.v1.DiscoveryOccurrence.encode(message.discovery, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                     if (message.attestation != null && message.hasOwnProperty("attestation"))
                         $root.grafeas.v1.AttestationOccurrence.encode(message.attestation, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade"))
+                        $root.grafeas.v1.UpgradeOccurrence.encode(message.upgrade, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                     return writer;
                 };
     
@@ -836,6 +847,9 @@
                         case 14:
                             message.attestation = $root.grafeas.v1.AttestationOccurrence.decode(reader, reader.uint32());
                             break;
+                        case 15:
+                            message.upgrade = $root.grafeas.v1.UpgradeOccurrence.decode(reader, reader.uint32());
+                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -893,6 +907,7 @@
                         case 5:
                         case 6:
                         case 7:
+                        case 8:
                             break;
                         }
                     if (message.remediation != null && message.hasOwnProperty("remediation"))
@@ -976,6 +991,16 @@
                                 return "attestation." + error;
                         }
                     }
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade")) {
+                        if (properties.details === 1)
+                            return "details: multiple values";
+                        properties.details = 1;
+                        {
+                            var error = $root.grafeas.v1.UpgradeOccurrence.verify(message.upgrade);
+                            if (error)
+                                return "upgrade." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -1030,6 +1055,10 @@
                     case 7:
                         message.kind = 7;
                         break;
+                    case "UPGRADE":
+                    case 8:
+                        message.kind = 8;
+                        break;
                     }
                     if (object.remediation != null)
                         message.remediation = String(object.remediation);
@@ -1077,6 +1106,11 @@
                         if (typeof object.attestation !== "object")
                             throw TypeError(".grafeas.v1.Occurrence.attestation: object expected");
                         message.attestation = $root.grafeas.v1.AttestationOccurrence.fromObject(object.attestation);
+                    }
+                    if (object.upgrade != null) {
+                        if (typeof object.upgrade !== "object")
+                            throw TypeError(".grafeas.v1.Occurrence.upgrade: object expected");
+                        message.upgrade = $root.grafeas.v1.UpgradeOccurrence.fromObject(object.upgrade);
                     }
                     return message;
                 };
@@ -1152,6 +1186,11 @@
                         if (options.oneofs)
                             object.details = "attestation";
                     }
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade")) {
+                        object.upgrade = $root.grafeas.v1.UpgradeOccurrence.toObject(message.upgrade, options);
+                        if (options.oneofs)
+                            object.details = "upgrade";
+                    }
                     return object;
                 };
     
@@ -1191,6 +1230,7 @@
                  * @property {grafeas.v1.IDeploymentNote|null} [deployment] Note deployment
                  * @property {grafeas.v1.IDiscoveryNote|null} [discovery] Note discovery
                  * @property {grafeas.v1.IAttestationNote|null} [attestation] Note attestation
+                 * @property {grafeas.v1.IUpgradeNote|null} [upgrade] Note upgrade
                  */
     
                 /**
@@ -1338,17 +1378,25 @@
                  */
                 Note.prototype.attestation = null;
     
+                /**
+                 * Note upgrade.
+                 * @member {grafeas.v1.IUpgradeNote|null|undefined} upgrade
+                 * @memberof grafeas.v1.Note
+                 * @instance
+                 */
+                Note.prototype.upgrade = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
                 /**
                  * Note type.
-                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|undefined} type
+                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|undefined} type
                  * @memberof grafeas.v1.Note
                  * @instance
                  */
                 Object.defineProperty(Note.prototype, "type", {
-                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation"]),
+                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -1410,6 +1458,8 @@
                         $root.grafeas.v1.DiscoveryNote.encode(message.discovery, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                     if (message.attestation != null && message.hasOwnProperty("attestation"))
                         $root.grafeas.v1.AttestationNote.encode(message.attestation, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade"))
+                        $root.grafeas.v1.UpgradeNote.encode(message.upgrade, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                     return writer;
                 };
     
@@ -1496,6 +1546,9 @@
                         case 16:
                             message.attestation = $root.grafeas.v1.AttestationNote.decode(reader, reader.uint32());
                             break;
+                        case 17:
+                            message.upgrade = $root.grafeas.v1.UpgradeNote.decode(reader, reader.uint32());
+                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -1553,6 +1606,7 @@
                         case 5:
                         case 6:
                         case 7:
+                        case 8:
                             break;
                         }
                     if (message.relatedUrl != null && message.hasOwnProperty("relatedUrl")) {
@@ -1654,6 +1708,16 @@
                                 return "attestation." + error;
                         }
                     }
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade")) {
+                        if (properties.type === 1)
+                            return "type: multiple values";
+                        properties.type = 1;
+                        {
+                            var error = $root.grafeas.v1.UpgradeNote.verify(message.upgrade);
+                            if (error)
+                                return "upgrade." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -1707,6 +1771,10 @@
                     case "ATTESTATION":
                     case 7:
                         message.kind = 7;
+                        break;
+                    case "UPGRADE":
+                    case 8:
+                        message.kind = 8;
                         break;
                     }
                     if (object.relatedUrl) {
@@ -1775,6 +1843,11 @@
                         if (typeof object.attestation !== "object")
                             throw TypeError(".grafeas.v1.Note.attestation: object expected");
                         message.attestation = $root.grafeas.v1.AttestationNote.fromObject(object.attestation);
+                    }
+                    if (object.upgrade != null) {
+                        if (typeof object.upgrade !== "object")
+                            throw TypeError(".grafeas.v1.Note.upgrade: object expected");
+                        message.upgrade = $root.grafeas.v1.UpgradeNote.fromObject(object.upgrade);
                     }
                     return message;
                 };
@@ -1863,6 +1936,11 @@
                         object.attestation = $root.grafeas.v1.AttestationNote.toObject(message.attestation, options);
                         if (options.oneofs)
                             object.type = "attestation";
+                    }
+                    if (message.upgrade != null && message.hasOwnProperty("upgrade")) {
+                        object.upgrade = $root.grafeas.v1.UpgradeNote.toObject(message.upgrade, options);
+                        if (options.oneofs)
+                            object.type = "upgrade";
                     }
                     return object;
                 };
@@ -6723,6 +6801,7 @@
              * @property {number} DEPLOYMENT=5 DEPLOYMENT value
              * @property {number} DISCOVERY=6 DISCOVERY value
              * @property {number} ATTESTATION=7 ATTESTATION value
+             * @property {number} UPGRADE=8 UPGRADE value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -6734,6 +6813,7 @@
                 values[valuesById[5] = "DEPLOYMENT"] = 5;
                 values[valuesById[6] = "DISCOVERY"] = 6;
                 values[valuesById[7] = "ATTESTATION"] = 7;
+                values[valuesById[8] = "UPGRADE"] = 8;
                 return values;
             })();
     
@@ -11958,6 +12038,7 @@
                         case 5:
                         case 6:
                         case 7:
+                        case 8:
                             break;
                         }
                     return null;
@@ -12008,6 +12089,10 @@
                     case 7:
                         message.analysisKind = 7;
                         break;
+                    case "UPGRADE":
+                    case 8:
+                        message.analysisKind = 8;
+                        break;
                     }
                     return message;
                 };
@@ -12055,6 +12140,8 @@
                  * @property {grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis|null} [continuousAnalysis] DiscoveryOccurrence continuousAnalysis
                  * @property {grafeas.v1.DiscoveryOccurrence.AnalysisStatus|null} [analysisStatus] DiscoveryOccurrence analysisStatus
                  * @property {google.rpc.IStatus|null} [analysisStatusError] DiscoveryOccurrence analysisStatusError
+                 * @property {string|null} [cpe] DiscoveryOccurrence cpe
+                 * @property {google.protobuf.ITimestamp|null} [lastScanTime] DiscoveryOccurrence lastScanTime
                  */
     
                 /**
@@ -12097,6 +12184,22 @@
                 DiscoveryOccurrence.prototype.analysisStatusError = null;
     
                 /**
+                 * DiscoveryOccurrence cpe.
+                 * @member {string} cpe
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.cpe = "";
+    
+                /**
+                 * DiscoveryOccurrence lastScanTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} lastScanTime
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.lastScanTime = null;
+    
+                /**
                  * Creates a new DiscoveryOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.DiscoveryOccurrence
@@ -12126,6 +12229,10 @@
                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.analysisStatus);
                     if (message.analysisStatusError != null && message.hasOwnProperty("analysisStatusError"))
                         $root.google.rpc.Status.encode(message.analysisStatusError, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.cpe != null && message.hasOwnProperty("cpe"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.cpe);
+                    if (message.lastScanTime != null && message.hasOwnProperty("lastScanTime"))
+                        $root.google.protobuf.Timestamp.encode(message.lastScanTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
     
@@ -12168,6 +12275,12 @@
                             break;
                         case 3:
                             message.analysisStatusError = $root.google.rpc.Status.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.cpe = reader.string();
+                            break;
+                        case 5:
+                            message.lastScanTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -12230,6 +12343,14 @@
                         if (error)
                             return "analysisStatusError." + error;
                     }
+                    if (message.cpe != null && message.hasOwnProperty("cpe"))
+                        if (!$util.isString(message.cpe))
+                            return "cpe: string expected";
+                    if (message.lastScanTime != null && message.hasOwnProperty("lastScanTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.lastScanTime);
+                        if (error)
+                            return "lastScanTime." + error;
+                    }
                     return null;
                 };
     
@@ -12290,6 +12411,13 @@
                             throw TypeError(".grafeas.v1.DiscoveryOccurrence.analysisStatusError: object expected");
                         message.analysisStatusError = $root.google.rpc.Status.fromObject(object.analysisStatusError);
                     }
+                    if (object.cpe != null)
+                        message.cpe = String(object.cpe);
+                    if (object.lastScanTime != null) {
+                        if (typeof object.lastScanTime !== "object")
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.lastScanTime: object expected");
+                        message.lastScanTime = $root.google.protobuf.Timestamp.fromObject(object.lastScanTime);
+                    }
                     return message;
                 };
     
@@ -12310,6 +12438,8 @@
                         object.continuousAnalysis = options.enums === String ? "CONTINUOUS_ANALYSIS_UNSPECIFIED" : 0;
                         object.analysisStatus = options.enums === String ? "ANALYSIS_STATUS_UNSPECIFIED" : 0;
                         object.analysisStatusError = null;
+                        object.cpe = "";
+                        object.lastScanTime = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
                         object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
@@ -12317,6 +12447,10 @@
                         object.analysisStatus = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.AnalysisStatus[message.analysisStatus] : message.analysisStatus;
                     if (message.analysisStatusError != null && message.hasOwnProperty("analysisStatusError"))
                         object.analysisStatusError = $root.google.rpc.Status.toObject(message.analysisStatusError, options);
+                    if (message.cpe != null && message.hasOwnProperty("cpe"))
+                        object.cpe = message.cpe;
+                    if (message.lastScanTime != null && message.hasOwnProperty("lastScanTime"))
+                        object.lastScanTime = $root.google.protobuf.Timestamp.toObject(message.lastScanTime, options);
                     return object;
                 };
     
@@ -14680,6 +14814,1621 @@
                 return Version;
             })();
     
+            v1.UpgradeNote = (function() {
+    
+                /**
+                 * Properties of an UpgradeNote.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeNote
+                 * @property {string|null} ["package"] UpgradeNote package
+                 * @property {grafeas.v1.IVersion|null} [version] UpgradeNote version
+                 * @property {Array.<grafeas.v1.IUpgradeDistribution>|null} [distributions] UpgradeNote distributions
+                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeNote windowsUpdate
+                 */
+    
+                /**
+                 * Constructs a new UpgradeNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeNote.
+                 * @implements IUpgradeNote
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
+                 */
+                function UpgradeNote(properties) {
+                    this.distributions = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeNote package.
+                 * @member {string} package
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype["package"] = "";
+    
+                /**
+                 * UpgradeNote version.
+                 * @member {grafeas.v1.IVersion|null|undefined} version
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.version = null;
+    
+                /**
+                 * UpgradeNote distributions.
+                 * @member {Array.<grafeas.v1.IUpgradeDistribution>} distributions
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.distributions = $util.emptyArray;
+    
+                /**
+                 * UpgradeNote windowsUpdate.
+                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 */
+                UpgradeNote.prototype.windowsUpdate = null;
+    
+                /**
+                 * Creates a new UpgradeNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote instance
+                 */
+                UpgradeNote.create = function create(properties) {
+                    return new UpgradeNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeNote message. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        $root.grafeas.v1.Version.encode(message.version, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.distributions != null && message.distributions.length)
+                        for (var i = 0; i < message.distributions.length; ++i)
+                            $root.grafeas.v1.UpgradeDistribution.encode(message.distributions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeNote message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.IUpgradeNote} message UpgradeNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message["package"] = reader.string();
+                            break;
+                        case 2:
+                            message.version = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 3:
+                            if (!(message.distributions && message.distributions.length))
+                                message.distributions = [];
+                            message.distributions.push($root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32()));
+                            break;
+                        case 4:
+                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        if (!$util.isString(message["package"]))
+                            return "package: string expected";
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.Version.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
+                    if (message.distributions != null && message.hasOwnProperty("distributions")) {
+                        if (!Array.isArray(message.distributions))
+                            return "distributions: array expected";
+                        for (var i = 0; i < message.distributions.length; ++i) {
+                            var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distributions[i]);
+                            if (error)
+                                return "distributions." + error;
+                        }
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
+                        if (error)
+                            return "windowsUpdate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeNote} UpgradeNote
+                 */
+                UpgradeNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeNote)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeNote();
+                    if (object["package"] != null)
+                        message["package"] = String(object["package"]);
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeNote.version: object expected");
+                        message.version = $root.grafeas.v1.Version.fromObject(object.version);
+                    }
+                    if (object.distributions) {
+                        if (!Array.isArray(object.distributions))
+                            throw TypeError(".grafeas.v1.UpgradeNote.distributions: array expected");
+                        message.distributions = [];
+                        for (var i = 0; i < object.distributions.length; ++i) {
+                            if (typeof object.distributions[i] !== "object")
+                                throw TypeError(".grafeas.v1.UpgradeNote.distributions: object expected");
+                            message.distributions[i] = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distributions[i]);
+                        }
+                    }
+                    if (object.windowsUpdate != null) {
+                        if (typeof object.windowsUpdate !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeNote.windowsUpdate: object expected");
+                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @static
+                 * @param {grafeas.v1.UpgradeNote} message UpgradeNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.distributions = [];
+                    if (options.defaults) {
+                        object["package"] = "";
+                        object.version = null;
+                        object.windowsUpdate = null;
+                    }
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        object["package"] = message["package"];
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.Version.toObject(message.version, options);
+                    if (message.distributions && message.distributions.length) {
+                        object.distributions = [];
+                        for (var j = 0; j < message.distributions.length; ++j)
+                            object.distributions[j] = $root.grafeas.v1.UpgradeDistribution.toObject(message.distributions[j], options);
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeNote;
+            })();
+    
+            v1.UpgradeDistribution = (function() {
+    
+                /**
+                 * Properties of an UpgradeDistribution.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeDistribution
+                 * @property {string|null} [cpeUri] UpgradeDistribution cpeUri
+                 * @property {string|null} [classification] UpgradeDistribution classification
+                 * @property {string|null} [severity] UpgradeDistribution severity
+                 * @property {Array.<string>|null} [cve] UpgradeDistribution cve
+                 */
+    
+                /**
+                 * Constructs a new UpgradeDistribution.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeDistribution.
+                 * @implements IUpgradeDistribution
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
+                 */
+                function UpgradeDistribution(properties) {
+                    this.cve = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeDistribution cpeUri.
+                 * @member {string} cpeUri
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.cpeUri = "";
+    
+                /**
+                 * UpgradeDistribution classification.
+                 * @member {string} classification
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.classification = "";
+    
+                /**
+                 * UpgradeDistribution severity.
+                 * @member {string} severity
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.severity = "";
+    
+                /**
+                 * UpgradeDistribution cve.
+                 * @member {Array.<string>} cve
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 */
+                UpgradeDistribution.prototype.cve = $util.emptyArray;
+    
+                /**
+                 * Creates a new UpgradeDistribution instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution instance
+                 */
+                UpgradeDistribution.create = function create(properties) {
+                    return new UpgradeDistribution(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeDistribution message. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeDistribution.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.cpeUri);
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.classification);
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.severity);
+                    if (message.cve != null && message.cve.length)
+                        for (var i = 0; i < message.cve.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.cve[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeDistribution message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.IUpgradeDistribution} message UpgradeDistribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeDistribution.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeDistribution message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeDistribution.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeDistribution();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.cpeUri = reader.string();
+                            break;
+                        case 2:
+                            message.classification = reader.string();
+                            break;
+                        case 3:
+                            message.severity = reader.string();
+                            break;
+                        case 4:
+                            if (!(message.cve && message.cve.length))
+                                message.cve = [];
+                            message.cve.push(reader.string());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeDistribution message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeDistribution.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeDistribution message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeDistribution.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        if (!$util.isString(message.cpeUri))
+                            return "cpeUri: string expected";
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        if (!$util.isString(message.classification))
+                            return "classification: string expected";
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        if (!$util.isString(message.severity))
+                            return "severity: string expected";
+                    if (message.cve != null && message.hasOwnProperty("cve")) {
+                        if (!Array.isArray(message.cve))
+                            return "cve: array expected";
+                        for (var i = 0; i < message.cve.length; ++i)
+                            if (!$util.isString(message.cve[i]))
+                                return "cve: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeDistribution message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeDistribution} UpgradeDistribution
+                 */
+                UpgradeDistribution.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeDistribution)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeDistribution();
+                    if (object.cpeUri != null)
+                        message.cpeUri = String(object.cpeUri);
+                    if (object.classification != null)
+                        message.classification = String(object.classification);
+                    if (object.severity != null)
+                        message.severity = String(object.severity);
+                    if (object.cve) {
+                        if (!Array.isArray(object.cve))
+                            throw TypeError(".grafeas.v1.UpgradeDistribution.cve: array expected");
+                        message.cve = [];
+                        for (var i = 0; i < object.cve.length; ++i)
+                            message.cve[i] = String(object.cve[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeDistribution message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @static
+                 * @param {grafeas.v1.UpgradeDistribution} message UpgradeDistribution
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeDistribution.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.cve = [];
+                    if (options.defaults) {
+                        object.cpeUri = "";
+                        object.classification = "";
+                        object.severity = "";
+                    }
+                    if (message.cpeUri != null && message.hasOwnProperty("cpeUri"))
+                        object.cpeUri = message.cpeUri;
+                    if (message.classification != null && message.hasOwnProperty("classification"))
+                        object.classification = message.classification;
+                    if (message.severity != null && message.hasOwnProperty("severity"))
+                        object.severity = message.severity;
+                    if (message.cve && message.cve.length) {
+                        object.cve = [];
+                        for (var j = 0; j < message.cve.length; ++j)
+                            object.cve[j] = message.cve[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeDistribution to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeDistribution
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeDistribution.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeDistribution;
+            })();
+    
+            v1.WindowsUpdate = (function() {
+    
+                /**
+                 * Properties of a WindowsUpdate.
+                 * @memberof grafeas.v1
+                 * @interface IWindowsUpdate
+                 * @property {grafeas.v1.WindowsUpdate.IIdentity|null} [identity] WindowsUpdate identity
+                 * @property {string|null} [title] WindowsUpdate title
+                 * @property {string|null} [description] WindowsUpdate description
+                 * @property {Array.<grafeas.v1.WindowsUpdate.ICategory>|null} [categories] WindowsUpdate categories
+                 * @property {Array.<string>|null} [kbArticleIds] WindowsUpdate kbArticleIds
+                 * @property {string|null} [supportUrl] WindowsUpdate supportUrl
+                 * @property {google.protobuf.ITimestamp|null} [lastPublishedTimestamp] WindowsUpdate lastPublishedTimestamp
+                 */
+    
+                /**
+                 * Constructs a new WindowsUpdate.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a WindowsUpdate.
+                 * @implements IWindowsUpdate
+                 * @constructor
+                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
+                 */
+                function WindowsUpdate(properties) {
+                    this.categories = [];
+                    this.kbArticleIds = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * WindowsUpdate identity.
+                 * @member {grafeas.v1.WindowsUpdate.IIdentity|null|undefined} identity
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.identity = null;
+    
+                /**
+                 * WindowsUpdate title.
+                 * @member {string} title
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.title = "";
+    
+                /**
+                 * WindowsUpdate description.
+                 * @member {string} description
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.description = "";
+    
+                /**
+                 * WindowsUpdate categories.
+                 * @member {Array.<grafeas.v1.WindowsUpdate.ICategory>} categories
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.categories = $util.emptyArray;
+    
+                /**
+                 * WindowsUpdate kbArticleIds.
+                 * @member {Array.<string>} kbArticleIds
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.kbArticleIds = $util.emptyArray;
+    
+                /**
+                 * WindowsUpdate supportUrl.
+                 * @member {string} supportUrl
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.supportUrl = "";
+    
+                /**
+                 * WindowsUpdate lastPublishedTimestamp.
+                 * @member {google.protobuf.ITimestamp|null|undefined} lastPublishedTimestamp
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 */
+                WindowsUpdate.prototype.lastPublishedTimestamp = null;
+    
+                /**
+                 * Creates a new WindowsUpdate instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate=} [properties] Properties to set
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate instance
+                 */
+                WindowsUpdate.create = function create(properties) {
+                    return new WindowsUpdate(properties);
+                };
+    
+                /**
+                 * Encodes the specified WindowsUpdate message. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WindowsUpdate.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.identity != null && message.hasOwnProperty("identity"))
+                        $root.grafeas.v1.WindowsUpdate.Identity.encode(message.identity, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    if (message.categories != null && message.categories.length)
+                        for (var i = 0; i < message.categories.length; ++i)
+                            $root.grafeas.v1.WindowsUpdate.Category.encode(message.categories[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.kbArticleIds != null && message.kbArticleIds.length)
+                        for (var i = 0; i < message.kbArticleIds.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.kbArticleIds[i]);
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.supportUrl);
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
+                        $root.google.protobuf.Timestamp.encode(message.lastPublishedTimestamp, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified WindowsUpdate message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.IWindowsUpdate} message WindowsUpdate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                WindowsUpdate.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a WindowsUpdate message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WindowsUpdate.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.identity = $root.grafeas.v1.WindowsUpdate.Identity.decode(reader, reader.uint32());
+                            break;
+                        case 2:
+                            message.title = reader.string();
+                            break;
+                        case 3:
+                            message.description = reader.string();
+                            break;
+                        case 4:
+                            if (!(message.categories && message.categories.length))
+                                message.categories = [];
+                            message.categories.push($root.grafeas.v1.WindowsUpdate.Category.decode(reader, reader.uint32()));
+                            break;
+                        case 5:
+                            if (!(message.kbArticleIds && message.kbArticleIds.length))
+                                message.kbArticleIds = [];
+                            message.kbArticleIds.push(reader.string());
+                            break;
+                        case 6:
+                            message.supportUrl = reader.string();
+                            break;
+                        case 7:
+                            message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a WindowsUpdate message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                WindowsUpdate.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a WindowsUpdate message.
+                 * @function verify
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                WindowsUpdate.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.identity != null && message.hasOwnProperty("identity")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.Identity.verify(message.identity);
+                        if (error)
+                            return "identity." + error;
+                    }
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        if (!$util.isString(message.title))
+                            return "title: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.categories != null && message.hasOwnProperty("categories")) {
+                        if (!Array.isArray(message.categories))
+                            return "categories: array expected";
+                        for (var i = 0; i < message.categories.length; ++i) {
+                            var error = $root.grafeas.v1.WindowsUpdate.Category.verify(message.categories[i]);
+                            if (error)
+                                return "categories." + error;
+                        }
+                    }
+                    if (message.kbArticleIds != null && message.hasOwnProperty("kbArticleIds")) {
+                        if (!Array.isArray(message.kbArticleIds))
+                            return "kbArticleIds: array expected";
+                        for (var i = 0; i < message.kbArticleIds.length; ++i)
+                            if (!$util.isString(message.kbArticleIds[i]))
+                                return "kbArticleIds: string[] expected";
+                    }
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        if (!$util.isString(message.supportUrl))
+                            return "supportUrl: string expected";
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.lastPublishedTimestamp);
+                        if (error)
+                            return "lastPublishedTimestamp." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a WindowsUpdate message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.WindowsUpdate} WindowsUpdate
+                 */
+                WindowsUpdate.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.WindowsUpdate)
+                        return object;
+                    var message = new $root.grafeas.v1.WindowsUpdate();
+                    if (object.identity != null) {
+                        if (typeof object.identity !== "object")
+                            throw TypeError(".grafeas.v1.WindowsUpdate.identity: object expected");
+                        message.identity = $root.grafeas.v1.WindowsUpdate.Identity.fromObject(object.identity);
+                    }
+                    if (object.title != null)
+                        message.title = String(object.title);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.categories) {
+                        if (!Array.isArray(object.categories))
+                            throw TypeError(".grafeas.v1.WindowsUpdate.categories: array expected");
+                        message.categories = [];
+                        for (var i = 0; i < object.categories.length; ++i) {
+                            if (typeof object.categories[i] !== "object")
+                                throw TypeError(".grafeas.v1.WindowsUpdate.categories: object expected");
+                            message.categories[i] = $root.grafeas.v1.WindowsUpdate.Category.fromObject(object.categories[i]);
+                        }
+                    }
+                    if (object.kbArticleIds) {
+                        if (!Array.isArray(object.kbArticleIds))
+                            throw TypeError(".grafeas.v1.WindowsUpdate.kbArticleIds: array expected");
+                        message.kbArticleIds = [];
+                        for (var i = 0; i < object.kbArticleIds.length; ++i)
+                            message.kbArticleIds[i] = String(object.kbArticleIds[i]);
+                    }
+                    if (object.supportUrl != null)
+                        message.supportUrl = String(object.supportUrl);
+                    if (object.lastPublishedTimestamp != null) {
+                        if (typeof object.lastPublishedTimestamp !== "object")
+                            throw TypeError(".grafeas.v1.WindowsUpdate.lastPublishedTimestamp: object expected");
+                        message.lastPublishedTimestamp = $root.google.protobuf.Timestamp.fromObject(object.lastPublishedTimestamp);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a WindowsUpdate message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @static
+                 * @param {grafeas.v1.WindowsUpdate} message WindowsUpdate
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                WindowsUpdate.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.categories = [];
+                        object.kbArticleIds = [];
+                    }
+                    if (options.defaults) {
+                        object.identity = null;
+                        object.title = "";
+                        object.description = "";
+                        object.supportUrl = "";
+                        object.lastPublishedTimestamp = null;
+                    }
+                    if (message.identity != null && message.hasOwnProperty("identity"))
+                        object.identity = $root.grafeas.v1.WindowsUpdate.Identity.toObject(message.identity, options);
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        object.title = message.title;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.categories && message.categories.length) {
+                        object.categories = [];
+                        for (var j = 0; j < message.categories.length; ++j)
+                            object.categories[j] = $root.grafeas.v1.WindowsUpdate.Category.toObject(message.categories[j], options);
+                    }
+                    if (message.kbArticleIds && message.kbArticleIds.length) {
+                        object.kbArticleIds = [];
+                        for (var j = 0; j < message.kbArticleIds.length; ++j)
+                            object.kbArticleIds[j] = message.kbArticleIds[j];
+                    }
+                    if (message.supportUrl != null && message.hasOwnProperty("supportUrl"))
+                        object.supportUrl = message.supportUrl;
+                    if (message.lastPublishedTimestamp != null && message.hasOwnProperty("lastPublishedTimestamp"))
+                        object.lastPublishedTimestamp = $root.google.protobuf.Timestamp.toObject(message.lastPublishedTimestamp, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this WindowsUpdate to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.WindowsUpdate
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                WindowsUpdate.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                WindowsUpdate.Identity = (function() {
+    
+                    /**
+                     * Properties of an Identity.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @interface IIdentity
+                     * @property {string|null} [updateId] Identity updateId
+                     * @property {number|null} [revision] Identity revision
+                     */
+    
+                    /**
+                     * Constructs a new Identity.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @classdesc Represents an Identity.
+                     * @implements IIdentity
+                     * @constructor
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
+                     */
+                    function Identity(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Identity updateId.
+                     * @member {string} updateId
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     */
+                    Identity.prototype.updateId = "";
+    
+                    /**
+                     * Identity revision.
+                     * @member {number} revision
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     */
+                    Identity.prototype.revision = 0;
+    
+                    /**
+                     * Creates a new Identity instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity=} [properties] Properties to set
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity instance
+                     */
+                    Identity.create = function create(properties) {
+                        return new Identity(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Identity message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Identity.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.updateId);
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.revision);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Identity message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.IIdentity} message Identity message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Identity.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Identity.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Identity();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.updateId = reader.string();
+                                break;
+                            case 2:
+                                message.revision = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Identity.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Identity message.
+                     * @function verify
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Identity.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            if (!$util.isString(message.updateId))
+                                return "updateId: string expected";
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            if (!$util.isInteger(message.revision))
+                                return "revision: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.WindowsUpdate.Identity} Identity
+                     */
+                    Identity.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Identity)
+                            return object;
+                        var message = new $root.grafeas.v1.WindowsUpdate.Identity();
+                        if (object.updateId != null)
+                            message.updateId = String(object.updateId);
+                        if (object.revision != null)
+                            message.revision = object.revision | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.Identity} message Identity
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Identity.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.updateId = "";
+                            object.revision = 0;
+                        }
+                        if (message.updateId != null && message.hasOwnProperty("updateId"))
+                            object.updateId = message.updateId;
+                        if (message.revision != null && message.hasOwnProperty("revision"))
+                            object.revision = message.revision;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Identity to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.WindowsUpdate.Identity
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Identity.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Identity;
+                })();
+    
+                WindowsUpdate.Category = (function() {
+    
+                    /**
+                     * Properties of a Category.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @interface ICategory
+                     * @property {string|null} [categoryId] Category categoryId
+                     * @property {string|null} [name] Category name
+                     */
+    
+                    /**
+                     * Constructs a new Category.
+                     * @memberof grafeas.v1.WindowsUpdate
+                     * @classdesc Represents a Category.
+                     * @implements ICategory
+                     * @constructor
+                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
+                     */
+                    function Category(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Category categoryId.
+                     * @member {string} categoryId
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     */
+                    Category.prototype.categoryId = "";
+    
+                    /**
+                     * Category name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     */
+                    Category.prototype.name = "";
+    
+                    /**
+                     * Creates a new Category instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory=} [properties] Properties to set
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category instance
+                     */
+                    Category.create = function create(properties) {
+                        return new Category(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Category message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Category.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.categoryId);
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Category message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.ICategory} message Category message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Category.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Category message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Category.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.WindowsUpdate.Category();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.categoryId = reader.string();
+                                break;
+                            case 2:
+                                message.name = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Category message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Category.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Category message.
+                     * @function verify
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Category.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            if (!$util.isString(message.categoryId))
+                                return "categoryId: string expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Category message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.WindowsUpdate.Category} Category
+                     */
+                    Category.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.WindowsUpdate.Category)
+                            return object;
+                        var message = new $root.grafeas.v1.WindowsUpdate.Category();
+                        if (object.categoryId != null)
+                            message.categoryId = String(object.categoryId);
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Category message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @static
+                     * @param {grafeas.v1.WindowsUpdate.Category} message Category
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Category.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.categoryId = "";
+                            object.name = "";
+                        }
+                        if (message.categoryId != null && message.hasOwnProperty("categoryId"))
+                            object.categoryId = message.categoryId;
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Category to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.WindowsUpdate.Category
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Category.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Category;
+                })();
+    
+                return WindowsUpdate;
+            })();
+    
+            v1.UpgradeOccurrence = (function() {
+    
+                /**
+                 * Properties of an UpgradeOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface IUpgradeOccurrence
+                 * @property {string|null} ["package"] UpgradeOccurrence package
+                 * @property {grafeas.v1.IVersion|null} [parsedVersion] UpgradeOccurrence parsedVersion
+                 * @property {grafeas.v1.IUpgradeDistribution|null} [distribution] UpgradeOccurrence distribution
+                 * @property {grafeas.v1.IWindowsUpdate|null} [windowsUpdate] UpgradeOccurrence windowsUpdate
+                 */
+    
+                /**
+                 * Constructs a new UpgradeOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an UpgradeOccurrence.
+                 * @implements IUpgradeOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
+                 */
+                function UpgradeOccurrence(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * UpgradeOccurrence package.
+                 * @member {string} package
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype["package"] = "";
+    
+                /**
+                 * UpgradeOccurrence parsedVersion.
+                 * @member {grafeas.v1.IVersion|null|undefined} parsedVersion
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.parsedVersion = null;
+    
+                /**
+                 * UpgradeOccurrence distribution.
+                 * @member {grafeas.v1.IUpgradeDistribution|null|undefined} distribution
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.distribution = null;
+    
+                /**
+                 * UpgradeOccurrence windowsUpdate.
+                 * @member {grafeas.v1.IWindowsUpdate|null|undefined} windowsUpdate
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 */
+                UpgradeOccurrence.prototype.windowsUpdate = null;
+    
+                /**
+                 * Creates a new UpgradeOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence instance
+                 */
+                UpgradeOccurrence.create = function create(properties) {
+                    return new UpgradeOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified UpgradeOccurrence message. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message["package"]);
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
+                        $root.grafeas.v1.Version.encode(message.parsedVersion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.distribution != null && message.hasOwnProperty("distribution"))
+                        $root.grafeas.v1.UpgradeDistribution.encode(message.distribution, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        $root.grafeas.v1.WindowsUpdate.encode(message.windowsUpdate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified UpgradeOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.IUpgradeOccurrence} message UpgradeOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                UpgradeOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an UpgradeOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.UpgradeOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message["package"] = reader.string();
+                            break;
+                        case 3:
+                            message.parsedVersion = $root.grafeas.v1.Version.decode(reader, reader.uint32());
+                            break;
+                        case 4:
+                            message.distribution = $root.grafeas.v1.UpgradeDistribution.decode(reader, reader.uint32());
+                            break;
+                        case 5:
+                            message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an UpgradeOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                UpgradeOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an UpgradeOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                UpgradeOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        if (!$util.isString(message["package"]))
+                            return "package: string expected";
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion")) {
+                        var error = $root.grafeas.v1.Version.verify(message.parsedVersion);
+                        if (error)
+                            return "parsedVersion." + error;
+                    }
+                    if (message.distribution != null && message.hasOwnProperty("distribution")) {
+                        var error = $root.grafeas.v1.UpgradeDistribution.verify(message.distribution);
+                        if (error)
+                            return "distribution." + error;
+                    }
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate")) {
+                        var error = $root.grafeas.v1.WindowsUpdate.verify(message.windowsUpdate);
+                        if (error)
+                            return "windowsUpdate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an UpgradeOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.UpgradeOccurrence} UpgradeOccurrence
+                 */
+                UpgradeOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.UpgradeOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.UpgradeOccurrence();
+                    if (object["package"] != null)
+                        message["package"] = String(object["package"]);
+                    if (object.parsedVersion != null) {
+                        if (typeof object.parsedVersion !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.parsedVersion: object expected");
+                        message.parsedVersion = $root.grafeas.v1.Version.fromObject(object.parsedVersion);
+                    }
+                    if (object.distribution != null) {
+                        if (typeof object.distribution !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.distribution: object expected");
+                        message.distribution = $root.grafeas.v1.UpgradeDistribution.fromObject(object.distribution);
+                    }
+                    if (object.windowsUpdate != null) {
+                        if (typeof object.windowsUpdate !== "object")
+                            throw TypeError(".grafeas.v1.UpgradeOccurrence.windowsUpdate: object expected");
+                        message.windowsUpdate = $root.grafeas.v1.WindowsUpdate.fromObject(object.windowsUpdate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an UpgradeOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @static
+                 * @param {grafeas.v1.UpgradeOccurrence} message UpgradeOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                UpgradeOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object["package"] = "";
+                        object.parsedVersion = null;
+                        object.distribution = null;
+                        object.windowsUpdate = null;
+                    }
+                    if (message["package"] != null && message.hasOwnProperty("package"))
+                        object["package"] = message["package"];
+                    if (message.parsedVersion != null && message.hasOwnProperty("parsedVersion"))
+                        object.parsedVersion = $root.grafeas.v1.Version.toObject(message.parsedVersion, options);
+                    if (message.distribution != null && message.hasOwnProperty("distribution"))
+                        object.distribution = $root.grafeas.v1.UpgradeDistribution.toObject(message.distribution, options);
+                    if (message.windowsUpdate != null && message.hasOwnProperty("windowsUpdate"))
+                        object.windowsUpdate = $root.grafeas.v1.WindowsUpdate.toObject(message.windowsUpdate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this UpgradeOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.UpgradeOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                UpgradeOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return UpgradeOccurrence;
+            })();
+    
             /**
              * Severity enum.
              * @name grafeas.v1.Severity
@@ -14713,6 +16462,7 @@
                  * @property {Array.<grafeas.v1.VulnerabilityNote.IDetail>|null} [details] VulnerabilityNote details
                  * @property {grafeas.v1.ICVSSv3|null} [cvssV3] VulnerabilityNote cvssV3
                  * @property {Array.<grafeas.v1.VulnerabilityNote.IWindowsDetail>|null} [windowsDetails] VulnerabilityNote windowsDetails
+                 * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
                  */
     
                 /**
@@ -14773,6 +16523,14 @@
                 VulnerabilityNote.prototype.windowsDetails = $util.emptyArray;
     
                 /**
+                 * VulnerabilityNote sourceUpdateTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.sourceUpdateTime = null;
+    
+                /**
                  * Creates a new VulnerabilityNote instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityNote
@@ -14808,6 +16566,8 @@
                     if (message.windowsDetails != null && message.windowsDetails.length)
                         for (var i = 0; i < message.windowsDetails.length; ++i)
                             $root.grafeas.v1.VulnerabilityNote.WindowsDetail.encode(message.windowsDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                        $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     return writer;
                 };
     
@@ -14860,6 +16620,9 @@
                             if (!(message.windowsDetails && message.windowsDetails.length))
                                 message.windowsDetails = [];
                             message.windowsDetails.push($root.grafeas.v1.VulnerabilityNote.WindowsDetail.decode(reader, reader.uint32()));
+                            break;
+                        case 6:
+                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -14934,6 +16697,11 @@
                                 return "windowsDetails." + error;
                         }
                     }
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
+                        if (error)
+                            return "sourceUpdateTime." + error;
+                    }
                     return null;
                 };
     
@@ -15002,6 +16770,11 @@
                             message.windowsDetails[i] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.fromObject(object.windowsDetails[i]);
                         }
                     }
+                    if (object.sourceUpdateTime != null) {
+                        if (typeof object.sourceUpdateTime !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.sourceUpdateTime: object expected");
+                        message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
+                    }
                     return message;
                 };
     
@@ -15026,6 +16799,7 @@
                         object.cvssScore = 0;
                         object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                         object.cvssV3 = null;
+                        object.sourceUpdateTime = null;
                     }
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
@@ -15043,6 +16817,8 @@
                         for (var j = 0; j < message.windowsDetails.length; ++j)
                             object.windowsDetails[j] = $root.grafeas.v1.VulnerabilityNote.WindowsDetail.toObject(message.windowsDetails[j], options);
                     }
+                    if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                        object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
                     return object;
                 };
     
@@ -15074,6 +16850,7 @@
                      * @property {string|null} [fixedPackage] Detail fixedPackage
                      * @property {grafeas.v1.IVersion|null} [fixedVersion] Detail fixedVersion
                      * @property {boolean|null} [isObsolete] Detail isObsolete
+                     * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] Detail sourceUpdateTime
                      */
     
                     /**
@@ -15180,6 +16957,14 @@
                     Detail.prototype.isObsolete = false;
     
                     /**
+                     * Detail sourceUpdateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} sourceUpdateTime
+                     * @memberof grafeas.v1.VulnerabilityNote.Detail
+                     * @instance
+                     */
+                    Detail.prototype.sourceUpdateTime = null;
+    
+                    /**
                      * Creates a new Detail instance using the specified properties.
                      * @function create
                      * @memberof grafeas.v1.VulnerabilityNote.Detail
@@ -15225,6 +17010,8 @@
                             $root.grafeas.v1.Version.encode(message.fixedVersion, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
                             writer.uint32(/* id 11, wireType 0 =*/88).bool(message.isObsolete);
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.sourceUpdateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         return writer;
                     };
     
@@ -15291,6 +17078,9 @@
                                 break;
                             case 11:
                                 message.isObsolete = reader.bool();
+                                break;
+                            case 12:
+                                message.sourceUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -15366,6 +17156,11 @@
                         if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
                             if (typeof message.isObsolete !== "boolean")
                                 return "isObsolete: boolean expected";
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.sourceUpdateTime);
+                            if (error)
+                                return "sourceUpdateTime." + error;
+                        }
                         return null;
                     };
     
@@ -15412,6 +17207,11 @@
                         }
                         if (object.isObsolete != null)
                             message.isObsolete = Boolean(object.isObsolete);
+                        if (object.sourceUpdateTime != null) {
+                            if (typeof object.sourceUpdateTime !== "object")
+                                throw TypeError(".grafeas.v1.VulnerabilityNote.Detail.sourceUpdateTime: object expected");
+                            message.sourceUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.sourceUpdateTime);
+                        }
                         return message;
                     };
     
@@ -15440,6 +17240,7 @@
                             object.fixedPackage = "";
                             object.fixedVersion = null;
                             object.isObsolete = false;
+                            object.sourceUpdateTime = null;
                         }
                         if (message.severityName != null && message.hasOwnProperty("severityName"))
                             object.severityName = message.severityName;
@@ -15463,6 +17264,8 @@
                             object.fixedVersion = $root.grafeas.v1.Version.toObject(message.fixedVersion, options);
                         if (message.isObsolete != null && message.hasOwnProperty("isObsolete"))
                             object.isObsolete = message.isObsolete;
+                        if (message.sourceUpdateTime != null && message.hasOwnProperty("sourceUpdateTime"))
+                            object.sourceUpdateTime = $root.google.protobuf.Timestamp.toObject(message.sourceUpdateTime, options);
                         return object;
                     };
     
@@ -18385,6 +20188,587 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -22558,6 +24942,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -22570,6 +24955,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -22745,6 +25131,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -22811,6 +25205,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -22909,6 +25306,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -23020,6 +25422,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -23097,6 +25508,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -23113,8 +25534,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -23182,6 +25605,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -23226,6 +25654,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -23285,6 +25714,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -23319,6 +25756,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -23369,6 +25808,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -23426,6 +25868,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -23459,6 +25906,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -23482,6 +25934,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -23496,6 +25949,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -23526,6 +25981,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -23538,6 +25995,7 @@
                  */
                 function FieldOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -23601,6 +26059,22 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -23639,6 +26113,14 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -23695,6 +26177,19 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1052:
+                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                message[".google.api.fieldBehavior"] = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message[".google.api.fieldBehavior"].push(reader.int32());
+                            } else
+                                message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -23770,6 +26265,27 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                        if (!Array.isArray(message[".google.api.fieldBehavior"]))
+                            return ".google.api.fieldBehavior: array expected";
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            switch (message[".google.api.fieldBehavior"][i]) {
+                            default:
+                                return ".google.api.fieldBehavior: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                break;
+                            }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
+                    }
                     return null;
                 };
     
@@ -23831,6 +26347,44 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.fieldBehavior"]) {
+                        if (!Array.isArray(object[".google.api.fieldBehavior"]))
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
+                        message[".google.api.fieldBehavior"] = [];
+                        for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
+                            switch (object[".google.api.fieldBehavior"][i]) {
+                            default:
+                            case "FIELD_BEHAVIOR_UNSPECIFIED":
+                            case 0:
+                                message[".google.api.fieldBehavior"][i] = 0;
+                                break;
+                            case "OPTIONAL":
+                            case 1:
+                                message[".google.api.fieldBehavior"][i] = 1;
+                                break;
+                            case "REQUIRED":
+                            case 2:
+                                message[".google.api.fieldBehavior"][i] = 2;
+                                break;
+                            case "OUTPUT_ONLY":
+                            case 3:
+                                message[".google.api.fieldBehavior"][i] = 3;
+                                break;
+                            case "INPUT_ONLY":
+                            case 4:
+                                message[".google.api.fieldBehavior"][i] = 4;
+                                break;
+                            case "IMMUTABLE":
+                            case 5:
+                                message[".google.api.fieldBehavior"][i] = 5;
+                                break;
+                            }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -23847,8 +26401,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.fieldBehavior"] = [];
+                    }
                     if (options.defaults) {
                         object.ctype = options.enums === String ? "STRING" : 0;
                         object.packed = false;
@@ -23856,6 +26412,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -23874,6 +26431,13 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
+                        object[".google.api.fieldBehavior"] = [];
+                        for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     
@@ -24624,6 +27188,8 @@
                  * @interface IServiceOptions
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
+                 * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
+                 * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
                  */
     
                 /**
@@ -24659,6 +27225,22 @@
                 ServiceOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * ServiceOptions .google.api.defaultHost.
+                 * @member {string} .google.api.defaultHost
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.defaultHost"] = "";
+    
+                /**
+                 * ServiceOptions .google.api.oauthScopes.
+                 * @member {string} .google.api.oauthScopes
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.oauthScopes"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -24687,6 +27269,10 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
                     return writer;
                 };
     
@@ -24728,6 +27314,12 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1049:
+                            message[".google.api.defaultHost"] = reader.string();
+                            break;
+                        case 1050:
+                            message[".google.api.oauthScopes"] = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -24776,6 +27368,12 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        if (!$util.isString(message[".google.api.defaultHost"]))
+                            return ".google.api.defaultHost: string expected";
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        if (!$util.isString(message[".google.api.oauthScopes"]))
+                            return ".google.api.oauthScopes: string expected";
                     return null;
                 };
     
@@ -24803,6 +27401,10 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.defaultHost"] != null)
+                        message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
+                    if (object[".google.api.oauthScopes"] != null)
+                        message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
                     return message;
                 };
     
@@ -24821,8 +27423,11 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object[".google.api.defaultHost"] = "";
+                        object[".google.api.oauthScopes"] = "";
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
@@ -24830,6 +27435,10 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
                     return object;
                 };
     
@@ -24857,6 +27466,7 @@
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
+                 * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
                  */
     
                 /**
@@ -24869,6 +27479,7 @@
                  */
                 function MethodOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -24908,6 +27519,14 @@
                 MethodOptions.prototype[".google.api.http"] = null;
     
                 /**
+                 * MethodOptions .google.api.methodSignature.
+                 * @member {Array.<string>} .google.api.methodSignature
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
+    
+                /**
                  * Creates a new MethodOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MethodOptions
@@ -24938,6 +27557,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork()).ldelim();
                     return writer;
@@ -24987,6 +27609,11 @@
                             break;
                         case 72295728:
                             message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                            break;
+                        case 1051:
+                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                message[".google.api.methodSignature"] = [];
+                            message[".google.api.methodSignature"].push(reader.string());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -25049,6 +27676,13 @@
                         if (error)
                             return ".google.api.http." + error;
                     }
+                    if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
+                        if (!Array.isArray(message[".google.api.methodSignature"]))
+                            return ".google.api.methodSignature: array expected";
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            if (!$util.isString(message[".google.api.methodSignature"][i]))
+                                return ".google.api.methodSignature: string[] expected";
+                    }
                     return null;
                 };
     
@@ -25095,6 +27729,13 @@
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
                     }
+                    if (object[".google.api.methodSignature"]) {
+                        if (!Array.isArray(object[".google.api.methodSignature"]))
+                            throw TypeError(".google.protobuf.MethodOptions..google.api.methodSignature: array expected");
+                        message[".google.api.methodSignature"] = [];
+                        for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
+                            message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
+                    }
                     return message;
                 };
     
@@ -25111,8 +27752,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.methodSignature"] = [];
+                    }
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
@@ -25126,6 +27769,11 @@
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
+                    }
+                    if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
+                        object[".google.api.methodSignature"] = [];
+                        for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
+                            object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options);

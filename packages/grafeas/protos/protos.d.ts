@@ -382,6 +382,9 @@ export namespace grafeas {
 
             /** Occurrence attestation */
             attestation?: (grafeas.v1.IAttestationOccurrence|null);
+
+            /** Occurrence upgrade */
+            upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
         }
 
         /** Represents an Occurrence. */
@@ -435,8 +438,11 @@ export namespace grafeas {
             /** Occurrence attestation. */
             public attestation?: (grafeas.v1.IAttestationOccurrence|null);
 
+            /** Occurrence upgrade. */
+            public upgrade?: (grafeas.v1.IUpgradeOccurrence|null);
+
             /** Occurrence details. */
-            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation");
+            public details?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade");
 
             /**
              * Creates a new Occurrence instance using the specified properties.
@@ -559,6 +565,9 @@ export namespace grafeas {
 
             /** Note attestation */
             attestation?: (grafeas.v1.IAttestationNote|null);
+
+            /** Note upgrade */
+            upgrade?: (grafeas.v1.IUpgradeNote|null);
         }
 
         /** Represents a Note. */
@@ -618,8 +627,11 @@ export namespace grafeas {
             /** Note attestation. */
             public attestation?: (grafeas.v1.IAttestationNote|null);
 
+            /** Note upgrade. */
+            public upgrade?: (grafeas.v1.IUpgradeNote|null);
+
             /** Note type. */
-            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation");
+            public type?: ("vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade");
 
             /**
              * Creates a new Note instance using the specified properties.
@@ -2816,7 +2828,8 @@ export namespace grafeas {
             PACKAGE = 4,
             DEPLOYMENT = 5,
             DISCOVERY = 6,
-            ATTESTATION = 7
+            ATTESTATION = 7,
+            UPGRADE = 8
         }
 
         /** Properties of a RelatedUrl. */
@@ -4928,6 +4941,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence analysisStatusError */
             analysisStatusError?: (google.rpc.IStatus|null);
+
+            /** DiscoveryOccurrence cpe */
+            cpe?: (string|null);
+
+            /** DiscoveryOccurrence lastScanTime */
+            lastScanTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -4947,6 +4966,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence analysisStatusError. */
             public analysisStatusError?: (google.rpc.IStatus|null);
+
+            /** DiscoveryOccurrence cpe. */
+            public cpe: string;
+
+            /** DiscoveryOccurrence lastScanTime. */
+            public lastScanTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
@@ -5987,6 +6012,651 @@ export namespace grafeas {
             }
         }
 
+        /** Properties of an UpgradeNote. */
+        interface IUpgradeNote {
+
+            /** UpgradeNote package */
+            "package"?: (string|null);
+
+            /** UpgradeNote version */
+            version?: (grafeas.v1.IVersion|null);
+
+            /** UpgradeNote distributions */
+            distributions?: (grafeas.v1.IUpgradeDistribution[]|null);
+
+            /** UpgradeNote windowsUpdate */
+            windowsUpdate?: (grafeas.v1.IWindowsUpdate|null);
+        }
+
+        /** Represents an UpgradeNote. */
+        class UpgradeNote implements IUpgradeNote {
+
+            /**
+             * Constructs a new UpgradeNote.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IUpgradeNote);
+
+            /** UpgradeNote package. */
+            public package: string;
+
+            /** UpgradeNote version. */
+            public version?: (grafeas.v1.IVersion|null);
+
+            /** UpgradeNote distributions. */
+            public distributions: grafeas.v1.IUpgradeDistribution[];
+
+            /** UpgradeNote windowsUpdate. */
+            public windowsUpdate?: (grafeas.v1.IWindowsUpdate|null);
+
+            /**
+             * Creates a new UpgradeNote instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UpgradeNote instance
+             */
+            public static create(properties?: grafeas.v1.IUpgradeNote): grafeas.v1.UpgradeNote;
+
+            /**
+             * Encodes the specified UpgradeNote message. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+             * @param message UpgradeNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IUpgradeNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UpgradeNote message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeNote.verify|verify} messages.
+             * @param message UpgradeNote message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IUpgradeNote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UpgradeNote message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UpgradeNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpgradeNote;
+
+            /**
+             * Decodes an UpgradeNote message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UpgradeNote
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpgradeNote;
+
+            /**
+             * Verifies an UpgradeNote message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UpgradeNote message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UpgradeNote
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpgradeNote;
+
+            /**
+             * Creates a plain object from an UpgradeNote message. Also converts values to other types if specified.
+             * @param message UpgradeNote
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.UpgradeNote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UpgradeNote to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an UpgradeDistribution. */
+        interface IUpgradeDistribution {
+
+            /** UpgradeDistribution cpeUri */
+            cpeUri?: (string|null);
+
+            /** UpgradeDistribution classification */
+            classification?: (string|null);
+
+            /** UpgradeDistribution severity */
+            severity?: (string|null);
+
+            /** UpgradeDistribution cve */
+            cve?: (string[]|null);
+        }
+
+        /** Represents an UpgradeDistribution. */
+        class UpgradeDistribution implements IUpgradeDistribution {
+
+            /**
+             * Constructs a new UpgradeDistribution.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IUpgradeDistribution);
+
+            /** UpgradeDistribution cpeUri. */
+            public cpeUri: string;
+
+            /** UpgradeDistribution classification. */
+            public classification: string;
+
+            /** UpgradeDistribution severity. */
+            public severity: string;
+
+            /** UpgradeDistribution cve. */
+            public cve: string[];
+
+            /**
+             * Creates a new UpgradeDistribution instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UpgradeDistribution instance
+             */
+            public static create(properties?: grafeas.v1.IUpgradeDistribution): grafeas.v1.UpgradeDistribution;
+
+            /**
+             * Encodes the specified UpgradeDistribution message. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+             * @param message UpgradeDistribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IUpgradeDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UpgradeDistribution message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeDistribution.verify|verify} messages.
+             * @param message UpgradeDistribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IUpgradeDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UpgradeDistribution message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UpgradeDistribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpgradeDistribution;
+
+            /**
+             * Decodes an UpgradeDistribution message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UpgradeDistribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpgradeDistribution;
+
+            /**
+             * Verifies an UpgradeDistribution message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UpgradeDistribution message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UpgradeDistribution
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpgradeDistribution;
+
+            /**
+             * Creates a plain object from an UpgradeDistribution message. Also converts values to other types if specified.
+             * @param message UpgradeDistribution
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.UpgradeDistribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UpgradeDistribution to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a WindowsUpdate. */
+        interface IWindowsUpdate {
+
+            /** WindowsUpdate identity */
+            identity?: (grafeas.v1.WindowsUpdate.IIdentity|null);
+
+            /** WindowsUpdate title */
+            title?: (string|null);
+
+            /** WindowsUpdate description */
+            description?: (string|null);
+
+            /** WindowsUpdate categories */
+            categories?: (grafeas.v1.WindowsUpdate.ICategory[]|null);
+
+            /** WindowsUpdate kbArticleIds */
+            kbArticleIds?: (string[]|null);
+
+            /** WindowsUpdate supportUrl */
+            supportUrl?: (string|null);
+
+            /** WindowsUpdate lastPublishedTimestamp */
+            lastPublishedTimestamp?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents a WindowsUpdate. */
+        class WindowsUpdate implements IWindowsUpdate {
+
+            /**
+             * Constructs a new WindowsUpdate.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IWindowsUpdate);
+
+            /** WindowsUpdate identity. */
+            public identity?: (grafeas.v1.WindowsUpdate.IIdentity|null);
+
+            /** WindowsUpdate title. */
+            public title: string;
+
+            /** WindowsUpdate description. */
+            public description: string;
+
+            /** WindowsUpdate categories. */
+            public categories: grafeas.v1.WindowsUpdate.ICategory[];
+
+            /** WindowsUpdate kbArticleIds. */
+            public kbArticleIds: string[];
+
+            /** WindowsUpdate supportUrl. */
+            public supportUrl: string;
+
+            /** WindowsUpdate lastPublishedTimestamp. */
+            public lastPublishedTimestamp?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new WindowsUpdate instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WindowsUpdate instance
+             */
+            public static create(properties?: grafeas.v1.IWindowsUpdate): grafeas.v1.WindowsUpdate;
+
+            /**
+             * Encodes the specified WindowsUpdate message. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+             * @param message WindowsUpdate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IWindowsUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WindowsUpdate message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.verify|verify} messages.
+             * @param message WindowsUpdate message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IWindowsUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WindowsUpdate message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WindowsUpdate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.WindowsUpdate;
+
+            /**
+             * Decodes a WindowsUpdate message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WindowsUpdate
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.WindowsUpdate;
+
+            /**
+             * Verifies a WindowsUpdate message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WindowsUpdate message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WindowsUpdate
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.WindowsUpdate;
+
+            /**
+             * Creates a plain object from a WindowsUpdate message. Also converts values to other types if specified.
+             * @param message WindowsUpdate
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.WindowsUpdate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WindowsUpdate to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace WindowsUpdate {
+
+            /** Properties of an Identity. */
+            interface IIdentity {
+
+                /** Identity updateId */
+                updateId?: (string|null);
+
+                /** Identity revision */
+                revision?: (number|null);
+            }
+
+            /** Represents an Identity. */
+            class Identity implements IIdentity {
+
+                /**
+                 * Constructs a new Identity.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.WindowsUpdate.IIdentity);
+
+                /** Identity updateId. */
+                public updateId: string;
+
+                /** Identity revision. */
+                public revision: number;
+
+                /**
+                 * Creates a new Identity instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Identity instance
+                 */
+                public static create(properties?: grafeas.v1.WindowsUpdate.IIdentity): grafeas.v1.WindowsUpdate.Identity;
+
+                /**
+                 * Encodes the specified Identity message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                 * @param message Identity message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.WindowsUpdate.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Identity message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Identity.verify|verify} messages.
+                 * @param message Identity message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.WindowsUpdate.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Identity message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Identity
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.WindowsUpdate.Identity;
+
+                /**
+                 * Decodes an Identity message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Identity
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.WindowsUpdate.Identity;
+
+                /**
+                 * Verifies an Identity message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Identity
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.WindowsUpdate.Identity;
+
+                /**
+                 * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                 * @param message Identity
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.WindowsUpdate.Identity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Identity to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Category. */
+            interface ICategory {
+
+                /** Category categoryId */
+                categoryId?: (string|null);
+
+                /** Category name */
+                name?: (string|null);
+            }
+
+            /** Represents a Category. */
+            class Category implements ICategory {
+
+                /**
+                 * Constructs a new Category.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.WindowsUpdate.ICategory);
+
+                /** Category categoryId. */
+                public categoryId: string;
+
+                /** Category name. */
+                public name: string;
+
+                /**
+                 * Creates a new Category instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Category instance
+                 */
+                public static create(properties?: grafeas.v1.WindowsUpdate.ICategory): grafeas.v1.WindowsUpdate.Category;
+
+                /**
+                 * Encodes the specified Category message. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                 * @param message Category message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.WindowsUpdate.ICategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Category message, length delimited. Does not implicitly {@link grafeas.v1.WindowsUpdate.Category.verify|verify} messages.
+                 * @param message Category message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.WindowsUpdate.ICategory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Category message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Category
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.WindowsUpdate.Category;
+
+                /**
+                 * Decodes a Category message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Category
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.WindowsUpdate.Category;
+
+                /**
+                 * Verifies a Category message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Category message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Category
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.WindowsUpdate.Category;
+
+                /**
+                 * Creates a plain object from a Category message. Also converts values to other types if specified.
+                 * @param message Category
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.WindowsUpdate.Category, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Category to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+
+        /** Properties of an UpgradeOccurrence. */
+        interface IUpgradeOccurrence {
+
+            /** UpgradeOccurrence package */
+            "package"?: (string|null);
+
+            /** UpgradeOccurrence parsedVersion */
+            parsedVersion?: (grafeas.v1.IVersion|null);
+
+            /** UpgradeOccurrence distribution */
+            distribution?: (grafeas.v1.IUpgradeDistribution|null);
+
+            /** UpgradeOccurrence windowsUpdate */
+            windowsUpdate?: (grafeas.v1.IWindowsUpdate|null);
+        }
+
+        /** Represents an UpgradeOccurrence. */
+        class UpgradeOccurrence implements IUpgradeOccurrence {
+
+            /**
+             * Constructs a new UpgradeOccurrence.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IUpgradeOccurrence);
+
+            /** UpgradeOccurrence package. */
+            public package: string;
+
+            /** UpgradeOccurrence parsedVersion. */
+            public parsedVersion?: (grafeas.v1.IVersion|null);
+
+            /** UpgradeOccurrence distribution. */
+            public distribution?: (grafeas.v1.IUpgradeDistribution|null);
+
+            /** UpgradeOccurrence windowsUpdate. */
+            public windowsUpdate?: (grafeas.v1.IWindowsUpdate|null);
+
+            /**
+             * Creates a new UpgradeOccurrence instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns UpgradeOccurrence instance
+             */
+            public static create(properties?: grafeas.v1.IUpgradeOccurrence): grafeas.v1.UpgradeOccurrence;
+
+            /**
+             * Encodes the specified UpgradeOccurrence message. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+             * @param message UpgradeOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IUpgradeOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified UpgradeOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.UpgradeOccurrence.verify|verify} messages.
+             * @param message UpgradeOccurrence message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IUpgradeOccurrence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an UpgradeOccurrence message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns UpgradeOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.UpgradeOccurrence;
+
+            /**
+             * Decodes an UpgradeOccurrence message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns UpgradeOccurrence
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.UpgradeOccurrence;
+
+            /**
+             * Verifies an UpgradeOccurrence message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an UpgradeOccurrence message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns UpgradeOccurrence
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.UpgradeOccurrence;
+
+            /**
+             * Creates a plain object from an UpgradeOccurrence message. Also converts values to other types if specified.
+             * @param message UpgradeOccurrence
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.UpgradeOccurrence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this UpgradeOccurrence to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Severity enum. */
         enum Severity {
             SEVERITY_UNSPECIFIED = 0,
@@ -6014,6 +6684,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote windowsDetails */
             windowsDetails?: (grafeas.v1.VulnerabilityNote.IWindowsDetail[]|null);
+
+            /** VulnerabilityNote sourceUpdateTime */
+            sourceUpdateTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -6039,6 +6712,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote windowsDetails. */
             public windowsDetails: grafeas.v1.VulnerabilityNote.IWindowsDetail[];
+
+            /** VulnerabilityNote sourceUpdateTime. */
+            public sourceUpdateTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -6148,6 +6824,9 @@ export namespace grafeas {
 
                 /** Detail isObsolete */
                 isObsolete?: (boolean|null);
+
+                /** Detail sourceUpdateTime */
+                sourceUpdateTime?: (google.protobuf.ITimestamp|null);
             }
 
             /** Represents a Detail. */
@@ -6191,6 +6870,9 @@ export namespace grafeas {
 
                 /** Detail isObsolete. */
                 public isObsolete: boolean;
+
+                /** Detail sourceUpdateTime. */
+                public sourceUpdateTime?: (google.protobuf.ITimestamp|null);
 
                 /**
                  * Creates a new Detail instance using the specified properties.
@@ -7279,6 +7961,242 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: google.api.ResourceDescriptor.History;
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -8843,6 +9761,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -9015,6 +9936,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -9135,6 +10059,12 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
@@ -9551,6 +10481,12 @@ export namespace google {
 
             /** ServiceOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ServiceOptions .google.api.defaultHost */
+            ".google.api.defaultHost"?: (string|null);
+
+            /** ServiceOptions .google.api.oauthScopes */
+            ".google.api.oauthScopes"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -9653,6 +10589,9 @@ export namespace google {
 
             /** MethodOptions .google.api.http */
             ".google.api.http"?: (google.api.IHttpRule|null);
+
+            /** MethodOptions .google.api.methodSignature */
+            ".google.api.methodSignature"?: (string[]|null);
         }
 
         /** Represents a MethodOptions. */
