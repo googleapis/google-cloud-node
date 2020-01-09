@@ -527,7 +527,7 @@ export class DeviceManagerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      device_registry_name: request.deviceRegistry!.name || '',
+      'device_registry.name': request.deviceRegistry!.name || '',
     });
     return this._innerApiCalls.updateDeviceRegistry(request, options, callback);
   }
@@ -832,7 +832,7 @@ export class DeviceManagerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      device_name: request.device!.name || '',
+      'device.name': request.device!.name || '',
     });
     return this._innerApiCalls.updateDevice(request, options, callback);
   }
