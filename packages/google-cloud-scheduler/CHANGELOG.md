@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.4.0...v1.4.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* proper routing headers ([8293ffe](https://www.github.com/googleapis/nodejs-scheduler/commit/8293ffe4b3ec687a67640b766c956ce5b693ea8b))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.3.3...v1.4.0) (2020-01-05)
 
 
