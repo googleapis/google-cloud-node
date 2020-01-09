@@ -16,9 +16,7 @@
                         "java_outer_classname": "TransferProto",
                         "java_package": "com.google.cloud.bigquery.datatransfer.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\DataTransfer\\V1",
-                        "objc_class_prefix": "GCBDT",
-                        "(google.api.resource_definition).type": "bigquerydatatransfer.google.com/Parent",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}"
+                        "objc_class_prefix": "GCBDT"
                       },
                       "nested": {
                         "DataTransferService": {
