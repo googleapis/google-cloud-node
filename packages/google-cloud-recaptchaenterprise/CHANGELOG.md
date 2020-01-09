@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.0...v1.5.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* proper routing headers ([4d1b1d3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/4d1b1d31da7e5ca064ad2d26f0a1b1103251bdfa))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.4.0...v1.5.0) (2020-01-02)
 
 
