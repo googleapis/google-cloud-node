@@ -101,6 +101,10 @@
                       }
                     },
                     "Agent": {
+                      "options": {
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Agent",
+                        "(google.api.resource).pattern": "projects/{project}/agent"
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -1146,7 +1150,7 @@
                     },
                     "Intent": {
                       "options": {
-                        "(google.api.resource).type": "pubsub.googleapis.com/Intent",
+                        "(google.api.resource).type": "dialogflow.googleapis.com/Intent",
                         "(google.api.resource).pattern": "projects/{project}/agent/intents/{intent}"
                       },
                       "fields": {
@@ -2610,7 +2614,7 @@
                     },
                     "SessionEntityType": {
                       "options": {
-                        "(google.api.resource).type": "pubsub.googleapis.com/SessionEntityType",
+                        "(google.api.resource).type": "dialogflow.googleapis.com/SessionEntityType",
                         "(google.api.resource).pattern": "projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}"
                       },
                       "fields": {
