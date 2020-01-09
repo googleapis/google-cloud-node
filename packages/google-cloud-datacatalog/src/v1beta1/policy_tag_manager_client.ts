@@ -541,7 +541,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      taxonomy_name: request.taxonomy!.name || '',
+      'taxonomy.name': request.taxonomy!.name || '',
     });
     return this._innerApiCalls.updateTaxonomy(request, options, callback);
   }
@@ -873,7 +873,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      policy_tag_name: request.policyTag!.name || '',
+      'policy_tag.name': request.policyTag!.name || '',
     });
     return this._innerApiCalls.updatePolicyTag(request, options, callback);
   }

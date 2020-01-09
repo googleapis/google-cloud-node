@@ -764,7 +764,7 @@ export class DataCatalogClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      entry_name: request.entry!.name || '',
+      'entry.name': request.entry!.name || '',
     });
     return this._innerApiCalls.updateEntry(request, options, callback);
   }
@@ -1295,7 +1295,7 @@ export class DataCatalogClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      tag_template_name: request.tagTemplate!.name || '',
+      'tag_template.name': request.tagTemplate!.name || '',
     });
     return this._innerApiCalls.updateTagTemplate(request, options, callback);
   }
@@ -1952,7 +1952,7 @@ export class DataCatalogClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      tag_name: request.tag!.name || '',
+      'tag.name': request.tag!.name || '',
     });
     return this._innerApiCalls.updateTag(request, options, callback);
   }
