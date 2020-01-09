@@ -693,7 +693,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      key_name: request.key!.name || '',
+      'key.name': request.key!.name || '',
     });
     return this._innerApiCalls.updateKey(request, options, callback);
   }
