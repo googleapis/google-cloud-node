@@ -15,7 +15,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/datacatalog": "^1.6.2"
+    "@google-cloud/datacatalog": "^1.6.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",

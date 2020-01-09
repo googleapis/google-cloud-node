@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.6.3](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.2...v1.6.3) (2020-01-09)
+
+
+### Bug Fixes
+
+* proper routing headers ([1fc10d6](https://www.github.com/googleapis/nodejs-datacatalog/commit/1fc10d6e538fd2c6a43e160318e6b75c6e0d32e5))
+
 ### [1.6.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.6.1...v1.6.2) (2020-01-08)
 
 
