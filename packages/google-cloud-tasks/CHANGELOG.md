@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.0...v1.7.1) (2020-01-09)
+
+
+### Bug Fixes
+
+* proper routing headers ([8a63747](https://www.github.com/googleapis/nodejs-tasks/commit/8a63747837341b10c3df4e5459387e4a8e7b02b5))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.6.1...v1.7.0) (2020-01-05)
 
 
