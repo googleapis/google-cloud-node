@@ -31,6 +31,10 @@
   * [Vision_classification_create_model](#vision_classification_create_model)
   * [Vision_classification_deploy_model_node_count](#vision_classification_deploy_model_node_count)
   * [Vision_classification_predict](#vision_classification_predict)
+  * [Vision_object_detection_create_dataset](#vision_object_detection_create_dataset)
+  * [Vision_object_detection_create_model](#vision_object_detection_create_model)
+  * [Vision_object_detection_deploy_model_node_count](#vision_object_detection_deploy_model_node_count)
+  * [Vision_object_detection_predict](#vision_object_detection_predict)
 
 ## Before you begin
 
@@ -363,6 +367,74 @@ __Usage:__
 
 
 `node samples/vision_classification_predict.js`
+
+
+-----
+
+
+
+
+### Vision_object_detection_create_dataset
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_create_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_create_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/vision_object_detection_create_dataset.js`
+
+
+-----
+
+
+
+
+### Vision_object_detection_create_model
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_create_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_create_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/vision_object_detection_create_model.js`
+
+
+-----
+
+
+
+
+### Vision_object_detection_deploy_model_node_count
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_deploy_model_node_count.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_deploy_model_node_count.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/vision_object_detection_deploy_model_node_count.js`
+
+
+-----
+
+
+
+
+### Vision_object_detection_predict
+
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/vision_object_detection_predict.js`
 
 
 
