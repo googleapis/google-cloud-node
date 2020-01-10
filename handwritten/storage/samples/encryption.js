@@ -121,37 +121,6 @@ async function downloadEncryptedFile(
   // [END storage_download_encrypted_file]
 }
 
-async function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
-  // [START storage_rotate_encryption_key]
-  // Imports the Google Cloud client library
-  const {Storage} = require('@google-cloud/storage');
-
-  // Creates a client
-  const storage = new Storage();
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const fileName = 'Nome of a file in the bucket, e.g. my-file';
-
-  // See the "Generating your own encryption key" section above.
-  // const oldKey = 'The current base64 encoded customer-supplied encryption key';
-  // const newKey = 'A new base64 encoded customer-supplied encryption key';
-
-  await storage
-    .bucket(bucketName)
-    .file(fileName, {
-      encryptionKey: Buffer.from(oldKey, 'base64'),
-    })
-    .rotateEncryptionKey({
-      encryptionKey: Buffer.from(newKey, 'base64'),
-    });
-
-  console.log(`Encryption key rotated successfully.`);
-  // [END storage_rotate_encryption_key]
-}
-
 require(`yargs`)
   .demand(1)
   .command(
@@ -182,18 +151,6 @@ require(`yargs`)
         opts.srcFilename,
         opts.destFilename,
         opts.key
-      )
-  )
-  .command(
-    `rotate <bucketName> <fileName> <oldKey> <newKey>`,
-    `Rotates encryption keys for a file.`,
-    {},
-    opts =>
-      rotateEncryptionKey(
-        opts.bucketName,
-        opts.fileName,
-        opts.oldKey,
-        opts.newKey
       )
   )
   .example(
