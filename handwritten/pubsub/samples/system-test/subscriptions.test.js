@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2019-2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,7 +48,10 @@ describe('subscriptions', () => {
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
   const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
   const fullSubscriptionNameFour = `projects/${projectId}/subscriptions/${subscriptionNameFour}`;
-  const cmd = `node subscriptions.js`;
+
+  function commandFor(action) {
+    return `node ${action}.js`;
+  }
 
   before(() => {
     return Promise.all([
@@ -70,7 +73,9 @@ describe('subscriptions', () => {
 
   it('should create a subscription', async () => {
     const output = execSync(
-      `${cmd} create ${topicNameOne} ${subscriptionNameOne}`
+      `${commandFor(
+        'createSubscription'
+      )} ${topicNameOne} ${subscriptionNameOne}`
     );
     assert.include(output, `Subscription ${subscriptionNameOne} created.`);
     const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
@@ -79,7 +84,9 @@ describe('subscriptions', () => {
 
   it('should create a push subscription', async () => {
     const output = execSync(
-      `${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`
+      `${commandFor(
+        'createPushSubscription'
+      )} ${topicNameOne} ${subscriptionNameTwo}`
     );
     assert.include(output, `Subscription ${subscriptionNameTwo} created.`);
     const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
@@ -88,7 +95,7 @@ describe('subscriptions', () => {
 
   it('should modify the config of an existing push subscription', async () => {
     const output = execSync(
-      `${cmd} modify-config ${topicNameTwo} ${subscriptionNameTwo}`
+      `${commandFor('modifyPushConfig')} ${topicNameTwo} ${subscriptionNameTwo}`
     );
     assert.include(
       output,
@@ -97,7 +104,9 @@ describe('subscriptions', () => {
   });
 
   it('should get metadata for a subscription', async () => {
-    const output = execSync(`${cmd} get ${subscriptionNameOne}`);
+    const output = execSync(
+      `${commandFor('getSubscription')} ${subscriptionNameOne}`
+    );
     const expected =
       `Subscription: ${fullSubscriptionNameOne}` +
       `\nTopic: ${fullTopicNameOne}` +
@@ -107,14 +116,16 @@ describe('subscriptions', () => {
   });
 
   it('should list all subscriptions', async () => {
-    const output = execSync(`${cmd} list`);
+    const output = execSync(`${commandFor('listSubscriptions')}`);
     assert.match(output, /Subscriptions:/);
     assert.match(output, new RegExp(fullSubscriptionNameOne));
     assert.match(output, new RegExp(fullSubscriptionNameTwo));
   });
 
   it('should list subscriptions for a topic', async () => {
-    const output = execSync(`${cmd} list ${topicNameOne}`);
+    const output = execSync(
+      `${commandFor('listTopicSubscriptions')} ${topicNameOne}`
+    );
     assert.match(output, new RegExp(`Subscriptions for ${topicNameOne}:`));
     assert.match(output, new RegExp(fullSubscriptionNameOne));
     assert.match(output, new RegExp(fullSubscriptionNameTwo));
@@ -124,14 +135,16 @@ describe('subscriptions', () => {
     const messageIds = await pubsub
       .topic(topicNameOne)
       .publish(Buffer.from(`Hello, world!`));
-    const output = execSync(`${cmd} listen-messages ${subscriptionNameOne}`);
+    const output = execSync(
+      `${commandFor('listenForMessages')} ${subscriptionNameOne}`
+    );
     assert.match(output, new RegExp(`Received message ${messageIds}:`));
   });
 
   it('should listen for messages synchronously', async () => {
     pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
     const output = await execPromise(
-      `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`
+      `${commandFor('synchronousPull')} ${projectId} ${subscriptionNameOne}`
     );
     assert.match(output, /Done./);
   });
@@ -142,7 +155,9 @@ describe('subscriptions', () => {
     await topicTwo.publish(Buffer.from(`Hello, world!`));
 
     const output = execSync(
-      `${cmd} listen-flow-control ${subscriptionNameFour} -m 5`
+      `${commandFor(
+        'subscribeWithFlowControlSettings'
+      )} ${subscriptionNameFour} 5`
     );
     assert.include(
       output,
@@ -154,7 +169,7 @@ describe('subscriptions', () => {
 
   it('should listen for ordered messages', async () => {
     const timeout = 5;
-    const subscriptions = require('../subscriptions');
+    const subscriptions = require('../listenForOrderedMessages');
     const spy = {calls: []};
     const log = console.log;
     console.log = (...args) => {
@@ -215,13 +230,16 @@ describe('subscriptions', () => {
 
   it('should listen for error messages', async () => {
     assertRejects(
-      () => execPromise(`${cmd} listen-errors nonexistent-subscription`),
+      () =>
+        execPromise(
+          `${commandFor('listenForErrors')} nonexistent-subscription`
+        ),
       /Resource not found/
     );
   });
 
   it('should set the IAM policy for a subscription', async () => {
-    execSync(`${cmd} set-policy ${subscriptionNameOne}`);
+    execSync(`${commandFor('setSubscriptionPolicy')} ${subscriptionNameOne}`);
     const results = await pubsub
       .subscription(subscriptionNameOne)
       .iam.getPolicy();
@@ -244,7 +262,9 @@ describe('subscriptions', () => {
     const results = await pubsub
       .subscription(subscriptionNameOne)
       .iam.getPolicy();
-    const output = execSync(`${cmd} get-policy ${subscriptionNameOne}`);
+    const output = execSync(
+      `${commandFor('getSubscriptionPolicy')} ${subscriptionNameOne}`
+    );
     assert.include(
       output,
       `Policy for subscription: ${JSON.stringify(results[0].bindings)}.`
@@ -252,12 +272,16 @@ describe('subscriptions', () => {
   });
 
   it('should test permissions for a subscription', async () => {
-    const output = execSync(`${cmd} test-permissions ${subscriptionNameOne}`);
+    const output = execSync(
+      `${commandFor('testSubscriptionPermissions')} ${subscriptionNameOne}`
+    );
     assert.match(output, /Tested permissions for subscription/);
   });
 
   it('should delete a subscription', async () => {
-    const output = execSync(`${cmd} delete ${subscriptionNameOne}`);
+    const output = execSync(
+      `${commandFor('deleteSubscription')} ${subscriptionNameOne}`
+    );
     assert.include(output, `Subscription ${subscriptionNameOne} deleted.`);
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);

@@ -1,7 +1,9 @@
 {
   "name": "nodejs-docs-samples-pubsub",
   "files": [
-    "*.js"
+    "*.js",
+    "subscriptions/*.js",
+    "topics/*.js"
   ],
   "private": true,
   "license": "Apache-2.0",
@@ -14,8 +16,7 @@
     "test": "mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^1.2.0",
-    "yargs": "^15.0.0"
+    "@google-cloud/pubsub": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

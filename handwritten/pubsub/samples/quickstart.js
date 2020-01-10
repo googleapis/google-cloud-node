@@ -14,6 +14,11 @@
 
 'use strict';
 
+// sample-metadata:
+//   title: Quickstart
+//   description: A quick introduction to using the Pub/Sub client library.
+//   usage: node quickstart.js <project-id> <topic-name>
+
 // [START pubsub_quickstart_create_topic]
 // Imports the Google Cloud client library
 const {PubSub} = require('@google-cloud/pubsub');
