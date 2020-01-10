@@ -57,7 +57,7 @@ it('should generate a key', () => {
 
 it('should upload a file', async () => {
   const output = execSync(
-    `${cmd} upload ${bucketName} ${filePath} ${fileName} ${key}`
+    `node uploadEncryptedFile.js ${bucketName} ${filePath} ${fileName} ${key}`
   );
   assert.match(
     output,

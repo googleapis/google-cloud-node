@@ -45,42 +45,6 @@ function generateEncryptionKey() {
 }
 // [END storage_generate_encryption_key]
 
-async function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
-  // [START storage_upload_encrypted_file]
-  // Imports the Google Cloud client library
-  const {Storage} = require('@google-cloud/storage');
-
-  // Creates a client
-  const storage = new Storage();
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const bucketName = 'Name of a bucket, e.g. my-bucket';
-  // const srcFilename = 'Local file to upload, e.g. ./local/path/to/file.txt';
-  // const destFilename = 'Remote destination for file, e.g. file_encrypted.txt';
-
-  // See the "Generating your own encryption key" section above.
-  // const key = 'A base64 encoded customer-supplied key';
-
-  const options = {
-    // The path to which the file should be uploaded, e.g. "file_encrypted.txt"
-    destination: destFilename,
-    // Encrypt the file with a customer-supplied key.
-    // See the "Generating your own encryption key" section above.
-    encryptionKey: Buffer.from(key, 'base64'),
-  };
-
-  // Encrypts and uploads a local file, e.g. "./local/path/to/file.txt".
-  // The file will only be retrievable using the key used to upload it.
-  await storage.bucket(bucketName).upload(srcFilename, options);
-
-  console.log(
-    `File ${srcFilename} uploaded to gs://${bucketName}/${destFilename}.`
-  );
-  // [END storage_upload_encrypted_file]
-}
-
 async function downloadEncryptedFile(
   bucketName,
   srcFilename,
@@ -128,18 +92,6 @@ require(`yargs`)
     `Generate a sample encryption key.`,
     {},
     generateEncryptionKey
-  )
-  .command(
-    `upload <bucketName> <srcFilename> <destFilename> <key>`,
-    `Encrypts and uploads a file.`,
-    {},
-    opts =>
-      uploadEncryptedFile(
-        opts.bucketName,
-        opts.srcFilename,
-        opts.destFilename,
-        opts.key
-      )
   )
   .command(
     `download <bucketName> <srcFilename> <destFilename> <key>`,
