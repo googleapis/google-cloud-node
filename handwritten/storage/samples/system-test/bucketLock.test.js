@@ -64,7 +64,7 @@ it('should set a retention policy on a bucket', () => {
 });
 
 it('should get a retention policy on a bucket', () => {
-  const output = execSync(`${cmd} get-retention-policy ${bucketName}`);
+  const output = execSync(`node getRetentionPolicy.js ${bucketName}`);
   assert.match(output, /A retention policy exists!/);
 });
 
