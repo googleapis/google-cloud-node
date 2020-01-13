@@ -23,14 +23,14 @@ export GCLOUD_TESTS_NODEJS_PROJECT_ID="cloud-profiler-e2e"
 export GCLOUD_TESTS_NODEJS_ZONE="us-east4-b"
 export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 
-# Move test to go path.
-export GOPATH="$HOME/go"
-mkdir -p "$GOPATH/src"
-cp -R "system-test" "$GOPATH/src/proftest"
-
 # Run test.
-cd "$GOPATH/src/proftest"
-retry go get -t -d -tags=integration .
+cd "system-test"
+
+# Initializing go modules allows our dependencies to install versions of their
+# dependencies specified by their go.mod files. This reduces the likelihood of
+# dependencies breaking this test.
+retry go mod init e2e
+
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
   go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
 else

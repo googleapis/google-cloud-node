@@ -14,7 +14,7 @@
 
 // +build integration,go1.7
 
-package testing
+package e2e
 
 import (
 	"bytes"
