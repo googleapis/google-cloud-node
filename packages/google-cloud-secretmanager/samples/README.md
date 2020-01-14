@@ -31,6 +31,12 @@
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-secret-manager#using-the-client-library).
 
+`cd samples`
+
+`npm install`
+
+`cd ..`
+
 ## Samples
 
 
@@ -44,7 +50,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node accessSecretVersion.js`
+`node samples/accessSecretVersion.js`
 
 
 -----
@@ -61,7 +67,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node addSecretVersion.js`
+`node samples/addSecretVersion.js`
 
 
 -----
@@ -78,7 +84,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node createSecret.js`
+`node samples/createSecret.js`
 
 
 -----
@@ -95,7 +101,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node deleteSecret.js`
+`node samples/deleteSecret.js`
 
 
 -----
@@ -112,7 +118,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node destroySecretVersion.js`
+`node samples/destroySecretVersion.js`
 
 
 -----
@@ -129,7 +135,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node disableSecretVersion.js`
+`node samples/disableSecretVersion.js`
 
 
 -----
@@ -146,7 +152,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node enableSecretVersion.js`
+`node samples/enableSecretVersion.js`
 
 
 -----
@@ -163,7 +169,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node getSecret.js`
+`node samples/getSecret.js`
 
 
 -----
@@ -180,7 +186,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node getSecretVersion.js`
+`node samples/getSecretVersion.js`
 
 
 -----
@@ -197,7 +203,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node listSecretVersions.js`
+`node samples/listSecretVersions.js`
 
 
 -----
@@ -214,7 +220,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node listSecrets.js`
+`node samples/listSecrets.js`
 
 
 -----
@@ -231,7 +237,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node quickstart.js`
+`node samples/quickstart.js`
 
 
 -----
@@ -248,7 +254,7 @@ View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/
 __Usage:__
 
 
-`node updateSecret.js`
+`node samples/updateSecret.js`
 
 
 

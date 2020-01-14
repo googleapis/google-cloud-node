@@ -221,6 +221,9 @@ export class SecretManagerServiceClient {
     for (const methodName of secretManagerServiceStubMethods) {
       const innerCallPromise = this.secretManagerServiceStub.then(
         stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -241,9 +244,6 @@ export class SecretManagerServiceClient {
         callOptions?: CallOptions,
         callback?: APICallback
       ) => {
-        if (this._terminated) {
-          return Promise.reject('The client has already been closed.');
-        }
         return apiCall(argument, callOptions, callback);
       };
     }
@@ -602,7 +602,7 @@ export class SecretManagerServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      secret_name: request.secret!.name || '',
+      'secret.name': request.secret!.name || '',
     });
     return this._innerApiCalls.updateSecret(request, options, callback);
   }
@@ -1639,7 +1639,7 @@ export class SecretManagerServiceClient {
    * @param {string} secret
    * @returns {string} Resource name string.
    */
-  secretversionPath(project: string, secret: string) {
+  secretVersionPath(project: string, secret: string) {
     return this._pathTemplates.secretversionPathTemplate.render({
       project,
       secret,
