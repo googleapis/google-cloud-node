@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.1.1...v1.1.2) (2020-01-14)
+
+
+### Bug Fixes
+
+* address bug with termination logic ([d69739c](https://www.github.com/googleapis/nodejs-secret-manager/commit/d69739cdec025e49f944b9474b85d46ee4addf67))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v1.1.0...v1.1.1) (2020-01-08)
 
 
