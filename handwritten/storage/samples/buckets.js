@@ -39,6 +39,33 @@ async function listBuckets() {
   // [END storage_list_buckets]
 }
 
+async function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
+  // [START storage_set_bucket_default_kms_key]
+  // Imports the Google Cloud client library
+  const {Storage} = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const defaultKmsKeyName = 'KMS key resource id, e.g. my-key';
+
+  // Enables a default KMS key for the bucket
+  await storage.bucket(bucketName).setMetadata({
+    encryption: {
+      defaultKmsKeyName,
+    },
+  });
+
+  console.log(
+    `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
+  );
+  // [END storage_set_bucket_default_kms_key]
+}
+
 async function getUniformBucketLevelAccess(bucketName) {
   // [START storage_get_uniform_bucket_level_access]
   // Imports the Google Cloud client library
@@ -73,6 +100,12 @@ async function getUniformBucketLevelAccess(bucketName) {
 require(`yargs`)
   .demand(1)
   .command(`list`, `Lists all buckets in the current project.`, {}, listBuckets)
+  .command(
+    `enable-default-kms-key <bucket> <defaultKmsKeyName>`,
+    `Sets the default KMS key for the specified bucket.`,
+    {},
+    opts => enableDefaultKMSKey(opts.bucket, opts.defaultKmsKeyName)
+  )
   .command(
     `get-uniform-bucket-level-access <bucket>`,
     `Get uniform bucket-level access metadata for the specified bucket.`,

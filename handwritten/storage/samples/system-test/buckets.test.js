@@ -82,9 +82,7 @@ it(`should enable a bucket's uniform bucket-level access`, async () => {
 });
 
 it(`should get a bucket's uniform bucket-level access metadata`, async () => {
-  const output = execSync(
-    `${cmd} get-uniform-bucket-level-access ${bucketName}`
-  );
+  const output = execSync(`node getUniformBucketLevelAccess.js ${bucketName}`);
 
   assert.match(
     output,
