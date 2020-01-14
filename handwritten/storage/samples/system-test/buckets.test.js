@@ -116,7 +116,7 @@ it(`should disable a bucket's uniform bucket-level access`, async () => {
 });
 
 it(`should delete a bucket`, async () => {
-  const output = execSync(`${cmd} delete ${bucketName}`);
+  const output = execSync(`node deleteBucket.js ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, false);
