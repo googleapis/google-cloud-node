@@ -1802,6 +1802,10 @@
                   },
                   "nested": {
                     "ContainerAnalysis": {
+                      "options": {
+                        "(google.api.default_host)": "containeranalysis.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -1810,7 +1814,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/notes/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/occurrences/*}:setIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,policy"
                           }
                         },
                         "GetIamPolicy": {
@@ -1820,7 +1825,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/notes/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/occurrences/*}:getIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource"
                           }
                         },
                         "TestIamPermissions": {
@@ -1830,7 +1836,8 @@
                             "(google.api.http).post": "/v1/{resource=projects/*/notes/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{resource=projects/*/occurrences/*}:testIamPermissions",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,permissions"
                           }
                         }
                       }
