@@ -67,7 +67,8 @@
                           "responseType": "ListInfoTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/infoTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/locations/{location_id}/infoTypes"
+                            "(google.api.http).additional_bindings.get": "/v2/locations/{location_id}/infoTypes",
+                            "(google.api.method_signature)": "location_id"
                           }
                         },
                         "CreateInspectTemplate": {
@@ -77,7 +78,8 @@
                             "(google.api.http).post": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,inspect_template,location_id"
                           }
                         },
                         "UpdateInspectTemplate": {
@@ -87,7 +89,8 @@
                             "(google.api.http).patch": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,inspect_template,update_mask"
                           }
                         },
                         "GetInspectTemplate": {
@@ -95,7 +98,8 @@
                           "responseType": "InspectTemplate",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListInspectTemplates": {
@@ -103,7 +107,8 @@
                           "responseType": "ListInspectTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/inspectTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/inspectTemplates",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "DeleteInspectTemplate": {
@@ -111,7 +116,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateDeidentifyTemplate": {
@@ -121,7 +127,8 @@
                             "(google.api.http).post": "/v2/{parent=organizations/*}/deidentifyTemplates",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,deidentify_template,location_id"
                           }
                         },
                         "UpdateDeidentifyTemplate": {
@@ -131,7 +138,8 @@
                             "(google.api.http).patch": "/v2/{name=organizations/*/deidentifyTemplates/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,deidentify_template,update_mask"
                           }
                         },
                         "GetDeidentifyTemplate": {
@@ -139,7 +147,8 @@
                           "responseType": "DeidentifyTemplate",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/deidentifyTemplates/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListDeidentifyTemplates": {
@@ -147,7 +156,8 @@
                           "responseType": "ListDeidentifyTemplatesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/deidentifyTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/deidentifyTemplates",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "DeleteDeidentifyTemplate": {
@@ -155,7 +165,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/deidentifyTemplates/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/deidentifyTemplates/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateJobTrigger": {
@@ -165,7 +176,8 @@
                             "(google.api.http).post": "/v2/{parent=projects/*}/jobTriggers",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,job_trigger,location_id"
                           }
                         },
                         "UpdateJobTrigger": {
@@ -175,7 +187,8 @@
                             "(google.api.http).patch": "/v2/{name=projects/*/jobTriggers/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,job_trigger,update_mask"
                           }
                         },
                         "GetJobTrigger": {
@@ -183,7 +196,8 @@
                           "responseType": "JobTrigger",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/jobTriggers/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListJobTriggers": {
@@ -191,7 +205,8 @@
                           "responseType": "ListJobTriggersResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/jobTriggers",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/jobTriggers",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "DeleteJobTrigger": {
@@ -199,7 +214,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/jobTriggers/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/jobTriggers/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ActivateJobTrigger": {
@@ -219,7 +235,8 @@
                             "(google.api.http).post": "/v2/{parent=projects/*}/dlpJobs",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,risk_job,location_id"
                           }
                         },
                         "ListDlpJobs": {
@@ -227,7 +244,8 @@
                           "responseType": "ListDlpJobsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*}/dlpJobs",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/dlpJobs",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetDlpJob": {
@@ -235,7 +253,8 @@
                           "responseType": "DlpJob",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/dlpJobs/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/dlpJobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "DeleteDlpJob": {
@@ -243,7 +262,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/dlpJobs/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/dlpJobs/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/dlpJobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CancelDlpJob": {
@@ -263,7 +283,8 @@
                             "(google.api.http).post": "/v2/{parent=organizations/*}/storedInfoTypes",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,config,location_id"
                           }
                         },
                         "UpdateStoredInfoType": {
@@ -273,7 +294,8 @@
                             "(google.api.http).patch": "/v2/{name=organizations/*/storedInfoTypes/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,config,update_mask"
                           }
                         },
                         "GetStoredInfoType": {
@@ -281,7 +303,8 @@
                           "responseType": "StoredInfoType",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/storedInfoTypes/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListStoredInfoTypes": {
@@ -289,7 +312,8 @@
                           "responseType": "ListStoredInfoTypesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/storedInfoTypes",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes"
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*}/locations/{location_id}/storedInfoTypes",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "DeleteStoredInfoType": {
@@ -297,7 +321,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/storedInfoTypes/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/storedInfoTypes/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         }
                       }
@@ -338,13 +363,6 @@
                           "type": "MatchingType",
                           "id": 4
                         }
-                      }
-                    },
-                    "ContentOption": {
-                      "values": {
-                        "CONTENT_UNSPECIFIED": 0,
-                        "CONTENT_TEXT": 1,
-                        "CONTENT_IMAGE": 2
                       }
                     },
                     "InspectionRule": {
@@ -586,14 +604,6 @@
                           "type": "ContentLocation",
                           "id": 7
                         }
-                      }
-                    },
-                    "MatchingType": {
-                      "values": {
-                        "MATCHING_TYPE_UNSPECIFIED": 0,
-                        "MATCHING_TYPE_FULL_MATCH": 1,
-                        "MATCHING_TYPE_PARTIAL_MATCH": 2,
-                        "MATCHING_TYPE_INVERSE_MATCH": 3
                       }
                     },
                     "ContentLocation": {
@@ -1088,7 +1098,10 @@
                       "fields": {
                         "field": {
                           "type": "FieldId",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "infoType": {
                           "type": "InfoType",
@@ -1108,16 +1121,25 @@
                       "fields": {
                         "table": {
                           "type": "BigQueryTable",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "quasiIds": {
                           "rule": "repeated",
                           "type": "QuasiIdentifierField",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "relativeFrequency": {
                           "type": "FieldId",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       },
                       "nested": {
@@ -1222,7 +1244,10 @@
                             "quasiIds": {
                               "rule": "repeated",
                               "type": "TaggedField",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "regionCode": {
                               "type": "string",
@@ -1248,7 +1273,10 @@
                               "fields": {
                                 "field": {
                                   "type": "FieldId",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 },
                                 "infoType": {
                                   "type": "InfoType",
@@ -1268,16 +1296,25 @@
                               "fields": {
                                 "table": {
                                   "type": "BigQueryTable",
-                                  "id": 3
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 },
                                 "quasiIds": {
                                   "rule": "repeated",
                                   "type": "QuasiIdField",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 },
                                 "relativeFrequency": {
                                   "type": "FieldId",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1302,7 +1339,10 @@
                             "quasiIds": {
                               "rule": "repeated",
                               "type": "QuasiId",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "regionCode": {
                               "type": "string",
@@ -1933,15 +1973,24 @@
                       "fields": {
                         "lowerBound": {
                           "type": "Value",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "upperBound": {
                           "type": "Value",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "bucketSize": {
                           "type": "double",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1985,7 +2034,10 @@
                       "fields": {
                         "cryptoKey": {
                           "type": "CryptoKey",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "context": {
                           "type": "FieldId",
@@ -2049,7 +2101,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2057,26 +2112,28 @@
                       "fields": {
                         "key": {
                           "type": "bytes",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
-                      }
-                    },
-                    "InfoTypeSupportedBy": {
-                      "values": {
-                        "ENUM_TYPE_UNSPECIFIED": 0,
-                        "INSPECT": 1,
-                        "RISK_ANALYSIS": 2
                       }
                     },
                     "KmsWrappedCryptoKey": {
                       "fields": {
                         "wrappedKey": {
                           "type": "bytes",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "cryptoKeyName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2091,11 +2148,17 @@
                       "fields": {
                         "upperBoundDays": {
                           "type": "int32",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "lowerBoundDays": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "context": {
                           "type": "FieldId",
@@ -2112,7 +2175,10 @@
                         "transformations": {
                           "rule": "repeated",
                           "type": "InfoTypeTransformation",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       },
                       "nested": {
@@ -2125,7 +2191,10 @@
                             },
                             "primitiveTransformation": {
                               "type": "PrimitiveTransformation",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         }
@@ -2144,7 +2213,10 @@
                         "fields": {
                           "rule": "repeated",
                           "type": "FieldId",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "condition": {
                           "type": "RecordCondition",
@@ -2194,11 +2266,17 @@
                           "fields": {
                             "field": {
                               "type": "FieldId",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "operator": {
                               "type": "RelationalOperator",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "value": {
                               "type": "Value",
@@ -2339,7 +2417,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2351,11 +2432,17 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "inspectConfig": {
                           "type": "InspectConfig",
@@ -2371,7 +2458,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -2383,11 +2473,17 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "deidentifyConfig": {
                           "type": "DeidentifyConfig",
@@ -2445,23 +2541,38 @@
                         "errors": {
                           "rule": "repeated",
                           "type": "Error",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "lastRunTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "status": {
                           "type": "Status",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       },
                       "nested": {
@@ -2572,7 +2683,10 @@
                         },
                         "inspectTemplate": {
                           "type": "InspectTemplate",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "templateId": {
                           "type": "string",
@@ -2681,7 +2795,10 @@
                         },
                         "jobTrigger": {
                           "type": "JobTrigger",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "triggerId": {
                           "type": "string",
@@ -2968,18 +3085,6 @@
                         }
                       }
                     },
-                    "RelationalOperator": {
-                      "values": {
-                        "RELATIONAL_OPERATOR_UNSPECIFIED": 0,
-                        "EQUAL_TO": 1,
-                        "NOT_EQUAL_TO": 2,
-                        "GREATER_THAN": 3,
-                        "LESS_THAN": 4,
-                        "GREATER_THAN_OR_EQUALS": 5,
-                        "LESS_THAN_OR_EQUALS": 6,
-                        "EXISTS": 7
-                      }
-                    },
                     "ListDlpJobsResponse": {
                       "fields": {
                         "jobs": {
@@ -3029,7 +3134,10 @@
                         },
                         "deidentifyTemplate": {
                           "type": "DeidentifyTemplate",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "templateId": {
                           "type": "string",
@@ -3254,7 +3362,10 @@
                         },
                         "config": {
                           "type": "StoredInfoTypeConfig",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "storedInfoTypeId": {
                           "type": "string",
@@ -3349,6 +3460,40 @@
                             "(google.api.resource_reference).type": "dlp.googleapis.com/StoredInfoType"
                           }
                         }
+                      }
+                    },
+                    "RelationalOperator": {
+                      "values": {
+                        "RELATIONAL_OPERATOR_UNSPECIFIED": 0,
+                        "EQUAL_TO": 1,
+                        "NOT_EQUAL_TO": 2,
+                        "GREATER_THAN": 3,
+                        "LESS_THAN": 4,
+                        "GREATER_THAN_OR_EQUALS": 5,
+                        "LESS_THAN_OR_EQUALS": 6,
+                        "EXISTS": 7
+                      }
+                    },
+                    "MatchingType": {
+                      "values": {
+                        "MATCHING_TYPE_UNSPECIFIED": 0,
+                        "MATCHING_TYPE_FULL_MATCH": 1,
+                        "MATCHING_TYPE_PARTIAL_MATCH": 2,
+                        "MATCHING_TYPE_INVERSE_MATCH": 3
+                      }
+                    },
+                    "ContentOption": {
+                      "values": {
+                        "CONTENT_UNSPECIFIED": 0,
+                        "CONTENT_TEXT": 1,
+                        "CONTENT_IMAGE": 2
+                      }
+                    },
+                    "InfoTypeSupportedBy": {
+                      "values": {
+                        "ENUM_TYPE_UNSPECIFIED": 0,
+                        "INSPECT": 1,
+                        "RISK_ANALYSIS": 2
                       }
                     },
                     "DlpJobType": {
@@ -3917,7 +4062,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -4010,6 +4155,22 @@
                 }
               }
             },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -4091,22 +4252,6 @@
                   "id": 2
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },

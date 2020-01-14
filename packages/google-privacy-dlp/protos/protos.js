@@ -1657,22 +1657,6 @@
                         return ExclusionRule;
                     })();
     
-                    /**
-                     * ContentOption enum.
-                     * @name google.privacy.dlp.v2.ContentOption
-                     * @enum {string}
-                     * @property {number} CONTENT_UNSPECIFIED=0 CONTENT_UNSPECIFIED value
-                     * @property {number} CONTENT_TEXT=1 CONTENT_TEXT value
-                     * @property {number} CONTENT_IMAGE=2 CONTENT_IMAGE value
-                     */
-                    v2.ContentOption = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CONTENT_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "CONTENT_TEXT"] = 1;
-                        values[valuesById[2] = "CONTENT_IMAGE"] = 2;
-                        return values;
-                    })();
-    
                     v2.InspectionRule = (function() {
     
                         /**
@@ -4993,24 +4977,6 @@
                         };
     
                         return Location;
-                    })();
-    
-                    /**
-                     * MatchingType enum.
-                     * @name google.privacy.dlp.v2.MatchingType
-                     * @enum {string}
-                     * @property {number} MATCHING_TYPE_UNSPECIFIED=0 MATCHING_TYPE_UNSPECIFIED value
-                     * @property {number} MATCHING_TYPE_FULL_MATCH=1 MATCHING_TYPE_FULL_MATCH value
-                     * @property {number} MATCHING_TYPE_PARTIAL_MATCH=2 MATCHING_TYPE_PARTIAL_MATCH value
-                     * @property {number} MATCHING_TYPE_INVERSE_MATCH=3 MATCHING_TYPE_INVERSE_MATCH value
-                     */
-                    v2.MatchingType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MATCHING_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MATCHING_TYPE_FULL_MATCH"] = 1;
-                        values[valuesById[2] = "MATCHING_TYPE_PARTIAL_MATCH"] = 2;
-                        values[valuesById[3] = "MATCHING_TYPE_INVERSE_MATCH"] = 3;
-                        return values;
                     })();
     
                     v2.ContentLocation = (function() {
@@ -25219,22 +25185,6 @@
                         return UnwrappedCryptoKey;
                     })();
     
-                    /**
-                     * InfoTypeSupportedBy enum.
-                     * @name google.privacy.dlp.v2.InfoTypeSupportedBy
-                     * @enum {string}
-                     * @property {number} ENUM_TYPE_UNSPECIFIED=0 ENUM_TYPE_UNSPECIFIED value
-                     * @property {number} INSPECT=1 INSPECT value
-                     * @property {number} RISK_ANALYSIS=2 RISK_ANALYSIS value
-                     */
-                    v2.InfoTypeSupportedBy = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ENUM_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "INSPECT"] = 1;
-                        values[valuesById[2] = "RISK_ANALYSIS"] = 2;
-                        return values;
-                    })();
-    
                     v2.KmsWrappedCryptoKey = (function() {
     
                         /**
@@ -36637,32 +36587,6 @@
                         return ListDlpJobsRequest;
                     })();
     
-                    /**
-                     * RelationalOperator enum.
-                     * @name google.privacy.dlp.v2.RelationalOperator
-                     * @enum {string}
-                     * @property {number} RELATIONAL_OPERATOR_UNSPECIFIED=0 RELATIONAL_OPERATOR_UNSPECIFIED value
-                     * @property {number} EQUAL_TO=1 EQUAL_TO value
-                     * @property {number} NOT_EQUAL_TO=2 NOT_EQUAL_TO value
-                     * @property {number} GREATER_THAN=3 GREATER_THAN value
-                     * @property {number} LESS_THAN=4 LESS_THAN value
-                     * @property {number} GREATER_THAN_OR_EQUALS=5 GREATER_THAN_OR_EQUALS value
-                     * @property {number} LESS_THAN_OR_EQUALS=6 LESS_THAN_OR_EQUALS value
-                     * @property {number} EXISTS=7 EXISTS value
-                     */
-                    v2.RelationalOperator = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "RELATIONAL_OPERATOR_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "EQUAL_TO"] = 1;
-                        values[valuesById[2] = "NOT_EQUAL_TO"] = 2;
-                        values[valuesById[3] = "GREATER_THAN"] = 3;
-                        values[valuesById[4] = "LESS_THAN"] = 4;
-                        values[valuesById[5] = "GREATER_THAN_OR_EQUALS"] = 5;
-                        values[valuesById[6] = "LESS_THAN_OR_EQUALS"] = 6;
-                        values[valuesById[7] = "EXISTS"] = 7;
-                        return values;
-                    })();
-    
                     v2.ListDlpJobsResponse = (function() {
     
                         /**
@@ -41572,6 +41496,82 @@
                         };
     
                         return DeleteStoredInfoTypeRequest;
+                    })();
+    
+                    /**
+                     * RelationalOperator enum.
+                     * @name google.privacy.dlp.v2.RelationalOperator
+                     * @enum {string}
+                     * @property {number} RELATIONAL_OPERATOR_UNSPECIFIED=0 RELATIONAL_OPERATOR_UNSPECIFIED value
+                     * @property {number} EQUAL_TO=1 EQUAL_TO value
+                     * @property {number} NOT_EQUAL_TO=2 NOT_EQUAL_TO value
+                     * @property {number} GREATER_THAN=3 GREATER_THAN value
+                     * @property {number} LESS_THAN=4 LESS_THAN value
+                     * @property {number} GREATER_THAN_OR_EQUALS=5 GREATER_THAN_OR_EQUALS value
+                     * @property {number} LESS_THAN_OR_EQUALS=6 LESS_THAN_OR_EQUALS value
+                     * @property {number} EXISTS=7 EXISTS value
+                     */
+                    v2.RelationalOperator = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RELATIONAL_OPERATOR_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EQUAL_TO"] = 1;
+                        values[valuesById[2] = "NOT_EQUAL_TO"] = 2;
+                        values[valuesById[3] = "GREATER_THAN"] = 3;
+                        values[valuesById[4] = "LESS_THAN"] = 4;
+                        values[valuesById[5] = "GREATER_THAN_OR_EQUALS"] = 5;
+                        values[valuesById[6] = "LESS_THAN_OR_EQUALS"] = 6;
+                        values[valuesById[7] = "EXISTS"] = 7;
+                        return values;
+                    })();
+    
+                    /**
+                     * MatchingType enum.
+                     * @name google.privacy.dlp.v2.MatchingType
+                     * @enum {string}
+                     * @property {number} MATCHING_TYPE_UNSPECIFIED=0 MATCHING_TYPE_UNSPECIFIED value
+                     * @property {number} MATCHING_TYPE_FULL_MATCH=1 MATCHING_TYPE_FULL_MATCH value
+                     * @property {number} MATCHING_TYPE_PARTIAL_MATCH=2 MATCHING_TYPE_PARTIAL_MATCH value
+                     * @property {number} MATCHING_TYPE_INVERSE_MATCH=3 MATCHING_TYPE_INVERSE_MATCH value
+                     */
+                    v2.MatchingType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MATCHING_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MATCHING_TYPE_FULL_MATCH"] = 1;
+                        values[valuesById[2] = "MATCHING_TYPE_PARTIAL_MATCH"] = 2;
+                        values[valuesById[3] = "MATCHING_TYPE_INVERSE_MATCH"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * ContentOption enum.
+                     * @name google.privacy.dlp.v2.ContentOption
+                     * @enum {string}
+                     * @property {number} CONTENT_UNSPECIFIED=0 CONTENT_UNSPECIFIED value
+                     * @property {number} CONTENT_TEXT=1 CONTENT_TEXT value
+                     * @property {number} CONTENT_IMAGE=2 CONTENT_IMAGE value
+                     */
+                    v2.ContentOption = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CONTENT_TEXT"] = 1;
+                        values[valuesById[2] = "CONTENT_IMAGE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * InfoTypeSupportedBy enum.
+                     * @name google.privacy.dlp.v2.InfoTypeSupportedBy
+                     * @enum {string}
+                     * @property {number} ENUM_TYPE_UNSPECIFIED=0 ENUM_TYPE_UNSPECIFIED value
+                     * @property {number} INSPECT=1 INSPECT value
+                     * @property {number} RISK_ANALYSIS=2 RISK_ANALYSIS value
+                     */
+                    v2.InfoTypeSupportedBy = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENUM_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "INSPECT"] = 1;
+                        values[valuesById[2] = "RISK_ANALYSIS"] = 2;
+                        return values;
                     })();
     
                     /**

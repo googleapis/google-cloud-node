@@ -142,6 +142,8 @@ const InspectionRuleSet = {
  *   The number should be among the values of [Likelihood]{@link google.privacy.dlp.v2.Likelihood}
  *
  * @property {Object} limits
+ *   Configuration to control the number of findings returned.
+ *
  *   This object should have the same structure as [FindingLimits]{@link google.privacy.dlp.v2.FindingLimits}
  *
  * @property {boolean} includeQuote
@@ -178,6 +180,8 @@ const InspectConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Configuration to control the number of findings returned.
+   *
    * @property {number} maxFindingsPerItem
    *   Max number of findings that will be returned for each item scanned.
    *   When set within `InspectDataSourceRequest`,
@@ -245,17 +249,51 @@ const ByteContentItem = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * The type of data being sent to in data.
+   *
    * @enum {number}
    * @memberof google.privacy.dlp.v2
    */
   BytesType: {
+
+    /**
+     * Unused
+     */
     BYTES_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * Any image type.
+     */
     IMAGE: 6,
+
+    /**
+     * jpeg
+     */
     IMAGE_JPEG: 1,
+
+    /**
+     * bmp
+     */
     IMAGE_BMP: 2,
+
+    /**
+     * png
+     */
     IMAGE_PNG: 3,
+
+    /**
+     * svg
+     */
     IMAGE_SVG: 4,
+
+    /**
+     * plain text
+     */
     TEXT_UTF8: 5,
+
+    /**
+     * avro
+     */
     AVRO: 11
   }
 };
@@ -292,9 +330,13 @@ const ContentItem = {
  * learn more.
  *
  * @property {Object[]} headers
+ *   Headers of the table.
+ *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
  * @property {Object[]} rows
+ *   Rows of the table.
+ *
  *   This object should have the same structure as [Row]{@link google.privacy.dlp.v2.Row}
  *
  * @typedef Table
@@ -305,7 +347,11 @@ const Table = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Values of the row.
+   *
    * @property {Object[]} values
+   *   Individual cells.
+   *
    *   This object should have the same structure as [Value]{@link google.privacy.dlp.v2.Value}
    *
    * @typedef Row
@@ -428,9 +474,9 @@ const Location = {
  *   The top level name is the source file name or table name. Names of some
  *   common storage containers are formatted as follows:
  *
- *   * BigQuery tables:  `<project_id>:<dataset_id>.<table_id>`
- *   * Cloud Storage files: `gs://<bucket>/<path>`
- *   * Datastore namespace: <namespace>
+ *   * BigQuery tables:  `{project_id}:{dataset_id}.{table_id}`
+ *   * Cloud Storage files: `gs://{bucket}/{path}`
+ *   * Datastore namespace: {namespace}
  *
  *   Nested names could be absent if the embedded object has no string
  *   identifier (for an example an image contained within a document).
@@ -718,14 +764,14 @@ const RedactImageResponse = {
  *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
  *
  * @property {string} inspectTemplateName
- *   Optional template to use. Any configuration directly specified in
+ *   Template to use. Any configuration directly specified in
  *   inspect_config will override those set in the template. Singular fields
  *   that are set in this request will replace their corresponding fields in the
  *   template. Repeated fields are appended. Singular sub-messages and groups
  *   are recursively merged.
  *
  * @property {string} deidentifyTemplateName
- *   Optional template to use. Any configuration directly specified in
+ *   Template to use. Any configuration directly specified in
  *   deidentify_config will override those set in the template. Singular fields
  *   that are set in this request will replace their corresponding fields in the
  *   template. Repeated fields are appended. Singular sub-messages and groups
@@ -795,14 +841,14 @@ const DeidentifyContentResponse = {
  *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
  *
  * @property {string} inspectTemplateName
- *   Optional template to use. Any configuration directly specified in
+ *   Template to use. Any configuration directly specified in
  *   `inspect_config` will override those set in the template. Singular fields
  *   that are set in this request will replace their corresponding fields in the
  *   template. Repeated fields are appended. Singular sub-messages and groups
  *   are recursively merged.
  *
  * @property {string} reidentifyTemplateName
- *   Optional template to use. References an instance of `DeidentifyTemplate`.
+ *   Template to use. References an instance of `DeidentifyTemplate`.
  *   Any configuration directly specified in `reidentify_config` or
  *   `inspect_config` will override those set in the template. Singular fields
  *   that are set in this request will replace their corresponding fields in the
@@ -860,7 +906,7 @@ const ReidentifyContentResponse = {
  *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
  *
  * @property {string} inspectTemplateName
- *   Optional template to use. Any configuration directly specified in
+ *   Template to use. Any configuration directly specified in
  *   inspect_config will override those set in the template. Singular fields
  *   that are set in this request will replace their corresponding fields in the
  *   template. Repeated fields are appended. Singular sub-messages and groups
@@ -942,6 +988,10 @@ const OutputStorageConfig = {
    * @memberof google.privacy.dlp.v2
    */
   OutputSchema: {
+
+    /**
+     * Unused.
+     */
     OUTPUT_SCHEMA_UNSPECIFIED: 0,
 
     /**
@@ -1012,6 +1062,8 @@ const InspectDataSourceDetails = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Snapshot of the inspection configuration.
+   *
    * @property {Object} snapshotInspectTemplate
    *   If run with an InspectTemplate, a snapshot of its state at the time of
    *   this run.
@@ -1019,6 +1071,8 @@ const InspectDataSourceDetails = {
    *   This object should have the same structure as [InspectTemplate]{@link google.privacy.dlp.v2.InspectTemplate}
    *
    * @property {Object} jobConfig
+   *   Inspect config.
+   *
    *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
    *
    * @typedef RequestedOptions
@@ -1083,12 +1137,12 @@ const InfoTypeDescription = {
  * Request for the list of infoTypes.
  *
  * @property {string} languageCode
- *   Optional BCP-47 language code for localized infoType friendly
+ *   BCP-47 language code for localized infoType friendly
  *   names. If omitted, or if localized strings are not available,
  *   en-US strings will be returned.
  *
  * @property {string} filter
- *   Optional filter to only return infoTypes supported by certain parts of the
+ *   filter to only return infoTypes supported by certain parts of the
  *   API. Defaults to supported_by=INSPECT.
  *
  * @property {string} locationId
@@ -1151,7 +1205,7 @@ const RiskAnalysisJobConfig = {
  * A column with a semantic tag attached.
  *
  * @property {Object} field
- *   Identifies the column. [required]
+ *   Required. Identifies the column.
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
@@ -1193,19 +1247,18 @@ const QuasiId = {
  * tuple is highly reidentifiable).
  *
  * @property {Object} table
- *   Auxiliary table location. [required]
+ *   Required. Auxiliary table location.
  *
  *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
  *
  * @property {Object[]} quasiIds
- *   Quasi-identifier columns. [required]
+ *   Required. Quasi-identifier columns.
  *
  *   This object should have the same structure as [QuasiIdentifierField]{@link google.privacy.dlp.v2.QuasiIdentifierField}
  *
  * @property {Object} relativeFrequency
- *   The relative frequency column must contain a floating-point number
+ *   Required. The relative frequency column must contain a floating-point number
  *   between 0 and 1 (inclusive). Null values are assumed to be zero.
- *   [required]
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
@@ -1221,9 +1274,14 @@ const StatisticalTable = {
    * in the data corresponds to which column in the statistical model.
    *
    * @property {Object} field
+   *   Identifies the column.
+   *
    *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
    *
    * @property {string} customTag
+   *   A column can be tagged with a custom tag. In this case, the user must
+   *   indicate an auxiliary table that contains statistical information on
+   *   the possible values of this column (below).
    *
    * @typedef QuasiIdentifierField
    * @memberof google.privacy.dlp.v2
@@ -1238,21 +1296,33 @@ const StatisticalTable = {
  * Privacy metric to compute for reidentification risk analysis.
  *
  * @property {Object} numericalStatsConfig
+ *   Numerical stats
+ *
  *   This object should have the same structure as [NumericalStatsConfig]{@link google.privacy.dlp.v2.NumericalStatsConfig}
  *
  * @property {Object} categoricalStatsConfig
+ *   Categorical stats
+ *
  *   This object should have the same structure as [CategoricalStatsConfig]{@link google.privacy.dlp.v2.CategoricalStatsConfig}
  *
  * @property {Object} kAnonymityConfig
+ *   K-anonymity
+ *
  *   This object should have the same structure as [KAnonymityConfig]{@link google.privacy.dlp.v2.KAnonymityConfig}
  *
  * @property {Object} lDiversityConfig
+ *   l-diversity
+ *
  *   This object should have the same structure as [LDiversityConfig]{@link google.privacy.dlp.v2.LDiversityConfig}
  *
  * @property {Object} kMapEstimationConfig
+ *   k-map
+ *
  *   This object should have the same structure as [KMapEstimationConfig]{@link google.privacy.dlp.v2.KMapEstimationConfig}
  *
  * @property {Object} deltaPresenceEstimationConfig
+ *   delta-presence
+ *
  *   This object should have the same structure as [DeltaPresenceEstimationConfig]{@link google.privacy.dlp.v2.DeltaPresenceEstimationConfig}
  *
  * @typedef PrivacyMetric
@@ -1313,7 +1383,7 @@ const PrivacyMetric = {
    *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
    *
    * @property {Object} entityId
-   *   Optional message indicating that multiple rows might be associated to a
+   *   Message indicating that multiple rows might be associated to a
    *   single individual. If the same entity_id is associated to multiple
    *   quasi-identifier tuples over distinct rows, we consider the entire
    *   collection of tuples as the composite quasi-identifier. This collection
@@ -1364,17 +1434,16 @@ const PrivacyMetric = {
    * using publicly available data (like the US Census), or using a custom
    * statistical model (indicated as one or several BigQuery tables), or by
    * extrapolating from the distribution of values in the input dataset.
-   * A column with a semantic tag attached.
    *
    * @property {Object[]} quasiIds
-   *   Fields considered to be quasi-identifiers. No two columns can have the
-   *   same tag. [required]
+   *   Required. Fields considered to be quasi-identifiers. No two columns can have the
+   *   same tag.
    *
    *   This object should have the same structure as [TaggedField]{@link google.privacy.dlp.v2.TaggedField}
    *
    * @property {string} regionCode
    *   ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-   *   Required if no column is tagged with a region-specific InfoType (like
+   *   Set if no column is tagged with a region-specific InfoType (like
    *   US_ZIP_5) or a region code.
    *
    * @property {Object[]} auxiliaryTables
@@ -1392,8 +1461,10 @@ const PrivacyMetric = {
     // This is for documentation. Actual contents will be loaded by gRPC.
 
     /**
+     * A column with a semantic tag attached.
+     *
      * @property {Object} field
-     *   Identifies the column. [required]
+     *   Required. Identifies the column.
      *
      *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
      *
@@ -1435,19 +1506,18 @@ const PrivacyMetric = {
      * tuple is highly reidentifiable).
      *
      * @property {Object} table
-     *   Auxiliary table location. [required]
+     *   Required. Auxiliary table location.
      *
      *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
      *
      * @property {Object[]} quasiIds
-     *   Quasi-identifier columns. [required]
+     *   Required. Quasi-identifier columns.
      *
      *   This object should have the same structure as [QuasiIdField]{@link google.privacy.dlp.v2.QuasiIdField}
      *
      * @property {Object} relativeFrequency
-     *   The relative frequency column must contain a floating-point number
+     *   Required. The relative frequency column must contain a floating-point number
      *   between 0 and 1 (inclusive). Null values are assumed to be zero.
-     *   [required]
      *
      *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
      *
@@ -1463,9 +1533,12 @@ const PrivacyMetric = {
        * in the data corresponds to which column in the statistical model.
        *
        * @property {Object} field
+       *   Identifies the column.
+       *
        *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
        *
        * @property {string} customTag
+       *   A auxiliary field.
        *
        * @typedef QuasiIdField
        * @memberof google.privacy.dlp.v2
@@ -1484,14 +1557,14 @@ const PrivacyMetric = {
    * knowing the attack dataset, so we use a statistical model instead.
    *
    * @property {Object[]} quasiIds
-   *   Fields considered to be quasi-identifiers. No two fields can have the
-   *   same tag. [required]
+   *   Required. Fields considered to be quasi-identifiers. No two fields can have the
+   *   same tag.
    *
    *   This object should have the same structure as [QuasiId]{@link google.privacy.dlp.v2.QuasiId}
    *
    * @property {string} regionCode
    *   ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-   *   Required if no column is tagged with a region-specific InfoType (like
+   *   Set if no column is tagged with a region-specific InfoType (like
    *   US_ZIP_5) or a region code.
    *
    * @property {Object[]} auxiliaryTables
@@ -1524,21 +1597,33 @@ const PrivacyMetric = {
  *   This object should have the same structure as [BigQueryTable]{@link google.privacy.dlp.v2.BigQueryTable}
  *
  * @property {Object} numericalStatsResult
+ *   Numerical stats result
+ *
  *   This object should have the same structure as [NumericalStatsResult]{@link google.privacy.dlp.v2.NumericalStatsResult}
  *
  * @property {Object} categoricalStatsResult
+ *   Categorical stats result
+ *
  *   This object should have the same structure as [CategoricalStatsResult]{@link google.privacy.dlp.v2.CategoricalStatsResult}
  *
  * @property {Object} kAnonymityResult
+ *   K-anonymity result
+ *
  *   This object should have the same structure as [KAnonymityResult]{@link google.privacy.dlp.v2.KAnonymityResult}
  *
  * @property {Object} lDiversityResult
+ *   L-divesity result
+ *
  *   This object should have the same structure as [LDiversityResult]{@link google.privacy.dlp.v2.LDiversityResult}
  *
  * @property {Object} kMapEstimationResult
+ *   K-map result
+ *
  *   This object should have the same structure as [KMapEstimationResult]{@link google.privacy.dlp.v2.KMapEstimationResult}
  *
  * @property {Object} deltaPresenceEstimationResult
+ *   Delta-presence result
+ *
  *   This object should have the same structure as [DeltaPresenceEstimationResult]{@link google.privacy.dlp.v2.DeltaPresenceEstimationResult}
  *
  * @typedef AnalyzeDataSourceRiskDetails
@@ -1591,6 +1676,8 @@ const AnalyzeDataSourceRiskDetails = {
     // This is for documentation. Actual contents will be loaded by gRPC.
 
     /**
+     * Histogram of value frequencies in the column.
+     *
      * @property {number} valueFrequencyLowerBound
      *   Lower bound on the value frequency of the values in this bucket.
      *
@@ -1656,6 +1743,8 @@ const AnalyzeDataSourceRiskDetails = {
     },
 
     /**
+     * Histogram of k-anonymity equivalence classes.
+     *
      * @property {number} equivalenceClassSizeLowerBound
      *   Lower bound on the size of the equivalence classes in this bucket.
      *
@@ -1727,6 +1816,8 @@ const AnalyzeDataSourceRiskDetails = {
     },
 
     /**
+     * Histogram of l-diversity equivalence class sensitive value frequencies.
+     *
      * @property {number} sensitiveValueFrequencyLowerBound
      *   Lower bound on the sensitive value frequencies of the equivalence
      *   classes in this bucket.
@@ -1951,23 +2042,35 @@ const ValueFrequency = {
  * int64 only holds up to 8 bytes of data.
  *
  * @property {number} integerValue
+ *   integer
  *
  * @property {number} floatValue
+ *   float
  *
  * @property {string} stringValue
+ *   string
  *
  * @property {boolean} booleanValue
+ *   boolean
  *
  * @property {Object} timestampValue
+ *   timestamp
+ *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} timeValue
+ *   time of day
+ *
  *   This object should have the same structure as [TimeOfDay]{@link google.type.TimeOfDay}
  *
  * @property {Object} dateValue
+ *   date
+ *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {number} dayOfWeekValue
+ *   day of week
+ *
  *   The number should be among the values of [DayOfWeek]{@link google.type.DayOfWeek}
  *
  * @typedef Value
@@ -1999,18 +2102,24 @@ const QuoteInfo = {
  * e.g. 2018-01-01, 5th August.
  *
  * @property {Object} date
- *   One or more of the following must be set. All fields are optional, but
- *   when set must be valid date or time values.
+ *   One or more of the following must be set.
+ *   Must be a valid date or time value.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {number} dayOfWeek
+ *   Day of week
+ *
  *   The number should be among the values of [DayOfWeek]{@link google.type.DayOfWeek}
  *
  * @property {Object} time
+ *   Time of day
+ *
  *   This object should have the same structure as [TimeOfDay]{@link google.type.TimeOfDay}
  *
  * @property {Object} timeZone
+ *   Time zone
+ *
  *   This object should have the same structure as [TimeZone]{@link google.privacy.dlp.v2.TimeZone}
  *
  * @typedef DateTime
@@ -2021,6 +2130,8 @@ const DateTime = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Time zone of the date time object.
+   *
    * @property {number} offsetMinutes
    *   Set only if the offset can be determined. Positive for time ahead of UTC.
    *   E.g. For "UTC-9", this value is -540.
@@ -2062,36 +2173,58 @@ const DeidentifyConfig = {
  * A rule for transforming a value.
  *
  * @property {Object} replaceConfig
+ *   Replace
+ *
  *   This object should have the same structure as [ReplaceValueConfig]{@link google.privacy.dlp.v2.ReplaceValueConfig}
  *
  * @property {Object} redactConfig
+ *   Redact
+ *
  *   This object should have the same structure as [RedactConfig]{@link google.privacy.dlp.v2.RedactConfig}
  *
  * @property {Object} characterMaskConfig
+ *   Mask
+ *
  *   This object should have the same structure as [CharacterMaskConfig]{@link google.privacy.dlp.v2.CharacterMaskConfig}
  *
  * @property {Object} cryptoReplaceFfxFpeConfig
+ *   Ffx-Fpe
+ *
  *   This object should have the same structure as [CryptoReplaceFfxFpeConfig]{@link google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig}
  *
  * @property {Object} fixedSizeBucketingConfig
+ *   Fixed size bucketing
+ *
  *   This object should have the same structure as [FixedSizeBucketingConfig]{@link google.privacy.dlp.v2.FixedSizeBucketingConfig}
  *
  * @property {Object} bucketingConfig
+ *   Bucketing
+ *
  *   This object should have the same structure as [BucketingConfig]{@link google.privacy.dlp.v2.BucketingConfig}
  *
  * @property {Object} replaceWithInfoTypeConfig
+ *   Replace with infotype
+ *
  *   This object should have the same structure as [ReplaceWithInfoTypeConfig]{@link google.privacy.dlp.v2.ReplaceWithInfoTypeConfig}
  *
  * @property {Object} timePartConfig
+ *   Time extraction
+ *
  *   This object should have the same structure as [TimePartConfig]{@link google.privacy.dlp.v2.TimePartConfig}
  *
  * @property {Object} cryptoHashConfig
+ *   Crypto
+ *
  *   This object should have the same structure as [CryptoHashConfig]{@link google.privacy.dlp.v2.CryptoHashConfig}
  *
  * @property {Object} dateShiftConfig
+ *   Date Shift
+ *
  *   This object should have the same structure as [DateShiftConfig]{@link google.privacy.dlp.v2.DateShiftConfig}
  *
  * @property {Object} cryptoDeterministicConfig
+ *   Deterministic Crypto
+ *
  *   This object should have the same structure as [CryptoDeterministicConfig]{@link google.privacy.dlp.v2.CryptoDeterministicConfig}
  *
  * @typedef PrimitiveTransformation
@@ -2107,6 +2240,8 @@ const PrimitiveTransformation = {
  * portion of the value.
  *
  * @property {number} partToExtract
+ *   The part of the time to keep.
+ *
  *   The number should be among the values of [TimePart]{@link google.privacy.dlp.v2.TimePart}
  *
  * @typedef TimePartConfig
@@ -2117,10 +2252,16 @@ const TimePartConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Components that make up time.
+   *
    * @enum {number}
    * @memberof google.privacy.dlp.v2
    */
   TimePart: {
+
+    /**
+     * Unused
+     */
     TIME_PART_UNSPECIFIED: 0,
 
     /**
@@ -2192,7 +2333,7 @@ const CryptoHashConfig = {
  *   This annotation will be applied to the surrogate by prefixing it with
  *   the name of the custom info type followed by the number of
  *   characters comprising the surrogate. The following scheme defines the
- *   format: <info type name>(<surrogate character count>):<surrogate>
+ *   format: {info type name}({surrogate character count}):{surrogate}
  *
  *   For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
  *   the surrogate is 'abc', the full replacement value
@@ -2203,7 +2344,7 @@ const CryptoHashConfig = {
  *   surrogate when it occurs in free text.
  *
  *   Note: For record transformations where the entire cell in a table is being
- *   transformed, surrogates are optional to use. Surrogates are used to denote
+ *   transformed, surrogates are not mandatory. Surrogates are used to denote
  *   the location of the token and are necessary for re-identification in free
  *   form text.
  *
@@ -2224,7 +2365,7 @@ const CryptoHashConfig = {
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
  * @property {Object} context
- *   Optional. A context may be used for higher security and maintaining
+ *   A context may be used for higher security and maintaining
  *   referential integrity such that the same identifier in two different
  *   contexts will be given a distinct surrogate. The context is appended to
  *   plaintext value being encrypted. On decryption the provided context is
@@ -2296,8 +2437,12 @@ const RedactConfig = {
  * alone and skipped.
  *
  * @property {string} charactersToSkip
+ *   Characters to not transform when masking.
  *
  * @property {number} commonCharactersToIgnore
+ *   Common characters to not transform when masking. Useful to avoid removing
+ *   punctuation.
+ *
  *   The number should be among the values of [CommonCharsToIgnore]{@link google.privacy.dlp.v2.CommonCharsToIgnore}
  *
  * @typedef CharsToIgnore
@@ -2308,10 +2453,16 @@ const CharsToIgnore = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Convenience enum for indication common characters to not transform.
+   *
    * @enum {number}
    * @memberof google.privacy.dlp.v2
    */
   CommonCharsToIgnore: {
+
+    /**
+     * Unused.
+     */
     COMMON_CHARS_TO_IGNORE_UNSPECIFIED: 0,
 
     /**
@@ -2389,7 +2540,7 @@ const CharacterMaskConfig = {
  * the user for simple bucketing strategies.
  *
  * The transformed value will be a hyphenated string of
- * <lower_bound>-<upper_bound>, i.e if lower_bound = 10 and upper_bound = 20
+ * {lower_bound}-{upper_bound}, i.e if lower_bound = 10 and upper_bound = 20
  * all values that are within this bucket will be replaced with "10-20".
  *
  * This can be used on data of type: double, long.
@@ -2401,25 +2552,24 @@ const CharacterMaskConfig = {
  * See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
  *
  * @property {Object} lowerBound
- *   Lower bound value of buckets. All values less than `lower_bound` are
+ *   Required. Lower bound value of buckets. All values less than `lower_bound` are
  *   grouped together into a single bucket; for example if `lower_bound` = 10,
- *   then all values less than 10 are replaced with the value “-10”. [Required].
+ *   then all values less than 10 are replaced with the value “-10”.
  *
  *   This object should have the same structure as [Value]{@link google.privacy.dlp.v2.Value}
  *
  * @property {Object} upperBound
- *   Upper bound value of buckets. All values greater than upper_bound are
+ *   Required. Upper bound value of buckets. All values greater than upper_bound are
  *   grouped together into a single bucket; for example if `upper_bound` = 89,
  *   then all values greater than 89 are replaced with the value “89+”.
- *   [Required].
  *
  *   This object should have the same structure as [Value]{@link google.privacy.dlp.v2.Value}
  *
  * @property {number} bucketSize
- *   Size of each bucket (except for minimum and maximum buckets). So if
+ *   Required. Size of each bucket (except for minimum and maximum buckets). So if
  *   `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
  *   following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
- *   60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].
+ *   60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
  *
  * @typedef FixedSizeBucketingConfig
  * @memberof google.privacy.dlp.v2
@@ -2497,7 +2647,7 @@ const BucketingConfig = {
  * referential integrity.
  *
  * @property {Object} cryptoKey
- *   The key used by the encryption algorithm. [required]
+ *   Required. The key used by the encryption algorithm.
  *
  *   This object should have the same structure as [CryptoKey]{@link google.privacy.dlp.v2.CryptoKey}
  *
@@ -2526,6 +2676,8 @@ const BucketingConfig = {
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
  * @property {number} commonAlphabet
+ *   Common alphabets.
+ *
  *   The number should be among the values of [FfxCommonNativeAlphabet]{@link google.privacy.dlp.v2.FfxCommonNativeAlphabet}
  *
  * @property {string} customAlphabet
@@ -2585,6 +2737,10 @@ const CryptoReplaceFfxFpeConfig = {
    * @memberof google.privacy.dlp.v2
    */
   FfxCommonNativeAlphabet: {
+
+    /**
+     * Unused.
+     */
     FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED: 0,
 
     /**
@@ -2617,12 +2773,18 @@ const CryptoReplaceFfxFpeConfig = {
  * unwrap the data crypto key.
  *
  * @property {Object} transient
+ *   Transient crypto key
+ *
  *   This object should have the same structure as [TransientCryptoKey]{@link google.privacy.dlp.v2.TransientCryptoKey}
  *
  * @property {Object} unwrapped
+ *   Unwrapped crypto key
+ *
  *   This object should have the same structure as [UnwrappedCryptoKey]{@link google.privacy.dlp.v2.UnwrappedCryptoKey}
  *
  * @property {Object} kmsWrapped
+ *   Kms wrapped key
+ *
  *   This object should have the same structure as [KmsWrappedCryptoKey]{@link google.privacy.dlp.v2.KmsWrappedCryptoKey}
  *
  * @typedef CryptoKey
@@ -2638,7 +2800,7 @@ const CryptoKey = {
  * It will be discarded after the request finishes.
  *
  * @property {string} name
- *   Name of the key. [required]
+ *   Required. Name of the key.
  *   This is an arbitrary string used to differentiate different keys.
  *   A unique key is generated per name: two separate `TransientCryptoKey`
  *   protos share the same generated key if their names are the same.
@@ -2658,7 +2820,7 @@ const TransientCryptoKey = {
  * leaking the key. Choose another type of key if possible.
  *
  * @property {Buffer} key
- *   A 128/192/256 bit key. [required]
+ *   Required. A 128/192/256 bit key.
  *
  * @typedef UnwrappedCryptoKey
  * @memberof google.privacy.dlp.v2
@@ -2676,10 +2838,10 @@ const UnwrappedCryptoKey = {
  * dlp.kms.encrypt
  *
  * @property {Buffer} wrappedKey
- *   The wrapped data crypto key. [required]
+ *   Required. The wrapped data crypto key.
  *
  * @property {string} cryptoKeyName
- *   The resource name of the KMS CryptoKey to use for unwrapping. [required]
+ *   Required. The resource name of the KMS CryptoKey to use for unwrapping.
  *
  * @typedef KmsWrappedCryptoKey
  * @memberof google.privacy.dlp.v2
@@ -2695,16 +2857,14 @@ const KmsWrappedCryptoKey = {
  * to learn more.
  *
  * @property {number} upperBoundDays
- *   Range of shift in days. Actual shift will be selected at random within this
+ *   Required. Range of shift in days. Actual shift will be selected at random within this
  *   range (inclusive ends). Negative means shift to earlier in time. Must not
  *   be more than 365250 days (1000 years) each direction.
  *
  *   For example, 3 means shift date to at most 3 days into the future.
- *   [Required]
  *
  * @property {number} lowerBoundDays
- *   For example, -5 means shift date to at most 5 days back in the past.
- *   [Required]
+ *   Required. For example, -5 means shift date to at most 5 days back in the past.
  *
  * @property {Object} context
  *   Points to the field that contains the context, for example, an entity id.
@@ -2735,8 +2895,8 @@ const DateShiftConfig = {
  * info_type.
  *
  * @property {Object[]} transformations
- *   Transformation for each infoType. Cannot specify more than one
- *   for a given infoType. [required]
+ *   Required. Transformation for each infoType. Cannot specify more than one
+ *   for a given infoType.
  *
  *   This object should have the same structure as [InfoTypeTransformation]{@link google.privacy.dlp.v2.InfoTypeTransformation}
  *
@@ -2759,7 +2919,7 @@ const InfoTypeTransformations = {
    *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
    *
    * @property {Object} primitiveTransformation
-   *   Primitive transformation to apply to the infoType. [required]
+   *   Required. Primitive transformation to apply to the infoType.
    *
    *   This object should have the same structure as [PrimitiveTransformation]{@link google.privacy.dlp.v2.PrimitiveTransformation}
    *
@@ -2776,14 +2936,14 @@ const InfoTypeTransformations = {
  * The transformation to apply to the field.
  *
  * @property {Object[]} fields
- *   Input field(s) to apply the transformation to. [required]
+ *   Required. Input field(s) to apply the transformation to.
  *
  *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
  * @property {Object} condition
  *   Only apply the transformation if the condition evaluates to true for the
  *   given `RecordCondition`. The conditions are allowed to reference fields
- *   that are not used in the actual transformation. [optional]
+ *   that are not used in the actual transformation.
  *
  *   Example Use Cases:
  *
@@ -2823,7 +2983,7 @@ const FieldTransformation = {
  *
  * @property {Object[]} recordSuppressions
  *   Configuration defining which records get suppressed entirely. Records that
- *   match any suppression rule are omitted from the output [optional].
+ *   match any suppression rule are omitted from the output.
  *
  *   This object should have the same structure as [RecordSuppression]{@link google.privacy.dlp.v2.RecordSuppression}
  *
@@ -2891,17 +3051,17 @@ const RecordCondition = {
    * the condition will evaluate to false.
    *
    * @property {Object} field
-   *   Field within the record this condition is evaluated against. [required]
+   *   Required. Field within the record this condition is evaluated against.
    *
    *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
    *
    * @property {number} operator
-   *   Operator used to compare the field or infoType to the value. [required]
+   *   Required. Operator used to compare the field or infoType to the value.
    *
    *   The number should be among the values of [RelationalOperator]{@link google.privacy.dlp.v2.RelationalOperator}
    *
    * @property {Object} value
-   *   Value to compare against. [Required, except for `EXISTS` tests.]
+   *   Value to compare against. [Mandatory, except for `EXISTS` tests.]
    *
    *   This object should have the same structure as [Value]{@link google.privacy.dlp.v2.Value}
    *
@@ -2917,6 +3077,8 @@ const RecordCondition = {
    * A collection of conditions.
    *
    * @property {Object[]} conditions
+   *   A collection of conditions.
+   *
    *   This object should have the same structure as [Condition]{@link google.privacy.dlp.v2.Condition}
    *
    * @typedef Conditions
@@ -2937,6 +3099,8 @@ const RecordCondition = {
    *   The number should be among the values of [LogicalOperator]{@link google.privacy.dlp.v2.LogicalOperator}
    *
    * @property {Object} conditions
+   *   Conditions to apply to the expression.
+   *
    *   This object should have the same structure as [Conditions]{@link google.privacy.dlp.v2.Conditions}
    *
    * @typedef Expressions
@@ -2947,11 +3111,21 @@ const RecordCondition = {
     // This is for documentation. Actual contents will be loaded by gRPC.
 
     /**
+     * Logical operators for conditional checks.
+     *
      * @enum {number}
      * @memberof google.privacy.dlp.v2
      */
     LogicalOperator: {
+
+      /**
+       * Unused
+       */
       LOGICAL_OPERATOR_UNSPECIFIED: 0,
+
+      /**
+       * Conditional AND
+       */
       AND: 1
     }
   }
@@ -3009,6 +3183,8 @@ const TransformationOverview = {
  *   This object should have the same structure as [RecordSuppression]{@link google.privacy.dlp.v2.RecordSuppression}
  *
  * @property {Object[]} results
+ *   Collection of all transformations that took place or had an error.
+ *
  *   This object should have the same structure as [SummaryResult]{@link google.privacy.dlp.v2.SummaryResult}
  *
  * @property {number} transformedBytes
@@ -3026,8 +3202,11 @@ const TransformationSummary = {
    * `TransformationResultCode` and error details occurred.
    *
    * @property {number} count
+   *   Number of transformations counted by this result.
    *
    * @property {number} code
+   *   Outcome of the transformation.
+   *
    *   The number should be among the values of [TransformationResultCode]{@link google.privacy.dlp.v2.TransformationResultCode}
    *
    * @property {string} details
@@ -3049,8 +3228,20 @@ const TransformationSummary = {
    * @memberof google.privacy.dlp.v2
    */
   TransformationResultCode: {
+
+    /**
+     * Unused
+     */
     TRANSFORMATION_RESULT_CODE_UNSPECIFIED: 0,
+
+    /**
+     * Transformation completed without an error.
+     */
     SUCCESS: 1,
+
+    /**
+     * Transformation had an error.
+     */
     ERROR: 2
   }
 };
@@ -3085,11 +3276,11 @@ const Schedule = {
  * to learn more.
  *
  * @property {string} name
- *   The template name. Output only.
+ *   Output only. The template name.
  *
  *   The template will have one of the following formats:
  *   `projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID` OR
- *   `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`
+ *   `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`;
  *
  * @property {string} displayName
  *   Display name (max 256 chars).
@@ -3098,12 +3289,12 @@ const Schedule = {
  *   Short description (max 256 chars).
  *
  * @property {Object} createTime
- *   The creation timestamp of an inspectTemplate, output only field.
+ *   Output only. The creation timestamp of an inspectTemplate.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The last update timestamp of an inspectTemplate, output only field.
+ *   Output only. The last update timestamp of an inspectTemplate.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -3125,7 +3316,7 @@ const InspectTemplate = {
  * See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
  *
  * @property {string} name
- *   The template name. Output only.
+ *   Output only. The template name.
  *
  *   The template will have one of the following formats:
  *   `projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID` OR
@@ -3138,12 +3329,12 @@ const InspectTemplate = {
  *   Short description (max 256 chars).
  *
  * @property {Object} createTime
- *   The creation timestamp of an inspectTemplate, output only field.
+ *   Output only. The creation timestamp of an inspectTemplate.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The last update timestamp of an inspectTemplate, output only field.
+ *   Output only. The last update timestamp of an inspectTemplate.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -3163,9 +3354,10 @@ const DeidentifyTemplate = {
 /**
  * Details information about an error encountered during job execution or
  * the results of an unsuccessful activation of the JobTrigger.
- * Output only field.
  *
  * @property {Object} details
+ *   Detailed error codes and messages.
+ *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {Object[]} timestamps
@@ -3197,6 +3389,8 @@ const Error = {
  *   User provided description (max 256 chars)
  *
  * @property {Object} inspectJob
+ *   For inspect jobs, a snapshot of the configuration.
+ *
  *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
  *
  * @property {Object[]} triggers
@@ -3207,30 +3401,30 @@ const Error = {
  *   This object should have the same structure as [Trigger]{@link google.privacy.dlp.v2.Trigger}
  *
  * @property {Object[]} errors
- *   A stream of errors encountered when the trigger was activated. Repeated
+ *   Output only. A stream of errors encountered when the trigger was activated. Repeated
  *   errors may result in the JobTrigger automatically being paused.
  *   Will return the last 100 errors. Whenever the JobTrigger is modified
- *   this list will be cleared. Output only field.
+ *   this list will be cleared.
  *
  *   This object should have the same structure as [Error]{@link google.privacy.dlp.v2.Error}
  *
  * @property {Object} createTime
- *   The creation timestamp of a triggeredJob, output only field.
+ *   Output only. The creation timestamp of a triggeredJob.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The last update timestamp of a triggeredJob, output only field.
+ *   Output only. The last update timestamp of a triggeredJob.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} lastRunTime
- *   The timestamp of the last time this trigger executed, output only field.
+ *   Output only. The timestamp of the last time this trigger executed.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {number} status
- *   A status for this trigger. [required]
+ *   Required. A status for this trigger.
  *
  *   The number should be among the values of [Status]{@link google.privacy.dlp.v2.Status}
  *
@@ -3267,6 +3461,10 @@ const JobTrigger = {
    * @memberof google.privacy.dlp.v2
    */
   Status: {
+
+    /**
+     * Unused.
+     */
     STATUS_UNSPECIFIED: 0,
 
     /**
@@ -3311,7 +3509,7 @@ const JobTrigger = {
  *   This object should have the same structure as [PublishFindingsToCloudDataCatalog]{@link google.privacy.dlp.v2.PublishFindingsToCloudDataCatalog}
  *
  * @property {Object} jobNotificationEmails
- *   Enable email notification to project owners and editors on job's
+ *   Enable email notification for project owners and editors on job's
  *   completion/failure.
  *
  *   This object should have the same structure as [JobNotificationEmails]{@link google.privacy.dlp.v2.JobNotificationEmails}
@@ -3335,6 +3533,8 @@ const Action = {
    * Compatible with: Inspect, Risk
    *
    * @property {Object} outputConfig
+   *   Location to store findings outside of DLP.
+   *
    *   This object should have the same structure as [OutputStorageConfig]{@link google.privacy.dlp.v2.OutputStorageConfig}
    *
    * @typedef SaveFindings
@@ -3437,7 +3637,7 @@ const Action = {
  *   organizations/my-org-id.
  *
  * @property {Object} inspectTemplate
- *   The InspectTemplate to create.
+ *   Required. The InspectTemplate to create.
  *
  *   This object should have the same structure as [InspectTemplate]{@link google.privacy.dlp.v2.InspectTemplate}
  *
@@ -3509,15 +3709,15 @@ const GetInspectTemplateRequest = {
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
- *   Optional page token to continue retrieval. Comes from previous call
+ *   Page token to continue retrieval. Comes from previous call
  *   to `ListInspectTemplates`.
  *
  * @property {number} pageSize
- *   Optional size of the page, can be limited by server. If zero server returns
+ *   Size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
  * @property {string} orderBy
- *   Optional comma separated list of fields to order by,
+ *   Comma separated list of fields to order by,
  *   followed by `asc` or `desc` postfix. This list is case-insensitive,
  *   default sorting order is ascending, redundant space characters are
  *   insignificant.
@@ -3586,7 +3786,7 @@ const DeleteInspectTemplateRequest = {
  *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {Object} jobTrigger
- *   The JobTrigger to create.
+ *   Required. The JobTrigger to create.
  *
  *   This object should have the same structure as [JobTrigger]{@link google.privacy.dlp.v2.JobTrigger}
  *
@@ -3672,9 +3872,13 @@ const GetJobTriggerRequest = {
  *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {Object} inspectJob
+ *   Set to control what and how to inspect.
+ *
  *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
  *
  * @property {Object} riskJob
+ *   Set to choose what metric to calculate.
+ *
  *   This object should have the same structure as [RiskAnalysisJobConfig]{@link google.privacy.dlp.v2.RiskAnalysisJobConfig}
  *
  * @property {string} jobId
@@ -3702,15 +3906,15 @@ const CreateDlpJobRequest = {
  *   Required. The parent resource name, for example `projects/my-project-id`.
  *
  * @property {string} pageToken
- *   Optional page token to continue retrieval. Comes from previous call
+ *   Page token to continue retrieval. Comes from previous call
  *   to ListJobTriggers. `order_by` field must not
  *   change for subsequent calls.
  *
  * @property {number} pageSize
- *   Optional size of the page, can be limited by a server.
+ *   Size of the page, can be limited by a server.
  *
  * @property {string} orderBy
- *   Optional comma separated list of triggeredJob fields to order by,
+ *   Comma separated list of triggeredJob fields to order by,
  *   followed by `asc` or `desc` postfix. This list is case-insensitive,
  *   default sorting order is ascending, redundant space characters are
  *   insignificant.
@@ -3727,14 +3931,14 @@ const CreateDlpJobRequest = {
  *   - `status`: corresponds to JobTrigger's status.
  *
  * @property {string} filter
- *   Optional. Allows filtering.
+ *   Allows filtering.
  *
  *   Supported syntax:
  *
  *   * Filter expressions are made up of one or more restrictions.
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
- *   * A restriction has the form of `<field> <operator> <value>`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
  *   * Supported fields/values for inspect jobs:
  *       - `status` - HEALTHY|PAUSED|CANCELLED
  *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -3800,6 +4004,8 @@ const DeleteJobTriggerRequest = {
 };
 
 /**
+ * Controls what and how to inspect for findings.
+ *
  * @property {Object} storageConfig
  *   The data to scan.
  *
@@ -3886,10 +4092,16 @@ const DlpJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
+   * Possible states of a job.
+   *
    * @enum {number}
    * @memberof google.privacy.dlp.v2
    */
   JobState: {
+
+    /**
+     * Unused.
+     */
     JOB_STATE_UNSPECIFIED: 0,
 
     /**
@@ -3940,14 +4152,14 @@ const GetDlpJobRequest = {
  *   Required. The parent resource name, for example projects/my-project-id.
  *
  * @property {string} filter
- *   Optional. Allows filtering.
+ *   Allows filtering.
  *
  *   Supported syntax:
  *
  *   * Filter expressions are made up of one or more restrictions.
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
- *   * A restriction has the form of `<field> <operator> <value>`.
+ *   * A restriction has the form of `{field} {operator} {value}`.
  *   * Supported fields/values for inspect jobs:
  *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
  *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -3981,7 +4193,7 @@ const GetDlpJobRequest = {
  *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
  *
  * @property {string} orderBy
- *   Optional comma separated list of fields to order by,
+ *   Comma separated list of fields to order by,
  *   followed by `asc` or `desc` postfix. This list is case-insensitive,
  *   default sorting order is ascending, redundant space characters are
  *   insignificant.
@@ -4062,7 +4274,7 @@ const DeleteDlpJobRequest = {
  *   organizations/my-org-id.
  *
  * @property {Object} deidentifyTemplate
- *   The DeidentifyTemplate to create.
+ *   Required. The DeidentifyTemplate to create.
  *
  *   This object should have the same structure as [DeidentifyTemplate]{@link google.privacy.dlp.v2.DeidentifyTemplate}
  *
@@ -4134,15 +4346,15 @@ const GetDeidentifyTemplateRequest = {
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
- *   Optional page token to continue retrieval. Comes from previous call
+ *   Page token to continue retrieval. Comes from previous call
  *   to `ListDeidentifyTemplates`.
  *
  * @property {number} pageSize
- *   Optional size of the page, can be limited by server. If zero server returns
+ *   Size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
  * @property {string} orderBy
- *   Optional comma separated list of fields to order by,
+ *   Comma separated list of fields to order by,
  *   followed by `asc` or `desc` postfix. This list is case-insensitive,
  *   default sorting order is ascending, redundant space characters are
  *   insignificant.
@@ -4319,10 +4531,12 @@ const StoredInfoTypeStats = {
  *   anomalies detected in the storedInfoType data that render it unusable. Only
  *   the five most recent errors will be displayed, with the most recent error
  *   appearing first.
- *   <p>For example, some of the data for stored custom dictionaries is put in
+ *
+ *   For example, some of the data for stored custom dictionaries is put in
  *   the user's Google Cloud Storage bucket, and if this data is modified or
  *   deleted by the user or another system, the dictionary becomes invalid.
- *   <p>If any errors occur, fix the problem indicated by the error message and
+ *
+ *   If any errors occur, fix the problem indicated by the error message and
  *   use the UpdateStoredInfoType API method to create another version of the
  *   storedInfoType to continue using it, reusing the same `config` if it was
  *   not the source of the error.
@@ -4376,7 +4590,7 @@ const StoredInfoType = {
  *   organizations/my-org-id.
  *
  * @property {Object} config
- *   Configuration of the storedInfoType to create.
+ *   Required. Configuration of the storedInfoType to create.
  *
  *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
  *
@@ -4450,15 +4664,15 @@ const GetStoredInfoTypeRequest = {
  *   organizations/my-org-id.
  *
  * @property {string} pageToken
- *   Optional page token to continue retrieval. Comes from previous call
+ *   Page token to continue retrieval. Comes from previous call
  *   to `ListStoredInfoTypes`.
  *
  * @property {number} pageSize
- *   Optional size of the page, can be limited by server. If zero server returns
+ *   Size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
  * @property {string} orderBy
- *   Optional comma separated list of fields to order by,
+ *   Comma separated list of fields to order by,
  *   followed by `asc` or `desc` postfix. This list is case-insensitive,
  *   default sorting order is ascending, redundant space characters are
  *   insignificant.
@@ -4546,12 +4760,16 @@ const ContentOption = {
 };
 
 /**
- * An enum to represent the various type of DLP jobs.
+ * An enum to represent the various types of DLP jobs.
  *
  * @enum {number}
  * @memberof google.privacy.dlp.v2
  */
 const DlpJobType = {
+
+  /**
+   * Unused
+   */
   DLP_JOB_TYPE_UNSPECIFIED: 0,
 
   /**
@@ -4572,6 +4790,10 @@ const DlpJobType = {
  * @memberof google.privacy.dlp.v2
  */
 const InfoTypeSupportedBy = {
+
+  /**
+   * Unused.
+   */
   ENUM_TYPE_UNSPECIFIED: 0,
 
   /**
@@ -4635,6 +4857,10 @@ const MatchingType = {
  * @memberof google.privacy.dlp.v2
  */
 const RelationalOperator = {
+
+  /**
+   * Unused
+   */
   RELATIONAL_OPERATOR_UNSPECIFIED: 0,
 
   /**
@@ -4680,6 +4906,10 @@ const RelationalOperator = {
  * @memberof google.privacy.dlp.v2
  */
 const StoredInfoTypeState = {
+
+  /**
+   * Unused
+   */
   STORED_INFO_TYPE_STATE_UNSPECIFIED: 0,
 
   /**

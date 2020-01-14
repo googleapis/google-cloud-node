@@ -335,7 +335,7 @@ class DlpServiceClient {
    *
    *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
    * @param {string} [request.inspectTemplateName]
-   *   Optional template to use. Any configuration directly specified in
+   *   Template to use. Any configuration directly specified in
    *   inspect_config will override those set in the template. Singular fields
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
@@ -500,13 +500,13 @@ class DlpServiceClient {
    *
    *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
    * @param {string} [request.inspectTemplateName]
-   *   Optional template to use. Any configuration directly specified in
+   *   Template to use. Any configuration directly specified in
    *   inspect_config will override those set in the template. Singular fields
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
    * @param {string} [request.deidentifyTemplateName]
-   *   Optional template to use. Any configuration directly specified in
+   *   Template to use. Any configuration directly specified in
    *   deidentify_config will override those set in the template. Singular fields
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
@@ -593,13 +593,13 @@ class DlpServiceClient {
    *
    *   This object should have the same structure as [ContentItem]{@link google.privacy.dlp.v2.ContentItem}
    * @param {string} [request.inspectTemplateName]
-   *   Optional template to use. Any configuration directly specified in
+   *   Template to use. Any configuration directly specified in
    *   `inspect_config` will override those set in the template. Singular fields
    *   that are set in this request will replace their corresponding fields in the
    *   template. Repeated fields are appended. Singular sub-messages and groups
    *   are recursively merged.
    * @param {string} [request.reidentifyTemplateName]
-   *   Optional template to use. References an instance of `DeidentifyTemplate`.
+   *   Template to use. References an instance of `DeidentifyTemplate`.
    *   Any configuration directly specified in `reidentify_config` or
    *   `inspect_config` will override those set in the template. Singular fields
    *   that are set in this request will replace their corresponding fields in the
@@ -663,11 +663,11 @@ class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.languageCode]
-   *   Optional BCP-47 language code for localized infoType friendly
+   *   BCP-47 language code for localized infoType friendly
    *   names. If omitted, or if localized strings are not available,
    *   en-US strings will be returned.
    * @param {string} [request.filter]
-   *   Optional filter to only return infoTypes supported by certain parts of the
+   *   filter to only return infoTypes supported by certain parts of the
    *   API. Defaults to supported_by=INSPECT.
    * @param {string} [request.locationId]
    *   The geographic location to list info types. Reserved for future
@@ -730,7 +730,7 @@ class DlpServiceClient {
    *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.inspectTemplate]
-   *   The InspectTemplate to create.
+   *   Required. The InspectTemplate to create.
    *
    *   This object should have the same structure as [InspectTemplate]{@link google.privacy.dlp.v2.InspectTemplate}
    * @param {string} [request.templateId]
@@ -934,7 +934,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -1064,7 +1064,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -1177,7 +1177,7 @@ class DlpServiceClient {
    *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.deidentifyTemplate]
-   *   The DeidentifyTemplate to create.
+   *   Required. The DeidentifyTemplate to create.
    *
    *   This object should have the same structure as [DeidentifyTemplate]{@link google.privacy.dlp.v2.DeidentifyTemplate}
    * @param {string} [request.templateId]
@@ -1388,7 +1388,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -1522,7 +1522,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -1638,8 +1638,12 @@ class DlpServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id.
    * @param {Object} [request.inspectJob]
+   *   Set to control what and how to inspect.
+   *
    *   This object should have the same structure as [InspectJobConfig]{@link google.privacy.dlp.v2.InspectJobConfig}
    * @param {Object} [request.riskJob]
+   *   Set to choose what metric to calculate.
+   *
    *   This object should have the same structure as [RiskAnalysisJobConfig]{@link google.privacy.dlp.v2.RiskAnalysisJobConfig}
    * @param {string} [request.jobId]
    *   The job id can contain uppercase and lowercase letters,
@@ -1706,14 +1710,14 @@ class DlpServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id.
    * @param {string} [request.filter]
-   *   Optional. Allows filtering.
+   *   Allows filtering.
    *
    *   Supported syntax:
    *
    *   * Filter expressions are made up of one or more restrictions.
    *   * Restrictions can be combined by `AND` or `OR` logical operators. A
    *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `<field> <operator> <value>`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values for inspect jobs:
    *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
    *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -1745,7 +1749,7 @@ class DlpServiceClient {
    *
    *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -1868,14 +1872,14 @@ class DlpServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id.
    * @param {string} [request.filter]
-   *   Optional. Allows filtering.
+   *   Allows filtering.
    *
    *   Supported syntax:
    *
    *   * Filter expressions are made up of one or more restrictions.
    *   * Restrictions can be combined by `AND` or `OR` logical operators. A
    *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `<field> <operator> <value>`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values for inspect jobs:
    *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
    *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -1907,7 +1911,7 @@ class DlpServiceClient {
    *
    *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -2126,7 +2130,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of triggeredJob fields to order by,
+   *   Comma separated list of triggeredJob fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -2142,14 +2146,14 @@ class DlpServiceClient {
    *   - `display_name`: corresponds to JobTrigger's display name.
    *   - `status`: corresponds to JobTrigger's status.
    * @param {string} [request.filter]
-   *   Optional. Allows filtering.
+   *   Allows filtering.
    *
    *   Supported syntax:
    *
    *   * Filter expressions are made up of one or more restrictions.
    *   * Restrictions can be combined by `AND` or `OR` logical operators. A
    *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `<field> <operator> <value>`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values for inspect jobs:
    *       - `status` - HEALTHY|PAUSED|CANCELLED
    *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -2282,7 +2286,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of triggeredJob fields to order by,
+   *   Comma separated list of triggeredJob fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -2298,14 +2302,14 @@ class DlpServiceClient {
    *   - `display_name`: corresponds to JobTrigger's display name.
    *   - `status`: corresponds to JobTrigger's status.
    * @param {string} [request.filter]
-   *   Optional. Allows filtering.
+   *   Allows filtering.
    *
    *   Supported syntax:
    *
    *   * Filter expressions are made up of one or more restrictions.
    *   * Restrictions can be combined by `AND` or `OR` logical operators. A
    *   sequence of restrictions implicitly uses `AND`.
-   *   * A restriction has the form of `<field> <operator> <value>`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values for inspect jobs:
    *       - `status` - HEALTHY|PAUSED|CANCELLED
    *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -2535,7 +2539,7 @@ class DlpServiceClient {
    * @param {string} request.parent
    *   Required. The parent resource name, for example projects/my-project-id.
    * @param {Object} [request.jobTrigger]
-   *   The JobTrigger to create.
+   *   Required. The JobTrigger to create.
    *
    *   This object should have the same structure as [JobTrigger]{@link google.privacy.dlp.v2.JobTrigger}
    * @param {string} [request.triggerId]
@@ -2604,7 +2608,7 @@ class DlpServiceClient {
    *   Required. The parent resource name, for example projects/my-project-id or
    *   organizations/my-org-id.
    * @param {Object} [request.config]
-   *   Configuration of the storedInfoType to create.
+   *   Required. Configuration of the storedInfoType to create.
    *
    *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
    * @param {string} [request.storedInfoTypeId]
@@ -2806,7 +2810,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.
@@ -2937,7 +2941,7 @@ class DlpServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional comma separated list of fields to order by,
+   *   Comma separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case-insensitive,
    *   default sorting order is ascending, redundant space characters are
    *   insignificant.

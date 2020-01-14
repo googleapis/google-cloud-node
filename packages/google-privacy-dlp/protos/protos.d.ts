@@ -902,13 +902,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** ContentOption enum. */
-                enum ContentOption {
-                    CONTENT_UNSPECIFIED = 0,
-                    CONTENT_TEXT = 1,
-                    CONTENT_IMAGE = 2
-                }
-
                 /** Properties of an InspectionRule. */
                 interface IInspectionRule {
 
@@ -2161,14 +2154,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** MatchingType enum. */
-                enum MatchingType {
-                    MATCHING_TYPE_UNSPECIFIED = 0,
-                    MATCHING_TYPE_FULL_MATCH = 1,
-                    MATCHING_TYPE_PARTIAL_MATCH = 2,
-                    MATCHING_TYPE_INVERSE_MATCH = 3
                 }
 
                 /** Properties of a ContentLocation. */
@@ -10125,13 +10110,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** InfoTypeSupportedBy enum. */
-                enum InfoTypeSupportedBy {
-                    ENUM_TYPE_UNSPECIFIED = 0,
-                    INSPECT = 1,
-                    RISK_ANALYSIS = 2
-                }
-
                 /** Properties of a KmsWrappedCryptoKey. */
                 interface IKmsWrappedCryptoKey {
 
@@ -14771,18 +14749,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** RelationalOperator enum. */
-                enum RelationalOperator {
-                    RELATIONAL_OPERATOR_UNSPECIFIED = 0,
-                    EQUAL_TO = 1,
-                    NOT_EQUAL_TO = 2,
-                    GREATER_THAN = 3,
-                    LESS_THAN = 4,
-                    GREATER_THAN_OR_EQUALS = 5,
-                    LESS_THAN_OR_EQUALS = 6,
-                    EXISTS = 7
-                }
-
                 /** Properties of a ListDlpJobsResponse. */
                 interface IListDlpJobsResponse {
 
@@ -16866,6 +16832,40 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** RelationalOperator enum. */
+                enum RelationalOperator {
+                    RELATIONAL_OPERATOR_UNSPECIFIED = 0,
+                    EQUAL_TO = 1,
+                    NOT_EQUAL_TO = 2,
+                    GREATER_THAN = 3,
+                    LESS_THAN = 4,
+                    GREATER_THAN_OR_EQUALS = 5,
+                    LESS_THAN_OR_EQUALS = 6,
+                    EXISTS = 7
+                }
+
+                /** MatchingType enum. */
+                enum MatchingType {
+                    MATCHING_TYPE_UNSPECIFIED = 0,
+                    MATCHING_TYPE_FULL_MATCH = 1,
+                    MATCHING_TYPE_PARTIAL_MATCH = 2,
+                    MATCHING_TYPE_INVERSE_MATCH = 3
+                }
+
+                /** ContentOption enum. */
+                enum ContentOption {
+                    CONTENT_UNSPECIFIED = 0,
+                    CONTENT_TEXT = 1,
+                    CONTENT_IMAGE = 2
+                }
+
+                /** InfoTypeSupportedBy enum. */
+                enum InfoTypeSupportedBy {
+                    ENUM_TYPE_UNSPECIFIED = 0,
+                    INSPECT = 1,
+                    RISK_ANALYSIS = 2
                 }
 
                 /** DlpJobType enum. */
