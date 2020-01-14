@@ -67,7 +67,7 @@ it('should set a buckets default KMS key', async () => {
 
 it(`should enable a bucket's uniform bucket-level access`, async () => {
   const output = execSync(
-    `${cmd} enable-uniform-bucket-level-access ${bucketName}`
+    `node enableUniformBucketLevelAccess.js ${bucketName}`
   );
   assert.match(
     output,
