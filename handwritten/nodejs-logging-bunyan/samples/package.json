@@ -20,7 +20,7 @@
     "yargs": "^15.0.0"
   },
   "devDependencies": {
-    "@google-cloud/logging": "^6.0.0",
+    "@google-cloud/logging": "^7.0.0",
     "chai": "^4.2.0",
     "delay": "^4.0.0",
     "got": "^10.0.0",
