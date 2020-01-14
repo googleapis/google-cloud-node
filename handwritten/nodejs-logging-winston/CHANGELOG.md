@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [3.0.5](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.4...v3.0.5) (2020-01-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/logging to v7 ([#439](https://www.github.com/googleapis/nodejs-logging-winston/issues/439)) ([ac69ff4](https://www.github.com/googleapis/nodejs-logging-winston/commit/ac69ff488084a615a616582b1fcb450456653760))
+
 ### [3.0.4](https://www.github.com/googleapis/nodejs-logging-winston/compare/v3.0.3...v3.0.4) (2020-01-04)
 
 
