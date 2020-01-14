@@ -927,7 +927,7 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/monitoring/dashboard/v1;dashboard",
                     "java_multiple_files": true,
-                    "java_outer_classname": "DashboardsServiceProto",
+                    "java_outer_classname": "ServiceMonitoringProto",
                     "java_package": "com.google.monitoring.dashboard.v1"
                   },
                   "nested": {
@@ -1197,27 +1197,6 @@
                         "SPARK_BAR": 2
                       }
                     },
-                    "Text": {
-                      "fields": {
-                        "content": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "format": {
-                          "type": "Format",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "Format": {
-                          "values": {
-                            "FORMAT_UNSPECIFIED": 0,
-                            "MARKDOWN": 1,
-                            "RAW": 2
-                          }
-                        }
-                      }
-                    },
                     "Scorecard": {
                       "oneofs": {
                         "dataView": {
@@ -1269,6 +1248,27 @@
                               "type": "google.protobuf.Duration",
                               "id": 2
                             }
+                          }
+                        }
+                      }
+                    },
+                    "Text": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "format": {
+                          "type": "Format",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "MARKDOWN": 1,
+                            "RAW": 2
                           }
                         }
                       }

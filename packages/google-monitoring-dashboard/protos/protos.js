@@ -11756,250 +11756,6 @@
                         return values;
                     })();
     
-                    v1.Text = (function() {
-    
-                        /**
-                         * Properties of a Text.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IText
-                         * @property {string|null} [content] Text content
-                         * @property {google.monitoring.dashboard.v1.Text.Format|null} [format] Text format
-                         */
-    
-                        /**
-                         * Constructs a new Text.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a Text.
-                         * @implements IText
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IText=} [properties] Properties to set
-                         */
-                        function Text(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Text content.
-                         * @member {string} content
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @instance
-                         */
-                        Text.prototype.content = "";
-    
-                        /**
-                         * Text format.
-                         * @member {google.monitoring.dashboard.v1.Text.Format} format
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @instance
-                         */
-                        Text.prototype.format = 0;
-    
-                        /**
-                         * Creates a new Text instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IText=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.Text} Text instance
-                         */
-                        Text.create = function create(properties) {
-                            return new Text(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IText} message Text message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Text.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.content != null && message.hasOwnProperty("content"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.format);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IText} message Text message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Text.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Text message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.Text} Text
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Text.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Text();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.content = reader.string();
-                                    break;
-                                case 2:
-                                    message.format = reader.int32();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Text message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.Text} Text
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Text.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Text message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Text.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.content != null && message.hasOwnProperty("content"))
-                                if (!$util.isString(message.content))
-                                    return "content: string expected";
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                switch (message.format) {
-                                default:
-                                    return "format: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Text message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.Text} Text
-                         */
-                        Text.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.Text)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.Text();
-                            if (object.content != null)
-                                message.content = String(object.content);
-                            switch (object.format) {
-                            case "FORMAT_UNSPECIFIED":
-                            case 0:
-                                message.format = 0;
-                                break;
-                            case "MARKDOWN":
-                            case 1:
-                                message.format = 1;
-                                break;
-                            case "RAW":
-                            case 2:
-                                message.format = 2;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Text message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.Text} message Text
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Text.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.content = "";
-                                object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
-                            }
-                            if (message.content != null && message.hasOwnProperty("content"))
-                                object.content = message.content;
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.monitoring.dashboard.v1.Text.Format[message.format] : message.format;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Text to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.Text
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Text.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Format enum.
-                         * @name google.monitoring.dashboard.v1.Text.Format
-                         * @enum {string}
-                         * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
-                         * @property {number} MARKDOWN=1 MARKDOWN value
-                         * @property {number} RAW=2 RAW value
-                         */
-                        Text.Format = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "MARKDOWN"] = 1;
-                            values[valuesById[2] = "RAW"] = 2;
-                            return values;
-                        })();
-    
-                        return Text;
-                    })();
-    
                     v1.Scorecard = (function() {
     
                         /**
@@ -12758,6 +12514,250 @@
                         })();
     
                         return Scorecard;
+                    })();
+    
+                    v1.Text = (function() {
+    
+                        /**
+                         * Properties of a Text.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IText
+                         * @property {string|null} [content] Text content
+                         * @property {google.monitoring.dashboard.v1.Text.Format|null} [format] Text format
+                         */
+    
+                        /**
+                         * Constructs a new Text.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a Text.
+                         * @implements IText
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IText=} [properties] Properties to set
+                         */
+                        function Text(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Text content.
+                         * @member {string} content
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @instance
+                         */
+                        Text.prototype.content = "";
+    
+                        /**
+                         * Text format.
+                         * @member {google.monitoring.dashboard.v1.Text.Format} format
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @instance
+                         */
+                        Text.prototype.format = 0;
+    
+                        /**
+                         * Creates a new Text instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IText=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.Text} Text instance
+                         */
+                        Text.create = function create(properties) {
+                            return new Text(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IText} message Text message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Text.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.format);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IText} message Text message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Text.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Text message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.Text} Text
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Text.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Text();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.content = reader.string();
+                                    break;
+                                case 2:
+                                    message.format = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Text message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.Text} Text
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Text.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Text message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Text.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!$util.isString(message.content))
+                                    return "content: string expected";
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                switch (message.format) {
+                                default:
+                                    return "format: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Text message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.Text} Text
+                         */
+                        Text.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.Text)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.Text();
+                            if (object.content != null)
+                                message.content = String(object.content);
+                            switch (object.format) {
+                            case "FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.format = 0;
+                                break;
+                            case "MARKDOWN":
+                            case 1:
+                                message.format = 1;
+                                break;
+                            case "RAW":
+                            case 2:
+                                message.format = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Text message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.Text} message Text
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Text.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.content = "";
+                                object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                            }
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = message.content;
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                object.format = options.enums === String ? $root.google.monitoring.dashboard.v1.Text.Format[message.format] : message.format;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Text to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.Text
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Text.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Format enum.
+                         * @name google.monitoring.dashboard.v1.Text.Format
+                         * @enum {string}
+                         * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                         * @property {number} MARKDOWN=1 MARKDOWN value
+                         * @property {number} RAW=2 RAW value
+                         */
+                        Text.Format = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MARKDOWN"] = 1;
+                            values[valuesById[2] = "RAW"] = 2;
+                            return values;
+                        })();
+    
+                        return Text;
                     })();
     
                     v1.XyChart = (function() {

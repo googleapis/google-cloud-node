@@ -4354,112 +4354,6 @@ export namespace google {
                     SPARK_BAR = 2
                 }
 
-                /** Properties of a Text. */
-                interface IText {
-
-                    /** Text content */
-                    content?: (string|null);
-
-                    /** Text format */
-                    format?: (google.monitoring.dashboard.v1.Text.Format|null);
-                }
-
-                /** Represents a Text. */
-                class Text implements IText {
-
-                    /**
-                     * Constructs a new Text.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IText);
-
-                    /** Text content. */
-                    public content: string;
-
-                    /** Text format. */
-                    public format: google.monitoring.dashboard.v1.Text.Format;
-
-                    /**
-                     * Creates a new Text instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Text instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IText): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                     * @param message Text message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                     * @param message Text message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Text message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Text
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Decodes a Text message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Text
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Verifies a Text message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Text message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Text
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Creates a plain object from a Text message. Also converts values to other types if specified.
-                     * @param message Text
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Text, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Text to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Text {
-
-                    /** Format enum. */
-                    enum Format {
-                        FORMAT_UNSPECIFIED = 0,
-                        MARKDOWN = 1,
-                        RAW = 2
-                    }
-                }
-
                 /** Properties of a Scorecard. */
                 interface IScorecard {
 
@@ -4763,6 +4657,112 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Text. */
+                interface IText {
+
+                    /** Text content */
+                    content?: (string|null);
+
+                    /** Text format */
+                    format?: (google.monitoring.dashboard.v1.Text.Format|null);
+                }
+
+                /** Represents a Text. */
+                class Text implements IText {
+
+                    /**
+                     * Constructs a new Text.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IText);
+
+                    /** Text content. */
+                    public content: string;
+
+                    /** Text format. */
+                    public format: google.monitoring.dashboard.v1.Text.Format;
+
+                    /**
+                     * Creates a new Text instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Text instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IText): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                     * @param message Text message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                     * @param message Text message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Text message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Text
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Decodes a Text message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Text
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Verifies a Text message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Text message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Text
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Creates a plain object from a Text message. Also converts values to other types if specified.
+                     * @param message Text
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Text, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Text to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Text {
+
+                    /** Format enum. */
+                    enum Format {
+                        FORMAT_UNSPECIFIED = 0,
+                        MARKDOWN = 1,
+                        RAW = 2
                     }
                 }
 

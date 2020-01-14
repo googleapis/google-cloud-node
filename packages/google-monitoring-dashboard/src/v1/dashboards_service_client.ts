@@ -610,7 +610,7 @@ export class DashboardsServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      dashboard_name: request.dashboard!.name || '',
+      'dashboard.name': request.dashboard!.name || '',
     });
     return this._innerApiCalls.updateDashboard(request, options, callback);
   }
