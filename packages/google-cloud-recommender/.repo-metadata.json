@@ -1,0 +1,13 @@
+{
+  "name": "recommender",
+  "name_pretty": "Recommender",
+  "product_documentation": "https://cloud.google.com/recommender/docs",
+  "client_documentation": "https://googleapis.dev/nodejs/recommender/latest/index.html",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-recommender",
+  "distribution_name": "@google-cloud/recommender",
+  "api_id": "recommender.googleapis.com",
+  "requires_billing": true
+}
