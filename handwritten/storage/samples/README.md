@@ -23,10 +23,15 @@ objects to users via direct download.
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
   * [Buckets](#buckets)
   * [Create New Bucket](#create-new-bucket)
+  * [Delete Bucket](#delete-bucket)
+  * [Disable Uniform Bucket Level Access](#disable-uniform-bucket-level-access)
+  * [Enable Default KMS Key](#enable-default-kms-key)
+  * [Enable Uniform Bucket Level Access](#enable-uniform-bucket-level-access)
   * [Encryption](#encryption)
   * [Storage Set File Metadata.](#storage-set-file-metadata.)
   * [Files](#files)
   * [Get Retention Policy](#get-retention-policy)
+  * [Get Uniform Bucket Level Access](#get-uniform-bucket-level-access)
   * [Activate HMAC SA Key.](#activate-hmac-sa-key.)
   * [Create HMAC SA Key.](#create-hmac-sa-key.)
   * [Deactivate HMAC SA Key.](#deactivate-hmac-sa-key.)
@@ -144,6 +149,74 @@ __Usage:__
 
 
 
+### Delete Bucket
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/deleteBucket.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/deleteBucket.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deleteBucket.js`
+
+
+-----
+
+
+
+
+### Disable Uniform Bucket Level Access
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/disableUniformBucketLevelAccess.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/disableUniformBucketLevelAccess.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/disableUniformBucketLevelAccess.js`
+
+
+-----
+
+
+
+
+### Enable Default KMS Key
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/enableDefaultKMSKey.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/enableDefaultKMSKey.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/enableDefaultKMSKey.js`
+
+
+-----
+
+
+
+
+### Enable Uniform Bucket Level Access
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/enableUniformBucketLevelAccess.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/enableUniformBucketLevelAccess.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/enableUniformBucketLevelAccess.js`
+
+
+-----
+
+
+
+
 ### Encryption
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/encryption.js).
@@ -207,6 +280,23 @@ __Usage:__
 
 
 `node samples/getRetentionPolicy.js`
+
+
+-----
+
+
+
+
+### Get Uniform Bucket Level Access
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/getUniformBucketLevelAccess.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/getUniformBucketLevelAccess.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getUniformBucketLevelAccess.js`
 
 
 -----
