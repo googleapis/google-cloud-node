@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.0...v1.0.1) (2020-01-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mocha to v7 ([#9](https://www.github.com/googleapis/nodejs-billing-budgets/issues/9)) ([69795da](https://www.github.com/googleapis/nodejs-billing-budgets/commit/69795daef3c439b1ce89e21a6c7b5118d6cc79b1))
+
 ## 1.0.0 (2019-11-16)
 
 
