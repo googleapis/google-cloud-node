@@ -22,7 +22,7 @@ for version in versions:
   library = gapic.node_library('dataproc', version)
   s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.js',]
+    excludes=['package.json', 'src/index.js',]
   )
 
 common_templates = gcp.CommonTemplates()
