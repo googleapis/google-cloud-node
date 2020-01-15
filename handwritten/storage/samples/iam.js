@@ -28,21 +28,31 @@ async function viewBucketIamMembers(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets and displays the bucket's IAM policy
-  const results = await storage.bucket(bucketName).iam.getPolicy();
+  const results = await storage
+    .bucket(bucketName)
+    .iam.getPolicy({requestedPolicyVersion: 3});
 
-  const policy = results[0].bindings;
+  const bindings = results[0].bindings;
 
   // Displays the roles in the bucket's IAM policy
-  console.log(`Roles for bucket ${bucketName}:`);
-  policy.forEach(role => {
-    console.log(`  Role: ${role.role}`);
+  console.log(`Bindings for bucket ${bucketName}:`);
+  for (const binding of bindings) {
+    console.log(`  Role: ${binding.role}`);
     console.log(`  Members:`);
 
-    const members = role.members;
-    members.forEach(member => {
+    const members = binding.members;
+    for (const member of members) {
       console.log(`    ${member}`);
-    });
-  });
+    }
+
+    const condition = binding.condition;
+    if (condition) {
+      console.log(`  Condiiton:`);
+      console.log(`    Title: ${condition.title}`);
+      console.log(`    Description: ${condition.description}`);
+      console.log(`    Expression: ${condition.expression}`);
+    }
+  }
   // [END storage_view_bucket_iam_members]
 }
 
@@ -68,7 +78,7 @@ async function addBucketIamMember(bucketName, roleName, members) {
   const bucket = storage.bucket(bucketName);
 
   // Gets and updates the bucket's IAM policy
-  const [policy] = await bucket.iam.getPolicy();
+  const [policy] = await bucket.iam.getPolicy({requestedPolicyVersion: 3});
 
   // Adds the new roles to the bucket's IAM policy
   policy.bindings.push({
@@ -87,6 +97,72 @@ async function addBucketIamMember(bucketName, roleName, members) {
     console.log(`  ${member}`);
   });
   // [END storage_add_bucket_iam_member]
+}
+
+async function addBucketConditionalBinding(
+  bucketName,
+  roleName,
+  title,
+  description,
+  expression,
+  members
+) {
+  // [START storage_add_bucket_conditional_iam_binding]
+  // Imports the Google Cloud client library
+  const {Storage} = require('@google-cloud/storage');
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const roleName = 'Role to grant, e.g. roles/storage.objectViewer';
+  // const members = [
+  //   'user:jdoe@example.com',    // Example members to grant
+  //   'group:admins@example.com', // the new role to
+  // ];
+  // const title = 'Condition title.';
+  // const description = 'Conditon description.';
+  // const expression = 'Condition expression.';
+
+  // Creates a client
+  const storage = new Storage();
+
+  // Get a reference to a Google Cloud Storage bucket
+  const bucket = storage.bucket(bucketName);
+
+  // Gets and updates the bucket's IAM policy
+  const [policy] = await bucket.iam.getPolicy({requestedPolicyVersion: 3});
+
+  // Set the policy's version to 3 to use condition in bindings.
+  policy.version = 3;
+
+  // Adds the new roles to the bucket's IAM policy
+  policy.bindings.push({
+    role: roleName,
+    members: members,
+    condition: {
+      title: title,
+      description: description,
+      expression: expression,
+    },
+  });
+
+  // Updates the bucket's IAM policy
+  await bucket.iam.setPolicy(policy);
+
+  console.log(
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`
+  );
+
+  members.forEach(member => {
+    console.log(`  ${member}`);
+  });
+
+  console.log('with condition:');
+  console.log(`  Title: ${title}`);
+  console.log(`  Description: ${description}`);
+  console.log(`  Expression: ${expression}`);
+  // [END storage_add_bucket_conditional_iam_binding]
 }
 
 async function removeBucketIamMember(bucketName, roleName, members) {
@@ -111,10 +187,13 @@ async function removeBucketIamMember(bucketName, roleName, members) {
   const bucket = storage.bucket(bucketName);
 
   // Gets and updates the bucket's IAM policy
-  const [policy] = await bucket.iam.getPolicy();
+  const [policy] = await bucket.iam.getPolicy({requestedPolicyVersion: 3});
 
-  // Finds and updates the appropriate role-member group
-  const index = policy.bindings.findIndex(role => role.role === roleName);
+  // Finds and updates the appropriate role-member group, without a condition.
+  const index = policy.bindings.findIndex(
+    binding => binding.role === roleName && !binding.condition
+  );
+
   const role = policy.bindings[index];
   if (role) {
     role.members = role.members.filter(
@@ -158,6 +237,20 @@ require(`yargs`)
     `Adds one or more IAM member-role groups to a Google Cloud Storage bucket.`,
     {},
     opts => addBucketIamMember(opts.bucketName, opts.roleName, opts.members)
+  )
+  .command(
+    `add-conditional-binding <bucketName> <roleName> <title> <description> <expression> [members..]`,
+    `Adds a conditional binding to a Google Cloud Storage bucket's IAM policy.`,
+    {},
+    opts =>
+      addBucketConditionalBinding(
+        opts.bucketName,
+        opts.roleName,
+        opts.title,
+        opts.description,
+        opts.expression,
+        opts.members
+      )
   )
   .command(
     `remove-members <bucketName> <roleName> [members..]`,

@@ -29,8 +29,22 @@ const userEmail = 'test@example.com';
 const cmd = 'node iam.js';
 const roleName = 'roles/storage.objectViewer';
 
+// Condition
+const title = 'match-prefix';
+const description = 'Applies to objects matching a prefix';
+const expression =
+  'resource.name.startsWith("projects/_/buckets/bucket-name/objects/prefix-a-")';
+
 before(async () => {
   await bucket.create();
+  // UniformBucketLevelAccess must be enabled to add a condiitonal binding.
+  await bucket.setMetadata({
+    iamConfiguration: {
+      uniformBucketLevelAccess: {
+        enabled: true,
+      },
+    },
+  });
 });
 
 after(async () => {
@@ -41,17 +55,30 @@ it('should add multiple members to a role on a bucket', async () => {
   const output = execSync(
     `${cmd} add-members ${bucketName} ${roleName} "user:${userEmail}"`
   );
-  assert.ok(
-    output.includes(
-      `Added the following member(s) with role ${roleName} to ${bucketName}:`
-    )
+  assert.include(
+    output,
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`
   );
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
+it('should add conditional binding to a bucket', async () => {
+  const output = execSync(
+    `${cmd} add-conditional-binding ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`
+  );
+  assert.include(
+    output,
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`
+  );
+  assert.include(output, `with condition:`);
+  assert.include(output, `Title: ${title}`);
+  assert.include(output, `Description: ${description}`);
+  assert.include(output, `Expression: ${expression}`);
+});
+
 it('should list members of a role on a bucket', async () => {
   const output = execSync(`${cmd} view-members ${bucketName}`);
-  assert.match(output, new RegExp(`Roles for bucket ${bucketName}:`));
+  assert.match(output, new RegExp(`Bindings for bucket ${bucketName}:`));
   assert.match(output, new RegExp(`Role: ${roleName}`));
   assert.match(output, new RegExp(`Members:`));
   assert.match(output, new RegExp(`user:${userEmail}`));
