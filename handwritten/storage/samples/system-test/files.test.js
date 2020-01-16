@@ -243,7 +243,7 @@ it('should generate a v4 signed URL and upload a file', async () => {
 
 it('should get metadata for a file', () => {
   const output = execSync(
-    `${cmd} get-metadata ${bucketName} ${copiedFileName}`
+    `node getMetadata.js ${bucketName} ${copiedFileName}`
   );
   assert.match(output, new RegExp(`File: ${copiedFileName}`));
   assert.match(output, new RegExp(`Bucket: ${bucketName}`));
