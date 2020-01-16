@@ -26,7 +26,6 @@ const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const userEmail = 'test@example.com';
-const cmd = 'node iam.js';
 const roleName = 'roles/storage.objectViewer';
 
 // Condition
@@ -53,7 +52,7 @@ after(async () => {
 
 it('should add multiple members to a role on a bucket', async () => {
   const output = execSync(
-    `${cmd} add-members ${bucketName} ${roleName} "user:${userEmail}"`
+    `node addBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
   );
   assert.include(
     output,
@@ -62,9 +61,28 @@ it('should add multiple members to a role on a bucket', async () => {
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
+it('should list members of a role on a bucket', async () => {
+  const output = execSync(`node viewBucketIamMembers.js ${bucketName}`);
+  assert.match(output, new RegExp(`Roles for bucket ${bucketName}:`));
+  assert.match(output, new RegExp(`Role: ${roleName}`));
+  assert.match(output, new RegExp(`Members:`));
+});
+
+it('should remove multiple members from a role on a bucket', async () => {
+  const output = execSync(
+    `node removeBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
+  );
+  assert.ok(
+    output.includes(
+      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
+    )
+  );
+  assert.match(output, new RegExp(`user:${userEmail}`));
+});
+
 it('should add conditional binding to a bucket', async () => {
   const output = execSync(
-    `${cmd} add-conditional-binding ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`
+    `node addBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`
   );
   assert.include(
     output,
@@ -74,24 +92,4 @@ it('should add conditional binding to a bucket', async () => {
   assert.include(output, `Title: ${title}`);
   assert.include(output, `Description: ${description}`);
   assert.include(output, `Expression: ${expression}`);
-});
-
-it('should list members of a role on a bucket', async () => {
-  const output = execSync(`${cmd} view-members ${bucketName}`);
-  assert.match(output, new RegExp(`Bindings for bucket ${bucketName}:`));
-  assert.match(output, new RegExp(`Role: ${roleName}`));
-  assert.match(output, new RegExp(`Members:`));
-  assert.match(output, new RegExp(`user:${userEmail}`));
-});
-
-it('should remove multiple members from a role on a bucket', async () => {
-  const output = execSync(
-    `${cmd} remove-members ${bucketName} ${roleName} "user:${userEmail}"`
-  );
-  assert.ok(
-    output.includes(
-      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-    )
-  );
-  assert.match(output, new RegExp(`user:${userEmail}`));
 });

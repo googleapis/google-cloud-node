@@ -28,7 +28,6 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
-const cmd = `node encryption.js`;
 
 const fileName = `test.txt`;
 const filePath = path.join(__dirname, `../resources`, fileName);
@@ -49,7 +48,7 @@ after(async () => {
 });
 
 it('should generate a key', () => {
-  const output = execSync(`${cmd} generate-encryption-key`);
+  const output = execSync(`node generateEncryptionKey.js`);
   assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   key = output.match(test)[1];
@@ -69,7 +68,7 @@ it('should upload a file', async () => {
 
 it('should download a file', () => {
   const output = execSync(
-    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath} ${key}`
+    `node downloadEncryptedFile.js ${bucketName} ${fileName} ${downloadFilePath} ${key}`
   );
   assert.match(
     output,
@@ -79,7 +78,7 @@ it('should download a file', () => {
 });
 
 it('should rotate keys', () => {
-  let output = execSync(`${cmd} generate-encryption-key`);
+  let output = execSync(`node generateEncryptionKey.js`);
   assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   const newKey = output.match(test)[1];

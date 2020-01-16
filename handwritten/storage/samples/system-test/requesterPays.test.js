@@ -27,10 +27,10 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const cwd = path.join(__dirname, '..');
-const cmd = 'node requesterPays.js';
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const fileName = 'test.txt';
 const bucket = storage.bucket(bucketName);
+const projectId = process.env.GCLOUD_PROJECT;
 
 const uploadFilePath = path.join(cwd, 'resources', fileName);
 const downloadFilePath = path.join(__dirname, `test_${uuid.v4()}.txt`);
@@ -51,7 +51,7 @@ after(async () => {
 
 it.skip(`should error on requester-pays requests if they are disabled`, () => {
   const result = execSync(
-    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`
+    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
   );
   assert.ok(result.stderr);
   assert.match(
@@ -61,7 +61,7 @@ it.skip(`should error on requester-pays requests if they are disabled`, () => {
 });
 
 it(`should fetch requester-pays status on a default bucket`, () => {
-  const out = execSync(`${cmd} get-status ${bucketName}`);
+  const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
     `Requester-pays requests are disabled for bucket ${bucketName}.`
@@ -69,7 +69,7 @@ it(`should fetch requester-pays status on a default bucket`, () => {
 });
 
 it(`should enable requester-pays requests`, () => {
-  const out = execSync(`${cmd} enable ${bucketName}`);
+  const out = execSync(`node enableRequesterPays.js ${bucketName}`);
   assert.include(
     out,
     `Requester-pays requests have been enabled for bucket ${bucketName}.`
@@ -77,7 +77,7 @@ it(`should enable requester-pays requests`, () => {
 });
 
 it(`should fetch requester-pays status on a modified bucket`, () => {
-  const out = execSync(`${cmd} get-status ${bucketName}`);
+  const out = execSync(`node getRequesterPaysStatus.js ${bucketName}`);
   assert.include(
     out,
     `Requester-pays requests are enabled for bucket ${bucketName}.`
@@ -86,7 +86,7 @@ it(`should fetch requester-pays status on a modified bucket`, () => {
 
 it(`should download a file using requester-pays requests`, () => {
   const out = execSync(
-    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`
+    `node downloadFileUsingRequesterPays.js ${projectId} ${bucketName} ${fileName} ${downloadFilePath}`
   );
   assert.include(
     out,
@@ -96,7 +96,7 @@ it(`should download a file using requester-pays requests`, () => {
 });
 
 it(`should disable requester-pays requests`, () => {
-  const out = execSync(`${cmd} disable ${bucketName}`);
+  const out = execSync(`node disableRequesterPays.js ${bucketName}`);
   assert.include(
     out,
     `Requester-pays requests have been disabled for bucket ${bucketName}.`

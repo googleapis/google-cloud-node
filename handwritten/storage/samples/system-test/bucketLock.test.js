@@ -25,7 +25,6 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const cwd = path.join(__dirname, '..');
-const cmd = 'node bucketLock.js';
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const fileName = 'test.txt';
@@ -53,7 +52,7 @@ after(async () => {
 it('should set a retention policy on a bucket', () => {
   const retentionPeriod = 5;
   const output = execSync(
-    `${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`
+    `node setRetentionPolicy.js ${bucketName} ${retentionPeriod}`
   );
   assert.match(
     output,
@@ -69,9 +68,7 @@ it('should get a retention policy on a bucket', () => {
 });
 
 it('should enable default event-based hold on a bucket', () => {
-  const output = execSync(
-    `${cmd} enable-default-event-based-hold ${bucketName}`
-  );
+  const output = execSync(`node enableDefaultEventBasedHold.js ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Default event-based hold was enabled for ${bucketName}.`)
@@ -79,14 +76,12 @@ it('should enable default event-based hold on a bucket', () => {
 });
 
 it('should get default event-based hold on a bucket', () => {
-  const output = execSync(`${cmd} get-default-event-based-hold ${bucketName}`);
+  const output = execSync(`node getDefaultEventBasedHold.js ${bucketName}`);
   assert.match(output, /Default event-based hold: true./);
 });
 
 it('should disable default event-based hold on a bucket', () => {
-  const output = execSync(
-    `${cmd} disable-default-event-based-hold ${bucketName}`
-  );
+  const output = execSync(`node disableDefaultEventBasedHold.js ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Default event-based hold was disabled for ${bucketName}.`)
@@ -95,14 +90,14 @@ it('should disable default event-based hold on a bucket', () => {
 
 it('should set an event-based hold on a file', () => {
   const output = execSync(
-    `${cmd} set-event-based-hold ${bucketName} ${fileName}`
+    `node setEventBasedHold.js ${bucketName} ${fileName}`
   );
   assert.match(output, new RegExp(`Event-based hold was set for ${fileName}.`));
 });
 
 it('should release an event-based hold on a file', () => {
   const output = execSync(
-    `${cmd} release-event-based-hold ${bucketName} ${fileName}`
+    `node releaseEventBasedHold.js ${bucketName} ${fileName}`
   );
   assert.match(
     output,
@@ -111,7 +106,7 @@ it('should release an event-based hold on a file', () => {
 });
 
 it('should remove a retention policy on a bucket', () => {
-  const output = execSync(`${cmd} remove-retention-policy ${bucketName}`);
+  const output = execSync(`node removeRetentionPolicy.js ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Removed bucket ${bucketName} retention policy.`)
@@ -120,14 +115,14 @@ it('should remove a retention policy on a bucket', () => {
 
 it('should set an temporary hold on a file', () => {
   const output = execSync(
-    `${cmd} set-temporary-hold ${bucketName} ${fileName}`
+    `node setTemporarydHold.js ${bucketName} ${fileName}`
   );
   assert.match(output, new RegExp(`Temporary hold was set for ${fileName}.`));
 });
 
 it('should release an temporary hold on a file', () => {
   const output = execSync(
-    `${cmd} release-temporary-hold ${bucketName} ${fileName}`
+    `node releaseTemporaryHold.js ${bucketName} ${fileName}`
   );
   assert.match(
     output,
@@ -137,8 +132,8 @@ it('should release an temporary hold on a file', () => {
 
 it('should lock a bucket with a retention policy', () => {
   const retentionPeriod = 5;
-  execSync(`${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`);
-  const output = execSync(`${cmd} lock-retention-policy ${bucketName}`);
+  execSync(`node setRetentionPolicy.js ${bucketName} ${retentionPeriod}`);
+  const output = execSync(`node lockRetentionPolicy.js ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Retention policy for ${bucketName} is now locked.`)

@@ -38,7 +38,6 @@ const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(cwd, 'resources', fileName);
 const folderPath = path.join(cwd, 'resources');
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
-const cmd = `node files.js`;
 
 const fileContent = fs.readFileSync(filePath, 'utf-8');
 
@@ -63,7 +62,7 @@ it('should upload a file', async () => {
 
 it('should upload a file with a kms key', async () => {
   const output = execSync(
-    `${cmd} upload-with-kms-key ${bucketName} ${filePath} ${kmsKeyName}`
+    `node uploadFileWithKmsKey.js ${bucketName} ${filePath} ${kmsKeyName}`
   );
   assert.include(
     output,
@@ -118,7 +117,7 @@ it('should upload a local directory', done => {
 
 it('should download a file', () => {
   const output = execSync(
-    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`
+    `node downloadFile.js ${bucketName} ${fileName} ${downloadFilePath}`
   );
   assert.match(
     output,
@@ -131,7 +130,7 @@ it('should download a file', () => {
 
 it('should move a file', async () => {
   const output = execSync(
-    `${cmd} move ${bucketName} ${fileName} ${movedFileName}`
+    `node moveFile.js ${bucketName} ${fileName} ${movedFileName}`
   );
   assert.match(
     output,
@@ -145,7 +144,7 @@ it('should move a file', async () => {
 
 it('should copy a file', async () => {
   const output = execSync(
-    `${cmd} copy ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName}`
+    `node copyFile.js ${bucketName} ${movedFileName} ${bucketName} ${copiedFileName}`
   );
   assert.match(
     output,
@@ -158,26 +157,26 @@ it('should copy a file', async () => {
 });
 
 it('should list files', () => {
-  const output = execSync(`${cmd} list ${bucketName}`);
+  const output = execSync(`node listFiles.js ${bucketName}`);
   assert.match(output, /Files:/);
   assert.match(output, new RegExp(movedFileName));
   assert.match(output, new RegExp(copiedFileName));
 });
 
 it('should list files by a prefix', () => {
-  let output = execSync(`${cmd} list ${bucketName} test "/"`);
+  let output = execSync(`node listFilesByPrefix.js ${bucketName} test "/"`);
   assert.match(output, /Files:/);
   assert.match(output, new RegExp(movedFileName));
   assert.match(output, new RegExp(copiedFileName));
 
-  output = execSync(`${cmd} list ${bucketName} foo`);
+  output = execSync(`node listFilesByPrefix.js ${bucketName} foo`);
   assert.match(output, /Files:/);
   assert.notMatch(output, new RegExp(movedFileName));
   assert.notMatch(output, new RegExp(copiedFileName));
 });
 
 it('should make a file public', () => {
-  const output = execSync(`${cmd} make-public ${bucketName} ${copiedFileName}`);
+  const output = execSync(`node makePublic.js ${bucketName} ${copiedFileName}`);
   assert.match(
     output,
     new RegExp(`gs://${bucketName}/${copiedFileName} is now public.`)
@@ -186,14 +185,14 @@ it('should make a file public', () => {
 
 it('should generate a v2 signed URL for a file', async () => {
   const output = await execSync(
-    `${cmd} generate-signed-url ${bucketName} ${copiedFileName}`
+    `node generateSignedUrl ${bucketName} ${copiedFileName}`
   );
   assert.match(output, new RegExp(`The signed url for ${copiedFileName} is `));
 });
 
 it('should generate a v4 signed URL and read a file', async () => {
   const output = await execSync(
-    `${cmd} generate-v4-read-signed-url ${bucketName} ${copiedFileName}`
+    `node generateV4ReadSignedUrl.js ${bucketName} ${copiedFileName}`
   );
 
   const expected = /URL:\n([^\s]+)/;
@@ -207,7 +206,7 @@ it('should generate a v4 signed URL and read a file', async () => {
 
 it('should generate a v4 signed URL and upload a file', async () => {
   const output = execSync(
-    `${cmd} generate-v4-upload-signed-url ${bucketName} ${signedFileName}`
+    `node generateV4UploadSignedUrl.js ${bucketName} ${signedFileName}`
   );
 
   const expected = /URL:\n([^\s]+)/;
@@ -267,7 +266,7 @@ it('should set metadata for a file', () => {
 });
 
 it('should delete a file', async () => {
-  const output = execSync(`${cmd} delete ${bucketName} ${copiedFileName}`);
+  const output = execSync(`node deleteFile.js ${bucketName} ${copiedFileName}`);
   assert.match(
     output,
     new RegExp(`gs://${bucketName}/${copiedFileName} deleted.`)

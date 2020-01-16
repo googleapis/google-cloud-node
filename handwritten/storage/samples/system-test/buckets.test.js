@@ -26,7 +26,6 @@ const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
-const cmd = 'node buckets.js';
 
 after(async () => {
   return bucket.delete().catch(console.error);
@@ -40,7 +39,7 @@ it('should create a bucket', async () => {
 });
 
 it('should list buckets', () => {
-  const output = execSync(`${cmd} list`);
+  const output = execSync(`node listBuckets.js`);
   assert.match(output, /Buckets:/);
   assert.match(output, new RegExp(bucketName));
 });
