@@ -1217,6 +1217,52 @@ describe('storage', () => {
     });
   });
 
+  describe('cors configuration', () => {
+    const corsEntry = [
+      {
+        maxAgeSeconds: 1600,
+      },
+      {
+        maxAgeSeconds: 3600,
+        method: ['GET', 'POST'],
+        origin: ['*'],
+        responseHeader: ['Content-Type', 'Access-Control-Allow-Origin'],
+      },
+    ];
+
+    describe('bucket', () => {
+      it('should create a bucket with a CORS configuration when passed in', async () => {
+        const bucket = storage.bucket(generateName());
+        await storage.createBucket(bucket.name, {
+          cors: corsEntry,
+        });
+
+        await bucket.getMetadata();
+        assert.deepStrictEqual(bucket.metadata.cors, corsEntry);
+      });
+
+      it('should set a CORS configuration', async () => {
+        const bucket = storage.bucket(generateName());
+        await bucket.create();
+        await bucket.setCorsConfiguration(corsEntry);
+        await bucket.getMetadata();
+        assert.deepStrictEqual(bucket.metadata.cors, corsEntry);
+      });
+
+      it('should remove a CORS configuration', async () => {
+        const bucket = storage.bucket(generateName());
+        await bucket.create();
+        await bucket.setCorsConfiguration(corsEntry);
+        await bucket.getMetadata();
+        assert.deepStrictEqual(bucket.metadata.cors, corsEntry);
+
+        // And now test the removing
+        await bucket.setCorsConfiguration([]);
+        assert.ok(!bucket.metadata.cors);
+      });
+    });
+  });
+
   describe('bucket retention policies', () => {
     describe('bucket', () => {
       it('should create a bucket with a retention policy', async () => {

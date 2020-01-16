@@ -61,9 +61,17 @@ export interface BucketOptions {
   userProject?: string;
 }
 
+export interface Cors {
+  maxAgeSeconds?: number;
+  method?: string[];
+  origin?: string[];
+  responseHeader?: string[];
+}
+
 export interface CreateBucketRequest {
   archive?: boolean;
   coldline?: boolean;
+  cors?: Cors[];
   dra?: boolean;
   multiRegional?: boolean;
   nearline?: boolean;
@@ -479,6 +487,7 @@ export class Storage extends Service {
    * @typedef {object} CreateBucketRequest
    * @property {boolean} [archive=false] Specify the storage class as Archive.
    * @property {boolean} [coldline=false] Specify the storage class as Coldline.
+   * @property {Cors[]} [cors=[]] Specify the CORS configuration to use.
    * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
    *     Availability.
    * @property {boolean} [multiRegional=false] Specify the storage class as

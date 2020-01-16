@@ -47,7 +47,7 @@ import {
 } from './file';
 import {Iam} from './iam';
 import {Notification} from './notification';
-import {Storage} from './storage';
+import {Storage, Cors} from './storage';
 
 interface SourceObject {
   name: string;
@@ -2869,6 +2869,47 @@ class Bucket extends ServiceObject {
         retentionPolicy: {
           retentionPeriod: duration,
         },
+      },
+      callback!
+    );
+  }
+  setCorsConfiguration(
+    corsConfiguration: Cors[]
+  ): Promise<SetBucketMetadataResponse>;
+  setCorsConfiguration(
+    corsConfiguration: Cors[],
+    callback: SetBucketMetadataCallback
+  ): void;
+  /**
+   * This can be used to set the CORS configuration on the bucket.
+   *
+   * The configuration will be overwritten with the value passed into this.
+   *
+   * @param {Cors[]} corsConfiguration The new CORS configuration to set
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const storage = require('@google-cloud/storage')();
+   * const bucket = storage.bucket('albums');
+   *
+   * const corsConfiguration = [{maxAgeSeconds: 3600}]; // 1 hour
+   * bucket.setCorsConfiguration(corsConfiguration);
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * bucket.setCorsConfiguration(corsConfiguration).then(function(data) {
+   *   const apiResponse = data[0];
+   * });
+   */
+  setCorsConfiguration(
+    corsConfiguration: Cors[],
+    callback?: SetBucketMetadataCallback
+  ): Promise<SetBucketMetadataResponse> | void {
+    this.setMetadata(
+      {
+        cors: corsConfiguration,
       },
       callback!
     );
