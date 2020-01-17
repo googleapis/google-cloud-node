@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.3.4...v1.4.0) (2020-01-17)
+
+
+### Features
+
+* move to typescript code generation ([#109](https://www.github.com/googleapis/nodejs-datalabeling/issues/109)) ([381b1eb](https://www.github.com/googleapis/nodejs-datalabeling/commit/381b1eb70eef00ffd4292fbffbddf36d4e13bdec))
+
 ### [1.3.4](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.3.3...v1.3.4) (2019-12-05)
 
 
