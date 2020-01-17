@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -251,8 +251,7 @@ class ProfileServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the profile is
-   *   created.
+   *   Required. The resource name of the tenant under which the profile is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
    *   "projects/foo/tenants/bar".
@@ -394,8 +393,7 @@ class ProfileServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the tenant under which the profile is
-   *   created.
+   *   Required. The resource name of the tenant under which the profile is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
    *   "projects/foo/tenants/bar".
@@ -757,9 +755,7 @@ class ProfileServiceClient {
    * For example, search by raw queries "software engineer in Mountain View" or
    * search by structured filters (location filter, education filter, etc.).
    *
-   * See
-   * SearchProfilesRequest
-   * for more information.
+   * See SearchProfilesRequest for more information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -769,14 +765,13 @@ class ProfileServiceClient {
    *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
    *   "projects/foo/tenants/bar".
    * @param {Object} request.requestMetadata
-   *   Required. The meta information collected about the profile search user.
-   *   This is used to improve the search quality of the service. These values are
-   *   provided by users, and must be precise and consistent.
+   *   Required. The meta information collected about the profile search user. This is used
+   *   to improve the search quality of the service. These values are provided by
+   *   users, and must be precise and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {Object} [request.profileQuery]
-   *   Search query to execute. See
-   *   ProfileQuery for more details.
+   *   Search query to execute. See ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -787,9 +782,7 @@ class ProfileServiceClient {
    *   resources in a page.
    * @param {number} [request.offset]
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if
-   *   page_token
-   *   is unset.
+   *   search results. This field is only considered if page_token is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -809,27 +802,17 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_date desc": Sort by
-   *   Profile.update_time in
-   *   descending order
+   *   * "update_date desc": Sort by Profile.update_time in descending order
    *     (recently updated profiles first).
-   *   * "create_date desc": Sort by
-   *   Profile.create_time in
-   *   descending order
+   *   * "create_date desc": Sort by Profile.create_time in descending order
    *     (recently created profiles first).
-   *   * "first_name": Sort by
-   *   PersonName.PersonStructuredName.given_name
-   *   in
+   *   * "first_name": Sort by PersonName.PersonStructuredName.given_name in
    *     ascending order.
-   *   * "first_name desc": Sort by
-   *   PersonName.PersonStructuredName.given_name
+   *   * "first_name desc": Sort by PersonName.PersonStructuredName.given_name
    *     in descending order.
-   *   * "last_name": Sort by
-   *   PersonName.PersonStructuredName.family_name
-   *   in
+   *   * "last_name": Sort by PersonName.PersonStructuredName.family_name in
    *     ascending order.
-   *   * "last_name desc": Sort by
-   *   PersonName.PersonStructuredName.family_name
+   *   * "last_name desc": Sort by PersonName.PersonStructuredName.family_name
    *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
    *   When sort by field is based on alphabetical order, sort values case
@@ -837,8 +820,7 @@ class ProfileServiceClient {
    *   is case in-sensitive sort (false).
    * @param {Object[]} [request.histogramQueries]
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for
-   *   SearchProfilesRequest.
+   *   profiles for SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with parameters.
    *
@@ -890,19 +872,13 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See
-   *   [ApplicationDateFilter
-   *   for more details.
+   *   See [ApplicationDateFilter for more details.
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
-   *   See
-   *   ApplicationOutcomeNotesFilter
-   *   for more details.
+   *   See ApplicationOutcomeNotesFilter for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See
-   *   ApplicationJobFilter
-   *   for more details.
+   *   See ApplicationJobFilter for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -921,35 +897,25 @@ class ProfileServiceClient {
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
    *   An id that uniquely identifies the result set of a
-   *   SearchProfiles
-   *   call. The id should be retrieved from the
-   *   SearchProfilesResponse
-   *   message returned from a previous invocation of
-   *   SearchProfiles.
+   *   SearchProfiles call. The id should be
+   *   retrieved from the
+   *   SearchProfilesResponse message returned from a previous
+   *   invocation of SearchProfiles.
    *
    *   A result set is an ordered list of search results.
    *
    *   If this field is not set, a new result set is computed based on the
-   *   profile_query.
-   *   A new
-   *   result_set_id
-   *   is returned as a handle to access this result set.
+   *   profile_query.  A new result_set_id is returned as a handle to
+   *   access this result set.
    *
    *   If this field is set, the service will ignore the resource and
-   *   profile_query
-   *   values, and simply retrieve a page of results from the corresponding result
-   *   set.  In this case, one and only one of
-   *   page_token
-   *   or offset must
-   *   be set.
+   *   profile_query values, and simply retrieve a page of results from the
+   *   corresponding result set.  In this case, one and only one of page_token
+   *   or offset must be set.
    *
-   *   A typical use case is to invoke
-   *   SearchProfilesRequest
-   *   without this field, then use the resulting
-   *   result_set_id
-   *   in
-   *   SearchProfilesResponse
-   *   to page through the results.
+   *   A typical use case is to invoke SearchProfilesRequest without this
+   *   field, then use the resulting result_set_id in
+   *   SearchProfilesResponse to page through the results.
    * @param {boolean} [request.strictKeywordsSearch]
    *   This flag is used to indicate whether the service will attempt to
    *   understand synonyms and terms related to the search query or treat the
@@ -1084,14 +1050,13 @@ class ProfileServiceClient {
    *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
    *   "projects/foo/tenants/bar".
    * @param {Object} request.requestMetadata
-   *   Required. The meta information collected about the profile search user.
-   *   This is used to improve the search quality of the service. These values are
-   *   provided by users, and must be precise and consistent.
+   *   Required. The meta information collected about the profile search user. This is used
+   *   to improve the search quality of the service. These values are provided by
+   *   users, and must be precise and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {Object} [request.profileQuery]
-   *   Search query to execute. See
-   *   ProfileQuery for more details.
+   *   Search query to execute. See ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -1102,9 +1067,7 @@ class ProfileServiceClient {
    *   resources in a page.
    * @param {number} [request.offset]
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if
-   *   page_token
-   *   is unset.
+   *   search results. This field is only considered if page_token is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -1124,27 +1087,17 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_date desc": Sort by
-   *   Profile.update_time in
-   *   descending order
+   *   * "update_date desc": Sort by Profile.update_time in descending order
    *     (recently updated profiles first).
-   *   * "create_date desc": Sort by
-   *   Profile.create_time in
-   *   descending order
+   *   * "create_date desc": Sort by Profile.create_time in descending order
    *     (recently created profiles first).
-   *   * "first_name": Sort by
-   *   PersonName.PersonStructuredName.given_name
-   *   in
+   *   * "first_name": Sort by PersonName.PersonStructuredName.given_name in
    *     ascending order.
-   *   * "first_name desc": Sort by
-   *   PersonName.PersonStructuredName.given_name
+   *   * "first_name desc": Sort by PersonName.PersonStructuredName.given_name
    *     in descending order.
-   *   * "last_name": Sort by
-   *   PersonName.PersonStructuredName.family_name
-   *   in
+   *   * "last_name": Sort by PersonName.PersonStructuredName.family_name in
    *     ascending order.
-   *   * "last_name desc": Sort by
-   *   PersonName.PersonStructuredName.family_name
+   *   * "last_name desc": Sort by PersonName.PersonStructuredName.family_name
    *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
    *   When sort by field is based on alphabetical order, sort values case
@@ -1152,8 +1105,7 @@ class ProfileServiceClient {
    *   is case in-sensitive sort (false).
    * @param {Object[]} [request.histogramQueries]
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for
-   *   SearchProfilesRequest.
+   *   profiles for SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with parameters.
    *
@@ -1205,19 +1157,13 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See
-   *   [ApplicationDateFilter
-   *   for more details.
+   *   See [ApplicationDateFilter for more details.
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
-   *   See
-   *   ApplicationOutcomeNotesFilter
-   *   for more details.
+   *   See ApplicationOutcomeNotesFilter for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See
-   *   ApplicationJobFilter
-   *   for more details.
+   *   See ApplicationJobFilter for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -1236,35 +1182,25 @@ class ProfileServiceClient {
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
    *   An id that uniquely identifies the result set of a
-   *   SearchProfiles
-   *   call. The id should be retrieved from the
-   *   SearchProfilesResponse
-   *   message returned from a previous invocation of
-   *   SearchProfiles.
+   *   SearchProfiles call. The id should be
+   *   retrieved from the
+   *   SearchProfilesResponse message returned from a previous
+   *   invocation of SearchProfiles.
    *
    *   A result set is an ordered list of search results.
    *
    *   If this field is not set, a new result set is computed based on the
-   *   profile_query.
-   *   A new
-   *   result_set_id
-   *   is returned as a handle to access this result set.
+   *   profile_query.  A new result_set_id is returned as a handle to
+   *   access this result set.
    *
    *   If this field is set, the service will ignore the resource and
-   *   profile_query
-   *   values, and simply retrieve a page of results from the corresponding result
-   *   set.  In this case, one and only one of
-   *   page_token
-   *   or offset must
-   *   be set.
+   *   profile_query values, and simply retrieve a page of results from the
+   *   corresponding result set.  In this case, one and only one of page_token
+   *   or offset must be set.
    *
-   *   A typical use case is to invoke
-   *   SearchProfilesRequest
-   *   without this field, then use the resulting
-   *   result_set_id
-   *   in
-   *   SearchProfilesResponse
-   *   to page through the results.
+   *   A typical use case is to invoke SearchProfilesRequest without this
+   *   field, then use the resulting result_set_id in
+   *   SearchProfilesResponse to page through the results.
    * @param {boolean} [request.strictKeywordsSearch]
    *   This flag is used to indicate whether the service will attempt to
    *   understand synonyms and terms related to the search query or treat the

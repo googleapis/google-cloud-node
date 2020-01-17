@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -253,26 +253,6 @@ class CompletionClient {
    *   For more information, see
    *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
    *
-   *   For
-   *   CompletionType.JOB_TITLE
-   *   type, only open jobs with the same
-   *   language_codes
-   *   are returned.
-   *
-   *   For
-   *   CompletionType.COMPANY_NAME
-   *   type, only companies having open jobs with the same
-   *   language_codes
-   *   are returned.
-   *
-   *   For
-   *   CompletionType.COMBINED
-   *   type, only open jobs with the same
-   *   language_codes
-   *   or companies having open jobs with the same
-   *   language_codes
-   *   are returned.
-   *
    *   The maximum number of allowed characters is 255.
    * @param {string} [request.company]
    *   If provided, restricts completion to specified company.
@@ -284,13 +264,11 @@ class CompletionClient {
    *   If tenant id is unspecified, the default tenant is used, for
    *   example, "projects/foo".
    * @param {number} [request.scope]
-   *   The scope of the completion. The defaults is
-   *   CompletionScope.PUBLIC.
+   *   The scope of the completion. The defaults is CompletionScope.PUBLIC.
    *
    *   The number should be among the values of [CompletionScope]{@link google.cloud.talent.v4beta1.CompletionScope}
    * @param {number} [request.type]
-   *   The completion topic. The default is
-   *   CompletionType.COMBINED.
+   *   The completion topic. The default is CompletionType.COMBINED.
    *
    *   The number should be among the values of [CompletionType]{@link google.cloud.talent.v4beta1.CompletionType}
    * @param {Object} [options]

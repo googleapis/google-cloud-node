@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@
  * List profiles request.
  *
  * @property {string} parent
- *   Required. The resource name of the tenant under which the profile is
- *   created.
+ *   Required. The resource name of the tenant under which the profile is created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
  *   "projects/foo/tenants/bar".
@@ -47,9 +46,8 @@
  * @property {string} pageToken
  *   The token that specifies the current offset (that is, starting result).
  *
- *   Please set the value to
- *   ListProfilesResponse.next_page_token
- *   to continue the list.
+ *   Please set the value to ListProfilesResponse.next_page_token to
+ *   continue the list.
  *
  * @property {number} pageSize
  *   The maximum number of profiles to be returned, at most 100.
@@ -234,15 +232,14 @@ const DeleteProfileRequest = {
  *   "projects/foo/tenants/bar".
  *
  * @property {Object} requestMetadata
- *   Required. The meta information collected about the profile search user.
- *   This is used to improve the search quality of the service. These values are
- *   provided by users, and must be precise and consistent.
+ *   Required. The meta information collected about the profile search user. This is used
+ *   to improve the search quality of the service. These values are provided by
+ *   users, and must be precise and consistent.
  *
  *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
  *
  * @property {Object} profileQuery
- *   Search query to execute. See
- *   ProfileQuery for more details.
+ *   Search query to execute. See ProfileQuery for more details.
  *
  *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
  *
@@ -256,16 +253,14 @@ const DeleteProfileRequest = {
  *   The pageToken, similar to offset enables users of the API to paginate
  *   through the search results. To retrieve the first page of results, set the
  *   pageToken to empty. The search response includes a
- *   nextPageToken
- *   field that can be used to populate the pageToken field for the next page of
- *   results. Using pageToken instead of offset increases the performance of the
- *   API, especially compared to larger offset values.
+ *   nextPageToken field that can be
+ *   used to populate the pageToken field for the next page of results. Using
+ *   pageToken instead of offset increases the performance of the API,
+ *   especially compared to larger offset values.
  *
  * @property {number} offset
  *   An integer that specifies the current offset (that is, starting result) in
- *   search results. This field is only considered if
- *   page_token
- *   is unset.
+ *   search results. This field is only considered if page_token is unset.
  *
  *   The maximum allowed value is 5000. Otherwise an error is thrown.
  *
@@ -287,27 +282,17 @@ const DeleteProfileRequest = {
  *
  *   * "relevance desc": By descending relevance, as determined by the API
  *      algorithms.
- *   * "update_date desc": Sort by
- *   Profile.update_time in
- *   descending order
+ *   * "update_date desc": Sort by Profile.update_time in descending order
  *     (recently updated profiles first).
- *   * "create_date desc": Sort by
- *   Profile.create_time in
- *   descending order
+ *   * "create_date desc": Sort by Profile.create_time in descending order
  *     (recently created profiles first).
- *   * "first_name": Sort by
- *   PersonName.PersonStructuredName.given_name
- *   in
+ *   * "first_name": Sort by PersonName.PersonStructuredName.given_name in
  *     ascending order.
- *   * "first_name desc": Sort by
- *   PersonName.PersonStructuredName.given_name
+ *   * "first_name desc": Sort by PersonName.PersonStructuredName.given_name
  *     in descending order.
- *   * "last_name": Sort by
- *   PersonName.PersonStructuredName.family_name
- *   in
+ *   * "last_name": Sort by PersonName.PersonStructuredName.family_name in
  *     ascending order.
- *   * "last_name desc": Sort by
- *   PersonName.PersonStructuredName.family_name
+ *   * "last_name desc": Sort by PersonName.PersonStructuredName.family_name
  *     in ascending order.
  *
  * @property {boolean} caseSensitiveSort
@@ -317,8 +302,7 @@ const DeleteProfileRequest = {
  *
  * @property {Object[]} histogramQueries
  *   A list of expressions specifies histogram requests against matching
- *   profiles for
- *   SearchProfilesRequest.
+ *   profiles for SearchProfilesRequest.
  *
  *   The expression syntax looks like a function definition with parameters.
  *
@@ -370,19 +354,13 @@ const DeleteProfileRequest = {
  *   * experience_in_months: experience in months. 0 means 0 month to 1 month
  *   (exclusive).
  *   * application_date: The application date specifies application start dates.
- *   See
- *   [ApplicationDateFilter
- *   for more details.
+ *   See [ApplicationDateFilter for more details.
  *   * application_outcome_notes: The application outcome reason specifies the
  *   reasons behind the outcome of the job application.
- *   See
- *   ApplicationOutcomeNotesFilter
- *   for more details.
+ *   See ApplicationOutcomeNotesFilter for more details.
  *   * application_job_title: The application job title specifies the job
  *   applied for in the application.
- *   See
- *   ApplicationJobFilter
- *   for more details.
+ *   See ApplicationJobFilter for more details.
  *   * hirable_status: Hirable status specifies the profile's hirable status.
  *   * string_custom_attribute: String custom attributes. Values can be accessed
  *   via square bracket notation like string_custom_attribute["key1"].
@@ -402,35 +380,25 @@ const DeleteProfileRequest = {
  *
  * @property {string} resultSetId
  *   An id that uniquely identifies the result set of a
- *   SearchProfiles
- *   call. The id should be retrieved from the
- *   SearchProfilesResponse
- *   message returned from a previous invocation of
- *   SearchProfiles.
+ *   SearchProfiles call. The id should be
+ *   retrieved from the
+ *   SearchProfilesResponse message returned from a previous
+ *   invocation of SearchProfiles.
  *
  *   A result set is an ordered list of search results.
  *
  *   If this field is not set, a new result set is computed based on the
- *   profile_query.
- *   A new
- *   result_set_id
- *   is returned as a handle to access this result set.
+ *   profile_query.  A new result_set_id is returned as a handle to
+ *   access this result set.
  *
  *   If this field is set, the service will ignore the resource and
- *   profile_query
- *   values, and simply retrieve a page of results from the corresponding result
- *   set.  In this case, one and only one of
- *   page_token
- *   or offset must
- *   be set.
+ *   profile_query values, and simply retrieve a page of results from the
+ *   corresponding result set.  In this case, one and only one of page_token
+ *   or offset must be set.
  *
- *   A typical use case is to invoke
- *   SearchProfilesRequest
- *   without this field, then use the resulting
- *   result_set_id
- *   in
- *   SearchProfilesResponse
- *   to page through the results.
+ *   A typical use case is to invoke SearchProfilesRequest without this
+ *   field, then use the resulting result_set_id in
+ *   SearchProfilesResponse to page through the results.
  *
  * @property {boolean} strictKeywordsSearch
  *   This flag is used to indicate whether the service will attempt to
@@ -485,15 +453,14 @@ const SearchProfilesRequest = {
  *   This object should have the same structure as [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult}
  *
  * @property {Object[]} summarizedProfiles
- *   The profile entities that match the specified
- *   SearchProfilesRequest.
+ *   The profile entities that match the specified SearchProfilesRequest.
  *
  *   This object should have the same structure as [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}
  *
  * @property {string} resultSetId
  *   An id that uniquely identifies the result set of a
- *   SearchProfiles
- *   call for consistent results.
+ *   SearchProfiles call for consistent
+ *   results.
  *
  * @typedef SearchProfilesResponse
  * @memberof google.cloud.talent.v4beta1
@@ -504,12 +471,10 @@ const SearchProfilesResponse = {
 };
 
 /**
- * Profile entry with metadata inside
- * SearchProfilesResponse.
+ * Profile entry with metadata inside SearchProfilesResponse.
  *
  * @property {Object[]} profiles
- *   A list of profiles that are linked by
- *   Profile.group_id.
+ *   A list of profiles that are linked by Profile.group_id.
  *
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
@@ -517,10 +482,9 @@ const SearchProfilesResponse = {
  *   A profile summary shows the profile summary and how the profile matches the
  *   search query.
  *
- *   In profile summary, the profiles with the same
- *   Profile.group_id are merged
- *   together. Among profiles, same education/employment records may be slightly
- *   different but they are merged into one with best efforts.
+ *   In profile summary, the profiles with the same Profile.group_id are
+ *   merged together. Among profiles, same education/employment records may be
+ *   slightly different but they are merged into one with best efforts.
  *
  *   For example, in one profile the school name is "UC Berkeley" and the field
  *   study is "Computer Science" and in another one the school name is

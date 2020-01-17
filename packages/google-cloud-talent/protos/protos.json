@@ -12,7 +12,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TenantResourceProto",
                     "java_package": "com.google.cloud.talent.v4beta1",
-                    "objc_class_prefix": "CTS"
+                    "objc_class_prefix": "CTS",
+                    "(google.api.resource_definition).type": "jobs.googleapis.com/TenantOrProject",
+                    "(google.api.resource_definition).pattern": "projects/{project}"
                   },
                   "nested": {
                     "ApplicationService": {
@@ -26,14 +28,16 @@
                           "responseType": "Application",
                           "options": {
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,application"
                           }
                         },
                         "GetApplication": {
                           "requestType": "GetApplicationRequest",
                           "responseType": "Application",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateApplication": {
@@ -41,21 +45,24 @@
                           "responseType": "Application",
                           "options": {
                             "(google.api.http).patch": "/v4beta1/{application.name=projects/*/tenants/*/profiles/*/applications/*}",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "application"
                           }
                         },
                         "DeleteApplication": {
                           "requestType": "DeleteApplicationRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListApplications": {
                           "requestType": "ListApplicationsRequest",
                           "responseType": "ListApplicationsResponse",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications"
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
+                            "(google.api.method_signature)": "parent"
                           }
                         }
                       }
@@ -66,7 +73,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Profile"
                           }
                         },
                         "application": {
@@ -84,7 +92,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Application"
                           }
                         }
                       }
@@ -110,7 +119,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Application"
                           }
                         }
                       }
@@ -121,7 +131,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Profile"
                           }
                         },
                         "pageToken": {
@@ -152,6 +163,10 @@
                       }
                     },
                     "Application": {
+                      "options": {
+                        "(google.api.resource).type": "jobs.googleapis.com/Application",
+                        "(google.api.resource).pattern": "projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -173,11 +188,17 @@
                         },
                         "job": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Job"
+                          }
                         },
                         "company": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Company"
+                          }
                         },
                         "applicationDate": {
                           "type": "google.type.Date",
@@ -821,7 +842,8 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/companies",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/companies",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,company"
                           }
                         },
                         "GetCompany": {
@@ -829,7 +851,8 @@
                           "responseType": "Company",
                           "options": {
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/companies/*}"
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/companies/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateCompany": {
@@ -839,7 +862,8 @@
                             "(google.api.http).patch": "/v4beta1/{company.name=projects/*/tenants/*/companies/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v4beta1/{company.name=projects/*/companies/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "company"
                           }
                         },
                         "DeleteCompany": {
@@ -847,7 +871,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
-                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/companies/*}"
+                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/companies/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListCompanies": {
@@ -855,7 +880,8 @@
                           "responseType": "ListCompaniesResponse",
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/companies",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/companies"
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/companies",
+                            "(google.api.method_signature)": "parent"
                           }
                         }
                       }
@@ -866,7 +892,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Company"
                           }
                         },
                         "company": {
@@ -884,7 +911,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Company"
                           }
                         }
                       }
@@ -910,7 +938,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Company"
                           }
                         }
                       }
@@ -921,7 +950,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
                           }
                         },
                         "pageToken": {
@@ -956,6 +986,10 @@
                       }
                     },
                     "Company": {
+                      "options": {
+                        "(google.api.resource).type": "jobs.googleapis.com/Company",
+                        "(google.api.resource).pattern": "projects/{project}/tenants/{tenant}/companies/{company}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1056,7 +1090,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
                           }
                         },
                         "query": {
@@ -1080,7 +1115,10 @@
                         },
                         "company": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Company"
+                          }
                         },
                         "scope": {
                           "type": "CompletionScope",
@@ -1153,7 +1191,8 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/clientEvents",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/clientEvents",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,client_event"
                           }
                         }
                       }
@@ -1164,7 +1203,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/TenantOrProject"
                           }
                         },
                         "clientEvent": {
@@ -1310,7 +1350,8 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,job"
                           }
                         },
                         "BatchCreateJobs": {
@@ -1320,7 +1361,10 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchCreate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchCreate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,jobs",
+                            "(google.longrunning.operation_info).response_type": "JobOperationResult",
+                            "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
                           }
                         },
                         "GetJob": {
@@ -1328,7 +1372,8 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/jobs/*}"
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/jobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateJob": {
@@ -1338,7 +1383,8 @@
                             "(google.api.http).patch": "/v4beta1/{job.name=projects/*/tenants/*/jobs/*}",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.patch": "/v4beta1/{job.name=projects/*/jobs/*}",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "job"
                           }
                         },
                         "BatchUpdateJobs": {
@@ -1348,7 +1394,10 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchUpdate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchUpdate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,jobs",
+                            "(google.longrunning.operation_info).response_type": "JobOperationResult",
+                            "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
                           }
                         },
                         "DeleteJob": {
@@ -1356,7 +1405,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
-                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/jobs/*}"
+                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/jobs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "BatchDeleteJobs": {
@@ -1365,7 +1415,8 @@
                           "options": {
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchDelete",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchDelete"
+                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchDelete",
+                            "(google.api.method_signature)": "parent,filter"
                           }
                         },
                         "ListJobs": {
@@ -1373,7 +1424,8 @@
                           "responseType": "ListJobsResponse",
                           "options": {
                             "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/jobs"
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/jobs",
+                            "(google.api.method_signature)": "parent,filter"
                           }
                         },
                         "SearchJobs": {
@@ -1404,7 +1456,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "job": {
@@ -1422,7 +1475,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Job"
                           }
                         }
                       }
@@ -1448,7 +1502,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Job"
                           }
                         }
                       }
@@ -1459,7 +1514,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "filter": {
@@ -1477,7 +1533,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "filter": {
@@ -1533,7 +1590,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "searchMode": {
@@ -1732,7 +1790,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "jobs": {
@@ -1751,7 +1810,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "jobs.googleapis.com/Job"
                           }
                         },
                         "jobs": {
@@ -2295,6 +2355,10 @@
                       }
                     },
                     "Job": {
+                      "options": {
+                        "(google.api.resource).type": "jobs.googleapis.com/Job",
+                        "(google.api.resource).pattern": "projects/{project}/tenants/{tenant}/jobs/{job}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2304,7 +2368,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "Company"
                           }
                         },
                         "requisitionId": {
@@ -2506,7 +2571,8 @@
                           "requestType": "ListProfilesRequest",
                           "responseType": "ListProfilesResponse",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/profiles"
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/profiles",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "CreateProfile": {
@@ -2514,14 +2580,16 @@
                           "responseType": "Profile",
                           "options": {
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/profiles",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,profile"
                           }
                         },
                         "GetProfile": {
                           "requestType": "GetProfileRequest",
                           "responseType": "Profile",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*}"
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateProfile": {
@@ -2529,14 +2597,16 @@
                           "responseType": "Profile",
                           "options": {
                             "(google.api.http).patch": "/v4beta1/{profile.name=projects/*/tenants/*/profiles/*}",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "profile"
                           }
                         },
                         "DeleteProfile": {
                           "requestType": "DeleteProfileRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*}"
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "SearchProfiles": {
@@ -2595,7 +2665,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Tenant"
                           }
                         },
                         "profile": {
@@ -2613,7 +2684,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Profile"
                           }
                         }
                       }
@@ -2639,7 +2711,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Profile"
                           }
                         }
                       }
@@ -2650,7 +2723,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "Tenant"
                           }
                         },
                         "requestMetadata": {
@@ -2751,6 +2825,10 @@
                       }
                     },
                     "Profile": {
+                      "options": {
+                        "(google.api.resource).type": "jobs.googleapis.com/Profile",
+                        "(google.api.resource).pattern": "projects/{project}/tenants/{tenant}/profiles/{profile}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3401,14 +3479,16 @@
                           "responseType": "Tenant",
                           "options": {
                             "(google.api.http).post": "/v4beta1/{parent=projects/*}/tenants",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,tenant"
                           }
                         },
                         "GetTenant": {
                           "requestType": "GetTenantRequest",
                           "responseType": "Tenant",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*}"
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateTenant": {
@@ -3416,21 +3496,24 @@
                           "responseType": "Tenant",
                           "options": {
                             "(google.api.http).patch": "/v4beta1/{tenant.name=projects/*/tenants/*}",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "tenant"
                           }
                         },
                         "DeleteTenant": {
                           "requestType": "DeleteTenantRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*}"
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListTenants": {
                           "requestType": "ListTenantsRequest",
                           "responseType": "ListTenantsResponse",
                           "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*}/tenants"
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*}/tenants",
+                            "(google.api.method_signature)": "parent"
                           }
                         }
                       }
@@ -3441,7 +3524,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "tenant": {
@@ -3459,7 +3543,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Tenant"
                           }
                         }
                       }
@@ -3485,7 +3570,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Tenant"
                           }
                         }
                       }
@@ -3496,7 +3582,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "pageToken": {
@@ -3527,6 +3614,10 @@
                       }
                     },
                     "Tenant": {
+                      "options": {
+                        "(google.api.resource).type": "jobs.googleapis.com/Tenant",
+                        "(google.api.resource).pattern": "projects/{project}/tenants/{tenant}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3569,7 +3660,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldBehaviorProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3692,6 +3783,72 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }

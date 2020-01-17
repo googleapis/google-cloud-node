@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} queryLanguageCode
- *   The language code of query.
- *   For example, "en-US". This field helps to better interpret the query.
+ *   The language code of query. For example, "en-US". This field helps to
+ *   better interpret the query.
  *
  *   If a value isn't specified, the query language code is automatically
  *   detected, which may not be accurate.
@@ -55,17 +55,15 @@
  *
  * @property {Object[]} locationFilters
  *   The location filter specifies geo-regions containing the jobs to
- *   search against. See
- *   LocationFilter for more
- *   information.
+ *   search against. See LocationFilter for more information.
  *
  *   If a location value isn't specified, jobs fitting the other search
  *   criteria are retrieved regardless of where they're located.
  *
  *   If multiple values are specified, jobs are retrieved from any of the
  *   specified locations. If different values are specified for the
- *   LocationFilter.distance_in_miles
- *   parameter, the maximum provided distance is used for all locations.
+ *   LocationFilter.distance_in_miles parameter, the maximum provided
+ *   distance is used for all locations.
  *
  *   At most 5 location filters are allowed.
  *
@@ -73,8 +71,7 @@
  *
  * @property {number[]} jobCategories
  *   The category filter specifies the categories of jobs to search against.
- *   See JobCategory for more
- *   information.
+ *   See JobCategory for more information.
  *
  *   If a value isn't specified, jobs from any category are searched against.
  *
@@ -87,19 +84,16 @@
  *   Allows filtering jobs by commute time with different travel methods (for
  *    example, driving or public transit).
  *
- *   Note: This only works when you specify a
- *   CommuteMethod. In this case,
- *   location_filters
- *   is ignored.
+ *   Note: This only works when you specify a CommuteMethod. In this case,
+ *   location_filters is ignored.
  *
  *    Currently we don't support sorting by commute time.
  *
  *   This object should have the same structure as [CommuteFilter]{@link google.cloud.talent.v4beta1.CommuteFilter}
  *
  * @property {string[]} companyDisplayNames
- *   This filter specifies the exact company
- *   Company.display_name of
- *   the jobs to search against.
+ *   This filter specifies the exact company Company.display_name
+ *   of the jobs to search against.
  *
  *   If a value isn't specified, jobs within the search results are
  *   associated with any company.
@@ -111,17 +105,16 @@
  *
  * @property {Object} compensationFilter
  *   This search filter is applied only to
- *   Job.compensation_info.
- *   For example, if the filter is specified as "Hourly job with per-hour
- *   compensation > $15", only jobs meeting these criteria are searched. If a
- *   filter isn't defined, all open jobs are searched.
+ *   Job.compensation_info. For example, if the filter is specified
+ *   as "Hourly job with per-hour compensation > $15", only jobs meeting
+ *   these criteria are searched. If a filter isn't defined, all open jobs
+ *   are searched.
  *
  *   This object should have the same structure as [CompensationFilter]{@link google.cloud.talent.v4beta1.CompensationFilter}
  *
  * @property {string} customAttributeFilter
  *   This filter specifies a structured syntax to match against the
- *   Job.custom_attributes
- *   marked as `filterable`.
+ *   Job.custom_attributes marked as `filterable`.
  *
  *   The syntax for this expression is a subset of SQL syntax.
  *
@@ -152,8 +145,7 @@
  *
  * @property {number[]} employmentTypes
  *   The employment type filter specifies the employment type of jobs to
- *   search against, such as
- *   EmploymentType.FULL_TIME.
+ *   search against, such as EmploymentType.FULL_TIME.
  *
  *   If a value isn't specified, jobs in the search results includes any
  *   employment type.
@@ -208,61 +200,42 @@ const JobQuery = {
  *   The location filter specifies geo-regions containing the profiles to
  *   search against.
  *
- *   One of
- *   LocationFilter.address
- *   or
- *   LocationFilter.lat_lng
- *   must be provided or an error is thrown. If both
- *   LocationFilter.address
- *   and
- *   LocationFilter.lat_lng
- *   are provided, an error is thrown.
+ *   One of LocationFilter.address or LocationFilter.lat_lng must be
+ *   provided or an error is thrown. If both LocationFilter.address and
+ *   LocationFilter.lat_lng are provided, an error is thrown.
  *
  *   The following logic is used to determine which locations in
  *   the profile to filter against:
  *
- *   1. All of the profile's geocoded
- *   Profile.addresses where
- *   Address.usage is PERSONAL and
- *   Address.current is true.
+ *   1. All of the profile's geocoded Profile.addresses where
+ *   Address.usage is PERSONAL and Address.current is true.
  *
  *   2. If the above set of locations is empty, all of the profile's geocoded
- *   Profile.addresses where
- *   Address.usage is
- *   CONTACT_INFO_USAGE_UNSPECIFIED and
- *   Address.current is true.
+ *   Profile.addresses where Address.usage is
+ *   CONTACT_INFO_USAGE_UNSPECIFIED and Address.current is true.
  *
  *   3. If the above set of locations is empty, all of the profile's geocoded
- *   Profile.addresses where
- *   Address.usage is PERSONAL or
- *   CONTACT_INFO_USAGE_UNSPECIFIED and
- *   Address.current is not set.
+ *   Profile.addresses where Address.usage is PERSONAL or
+ *   CONTACT_INFO_USAGE_UNSPECIFIED and Address.current is not set.
  *
- *   This means that any profiles without any
- *   Profile.addresses that
- *   match any of the above criteria will not be included in a search with
- *   location filter. Furthermore, any
- *   Profile.addresses where
- *   Address.usage is WORK or
- *   SCHOOL or where
- *   Address.current is false are
- *   not considered for location filter.
+ *   This means that any profiles without any Profile.addresses that match
+ *   any of the above criteria will not be included in a search with location
+ *   filter. Furthermore, any Profile.addresses where Address.usage is
+ *   WORK or SCHOOL or where Address.current is false are not considered for
+ *   location filter.
  *
  *   If a location filter isn't specified, profiles fitting the other search
  *   criteria are retrieved regardless of where they're located.
  *
- *   If
- *   LocationFilter.negated
- *   is specified, the result doesn't contain profiles from that location.
+ *   If LocationFilter.negated is specified, the result doesn't contain
+ *   profiles from that location.
  *
- *   If
- *   LocationFilter.address
- *   is provided, the
+ *   If LocationFilter.address is provided, the
  *   LocationType, center
  *   point (latitude and longitude), and radius are automatically detected by
  *   the Google Maps Geocoding API and included as well. If
- *   LocationFilter.address
- *   cannot be geocoded, the filter falls back to keyword search.
+ *   LocationFilter.address cannot be geocoded, the filter
+ *   falls back to keyword search.
  *
  *   If the detected
  *   LocationType is
@@ -275,38 +248,24 @@ const JobQuery = {
  *   center point and a radius of detected location radius +
  *   LocationFilter.distance_in_miles.
  *
- *   If
- *   LocationFilter.address
- *   is provided,
- *   LocationFilter.distance_in_miles
- *   is the additional radius on top of the radius of the location geocoded from
- *   LocationFilter.address.
- *   If
- *   LocationFilter.lat_lng
- *   is provided,
- *   LocationFilter.distance_in_miles
- *   is the only radius that is used.
+ *   If LocationFilter.address is provided,
+ *   LocationFilter.distance_in_miles is the additional radius on top of the
+ *   radius of the location geocoded from LocationFilter.address. If
+ *   LocationFilter.lat_lng is provided,
+ *   LocationFilter.distance_in_miles is the only radius that is used.
  *
- *   LocationFilter.distance_in_miles
- *   is 10 by default. Note that the value of
- *   LocationFilter.distance_in_miles
- *   is 0 if it is unset, so the server does not differentiate
- *   LocationFilter.distance_in_miles
- *   that is explicitly set to 0 and
- *   LocationFilter.distance_in_miles
- *   that is not set. Which means that if
- *   LocationFilter.distance_in_miles
- *   is explicitly set to 0, the server will use the default value of
- *   LocationFilter.distance_in_miles
- *   which is 10. To work around this and effectively set
- *   LocationFilter.distance_in_miles
- *   to 0, we recommend setting
- *   LocationFilter.distance_in_miles
- *   to a very small decimal number (such as 0.00001).
+ *   LocationFilter.distance_in_miles is 10 by default. Note that the value
+ *   of LocationFilter.distance_in_miles is 0 if it is unset, so the server
+ *   does not differentiate LocationFilter.distance_in_miles that is
+ *   explicitly set to 0 and LocationFilter.distance_in_miles that is not
+ *   set. Which means that if LocationFilter.distance_in_miles is explicitly
+ *   set to 0, the server will use the default value of
+ *   LocationFilter.distance_in_miles which is 10. To work around this and
+ *   effectively set LocationFilter.distance_in_miles to 0, we recommend
+ *   setting LocationFilter.distance_in_miles to a very small decimal number
+ *   (such as 0.00001).
  *
- *   If
- *   LocationFilter.distance_in_miles
- *   is negative, an error is thrown.
+ *   If LocationFilter.distance_in_miles is negative, an error is thrown.
  *
  *   This object should have the same structure as [LocationFilter]{@link google.cloud.talent.v4beta1.LocationFilter}
  *
@@ -318,9 +277,8 @@ const JobQuery = {
  *   If multiple values are specified, profiles are retrieved with any of the
  *   specified job titles.
  *
- *   If
- *   JobTitleFilter.negated
- *   is specified, the result won't contain profiles with the job titles.
+ *   If JobTitleFilter.negated is specified, the result won't contain
+ *   profiles with the job titles.
  *
  *   For example, search for profiles with a job title "Product Manager".
  *
@@ -335,9 +293,8 @@ const JobQuery = {
  *   If multiple employer filters are specified, profiles with any matching
  *   employers are retrieved.
  *
- *   If
- *   EmployerFilter.negated
- *   is specified, the result won't contain profiles that match the employers.
+ *   If EmployerFilter.negated is specified, the result won't contain
+ *   profiles that match the employers.
  *
  *   For example, search for profiles that have working experience at "Google
  *   LLC".
@@ -353,9 +310,8 @@ const JobQuery = {
  *   If multiple education filters are specified, profiles that match any
  *   education filters are retrieved.
  *
- *   If
- *   EducationFilter.negated
- *   is specified, the result won't contain profiles that match the educations.
+ *   If EducationFilter.negated is specified, the result won't contain
+ *   profiles that match the educations.
  *
  *   For example, search for profiles with a master degree.
  *
@@ -369,8 +325,8 @@ const JobQuery = {
  *   If multiple skill filters are specified, profiles that match any skill
  *   filters are retrieved.
  *
- *   If SkillFilter.negated
- *   is specified, the result won't contain profiles that match the skills.
+ *   If SkillFilter.negated is specified, the result won't contain profiles
+ *   that match the skills.
  *
  *   For example, search for profiles that have "Java" and "Python" in skill
  *   list.
@@ -422,8 +378,7 @@ const JobQuery = {
  *
  * @property {string} customAttributeFilter
  *   This filter specifies a structured syntax to match against the
- *   Profile.custom_attributes
- *   that are marked as `filterable`.
+ *   Profile.custom_attributes that are marked as `filterable`.
  *
  *   The syntax for this expression is a subset of Google SQL syntax.
  *
@@ -454,8 +409,8 @@ const JobQuery = {
  *   signals.
  *
  *   Signal 1: Number of days since most recent job application.  See
- *   Availability.JobApplicationAvailabilitySignal
- *   for the details of this signal.
+ *   Availability.JobApplicationAvailabilitySignal for the details of this
+ *   signal.
  *
  *   Signal 2: Number of days since last profile update. See
  *   Availability.ProfileUpdateAvailabilitySignal
@@ -479,12 +434,9 @@ const JobQuery = {
  *   indicate the candidate's potential qualification / interest / close ability
  *   for a specific job.
  *
- *   There can be at most one
- *   AvailabilityFilter per
- *   signal_type.
- *   If there are multiple
- *   AvailabilityFilter for a
- *   signal_type,
+ *   There can be at most one AvailabilityFilter per
+ *   signal_type. If there are multiple
+ *   AvailabilityFilter for a signal_type,
  *   an error is thrown.
  *
  *   This object should have the same structure as [AvailabilityFilter]{@link google.cloud.talent.v4beta1.AvailabilityFilter}
@@ -542,15 +494,12 @@ const ProfileQuery = {
  *   Allows the client to return jobs without a
  *   set location, specifically, telecommuting jobs (telecommuting is considered
  *   by the service as a special location.
- *   Job.posting_region
- *   indicates if a job permits telecommuting. If this field is set to
- *   TelecommutePreference.TELECOMMUTE_ALLOWED,
- *   telecommuting jobs are searched, and
- *   address and
- *   lat_lng are ignored.
- *   If not set or set to
- *   TelecommutePreference.TELECOMMUTE_EXCLUDED,
- *   telecommute job are not searched.
+ *   Job.posting_region indicates if a job permits telecommuting.
+ *   If this field is set to TelecommutePreference.TELECOMMUTE_ALLOWED,
+ *   telecommuting jobs are searched, and address and lat_lng are
+ *   ignored. If not set or set to
+ *   TelecommutePreference.TELECOMMUTE_EXCLUDED, telecommute job are not
+ *   searched.
  *
  *   This filter can be used by itself to search exclusively for telecommuting
  *   jobs, or it can be combined with another location
@@ -647,14 +596,11 @@ const CompensationFilter = {
     /**
      * Filter by `base compensation entry's` unit. A job is a match if and
      * only if the job contains a base CompensationEntry and the base
-     * CompensationEntry's unit matches provided
-     * units. Populate
-     * one or more
-     * units.
+     * CompensationEntry's unit matches provided units.
+     * Populate one or more units.
      *
-     * See
-     * CompensationInfo.CompensationEntry
-     * for definition of base compensation entry.
+     * See CompensationInfo.CompensationEntry for definition of
+     * base compensation entry.
      */
     UNIT_ONLY: 1,
 
@@ -662,33 +608,26 @@ const CompensationFilter = {
      * Filter by `base compensation entry's` unit and amount / range. A job
      * is a match if and only if the job contains a base CompensationEntry, and
      * the base entry's unit matches provided
-     * CompensationUnit
-     * and amount or range overlaps with provided
+     * CompensationUnit and
+     * amount or range overlaps with provided
      * CompensationRange.
      *
-     * See
-     * CompensationInfo.CompensationEntry
-     * for definition of base compensation entry.
+     * See CompensationInfo.CompensationEntry for definition of
+     * base compensation entry.
      *
-     * Set exactly one
-     * units and
-     * populate range.
+     * Set exactly one units and populate range.
      */
     UNIT_AND_AMOUNT: 2,
 
     /**
      * Filter by annualized base compensation amount and `base compensation
-     * entry's` unit. Populate
-     * range and zero or
-     * more units.
+     * entry's` unit. Populate range and zero or more units.
      */
     ANNUALIZED_BASE_AMOUNT: 3,
 
     /**
      * Filter by annualized total compensation amount and `base compensation
-     * entry's` unit . Populate
-     * range and zero or
-     * more units.
+     * entry's` unit . Populate range and zero or more units.
      */
     ANNUALIZED_TOTAL_AMOUNT: 4
   }
@@ -709,8 +648,8 @@ const CompensationFilter = {
  *   This object should have the same structure as [LatLng]{@link google.type.LatLng}
  *
  * @property {Object} travelDuration
- *   Required. The maximum travel time in seconds. The maximum allowed value is
- *   `3600s` (one hour). Format is `123s`.
+ *   Required. The maximum travel time in seconds. The maximum allowed value is `3600s`
+ *   (one hour). Format is `123s`.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
@@ -770,8 +709,7 @@ const CommuteFilter = {
  * Job title of the search.
  *
  * @property {string} jobTitle
- *   Required. The job title. For example, "Software engineer", or "Product
- *   manager".
+ *   Required. The job title. For example, "Software engineer", or "Product manager".
  *
  * @property {boolean} negated
  *   Whether to apply negation to the filter so profiles matching the filter
@@ -810,12 +748,9 @@ const SkillFilter = {
  *   Required. The name of the employer, for example "Google", "Alphabet".
  *
  * @property {number} mode
- *   Define set of
- *   EmploymentRecords to search
- *   against.
+ *   Define set of EmploymentRecords to search against.
  *
- *   Defaults to
- *   EmployerFilterMode.ALL_EMPLOYMENT_RECORDS.
+ *   Defaults to EmployerFilterMode.ALL_EMPLOYMENT_RECORDS.
  *
  *   The number should be among the values of [EmployerFilterMode]{@link google.cloud.talent.v4beta1.EmployerFilterMode}
  *
@@ -831,9 +766,8 @@ const EmployerFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Enum indicating which set of
-   * Profile.employment_records
-   * to search against.
+   * Enum indicating which set of Profile.employment_records to search
+   * against.
    *
    * @enum {number}
    * @memberof google.cloud.talent.v4beta1
@@ -846,14 +780,12 @@ const EmployerFilter = {
     EMPLOYER_FILTER_MODE_UNSPECIFIED: 0,
 
     /**
-     * Apply to all employers in
-     * Profile.employment_records.
+     * Apply to all employers in Profile.employment_records.
      */
     ALL_EMPLOYMENT_RECORDS: 1,
 
     /**
-     * Apply only to current employer in
-     * Profile.employment_records.
+     * Apply only to current employer in Profile.employment_records.
      */
     CURRENT_EMPLOYMENT_RECORDS_ONLY: 2,
 
@@ -899,10 +831,7 @@ const EducationFilter = {
  * Work experience filter.
  *
  * This filter is used to search for profiles with working experience length
- * between
- * min_experience
- * and
- * max_experience.
+ * between min_experience and max_experience.
  *
  * @property {Object} minExperience
  *   The minimum duration of the work experience (inclusive).
@@ -925,13 +854,9 @@ const WorkExperienceFilter = {
 /**
  * Application Date Range Filter.
  *
- * The API matches profiles with
- * Application.application_date
- * between start date and end date (both boundaries are inclusive). The filter
- * is ignored if both
- * start_date
- * and end_date
- * are missing.
+ * The API matches profiles with Application.application_date between
+ * start date and end date (both boundaries are inclusive). The filter is
+ * ignored if both start_date and end_date are missing.
  *
  * @property {Object} startDate
  *   Start date. If it's missing, The API matches profiles with application date
@@ -957,15 +882,13 @@ const ApplicationDateFilter = {
  * Outcome Notes Filter.
  *
  * @property {string} outcomeNotes
- *   Required. User entered or selected outcome reason. The API does an exact
- *   match on the
- *   Application.outcome_notes
- *   in profiles.
+ *   Required. User entered or selected outcome reason. The API does an exact match on the
+ *   Application.outcome_notes in profiles.
  *
  * @property {boolean} negated
  *   If true, The API excludes all candidates with any
- *   Application.outcome_notes
- *   matching the outcome reason specified in the filter.
+ *   Application.outcome_notes matching the outcome reason specified in
+ *   the filter.
  *
  * @typedef ApplicationOutcomeNotesFilter
  * @memberof google.cloud.talent.v4beta1
@@ -980,18 +903,15 @@ const ApplicationOutcomeNotesFilter = {
  *
  * @property {string} jobRequisitionId
  *   The job requisition id in the application. The API does an exact match on
- *   the Job.requisition_id of
- *   Application.job in profiles.
+ *   the Job.requisition_id of Application.job in profiles.
  *
  * @property {string} jobTitle
  *   The job title in the application. The API does an exact match on the
- *   Job.title of
- *   Application.job in profiles.
+ *   Job.title of Application.job in profiles.
  *
  * @property {boolean} negated
- *   If true, the API excludes all profiles with any
- *   Application.job matching the
- *   filters.
+ *   If true, the API excludes all profiles with any Application.job
+ *   matching the filters.
  *
  * @typedef ApplicationJobFilter
  * @memberof google.cloud.talent.v4beta1
@@ -1021,8 +941,7 @@ const ApplicationJobFilter = {
  * @property {number} timeField
  *   Specifies which time field to filter profiles.
  *
- *   Defaults to
- *   TimeField.CREATE_TIME.
+ *   Defaults to TimeField.CREATE_TIME.
  *
  *   The number should be among the values of [TimeField]{@link google.cloud.talent.v4beta1.TimeField}
  *
@@ -1089,12 +1008,9 @@ const CandidateAvailabilityFilter = {
  *   This object should have the same structure as [TimestampRange]{@link google.cloud.talent.v4beta1.TimestampRange}
  *
  * @property {boolean} required
- *   If multiple
- *   AvailabilityFilter are
- *   provided, the default behavior is to OR all filters, but if this field is
- *   set to true, this particular
- *   AvailabilityFilter will
- *   be AND'ed against other
+ *   If multiple AvailabilityFilter are provided, the default
+ *   behavior is to OR all filters, but if this field is set to true, this
+ *   particular AvailabilityFilter will be AND'ed against other
  *   AvailabilityFilter.
  *
  * @typedef AvailabilityFilter

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,27 +65,23 @@ const ClientEvent = {
  * implements Cloud Talent Solution.
  *
  * @property {number} type
- *   Required. The type of the event (see
- *   JobEventType).
+ *   Required. The type of the event (see JobEventType).
  *
  *   The number should be among the values of [JobEventType]{@link google.cloud.talent.v4beta1.JobEventType}
  *
  * @property {string[]} jobs
- *   Required. The job name(s)
- *   associated with this event. For example, if this is an
- *   impression
- *   event, this field contains the identifiers of all jobs shown to the job
- *   seeker. If this was a
- *   view event, this
- *   field contains the identifier of the viewed job.
+ *   Required. The job name(s) associated with this event.
+ *   For example, if this is an impression event,
+ *   this field contains the identifiers of all jobs shown to the job seeker.
+ *   If this was a view event, this field contains the
+ *   identifier of the viewed job.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
  *   example, "projects/foo/tenants/bar/jobs/baz".
  *
  * @property {string} profile
- *   The profile name associated
- *   with this client event.
+ *   The profile name associated with this client event.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
@@ -153,9 +149,7 @@ const JobEvent = {
      * submitted an application for a job with a single click without
      * entering information. If a job seeker performs this action, send only
      * this event to the service. Do not also send
-     * JobEventType.APPLICATION_START
-     * or
-     * JobEventType.APPLICATION_FINISH
+     * JobEventType.APPLICATION_START or JobEventType.APPLICATION_FINISH
      * events.
      */
     APPLICATION_QUICK_SUBMISSION: 6,
@@ -181,12 +175,8 @@ const JobEvent = {
      * (without viewing the details of the job posting), and is redirected
      * to a different website to complete the application. If a candidate
      * performs this action, send only this event to the service. Do not also
-     * send
-     * JobEventType.APPLICATION_START,
-     * JobEventType.APPLICATION_FINISH
-     * or
-     * JobEventType.VIEW
-     * events.
+     * send JobEventType.APPLICATION_START,
+     * JobEventType.APPLICATION_FINISH or JobEventType.VIEW events.
      */
     APPLICATION_REDIRECT_FROM_SEARCH: 9,
 
@@ -247,16 +237,15 @@ const JobEvent = {
  *   The number should be among the values of [ProfileEventType]{@link google.cloud.talent.v4beta1.ProfileEventType}
  *
  * @property {string[]} profiles
- *   Required. The profile name(s)
- *   associated with this client event.
+ *   Required. The profile name(s) associated with this client event.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
  *   for example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @property {string[]} jobs
- *   The job name(s) associated with
- *   this client event. Leave it empty if the event isn't associated with a job.
+ *   The job name(s) associated with this client event. Leave it
+ *   empty if the event isn't associated with a job.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
@@ -283,11 +272,9 @@ const ProfileEvent = {
     PROFILE_EVENT_TYPE_UNSPECIFIED: 0,
 
     /**
-     * Send this event when a
-     * ProfileEvent.profiles
-     * was sent as a part of a result set for a CTS API call and was rendered in
-     * the end user's UI (that is, the
-     * ProfileEvent.recruiter).
+     * Send this event when a ProfileEvent.profiles was sent as a part of
+     * a result set for a CTS API call and was rendered in the end user's UI
+     * (that is, the ProfileEvent.recruiter).
      */
     IMPRESSION: 1,
 
@@ -301,9 +288,8 @@ const ProfileEvent = {
      * making a request).
      *
      * For a VIEW events associated with API calls, the
-     * ClientEvent.request_id
-     * should be populated.  If the VIEW is not associated with an API call,
-     * request_id should
+     * ClientEvent.request_id should be populated.  If the VIEW is not
+     * associated with an API call, request_id should
      * not be populated.
      *
      * This event requires a valid recruiter and one valid ID in profiles.

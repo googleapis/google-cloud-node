@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@
  * The Request of the CreateApplication method.
  *
  * @property {string} parent
- *   Required. Resource name of the profile under which the application is
- *   created.
+ *   Required. Resource name of the profile under which the application is created.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
@@ -61,23 +60,18 @@ const GetApplicationRequest = {
  * Request for updating a specified application.
  *
  * @property {Object} application
- *   Required. The application resource to replace the current resource in the
- *   system.
+ *   Required. The application resource to replace the current resource in the system.
  *
  *   This object should have the same structure as [Application]{@link google.cloud.talent.v4beta1.Application}
  *
  * @property {Object} updateMask
  *   Strongly recommended for the best service experience.
  *
- *   If
- *   update_mask
- *   is provided, only the specified fields in
- *   application
- *   are updated. Otherwise all the fields are updated.
+ *   If update_mask is provided, only the specified fields in
+ *   application are updated. Otherwise all the fields are updated.
  *
  *   A field mask to specify the application fields to be updated. Only
- *   top level fields of Application
- *   are supported.
+ *   top level fields of Application are supported.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -111,8 +105,7 @@ const DeleteApplicationRequest = {
  * List applications for which the client has ACL visibility.
  *
  * @property {string} parent
- *   Required. Resource name of the profile under which the application is
- *   created.
+ *   Required. Resource name of the profile under which the application is created.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for

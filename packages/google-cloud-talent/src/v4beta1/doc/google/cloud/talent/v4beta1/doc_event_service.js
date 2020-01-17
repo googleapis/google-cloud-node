@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@
  *   is created, for example, "projects/foo".
  *
  * @property {Object} clientEvent
- *   Required. Events issued when end user interacts with customer's application
- *   that uses Cloud Talent Solution.
+ *   Required. Events issued when end user interacts with customer's application that
+ *   uses Cloud Talent Solution.
  *
  *   This object should have the same structure as [ClientEvent]{@link google.cloud.talent.v4beta1.ClientEvent}
  *

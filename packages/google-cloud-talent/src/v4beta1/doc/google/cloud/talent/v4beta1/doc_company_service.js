@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,23 +63,18 @@ const GetCompanyRequest = {
  * Request for updating a specified company.
  *
  * @property {Object} company
- *   Required. The company resource to replace the current resource in the
- *   system.
+ *   Required. The company resource to replace the current resource in the system.
  *
  *   This object should have the same structure as [Company]{@link google.cloud.talent.v4beta1.Company}
  *
  * @property {Object} updateMask
  *   Strongly recommended for the best service experience.
  *
- *   If
- *   update_mask
- *   is provided, only the specified fields in
- *   company are
- *   updated. Otherwise all the fields are updated.
+ *   If update_mask is provided, only the specified fields in
+ *   company are updated. Otherwise all the fields are updated.
  *
  *   A field mask to specify the company fields to be updated. Only
- *   top level fields of Company are
- *   supported.
+ *   top level fields of Company are supported.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -136,9 +131,8 @@ const DeleteCompanyRequest = {
  *
  *   Defaults to false.
  *
- *   If true, at most
- *   page_size of
- *   companies are fetched, among which only those with open jobs are returned.
+ *   If true, at most page_size of companies are fetched, among which
+ *   only those with open jobs are returned.
  *
  * @typedef ListCompaniesRequest
  * @memberof google.cloud.talent.v4beta1

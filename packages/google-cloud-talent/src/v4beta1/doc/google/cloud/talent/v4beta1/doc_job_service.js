@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -70,10 +70,8 @@ const GetJobRequest = {
  * @property {Object} updateMask
  *   Strongly recommended for the best service experience.
  *
- *   If update_mask
- *   is provided, only the specified fields in
- *   job are updated.
- *   Otherwise all the fields are updated.
+ *   If update_mask is provided, only the specified fields in
+ *   job are updated. Otherwise all the fields are updated.
  *
  *   A field mask to restrict the fields that are updated. Only
  *   top level fields of Job are supported.
@@ -176,19 +174,15 @@ const BatchDeleteJobsRequest = {
  * @property {number} pageSize
  *   The maximum number of jobs to be returned per page of results.
  *
- *   If job_view is set
- *   to
- *   JobView.JOB_VIEW_ID_ONLY,
- *   the maximum allowed page size is 1000. Otherwise, the maximum allowed page
- *   size is 100.
+ *   If job_view is set to JobView.JOB_VIEW_ID_ONLY, the maximum allowed
+ *   page size is 1000. Otherwise, the maximum allowed page size is 100.
  *
  *   Default is 100 if empty or a number < 1 is specified.
  *
  * @property {number} jobView
  *   The desired job attributes returned for jobs in the
- *   search response. Defaults to
- *   JobView.JOB_VIEW_FULL
- *   if no value is specified.
+ *   search response. Defaults to JobView.JOB_VIEW_FULL if no value is
+ *   specified.
  *
  *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
  *
@@ -241,15 +235,14 @@ const ListJobsResponse = {
  * @property {number} searchMode
  *   Mode of a search.
  *
- *   Defaults to
- *   SearchMode.JOB_SEARCH.
+ *   Defaults to SearchMode.JOB_SEARCH.
  *
  *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
  *
  * @property {Object} requestMetadata
- *   Required. The meta information collected about the job searcher, used to
- *   improve the search quality of the service. The identifiers (such as
- *   `user_id`) are provided by users, and must be unique and consistent.
+ *   Required. The meta information collected about the job searcher, used to improve the
+ *   search quality of the service. The identifiers (such as `user_id`) are
+ *   provided by users, and must be unique and consistent.
  *
  *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
  *
@@ -309,30 +302,20 @@ const ListJobsResponse = {
  *
  *   Job histogram facets:
  *
- *   * company_display_name: histogram by
- *   [Job.company_display_name.
- *   * employment_type: histogram by
- *   Job.employment_types,
- *   for example,
+ *   * company_display_name: histogram by [Job.company_display_name.
+ *   * employment_type: histogram by Job.employment_types, for example,
  *     "FULL_TIME", "PART_TIME".
- *   * company_size: histogram by
- *   CompanySize, for example,
- *   "SMALL", "MEDIUM", "BIG".
- *   * publish_time_in_month: histogram by the
- *   Job.posting_publish_time
+ *   * company_size: histogram by CompanySize, for example, "SMALL",
+ *   "MEDIUM", "BIG".
+ *   * publish_time_in_month: histogram by the Job.posting_publish_time
  *     in months.
  *     Must specify list of numeric buckets in spec.
- *   * publish_time_in_year: histogram by the
- *   Job.posting_publish_time
+ *   * publish_time_in_year: histogram by the Job.posting_publish_time
  *     in years.
  *     Must specify list of numeric buckets in spec.
- *   * degree_types: histogram by the
- *   Job.degree_types, for
- *   example,
+ *   * degree_types: histogram by the Job.degree_types, for example,
  *     "Bachelors", "Masters".
- *   * job_level: histogram by the
- *   Job.job_level, for example,
- *   "Entry
+ *   * job_level: histogram by the Job.job_level, for example, "Entry
  *     Level".
  *   * country: histogram by the country code of jobs, for example, "US", "FR".
  *   * admin1: histogram by the admin1 code of jobs, which is a global
@@ -347,31 +330,25 @@ const ListJobsResponse = {
  *     and longitude), for example, 37.4038522,-122.0987765. Since the
  *     coordinates of a city center can change, customers may need to refresh
  *     them periodically.
- *   * locale: histogram by the
- *   Job.language_code, for
- *   example, "en-US",
+ *   * locale: histogram by the Job.language_code, for example, "en-US",
  *     "fr-FR".
- *   * language: histogram by the language subtag of the
- *   Job.language_code,
+ *   * language: histogram by the language subtag of the Job.language_code,
  *     for example, "en", "fr".
- *   * category: histogram by the
- *   JobCategory, for example,
+ *   * category: histogram by the JobCategory, for example,
  *     "COMPUTER_AND_IT", "HEALTHCARE".
  *   * base_compensation_unit: histogram by the
- *     CompensationInfo.CompensationUnit
- *     of base salary, for example, "WEEKLY", "MONTHLY".
+ *     CompensationInfo.CompensationUnit of base
+ *     salary, for example, "WEEKLY", "MONTHLY".
  *   * base_compensation: histogram by the base salary. Must specify list of
  *     numeric buckets to group results by.
  *   * annualized_base_compensation: histogram by the base annualized salary.
  *     Must specify list of numeric buckets to group results by.
  *   * annualized_total_compensation: histogram by the total annualized salary.
  *     Must specify list of numeric buckets to group results by.
- *   * string_custom_attribute: histogram by string
- *   Job.custom_attributes.
+ *   * string_custom_attribute: histogram by string Job.custom_attributes.
  *     Values can be accessed via square bracket notations like
  *     string_custom_attribute["key1"].
- *   * numeric_custom_attribute: histogram by numeric
- *   Job.custom_attributes.
+ *   * numeric_custom_attribute: histogram by numeric Job.custom_attributes.
  *     Values can be accessed via square bracket notations like
  *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
  *     group results by.
@@ -389,18 +366,18 @@ const ListJobsResponse = {
  *
  * @property {number} jobView
  *   The desired job attributes returned for jobs in the search response.
- *   Defaults to
- *   JobView.JOB_VIEW_SMALL
- *   if no value is specified.
+ *   Defaults to JobView.JOB_VIEW_SMALL if no value is specified.
  *
  *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
  *
  * @property {number} offset
  *   An integer that specifies the current offset (that is, starting result
  *   location, amongst the jobs deemed by the API as relevant) in search
- *   results. This field is only considered if
- *   page_token is
- *   unset.
+ *   results. This field is only considered if page_token is unset.
+ *
+ *   The maximum allowed value is 5000. Otherwise an error is thrown.
+ *
+ *   The maximum allowed value is 5000. Otherwise an error is thrown.
  *
  *   For example, 0 means to  return results starting from the first matching
  *   job, and 10 means to return from the 11th job. This can be used for
@@ -414,9 +391,8 @@ const ListJobsResponse = {
  *
  * @property {string} pageToken
  *   The token specifying the current offset within
- *   search results. See
- *   SearchJobsResponse.next_page_token
- *   for an explanation of how to obtain the next set of query results.
+ *   search results. See SearchJobsResponse.next_page_token for
+ *   an explanation of how to obtain the next set of query results.
  *
  * @property {string} orderBy
  *   The criteria determining how search results are sorted. Default is
@@ -427,37 +403,33 @@ const ListJobsResponse = {
  *   * `"relevance desc"`: By relevance descending, as determined by the API
  *     algorithms. Relevance thresholding of query results is only available
  *     with this ordering.
- *   * `"posting_publish_time desc"`: By
- *   Job.posting_publish_time
+ *   * `"posting_publish_time desc"`: By Job.posting_publish_time
  *     descending.
- *   * `"posting_update_time desc"`: By
- *   Job.posting_update_time
+ *   * `"posting_update_time desc"`: By Job.posting_update_time
  *     descending.
- *   * `"title"`: By Job.title
- *   ascending.
- *   * `"title desc"`: By Job.title
- *   descending.
+ *   * `"title"`: By Job.title ascending.
+ *   * `"title desc"`: By Job.title descending.
  *   * `"annualized_base_compensation"`: By job's
- *     CompensationInfo.annualized_base_compensation_range
- *     ascending. Jobs whose annualized base compensation is unspecified are put
- *     at the end of search results.
+ *     CompensationInfo.annualized_base_compensation_range ascending. Jobs
+ *     whose annualized base compensation is unspecified are put at the end of
+ *     search results.
  *   * `"annualized_base_compensation desc"`: By job's
- *     CompensationInfo.annualized_base_compensation_range
- *     descending. Jobs whose annualized base compensation is unspecified are
- *     put at the end of search results.
+ *     CompensationInfo.annualized_base_compensation_range descending. Jobs
+ *     whose annualized base compensation is unspecified are put at the end of
+ *     search results.
  *   * `"annualized_total_compensation"`: By job's
- *     CompensationInfo.annualized_total_compensation_range
- *     ascending. Jobs whose annualized base compensation is unspecified are put
- *     at the end of search results.
+ *     CompensationInfo.annualized_total_compensation_range ascending. Jobs
+ *     whose annualized base compensation is unspecified are put at the end of
+ *     search results.
  *   * `"annualized_total_compensation desc"`: By job's
- *     CompensationInfo.annualized_total_compensation_range
- *     descending. Jobs whose annualized base compensation is unspecified are
- *     put at the end of search results.
+ *     CompensationInfo.annualized_total_compensation_range descending. Jobs
+ *     whose annualized base compensation is unspecified are put at the end of
+ *     search results.
  *   * `"custom_ranking desc"`: By the relevance score adjusted to the
- *     SearchJobsRequest.CustomRankingInfo.ranking_expression
- *     with weight factor assigned by
- *     SearchJobsRequest.CustomRankingInfo.importance_level
- *     in descending order.
+ *     SearchJobsRequest.CustomRankingInfo.ranking_expression with weight
+ *     factor assigned by
+ *     SearchJobsRequest.CustomRankingInfo.importance_level in descending
+ *     order.
  *   * Location sorting: Use the special syntax to order jobs by distance:<br>
  *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
  *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
@@ -482,9 +454,8 @@ const ListJobsResponse = {
  *   displayed to the job seeker higher up in the results, with the other jobs
  *   being displayed lower down in the results.
  *
- *   Defaults to
- *   DiversificationLevel.SIMPLE
- *   if no value is specified.
+ *   Defaults to DiversificationLevel.SIMPLE if no value
+ *   is specified.
  *
  *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
  *
@@ -495,27 +466,22 @@ const ListJobsResponse = {
  *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
  *
  * @property {boolean} disableKeywordMatch
- *   Controls whether to disable exact keyword match on
- *   Job.title,
- *   Job.description,
- *   Job.company_display_name,
- *   Job.addresses,
- *   Job.qualifications. When
- *   disable keyword match is turned off, a keyword match returns jobs that do
- *   not match given category filters when there are matching keywords. For
- *   example, for the query "program manager," a result is returned even if the
- *   job posting has the title "software developer," which doesn't fall into
- *   "program manager" ontology, but does have "program manager" appearing in
- *   its description.
+ *   Controls whether to disable exact keyword match on Job.title,
+ *   Job.description, Job.company_display_name, Job.addresses,
+ *   Job.qualifications. When disable keyword match is turned off, a
+ *   keyword match returns jobs that do not match given category filters when
+ *   there are matching keywords. For example, for the query "program manager,"
+ *   a result is returned even if the job posting has the title "software
+ *   developer," which doesn't fall into "program manager" ontology, but does
+ *   have "program manager" appearing in its description.
  *
  *   For queries like "cloud" that don't contain title or
  *   location specific ontology, jobs with "cloud" keyword matches are returned
  *   regardless of this flag's value.
  *
- *   Use
- *   Company.keyword_searchable_job_custom_attributes
- *   if company-specific globally matched custom field/attribute string values
- *   are needed. Enabling keyword match improves recall of subsequent search
+ *   Use Company.keyword_searchable_job_custom_attributes if
+ *   company-specific globally matched custom field/attribute string values are
+ *   needed. Enabling keyword match improves recall of subsequent search
  *   requests.
  *
  *   Defaults to false.
@@ -528,13 +494,12 @@ const SearchJobsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Custom ranking information for
-   * SearchJobsRequest.
+   * Custom ranking information for SearchJobsRequest.
    *
    * @property {number} importanceLevel
    *   Required. Controls over how important the score of
-   *   CustomRankingInfo.ranking_expression
-   *   gets applied to job's final ranking position.
+   *   CustomRankingInfo.ranking_expression gets applied to job's final
+   *   ranking position.
    *
    *   An error is thrown if not specified.
    *
@@ -542,20 +507,23 @@ const SearchJobsRequest = {
    *
    * @property {string} rankingExpression
    *   Required. Controls over how job documents get ranked on top of existing
-   *   relevance score (determined by API algorithm). The product of ranking
-   *   expression and relevance score is used to determine job's final ranking
-   *   position.
+   *   relevance score (determined by API algorithm). A combination of the
+   *   ranking expression and relevance score is used to determine job's final
+   *   ranking position.
    *
    *   The syntax for this expression is a subset of Google SQL syntax.
    *
    *   Supported operators are: +, -, *, /, where the left and right side of
-   *   the operator is either a numeric
-   *   Job.custom_attributes
-   *   key, integer/double value or an expression that can be evaluated to a
-   *   number.
+   *   the operator is either a numeric Job.custom_attributes key,
+   *   integer/double value or an expression that can be evaluated to a number.
    *
    *   Parenthesis are supported to adjust calculation precedence. The
    *   expression must be < 100 characters in length.
+   *
+   *   The expression is considered invalid for a job if the expression
+   *   references custom attributes that are not populated on the job or if the
+   *   expression results in a divide by zero. If an expression is invalid for a
+   *   job, that job is demoted to the end of the results.
    *
    *   Sample ranking expression
    *   (year + 25) * 0.25 - (freshness / 0.5)
@@ -568,8 +536,7 @@ const SearchJobsRequest = {
     // This is for documentation. Actual contents will be loaded by gRPC.
 
     /**
-     * The importance level for
-     * CustomRankingInfo.ranking_expression.
+     * The importance level for CustomRankingInfo.ranking_expression.
      *
      * @enum {number}
      * @memberof google.cloud.talent.v4beta1
@@ -697,8 +664,7 @@ const SearchJobsRequest = {
  * Response for SearchJob method.
  *
  * @property {Object[]} matchingJobs
- *   The Job entities that match the specified
- *   SearchJobsRequest.
+ *   The Job entities that match the specified SearchJobsRequest.
  *
  *   This object should have the same structure as [MatchingJob]{@link google.cloud.talent.v4beta1.MatchingJob}
  *
@@ -714,9 +680,7 @@ const SearchJobsRequest = {
  *
  * @property {Object[]} locationFilters
  *   The location filters that the service applied to the specified query. If
- *   any filters are lat-lng based, the
- *   Location.location_type
- *   is
+ *   any filters are lat-lng based, the Location.location_type is
  *   Location.LocationType.LOCATION_TYPE_UNSPECIFIED.
  *
  *   This object should have the same structure as [Location]{@link google.cloud.talent.v4beta1.Location}
@@ -725,14 +689,12 @@ const SearchJobsRequest = {
  *   An estimation of the number of jobs that match the specified query.
  *
  *   This number isn't guaranteed to be accurate. For accurate results,
- *   see
- *   SearchJobsRequest.require_precise_result_size.
+ *   see SearchJobsRequest.require_precise_result_size.
  *
  * @property {number} totalSize
  *   The precise result count, which is available only if the client set
- *   SearchJobsRequest.require_precise_result_size
- *   to `true`, or if the response is the last page of results. Otherwise, the
- *   value is `-1`.
+ *   SearchJobsRequest.require_precise_result_size to `true`, or if the
+ *   response is the last page of results. Otherwise, the value is `-1`.
  *
  * @property {Object} metadata
  *   Additional information for the API invocation, such as the request
@@ -762,12 +724,10 @@ const SearchJobsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Job entry with metadata inside
-   * SearchJobsResponse.
+   * Job entry with metadata inside SearchJobsResponse.
    *
    * @property {Object} job
-   *   Job resource that matches the specified
-   *   SearchJobsRequest.
+   *   Job resource that matches the specified SearchJobsRequest.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    *
@@ -776,18 +736,15 @@ const SearchJobsResponse = {
    *   results listing page.
    *
    * @property {string} jobTitleSnippet
-   *   Contains snippets of text from the
-   *   Job.title field most closely
-   *   matching a search query's keywords, if available. The matching query
-   *   keywords are enclosed in HTML bold tags.
+   *   Contains snippets of text from the Job.title field most
+   *   closely matching a search query's keywords, if available. The matching
+   *   query keywords are enclosed in HTML bold tags.
    *
    * @property {string} searchTextSnippet
-   *   Contains snippets of text from the
-   *   Job.description and
-   *   similar fields that most closely match a search query's keywords, if
-   *   available. All HTML tags in the original fields are stripped when
-   *   returned in this field, and matching query keywords are enclosed in HTML
-   *   bold tags.
+   *   Contains snippets of text from the Job.description and similar
+   *   fields that most closely match a search query's keywords, if available.
+   *   All HTML tags in the original fields are stripped when returned in this
+   *   field, and matching query keywords are enclosed in HTML bold tags.
    *
    * @property {Object} commuteInfo
    *   Commute information which is generated based on specified
@@ -870,22 +827,17 @@ const BatchCreateJobsRequest = {
  *   Strongly recommended for the best service experience. Be aware that it will
  *   also increase latency when checking the status of a batch operation.
  *
- *   If
- *   update_mask
- *   is provided, only the specified fields in
- *   Job are updated. Otherwise all the
- *   fields are updated.
+ *   If update_mask is provided, only the specified fields in
+ *   Job are updated. Otherwise all the fields are updated.
  *
  *   A field mask to restrict the fields that are updated. Only
  *   top level fields of Job are supported.
  *
- *   If
- *   update_mask
- *   is provided, The Job inside
+ *   If update_mask is provided, The Job inside
  *   JobResult
  *   will only contains fields that is updated, plus the Id of the Job.
- *   Otherwise,  Job will include all fields,
- *   which can yield a very large response.
+ *   Otherwise,  Job will include all fields, which can yield a very
+ *   large response.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -898,13 +850,9 @@ const BatchUpdateJobsRequest = {
 };
 
 /**
- * The result of
- * JobService.BatchCreateJobs
- * or
- * JobService.BatchUpdateJobs
- * APIs. It's used to replace
- * google.longrunning.Operation.response
- * in case of success.
+ * The result of JobService.BatchCreateJobs or
+ * JobService.BatchUpdateJobs APIs. It's used to
+ * replace google.longrunning.Operation.response in case of success.
  *
  * @property {Object[]} jobResults
  *   List of job mutation results from a batch mutate operation. It can change
@@ -923,21 +871,16 @@ const JobOperationResult = {
    * Mutation result of a job.
    *
    * @property {Object} job
-   *   Here Job only contains basic
-   *   information including name,
-   *   company,
-   *   language_code and
-   *   requisition_id, use
-   *   getJob method to retrieve detailed information of the created/updated
-   *   job.
+   *   Here Job only contains basic information including name,
+   *   company, language_code
+   *   and requisition_id, use getJob method to retrieve
+   *   detailed information of the created/updated job.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    *
    * @property {Object} status
    *   The status of the job processed. This field is populated if the
-   *   processing of the
-   *   job
-   *   fails.
+   *   processing of the job fails.
    *
    *   This object should have the same structure as [Status]{@link google.rpc.Status}
    *
@@ -952,9 +895,8 @@ const JobOperationResult = {
 
 /**
  * An enum that specifies the job attributes that are returned in the
- * MatchingJob.job
- * or ListJobsResponse.jobs
- * fields.
+ * MatchingJob.job or
+ * ListJobsResponse.jobs fields.
  *
  * @enum {number}
  * @memberof google.cloud.talent.v4beta1
@@ -968,33 +910,22 @@ const JobView = {
 
   /**
    * A ID only view of job, with following attributes:
-   * Job.name,
-   * Job.requisition_id,
-   * Job.language_code.
+   * Job.name, Job.requisition_id, Job.language_code.
    */
   JOB_VIEW_ID_ONLY: 1,
 
   /**
    * A minimal view of the job, with the following attributes:
-   * Job.name,
-   * Job.requisition_id,
-   * Job.title,
-   * Job.company,
-   * Job.DerivedInfo.locations,
-   * Job.language_code.
+   * Job.name, Job.requisition_id, Job.title,
+   * Job.company, Job.DerivedInfo.locations, Job.language_code.
    */
   JOB_VIEW_MINIMAL: 2,
 
   /**
    * A small view of the job, with the following attributes in the search
-   * results: Job.name,
-   * Job.requisition_id,
-   * Job.title,
-   * Job.company,
-   * Job.DerivedInfo.locations,
-   * Job.visibility,
-   * Job.language_code,
-   * Job.description.
+   * results: Job.name, Job.requisition_id, Job.title,
+   * Job.company, Job.DerivedInfo.locations, Job.visibility,
+   * Job.language_code, Job.description.
    */
   JOB_VIEW_SMALL: 3,
 

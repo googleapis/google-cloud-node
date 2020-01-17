@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@
  *   "projects/foo/tenants/bar".
  *
  * @property {string} externalId
- *   Required. Client side tenant identifier, used to uniquely identify the
- *   tenant.
+ *   Required. Client side tenant identifier, used to uniquely identify the tenant.
  *
  *   The maximum number of allowed characters is 255.
  *
@@ -40,17 +39,14 @@
  *   Indicates whether data owned by this tenant may be used to provide product
  *   improvements across other tenants.
  *
- *   Defaults behavior is
- *   DataUsageType.ISOLATED
- *   if it's unset.
+ *   Defaults behavior is DataUsageType.ISOLATED if it's unset.
  *
  *   The number should be among the values of [DataUsageType]{@link google.cloud.talent.v4beta1.DataUsageType}
  *
  * @property {string[]} keywordSearchableProfileCustomAttributes
- *   A list of keys of filterable
- *   Profile.custom_attributes,
- *   whose corresponding `string_values` are used in keyword searches. Profiles
- *   with `string_values` under these specified field keys are returned if any
+ *   A list of keys of filterable Profile.custom_attributes, whose
+ *   corresponding `string_values` are used in keyword searches. Profiles with
+ *   `string_values` under these specified field keys are returned if any
  *   of the values match the search keyword. Custom field values with
  *   parenthesis, brackets and special symbols are not searchable as-is,
  *   and must be surrounded by quotes.

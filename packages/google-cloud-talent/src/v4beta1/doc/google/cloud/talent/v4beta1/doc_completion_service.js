@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,26 +38,6 @@
  *   For more information, see
  *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
  *
- *   For
- *   CompletionType.JOB_TITLE
- *   type, only open jobs with the same
- *   language_codes
- *   are returned.
- *
- *   For
- *   CompletionType.COMPANY_NAME
- *   type, only companies having open jobs with the same
- *   language_codes
- *   are returned.
- *
- *   For
- *   CompletionType.COMBINED
- *   type, only open jobs with the same
- *   language_codes
- *   or companies having open jobs with the same
- *   language_codes
- *   are returned.
- *
  *   The maximum number of allowed characters is 255.
  *
  * @property {number} pageSize
@@ -76,14 +56,12 @@
  *   example, "projects/foo".
  *
  * @property {number} scope
- *   The scope of the completion. The defaults is
- *   CompletionScope.PUBLIC.
+ *   The scope of the completion. The defaults is CompletionScope.PUBLIC.
  *
  *   The number should be among the values of [CompletionScope]{@link google.cloud.talent.v4beta1.CompletionScope}
  *
  * @property {number} type
- *   The completion topic. The default is
- *   CompletionType.COMBINED.
+ *   The completion topic. The default is CompletionType.COMBINED.
  *
  *   The number should be among the values of [CompletionType]{@link google.cloud.talent.v4beta1.CompletionType}
  *
@@ -133,17 +111,37 @@ const CompleteQueryRequest = {
     COMPLETION_TYPE_UNSPECIFIED: 0,
 
     /**
-     * Only suggest job titles.
+     * Suggest job titles for jobs autocomplete.
+     *
+     * For
+     * CompletionType.JOB_TITLE
+     * type, only open jobs with the same
+     * language_codes
+     * are returned.
      */
     JOB_TITLE: 1,
 
     /**
-     * Only suggest company names.
+     * Suggest company names for jobs autocomplete.
+     *
+     * For
+     * CompletionType.COMPANY_NAME
+     * type, only companies having open jobs with the same
+     * language_codes
+     * are returned.
      */
     COMPANY_NAME: 2,
 
     /**
-     * Suggest both job titles and company names.
+     * Suggest both job titles and company names for jobs autocomplete.
+     *
+     * For
+     * CompletionType.COMBINED
+     * type, only open jobs with the same
+     * language_codes
+     * or companies having open jobs with the same
+     * language_codes
+     * are returned.
      */
     COMBINED: 3
   }

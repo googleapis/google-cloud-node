@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,11 +41,9 @@ const TimestampRange = {
  *
  * @property {number} locationType
  *   The type of a location, which corresponds to the address lines field of
- *   google.type.PostalAddress. For example,
- *   "Downtown, Atlanta, GA, USA" has a type of
- *   LocationType.NEIGHBORHOOD,
- *   and "Kansas City, KS, USA" has a type of
- *   LocationType.LOCALITY.
+ *   google.type.PostalAddress. For example, "Downtown, Atlanta, GA, USA"
+ *   has a type of LocationType.NEIGHBORHOOD, and "Kansas City, KS, USA"
+ *   has a type of LocationType.LOCALITY.
  *
  *   The number should be among the values of [LocationType]{@link google.cloud.talent.v4beta1.LocationType}
  *
@@ -65,9 +63,10 @@ const TimestampRange = {
  * @property {number} radiusMiles
  *   Radius in miles of the job location. This value is derived from the
  *   location bounding box in which a circle with the specified radius
- *   centered from google.type.LatLng covers the area
- *   associated with the job location. For example, currently, "Mountain View,
- *   CA, USA" has a radius of 6.17 miles.
+ *   centered from google.type.LatLng covers the area associated with the
+ *   job location.
+ *   For example, currently, "Mountain View, CA, USA" has a radius of
+ *   6.17 miles.
  *
  * @typedef Location
  * @memberof google.cloud.talent.v4beta1
@@ -151,9 +150,7 @@ const Location = {
  * performance of the service.
  *
  * @property {string} domain
- *   Required if
- *   allow_missing_ids
- *   is unset or `false`.
+ *   Required if allow_missing_ids is unset or `false`.
  *
  *   The client-defined scope or source of the service call, which typically
  *   is the domain on
@@ -170,9 +167,7 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} sessionId
- *   Required if
- *   allow_missing_ids
- *   is unset or `false`.
+ *   Required if allow_missing_ids is unset or `false`.
  *
  *   A unique session identification string. A session is defined as the
  *   duration of an end user's interaction with the service over a certain
@@ -186,9 +181,7 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} userId
- *   Required if
- *   allow_missing_ids
- *   is unset or `false`.
+ *   Required if allow_missing_ids is unset or `false`.
  *
  *   A unique user identification string, as determined by the client.
  *   To have the strongest positive impact on search quality
@@ -202,16 +195,10 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {boolean} allowMissingIds
- *   Only set when any of
- *   domain,
- *   session_id and
- *   user_id isn't
+ *   Only set when any of domain, session_id and user_id isn't
  *   available for some reason. It is highly recommended not to set this field
- *   and provide accurate
- *   domain,
- *   session_id and
- *   user_id for the best
- *   service experience.
+ *   and provide accurate domain, session_id and user_id for the
+ *   best service experience.
  *
  * @property {Object} deviceInfo
  *   The type of device used by the job seeker at the time of the call to the
@@ -315,10 +302,7 @@ const DeviceInfo = {
  * Custom attribute values that are either filterable or non-filterable.
  *
  * @property {string[]} stringValues
- *   Exactly one of
- *   string_values
- *   or long_values
- *   must be specified.
+ *   Exactly one of string_values or long_values must be specified.
  *
  *   This field is used to perform a string match (`CASE_SENSITIVE_MATCH` or
  *   `CASE_INSENSITIVE_MATCH`) search.
@@ -330,17 +314,12 @@ const DeviceInfo = {
  *   Empty string isn't allowed.
  *
  * @property {number[]} longValues
- *   Exactly one of
- *   string_values
- *   or long_values
- *   must be specified.
+ *   Exactly one of string_values or long_values must be specified.
  *
  *   This field is used to perform number range search.
  *   (`EQ`, `GT`, `GE`, `LE`, `LT`) over filterable `long_value`.
  *
- *   Currently at most 1
- *   long_values is
- *   supported.
+ *   Currently at most 1 long_values is supported.
  *
  * @property {boolean} filterable
  *   If the `filterable` flag is true, custom field values are searchable.
@@ -389,34 +368,26 @@ const SpellingCorrection = {
  *   Job compensation information.
  *
  *   At most one entry can be of type
- *   CompensationInfo.CompensationType.BASE,
- *   which is referred as **base compensation entry** for the job.
+ *   CompensationInfo.CompensationType.BASE, which is
+ *   referred as **base compensation entry** for the job.
  *
  *   This object should have the same structure as [CompensationEntry]{@link google.cloud.talent.v4beta1.CompensationEntry}
  *
  * @property {Object} annualizedBaseCompensationRange
- *   Output only. Annualized base compensation range. Computed as base
- *   compensation entry's
- *   CompensationEntry.amount
- *   times
+ *   Output only. Annualized base compensation range. Computed as base compensation entry's
+ *   CompensationEntry.amount times
  *   CompensationEntry.expected_units_per_year.
  *
- *   See
- *   CompensationEntry
- *   for explanation on compensation annualization.
+ *   See CompensationEntry for explanation on compensation annualization.
  *
  *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
  *
  * @property {Object} annualizedTotalCompensationRange
- *   Output only. Annualized total compensation range. Computed as all
- *   compensation entries'
- *   CompensationEntry.amount
- *   times
+ *   Output only. Annualized total compensation range. Computed as all compensation entries'
+ *   CompensationEntry.amount times
  *   CompensationEntry.expected_units_per_year.
  *
- *   See
- *   CompensationEntry
- *   for explanation on compensation annualization.
+ *   See CompensationEntry for explanation on compensation annualization.
  *
  *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
  *
@@ -432,32 +403,22 @@ const CompensationInfo = {
    * as base pay, bonus, or other compensation type.
    *
    * Annualization: One compensation entry can be annualized if
-   * - it contains valid
-   * amount
-   * or
-   * range.
-   * - and its
-   * expected_units_per_year
-   * is set or can be derived. Its annualized range is determined as
-   * (amount
-   * or
-   * range)
-   * times
+   * - it contains valid amount or range.
+   * - and its expected_units_per_year is set or can be derived.
+   * Its annualized range is determined as (amount or range) times
    * expected_units_per_year.
    *
    * @property {number} type
    *   Compensation type.
    *
-   *   Default is
-   *   CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
+   *   Default is CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
    *
    *   The number should be among the values of [CompensationType]{@link google.cloud.talent.v4beta1.CompensationType}
    *
    * @property {number} unit
    *   Frequency of the specified amount.
    *
-   *   Default is
-   *   CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
+   *   Default is CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
    *
    *   The number should be among the values of [CompensationUnit]{@link google.cloud.talent.v4beta1.CompensationUnit}
    *
@@ -478,10 +439,8 @@ const CompensationInfo = {
    *
    * @property {Object} expectedUnitsPerYear
    *   Expected number of units paid each year. If not specified, when
-   *   Job.employment_types
-   *   is FULLTIME, a default value is inferred based on
-   *   unit.
-   *   Default values:
+   *   Job.employment_types is FULLTIME, a default value is inferred
+   *   based on unit. Default values:
    *   - HOURLY: 2080
    *   - DAILY: 260
    *   - WEEKLY: 52
@@ -528,30 +487,19 @@ const CompensationInfo = {
    * The type of compensation.
    *
    * For compensation amounts specified in non-monetary amounts,
-   * describe the compensation scheme in the
-   * CompensationEntry.description.
+   * describe the compensation scheme in the CompensationEntry.description.
    *
    * For example, tipping format is described in
-   * CompensationEntry.description
-   * (for example, "expect 15-20% tips based on customer bill.") and an estimate
-   * of the tips provided in
-   * CompensationEntry.amount
-   * or
-   * CompensationEntry.range
-   * ($10 per hour).
+   * CompensationEntry.description (for example, "expect 15-20% tips based
+   * on customer bill.") and an estimate of the tips provided in
+   * CompensationEntry.amount or CompensationEntry.range ($10 per hour).
    *
-   * For example, equity is described in
-   * CompensationEntry.description
+   * For example, equity is described in CompensationEntry.description
    * (for example, "1% - 2% equity vesting over 4 years, 1 year cliff") and
-   * value estimated in
-   * CompensationEntry.amount
-   * or
-   * CompensationEntry.range.
-   * If no value estimate is possible, units are
-   * CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED
-   * and then further clarified in
-   * CompensationEntry.description
-   * field.
+   * value estimated in CompensationEntry.amount or
+   * CompensationEntry.range. If no value estimate is possible, units are
+   * CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED and then further
+   * clarified in CompensationEntry.description field.
    *
    * @enum {number}
    * @memberof google.cloud.talent.v4beta1
@@ -720,11 +668,9 @@ const Certification = {
  *   Number of characters allowed is 100,000.
  *
  * @property {string} skillNameSnippet
- *   Output only. Skill name snippet shows how the
- *   display_name is related
- *   to a search query. It's empty if the
- *   display_name isn't
- *   related to the search query.
+ *   Output only. Skill name snippet shows how the display_name is related to a search
+ *   query. It's empty if the display_name isn't related to the search
+ *   query.
  *
  * @typedef Skill
  * @memberof google.cloud.talent.v4beta1
@@ -743,8 +689,8 @@ const Skill = {
  *   This object should have the same structure as [Rating]{@link google.cloud.talent.v4beta1.Rating}
  *
  * @property {number} outcome
- *   Required. The overall decision resulting from this interview (positive,
- *   negative, nuetral).
+ *   Required. The overall decision resulting from this interview (positive, negative,
+ *   nuetral).
  *
  *   The number should be among the values of [Outcome]{@link google.cloud.talent.v4beta1.Outcome}
  *
@@ -782,8 +728,7 @@ const Rating = {
 
 /**
  * Metadata used for long running operations returned by CTS batch APIs.
- * It's used to replace
- * google.longrunning.Operation.metadata.
+ * It's used to replace google.longrunning.Operation.metadata.
  *
  * @property {number} state
  *   The state of a long running operation.
@@ -809,15 +754,14 @@ const Rating = {
  *
  * @property {Object} updateTime
  *   The time when the batch operation status is updated. The metadata and the
- *   update_time
- *   is refreshed every minute otherwise cached data is returned.
+ *   update_time is refreshed every minute otherwise cached data is
+ *   returned.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} endTime
  *   The time when the batch operation is finished and
- *   google.longrunning.Operation.done is
- *   set to `true`.
+ *   google.longrunning.Operation.done is set to `true`.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -862,16 +806,14 @@ const BatchOperationMetadata = {
 
     /**
      * The batch operation is in the process of cancelling after
-     * google.longrunning.Operations.CancelOperation
-     * is called.
+     * google.longrunning.Operations.CancelOperation is called.
      */
     CANCELLING: 5,
 
     /**
      * The batch operation is done after
-     * google.longrunning.Operations.CancelOperation
-     * is called. Any items processed before cancelling are returned in the
-     * response.
+     * google.longrunning.Operations.CancelOperation is called. Any items
+     * processed before cancelling are returned in the response.
      */
     CANCELLED: 6
   }
@@ -893,100 +835,72 @@ const AvailabilitySignalType = {
   /**
    * Job application signal.
    *
-   * In the context of
-   * Profile.availability_signals,
-   * this signal is related to the candidate's most recent application.
-   * last_update_time
-   * is calculated from
-   * max(Application.create_time)
-   * from all Application records
-   * where Application.source
-   * is any of the following:
+   * In the context of Profile.availability_signals, this signal is related
+   * to the candidate's most recent application.
+   * last_update_time is
+   * calculated from max(Application.create_time) from all Application
+   * records where Application.source is any of the following:
    *  APPLY_DIRECT_WEB
    *  APPLY_DIRECT_MOBILE_WEB
    *  APPLY_DIRECT_MOBILE_APP
    *  APPLY_DIRECT_IN_PERSON
    *  APPLY_INDIRECT
    *
-   * In the context of
-   * AvailabilityFilter, the
-   * filter is applied on
-   * Profile.availability_signals
-   * where type is
-   * JOB_APPLICATION.
+   * In the context of AvailabilityFilter, the filter is applied on
+   * Profile.availability_signals where
+   * type is JOB_APPLICATION.
    */
   JOB_APPLICATION: 1,
 
   /**
    * Resume update signal.
    *
-   * In the context of
-   * Profile.availability_signals,
-   * this signal is related to the candidate's most recent update to their
-   * resume. For a
-   * SummarizedProfile.summary,
-   * last_update_time
-   * is calculated from
-   * max(Profile.resume_update_time)
-   * from all
+   * In the context of Profile.availability_signals, this signal is related
+   * to the candidate's most recent update to their resume.
+   * For a SummarizedProfile.summary,
+   * last_update_time is
+   * calculated from max(Profile.resume_update_time) from all
    * SummarizedProfile.profiles.
    *
-   * In the context of
-   * AvailabilityFilter, the
-   * filter is applied on
-   * Profile.availability_signals
-   * where type is
-   * RESUME_UPDATE.
+   * In the context of AvailabilityFilter, the filter is applied on
+   * Profile.availability_signals where
+   * type is RESUME_UPDATE.
    */
   RESUME_UPDATE: 2,
 
   /**
    * Candidate update signal.
    *
-   * In the context of
-   * Profile.availability_signals,
-   * this signal is related to the candidate's most recent update to their
-   * profile. For a
-   * SummarizedProfile.summary,
-   * last_update_time
-   * is calculated from
-   * max(Profile.candidate_update_time)
-   * from all
+   * In the context of Profile.availability_signals, this signal is related
+   * to the candidate's most recent update to their profile.
+   * For a SummarizedProfile.summary,
+   * last_update_time is
+   * calculated from max(Profile.candidate_update_time) from all
    * SummarizedProfile.profiles.
    *
-   * In the context of
-   * AvailabilityFilter, the
-   * filter is applied on
-   * Profile.availability_signals
-   * where type is
-   * CANDIDATE_UPDATE.
+   * In the context of AvailabilityFilter, the filter is applied on
+   * Profile.availability_signals where
+   * type is CANDIDATE_UPDATE.
    */
   CANDIDATE_UPDATE: 3,
 
   /**
    * Client submission signal.
    *
-   * In the context of
-   * Profile.availability_signals,
-   * this signal is related to the candidate's most recent submission.
-   * last_update_time
-   * is calculated from
-   * max(Application.create_time)
-   * from all Application records
-   * where Application.stage is
-   * any of the following:
+   * In the context of Profile.availability_signals, this signal is related
+   * to the candidate's most recent submission.
+   * last_update_time is
+   * calculated from max(Application.create_time) from all Application
+   * records where Application.stage is any of the following:
    *  HIRING_MANAGER_REVIEW
    *  INTERVIEW
    *  OFFER_EXTENDED
    *  OFFER_ACCEPTED
    *  STARTED
    *
-   * In the context of
-   * AvailabilityFilter, the
-   * filter is applied on
-   * Profile.availability_signals
-   * where type is
-   * CLIENT_SUBMISSION.
+   * In the context of AvailabilityFilter, the filter is applied on
+   * Profile.availability_signals where
+   * type is CLIENT_SUBMISSION.
    */
   CLIENT_SUBMISSION: 4
 };
@@ -1218,8 +1132,7 @@ const EmploymentType = {
    * The job is offered as a contracted position with the understanding
    * that it's converted into a full-time position at the end of the
    * contract. Jobs of this type are also returned by a search for
-   * EmploymentType.CONTRACTOR
-   * jobs.
+   * EmploymentType.CONTRACTOR jobs.
    */
   CONTRACT_TO_HIRE: 4,
 
@@ -1628,11 +1541,10 @@ const PostingRegion = {
 
   /**
    * In addition to exact location matching, job posting is returned when the
-   * LocationFilter in the search
-   * query is in the same administrative area as the returned job posting. For
-   * example, if a `ADMINISTRATIVE_AREA` job is posted in "CA, USA", it's
-   * returned if LocationFilter
-   * has "Mountain View".
+   * LocationFilter in the search query is in the same administrative area
+   * as the returned job posting. For example, if a `ADMINISTRATIVE_AREA` job
+   * is posted in "CA, USA", it's returned if LocationFilter has
+   * "Mountain View".
    *
    * Administrative area refers to top-level administrative subdivision of this
    * country. For example, US state, IT region, UK constituent nation and
@@ -1642,11 +1554,9 @@ const PostingRegion = {
 
   /**
    * In addition to exact location matching, job is returned when
-   * LocationFilter in search
-   * query is in the same country as this job. For example, if a `NATION_WIDE`
-   * job is posted in "USA", it's returned if
-   * LocationFilter has 'Mountain
-   * View'.
+   * LocationFilter in search query is in the same country as this job.
+   * For example, if a `NATION_WIDE` job is posted in "USA", it's
+   * returned if LocationFilter has 'Mountain View'.
    */
   NATION: 2,
 

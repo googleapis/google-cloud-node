@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -64,8 +64,8 @@
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {number} stage
- *   Required. What is the most recent stage of the application (that is, new,
- *   screen, send cv, hired, finished work)?  This field is intentionally not
+ *   Required. What is the most recent stage of the application (that is, new, screen,
+ *   send cv, hired, finished work)?  This field is intentionally not
  *   comprehensive of every possible status, but instead, represents statuses
  *   that would be used to indicate to the ML models good / bad matches.
  *

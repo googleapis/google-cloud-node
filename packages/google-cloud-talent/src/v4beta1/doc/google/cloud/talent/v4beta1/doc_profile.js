@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,9 +59,8 @@
  *   a client has a candidate with two profiles, where one was created recently
  *   and the other one was created 5 years ago. These two profiles may be very
  *   different. The clients can create the first profile and get a generated
- *   group_id, and assign it
- *   when the second profile is created, indicating these two profiles are
- *   referring to the same candidate.
+ *   group_id, and assign it when the second profile is created,
+ *   indicating these two profiles are referring to the same candidate.
  *
  * @property {Object} isHirable
  *   Indicates the hirable status of the candidate.
@@ -92,15 +91,11 @@
  *   a recruiter who then uploads it into the ATS, and so on.
  *   * Updates made to the candidate's profile by the recruiter as a result of
  *   interacting with the candidate (for example adding a skill or work
- *   preference, and so on). Changes to
- *   recruiting_notes
- *   are specifically excluded from this action type.
+ *   preference, and so on). Changes to recruiting_notes are specifically
+ *   excluded from this action type.
  *
- *   Note:
- *   candidate_update_time
- *   must be greater than or equal to
- *   resume_update_time
- *   or an error is thrown.
+ *   Note: candidate_update_time must be greater than or equal to
+ *   resume_update_time or an error is thrown.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -110,9 +105,8 @@
  *   candidate, pulled from a 3rd party job board feed, added by a recruiter,
  *   and so on.
  *
- *   If this field is updated, it's expected that
- *   resume is provided in the
- *   create or update calls.
+ *   If this field is updated, it's expected that resume is provided in
+ *   the create or update calls.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -133,30 +127,24 @@
  *   input this information as accurately as possible to help improve search
  *   quality. Here are some recommendations:
  *
- *   * Provide Address.usage if
- *   possible, especially if the address is PERSONAL. During a search only
- *   personal addresses are considered. If there is no such address, all
- *   addresses with unspecified usage are assumed to be personal.
- *   * Provide Address.current
- *   for the current address if possible. During a search, only current
- *   addresses are considered. If there is no such address, all addresses are
- *   assumed to be current.
+ *   * Provide Address.usage if possible, especially if the address is
+ *   PERSONAL. During a search only personal addresses are considered. If there
+ *   is no such address, all addresses with unspecified usage are assumed to be
+ *   personal.
+ *   * Provide Address.current for the current address if possible. During
+ *   a search, only current addresses are considered. If there is no such
+ *   address, all addresses are assumed to be current.
  *
  *   When displaying a candidate's addresses, it is sometimes desirable to limit
  *   the number of addresses shown. In these cases we recommend that you display
  *   the addresses in the following order of priority:
- *   1. Address.usage is PERSONAL
- *   and Address.current is true.
- *   2. Address.usage is PERSONAL
- *   and Address.current is false
- *   or not set.
- *   3. Address.usage is
- *   CONTACT_INFO_USAGE_UNSPECIFIED and
+ *   1. Address.usage is PERSONAL and Address.current is true.
+ *   2. Address.usage is PERSONAL and Address.current is false or not
+ *   set.
+ *   3. Address.usage is CONTACT_INFO_USAGE_UNSPECIFIED and
  *   Address.current is true.
- *   4. Address.usage is
- *   CONTACT_INFO_USAGE_UNSPECIFIED and
- *   Address.current is false or
- *   not set.
+ *   4. Address.usage is CONTACT_INFO_USAGE_UNSPECIFIED and
+ *   Address.current is false or not set.
  *
  *   This object should have the same structure as [Address]{@link google.cloud.talent.v4beta1.Address}
  *
@@ -176,12 +164,8 @@
  *   This object should have the same structure as [PersonalUri]{@link google.cloud.talent.v4beta1.PersonalUri}
  *
  * @property {Object[]} additionalContactInfo
- *   Available contact information besides
- *   addresses,
- *   email_addresses,
- *   phone_numbers and
- *   personal_uris. For
- *   example, Hang-out, Skype.
+ *   Available contact information besides addresses, email_addresses,
+ *   phone_numbers and personal_uris. For example, Hang-out, Skype.
  *
  *   This object should have the same structure as [AdditionalContactInfo]{@link google.cloud.talent.v4beta1.AdditionalContactInfo}
  *
@@ -195,10 +179,8 @@
  *   change is.
  *   For example, only job title is changed from "software engineer" to "senior
  *   software engineer".
- *   * Provide
- *   EmploymentRecord.is_current
- *   for the current employment if possible. If not, it's inferred from user
- *   inputs.
+ *   * Provide EmploymentRecord.is_current for the current employment if
+ *   possible. If not, it's inferred from user inputs.
  *
  *   The limitation for max number of employment records is 100.
  *
@@ -213,10 +195,8 @@
  *   * List each education type separately, no matter how minor the change is.
  *   For example, the profile contains the education experience from the same
  *   school but different degrees.
- *   * Provide
- *   EducationRecord.is_current
- *   for the current education if possible. If not, it's inferred from user
- *   inputs.
+ *   * Provide EducationRecord.is_current for the current education if
+ *   possible. If not, it's inferred from user inputs.
  *
  *   The limitation for max number of education records is 100.
  *
@@ -233,8 +213,7 @@
  * @property {Object[]} activities
  *   The individual or collaborative activities which the candidate has
  *   participated in, for example, open-source projects, class assignments that
- *   aren't listed in
- *   employment_records.
+ *   aren't listed in employment_records.
  *
  *   The limitation for max number of activities is 50.
  *
@@ -266,8 +245,7 @@
  * @property {Object.<string, Object>} customAttributes
  *   A map of fields to hold both filterable and non-filterable custom profile
  *   attributes that aren't covered by the provided structured fields. See
- *   CustomAttribute for more
- *   details.
+ *   CustomAttribute for more details.
  *
  *   At most 100 filterable and at most 100 unfilterable keys are supported. If
  *   limit is exceeded, an error is thrown. Custom attributes are `unfilterable`
@@ -291,8 +269,7 @@
  *
  * @property {string} keywordSnippet
  *   Output only. Keyword snippet shows how the search result is related to a
- *   search query.  This is only returned in
- *   SearchProfilesResponse.
+ *   search query.  This is only returned in SearchProfilesResponse.
  *
  * @property {Object[]} availabilitySignals
  *   Output only. Candidate's availability signals.
@@ -300,12 +277,9 @@
  *   This object should have the same structure as [AvailabilitySignal]{@link google.cloud.talent.v4beta1.AvailabilitySignal}
  *
  * @property {Object[]} derivedAddresses
- *   Output only. Derived locations of the profile, resolved from
- *   Profile.addresses.
+ *   Output only. Derived locations of the profile, resolved from Profile.addresses.
  *
- *   derived_addresses
- *   are exactly matched to
- *   Profile.addresses in the
+ *   derived_addresses are exactly matched to Profile.addresses in the
  *   same order.
  *
  *   This object should have the same structure as [Location]{@link google.cloud.talent.v4beta1.Location}
@@ -332,17 +306,12 @@ const Profile = {
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} filterSatisfied
- *   Indicates if the
- *   last_update_time
- *   is within
+ *   Indicates if the last_update_time is within
  *   AvailabilityFilter.range.
  *
- *   Returned only in a search response when there is an
- *   AvailabilityFilter in
- *   ProfileQuery.availability_filters
- *   where
- *   signal_type
- *   matches type.
+ *   Returned only in a search response when there is an AvailabilityFilter
+ *   in ProfileQuery.availability_filters where
+ *   signal_type matches type.
  *
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
@@ -358,22 +327,19 @@ const AvailabilitySignal = {
  * Resource that represents a resume.
  *
  * @property {string} structuredResume
- *   Users can create a profile with only this field field, if
- *   resume_type is
- *   HRXML. For example,
- *   the API parses this field and creates a profile with all structured fields
- *   populated.
- *   EmploymentRecord,
- *   EducationRecord, and so on.
- *   An error is thrown if this field cannot be parsed.
+ *   Users can create a profile with only this field field, if resume_type
+ *   is HRXML. For example, the API parses this field and
+ *   creates a profile
+ *   with all structured fields populated. EmploymentRecord,
+ *   EducationRecord, and so on. An error is thrown if this field cannot be
+ *   parsed.
  *
  *   Note that the use of the functionality offered by this field to extract
  *   data from resumes is an Alpha feature and as such is not covered by any
  *   SLA.
  *
  * @property {number} resumeType
- *   The format of
- *   structured_resume.
+ *   The format of structured_resume.
  *
  *   The number should be among the values of [ResumeType]{@link google.cloud.talent.v4beta1.ResumeType}
  *
@@ -426,8 +392,7 @@ const Resume = {
  *   This object should have the same structure as [PersonStructuredName]{@link google.cloud.talent.v4beta1.PersonStructuredName}
  *
  * @property {string} preferredName
- *   Preferred name for the person. This field is ignored if
- *   structured_name
+ *   Preferred name for the person. This field is ignored if structured_name
  *   is provided.
  *
  *   Number of characters allowed is 100.
@@ -445,9 +410,7 @@ const PersonName = {
    * @property {string} givenName
    *   Given/first name.
    *
-   *   It's derived from
-   *   formatted_name
-   *   if not provided.
+   *   It's derived from formatted_name if not provided.
    *
    *   Number of characters allowed is 100.
    *
@@ -459,18 +422,14 @@ const PersonName = {
    * @property {string} middleInitial
    *   Middle initial.
    *
-   *   It's derived from
-   *   formatted_name
-   *   if not provided.
+   *   It's derived from formatted_name if not provided.
    *
    *   Number of characters allowed is 20.
    *
    * @property {string} familyName
    *   Family/last name.
    *
-   *   It's derived from
-   *   formatted_name
-   *   if not provided.
+   *   It's derived from formatted_name if not provided.
    *
    *   Number of characters allowed is 100.
    *
@@ -631,10 +590,9 @@ const Phone = {
      * A virtual telephone number is a number that can be routed to another
      * number and managed by the user via Web, SMS, IVR, and so on.  It is
      * associated with a particular person, and may be routed to either a MOBILE
-     * or LANDLINE number. The phone
-     * usage should be set to
-     * PERSONAL for these phone types. Some more information can be found here:
-     * https://en.wikipedia.org/wiki/Personal_Numbers
+     * or LANDLINE number. The phone usage should
+     * be set to PERSONAL for these phone types. Some more information can be
+     * found here: https://en.wikipedia.org/wiki/Personal_Numbers
      */
     VIRTUAL: 7,
 
@@ -756,25 +714,19 @@ const AdditionalContactInfo = {
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
  * @property {string} jobTitleSnippet
- *   Output only. The job title snippet shows how the
- *   job_title is
- *   related to a search query. It's empty if the
- *   job_title isn't
- *   related to the search query.
+ *   Output only. The job title snippet shows how the job_title is related
+ *   to a search query. It's empty if the job_title isn't related to the
+ *   search query.
  *
  * @property {string} jobDescriptionSnippet
- *   Output only. The job description snippet shows how the
- *   job_description
- *   is related to a search query. It's empty if the
- *   job_description
- *   isn't related to the search query.
+ *   Output only. The job description snippet shows how the job_description
+ *   is related to a search query. It's empty if the job_description isn't
+ *   related to the search query.
  *
  * @property {string} employerNameSnippet
- *   Output only. The employer name snippet shows how the
- *   employer_name
- *   is related to a search query. It's empty if the
- *   employer_name
- *   isn't related to the search query.
+ *   Output only. The employer name snippet shows how the employer_name is
+ *   related to a search query. It's empty if the employer_name isn't
+ *   related to the search query.
  *
  * @typedef EmploymentRecord
  * @memberof google.cloud.talent.v4beta1
@@ -837,18 +789,14 @@ const EmploymentRecord = {
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
  * @property {string} schoolNameSnippet
- *   Output only. The school name snippet shows how the
- *   school_name is
- *   related to a search query in search result. It's empty if the
- *   school_name
- *   isn't related to the search query.
+ *   Output only. The school name snippet shows how the school_name is related to a
+ *   search query in search result. It's empty if the school_name isn't
+ *   related to the search query.
  *
  * @property {string} degreeSnippet
- *   Output only. The job description snippet shows how the
- *   Degree is related to a search query
- *   in search result. It's empty if the
- *   Degree isn't related to the search
- *   query.
+ *   Output only. The job description snippet shows how the Degree is related to a search
+ *   query in search result. It's empty if the Degree isn't related to the
+ *   search query.
  *
  * @typedef EducationRecord
  * @memberof google.cloud.talent.v4beta1
@@ -933,25 +881,19 @@ const Degree = {
  *   This object should have the same structure as [Skill]{@link google.cloud.talent.v4beta1.Skill}
  *
  * @property {string} activityNameSnippet
- *   Output only. Activity name snippet shows how the
- *   display_name is
- *   related to a search query. It's empty if the
- *   display_name isn't
- *   related to the search query.
+ *   Output only. Activity name snippet shows how the display_name is related to a search
+ *   query. It's empty if the display_name isn't related to the search
+ *   query.
  *
  * @property {string} activityDescriptionSnippet
  *   Output only. Activity description snippet shows how the
- *   description is related
- *   to a search query. It's empty if the
- *   description isn't
- *   related to the search query.
+ *   description is related to a search query. It's empty if the
+ *   description isn't related to the search query.
  *
  * @property {string[]} skillsUsedSnippet
  *   Output only. Skill used snippet shows how the corresponding
- *   skills_used are related
- *   to a search query. It's empty if the corresponding
- *   skills_used are not
- *   related to the search query.
+ *   skills_used are related to a search query. It's empty if the
+ *   corresponding skills_used are not related to the search query.
  *
  * @typedef Activity
  * @memberof google.cloud.talent.v4beta1
