@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.6](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.5...v1.4.6) (2020-01-15)
+
+
+### Bug Fixes
+
+* removed 'readme' from synthtool exclusions ([0e42471](https://www.github.com/googleapis/nodejs-dataproc/commit/0e4247174da5bf77aa35c829453d6e3953826de8))
+
 ### [1.4.5](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.4...v1.4.5) (2020-01-06)
 
 
