@@ -88,6 +88,6 @@ function main(
   }
 
   addBucketConditionalBinding();
-  // [END storage_add_bucket_default_owner]
+  // [END storage_add_bucket_conditional_iam_binding]
 }
 main(...process.argv.slice(2));

@@ -57,7 +57,6 @@ function main(
       .download(options);
 
     console.log(`File ${srcFilename} downloaded to ${destFilename}.`);
-    // [END storage_download_encrypted_file]
   }
 
   downloadEncryptedFile();
