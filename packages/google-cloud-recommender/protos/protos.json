@@ -8,7 +8,7 @@
               "nested": {
                 "v1beta1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Recommmender.V1Beta1",
+                    "csharp_namespace": "Google.Cloud.Recommender.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/recommender/v1beta1;recommender",
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.recommender.v1beta1",
