@@ -13,10 +13,10 @@ not subject to any SLA or deprecation policy.*
 
 ## Prerequisites
 
-1. Your application will need to be using Node.js 8.9.4 or greater, or Node.js
-10.4.1 or greater. The profiler will not be enabled when using an earlier 
-version of Node 8 or 10 because the profiler is not stable with those versions
-of Node.js.
+1. Your application will need to be using Node.js 8.9.4 or greater, Node.js
+10.4.1 or greater, or Node.js 12. The profiler will not be enabled when using
+earlier versions of Node 8 or 10 because the profiler is not stable with those
+versions of Node.js.
     * Versions of Node.js before Node.js 8 prior to 8.9.4 are impacted by
     [this](https://bugs.chromium.org/p/v8/issues/detail?id=6623) issue, which
     causes a memory leak when time profiling is enabled.
@@ -24,14 +24,13 @@ of Node.js.
     [this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
     which can cause garbage collection to take several minutes when heap
     profiling is enabled.
-    * Node.js 12.
 
 1. `@google-cloud/profiler` depends on the
 [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
 component that is used to collect profiles with v8's CPU and Heap profilers.
 You may need to install additional dependencies to build the `pprof` module.
     * For Linux: `pprof` has prebuilt binaries available for Linux and Alpine
-    Linux for Node 6, 8, 10, and 11. No additional dependencies are required.
+    Linux for Node 8, 10, and 12. No additional dependencies are required.
     * For other environments: when using `@google-cloud/profiler` on environments
     that `pprof` does not have prebuilt binaries for, the module
     [`node-gyp`](https://www.npmjs.com/package/node-gyp) will be used to
@@ -140,9 +139,9 @@ await require('@google-cloud/profiler').start({disableHeap: true});
 There are three different services that can host Node.js applications within
 Google Cloud Platform: Google App Engine flexible environment, Google Compute
 Engine, and Google Container Engine. After installing `@google-cloud/profiler`
-in your project and ensuring that the environment you are using uses Node.js
-version 6.12.3 or greater, or Node.js 8.9.4 or greater, follow the
-service-specific instructions to enable the profiler.
+in your project and ensuring that the environment you are using uses a
+supported version of Node.js, follow the service-specific instructions to
+enable the profiler.
 
 ### Running on App Engine flexible environment
 

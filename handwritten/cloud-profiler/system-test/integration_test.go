@@ -222,6 +222,17 @@ func TestAgentIntegration(t *testing.T) {
 			wantProfiles: wantProfiles,
 			nodeVersion:  "11",
 		},
+		{
+			InstanceConfig: proftest.InstanceConfig{
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-node12-%s", runID),
+				MachineType: "n1-standard-1",
+			},
+			name:         fmt.Sprintf("profiler-test-node12-%s-gce", runID),
+			wantProfiles: wantProfiles,
+			nodeVersion:  "12",
+		},
 	}
 
 	// Allow test cases to run in parallel.
