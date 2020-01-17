@@ -22,15 +22,24 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1']
 for version in versions:
-    library = gapic.node_library('datalabeling', version)
-    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+    library = gapic.typescript_library(
+        'datalabeling', version,
+        generator_args={
+            "grpc-service-config": f"google/cloud/datalabeling/{version}/datalabeling_grpc_service_config.json",
+            "package-name": f"@google-cloud/datalabeling",
+            "main-service": f"datalabeling"            
+        },
+        proto_path=f'/google/cloud/datalabeling/{version}',
+        extra_proto_files=['google/cloud/common_resources.proto'],
+    )
+    s.copy(library, excludes=['src/index.ts', 'README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 s.replace('**/doc/google/protobuf/doc_timestamp.js',
@@ -40,3 +49,4 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'compileProtos', 'run'])
