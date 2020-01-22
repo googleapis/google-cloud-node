@@ -15,7 +15,7 @@
 
 syntax = "proto3";
 
-package google.cloud.recommender.v1beta1;
+package google.cloud.recommender.v1;
 
 import "google/api/resource.proto";
 import "google/protobuf/duration.proto";
@@ -23,10 +23,10 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/type/money.proto";
 
-option csharp_namespace = "Google.Cloud.Recommender.V1Beta1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/recommender/v1beta1;recommender";
+option csharp_namespace = "Google.Cloud.Recommender.V1";
+option go_package = "google.golang.org/genproto/googleapis/cloud/recommender/v1;recommender";
 option java_multiple_files = true;
-option java_package = "com.google.cloud.recommender.v1beta1";
+option java_package = "com.google.cloud.recommender.v1";
 option objc_class_prefix = "CREC";
 option (google.api.resource_definition) = {
   type: "recommender.googleapis.com/Recommender"
@@ -109,7 +109,7 @@ message OperationGroup {
 // See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
 message Operation {
   // Type of this operation. Contains one of 'and', 'remove', 'replace', 'move',
-  // 'copy', 'test' and 'custom' operations. This field is case-insensitive and
+  // 'copy', 'test' and custom operations. This field is case-insensitive and
   // always populated.
   string action = 1;
 
@@ -159,15 +159,15 @@ message Operation {
   // * Example: {
   //   "/versions/*/name" : "it-123"
   //   "/versions/*/targetSize/percent": 20
-  //   }
+  //  }
   // * Example: {
   //   "/bindings/*/role": "roles/admin"
   //   "/bindings/*/condition" : null
-  //   }
+  //  }
   // * Example: {
   //   "/bindings/*/role": "roles/admin"
   //   "/bindings/*/members/*" : ["x@google.com", "y@google.com"]
-  //   }
+  //  }
   // When both path_filters and path_value_matchers are set, an implicit AND
   // must be performed.
   map<string, google.protobuf.Value> path_filters = 8;
@@ -233,7 +233,7 @@ message Impact {
 
 // Information for state. Contains state and metadata.
 message RecommendationStateInfo {
-  // Represents Recommendation State.
+  // Represents Recommendation State
   enum State {
     // Default state. Don't use directly.
     STATE_UNSPECIFIED = 0;

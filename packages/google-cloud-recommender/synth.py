@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.DEBUG)
 # Run the gapic generator
 gapic = gcp.GAPICMicrogenerator()
 name = 'recommender'
-versions = ['v1beta1']
+versions = ['v1']
 for version in versions:
     library = gapic.typescript_library(
         name,

@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.recommender.v1beta1.Recommender": {
+    "google.cloud.recommender.v1.Recommender": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [

@@ -6,12 +6,12 @@
           "nested": {
             "recommender": {
               "nested": {
-                "v1beta1": {
+                "v1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Recommender.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/recommender/v1beta1;recommender",
+                    "csharp_namespace": "Google.Cloud.Recommender.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/recommender/v1;recommender",
                     "java_multiple_files": true,
-                    "java_package": "com.google.cloud.recommender.v1beta1",
+                    "java_package": "com.google.cloud.recommender.v1",
                     "objc_class_prefix": "CREC",
                     "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/recommenders/{recommender}",
@@ -227,7 +227,7 @@
                           "requestType": "ListRecommendationsRequest",
                           "responseType": "ListRecommendationsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations",
                             "(google.api.method_signature)": "parent,filter"
                           }
                         },
@@ -235,7 +235,7 @@
                           "requestType": "GetRecommendationRequest",
                           "responseType": "Recommendation",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}",
                             "(google.api.method_signature)": "name"
                           }
                         },
@@ -243,7 +243,7 @@
                           "requestType": "MarkRecommendationClaimedRequest",
                           "responseType": "Recommendation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           }
@@ -252,7 +252,7 @@
                           "requestType": "MarkRecommendationSucceededRequest",
                           "responseType": "Recommendation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           }
@@ -261,7 +261,7 @@
                           "requestType": "MarkRecommendationFailedRequest",
                           "responseType": "Recommendation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "name,state_metadata,etag"
                           }

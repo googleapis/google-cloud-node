@@ -15,25 +15,25 @@
 
 syntax = "proto3";
 
-package google.cloud.recommender.v1beta1;
+package google.cloud.recommender.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
-import "google/cloud/recommender/v1beta1/recommendation.proto";
+import "google/cloud/recommender/v1/recommendation.proto";
 
-option csharp_namespace = "Google.Cloud.Recommender.V1Beta1";
-option go_package = "google.golang.org/genproto/googleapis/cloud/recommender/v1beta1;recommender";
+option csharp_namespace = "Google.Cloud.Recommender.V1";
+option go_package = "google.golang.org/genproto/googleapis/cloud/recommender/v1;recommender";
 option java_multiple_files = true;
 option java_outer_classname = "RecommenderProto";
-option java_package = "com.google.cloud.recommender.v1beta1";
+option java_package = "com.google.cloud.recommender.v1";
 option objc_class_prefix = "CREC";
 
-// Provides insights and recommendations for cloud customers for various
-// categories like performance optimization, cost savings, reliability, feature
-// discovery, etc. Insights and recommendations are generated automatically
-// based on analysis of user resources, configuration and monitoring metrics.
+// Provides recommendations for cloud customers for various categories like
+// performance optimization, cost savings, reliability, feature discovery, etc.
+// These recommendations are generated automatically based on analysis of user
+// resources, configuration and monitoring metrics.
 service Recommender {
   option (google.api.default_host) = "recommender.googleapis.com";
   option (google.api.oauth_scopes) = "https://www.googleapis.com/auth/cloud-platform";
@@ -42,8 +42,9 @@ service Recommender {
   // IAM permission for the specified recommender.
   rpc ListRecommendations(ListRecommendationsRequest) returns (ListRecommendationsResponse) {
     option (google.api.http) = {
-      get: "/v1beta1/{parent=projects/*/locations/*/recommenders/*}/recommendations"
+      get: "/v1/{parent=projects/*/locations/*/recommenders/*}/recommendations"
     };
+    option (google.api.method_signature) = "parent";
     option (google.api.method_signature) = "parent,filter";
   }
 
@@ -51,34 +52,33 @@ service Recommender {
   // IAM permission for the specified recommender.
   rpc GetRecommendation(GetRecommendationRequest) returns (Recommendation) {
     option (google.api.http) = {
-      get: "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}"
+      get: "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}"
     };
     option (google.api.method_signature) = "name";
   }
 
-  // Marks the Recommendation State as Claimed. Users can use this method to
+  // Mark the Recommendation State as Claimed. Users can use this method to
   // indicate to the Recommender API that they are starting to apply the
   // recommendation themselves. This stops the recommendation content from being
-  // updated. Associated insights are frozen and placed in the ACCEPTED state.
+  // updated.
   //
-  // MarkRecommendationClaimed can be applied to recommendations in CLAIMED or
-  // ACTIVE state.
+  // MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
+  // SUCCEEDED, FAILED, or ACTIVE state.
   //
   // Requires the recommender.*.update IAM permission for the specified
   // recommender.
   rpc MarkRecommendationClaimed(MarkRecommendationClaimedRequest) returns (Recommendation) {
     option (google.api.http) = {
-      post: "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed"
+      post: "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markClaimed"
       body: "*"
     };
     option (google.api.method_signature) = "name,state_metadata,etag";
   }
 
-  // Marks the Recommendation State as Succeeded. Users can use this method to
+  // Mark the Recommendation State as Succeeded. Users can use this method to
   // indicate to the Recommender API that they have applied the recommendation
   // themselves, and the operation was successful. This stops the recommendation
-  // content from being updated. Associated insights are frozen and placed in
-  // the ACCEPTED state.
+  // content from being updated.
   //
   // MarkRecommendationSucceeded can be applied to recommendations in ACTIVE,
   // CLAIMED, SUCCEEDED, or FAILED state.
@@ -87,17 +87,16 @@ service Recommender {
   // recommender.
   rpc MarkRecommendationSucceeded(MarkRecommendationSucceededRequest) returns (Recommendation) {
     option (google.api.http) = {
-      post: "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded"
+      post: "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markSucceeded"
       body: "*"
     };
     option (google.api.method_signature) = "name,state_metadata,etag";
   }
 
-  // Marks the Recommendation State as Failed. Users can use this method to
+  // Mark the Recommendation State as Failed. Users can use this method to
   // indicate to the Recommender API that they have applied the recommendation
   // themselves, and the operation failed. This stops the recommendation content
-  // from being updated. Associated insights are frozen and placed in the
-  // ACCEPTED state.
+  // from being updated.
   //
   // MarkRecommendationFailed can be applied to recommendations in ACTIVE,
   // CLAIMED, SUCCEEDED, or FAILED state.
@@ -106,7 +105,7 @@ service Recommender {
   // recommender.
   rpc MarkRecommendationFailed(MarkRecommendationFailedRequest) returns (Recommendation) {
     option (google.api.http) = {
-      post: "/v1beta1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed"
+      post: "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markFailed"
       body: "*"
     };
     option (google.api.method_signature) = "name,state_metadata,etag";

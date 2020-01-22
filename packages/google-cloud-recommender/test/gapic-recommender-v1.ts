@@ -57,38 +57,38 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('v1beta1.RecommenderClient', () => {
+describe('v1.RecommenderClient', () => {
   it('has servicePath', () => {
-    const servicePath = recommenderModule.v1beta1.RecommenderClient.servicePath;
+    const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
     assert(servicePath);
   });
   it('has apiEndpoint', () => {
-    const apiEndpoint = recommenderModule.v1beta1.RecommenderClient.apiEndpoint;
+    const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
     assert(apiEndpoint);
   });
   it('has port', () => {
-    const port = recommenderModule.v1beta1.RecommenderClient.port;
+    const port = recommenderModule.v1.RecommenderClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
   it('should create a client with no option', () => {
-    const client = new recommenderModule.v1beta1.RecommenderClient();
+    const client = new recommenderModule.v1.RecommenderClient();
     assert(client);
   });
   it('should create a client with gRPC fallback', () => {
-    const client = new recommenderModule.v1beta1.RecommenderClient({
+    const client = new recommenderModule.v1.RecommenderClient({
       fallback: true,
     });
     assert(client);
   });
   describe('getRecommendation', () => {
     it('invokes getRecommendation without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IGetRecommendationRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -105,12 +105,12 @@ describe('v1beta1.RecommenderClient', () => {
     });
 
     it('invokes getRecommendation with error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IGetRecommendationRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -129,12 +129,12 @@ describe('v1beta1.RecommenderClient', () => {
   });
   describe('markRecommendationClaimed', () => {
     it('invokes markRecommendationClaimed without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -151,12 +151,12 @@ describe('v1beta1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationClaimed with error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -178,12 +178,12 @@ describe('v1beta1.RecommenderClient', () => {
   });
   describe('markRecommendationSucceeded', () => {
     it('invokes markRecommendationSucceeded without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -200,12 +200,12 @@ describe('v1beta1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationSucceeded with error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -227,12 +227,12 @@ describe('v1beta1.RecommenderClient', () => {
   });
   describe('markRecommendationFailed', () => {
     it('invokes markRecommendationFailed without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -249,12 +249,12 @@ describe('v1beta1.RecommenderClient', () => {
     });
 
     it('invokes markRecommendationFailed with error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -276,12 +276,12 @@ describe('v1beta1.RecommenderClient', () => {
   });
   describe('listRecommendations', () => {
     it('invokes listRecommendations without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IListRecommendationsRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -302,12 +302,12 @@ describe('v1beta1.RecommenderClient', () => {
   });
   describe('listRecommendationsStream', () => {
     it('invokes listRecommendationsStream without error', done => {
-      const client = new recommenderModule.v1beta1.RecommenderClient({
+      const client = new recommenderModule.v1.RecommenderClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       // Mock request
-      const request: protosTypes.google.cloud.recommender.v1beta1.IListRecommendationsRequest = {};
+      const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer

@@ -23,8 +23,8 @@ export namespace google {
         /** Namespace recommender. */
         namespace recommender {
 
-            /** Namespace v1beta1. */
-            namespace v1beta1 {
+            /** Namespace v1. */
+            namespace v1 {
 
                 /** Properties of a Recommendation. */
                 interface IRecommendation {
@@ -42,16 +42,16 @@ export namespace google {
                     lastRefreshTime?: (google.protobuf.ITimestamp|null);
 
                     /** Recommendation primaryImpact */
-                    primaryImpact?: (google.cloud.recommender.v1beta1.IImpact|null);
+                    primaryImpact?: (google.cloud.recommender.v1.IImpact|null);
 
                     /** Recommendation additionalImpact */
-                    additionalImpact?: (google.cloud.recommender.v1beta1.IImpact[]|null);
+                    additionalImpact?: (google.cloud.recommender.v1.IImpact[]|null);
 
                     /** Recommendation content */
-                    content?: (google.cloud.recommender.v1beta1.IRecommendationContent|null);
+                    content?: (google.cloud.recommender.v1.IRecommendationContent|null);
 
                     /** Recommendation stateInfo */
-                    stateInfo?: (google.cloud.recommender.v1beta1.IRecommendationStateInfo|null);
+                    stateInfo?: (google.cloud.recommender.v1.IRecommendationStateInfo|null);
 
                     /** Recommendation etag */
                     etag?: (string|null);
@@ -64,7 +64,7 @@ export namespace google {
                      * Constructs a new Recommendation.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IRecommendation);
+                    constructor(properties?: google.cloud.recommender.v1.IRecommendation);
 
                     /** Recommendation name. */
                     public name: string;
@@ -79,16 +79,16 @@ export namespace google {
                     public lastRefreshTime?: (google.protobuf.ITimestamp|null);
 
                     /** Recommendation primaryImpact. */
-                    public primaryImpact?: (google.cloud.recommender.v1beta1.IImpact|null);
+                    public primaryImpact?: (google.cloud.recommender.v1.IImpact|null);
 
                     /** Recommendation additionalImpact. */
-                    public additionalImpact: google.cloud.recommender.v1beta1.IImpact[];
+                    public additionalImpact: google.cloud.recommender.v1.IImpact[];
 
                     /** Recommendation content. */
-                    public content?: (google.cloud.recommender.v1beta1.IRecommendationContent|null);
+                    public content?: (google.cloud.recommender.v1.IRecommendationContent|null);
 
                     /** Recommendation stateInfo. */
-                    public stateInfo?: (google.cloud.recommender.v1beta1.IRecommendationStateInfo|null);
+                    public stateInfo?: (google.cloud.recommender.v1.IRecommendationStateInfo|null);
 
                     /** Recommendation etag. */
                     public etag: string;
@@ -98,23 +98,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Recommendation instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IRecommendation): google.cloud.recommender.v1beta1.Recommendation;
+                    public static create(properties?: google.cloud.recommender.v1.IRecommendation): google.cloud.recommender.v1.Recommendation;
 
                     /**
-                     * Encodes the specified Recommendation message. Does not implicitly {@link google.cloud.recommender.v1beta1.Recommendation.verify|verify} messages.
+                     * Encodes the specified Recommendation message. Does not implicitly {@link google.cloud.recommender.v1.Recommendation.verify|verify} messages.
                      * @param message Recommendation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Recommendation message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.Recommendation.verify|verify} messages.
+                     * Encodes the specified Recommendation message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Recommendation.verify|verify} messages.
                      * @param message Recommendation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a Recommendation message from the specified reader or buffer.
@@ -124,7 +124,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.Recommendation;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Recommendation;
 
                     /**
                      * Decodes a Recommendation message from the specified reader or buffer, length delimited.
@@ -133,7 +133,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.Recommendation;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Recommendation;
 
                     /**
                      * Verifies a Recommendation message.
@@ -147,7 +147,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Recommendation
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.Recommendation;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Recommendation;
 
                     /**
                      * Creates a plain object from a Recommendation message. Also converts values to other types if specified.
@@ -155,7 +155,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.Recommendation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.Recommendation, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Recommendation to JSON.
@@ -168,7 +168,7 @@ export namespace google {
                 interface IRecommendationContent {
 
                     /** RecommendationContent operationGroups */
-                    operationGroups?: (google.cloud.recommender.v1beta1.IOperationGroup[]|null);
+                    operationGroups?: (google.cloud.recommender.v1.IOperationGroup[]|null);
                 }
 
                 /** Represents a RecommendationContent. */
@@ -178,33 +178,33 @@ export namespace google {
                      * Constructs a new RecommendationContent.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IRecommendationContent);
+                    constructor(properties?: google.cloud.recommender.v1.IRecommendationContent);
 
                     /** RecommendationContent operationGroups. */
-                    public operationGroups: google.cloud.recommender.v1beta1.IOperationGroup[];
+                    public operationGroups: google.cloud.recommender.v1.IOperationGroup[];
 
                     /**
                      * Creates a new RecommendationContent instance using the specified properties.
                      * @param [properties] Properties to set
                      * @returns RecommendationContent instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IRecommendationContent): google.cloud.recommender.v1beta1.RecommendationContent;
+                    public static create(properties?: google.cloud.recommender.v1.IRecommendationContent): google.cloud.recommender.v1.RecommendationContent;
 
                     /**
-                     * Encodes the specified RecommendationContent message. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommendationContent.verify|verify} messages.
+                     * Encodes the specified RecommendationContent message. Does not implicitly {@link google.cloud.recommender.v1.RecommendationContent.verify|verify} messages.
                      * @param message RecommendationContent message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IRecommendationContent, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IRecommendationContent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified RecommendationContent message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommendationContent.verify|verify} messages.
+                     * Encodes the specified RecommendationContent message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.RecommendationContent.verify|verify} messages.
                      * @param message RecommendationContent message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IRecommendationContent, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IRecommendationContent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a RecommendationContent message from the specified reader or buffer.
@@ -214,7 +214,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.RecommendationContent;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.RecommendationContent;
 
                     /**
                      * Decodes a RecommendationContent message from the specified reader or buffer, length delimited.
@@ -223,7 +223,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.RecommendationContent;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.RecommendationContent;
 
                     /**
                      * Verifies a RecommendationContent message.
@@ -237,7 +237,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns RecommendationContent
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.RecommendationContent;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.RecommendationContent;
 
                     /**
                      * Creates a plain object from a RecommendationContent message. Also converts values to other types if specified.
@@ -245,7 +245,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.RecommendationContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.RecommendationContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this RecommendationContent to JSON.
@@ -258,7 +258,7 @@ export namespace google {
                 interface IOperationGroup {
 
                     /** OperationGroup operations */
-                    operations?: (google.cloud.recommender.v1beta1.IOperation[]|null);
+                    operations?: (google.cloud.recommender.v1.IOperation[]|null);
                 }
 
                 /** Represents an OperationGroup. */
@@ -268,33 +268,33 @@ export namespace google {
                      * Constructs a new OperationGroup.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IOperationGroup);
+                    constructor(properties?: google.cloud.recommender.v1.IOperationGroup);
 
                     /** OperationGroup operations. */
-                    public operations: google.cloud.recommender.v1beta1.IOperation[];
+                    public operations: google.cloud.recommender.v1.IOperation[];
 
                     /**
                      * Creates a new OperationGroup instance using the specified properties.
                      * @param [properties] Properties to set
                      * @returns OperationGroup instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IOperationGroup): google.cloud.recommender.v1beta1.OperationGroup;
+                    public static create(properties?: google.cloud.recommender.v1.IOperationGroup): google.cloud.recommender.v1.OperationGroup;
 
                     /**
-                     * Encodes the specified OperationGroup message. Does not implicitly {@link google.cloud.recommender.v1beta1.OperationGroup.verify|verify} messages.
+                     * Encodes the specified OperationGroup message. Does not implicitly {@link google.cloud.recommender.v1.OperationGroup.verify|verify} messages.
                      * @param message OperationGroup message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IOperationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IOperationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified OperationGroup message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.OperationGroup.verify|verify} messages.
+                     * Encodes the specified OperationGroup message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.OperationGroup.verify|verify} messages.
                      * @param message OperationGroup message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IOperationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IOperationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes an OperationGroup message from the specified reader or buffer.
@@ -304,7 +304,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.OperationGroup;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.OperationGroup;
 
                     /**
                      * Decodes an OperationGroup message from the specified reader or buffer, length delimited.
@@ -313,7 +313,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.OperationGroup;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.OperationGroup;
 
                     /**
                      * Verifies an OperationGroup message.
@@ -327,7 +327,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns OperationGroup
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.OperationGroup;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.OperationGroup;
 
                     /**
                      * Creates a plain object from an OperationGroup message. Also converts values to other types if specified.
@@ -335,7 +335,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.OperationGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.OperationGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this OperationGroup to JSON.
@@ -369,13 +369,13 @@ export namespace google {
                     value?: (google.protobuf.IValue|null);
 
                     /** Operation valueMatcher */
-                    valueMatcher?: (google.cloud.recommender.v1beta1.IValueMatcher|null);
+                    valueMatcher?: (google.cloud.recommender.v1.IValueMatcher|null);
 
                     /** Operation pathFilters */
                     pathFilters?: ({ [k: string]: google.protobuf.IValue }|null);
 
                     /** Operation pathValueMatchers */
-                    pathValueMatchers?: ({ [k: string]: google.cloud.recommender.v1beta1.IValueMatcher }|null);
+                    pathValueMatchers?: ({ [k: string]: google.cloud.recommender.v1.IValueMatcher }|null);
                 }
 
                 /** Represents an Operation. */
@@ -385,7 +385,7 @@ export namespace google {
                      * Constructs a new Operation.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IOperation);
+                    constructor(properties?: google.cloud.recommender.v1.IOperation);
 
                     /** Operation action. */
                     public action: string;
@@ -409,13 +409,13 @@ export namespace google {
                     public value?: (google.protobuf.IValue|null);
 
                     /** Operation valueMatcher. */
-                    public valueMatcher?: (google.cloud.recommender.v1beta1.IValueMatcher|null);
+                    public valueMatcher?: (google.cloud.recommender.v1.IValueMatcher|null);
 
                     /** Operation pathFilters. */
                     public pathFilters: { [k: string]: google.protobuf.IValue };
 
                     /** Operation pathValueMatchers. */
-                    public pathValueMatchers: { [k: string]: google.cloud.recommender.v1beta1.IValueMatcher };
+                    public pathValueMatchers: { [k: string]: google.cloud.recommender.v1.IValueMatcher };
 
                     /** Operation pathValue. */
                     public pathValue?: ("value"|"valueMatcher");
@@ -425,23 +425,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Operation instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IOperation): google.cloud.recommender.v1beta1.Operation;
+                    public static create(properties?: google.cloud.recommender.v1.IOperation): google.cloud.recommender.v1.Operation;
 
                     /**
-                     * Encodes the specified Operation message. Does not implicitly {@link google.cloud.recommender.v1beta1.Operation.verify|verify} messages.
+                     * Encodes the specified Operation message. Does not implicitly {@link google.cloud.recommender.v1.Operation.verify|verify} messages.
                      * @param message Operation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.Operation.verify|verify} messages.
+                     * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Operation.verify|verify} messages.
                      * @param message Operation message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes an Operation message from the specified reader or buffer.
@@ -451,7 +451,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.Operation;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Operation;
 
                     /**
                      * Decodes an Operation message from the specified reader or buffer, length delimited.
@@ -460,7 +460,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.Operation;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Operation;
 
                     /**
                      * Verifies an Operation message.
@@ -474,7 +474,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Operation
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.Operation;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Operation;
 
                     /**
                      * Creates a plain object from an Operation message. Also converts values to other types if specified.
@@ -482,7 +482,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Operation to JSON.
@@ -505,7 +505,7 @@ export namespace google {
                      * Constructs a new ValueMatcher.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IValueMatcher);
+                    constructor(properties?: google.cloud.recommender.v1.IValueMatcher);
 
                     /** ValueMatcher matchesPattern. */
                     public matchesPattern: string;
@@ -518,23 +518,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns ValueMatcher instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IValueMatcher): google.cloud.recommender.v1beta1.ValueMatcher;
+                    public static create(properties?: google.cloud.recommender.v1.IValueMatcher): google.cloud.recommender.v1.ValueMatcher;
 
                     /**
-                     * Encodes the specified ValueMatcher message. Does not implicitly {@link google.cloud.recommender.v1beta1.ValueMatcher.verify|verify} messages.
+                     * Encodes the specified ValueMatcher message. Does not implicitly {@link google.cloud.recommender.v1.ValueMatcher.verify|verify} messages.
                      * @param message ValueMatcher message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IValueMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IValueMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ValueMatcher message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ValueMatcher.verify|verify} messages.
+                     * Encodes the specified ValueMatcher message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ValueMatcher.verify|verify} messages.
                      * @param message ValueMatcher message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IValueMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IValueMatcher, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a ValueMatcher message from the specified reader or buffer.
@@ -544,7 +544,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.ValueMatcher;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.ValueMatcher;
 
                     /**
                      * Decodes a ValueMatcher message from the specified reader or buffer, length delimited.
@@ -553,7 +553,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.ValueMatcher;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.ValueMatcher;
 
                     /**
                      * Verifies a ValueMatcher message.
@@ -567,7 +567,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns ValueMatcher
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.ValueMatcher;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.ValueMatcher;
 
                     /**
                      * Creates a plain object from a ValueMatcher message. Also converts values to other types if specified.
@@ -575,7 +575,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.ValueMatcher, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.ValueMatcher, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this ValueMatcher to JSON.
@@ -601,7 +601,7 @@ export namespace google {
                      * Constructs a new CostProjection.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.ICostProjection);
+                    constructor(properties?: google.cloud.recommender.v1.ICostProjection);
 
                     /** CostProjection cost. */
                     public cost?: (google.type.IMoney|null);
@@ -614,23 +614,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns CostProjection instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.ICostProjection): google.cloud.recommender.v1beta1.CostProjection;
+                    public static create(properties?: google.cloud.recommender.v1.ICostProjection): google.cloud.recommender.v1.CostProjection;
 
                     /**
-                     * Encodes the specified CostProjection message. Does not implicitly {@link google.cloud.recommender.v1beta1.CostProjection.verify|verify} messages.
+                     * Encodes the specified CostProjection message. Does not implicitly {@link google.cloud.recommender.v1.CostProjection.verify|verify} messages.
                      * @param message CostProjection message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.ICostProjection, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.ICostProjection, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CostProjection message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.CostProjection.verify|verify} messages.
+                     * Encodes the specified CostProjection message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.CostProjection.verify|verify} messages.
                      * @param message CostProjection message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.ICostProjection, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.ICostProjection, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a CostProjection message from the specified reader or buffer.
@@ -640,7 +640,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.CostProjection;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.CostProjection;
 
                     /**
                      * Decodes a CostProjection message from the specified reader or buffer, length delimited.
@@ -649,7 +649,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.CostProjection;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.CostProjection;
 
                     /**
                      * Verifies a CostProjection message.
@@ -663,7 +663,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns CostProjection
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.CostProjection;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.CostProjection;
 
                     /**
                      * Creates a plain object from a CostProjection message. Also converts values to other types if specified.
@@ -671,7 +671,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.CostProjection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.CostProjection, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this CostProjection to JSON.
@@ -684,10 +684,10 @@ export namespace google {
                 interface IImpact {
 
                     /** Impact category */
-                    category?: (google.cloud.recommender.v1beta1.Impact.Category|null);
+                    category?: (google.cloud.recommender.v1.Impact.Category|null);
 
                     /** Impact costProjection */
-                    costProjection?: (google.cloud.recommender.v1beta1.ICostProjection|null);
+                    costProjection?: (google.cloud.recommender.v1.ICostProjection|null);
                 }
 
                 /** Represents an Impact. */
@@ -697,13 +697,13 @@ export namespace google {
                      * Constructs a new Impact.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IImpact);
+                    constructor(properties?: google.cloud.recommender.v1.IImpact);
 
                     /** Impact category. */
-                    public category: google.cloud.recommender.v1beta1.Impact.Category;
+                    public category: google.cloud.recommender.v1.Impact.Category;
 
                     /** Impact costProjection. */
-                    public costProjection?: (google.cloud.recommender.v1beta1.ICostProjection|null);
+                    public costProjection?: (google.cloud.recommender.v1.ICostProjection|null);
 
                     /** Impact projection. */
                     public projection?: "costProjection";
@@ -713,23 +713,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Impact instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IImpact): google.cloud.recommender.v1beta1.Impact;
+                    public static create(properties?: google.cloud.recommender.v1.IImpact): google.cloud.recommender.v1.Impact;
 
                     /**
-                     * Encodes the specified Impact message. Does not implicitly {@link google.cloud.recommender.v1beta1.Impact.verify|verify} messages.
+                     * Encodes the specified Impact message. Does not implicitly {@link google.cloud.recommender.v1.Impact.verify|verify} messages.
                      * @param message Impact message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Impact message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.Impact.verify|verify} messages.
+                     * Encodes the specified Impact message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.Impact.verify|verify} messages.
                      * @param message Impact message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes an Impact message from the specified reader or buffer.
@@ -739,7 +739,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.Impact;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.Impact;
 
                     /**
                      * Decodes an Impact message from the specified reader or buffer, length delimited.
@@ -748,7 +748,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.Impact;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.Impact;
 
                     /**
                      * Verifies an Impact message.
@@ -762,7 +762,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Impact
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.Impact;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.Impact;
 
                     /**
                      * Creates a plain object from an Impact message. Also converts values to other types if specified.
@@ -770,7 +770,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.Impact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.Impact, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Impact to JSON.
@@ -795,7 +795,7 @@ export namespace google {
                 interface IRecommendationStateInfo {
 
                     /** RecommendationStateInfo state */
-                    state?: (google.cloud.recommender.v1beta1.RecommendationStateInfo.State|null);
+                    state?: (google.cloud.recommender.v1.RecommendationStateInfo.State|null);
 
                     /** RecommendationStateInfo stateMetadata */
                     stateMetadata?: ({ [k: string]: string }|null);
@@ -808,10 +808,10 @@ export namespace google {
                      * Constructs a new RecommendationStateInfo.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IRecommendationStateInfo);
+                    constructor(properties?: google.cloud.recommender.v1.IRecommendationStateInfo);
 
                     /** RecommendationStateInfo state. */
-                    public state: google.cloud.recommender.v1beta1.RecommendationStateInfo.State;
+                    public state: google.cloud.recommender.v1.RecommendationStateInfo.State;
 
                     /** RecommendationStateInfo stateMetadata. */
                     public stateMetadata: { [k: string]: string };
@@ -821,23 +821,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns RecommendationStateInfo instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IRecommendationStateInfo): google.cloud.recommender.v1beta1.RecommendationStateInfo;
+                    public static create(properties?: google.cloud.recommender.v1.IRecommendationStateInfo): google.cloud.recommender.v1.RecommendationStateInfo;
 
                     /**
-                     * Encodes the specified RecommendationStateInfo message. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommendationStateInfo.verify|verify} messages.
+                     * Encodes the specified RecommendationStateInfo message. Does not implicitly {@link google.cloud.recommender.v1.RecommendationStateInfo.verify|verify} messages.
                      * @param message RecommendationStateInfo message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IRecommendationStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IRecommendationStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified RecommendationStateInfo message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommendationStateInfo.verify|verify} messages.
+                     * Encodes the specified RecommendationStateInfo message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.RecommendationStateInfo.verify|verify} messages.
                      * @param message RecommendationStateInfo message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IRecommendationStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IRecommendationStateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a RecommendationStateInfo message from the specified reader or buffer.
@@ -847,7 +847,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.RecommendationStateInfo;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.RecommendationStateInfo;
 
                     /**
                      * Decodes a RecommendationStateInfo message from the specified reader or buffer, length delimited.
@@ -856,7 +856,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.RecommendationStateInfo;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.RecommendationStateInfo;
 
                     /**
                      * Verifies a RecommendationStateInfo message.
@@ -870,7 +870,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns RecommendationStateInfo
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.RecommendationStateInfo;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.RecommendationStateInfo;
 
                     /**
                      * Creates a plain object from a RecommendationStateInfo message. Also converts values to other types if specified.
@@ -878,7 +878,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.RecommendationStateInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.RecommendationStateInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this RecommendationStateInfo to JSON.
@@ -925,108 +925,108 @@ export namespace google {
                      * @param request ListRecommendationsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListRecommendationsResponse
                      */
-                    public listRecommendations(request: google.cloud.recommender.v1beta1.IListRecommendationsRequest, callback: google.cloud.recommender.v1beta1.Recommender.ListRecommendationsCallback): void;
+                    public listRecommendations(request: google.cloud.recommender.v1.IListRecommendationsRequest, callback: google.cloud.recommender.v1.Recommender.ListRecommendationsCallback): void;
 
                     /**
                      * Calls ListRecommendations.
                      * @param request ListRecommendationsRequest message or plain object
                      * @returns Promise
                      */
-                    public listRecommendations(request: google.cloud.recommender.v1beta1.IListRecommendationsRequest): Promise<google.cloud.recommender.v1beta1.ListRecommendationsResponse>;
+                    public listRecommendations(request: google.cloud.recommender.v1.IListRecommendationsRequest): Promise<google.cloud.recommender.v1.ListRecommendationsResponse>;
 
                     /**
                      * Calls GetRecommendation.
                      * @param request GetRecommendationRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Recommendation
                      */
-                    public getRecommendation(request: google.cloud.recommender.v1beta1.IGetRecommendationRequest, callback: google.cloud.recommender.v1beta1.Recommender.GetRecommendationCallback): void;
+                    public getRecommendation(request: google.cloud.recommender.v1.IGetRecommendationRequest, callback: google.cloud.recommender.v1.Recommender.GetRecommendationCallback): void;
 
                     /**
                      * Calls GetRecommendation.
                      * @param request GetRecommendationRequest message or plain object
                      * @returns Promise
                      */
-                    public getRecommendation(request: google.cloud.recommender.v1beta1.IGetRecommendationRequest): Promise<google.cloud.recommender.v1beta1.Recommendation>;
+                    public getRecommendation(request: google.cloud.recommender.v1.IGetRecommendationRequest): Promise<google.cloud.recommender.v1.Recommendation>;
 
                     /**
                      * Calls MarkRecommendationClaimed.
                      * @param request MarkRecommendationClaimedRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Recommendation
                      */
-                    public markRecommendationClaimed(request: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest, callback: google.cloud.recommender.v1beta1.Recommender.MarkRecommendationClaimedCallback): void;
+                    public markRecommendationClaimed(request: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest, callback: google.cloud.recommender.v1.Recommender.MarkRecommendationClaimedCallback): void;
 
                     /**
                      * Calls MarkRecommendationClaimed.
                      * @param request MarkRecommendationClaimedRequest message or plain object
                      * @returns Promise
                      */
-                    public markRecommendationClaimed(request: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest): Promise<google.cloud.recommender.v1beta1.Recommendation>;
+                    public markRecommendationClaimed(request: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest): Promise<google.cloud.recommender.v1.Recommendation>;
 
                     /**
                      * Calls MarkRecommendationSucceeded.
                      * @param request MarkRecommendationSucceededRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Recommendation
                      */
-                    public markRecommendationSucceeded(request: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest, callback: google.cloud.recommender.v1beta1.Recommender.MarkRecommendationSucceededCallback): void;
+                    public markRecommendationSucceeded(request: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest, callback: google.cloud.recommender.v1.Recommender.MarkRecommendationSucceededCallback): void;
 
                     /**
                      * Calls MarkRecommendationSucceeded.
                      * @param request MarkRecommendationSucceededRequest message or plain object
                      * @returns Promise
                      */
-                    public markRecommendationSucceeded(request: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest): Promise<google.cloud.recommender.v1beta1.Recommendation>;
+                    public markRecommendationSucceeded(request: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest): Promise<google.cloud.recommender.v1.Recommendation>;
 
                     /**
                      * Calls MarkRecommendationFailed.
                      * @param request MarkRecommendationFailedRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Recommendation
                      */
-                    public markRecommendationFailed(request: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest, callback: google.cloud.recommender.v1beta1.Recommender.MarkRecommendationFailedCallback): void;
+                    public markRecommendationFailed(request: google.cloud.recommender.v1.IMarkRecommendationFailedRequest, callback: google.cloud.recommender.v1.Recommender.MarkRecommendationFailedCallback): void;
 
                     /**
                      * Calls MarkRecommendationFailed.
                      * @param request MarkRecommendationFailedRequest message or plain object
                      * @returns Promise
                      */
-                    public markRecommendationFailed(request: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest): Promise<google.cloud.recommender.v1beta1.Recommendation>;
+                    public markRecommendationFailed(request: google.cloud.recommender.v1.IMarkRecommendationFailedRequest): Promise<google.cloud.recommender.v1.Recommendation>;
                 }
 
                 namespace Recommender {
 
                     /**
-                     * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender#listRecommendations}.
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#listRecommendations}.
                      * @param error Error, if any
                      * @param [response] ListRecommendationsResponse
                      */
-                    type ListRecommendationsCallback = (error: (Error|null), response?: google.cloud.recommender.v1beta1.ListRecommendationsResponse) => void;
+                    type ListRecommendationsCallback = (error: (Error|null), response?: google.cloud.recommender.v1.ListRecommendationsResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender#getRecommendation}.
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#getRecommendation}.
                      * @param error Error, if any
                      * @param [response] Recommendation
                      */
-                    type GetRecommendationCallback = (error: (Error|null), response?: google.cloud.recommender.v1beta1.Recommendation) => void;
+                    type GetRecommendationCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Recommendation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender#markRecommendationClaimed}.
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#markRecommendationClaimed}.
                      * @param error Error, if any
                      * @param [response] Recommendation
                      */
-                    type MarkRecommendationClaimedCallback = (error: (Error|null), response?: google.cloud.recommender.v1beta1.Recommendation) => void;
+                    type MarkRecommendationClaimedCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Recommendation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender#markRecommendationSucceeded}.
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#markRecommendationSucceeded}.
                      * @param error Error, if any
                      * @param [response] Recommendation
                      */
-                    type MarkRecommendationSucceededCallback = (error: (Error|null), response?: google.cloud.recommender.v1beta1.Recommendation) => void;
+                    type MarkRecommendationSucceededCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Recommendation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender#markRecommendationFailed}.
+                     * Callback as used by {@link google.cloud.recommender.v1.Recommender#markRecommendationFailed}.
                      * @param error Error, if any
                      * @param [response] Recommendation
                      */
-                    type MarkRecommendationFailedCallback = (error: (Error|null), response?: google.cloud.recommender.v1beta1.Recommendation) => void;
+                    type MarkRecommendationFailedCallback = (error: (Error|null), response?: google.cloud.recommender.v1.Recommendation) => void;
                 }
 
                 /** Properties of a ListRecommendationsRequest. */
@@ -1052,7 +1052,7 @@ export namespace google {
                      * Constructs a new ListRecommendationsRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IListRecommendationsRequest);
+                    constructor(properties?: google.cloud.recommender.v1.IListRecommendationsRequest);
 
                     /** ListRecommendationsRequest parent. */
                     public parent: string;
@@ -1071,23 +1071,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns ListRecommendationsRequest instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IListRecommendationsRequest): google.cloud.recommender.v1beta1.ListRecommendationsRequest;
+                    public static create(properties?: google.cloud.recommender.v1.IListRecommendationsRequest): google.cloud.recommender.v1.ListRecommendationsRequest;
 
                     /**
-                     * Encodes the specified ListRecommendationsRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendationsRequest.verify|verify} messages.
+                     * Encodes the specified ListRecommendationsRequest message. Does not implicitly {@link google.cloud.recommender.v1.ListRecommendationsRequest.verify|verify} messages.
                      * @param message ListRecommendationsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IListRecommendationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IListRecommendationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ListRecommendationsRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendationsRequest.verify|verify} messages.
+                     * Encodes the specified ListRecommendationsRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ListRecommendationsRequest.verify|verify} messages.
                      * @param message ListRecommendationsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IListRecommendationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IListRecommendationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a ListRecommendationsRequest message from the specified reader or buffer.
@@ -1097,7 +1097,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.ListRecommendationsRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.ListRecommendationsRequest;
 
                     /**
                      * Decodes a ListRecommendationsRequest message from the specified reader or buffer, length delimited.
@@ -1106,7 +1106,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.ListRecommendationsRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.ListRecommendationsRequest;
 
                     /**
                      * Verifies a ListRecommendationsRequest message.
@@ -1120,7 +1120,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns ListRecommendationsRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.ListRecommendationsRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.ListRecommendationsRequest;
 
                     /**
                      * Creates a plain object from a ListRecommendationsRequest message. Also converts values to other types if specified.
@@ -1128,7 +1128,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.ListRecommendationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.ListRecommendationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this ListRecommendationsRequest to JSON.
@@ -1141,7 +1141,7 @@ export namespace google {
                 interface IListRecommendationsResponse {
 
                     /** ListRecommendationsResponse recommendations */
-                    recommendations?: (google.cloud.recommender.v1beta1.IRecommendation[]|null);
+                    recommendations?: (google.cloud.recommender.v1.IRecommendation[]|null);
 
                     /** ListRecommendationsResponse nextPageToken */
                     nextPageToken?: (string|null);
@@ -1154,10 +1154,10 @@ export namespace google {
                      * Constructs a new ListRecommendationsResponse.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IListRecommendationsResponse);
+                    constructor(properties?: google.cloud.recommender.v1.IListRecommendationsResponse);
 
                     /** ListRecommendationsResponse recommendations. */
-                    public recommendations: google.cloud.recommender.v1beta1.IRecommendation[];
+                    public recommendations: google.cloud.recommender.v1.IRecommendation[];
 
                     /** ListRecommendationsResponse nextPageToken. */
                     public nextPageToken: string;
@@ -1167,23 +1167,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns ListRecommendationsResponse instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IListRecommendationsResponse): google.cloud.recommender.v1beta1.ListRecommendationsResponse;
+                    public static create(properties?: google.cloud.recommender.v1.IListRecommendationsResponse): google.cloud.recommender.v1.ListRecommendationsResponse;
 
                     /**
-                     * Encodes the specified ListRecommendationsResponse message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendationsResponse.verify|verify} messages.
+                     * Encodes the specified ListRecommendationsResponse message. Does not implicitly {@link google.cloud.recommender.v1.ListRecommendationsResponse.verify|verify} messages.
                      * @param message ListRecommendationsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IListRecommendationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IListRecommendationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified ListRecommendationsResponse message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendationsResponse.verify|verify} messages.
+                     * Encodes the specified ListRecommendationsResponse message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ListRecommendationsResponse.verify|verify} messages.
                      * @param message ListRecommendationsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IListRecommendationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IListRecommendationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a ListRecommendationsResponse message from the specified reader or buffer.
@@ -1193,7 +1193,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.ListRecommendationsResponse;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.ListRecommendationsResponse;
 
                     /**
                      * Decodes a ListRecommendationsResponse message from the specified reader or buffer, length delimited.
@@ -1202,7 +1202,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.ListRecommendationsResponse;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.ListRecommendationsResponse;
 
                     /**
                      * Verifies a ListRecommendationsResponse message.
@@ -1216,7 +1216,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns ListRecommendationsResponse
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.ListRecommendationsResponse;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.ListRecommendationsResponse;
 
                     /**
                      * Creates a plain object from a ListRecommendationsResponse message. Also converts values to other types if specified.
@@ -1224,7 +1224,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.ListRecommendationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.ListRecommendationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this ListRecommendationsResponse to JSON.
@@ -1247,7 +1247,7 @@ export namespace google {
                      * Constructs a new GetRecommendationRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IGetRecommendationRequest);
+                    constructor(properties?: google.cloud.recommender.v1.IGetRecommendationRequest);
 
                     /** GetRecommendationRequest name. */
                     public name: string;
@@ -1257,23 +1257,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns GetRecommendationRequest instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IGetRecommendationRequest): google.cloud.recommender.v1beta1.GetRecommendationRequest;
+                    public static create(properties?: google.cloud.recommender.v1.IGetRecommendationRequest): google.cloud.recommender.v1.GetRecommendationRequest;
 
                     /**
-                     * Encodes the specified GetRecommendationRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.GetRecommendationRequest.verify|verify} messages.
+                     * Encodes the specified GetRecommendationRequest message. Does not implicitly {@link google.cloud.recommender.v1.GetRecommendationRequest.verify|verify} messages.
                      * @param message GetRecommendationRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IGetRecommendationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IGetRecommendationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified GetRecommendationRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.GetRecommendationRequest.verify|verify} messages.
+                     * Encodes the specified GetRecommendationRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.GetRecommendationRequest.verify|verify} messages.
                      * @param message GetRecommendationRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IGetRecommendationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IGetRecommendationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a GetRecommendationRequest message from the specified reader or buffer.
@@ -1283,7 +1283,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.GetRecommendationRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.GetRecommendationRequest;
 
                     /**
                      * Decodes a GetRecommendationRequest message from the specified reader or buffer, length delimited.
@@ -1292,7 +1292,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.GetRecommendationRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.GetRecommendationRequest;
 
                     /**
                      * Verifies a GetRecommendationRequest message.
@@ -1306,7 +1306,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns GetRecommendationRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.GetRecommendationRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.GetRecommendationRequest;
 
                     /**
                      * Creates a plain object from a GetRecommendationRequest message. Also converts values to other types if specified.
@@ -1314,7 +1314,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.GetRecommendationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.GetRecommendationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this GetRecommendationRequest to JSON.
@@ -1343,7 +1343,7 @@ export namespace google {
                      * Constructs a new MarkRecommendationClaimedRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest);
+                    constructor(properties?: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest);
 
                     /** MarkRecommendationClaimedRequest name. */
                     public name: string;
@@ -1359,23 +1359,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns MarkRecommendationClaimedRequest instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest): google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest;
+                    public static create(properties?: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest): google.cloud.recommender.v1.MarkRecommendationClaimedRequest;
 
                     /**
-                     * Encodes the specified MarkRecommendationClaimedRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationClaimedRequest message. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationClaimedRequest.verify|verify} messages.
                      * @param message MarkRecommendationClaimedRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified MarkRecommendationClaimedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationClaimedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationClaimedRequest.verify|verify} messages.
                      * @param message MarkRecommendationClaimedRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IMarkRecommendationClaimedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IMarkRecommendationClaimedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a MarkRecommendationClaimedRequest message from the specified reader or buffer.
@@ -1385,7 +1385,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.MarkRecommendationClaimedRequest;
 
                     /**
                      * Decodes a MarkRecommendationClaimedRequest message from the specified reader or buffer, length delimited.
@@ -1394,7 +1394,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.MarkRecommendationClaimedRequest;
 
                     /**
                      * Verifies a MarkRecommendationClaimedRequest message.
@@ -1408,7 +1408,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns MarkRecommendationClaimedRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.MarkRecommendationClaimedRequest;
 
                     /**
                      * Creates a plain object from a MarkRecommendationClaimedRequest message. Also converts values to other types if specified.
@@ -1416,7 +1416,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.MarkRecommendationClaimedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.MarkRecommendationClaimedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this MarkRecommendationClaimedRequest to JSON.
@@ -1445,7 +1445,7 @@ export namespace google {
                      * Constructs a new MarkRecommendationSucceededRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest);
+                    constructor(properties?: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest);
 
                     /** MarkRecommendationSucceededRequest name. */
                     public name: string;
@@ -1461,23 +1461,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns MarkRecommendationSucceededRequest instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest): google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest;
+                    public static create(properties?: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest): google.cloud.recommender.v1.MarkRecommendationSucceededRequest;
 
                     /**
-                     * Encodes the specified MarkRecommendationSucceededRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationSucceededRequest message. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationSucceededRequest.verify|verify} messages.
                      * @param message MarkRecommendationSucceededRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified MarkRecommendationSucceededRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationSucceededRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationSucceededRequest.verify|verify} messages.
                      * @param message MarkRecommendationSucceededRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IMarkRecommendationSucceededRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IMarkRecommendationSucceededRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a MarkRecommendationSucceededRequest message from the specified reader or buffer.
@@ -1487,7 +1487,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.MarkRecommendationSucceededRequest;
 
                     /**
                      * Decodes a MarkRecommendationSucceededRequest message from the specified reader or buffer, length delimited.
@@ -1496,7 +1496,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.MarkRecommendationSucceededRequest;
 
                     /**
                      * Verifies a MarkRecommendationSucceededRequest message.
@@ -1510,7 +1510,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns MarkRecommendationSucceededRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.MarkRecommendationSucceededRequest;
 
                     /**
                      * Creates a plain object from a MarkRecommendationSucceededRequest message. Also converts values to other types if specified.
@@ -1518,7 +1518,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.MarkRecommendationSucceededRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.MarkRecommendationSucceededRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this MarkRecommendationSucceededRequest to JSON.
@@ -1547,7 +1547,7 @@ export namespace google {
                      * Constructs a new MarkRecommendationFailedRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest);
+                    constructor(properties?: google.cloud.recommender.v1.IMarkRecommendationFailedRequest);
 
                     /** MarkRecommendationFailedRequest name. */
                     public name: string;
@@ -1563,23 +1563,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns MarkRecommendationFailedRequest instance
                      */
-                    public static create(properties?: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest): google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest;
+                    public static create(properties?: google.cloud.recommender.v1.IMarkRecommendationFailedRequest): google.cloud.recommender.v1.MarkRecommendationFailedRequest;
 
                     /**
-                     * Encodes the specified MarkRecommendationFailedRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationFailedRequest message. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationFailedRequest.verify|verify} messages.
                      * @param message MarkRecommendationFailedRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.recommender.v1.IMarkRecommendationFailedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified MarkRecommendationFailedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest.verify|verify} messages.
+                     * Encodes the specified MarkRecommendationFailedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationFailedRequest.verify|verify} messages.
                      * @param message MarkRecommendationFailedRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.recommender.v1beta1.IMarkRecommendationFailedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.recommender.v1.IMarkRecommendationFailedRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a MarkRecommendationFailedRequest message from the specified reader or buffer.
@@ -1589,7 +1589,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recommender.v1.MarkRecommendationFailedRequest;
 
                     /**
                      * Decodes a MarkRecommendationFailedRequest message from the specified reader or buffer, length delimited.
@@ -1598,7 +1598,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recommender.v1.MarkRecommendationFailedRequest;
 
                     /**
                      * Verifies a MarkRecommendationFailedRequest message.
@@ -1612,7 +1612,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns MarkRecommendationFailedRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recommender.v1.MarkRecommendationFailedRequest;
 
                     /**
                      * Creates a plain object from a MarkRecommendationFailedRequest message. Also converts values to other types if specified.
@@ -1620,7 +1620,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.recommender.v1beta1.MarkRecommendationFailedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.recommender.v1.MarkRecommendationFailedRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this MarkRecommendationFailedRequest to JSON.
