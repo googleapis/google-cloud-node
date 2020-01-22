@@ -42,11 +42,11 @@ const version = require('../../../package.json').version;
  */
 export class BudgetServiceClient {
   private _descriptors: Descriptors = {page: {}, stream: {}, longrunning: {}};
-  private _budgetServiceStub: Promise<{[name: string]: Function}>;
   private _innerApiCalls: {[name: string]: Function};
   private _pathTemplates: {[name: string]: gax.PathTemplate};
   private _terminated = false;
   auth: gax.GoogleAuth;
+  budgetServiceStub: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BudgetServiceClient.
@@ -174,7 +174,7 @@ export class BudgetServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.billing.budgets.v1beta1.BudgetService.
-    this._budgetServiceStub = gaxGrpc.createStub(
+    this.budgetServiceStub = gaxGrpc.createStub(
       opts.fallback
         ? (protos as protobuf.Root).lookupService(
             'google.cloud.billing.budgets.v1beta1.BudgetService'
@@ -195,8 +195,11 @@ export class BudgetServiceClient {
     ];
 
     for (const methodName of budgetServiceStubMethods) {
-      const innerCallPromise = this._budgetServiceStub.then(
+      const innerCallPromise = this.budgetServiceStub.then(
         stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
           return stub[methodName].apply(stub, args);
         },
         (err: Error | null | undefined) => () => {
@@ -217,9 +220,6 @@ export class BudgetServiceClient {
         callOptions?: CallOptions,
         callback?: APICallback
       ) => {
-        if (this._terminated) {
-          return Promise.reject('The client has already been closed.');
-        }
         return apiCall(argument, callOptions, callback);
       };
     }
@@ -444,7 +444,7 @@ export class BudgetServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      budget_name: request.budget!.name || '',
+      'budget.name': request.budget!.name || '',
     });
     return this._innerApiCalls.updateBudget(request, options, callback);
   }
@@ -648,13 +648,18 @@ export class BudgetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListBudgetsResponse]{@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse}.
+   *   The first element of the array is Array of [Budget]{@link google.cloud.billing.budgets.v1beta1.Budget}.
+   *   The client library support auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ListBudgetsResponse]{@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListBudgetsResponse]{@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse}.
+   *   The first element is Array of [Budget]{@link google.cloud.billing.budgets.v1beta1.Budget} that corresponds to
+   *   the one page received from the API server.
+   *   If the second element is not null it contains the request object of type [ListBudgetsRequest]{@link google.cloud.billing.budgets.v1beta1.ListBudgetsRequest}
+   *   that can be used to obtain the next page of the results.
+   *   If it is null, the next page does not exist.
+   *   The third element contains the raw response received from the API server. Its type is
+   *   [ListBudgetsResponse]{@link google.cloud.billing.budgets.v1beta1.ListBudgetsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    */
@@ -743,11 +748,26 @@ export class BudgetServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified budget resource name string.
+   *
+   * @param {string} budget
+   * @returns {string} Resource name string.
+   */
   budgetPath(budget: string) {
     return this._pathTemplates.budgetPathTemplate.render({
       budget,
     });
   }
+
+  /**
+   * Parse the budget from Budget resource.
+   *
+   * @param {string} budgetName
+   *   A fully-qualified path representing Budget resource.
+   * @returns {string} A string representing the budget.
+   */
   matchBudgetFromBudgetName(budgetName: string) {
     return this._pathTemplates.budgetPathTemplate.match(budgetName).budget;
   }
@@ -759,7 +779,7 @@ export class BudgetServiceClient {
    */
   close(): Promise<void> {
     if (!this._terminated) {
-      return this._budgetServiceStub.then(stub => {
+      return this.budgetServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

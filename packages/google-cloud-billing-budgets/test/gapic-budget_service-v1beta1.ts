@@ -18,6 +18,7 @@
 
 import * as protosTypes from '../protos/protos';
 import * as assert from 'assert';
+import {describe, it} from 'mocha';
 const budgetserviceModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
@@ -40,7 +41,6 @@ export class Operation {
   constructor() {}
   promise() {}
 }
-
 function mockSimpleGrpcMethod(
   expectedRequest: {},
   response: {} | null,
@@ -57,7 +57,7 @@ function mockSimpleGrpcMethod(
     }
   };
 }
-describe('BudgetServiceClient', () => {
+describe('v1beta1.BudgetServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
       budgetserviceModule.v1beta1.BudgetServiceClient.servicePath;
@@ -77,7 +77,7 @@ describe('BudgetServiceClient', () => {
     const client = new budgetserviceModule.v1beta1.BudgetServiceClient();
     assert(client);
   });
-  it('should create a client with gRPC option', () => {
+  it('should create a client with gRPC fallback', () => {
     const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
       fallback: true,
     });
