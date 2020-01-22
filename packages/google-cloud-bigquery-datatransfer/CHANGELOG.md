@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [1.5.3](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.5.2...v1.5.3) (2020-01-21)
+
+
+### Bug Fixes
+
+* proto resource annotation removed, no code change ([9e0873f](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/9e0873f62f925e7dad871b0e96edc074e833d151))
+
 ### [1.5.2](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.5.1...v1.5.2) (2019-12-09)
 
 
