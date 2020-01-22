@@ -50,68 +50,33 @@ function main(
       projectId,
       subscriptionName
     );
+
     // The maximum number of messages returned for this request.
     // Pub/Sub may return fewer than the number specified.
-    const maxMessages = 1;
-    const newAckDeadlineSeconds = 30;
     const request = {
       subscription: formattedSubscription,
-      maxMessages: maxMessages,
+      maxMessages: 10,
     };
-
-    let isProcessed = false;
-
-    // The worker function is meant to be non-blocking. It starts a long-
-    // running process, such as writing the message to a table, which may
-    // take longer than the default 10-sec acknowledge deadline.
-    function worker(message) {
-      console.log(`Processing "${message.message.data}"...`);
-
-      setTimeout(() => {
-        console.log(`Finished procesing "${message.message.data}".`);
-        isProcessed = true;
-      }, 30000);
-    }
 
     // The subscriber pulls a specified number of messages.
     const [response] = await subClient.pull(request);
-    // Obtain the first message.
-    const message = response.receivedMessages[0];
-    // Send the message to the worker function.
-    worker(message);
 
-    let waiting = true;
-    while (waiting) {
-      await new Promise(r => setTimeout(r, 10000));
-      // If the message has been processed..
-      if (isProcessed) {
-        const ackRequest = {
-          subscription: formattedSubscription,
-          ackIds: [message.ackId],
-        };
-
-        //..acknowledges the message.
-        await subClient.acknowledge(ackRequest);
-        console.log(`Acknowledged: "${message.message.data}".`);
-        // Exit after the message is acknowledged.
-        waiting = false;
-        console.log(`Done.`);
-      } else {
-        // If the message is not yet processed..
-        const modifyAckRequest = {
-          subscription: formattedSubscription,
-          ackIds: [message.ackId],
-          ackDeadlineSeconds: newAckDeadlineSeconds,
-        };
-
-        //..reset its ack deadline.
-        await subClient.modifyAckDeadline(modifyAckRequest);
-
-        console.log(
-          `Reset ack deadline for "${message.message.data}" for ${newAckDeadlineSeconds}s.`
-        );
-      }
+    // Process the messages.
+    const ackIds = [];
+    for (const message of response.receivedMessages) {
+      console.log(`Received message: ${message.message.data}`);
+      ackIds.push(message.ackId);
     }
+
+    // Acknowledge all of the messages. You could also ackknowledge
+    // these individually, but this is more efficient.
+    const ackRequest = {
+      subscription: formattedSubscription,
+      ackIds: ackIds,
+    };
+    await subClient.acknowledge(ackRequest);
+
+    console.log('Done.');
   }
 
   synchronousPull().catch(console.error);

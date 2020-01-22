@@ -45,6 +45,7 @@ guides.
   * [Set Topic IAM Policy](#set-topic-iam-policy)
   * [Subscribe With Flow Control Settings](#subscribe-with-flow-control-settings)
   * [Synchronous Pull](#synchronous-pull)
+  * [Synchronous Pull With Lease Management](#synchronous-pull-with-lease-management)
   * [Test Subscription Permissions](#test-subscription-permissions)
   * [Test Topic Permissions](#test-topic-permissions)
 
@@ -531,6 +532,25 @@ __Usage:__
 
 
 `node synchronousPull.js <project-id> <subscription-name>`
+
+
+-----
+
+
+
+
+### Synchronous Pull With Lease Management
+
+Receive messages synchronously, setting lease management properties.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/synchronousPullWithLeaseManagement.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/synchronousPullWithLeaseManagement.js,samples/README.md)
+
+__Usage:__
+
+
+`node synchronousPullWithLeaseManagement.js <project-id> <subscription-name>`
 
 
 -----
