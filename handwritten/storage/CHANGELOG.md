@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [4.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.2.0...v4.3.0) (2020-01-21)
+
+
+### Features
+
+* add support for CORS as a first class citizen ([#1020](https://www.github.com/googleapis/nodejs-storage/issues/1020)) ([9fee6d9](https://www.github.com/googleapis/nodejs-storage/commit/9fee6d969a1311a3db18bf523d3614adef0526ce))
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-and-time to ^0.12.0 ([#1032](https://www.github.com/googleapis/nodejs-storage/issues/1032)) ([a324564](https://www.github.com/googleapis/nodejs-storage/commit/a324564e8f29345412047b7f6296098211e0e831))
+* a couple of typos from the refactorNodeSampleStorage branch ([#1038](https://www.github.com/googleapis/nodejs-storage/issues/1038)) ([8faa6c6](https://www.github.com/googleapis/nodejs-storage/commit/8faa6c6698b3b7ef4857d978482209bc5077e08e))
+* do not modify constructor options ([#974](https://www.github.com/googleapis/nodejs-storage/issues/974)) ([4969148](https://www.github.com/googleapis/nodejs-storage/commit/4969148f5e114d86aa4928109f099ec15d56fda5))
+* refactor getMetadata sample into its own file ([#1008](https://www.github.com/googleapis/nodejs-storage/issues/1008)) ([6ed1af8](https://www.github.com/googleapis/nodejs-storage/commit/6ed1af8aadd6f72cf0957d02e403f7c551166a5c))
+* refactor getRetentionPolicy sample into its own file ([#993](https://www.github.com/googleapis/nodejs-storage/issues/993)) ([47e4ad8](https://www.github.com/googleapis/nodejs-storage/commit/47e4ad8c8a4fd16f4f1d9d6d9bfdc9e30b1ab999))
+* refactor getUniformBucketLevelAccess into its own file ([#981](https://www.github.com/googleapis/nodejs-storage/issues/981)) ([0ba69f1](https://www.github.com/googleapis/nodejs-storage/commit/0ba69f1b3d6093701dac927fa4543d2d911ce8b0))
+* refactor rotateEncryptionKey sample into its own file ([#1030](https://www.github.com/googleapis/nodejs-storage/issues/1030)) ([afdf0fe](https://www.github.com/googleapis/nodejs-storage/commit/afdf0febe8760c0819736961065d134e231a0afa))
+* refactor uploadEncryptedFile sample into its own file ([#1028](https://www.github.com/googleapis/nodejs-storage/issues/1028)) ([ba4520b](https://www.github.com/googleapis/nodejs-storage/commit/ba4520b5f925968717222ffe5d2b1dbcfbea4334))
+* refactoring disableUniformBucketLevelAccess into its own file ([#980](https://www.github.com/googleapis/nodejs-storage/issues/980)) ([1481e20](https://www.github.com/googleapis/nodejs-storage/commit/1481e20d8332ee2806116166fb16028506487d2d))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-storage/compare/v4.1.3...v4.2.0) (2020-01-02)
 
 
