@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v1.0.0...v2.0.0) (2020-01-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to v1 client (#8)
+
+### Features
+
+* upgrade to v1 client ([#8](https://www.github.com/googleapis/nodejs-recommender/issues/8)) ([d31c634](https://www.github.com/googleapis/nodejs-recommender/commit/d31c634bffe0db521348d81180780d9da223d58d))
+
 ## 1.0.0 (2020-01-14)
 
 
