@@ -181,6 +181,7 @@ class Service extends common.ServiceObject {
       id: name,
       createMethod: compute.createService.bind(compute),
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * The parent {@link Compute} instance of this {@link Service} instance.

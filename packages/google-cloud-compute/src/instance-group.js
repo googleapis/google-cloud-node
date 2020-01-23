@@ -172,6 +172,7 @@ class InstanceGroup extends common.ServiceObject {
       id: name,
       createMethod: zone.createInstanceGroup.bind(zone),
       methods: methods,
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
     /**
      * The parent {@link Zone} instance of this {@link InstanceGroup} instance.

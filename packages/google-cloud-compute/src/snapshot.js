@@ -134,6 +134,7 @@ class Snapshot extends common.ServiceObject {
        */
       id: name,
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     };
     if (isDisk) {
       config.createMethod = scope.createSnapshot.bind(scope);

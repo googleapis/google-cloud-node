@@ -174,6 +174,9 @@ class Operation extends common.Operation {
        */
       id: name,
       methods: methods,
+      pollIntervalMs: isCompute
+        ? scope.pollIntervalMs
+        : scope.compute.pollIntervalMs,
     });
 
     /**

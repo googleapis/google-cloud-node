@@ -162,6 +162,7 @@ class Address extends common.ServiceObject {
       id: name,
       createMethod: region.createAddress.bind(region),
       methods: methods,
+      pollIntervalMs: region.compute.pollIntervalMs,
     });
     /**
      * @name Address#name

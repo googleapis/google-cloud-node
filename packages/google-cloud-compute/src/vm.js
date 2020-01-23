@@ -233,6 +233,7 @@ class VM extends common.ServiceObject {
       id: name,
       createMethod: zone.createVM.bind(zone),
       methods: methods,
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
 
     /**

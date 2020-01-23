@@ -138,6 +138,7 @@ class Zone extends common.ServiceObject {
        */
       id: name,
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * The parent {@link Compute} instance of this {@link Zone} instance.

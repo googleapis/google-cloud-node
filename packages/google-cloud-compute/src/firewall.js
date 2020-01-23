@@ -165,6 +165,7 @@ class Firewall extends common.ServiceObject {
       id: name,
       createMethod: compute.createFirewall.bind(compute),
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * The parent {@link Compute} instance of this {@link Firewall} instance.

@@ -181,6 +181,7 @@ class HealthCheck extends common.ServiceObject {
         compute.createHealthCheck(name, options, callback);
       },
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * The parent {@link Compute} instance of this {@link HealthCheck} instance.

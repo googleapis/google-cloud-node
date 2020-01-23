@@ -140,6 +140,7 @@ class InstanceGroupManager extends common.ServiceObject {
       id: name,
       // createMethod: zone.createInstanceGroupManager.bind(zone),
       methods: methods,
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
     /**
      * The parent {@link Zone} instance of this {@link InstanceGroup} instance.

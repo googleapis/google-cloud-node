@@ -44,6 +44,7 @@ describe('Subnetwork', function() {
   const REGION = {
     createSubnetwork: util.noop,
     name: REGION_NAME,
+    compute: {},
   };
 
   before(function() {

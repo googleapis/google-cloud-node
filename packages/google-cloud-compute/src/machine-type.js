@@ -128,6 +128,7 @@ class MachineType extends common.ServiceObject {
        */
       id: name,
       methods: methods,
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
     /**
      * The parent {@link Zone} instance of this {@link MachineType} instance.

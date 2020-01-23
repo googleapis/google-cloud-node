@@ -167,6 +167,7 @@ class Network extends common.ServiceObject {
       id: name,
       createMethod: compute.createNetwork.bind(compute),
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * The parent {@link Compute} instance of this {@link Network} instance.

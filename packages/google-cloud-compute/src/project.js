@@ -95,6 +95,7 @@ class Project extends common.ServiceObject {
       baseUrl: '',
       id: '',
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
   }
 }

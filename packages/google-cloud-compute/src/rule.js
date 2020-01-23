@@ -186,6 +186,9 @@ class Rule extends common.ServiceObject {
       id: name,
       createMethod: scope.createRule.bind(scope),
       methods: methods,
+      pollIntervalMs: scope.compute
+        ? scope.compute.pollIntervalMs
+        : scope.pollIntervalMs,
     });
     /**
      * @name Rule#scope

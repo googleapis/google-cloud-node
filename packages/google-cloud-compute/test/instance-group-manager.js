@@ -41,7 +41,9 @@ describe('InstanceGroupManager', function() {
 
   const staticMethods = {};
 
-  const ZONE = {};
+  const ZONE = {
+    compute: {},
+  };
   const NAME = 'instance-group-manager-name';
 
   before(function() {

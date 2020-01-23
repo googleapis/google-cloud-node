@@ -168,6 +168,7 @@ class Subnetwork extends common.ServiceObject {
       id: name,
       createMethod: region.createSubnetwork.bind(region),
       methods: methods,
+      pollIntervalMs: region.compute.pollIntervalMs,
     });
     /**
      * @name Subnetwork#name

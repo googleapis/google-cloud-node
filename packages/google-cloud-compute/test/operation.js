@@ -56,6 +56,7 @@ describe('Operation', function() {
 
   const SCOPE = {
     Promise: Promise,
+    compute: {},
   };
   const OPERATION_NAME = 'operation-name';
 

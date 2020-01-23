@@ -172,6 +172,7 @@ class Disk extends common.ServiceObject {
       id: name,
       createMethod: zone.createDisk.bind(zone),
       methods: methods,
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
     /**
      * @name Disk#name

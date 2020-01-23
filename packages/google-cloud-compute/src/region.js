@@ -131,12 +131,14 @@ class Region extends common.ServiceObject {
        */
       id: name,
       methods: methods,
+      pollIntervalMs: compute.pollIntervalMs,
     });
     /**
      * @name Region#name
      * @type {string}
      */
     this.name = name;
+    this.compute = compute;
     this.interceptors.push({
       request: function(reqOpts) {
         if (reqOpts.uri.indexOf('/global/forwardingRules') > -1) {

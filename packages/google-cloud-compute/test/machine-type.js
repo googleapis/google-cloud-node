@@ -31,6 +31,7 @@ describe('MachineType', function() {
   const ZONE_NAME = 'zone-1';
   const ZONE = {
     name: ZONE_NAME,
+    compute: {},
   };
 
   const MACHINE_TYPE_NAME = 'g1-small';

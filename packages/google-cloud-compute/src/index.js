@@ -56,6 +56,8 @@ const Image = require('./image.js');
  *     We will exponentially backoff subsequent requests by default.
  * @property {number} [maxRetries=3] Maximum number of automatic retries
  *     attempted before returning the error.
+ * @property {number} [pollIntervalMs=500] Poll interval for long running
+ *    operations.
  * @property {Constructor} [promise] Custom promise module to use instead of
  *     native Promises.
  * @property {string} [apiEndpoint] The API endpoint of the service used to make requests. Defaults to `compute.googleapis.com`
@@ -88,6 +90,7 @@ class Compute extends common.Service {
       packageJson: require('../package.json'),
     };
     super(config, options);
+    this.pollIntervalMs = options.pollIntervalMs;
   }
   /**
    * Create a firewall.

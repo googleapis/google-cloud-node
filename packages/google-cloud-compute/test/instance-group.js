@@ -64,6 +64,7 @@ describe('InstanceGroup', function() {
   const ZONE = {
     createInstanceGroup: util.noop,
     vm: util.noop,
+    compute: {},
   };
   const NAME = 'instance-group-name';
 

@@ -42,6 +42,7 @@ describe('Address', function() {
   const ADDRESS_NAME = 'us-central1';
   const REGION = {
     createAddress: () => {},
+    compute: {},
   };
 
   before(function() {
