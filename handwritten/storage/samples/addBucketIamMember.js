@@ -41,7 +41,7 @@ function main(
     const bucket = storage.bucket(bucketName);
 
     // Gets and updates the bucket's IAM policy
-    const [policy] = await bucket.iam.getPolicy();
+    const [policy] = await bucket.iam.getPolicy({requestedPolicyVersion: 3});
 
     // Adds the new roles to the bucket's IAM policy
     policy.bindings.push({

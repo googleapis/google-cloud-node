@@ -27,21 +27,32 @@ function main(bucketName = 'my-bucket') {
 
   async function viewBucketIamMembers() {
     // Gets and displays the bucket's IAM policy
-    const results = await storage.bucket(bucketName).iam.getPolicy();
+    // Gets and displays the bucket's IAM policy
+    const results = await storage
+      .bucket(bucketName)
+      .iam.getPolicy({requestedPolicyVersion: 3});
 
-    const policy = results[0].bindings;
+    const bindings = results[0].bindings;
 
     // Displays the roles in the bucket's IAM policy
-    console.log(`Roles for bucket ${bucketName}:`);
-    policy.forEach(role => {
-      console.log(`  Role: ${role.role}`);
+    console.log(`Bindings for bucket ${bucketName}:`);
+    for (const binding of bindings) {
+      console.log(`  Role: ${binding.role}`);
       console.log(`  Members:`);
 
-      const members = role.members;
-      members.forEach(member => {
+      const members = binding.members;
+      for (const member of members) {
         console.log(`    ${member}`);
-      });
-    });
+      }
+
+      const condition = binding.condition;
+      if (condition) {
+        console.log(`  Condiiton:`);
+        console.log(`    Title: ${condition.title}`);
+        console.log(`    Description: ${condition.description}`);
+        console.log(`    Expression: ${condition.expression}`);
+      }
+    }
   }
 
   viewBucketIamMembers();

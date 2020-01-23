@@ -61,25 +61,6 @@ it('should add multiple members to a role on a bucket', async () => {
   assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
-it('should list members of a role on a bucket', async () => {
-  const output = execSync(`node viewBucketIamMembers.js ${bucketName}`);
-  assert.match(output, new RegExp(`Roles for bucket ${bucketName}:`));
-  assert.match(output, new RegExp(`Role: ${roleName}`));
-  assert.match(output, new RegExp(`Members:`));
-});
-
-it('should remove multiple members from a role on a bucket', async () => {
-  const output = execSync(
-    `node removeBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
-  );
-  assert.ok(
-    output.includes(
-      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-    )
-  );
-  assert.match(output, new RegExp(`user:${userEmail}`));
-});
-
 it('should add conditional binding to a bucket', async () => {
   const output = execSync(
     `node addBucketConditionalBinding.js ${bucketName} ${roleName} '${title}' '${description}' '${expression}' "user:${userEmail}"`
@@ -92,4 +73,24 @@ it('should add conditional binding to a bucket', async () => {
   assert.include(output, `Title: ${title}`);
   assert.include(output, `Description: ${description}`);
   assert.include(output, `Expression: ${expression}`);
+});
+
+it('should list members of a role on a bucket', async () => {
+  const output = execSync(`node viewBucketIamMembers.js ${bucketName}`);
+  assert.match(output, new RegExp(`Bindings for bucket ${bucketName}:`));
+  assert.match(output, new RegExp(`Role: ${roleName}`));
+  assert.match(output, new RegExp(`Members:`));
+  assert.match(output, new RegExp(`user:${userEmail}`));
+});
+
+it('should remove multiple members from a role on a bucket', async () => {
+  const output = execSync(
+    `node removeBucketIamMember.js ${bucketName} ${roleName} "user:${userEmail}"`
+  );
+  assert.ok(
+    output.includes(
+      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
+    )
+  );
+  assert.match(output, new RegExp(`user:${userEmail}`));
 });
