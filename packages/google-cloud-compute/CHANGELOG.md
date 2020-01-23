@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.8...v1.2.0) (2020-01-23)
+
+
+### Features
+
+* allow pollIntervalMs to be configured ([#392](https://www.github.com/googleapis/nodejs-compute/issues/392)) ([0f9c6eb](https://www.github.com/googleapis/nodejs-compute/commit/0f9c6eb973aa6ce166c5ee8e017bda8bdea4407f))
+
 ### [1.1.8](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.7...v1.1.8) (2019-12-05)
 
 
