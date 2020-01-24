@@ -21,42 +21,34 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1']
 for version in versions:
- library = gapic.node_library(
+ library = gapic.typescript_library(
    'grafeas',
    version,
-   config_path='/grafeas/artman_grafeas_v1.yaml')
+   generator_args={
+     "grpc-service-config": f"grafeas/{version}/grafeas_grpc_service_config.json",
+     "package-name":f"@google-cloud/grafeas"
+     },
+     proto_path=f'/grafeas/{version}',
+     extra_proto_files=['google/cloud/common_resources.proto'],
+     )
  s.copy(library, excludes=[
    "README.md",
    "package.json",
-   "src/v1/grafeas_client.js",
-   "test/gapic-v1.js",
+   "src/v1/gapic-grafeas-v1.ts",
+   "test/gapic-v1.ts",
    "protos/google/*"
  ])
 
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace grafeas.v1
- */
-""")
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=['.nycrc'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'compileProtos', 'run'])
