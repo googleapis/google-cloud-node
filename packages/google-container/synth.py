@@ -46,5 +46,5 @@ s.replace('src/v1/*.ts',
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
+subprocess.run(['npm', 'run', 'compile-protos'])
 subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npm', 'compileProtos', 'src'])

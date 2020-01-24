@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/kubernetes-engine",
   "client_documentation": "https://googleapis.dev/nodejs/container/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559746",
-  "release_level": "beta",
+  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-container",
   "distribution_name": "@google-cloud/container",
