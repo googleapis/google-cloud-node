@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-22T12:11:59.042949Z",
+  "updateTime": "2020-01-23T23:23:01.946019Z",
   "sources": [
     {
       "generator": {
@@ -12,9 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461",
-        "internalRef": "290800639",
-        "log": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461\nChange api_name to 'asset' for v1p1beta1\n\nPiperOrigin-RevId: 290800639\n\n94e9e90c303a820ce40643d9129e7f0d2054e8a1\nAdds Google Maps Road service\n\nPiperOrigin-RevId: 290795667\n\na3b23dcb2eaecce98c600c7d009451bdec52dbda\nrpc: new message ErrorInfo, other comment updates\n\nPiperOrigin-RevId: 290781668\n\n26420ef4e46c37f193c0fbe53d6ebac481de460e\nAdd proto definition for Org Policy v1.\n\nPiperOrigin-RevId: 290771923\n\n7f0dab8177cf371ae019a082e2512de7ac102888\nPublish Routes Preferred API v1 service definitions.\n\nPiperOrigin-RevId: 290326986\n\nad6e508d0728e1d1bca6e3f328cd562718cb772d\nFix: Qualify resource type references with \"jobs.googleapis.com/\"\n\nPiperOrigin-RevId: 290285762\n\n58e770d568a2b78168ddc19a874178fee8265a9d\ncts client library\n\nPiperOrigin-RevId: 290146169\n\naf9daa4c3b4c4a8b7133b81588dd9ffd37270af2\nAdd more programming language options to public proto\n\nPiperOrigin-RevId: 290144091\n\nd9f2bbf2df301ef84641d4cec7c828736a0bd907\ntalent: add missing resource.proto dep to Bazel build target\n\nPiperOrigin-RevId: 290143164\n\n3b3968237451d027b42471cd28884a5a1faed6c7\nAnnotate Talent API.\nAdd gRPC service config for retry.\nUpdate bazel file with google.api.resource dependency.\n\nPiperOrigin-RevId: 290125172\n\n0735b4b096872960568d1f366bfa75b7b0e1f1a3\nWeekly library update.\n\nPiperOrigin-RevId: 289939042\n\n8760d3d9a4543d7f9c0d1c7870aca08b116e4095\nWeekly library update.\n\nPiperOrigin-RevId: 289939020\n\n8607df842f782a901805187e02fff598145b0b0e\nChange Talent API timeout to 30s.\n\nPiperOrigin-RevId: 289912621\n\n908155991fe32570653bcb72ecfdcfc896642f41\nAdd Recommendations AI V1Beta1\n\nPiperOrigin-RevId: 289901914\n\n5c9a8c2bebd8b71aa66d1cc473edfaac837a2c78\nAdding no-arg method signatures for ListBillingAccounts and ListServices\n\nPiperOrigin-RevId: 289891136\n\n50b0e8286ac988b0593bd890eb31fef6ea2f5767\nlongrunning: add grpc service config and default_host annotation to operations.proto\n\nPiperOrigin-RevId: 289876944\n\n6cac27dabe51c54807b0401698c32d34998948a9\n  Updating default deadline for Cloud Security Command Center's v1 APIs.\n\nPiperOrigin-RevId: 289875412\n\n"
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
       }
     },
     {
@@ -60,13 +59,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -147,9 +140,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -183,12 +173,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -204,19 +188,7 @@
       "path": "codecov.yaml"
     },
     {
-      "path": "linkinator.config.json"
-    },
-    {
-      "path": "package.json"
-    },
-    {
-      "path": "protos/google/cloud/bigquery/datatransfer/v1/datasource.proto"
-    },
-    {
       "path": "protos/google/cloud/bigquery/datatransfer/v1/datatransfer.proto"
-    },
-    {
-      "path": "protos/google/cloud/bigquery/datatransfer/v1/resourcestate.proto"
     },
     {
       "path": "protos/google/cloud/bigquery/datatransfer/v1/transfer.proto"
@@ -234,31 +206,13 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/test/quickstart.test.js"
-    },
-    {
-      "path": "smoke-test/.eslintrc.yml"
     },
     {
       "path": "smoke-test/data_transfer_service_smoke_test.js"
     },
     {
       "path": "src/browser.js"
-    },
-    {
-      "path": "src/index.js"
     },
     {
       "path": "src/v1/data_transfer_service_client.js"
@@ -268,9 +222,6 @@
     },
     {
       "path": "src/v1/data_transfer_service_proto_list.json"
-    },
-    {
-      "path": "src/v1/doc/google/cloud/bigquery/datatransfer/v1/doc_datasource.js"
     },
     {
       "path": "src/v1/doc/google/cloud/bigquery/datatransfer/v1/doc_datatransfer.js"
@@ -297,31 +248,10 @@
       "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
     },
     {
-      "path": "src/v1/doc/google/protobuf/doc_wrappers.js"
-    },
-    {
       "path": "src/v1/doc/google/rpc/doc_status.js"
     },
     {
-      "path": "src/v1/index.js"
-    },
-    {
-      "path": "synth.metadata"
-    },
-    {
-      "path": "synth.py"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
-    },
-    {
-      "path": "system-test/system.js"
-    },
-    {
       "path": "test/gapic-v1.js"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "webpack.config.js"
