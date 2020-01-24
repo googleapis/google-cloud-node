@@ -174,31 +174,31 @@ describe('storage', () => {
     let storageWithoutAuth: Storage;
 
     let GOOGLE_APPLICATION_CREDENTIALS: string | undefined;
+    let GOOGLE_CLOUD_PROJECT: string | undefined;
 
     before(done => {
+      // CI authentication is done with ADC. Cache it here, restore it `after`
+      GOOGLE_APPLICATION_CREDENTIALS =
+        process.env.GOOGLE_APPLICATION_CREDENTIALS;
+      GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
+
       privateBucket = bucket; // `bucket` was created in the global `before`
       privateFile = privateBucket.file('file-name');
+      privateFile.save('data', done);
+    });
 
-      privateFile.save('data', err => {
-        if (err) {
-          done(err);
-          return;
-        }
+    beforeEach(() => {
+      delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
+      delete process.env.GOOGLE_CLOUD_PROJECT;
+      delete require.cache[require.resolve('../src')];
 
-        // CI authentication is done with ADC. Cache it here, restore it `after`
-        GOOGLE_APPLICATION_CREDENTIALS =
-          process.env.GOOGLE_APPLICATION_CREDENTIALS;
-        delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
-        delete require.cache[require.resolve('../src')];
-
-        const {Storage} = require('../src');
-        storageWithoutAuth = new Storage();
-        done();
-      });
+      const {Storage} = require('../src');
+      storageWithoutAuth = new Storage();
     });
 
     after(() => {
       process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
+      process.env.GOOGLE_CLOUD_PROJECT = GOOGLE_APPLICATION_CREDENTIALS;
     });
 
     describe('public data', () => {
@@ -208,7 +208,7 @@ describe('storage', () => {
 
       let bucket: Bucket;
 
-      before(() => {
+      beforeEach(() => {
         bucket = storageWithoutAuth.bucket('gcp-public-data-landsat');
       });
 
@@ -225,7 +225,7 @@ describe('storage', () => {
       let bucket: Bucket;
       let file: File;
 
-      before(() => {
+      beforeEach(() => {
         bucket = storageWithoutAuth.bucket(privateBucket.id!);
         file = bucket.file(privateFile.id!);
       });
