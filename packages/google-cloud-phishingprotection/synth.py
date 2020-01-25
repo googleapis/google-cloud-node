@@ -43,4 +43,4 @@ s.copy(templates, excludes=['.nycrc'])
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
-subprocess.run(['npm', 'compileProtos', 'src'])
+subprocess.run(['npx', 'compileProtos', 'src'])
