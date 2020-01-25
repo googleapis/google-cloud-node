@@ -1,0 +1,546 @@
+{
+  "updateTime": "2020-01-24T12:33:32.193979Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "securitycenter",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/securitycenter/artman_securitycenter_v1beta1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "securitycenter",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/securitycenter/artman_securitycenter_v1.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".readme-partials.yaml"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/asset.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/finding.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/organization_settings.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/run_asset_discovery_response.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/security_marks.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/securitycenter_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1/source.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/asset.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/finding.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/organization_settings.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/run_asset_discovery_response.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/security_marks.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/securitycenter_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/securitycenter/v1beta1/source.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/system-test/quickstart.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/assetSecurityMarks.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/findings.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/listAllAssets.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/listAssetsAndChanges.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/listAssetsAtTime.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/listFilteredAssets.test.js"
+    },
+    {
+      "path": "samples/system-test/v1/orgSettings.test.js"
+    },
+    {
+      "path": "samples/v1/addDeleteSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/addFindingSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/addSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/createFinding.js"
+    },
+    {
+      "path": "samples/v1/createFindingSourceProperties.js"
+    },
+    {
+      "path": "samples/v1/createSource.js"
+    },
+    {
+      "path": "samples/v1/deleteSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/enableAssetDiscovery.js"
+    },
+    {
+      "path": "samples/v1/getOrganizationSettings.js"
+    },
+    {
+      "path": "samples/v1/getSource.js"
+    },
+    {
+      "path": "samples/v1/getSourceIam.js"
+    },
+    {
+      "path": "samples/v1/listAllAssets.js"
+    },
+    {
+      "path": "samples/v1/listAllFindings.js"
+    },
+    {
+      "path": "samples/v1/listAllSources.js"
+    },
+    {
+      "path": "samples/v1/listAssetsAndChanges.js"
+    },
+    {
+      "path": "samples/v1/listAssetsAtTime.js"
+    },
+    {
+      "path": "samples/v1/listAssetsWithSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/listFilteredAssets.js"
+    },
+    {
+      "path": "samples/v1/listFilteredFindings.js"
+    },
+    {
+      "path": "samples/v1/listFindingsAtTime.js"
+    },
+    {
+      "path": "samples/v1/listFindingsWithSecurityMarks.js"
+    },
+    {
+      "path": "samples/v1/setFindingState.js"
+    },
+    {
+      "path": "samples/v1/setSourceIam.js"
+    },
+    {
+      "path": "samples/v1/testIam.js"
+    },
+    {
+      "path": "samples/v1/updateFindingSourceProperties.js"
+    },
+    {
+      "path": "samples/v1/updateSource.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/extra_proto_list.json"
+    },
+    {
+      "path": "src/index.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_asset.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_finding.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_organization_settings.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_security_marks.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_securitycenter_service.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/securitycenter/v1/doc_source.js"
+    },
+    {
+      "path": "src/v1/doc/google/iam/v1/doc_iam_policy.js"
+    },
+    {
+      "path": "src/v1/doc/google/iam/v1/doc_options.js"
+    },
+    {
+      "path": "src/v1/doc/google/iam/v1/doc_policy.js"
+    },
+    {
+      "path": "src/v1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1/doc/google/type/doc_expr.js"
+    },
+    {
+      "path": "src/v1/index.js"
+    },
+    {
+      "path": "src/v1/security_center_client.js"
+    },
+    {
+      "path": "src/v1/security_center_client_config.json"
+    },
+    {
+      "path": "src/v1/security_center_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_asset.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_finding.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_organization_settings.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_security_marks.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_securitycenter_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_source.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/iam/v1/doc_iam_policy.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/iam/v1/doc_options.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/iam/v1/doc_policy.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/type/doc_expr.js"
+    },
+    {
+      "path": "src/v1beta1/index.js"
+    },
+    {
+      "path": "src/v1beta1/security_center_client.js"
+    },
+    {
+      "path": "src/v1beta1/security_center_client_config.json"
+    },
+    {
+      "path": "src/v1beta1/security_center_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/system.js"
+    },
+    {
+      "path": "test/gapic-v1.js"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
