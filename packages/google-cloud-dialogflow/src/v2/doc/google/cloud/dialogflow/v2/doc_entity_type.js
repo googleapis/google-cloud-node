@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ const EntityType = {
    *
    *   For `KIND_MAP` entity types:
    *
-   *   *   A canonical value to be used in place of synonyms.
+   *   *   A reference value to be used in place of synonyms.
    *
    *   For `KIND_LIST` entity types:
    *
@@ -125,13 +125,13 @@ const EntityType = {
     KIND_UNSPECIFIED: 0,
 
     /**
-     * Map entity types allow mapping of a group of synonyms to a canonical
+     * Map entity types allow mapping of a group of synonyms to a reference
      * value.
      */
     KIND_MAP: 1,
 
     /**
-     * List entity types contain a set of entries that do not map to canonical
+     * List entity types contain a set of entries that do not map to reference
      * values. However, list entity types can contain references to other entity
      * types (with or without aliases).
      */
@@ -434,7 +434,7 @@ const BatchUpdateEntitiesRequest = {
  *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
  *
  * @property {string[]} entityValues
- *   Required. The canonical `values` of the entities to delete. Note that
+ *   Required. The reference `values` of the entities to delete. Note that
  *   these are not fully-qualified names, i.e. they don't start with
  *   `projects/<Project ID>`.
  *

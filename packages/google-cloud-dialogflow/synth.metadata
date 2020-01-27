@@ -1,0 +1,618 @@
+{
+  "updateTime": "2020-01-24T12:17:53.705141Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dialogflow",
+        "apiVersion": "v2",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/dialogflow/v2/artman_dialogflow_v2.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dialogflow",
+        "apiVersion": "v2beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/dialogflow/v2beta1/artman_dialogflow_v2beta1.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".cloud-repo-tools.json"
+    },
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/agent.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/audio_config.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/context.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/entity_type.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/intent.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/session.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/session_entity_type.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2/webhook.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/agent.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/audio_config.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/context.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/document.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/entity_type.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/gcs.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/intent.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/knowledge_base.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/session.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/session_entity_type.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/validation_result.proto"
+    },
+    {
+      "path": "protos/google/cloud/dialogflow/v2beta1/webhook.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/.gitignore"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/detect-intent-TTS-response.v2.js"
+    },
+    {
+      "path": "samples/detect-intent-sentiment.v2.js"
+    },
+    {
+      "path": "samples/detect.js"
+    },
+    {
+      "path": "samples/detect.v2beta1.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/resource.js"
+    },
+    {
+      "path": "samples/resources/230pm.wav"
+    },
+    {
+      "path": "samples/resources/RoomReservation.zip"
+    },
+    {
+      "path": "samples/resources/book_a_room.wav"
+    },
+    {
+      "path": "samples/resources/half_an_hour.wav"
+    },
+    {
+      "path": "samples/resources/mountain_view.wav"
+    },
+    {
+      "path": "samples/resources/output.wav"
+    },
+    {
+      "path": "samples/resources/today.wav"
+    },
+    {
+      "path": "samples/resources/two_people.wav"
+    },
+    {
+      "path": "samples/system-test/detect.test.js"
+    },
+    {
+      "path": "samples/system-test/detect.v2beta1.test.js"
+    },
+    {
+      "path": "samples/system-test/resource.test.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/index.js"
+    },
+    {
+      "path": "src/v2/agents_client.js"
+    },
+    {
+      "path": "src/v2/agents_client_config.json"
+    },
+    {
+      "path": "src/v2/agents_proto_list.json"
+    },
+    {
+      "path": "src/v2/contexts_client.js"
+    },
+    {
+      "path": "src/v2/contexts_client_config.json"
+    },
+    {
+      "path": "src/v2/contexts_proto_list.json"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_agent.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_audio_config.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_context.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_entity_type.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_intent.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_session.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/dialogflow/v2/doc_session_entity_type.js"
+    },
+    {
+      "path": "src/v2/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v2/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v2/doc/google/type/doc_latlng.js"
+    },
+    {
+      "path": "src/v2/entity_types_client.js"
+    },
+    {
+      "path": "src/v2/entity_types_client_config.json"
+    },
+    {
+      "path": "src/v2/entity_types_proto_list.json"
+    },
+    {
+      "path": "src/v2/index.js"
+    },
+    {
+      "path": "src/v2/intents_client.js"
+    },
+    {
+      "path": "src/v2/intents_client_config.json"
+    },
+    {
+      "path": "src/v2/intents_proto_list.json"
+    },
+    {
+      "path": "src/v2/session_entity_types_client.js"
+    },
+    {
+      "path": "src/v2/session_entity_types_client_config.json"
+    },
+    {
+      "path": "src/v2/session_entity_types_proto_list.json"
+    },
+    {
+      "path": "src/v2/sessions_client.js"
+    },
+    {
+      "path": "src/v2/sessions_client_config.json"
+    },
+    {
+      "path": "src/v2/sessions_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/agents_client.js"
+    },
+    {
+      "path": "src/v2beta1/agents_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/agents_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/contexts_client.js"
+    },
+    {
+      "path": "src/v2beta1/contexts_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/contexts_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_agent.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_audio_config.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_context.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_document.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_entity_type.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_gcs.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_intent.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_knowledge_base.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_session.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_session_entity_type.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/cloud/dialogflow/v2beta1/doc_validation_result.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v2beta1/doc/google/type/doc_latlng.js"
+    },
+    {
+      "path": "src/v2beta1/documents_client.js"
+    },
+    {
+      "path": "src/v2beta1/documents_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/documents_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/entity_types_client.js"
+    },
+    {
+      "path": "src/v2beta1/entity_types_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/entity_types_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/index.js"
+    },
+    {
+      "path": "src/v2beta1/intents_client.js"
+    },
+    {
+      "path": "src/v2beta1/intents_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/intents_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/knowledge_bases_client.js"
+    },
+    {
+      "path": "src/v2beta1/knowledge_bases_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/knowledge_bases_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/session_entity_types_client.js"
+    },
+    {
+      "path": "src/v2beta1/session_entity_types_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/session_entity_types_proto_list.json"
+    },
+    {
+      "path": "src/v2beta1/sessions_client.js"
+    },
+    {
+      "path": "src/v2beta1/sessions_client_config.json"
+    },
+    {
+      "path": "src/v2beta1/sessions_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/no-test.js"
+    },
+    {
+      "path": "test/gapic-v2.js"
+    },
+    {
+      "path": "test/gapic-v2beta1.js"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}

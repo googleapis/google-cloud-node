@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ const VERSION = require('../../package.json').version;
  *     data types such as date, time, currency, and so on. A system entity is
  *     represented by the `EntityType` type.
  *
- * *   **Developer** - entities that are defined by you that represent
+ * *   **Custom** - entities that are defined by you that represent
  *     actionable data that is meaningful to your application. For example,
  *     you could define a `pizza.sauce` entity for red or white pizza sauce,
  *     a `pizza.cheese` entity for the different types of cheese on a pizza,
- *     a `pizza.topping` entity for different toppings, and so on. A developer
+ *     a `pizza.topping` entity for different toppings, and so on. A custom
  *     entity is represented by the `EntityType` type.
  *
  * *   **User** - entities that are built for an individual user such as
@@ -1291,7 +1291,7 @@ class EntityTypesClient {
    *   Required. The name of the entity type to delete entries for. Format:
    *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
    * @param {string[]} request.entityValues
-   *   Required. The canonical `values` of the entities to delete. Note that
+   *   Required. The reference `values` of the entities to delete. Note that
    *   these are not fully-qualified names, i.e. they don't start with
    *   `projects/<Project ID>`.
    * @param {string} [request.languageCode]

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ const Agent = {
 
     /**
      * Can be used for agents with a large number of examples in intents,
-     * especially the ones using @sys.any or very large developer entities.
+     * especially the ones using @sys.any or very large custom entities.
      */
     MATCH_MODE_ML_ONLY: 2
   },
