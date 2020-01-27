@@ -1,0 +1,407 @@
+{
+  "updateTime": "2020-01-24T12:16:42.461341Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "datastore",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/datastore/artman_datastore.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".readme-partials.yml"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "proto/app_engine_key.d.ts"
+    },
+    {
+      "path": "proto/datastore.d.ts"
+    },
+    {
+      "path": "proto/entity.d.ts"
+    },
+    {
+      "path": "protos/app_engine_key.proto"
+    },
+    {
+      "path": "protos/google/datastore/v1/datastore.proto"
+    },
+    {
+      "path": "protos/google/datastore/v1/entity.proto"
+    },
+    {
+      "path": "protos/google/datastore/v1/query.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/concepts.js"
+    },
+    {
+      "path": "samples/error.js"
+    },
+    {
+      "path": "samples/index.yaml"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/tasks.add.js"
+    },
+    {
+      "path": "samples/tasks.delete.js"
+    },
+    {
+      "path": "samples/tasks.js"
+    },
+    {
+      "path": "samples/tasks.list.js"
+    },
+    {
+      "path": "samples/tasks.markdone.js"
+    },
+    {
+      "path": "samples/test/concepts.test.js"
+    },
+    {
+      "path": "samples/test/error.test.js"
+    },
+    {
+      "path": "samples/test/index.yaml"
+    },
+    {
+      "path": "samples/test/quickstart.test.js"
+    },
+    {
+      "path": "samples/test/tasks.test.js"
+    },
+    {
+      "path": "src/.eslintrc.yml"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/entity.ts"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/query.ts"
+    },
+    {
+      "path": "src/request.ts"
+    },
+    {
+      "path": "src/service_proto_list.json"
+    },
+    {
+      "path": "src/transaction.ts"
+    },
+    {
+      "path": "src/v1/datastore_client.d.ts"
+    },
+    {
+      "path": "src/v1/datastore_client.js"
+    },
+    {
+      "path": "src/v1/datastore_client_config.json"
+    },
+    {
+      "path": "src/v1/datastore_proto_list.json"
+    },
+    {
+      "path": "src/v1/doc/google/datastore/v1/doc_datastore.js"
+    },
+    {
+      "path": "src/v1/doc/google/datastore/v1/doc_entity.js"
+    },
+    {
+      "path": "src/v1/doc/google/datastore/v1/doc_query.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_wrappers.js"
+    },
+    {
+      "path": "src/v1/index.d.ts"
+    },
+    {
+      "path": "src/v1/index.js"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/data/index.yaml"
+    },
+    {
+      "path": "system-test/datastore.ts"
+    },
+    {
+      "path": "system-test/fixtures/sample/package.json"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "system-test/fixtures/sample/tsconfig.json"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "test/.eslintrc.yml"
+    },
+    {
+      "path": "test/entity.ts"
+    },
+    {
+      "path": "test/gapic-v1.js"
+    },
+    {
+      "path": "test/index.ts"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "test/query.ts"
+    },
+    {
+      "path": "test/request.ts"
+    },
+    {
+      "path": "test/transaction.ts"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
