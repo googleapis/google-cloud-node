@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.4.0...v2.5.0) (2020-01-25)
+
+
+### Features
+
+* move to typescript code generation ([#83](https://www.github.com/googleapis/nodejs-grafeas/issues/83)) ([7c921ab](https://www.github.com/googleapis/nodejs-grafeas/commit/7c921ab4e30bb5c27379e226e24d88d4a93c8413))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.3.3...v2.4.0) (2020-01-09)
 
 
