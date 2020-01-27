@@ -1,0 +1,546 @@
+{
+  "updateTime": "2020-01-24T12:35:58.057386Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "speech",
+        "apiVersion": "v1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "speech",
+        "apiVersion": "v1p1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".vscode/launch.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "prettier.config.js"
+    },
+    {
+      "path": "protos/google/api/annotations.proto"
+    },
+    {
+      "path": "protos/google/api/auth.proto"
+    },
+    {
+      "path": "protos/google/api/backend.proto"
+    },
+    {
+      "path": "protos/google/api/billing.proto"
+    },
+    {
+      "path": "protos/google/api/config_change.proto"
+    },
+    {
+      "path": "protos/google/api/consumer.proto"
+    },
+    {
+      "path": "protos/google/api/context.proto"
+    },
+    {
+      "path": "protos/google/api/control.proto"
+    },
+    {
+      "path": "protos/google/api/distribution.proto"
+    },
+    {
+      "path": "protos/google/api/documentation.proto"
+    },
+    {
+      "path": "protos/google/api/endpoint.proto"
+    },
+    {
+      "path": "protos/google/api/experimental/authorization_config.proto"
+    },
+    {
+      "path": "protos/google/api/experimental/experimental.proto"
+    },
+    {
+      "path": "protos/google/api/http.proto"
+    },
+    {
+      "path": "protos/google/api/httpbody.proto"
+    },
+    {
+      "path": "protos/google/api/label.proto"
+    },
+    {
+      "path": "protos/google/api/log.proto"
+    },
+    {
+      "path": "protos/google/api/logging.proto"
+    },
+    {
+      "path": "protos/google/api/metric.proto"
+    },
+    {
+      "path": "protos/google/api/monitored_resource.proto"
+    },
+    {
+      "path": "protos/google/api/monitoring.proto"
+    },
+    {
+      "path": "protos/google/api/quota.proto"
+    },
+    {
+      "path": "protos/google/api/service.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/check_error.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/distribution.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/log_entry.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/metric_value.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/operation.proto"
+    },
+    {
+      "path": "protos/google/api/servicecontrol/v1/service_controller.proto"
+    },
+    {
+      "path": "protos/google/api/servicemanagement/v1/resources.proto"
+    },
+    {
+      "path": "protos/google/api/servicemanagement/v1/servicemanager.proto"
+    },
+    {
+      "path": "protos/google/api/source_info.proto"
+    },
+    {
+      "path": "protos/google/api/system_parameter.proto"
+    },
+    {
+      "path": "protos/google/api/usage.proto"
+    },
+    {
+      "path": "protos/google/cloud/speech/v1/cloud_speech.proto"
+    },
+    {
+      "path": "protos/google/cloud/speech/v1p1beta1/cloud_speech.proto"
+    },
+    {
+      "path": "protos/google/longrunning/operations.proto"
+    },
+    {
+      "path": "protos/google/protobuf/any.proto"
+    },
+    {
+      "path": "protos/google/protobuf/api.proto"
+    },
+    {
+      "path": "protos/google/protobuf/descriptor.proto"
+    },
+    {
+      "path": "protos/google/protobuf/duration.proto"
+    },
+    {
+      "path": "protos/google/protobuf/empty.proto"
+    },
+    {
+      "path": "protos/google/protobuf/field_mask.proto"
+    },
+    {
+      "path": "protos/google/protobuf/source_context.proto"
+    },
+    {
+      "path": "protos/google/protobuf/struct.proto"
+    },
+    {
+      "path": "protos/google/protobuf/timestamp.proto"
+    },
+    {
+      "path": "protos/google/protobuf/type.proto"
+    },
+    {
+      "path": "protos/google/protobuf/util/json_format_proto3.proto"
+    },
+    {
+      "path": "protos/google/protobuf/wrappers.proto"
+    },
+    {
+      "path": "protos/google/rpc/code.proto"
+    },
+    {
+      "path": "protos/google/rpc/error_details.proto"
+    },
+    {
+      "path": "protos/google/rpc/status.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/MicrophoneStream.js"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/betaFeatures.js"
+    },
+    {
+      "path": "samples/infiniteStreaming.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/recognize.js"
+    },
+    {
+      "path": "samples/recognize.v1p1beta1.js"
+    },
+    {
+      "path": "samples/resources/Google_Gnome.wav"
+    },
+    {
+      "path": "samples/resources/ManualTest.wav"
+    },
+    {
+      "path": "samples/resources/audio.raw"
+    },
+    {
+      "path": "samples/resources/audio2.raw"
+    },
+    {
+      "path": "samples/resources/brooklyn.flac"
+    },
+    {
+      "path": "samples/resources/commercial_mono.wav"
+    },
+    {
+      "path": "samples/resources/commercial_stereo.wav"
+    },
+    {
+      "path": "samples/resources/multi.wav"
+    },
+    {
+      "path": "samples/resources/quit.raw"
+    },
+    {
+      "path": "samples/system-test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/system-test/MicrophoneStream.test.js"
+    },
+    {
+      "path": "samples/system-test/betaFeatures.test.js"
+    },
+    {
+      "path": "samples/system-test/quickstart.test.js"
+    },
+    {
+      "path": "samples/system-test/recognize.test.js"
+    },
+    {
+      "path": "samples/system-test/recognize.v1p1beta1.test.js"
+    },
+    {
+      "path": "src/helpers.ts"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/v1/index.ts"
+    },
+    {
+      "path": "src/v1/speech_client.ts"
+    },
+    {
+      "path": "src/v1/speech_client_config.json"
+    },
+    {
+      "path": "src/v1/speech_proto_list.json"
+    },
+    {
+      "path": "src/v1p1beta1/index.ts"
+    },
+    {
+      "path": "src/v1p1beta1/speech_client.ts"
+    },
+    {
+      "path": "src/v1p1beta1/speech_client_config.json"
+    },
+    {
+      "path": "src/v1p1beta1/speech_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "system-test/fixtures/streamingRecognize/input.wav"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "system-test/speech_system_test.js"
+    },
+    {
+      "path": "system-test/speech_system_test_v1.js"
+    },
+    {
+      "path": "system-test/speech_system_test_v1p1beta1.js"
+    },
+    {
+      "path": "system-test/speech_typescript_system_test.ts"
+    },
+    {
+      "path": "system-test/speech_typescript_system_test_v1.ts"
+    },
+    {
+      "path": "system-test/speech_typescript_system_test_v1p1beta1.ts"
+    },
+    {
+      "path": "test/.eslintrc.yml"
+    },
+    {
+      "path": "test/gapic-speech-v1.ts"
+    },
+    {
+      "path": "test/gapic-speech-v1p1beta1.ts"
+    },
+    {
+      "path": "test/helpers.test.ts"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
