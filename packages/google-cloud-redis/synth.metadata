@@ -1,12 +1,12 @@
 {
-  "updateTime": "2020-01-24T12:30:57.470762Z",
+  "updateTime": "2020-01-24T22:57:12.486288Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "3c39a1d6e23c1ef63c7fba4019c25e76c40dfe19",
+        "internalRef": "291420695"
       }
     },
     {
@@ -60,13 +60,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -147,9 +141,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -183,12 +174,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -205,9 +190,6 @@
     },
     {
       "path": "linkinator.config.json"
-    },
-    {
-      "path": "package.json"
     },
     {
       "path": "protos/google/cloud/common_resources.proto"
@@ -231,25 +213,7 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/system-test/.eslintrc.yml"
-    },
-    {
-      "path": "samples/system-test/redis.js"
-    },
-    {
-      "path": "src/index.ts"
     },
     {
       "path": "src/v1/cloud_redis_client.ts"
@@ -276,9 +240,6 @@
       "path": "src/v1beta1/index.ts"
     },
     {
-      "path": "synth.py"
-    },
-    {
       "path": "system-test/fixtures/sample/src/index.js"
     },
     {
@@ -288,19 +249,10 @@
       "path": "system-test/install.ts"
     },
     {
-      "path": "system-test/system.js"
-    },
-    {
-      "path": "test/.eslintrc.yml"
-    },
-    {
       "path": "test/gapic-cloud_redis-v1.ts"
     },
     {
       "path": "test/gapic-cloud_redis-v1beta1.ts"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "tsconfig.json"
