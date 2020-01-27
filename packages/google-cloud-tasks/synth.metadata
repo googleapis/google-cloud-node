@@ -1,0 +1,528 @@
+{
+  "updateTime": "2020-01-24T12:37:41.649277Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "tasks",
+        "apiVersion": "v2beta2",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "tasks",
+        "apiVersion": "v2beta3",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "tasks",
+        "apiVersion": "v2",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2/cloudtasks.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2/queue.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2/target.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2/task.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta2/cloudtasks.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta2/queue.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta2/target.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta2/task.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta3/cloudtasks.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta3/queue.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta3/target.proto"
+    },
+    {
+      "path": "protos/google/cloud/tasks/v2beta3/task.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/Dockerfile"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/app.yaml"
+    },
+    {
+      "path": "samples/createHttpTask.js"
+    },
+    {
+      "path": "samples/createHttpTaskWithToken.js"
+    },
+    {
+      "path": "samples/createQueue.js"
+    },
+    {
+      "path": "samples/createTask.js"
+    },
+    {
+      "path": "samples/deleteQueue.js"
+    },
+    {
+      "path": "samples/listQueues.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/server.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/test/test.samples.js"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/v2/cloud_tasks_client.ts"
+    },
+    {
+      "path": "src/v2/cloud_tasks_client_config.json"
+    },
+    {
+      "path": "src/v2/cloud_tasks_proto_list.json"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/tasks/v2/doc_cloudtasks.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/tasks/v2/doc_queue.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/tasks/v2/doc_target.js"
+    },
+    {
+      "path": "src/v2/doc/google/cloud/tasks/v2/doc_task.js"
+    },
+    {
+      "path": "src/v2/doc/google/iam/v1/doc_iam_policy.js"
+    },
+    {
+      "path": "src/v2/doc/google/iam/v1/doc_options.js"
+    },
+    {
+      "path": "src/v2/doc/google/iam/v1/doc_policy.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v2/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v2/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v2/doc/google/type/doc_expr.js"
+    },
+    {
+      "path": "src/v2/index.ts"
+    },
+    {
+      "path": "src/v2beta2/cloud_tasks_client.ts"
+    },
+    {
+      "path": "src/v2beta2/cloud_tasks_client_config.json"
+    },
+    {
+      "path": "src/v2beta2/cloud_tasks_proto_list.json"
+    },
+    {
+      "path": "src/v2beta2/doc/google/cloud/tasks/v2beta2/doc_cloudtasks.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/cloud/tasks/v2beta2/doc_queue.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/cloud/tasks/v2beta2/doc_target.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/cloud/tasks/v2beta2/doc_task.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/iam/v1/doc_iam_policy.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/iam/v1/doc_options.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/iam/v1/doc_policy.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v2beta2/doc/google/type/doc_expr.js"
+    },
+    {
+      "path": "src/v2beta2/index.ts"
+    },
+    {
+      "path": "src/v2beta3/cloud_tasks_client.ts"
+    },
+    {
+      "path": "src/v2beta3/cloud_tasks_client_config.json"
+    },
+    {
+      "path": "src/v2beta3/cloud_tasks_proto_list.json"
+    },
+    {
+      "path": "src/v2beta3/doc/google/cloud/tasks/v2beta3/doc_cloudtasks.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/cloud/tasks/v2beta3/doc_queue.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/cloud/tasks/v2beta3/doc_target.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/cloud/tasks/v2beta3/doc_task.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/iam/v1/doc_iam_policy.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/iam/v1/doc_options.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/iam/v1/doc_policy.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v2beta3/doc/google/type/doc_expr.js"
+    },
+    {
+      "path": "src/v2beta3/index.ts"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "test/.eslintrc.yml"
+    },
+    {
+      "path": "test/gapic-cloud_tasks-v2.ts"
+    },
+    {
+      "path": "test/gapic-cloud_tasks-v2beta2.ts"
+    },
+    {
+      "path": "test/gapic-cloud_tasks-v2beta3.ts"
+    },
+    {
+      "path": "test/gapic-v2.js"
+    },
+    {
+      "path": "test/gapic-v2beta2.js"
+    },
+    {
+      "path": "test/gapic-v2beta3.js"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
