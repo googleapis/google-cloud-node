@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.2...v2.0.0) (2020-01-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* move to typescript code generation (#260)
+
+### Features
+
+* move to typescript code generation ([#260](https://www.github.com/googleapis/nodejs-os-login/issues/260)) ([37a5836](https://www.github.com/googleapis/nodejs-os-login/commit/37a5836f30346dfc39d1a07dec2080f5644d499f))
+
+
+### Bug Fixes
+
+* **deps:** pin TypeScript below 3.7.0 ([1231063](https://www.github.com/googleapis/nodejs-os-login/commit/1231063de822c3fbed554aea3e426fa0eacea743))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.1...v1.3.2) (2019-11-15)
 
 
