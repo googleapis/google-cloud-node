@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.2...v1.5.0) (2020-01-27)
+
+
+### Features
+
+* bump release level to ga ([#259](https://www.github.com/googleapis/nodejs-redis/issues/259)) ([cb15654](https://www.github.com/googleapis/nodejs-redis/commit/cb156541c019bfc4aff0b15e9b4fcf20cdb1987c))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.1...v1.4.2) (2020-01-05)
 
 
