@@ -2369,7 +2369,7 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "Company"
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Company"
                           }
                         },
                         "requisitionId": {
@@ -2724,7 +2724,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "Tenant"
+                            "(google.api.resource_reference).type": "jobs.googleapis.com/Tenant"
                           }
                         },
                         "requestMetadata": {

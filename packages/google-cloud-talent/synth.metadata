@@ -1,0 +1,473 @@
+{
+  "updateTime": "2020-01-24T12:36:39.379411Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "talent",
+        "apiVersion": "v4beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/talent/artman_talent_v4beta1.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/CONTRIBUTING.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/application.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/application_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/batch.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/common.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/company.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/company_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/completion_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/event.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/event_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/filters.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/histogram.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/job.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/job_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/profile.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/profile_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/tenant.proto"
+    },
+    {
+      "path": "protos/google/cloud/talent/v4beta1/tenant_service.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/test/no-test.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/index.js"
+    },
+    {
+      "path": "src/v4beta1/application_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/application_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/application_service_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/company_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/company_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/company_service_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/completion_client.js"
+    },
+    {
+      "path": "src/v4beta1/completion_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/completion_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_application.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_application_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_common.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_company.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_company_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_completion_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_event.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_event_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_filters.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_histogram.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_job.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_job_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_profile.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_profile_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_tenant.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/cloud/talent/v4beta1/doc_tenant_service.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/protobuf/doc_wrappers.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/type/doc_date.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/type/doc_latlng.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/type/doc_money.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/type/doc_postal_address.js"
+    },
+    {
+      "path": "src/v4beta1/doc/google/type/doc_timeofday.js"
+    },
+    {
+      "path": "src/v4beta1/event_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/event_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/event_service_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/index.js"
+    },
+    {
+      "path": "src/v4beta1/job_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/job_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/job_service_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/profile_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/profile_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/profile_service_proto_list.json"
+    },
+    {
+      "path": "src/v4beta1/tenant_service_client.js"
+    },
+    {
+      "path": "src/v4beta1/tenant_service_client_config.json"
+    },
+    {
+      "path": "src/v4beta1/tenant_service_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
+    },
+    {
+      "path": "system-test/no-test.js"
+    },
+    {
+      "path": "test/.eslintrc.yml"
+    },
+    {
+      "path": "test/gapic-v4beta1.js"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
