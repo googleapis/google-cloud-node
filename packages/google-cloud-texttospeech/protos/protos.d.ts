@@ -298,7 +298,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** Voice ssmlGender */
-                    ssmlGender?: (google.cloud.texttospeech.v1.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender|null);
 
                     /** Voice naturalSampleRateHertz */
                     naturalSampleRateHertz?: (number|null);
@@ -320,7 +320,7 @@ export namespace google {
                     public name: string;
 
                     /** Voice ssmlGender. */
-                    public ssmlGender: google.cloud.texttospeech.v1.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender);
 
                     /** Voice naturalSampleRateHertz. */
                     public naturalSampleRateHertz: number;
@@ -607,7 +607,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** VoiceSelectionParams ssmlGender */
-                    ssmlGender?: (google.cloud.texttospeech.v1.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -626,7 +626,7 @@ export namespace google {
                     public name: string;
 
                     /** VoiceSelectionParams ssmlGender. */
-                    public ssmlGender: google.cloud.texttospeech.v1.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.texttospeech.v1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1.SsmlVoiceGender);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -703,7 +703,7 @@ export namespace google {
                 interface IAudioConfig {
 
                     /** AudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.texttospeech.v1.AudioEncoding|null);
+                    audioEncoding?: (google.cloud.texttospeech.v1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1.AudioEncoding|null);
 
                     /** AudioConfig speakingRate */
                     speakingRate?: (number|null);
@@ -731,7 +731,7 @@ export namespace google {
                     constructor(properties?: google.cloud.texttospeech.v1.IAudioConfig);
 
                     /** AudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.texttospeech.v1.AudioEncoding;
+                    public audioEncoding: (google.cloud.texttospeech.v1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1.AudioEncoding);
 
                     /** AudioConfig speakingRate. */
                     public speakingRate: number;
@@ -823,7 +823,7 @@ export namespace google {
                 interface ISynthesizeSpeechResponse {
 
                     /** SynthesizeSpeechResponse audioContent */
-                    audioContent?: (Uint8Array|null);
+                    audioContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a SynthesizeSpeechResponse. */
@@ -836,7 +836,7 @@ export namespace google {
                     constructor(properties?: google.cloud.texttospeech.v1.ISynthesizeSpeechResponse);
 
                     /** SynthesizeSpeechResponse audioContent. */
-                    public audioContent: Uint8Array;
+                    public audioContent: (Uint8Array|string);
 
                     /**
                      * Creates a new SynthesizeSpeechResponse instance using the specified properties.
@@ -1185,7 +1185,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** Voice ssmlGender */
-                    ssmlGender?: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null);
 
                     /** Voice naturalSampleRateHertz */
                     naturalSampleRateHertz?: (number|null);
@@ -1207,7 +1207,7 @@ export namespace google {
                     public name: string;
 
                     /** Voice ssmlGender. */
-                    public ssmlGender: google.cloud.texttospeech.v1beta1.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender);
 
                     /** Voice naturalSampleRateHertz. */
                     public naturalSampleRateHertz: number;
@@ -1494,7 +1494,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** VoiceSelectionParams ssmlGender */
-                    ssmlGender?: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -1513,7 +1513,7 @@ export namespace google {
                     public name: string;
 
                     /** VoiceSelectionParams ssmlGender. */
-                    public ssmlGender: google.cloud.texttospeech.v1beta1.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -1590,7 +1590,7 @@ export namespace google {
                 interface IAudioConfig {
 
                     /** AudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.texttospeech.v1beta1.AudioEncoding|null);
+                    audioEncoding?: (google.cloud.texttospeech.v1beta1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1beta1.AudioEncoding|null);
 
                     /** AudioConfig speakingRate */
                     speakingRate?: (number|null);
@@ -1618,7 +1618,7 @@ export namespace google {
                     constructor(properties?: google.cloud.texttospeech.v1beta1.IAudioConfig);
 
                     /** AudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.texttospeech.v1beta1.AudioEncoding;
+                    public audioEncoding: (google.cloud.texttospeech.v1beta1.AudioEncoding|keyof typeof google.cloud.texttospeech.v1beta1.AudioEncoding);
 
                     /** AudioConfig speakingRate. */
                     public speakingRate: number;
@@ -1710,7 +1710,7 @@ export namespace google {
                 interface ISynthesizeSpeechResponse {
 
                     /** SynthesizeSpeechResponse audioContent */
-                    audioContent?: (Uint8Array|null);
+                    audioContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a SynthesizeSpeechResponse. */
@@ -1723,7 +1723,7 @@ export namespace google {
                     constructor(properties?: google.cloud.texttospeech.v1beta1.ISynthesizeSpeechResponse);
 
                     /** SynthesizeSpeechResponse audioContent. */
-                    public audioContent: Uint8Array;
+                    public audioContent: (Uint8Array|string);
 
                     /**
                      * Creates a new SynthesizeSpeechResponse instance using the specified properties.
@@ -2846,10 +2846,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -2886,10 +2886,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -3664,7 +3664,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -3737,7 +3737,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -3983,13 +3983,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -4017,13 +4017,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -4522,7 +4522,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -4547,7 +4547,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -4643,16 +4643,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -4674,16 +4674,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
