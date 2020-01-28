@@ -1543,55 +1543,74 @@ export class PolicyTagManagerClient {
   }
 
   /**
-   * Return a fully-qualified policytag resource name string.
+   * Return a fully-qualified policyTag resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} taxonomy
+   * @param {string} policy_tag
    * @returns {string} Resource name string.
    */
-  policyTagPath(project: string, location: string, taxonomy: string) {
-    return this._pathTemplates.policytagPathTemplate.render({
+  policyTagPath(
+    project: string,
+    location: string,
+    taxonomy: string,
+    policyTag: string
+  ) {
+    return this._pathTemplates.policyTagPathTemplate.render({
       project,
       location,
       taxonomy,
+      policy_tag: policyTag,
     });
   }
 
   /**
    * Parse the project from PolicyTag resource.
    *
-   * @param {string} policytagName
+   * @param {string} policyTagName
    *   A fully-qualified path representing PolicyTag resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromPolicyTagName(policytagName: string) {
-    return this._pathTemplates.policytagPathTemplate.match(policytagName)
+  matchProjectFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
       .project;
   }
 
   /**
    * Parse the location from PolicyTag resource.
    *
-   * @param {string} policytagName
+   * @param {string} policyTagName
    *   A fully-qualified path representing PolicyTag resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromPolicyTagName(policytagName: string) {
-    return this._pathTemplates.policytagPathTemplate.match(policytagName)
+  matchLocationFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
       .location;
   }
 
   /**
    * Parse the taxonomy from PolicyTag resource.
    *
-   * @param {string} policytagName
+   * @param {string} policyTagName
    *   A fully-qualified path representing PolicyTag resource.
    * @returns {string} A string representing the taxonomy.
    */
-  matchTaxonomyFromPolicyTagName(policytagName: string) {
-    return this._pathTemplates.policytagPathTemplate.match(policytagName)
+  matchTaxonomyFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
       .taxonomy;
+  }
+
+  /**
+   * Parse the policy_tag from PolicyTag resource.
+   *
+   * @param {string} policyTagName
+   *   A fully-qualified path representing PolicyTag resource.
+   * @returns {string} A string representing the policy_tag.
+   */
+  matchPolicyTagFromPolicyTagName(policyTagName: string) {
+    return this._pathTemplates.policyTagPathTemplate.match(policyTagName)
+      .policy_tag;
   }
 
   /**
