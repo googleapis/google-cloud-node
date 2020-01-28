@@ -246,16 +246,16 @@ export namespace google {
                     enableLogging?: (boolean|null);
 
                     /** Agent matchMode */
-                    matchMode?: (google.cloud.dialogflow.v2.Agent.MatchMode|null);
+                    matchMode?: (google.cloud.dialogflow.v2.Agent.MatchMode|keyof typeof google.cloud.dialogflow.v2.Agent.MatchMode|null);
 
                     /** Agent classificationThreshold */
                     classificationThreshold?: (number|null);
 
                     /** Agent apiVersion */
-                    apiVersion?: (google.cloud.dialogflow.v2.Agent.ApiVersion|null);
+                    apiVersion?: (google.cloud.dialogflow.v2.Agent.ApiVersion|keyof typeof google.cloud.dialogflow.v2.Agent.ApiVersion|null);
 
                     /** Agent tier */
-                    tier?: (google.cloud.dialogflow.v2.Agent.Tier|null);
+                    tier?: (google.cloud.dialogflow.v2.Agent.Tier|keyof typeof google.cloud.dialogflow.v2.Agent.Tier|null);
                 }
 
                 /** Represents an Agent. */
@@ -292,16 +292,16 @@ export namespace google {
                     public enableLogging: boolean;
 
                     /** Agent matchMode. */
-                    public matchMode: google.cloud.dialogflow.v2.Agent.MatchMode;
+                    public matchMode: (google.cloud.dialogflow.v2.Agent.MatchMode|keyof typeof google.cloud.dialogflow.v2.Agent.MatchMode);
 
                     /** Agent classificationThreshold. */
                     public classificationThreshold: number;
 
                     /** Agent apiVersion. */
-                    public apiVersion: google.cloud.dialogflow.v2.Agent.ApiVersion;
+                    public apiVersion: (google.cloud.dialogflow.v2.Agent.ApiVersion|keyof typeof google.cloud.dialogflow.v2.Agent.ApiVersion);
 
                     /** Agent tier. */
-                    public tier: google.cloud.dialogflow.v2.Agent.Tier;
+                    public tier: (google.cloud.dialogflow.v2.Agent.Tier|keyof typeof google.cloud.dialogflow.v2.Agent.Tier);
 
                     /**
                      * Creates a new Agent instance using the specified properties.
@@ -1067,7 +1067,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents an ExportAgentResponse. */
@@ -1083,7 +1083,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** ExportAgentResponse agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** ExportAgentResponse agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -1169,7 +1169,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents an ImportAgentRequest. */
@@ -1188,7 +1188,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** ImportAgentRequest agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** ImportAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -1274,7 +1274,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RestoreAgentRequest. */
@@ -1293,7 +1293,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** RestoreAgentRequest agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** RestoreAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -2525,10 +2525,10 @@ export namespace google {
                     displayName?: (string|null);
 
                     /** EntityType kind */
-                    kind?: (google.cloud.dialogflow.v2.EntityType.Kind|null);
+                    kind?: (google.cloud.dialogflow.v2.EntityType.Kind|keyof typeof google.cloud.dialogflow.v2.EntityType.Kind|null);
 
                     /** EntityType autoExpansionMode */
-                    autoExpansionMode?: (google.cloud.dialogflow.v2.EntityType.AutoExpansionMode|null);
+                    autoExpansionMode?: (google.cloud.dialogflow.v2.EntityType.AutoExpansionMode|keyof typeof google.cloud.dialogflow.v2.EntityType.AutoExpansionMode|null);
 
                     /** EntityType entities */
                     entities?: (google.cloud.dialogflow.v2.EntityType.IEntity[]|null);
@@ -2553,10 +2553,10 @@ export namespace google {
                     public displayName: string;
 
                     /** EntityType kind. */
-                    public kind: google.cloud.dialogflow.v2.EntityType.Kind;
+                    public kind: (google.cloud.dialogflow.v2.EntityType.Kind|keyof typeof google.cloud.dialogflow.v2.EntityType.Kind);
 
                     /** EntityType autoExpansionMode. */
-                    public autoExpansionMode: google.cloud.dialogflow.v2.EntityType.AutoExpansionMode;
+                    public autoExpansionMode: (google.cloud.dialogflow.v2.EntityType.AutoExpansionMode|keyof typeof google.cloud.dialogflow.v2.EntityType.AutoExpansionMode);
 
                     /** EntityType entities. */
                     public entities: google.cloud.dialogflow.v2.EntityType.IEntity[];
@@ -4228,7 +4228,7 @@ export namespace google {
                     displayName?: (string|null);
 
                     /** Intent webhookState */
-                    webhookState?: (google.cloud.dialogflow.v2.Intent.WebhookState|null);
+                    webhookState?: (google.cloud.dialogflow.v2.Intent.WebhookState|keyof typeof google.cloud.dialogflow.v2.Intent.WebhookState|null);
 
                     /** Intent priority */
                     priority?: (number|null);
@@ -4292,7 +4292,7 @@ export namespace google {
                     public displayName: string;
 
                     /** Intent webhookState. */
-                    public webhookState: google.cloud.dialogflow.v2.Intent.WebhookState;
+                    public webhookState: (google.cloud.dialogflow.v2.Intent.WebhookState|keyof typeof google.cloud.dialogflow.v2.Intent.WebhookState);
 
                     /** Intent priority. */
                     public priority: number;
@@ -4419,7 +4419,7 @@ export namespace google {
                         name?: (string|null);
 
                         /** TrainingPhrase type */
-                        type?: (google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type|null);
+                        type?: (google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type|keyof typeof google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type|null);
 
                         /** TrainingPhrase parts */
                         parts?: (google.cloud.dialogflow.v2.Intent.TrainingPhrase.IPart[]|null);
@@ -4441,7 +4441,7 @@ export namespace google {
                         public name: string;
 
                         /** TrainingPhrase type. */
-                        public type: google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type;
+                        public type: (google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type|keyof typeof google.cloud.dialogflow.v2.Intent.TrainingPhrase.Type);
 
                         /** TrainingPhrase parts. */
                         public parts: google.cloud.dialogflow.v2.Intent.TrainingPhrase.IPart[];
@@ -4816,7 +4816,7 @@ export namespace google {
                         mediaContent?: (google.cloud.dialogflow.v2.Intent.Message.IMediaContent|null);
 
                         /** Message platform */
-                        platform?: (google.cloud.dialogflow.v2.Intent.Message.Platform|null);
+                        platform?: (google.cloud.dialogflow.v2.Intent.Message.Platform|keyof typeof google.cloud.dialogflow.v2.Intent.Message.Platform|null);
                     }
 
                     /** Represents a Message. */
@@ -4871,7 +4871,7 @@ export namespace google {
                         public mediaContent?: (google.cloud.dialogflow.v2.Intent.Message.IMediaContent|null);
 
                         /** Message platform. */
-                        public platform: google.cloud.dialogflow.v2.Intent.Message.Platform;
+                        public platform: (google.cloud.dialogflow.v2.Intent.Message.Platform|keyof typeof google.cloud.dialogflow.v2.Intent.Message.Platform);
 
                         /** Message message. */
                         public message?: ("text"|"image"|"quickReplies"|"card"|"payload"|"simpleResponses"|"basicCard"|"suggestions"|"linkOutSuggestion"|"listSelect"|"carouselSelect"|"browseCarouselCard"|"tableCard"|"mediaContent");
@@ -6726,7 +6726,7 @@ export namespace google {
                         interface IMediaContent {
 
                             /** MediaContent mediaType */
-                            mediaType?: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType|null);
+                            mediaType?: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType|keyof typeof google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType|null);
 
                             /** MediaContent mediaObjects */
                             mediaObjects?: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject[]|null);
@@ -6742,7 +6742,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.v2.Intent.Message.IMediaContent);
 
                             /** MediaContent mediaType. */
-                            public mediaType: google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType;
+                            public mediaType: (google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType|keyof typeof google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaType);
 
                             /** MediaContent mediaObjects. */
                             public mediaObjects: google.cloud.dialogflow.v2.Intent.Message.MediaContent.IResponseMediaObject[];
@@ -6951,7 +6951,7 @@ export namespace google {
                             items?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[]|null);
 
                             /** BrowseCarouselCard imageDisplayOptions */
-                            imageDisplayOptions?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|null);
+                            imageDisplayOptions?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|keyof typeof google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|null);
                         }
 
                         /** Represents a BrowseCarouselCard. */
@@ -6967,7 +6967,7 @@ export namespace google {
                             public items: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[];
 
                             /** BrowseCarouselCard imageDisplayOptions. */
-                            public imageDisplayOptions: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions;
+                            public imageDisplayOptions: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|keyof typeof google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.ImageDisplayOptions);
 
                             /**
                              * Creates a new BrowseCarouselCard instance using the specified properties.
@@ -7165,7 +7165,7 @@ export namespace google {
                                     url?: (string|null);
 
                                     /** OpenUrlAction urlTypeHint */
-                                    urlTypeHint?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|null);
+                                    urlTypeHint?: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|keyof typeof google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|null);
                                 }
 
                                 /** Represents an OpenUrlAction. */
@@ -7181,7 +7181,7 @@ export namespace google {
                                     public url: string;
 
                                     /** OpenUrlAction urlTypeHint. */
-                                    public urlTypeHint: google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint;
+                                    public urlTypeHint: (google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|keyof typeof google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint);
 
                                     /**
                                      * Creates a new OpenUrlAction instance using the specified properties.
@@ -7402,7 +7402,7 @@ export namespace google {
                             header?: (string|null);
 
                             /** ColumnProperties horizontalAlignment */
-                            horizontalAlignment?: (google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment|null);
+                            horizontalAlignment?: (google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment|keyof typeof google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment|null);
                         }
 
                         /** Represents a ColumnProperties. */
@@ -7418,7 +7418,7 @@ export namespace google {
                             public header: string;
 
                             /** ColumnProperties horizontalAlignment. */
-                            public horizontalAlignment: google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment;
+                            public horizontalAlignment: (google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment|keyof typeof google.cloud.dialogflow.v2.Intent.Message.ColumnProperties.HorizontalAlignment);
 
                             /**
                              * Creates a new ColumnProperties instance using the specified properties.
@@ -7817,7 +7817,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** ListIntentsRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView|null);
 
                     /** ListIntentsRequest pageSize */
                     pageSize?: (number|null);
@@ -7842,7 +7842,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** ListIntentsRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView);
 
                     /** ListIntentsRequest pageSize. */
                     public pageSize: number;
@@ -8027,7 +8027,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** GetIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView|null);
                 }
 
                 /** Represents a GetIntentRequest. */
@@ -8046,7 +8046,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** GetIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView);
 
                     /**
                      * Creates a new GetIntentRequest instance using the specified properties.
@@ -8132,7 +8132,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** CreateIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView|null);
                 }
 
                 /** Represents a CreateIntentRequest. */
@@ -8154,7 +8154,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** CreateIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView);
 
                     /**
                      * Creates a new CreateIntentRequest instance using the specified properties.
@@ -8240,7 +8240,7 @@ export namespace google {
                     updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** UpdateIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView|null);
                 }
 
                 /** Represents an UpdateIntentRequest. */
@@ -8262,7 +8262,7 @@ export namespace google {
                     public updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** UpdateIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView);
 
                     /**
                      * Creates a new UpdateIntentRequest instance using the specified properties.
@@ -8444,7 +8444,7 @@ export namespace google {
                     updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** BatchUpdateIntentsRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView|null);
                 }
 
                 /** Represents a BatchUpdateIntentsRequest. */
@@ -8472,7 +8472,7 @@ export namespace google {
                     public updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** BatchUpdateIntentsRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2.IntentView|keyof typeof google.cloud.dialogflow.v2.IntentView);
 
                     /** BatchUpdateIntentsRequest intentBatch. */
                     public intentBatch?: ("intentBatchUri"|"intentBatchInline");
@@ -9058,7 +9058,7 @@ export namespace google {
                 interface IInputAudioConfig {
 
                     /** InputAudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.dialogflow.v2.AudioEncoding|null);
+                    audioEncoding?: (google.cloud.dialogflow.v2.AudioEncoding|keyof typeof google.cloud.dialogflow.v2.AudioEncoding|null);
 
                     /** InputAudioConfig sampleRateHertz */
                     sampleRateHertz?: (number|null);
@@ -9079,7 +9079,7 @@ export namespace google {
                     model?: (string|null);
 
                     /** InputAudioConfig modelVariant */
-                    modelVariant?: (google.cloud.dialogflow.v2.SpeechModelVariant|null);
+                    modelVariant?: (google.cloud.dialogflow.v2.SpeechModelVariant|keyof typeof google.cloud.dialogflow.v2.SpeechModelVariant|null);
 
                     /** InputAudioConfig singleUtterance */
                     singleUtterance?: (boolean|null);
@@ -9095,7 +9095,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2.IInputAudioConfig);
 
                     /** InputAudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.dialogflow.v2.AudioEncoding;
+                    public audioEncoding: (google.cloud.dialogflow.v2.AudioEncoding|keyof typeof google.cloud.dialogflow.v2.AudioEncoding);
 
                     /** InputAudioConfig sampleRateHertz. */
                     public sampleRateHertz: number;
@@ -9116,7 +9116,7 @@ export namespace google {
                     public model: string;
 
                     /** InputAudioConfig modelVariant. */
-                    public modelVariant: google.cloud.dialogflow.v2.SpeechModelVariant;
+                    public modelVariant: (google.cloud.dialogflow.v2.SpeechModelVariant|keyof typeof google.cloud.dialogflow.v2.SpeechModelVariant);
 
                     /** InputAudioConfig singleUtterance. */
                     public singleUtterance: boolean;
@@ -9207,7 +9207,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** VoiceSelectionParams ssmlGender */
-                    ssmlGender?: (google.cloud.dialogflow.v2.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.dialogflow.v2.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.v2.SsmlVoiceGender|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -9223,7 +9223,7 @@ export namespace google {
                     public name: string;
 
                     /** VoiceSelectionParams ssmlGender. */
-                    public ssmlGender: google.cloud.dialogflow.v2.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.dialogflow.v2.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.v2.SsmlVoiceGender);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -9422,7 +9422,7 @@ export namespace google {
                 interface IOutputAudioConfig {
 
                     /** OutputAudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.dialogflow.v2.OutputAudioEncoding|null);
+                    audioEncoding?: (google.cloud.dialogflow.v2.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.v2.OutputAudioEncoding|null);
 
                     /** OutputAudioConfig sampleRateHertz */
                     sampleRateHertz?: (number|null);
@@ -9441,7 +9441,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2.IOutputAudioConfig);
 
                     /** OutputAudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.dialogflow.v2.OutputAudioEncoding;
+                    public audioEncoding: (google.cloud.dialogflow.v2.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.v2.OutputAudioEncoding);
 
                     /** OutputAudioConfig sampleRateHertz. */
                     public sampleRateHertz: number;
@@ -9656,7 +9656,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** SessionEntityType entityOverrideMode */
-                    entityOverrideMode?: (google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode|null);
+                    entityOverrideMode?: (google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode|keyof typeof google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode|null);
 
                     /** SessionEntityType entities */
                     entities?: (google.cloud.dialogflow.v2.EntityType.IEntity[]|null);
@@ -9675,7 +9675,7 @@ export namespace google {
                     public name: string;
 
                     /** SessionEntityType entityOverrideMode. */
-                    public entityOverrideMode: google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode;
+                    public entityOverrideMode: (google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode|keyof typeof google.cloud.dialogflow.v2.SessionEntityType.EntityOverrideMode);
 
                     /** SessionEntityType entities. */
                     public entities: google.cloud.dialogflow.v2.EntityType.IEntity[];
@@ -10413,7 +10413,7 @@ export namespace google {
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** DetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|null);
+                    inputAudio?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DetectIntentRequest. */
@@ -10438,7 +10438,7 @@ export namespace google {
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** DetectIntentRequest inputAudio. */
-                    public inputAudio: Uint8Array;
+                    public inputAudio: (Uint8Array|string);
 
                     /**
                      * Creates a new DetectIntentRequest instance using the specified properties.
@@ -10524,7 +10524,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|null);
+                    outputAudio?: (Uint8Array|string|null);
 
                     /** DetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -10549,7 +10549,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio. */
-                    public outputAudio: Uint8Array;
+                    public outputAudio: (Uint8Array|string);
 
                     /** DetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -11049,7 +11049,7 @@ export namespace google {
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** StreamingDetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|null);
+                    inputAudio?: (Uint8Array|string|null);
                 }
 
                 /** Represents a StreamingDetectIntentRequest. */
@@ -11077,7 +11077,7 @@ export namespace google {
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
-                    public inputAudio: Uint8Array;
+                    public inputAudio: (Uint8Array|string);
 
                     /**
                      * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -11166,7 +11166,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|null);
+                    outputAudio?: (Uint8Array|string|null);
 
                     /** StreamingDetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -11194,7 +11194,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio. */
-                    public outputAudio: Uint8Array;
+                    public outputAudio: (Uint8Array|string);
 
                     /** StreamingDetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2.IOutputAudioConfig|null);
@@ -11274,7 +11274,7 @@ export namespace google {
                 interface IStreamingRecognitionResult {
 
                     /** StreamingRecognitionResult messageType */
-                    messageType?: (google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType|null);
+                    messageType?: (google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType|keyof typeof google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType|null);
 
                     /** StreamingRecognitionResult transcript */
                     transcript?: (string|null);
@@ -11302,7 +11302,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2.IStreamingRecognitionResult);
 
                     /** StreamingRecognitionResult messageType. */
-                    public messageType: google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType;
+                    public messageType: (google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType|keyof typeof google.cloud.dialogflow.v2.StreamingRecognitionResult.MessageType);
 
                     /** StreamingRecognitionResult transcript. */
                     public transcript: string;
@@ -12119,16 +12119,16 @@ export namespace google {
                     enableLogging?: (boolean|null);
 
                     /** Agent matchMode */
-                    matchMode?: (google.cloud.dialogflow.v2beta1.Agent.MatchMode|null);
+                    matchMode?: (google.cloud.dialogflow.v2beta1.Agent.MatchMode|keyof typeof google.cloud.dialogflow.v2beta1.Agent.MatchMode|null);
 
                     /** Agent classificationThreshold */
                     classificationThreshold?: (number|null);
 
                     /** Agent apiVersion */
-                    apiVersion?: (google.cloud.dialogflow.v2beta1.Agent.ApiVersion|null);
+                    apiVersion?: (google.cloud.dialogflow.v2beta1.Agent.ApiVersion|keyof typeof google.cloud.dialogflow.v2beta1.Agent.ApiVersion|null);
 
                     /** Agent tier */
-                    tier?: (google.cloud.dialogflow.v2beta1.Agent.Tier|null);
+                    tier?: (google.cloud.dialogflow.v2beta1.Agent.Tier|keyof typeof google.cloud.dialogflow.v2beta1.Agent.Tier|null);
                 }
 
                 /** Represents an Agent. */
@@ -12165,16 +12165,16 @@ export namespace google {
                     public enableLogging: boolean;
 
                     /** Agent matchMode. */
-                    public matchMode: google.cloud.dialogflow.v2beta1.Agent.MatchMode;
+                    public matchMode: (google.cloud.dialogflow.v2beta1.Agent.MatchMode|keyof typeof google.cloud.dialogflow.v2beta1.Agent.MatchMode);
 
                     /** Agent classificationThreshold. */
                     public classificationThreshold: number;
 
                     /** Agent apiVersion. */
-                    public apiVersion: google.cloud.dialogflow.v2beta1.Agent.ApiVersion;
+                    public apiVersion: (google.cloud.dialogflow.v2beta1.Agent.ApiVersion|keyof typeof google.cloud.dialogflow.v2beta1.Agent.ApiVersion);
 
                     /** Agent tier. */
-                    public tier: google.cloud.dialogflow.v2beta1.Agent.Tier;
+                    public tier: (google.cloud.dialogflow.v2beta1.Agent.Tier|keyof typeof google.cloud.dialogflow.v2beta1.Agent.Tier);
 
                     /**
                      * Creates a new Agent instance using the specified properties.
@@ -12940,7 +12940,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ExportAgentResponse agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents an ExportAgentResponse. */
@@ -12956,7 +12956,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** ExportAgentResponse agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** ExportAgentResponse agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -13042,7 +13042,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** ImportAgentRequest agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents an ImportAgentRequest. */
@@ -13061,7 +13061,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** ImportAgentRequest agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** ImportAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -13147,7 +13147,7 @@ export namespace google {
                     agentUri?: (string|null);
 
                     /** RestoreAgentRequest agentContent */
-                    agentContent?: (Uint8Array|null);
+                    agentContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RestoreAgentRequest. */
@@ -13166,7 +13166,7 @@ export namespace google {
                     public agentUri: string;
 
                     /** RestoreAgentRequest agentContent. */
-                    public agentContent: Uint8Array;
+                    public agentContent: (Uint8Array|string);
 
                     /** RestoreAgentRequest agent. */
                     public agent?: ("agentUri"|"agentContent");
@@ -13342,7 +13342,7 @@ export namespace google {
                 interface IValidationError {
 
                     /** ValidationError severity */
-                    severity?: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|null);
+                    severity?: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity|null);
 
                     /** ValidationError entries */
                     entries?: (string[]|null);
@@ -13361,7 +13361,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2beta1.IValidationError);
 
                     /** ValidationError severity. */
-                    public severity: google.cloud.dialogflow.v2beta1.ValidationError.Severity;
+                    public severity: (google.cloud.dialogflow.v2beta1.ValidationError.Severity|keyof typeof google.cloud.dialogflow.v2beta1.ValidationError.Severity);
 
                     /** ValidationError entries. */
                     public entries: string[];
@@ -14626,7 +14626,7 @@ export namespace google {
                     content?: (string|null);
 
                     /** Document rawContent */
-                    rawContent?: (Uint8Array|null);
+                    rawContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a Document. */
@@ -14657,7 +14657,7 @@ export namespace google {
                     public content: string;
 
                     /** Document rawContent. */
-                    public rawContent: Uint8Array;
+                    public rawContent: (Uint8Array|string);
 
                     /** Document source. */
                     public source?: ("contentUri"|"content"|"rawContent");
@@ -15317,7 +15317,7 @@ export namespace google {
                 interface IKnowledgeOperationMetadata {
 
                     /** KnowledgeOperationMetadata state */
-                    state?: (google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|null);
+                    state?: (google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|null);
                 }
 
                 /** Represents a KnowledgeOperationMetadata. */
@@ -15330,7 +15330,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2beta1.IKnowledgeOperationMetadata);
 
                     /** KnowledgeOperationMetadata state. */
-                    public state: google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State;
+                    public state: (google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata.State);
 
                     /**
                      * Creates a new KnowledgeOperationMetadata instance using the specified properties.
@@ -15847,10 +15847,10 @@ export namespace google {
                     displayName?: (string|null);
 
                     /** EntityType kind */
-                    kind?: (google.cloud.dialogflow.v2beta1.EntityType.Kind|null);
+                    kind?: (google.cloud.dialogflow.v2beta1.EntityType.Kind|keyof typeof google.cloud.dialogflow.v2beta1.EntityType.Kind|null);
 
                     /** EntityType autoExpansionMode */
-                    autoExpansionMode?: (google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode|null);
+                    autoExpansionMode?: (google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode|keyof typeof google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode|null);
 
                     /** EntityType entities */
                     entities?: (google.cloud.dialogflow.v2beta1.EntityType.IEntity[]|null);
@@ -15875,10 +15875,10 @@ export namespace google {
                     public displayName: string;
 
                     /** EntityType kind. */
-                    public kind: google.cloud.dialogflow.v2beta1.EntityType.Kind;
+                    public kind: (google.cloud.dialogflow.v2beta1.EntityType.Kind|keyof typeof google.cloud.dialogflow.v2beta1.EntityType.Kind);
 
                     /** EntityType autoExpansionMode. */
-                    public autoExpansionMode: google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode;
+                    public autoExpansionMode: (google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode|keyof typeof google.cloud.dialogflow.v2beta1.EntityType.AutoExpansionMode);
 
                     /** EntityType entities. */
                     public entities: google.cloud.dialogflow.v2beta1.EntityType.IEntity[];
@@ -17550,7 +17550,7 @@ export namespace google {
                     displayName?: (string|null);
 
                     /** Intent webhookState */
-                    webhookState?: (google.cloud.dialogflow.v2beta1.Intent.WebhookState|null);
+                    webhookState?: (google.cloud.dialogflow.v2beta1.Intent.WebhookState|keyof typeof google.cloud.dialogflow.v2beta1.Intent.WebhookState|null);
 
                     /** Intent priority */
                     priority?: (number|null);
@@ -17620,7 +17620,7 @@ export namespace google {
                     public displayName: string;
 
                     /** Intent webhookState. */
-                    public webhookState: google.cloud.dialogflow.v2beta1.Intent.WebhookState;
+                    public webhookState: (google.cloud.dialogflow.v2beta1.Intent.WebhookState|keyof typeof google.cloud.dialogflow.v2beta1.Intent.WebhookState);
 
                     /** Intent priority. */
                     public priority: number;
@@ -17753,7 +17753,7 @@ export namespace google {
                         name?: (string|null);
 
                         /** TrainingPhrase type */
-                        type?: (google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type|null);
+                        type?: (google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type|keyof typeof google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type|null);
 
                         /** TrainingPhrase parts */
                         parts?: (google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.IPart[]|null);
@@ -17775,7 +17775,7 @@ export namespace google {
                         public name: string;
 
                         /** TrainingPhrase type. */
-                        public type: google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type;
+                        public type: (google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type|keyof typeof google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.Type);
 
                         /** TrainingPhrase parts. */
                         public parts: google.cloud.dialogflow.v2beta1.Intent.TrainingPhrase.IPart[];
@@ -18168,7 +18168,7 @@ export namespace google {
                         mediaContent?: (google.cloud.dialogflow.v2beta1.Intent.Message.IMediaContent|null);
 
                         /** Message platform */
-                        platform?: (google.cloud.dialogflow.v2beta1.Intent.Message.Platform|null);
+                        platform?: (google.cloud.dialogflow.v2beta1.Intent.Message.Platform|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.Platform|null);
                     }
 
                     /** Represents a Message. */
@@ -18241,7 +18241,7 @@ export namespace google {
                         public mediaContent?: (google.cloud.dialogflow.v2beta1.Intent.Message.IMediaContent|null);
 
                         /** Message platform. */
-                        public platform: google.cloud.dialogflow.v2beta1.Intent.Message.Platform;
+                        public platform: (google.cloud.dialogflow.v2beta1.Intent.Message.Platform|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.Platform);
 
                         /** Message message. */
                         public message?: ("text"|"image"|"quickReplies"|"card"|"payload"|"simpleResponses"|"basicCard"|"suggestions"|"linkOutSuggestion"|"listSelect"|"carouselSelect"|"telephonyPlayAudio"|"telephonySynthesizeSpeech"|"telephonyTransferCall"|"rbmText"|"rbmStandaloneRichCard"|"rbmCarouselRichCard"|"browseCarouselCard"|"tableCard"|"mediaContent");
@@ -20471,7 +20471,7 @@ export namespace google {
                         interface IRbmCarouselCard {
 
                             /** RbmCarouselCard cardWidth */
-                            cardWidth?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth|null);
+                            cardWidth?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth|null);
 
                             /** RbmCarouselCard cardContents */
                             cardContents?: (google.cloud.dialogflow.v2beta1.Intent.Message.IRbmCardContent[]|null);
@@ -20487,7 +20487,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.v2beta1.Intent.Message.IRbmCarouselCard);
 
                             /** RbmCarouselCard cardWidth. */
-                            public cardWidth: google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth;
+                            public cardWidth: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard.CardWidth);
 
                             /** RbmCarouselCard cardContents. */
                             public cardContents: google.cloud.dialogflow.v2beta1.Intent.Message.IRbmCardContent[];
@@ -20577,10 +20577,10 @@ export namespace google {
                         interface IRbmStandaloneCard {
 
                             /** RbmStandaloneCard cardOrientation */
-                            cardOrientation?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation|null);
+                            cardOrientation?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation|null);
 
                             /** RbmStandaloneCard thumbnailImageAlignment */
-                            thumbnailImageAlignment?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment|null);
+                            thumbnailImageAlignment?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment|null);
 
                             /** RbmStandaloneCard cardContent */
                             cardContent?: (google.cloud.dialogflow.v2beta1.Intent.Message.IRbmCardContent|null);
@@ -20596,10 +20596,10 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.v2beta1.Intent.Message.IRbmStandaloneCard);
 
                             /** RbmStandaloneCard cardOrientation. */
-                            public cardOrientation: google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation;
+                            public cardOrientation: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.CardOrientation);
 
                             /** RbmStandaloneCard thumbnailImageAlignment. */
-                            public thumbnailImageAlignment: google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment;
+                            public thumbnailImageAlignment: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard.ThumbnailImageAlignment);
 
                             /** RbmStandaloneCard cardContent. */
                             public cardContent?: (google.cloud.dialogflow.v2beta1.Intent.Message.IRbmCardContent|null);
@@ -20812,7 +20812,7 @@ export namespace google {
                                 thumbnailUri?: (string|null);
 
                                 /** RbmMedia height */
-                                height?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height|null);
+                                height?: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height|null);
                             }
 
                             /** Represents a RbmMedia. */
@@ -20831,7 +20831,7 @@ export namespace google {
                                 public thumbnailUri: string;
 
                                 /** RbmMedia height. */
-                                public height: google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height;
+                                public height: (google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia.Height);
 
                                 /**
                                  * Creates a new RbmMedia instance using the specified properties.
@@ -21499,7 +21499,7 @@ export namespace google {
                         interface IMediaContent {
 
                             /** MediaContent mediaType */
-                            mediaType?: (google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType|null);
+                            mediaType?: (google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType|null);
 
                             /** MediaContent mediaObjects */
                             mediaObjects?: (google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.IResponseMediaObject[]|null);
@@ -21515,7 +21515,7 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.v2beta1.Intent.Message.IMediaContent);
 
                             /** MediaContent mediaType. */
-                            public mediaType: google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType;
+                            public mediaType: (google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.ResponseMediaType);
 
                             /** MediaContent mediaObjects. */
                             public mediaObjects: google.cloud.dialogflow.v2beta1.Intent.Message.MediaContent.IResponseMediaObject[];
@@ -21724,7 +21724,7 @@ export namespace google {
                             items?: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[]|null);
 
                             /** BrowseCarouselCard imageDisplayOptions */
-                            imageDisplayOptions?: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|null);
+                            imageDisplayOptions?: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|null);
                         }
 
                         /** Represents a BrowseCarouselCard. */
@@ -21740,7 +21740,7 @@ export namespace google {
                             public items: google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.IBrowseCarouselCardItem[];
 
                             /** BrowseCarouselCard imageDisplayOptions. */
-                            public imageDisplayOptions: google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions;
+                            public imageDisplayOptions: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.ImageDisplayOptions);
 
                             /**
                              * Creates a new BrowseCarouselCard instance using the specified properties.
@@ -21938,7 +21938,7 @@ export namespace google {
                                     url?: (string|null);
 
                                     /** OpenUrlAction urlTypeHint */
-                                    urlTypeHint?: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|null);
+                                    urlTypeHint?: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|null);
                                 }
 
                                 /** Represents an OpenUrlAction. */
@@ -21954,7 +21954,7 @@ export namespace google {
                                     public url: string;
 
                                     /** OpenUrlAction urlTypeHint. */
-                                    public urlTypeHint: google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint;
+                                    public urlTypeHint: (google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint);
 
                                     /**
                                      * Creates a new OpenUrlAction instance using the specified properties.
@@ -22175,7 +22175,7 @@ export namespace google {
                             header?: (string|null);
 
                             /** ColumnProperties horizontalAlignment */
-                            horizontalAlignment?: (google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment|null);
+                            horizontalAlignment?: (google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment|null);
                         }
 
                         /** Represents a ColumnProperties. */
@@ -22191,7 +22191,7 @@ export namespace google {
                             public header: string;
 
                             /** ColumnProperties horizontalAlignment. */
-                            public horizontalAlignment: google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment;
+                            public horizontalAlignment: (google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment|keyof typeof google.cloud.dialogflow.v2beta1.Intent.Message.ColumnProperties.HorizontalAlignment);
 
                             /**
                              * Creates a new ColumnProperties instance using the specified properties.
@@ -22591,7 +22591,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** ListIntentsRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView|null);
 
                     /** ListIntentsRequest pageSize */
                     pageSize?: (number|null);
@@ -22616,7 +22616,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** ListIntentsRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2beta1.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView);
 
                     /** ListIntentsRequest pageSize. */
                     public pageSize: number;
@@ -22801,7 +22801,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** GetIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView|null);
                 }
 
                 /** Represents a GetIntentRequest. */
@@ -22820,7 +22820,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** GetIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2beta1.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView);
 
                     /**
                      * Creates a new GetIntentRequest instance using the specified properties.
@@ -22906,7 +22906,7 @@ export namespace google {
                     languageCode?: (string|null);
 
                     /** CreateIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView|null);
                 }
 
                 /** Represents a CreateIntentRequest. */
@@ -22928,7 +22928,7 @@ export namespace google {
                     public languageCode: string;
 
                     /** CreateIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2beta1.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView);
 
                     /**
                      * Creates a new CreateIntentRequest instance using the specified properties.
@@ -23014,7 +23014,7 @@ export namespace google {
                     updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** UpdateIntentRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView|null);
                 }
 
                 /** Represents an UpdateIntentRequest. */
@@ -23036,7 +23036,7 @@ export namespace google {
                     public updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** UpdateIntentRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2beta1.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView);
 
                     /**
                      * Creates a new UpdateIntentRequest instance using the specified properties.
@@ -23218,7 +23218,7 @@ export namespace google {
                     updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** BatchUpdateIntentsRequest intentView */
-                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|null);
+                    intentView?: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView|null);
                 }
 
                 /** Represents a BatchUpdateIntentsRequest. */
@@ -23246,7 +23246,7 @@ export namespace google {
                     public updateMask?: (google.protobuf.IFieldMask|null);
 
                     /** BatchUpdateIntentsRequest intentView. */
-                    public intentView: google.cloud.dialogflow.v2beta1.IntentView;
+                    public intentView: (google.cloud.dialogflow.v2beta1.IntentView|keyof typeof google.cloud.dialogflow.v2beta1.IntentView);
 
                     /** BatchUpdateIntentsRequest intentBatch. */
                     public intentBatch?: ("intentBatchUri"|"intentBatchInline");
@@ -23832,7 +23832,7 @@ export namespace google {
                 interface IInputAudioConfig {
 
                     /** InputAudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.dialogflow.v2beta1.AudioEncoding|null);
+                    audioEncoding?: (google.cloud.dialogflow.v2beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.v2beta1.AudioEncoding|null);
 
                     /** InputAudioConfig sampleRateHertz */
                     sampleRateHertz?: (number|null);
@@ -23853,7 +23853,7 @@ export namespace google {
                     model?: (string|null);
 
                     /** InputAudioConfig modelVariant */
-                    modelVariant?: (google.cloud.dialogflow.v2beta1.SpeechModelVariant|null);
+                    modelVariant?: (google.cloud.dialogflow.v2beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.v2beta1.SpeechModelVariant|null);
 
                     /** InputAudioConfig singleUtterance */
                     singleUtterance?: (boolean|null);
@@ -23869,7 +23869,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2beta1.IInputAudioConfig);
 
                     /** InputAudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.dialogflow.v2beta1.AudioEncoding;
+                    public audioEncoding: (google.cloud.dialogflow.v2beta1.AudioEncoding|keyof typeof google.cloud.dialogflow.v2beta1.AudioEncoding);
 
                     /** InputAudioConfig sampleRateHertz. */
                     public sampleRateHertz: number;
@@ -23890,7 +23890,7 @@ export namespace google {
                     public model: string;
 
                     /** InputAudioConfig modelVariant. */
-                    public modelVariant: google.cloud.dialogflow.v2beta1.SpeechModelVariant;
+                    public modelVariant: (google.cloud.dialogflow.v2beta1.SpeechModelVariant|keyof typeof google.cloud.dialogflow.v2beta1.SpeechModelVariant);
 
                     /** InputAudioConfig singleUtterance. */
                     public singleUtterance: boolean;
@@ -23981,7 +23981,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** VoiceSelectionParams ssmlGender */
-                    ssmlGender?: (google.cloud.dialogflow.v2beta1.SsmlVoiceGender|null);
+                    ssmlGender?: (google.cloud.dialogflow.v2beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.v2beta1.SsmlVoiceGender|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -23997,7 +23997,7 @@ export namespace google {
                     public name: string;
 
                     /** VoiceSelectionParams ssmlGender. */
-                    public ssmlGender: google.cloud.dialogflow.v2beta1.SsmlVoiceGender;
+                    public ssmlGender: (google.cloud.dialogflow.v2beta1.SsmlVoiceGender|keyof typeof google.cloud.dialogflow.v2beta1.SsmlVoiceGender);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -24196,7 +24196,7 @@ export namespace google {
                 interface IOutputAudioConfig {
 
                     /** OutputAudioConfig audioEncoding */
-                    audioEncoding?: (google.cloud.dialogflow.v2beta1.OutputAudioEncoding|null);
+                    audioEncoding?: (google.cloud.dialogflow.v2beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.v2beta1.OutputAudioEncoding|null);
 
                     /** OutputAudioConfig sampleRateHertz */
                     sampleRateHertz?: (number|null);
@@ -24215,7 +24215,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2beta1.IOutputAudioConfig);
 
                     /** OutputAudioConfig audioEncoding. */
-                    public audioEncoding: google.cloud.dialogflow.v2beta1.OutputAudioEncoding;
+                    public audioEncoding: (google.cloud.dialogflow.v2beta1.OutputAudioEncoding|keyof typeof google.cloud.dialogflow.v2beta1.OutputAudioEncoding);
 
                     /** OutputAudioConfig sampleRateHertz. */
                     public sampleRateHertz: number;
@@ -25237,7 +25237,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** SessionEntityType entityOverrideMode */
-                    entityOverrideMode?: (google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode|null);
+                    entityOverrideMode?: (google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode|keyof typeof google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode|null);
 
                     /** SessionEntityType entities */
                     entities?: (google.cloud.dialogflow.v2beta1.EntityType.IEntity[]|null);
@@ -25256,7 +25256,7 @@ export namespace google {
                     public name: string;
 
                     /** SessionEntityType entityOverrideMode. */
-                    public entityOverrideMode: google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode;
+                    public entityOverrideMode: (google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode|keyof typeof google.cloud.dialogflow.v2beta1.SessionEntityType.EntityOverrideMode);
 
                     /** SessionEntityType entities. */
                     public entities: google.cloud.dialogflow.v2beta1.EntityType.IEntity[];
@@ -25994,7 +25994,7 @@ export namespace google {
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** DetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|null);
+                    inputAudio?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DetectIntentRequest. */
@@ -26019,7 +26019,7 @@ export namespace google {
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** DetectIntentRequest inputAudio. */
-                    public inputAudio: Uint8Array;
+                    public inputAudio: (Uint8Array|string);
 
                     /**
                      * Creates a new DetectIntentRequest instance using the specified properties.
@@ -26108,7 +26108,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|null);
+                    outputAudio?: (Uint8Array|string|null);
 
                     /** DetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -26136,7 +26136,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** DetectIntentResponse outputAudio. */
-                    public outputAudio: Uint8Array;
+                    public outputAudio: (Uint8Array|string);
 
                     /** DetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -26740,7 +26740,7 @@ export namespace google {
                         answer?: (string|null);
 
                         /** Answer matchConfidenceLevel */
-                        matchConfidenceLevel?: (google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel|null);
+                        matchConfidenceLevel?: (google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel|null);
 
                         /** Answer matchConfidence */
                         matchConfidence?: (number|null);
@@ -26765,7 +26765,7 @@ export namespace google {
                         public answer: string;
 
                         /** Answer matchConfidenceLevel. */
-                        public matchConfidenceLevel: google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel;
+                        public matchConfidenceLevel: (google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel|keyof typeof google.cloud.dialogflow.v2beta1.KnowledgeAnswers.Answer.MatchConfidenceLevel);
 
                         /** Answer matchConfidence. */
                         public matchConfidence: number;
@@ -26872,7 +26872,7 @@ export namespace google {
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** StreamingDetectIntentRequest inputAudio */
-                    inputAudio?: (Uint8Array|null);
+                    inputAudio?: (Uint8Array|string|null);
                 }
 
                 /** Represents a StreamingDetectIntentRequest. */
@@ -26900,7 +26900,7 @@ export namespace google {
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
 
                     /** StreamingDetectIntentRequest inputAudio. */
-                    public inputAudio: Uint8Array;
+                    public inputAudio: (Uint8Array|string);
 
                     /**
                      * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -26992,7 +26992,7 @@ export namespace google {
                     webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio */
-                    outputAudio?: (Uint8Array|null);
+                    outputAudio?: (Uint8Array|string|null);
 
                     /** StreamingDetectIntentResponse outputAudioConfig */
                     outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -27023,7 +27023,7 @@ export namespace google {
                     public webhookStatus?: (google.rpc.IStatus|null);
 
                     /** StreamingDetectIntentResponse outputAudio. */
-                    public outputAudio: Uint8Array;
+                    public outputAudio: (Uint8Array|string);
 
                     /** StreamingDetectIntentResponse outputAudioConfig. */
                     public outputAudioConfig?: (google.cloud.dialogflow.v2beta1.IOutputAudioConfig|null);
@@ -27103,7 +27103,7 @@ export namespace google {
                 interface IStreamingRecognitionResult {
 
                     /** StreamingRecognitionResult messageType */
-                    messageType?: (google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType|null);
+                    messageType?: (google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType|keyof typeof google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType|null);
 
                     /** StreamingRecognitionResult transcript */
                     transcript?: (string|null);
@@ -27134,7 +27134,7 @@ export namespace google {
                     constructor(properties?: google.cloud.dialogflow.v2beta1.IStreamingRecognitionResult);
 
                     /** StreamingRecognitionResult messageType. */
-                    public messageType: google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType;
+                    public messageType: (google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType|keyof typeof google.cloud.dialogflow.v2beta1.StreamingRecognitionResult.MessageType);
 
                     /** StreamingRecognitionResult transcript. */
                     public transcript: string;
@@ -28077,7 +28077,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -28105,7 +28105,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -28985,10 +28985,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -29025,10 +29025,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -29803,7 +29803,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -29879,7 +29879,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -30128,13 +30128,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -30165,13 +30165,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -30670,7 +30670,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -30698,7 +30698,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -30794,16 +30794,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -30825,16 +30825,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -31424,7 +31424,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -31440,7 +31440,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -31517,7 +31517,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -31533,7 +31533,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -31877,7 +31877,7 @@ export namespace google {
         interface IValue {
 
             /** Value nullValue */
-            nullValue?: (google.protobuf.NullValue|null);
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue */
             numberValue?: (number|null);
@@ -31905,7 +31905,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: google.protobuf.NullValue;
+            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
 
             /** Value numberValue. */
             public numberValue: number;
@@ -32095,7 +32095,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -32111,7 +32111,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
