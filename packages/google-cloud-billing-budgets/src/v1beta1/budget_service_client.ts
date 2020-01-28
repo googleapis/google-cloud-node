@@ -770,7 +770,7 @@ export class BudgetServiceClient {
    *   A fully-qualified path representing Budget resource.
    * @returns {string} A string representing the billing_account.
    */
-  matchBilling_accountFromBudgetName(budgetName: string) {
+  matchBillingAccountFromBudgetName(budgetName: string) {
     return this._pathTemplates.budgetPathTemplate.match(budgetName)
       .billing_account;
   }

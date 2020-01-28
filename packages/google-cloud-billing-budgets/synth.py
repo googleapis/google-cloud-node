@@ -27,7 +27,8 @@ for version in versions:
   library = gapic.typescript_library(
     'billingbudgets',
     generator_args={
-      "grpc-service-config": f"google/cloud/billing/budgets/{version}/billingbudgets_grpc_service_config.json"
+      "grpc-service-config": f"google/cloud/billing/budgets/{version}/billingbudgets_grpc_service_config.json",
+      "package-name": "@google-cloud/billing-budgets"
     },
     proto_path=f"google/cloud/billing/budgets/{version}",
     version=version)
@@ -43,6 +44,6 @@ templates = common_templates.node_library(source_location='build/src')
 s.copy(templates, excludes=[])
 
 # Node.js specific cleanup
-subprocess.run(['rm', '-rf', 'system-test/fixtures'])
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

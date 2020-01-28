@@ -1,23 +1,20 @@
 {
-  "updateTime": "2020-01-28T00:12:47.970364Z",
+  "updateTime": "2020-01-28T21:58:54.831340Z",
   "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-billing-budgets.git",
-        "sha": "1098b0adf389be0bef1de6fbefd20b1828dac080"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
-        "internalRef": "291821782"
+        "sha": "e19209fac29731d0baf6d9ac23da1164f7bdca24",
+        "internalRef": "291999930"
       }
     },
     {
-      "git": {}
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
     }
   ],
   "destinations": [
@@ -217,6 +214,12 @@
     },
     {
       "path": "src/v1beta1/index.ts"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
     },
     {
       "path": "system-test/install.ts"
