@@ -1,0 +1,566 @@
+{
+  "updateTime": "2020-01-25T12:16:15.574119Z",
+  "sources": [
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/pre-samples-test.sh"
+    },
+    {
+      "path": ".kokoro/pre-system-test.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/setup-vars.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".readme-partials.yaml"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "bin/README.md"
+    },
+    {
+      "path": "bin/benchwrapper.js"
+    },
+    {
+      "path": "bin/storage.proto"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "conformance-test/fixtures/signing-service-account.json"
+    },
+    {
+      "path": "conformance-test/test-data/v4SignedUrl.json"
+    },
+    {
+      "path": "conformance-test/v4SignedUrl.ts"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/addBucketConditionalBinding.js"
+    },
+    {
+      "path": "samples/addBucketDefaultOwnerAcl.js"
+    },
+    {
+      "path": "samples/addBucketIamMember.js"
+    },
+    {
+      "path": "samples/addBucketOwnerAcl.js"
+    },
+    {
+      "path": "samples/addFileOwnerAcl.js"
+    },
+    {
+      "path": "samples/bucketMetadata.js"
+    },
+    {
+      "path": "samples/copyFile.js"
+    },
+    {
+      "path": "samples/createNewBucket.js"
+    },
+    {
+      "path": "samples/createNotification.js"
+    },
+    {
+      "path": "samples/deleteBucket.js"
+    },
+    {
+      "path": "samples/deleteFile.js"
+    },
+    {
+      "path": "samples/deleteNotification.js"
+    },
+    {
+      "path": "samples/disableDefaultEventBasedHold.js"
+    },
+    {
+      "path": "samples/disableRequesterPays.js"
+    },
+    {
+      "path": "samples/disableUniformBucketLevelAccess.js"
+    },
+    {
+      "path": "samples/downloadEncryptedFile.js"
+    },
+    {
+      "path": "samples/downloadFile.js"
+    },
+    {
+      "path": "samples/downloadFileUsingRequesterPays.js"
+    },
+    {
+      "path": "samples/enableDefaultEventBasedHold.js"
+    },
+    {
+      "path": "samples/enableDefaultKMSKey.js"
+    },
+    {
+      "path": "samples/enableRequesterPays.js"
+    },
+    {
+      "path": "samples/enableUniformBucketLevelAccess.js"
+    },
+    {
+      "path": "samples/fileSetMetadata.js"
+    },
+    {
+      "path": "samples/generateEncryptionKey.js"
+    },
+    {
+      "path": "samples/generateSignedUrl.js"
+    },
+    {
+      "path": "samples/generateV4ReadSignedUrl.js"
+    },
+    {
+      "path": "samples/generateV4UploadSignedUrl.js"
+    },
+    {
+      "path": "samples/getDefaultEventBasedHold.js"
+    },
+    {
+      "path": "samples/getMetadata.js"
+    },
+    {
+      "path": "samples/getMetadataNotifications.js"
+    },
+    {
+      "path": "samples/getRequesterPaysStatus.js"
+    },
+    {
+      "path": "samples/getRetentionPolicy.js"
+    },
+    {
+      "path": "samples/getUniformBucketLevelAccess.js"
+    },
+    {
+      "path": "samples/hmacKeyActivate.js"
+    },
+    {
+      "path": "samples/hmacKeyCreate.js"
+    },
+    {
+      "path": "samples/hmacKeyDeactivate.js"
+    },
+    {
+      "path": "samples/hmacKeyDelete.js"
+    },
+    {
+      "path": "samples/hmacKeyGet.js"
+    },
+    {
+      "path": "samples/hmacKeysList.js"
+    },
+    {
+      "path": "samples/listBuckets.js"
+    },
+    {
+      "path": "samples/listFiles.js"
+    },
+    {
+      "path": "samples/listFilesByPrefix.js"
+    },
+    {
+      "path": "samples/listNotifications.js"
+    },
+    {
+      "path": "samples/lockRetentionPolicy.js"
+    },
+    {
+      "path": "samples/makePublic.js"
+    },
+    {
+      "path": "samples/moveFile.js"
+    },
+    {
+      "path": "samples/notifications.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/printBucketAcl.js"
+    },
+    {
+      "path": "samples/printBucketAclForUser.js"
+    },
+    {
+      "path": "samples/printFileAcl.js"
+    },
+    {
+      "path": "samples/printFileAclForUser.js"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/releaseEventBasedHold.js"
+    },
+    {
+      "path": "samples/releaseTemporaryHold.js"
+    },
+    {
+      "path": "samples/removeBucketDefaultOwner.js"
+    },
+    {
+      "path": "samples/removeBucketIamMember.js"
+    },
+    {
+      "path": "samples/removeBucketOwnerAcl.js"
+    },
+    {
+      "path": "samples/removeFileOwnerAcl.js"
+    },
+    {
+      "path": "samples/removeRetentionPolicy.js"
+    },
+    {
+      "path": "samples/resources/.gitignore"
+    },
+    {
+      "path": "samples/resources/resourcesSub1/testSub1.txt"
+    },
+    {
+      "path": "samples/resources/test.txt"
+    },
+    {
+      "path": "samples/rotateEncryptionKey.js"
+    },
+    {
+      "path": "samples/scripts/cleanup"
+    },
+    {
+      "path": "samples/setEventBasedHold.js"
+    },
+    {
+      "path": "samples/setRetentionPolicy.js"
+    },
+    {
+      "path": "samples/setTemporarydHold.js"
+    },
+    {
+      "path": "samples/system-test/acl.test.js"
+    },
+    {
+      "path": "samples/system-test/bucketLock.test.js"
+    },
+    {
+      "path": "samples/system-test/buckets.test.js"
+    },
+    {
+      "path": "samples/system-test/encryption.test.js"
+    },
+    {
+      "path": "samples/system-test/files.test.js"
+    },
+    {
+      "path": "samples/system-test/hmacKey.test.js"
+    },
+    {
+      "path": "samples/system-test/iam.test.js"
+    },
+    {
+      "path": "samples/system-test/notifications.test.js"
+    },
+    {
+      "path": "samples/system-test/quickstart.test.js"
+    },
+    {
+      "path": "samples/system-test/requesterPays.test.js"
+    },
+    {
+      "path": "samples/system-test/test_9d800329-00da-4cdd-9a3e-7ac6743d5813.txt"
+    },
+    {
+      "path": "samples/uploadDirectory.js"
+    },
+    {
+      "path": "samples/uploadEncryptedFile.js"
+    },
+    {
+      "path": "samples/uploadFile.js"
+    },
+    {
+      "path": "samples/uploadFileWithKmsKey.js"
+    },
+    {
+      "path": "samples/viewBucketIamMembers.js"
+    },
+    {
+      "path": "src/acl.ts"
+    },
+    {
+      "path": "src/bucket.ts"
+    },
+    {
+      "path": "src/channel.ts"
+    },
+    {
+      "path": "src/file.ts"
+    },
+    {
+      "path": "src/hmacKey.ts"
+    },
+    {
+      "path": "src/iam.ts"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/notification.ts"
+    },
+    {
+      "path": "src/storage.ts"
+    },
+    {
+      "path": "src/util.ts"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/data/CloudPlatform_128px_Retina.png"
+    },
+    {
+      "path": "system-test/data/long-html-file.html"
+    },
+    {
+      "path": "system-test/data/long-html-file.html.gz"
+    },
+    {
+      "path": "system-test/data/three-mb-file.tif"
+    },
+    {
+      "path": "system-test/storage.ts"
+    },
+    {
+      "path": "test/acl.ts"
+    },
+    {
+      "path": "test/bucket.ts"
+    },
+    {
+      "path": "test/channel.ts"
+    },
+    {
+      "path": "test/file.ts"
+    },
+    {
+      "path": "test/headers.ts"
+    },
+    {
+      "path": "test/hmacKey.ts"
+    },
+    {
+      "path": "test/iam.ts"
+    },
+    {
+      "path": "test/index.ts"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "test/notification.ts"
+    },
+    {
+      "path": "test/testdata/testfile.json"
+    },
+    {
+      "path": "test/testdata/textfile.txt"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tslint.json"
+    }
+  ]
+}
