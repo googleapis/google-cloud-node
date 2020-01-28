@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.9.0...v2.0.0) (2020-01-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* move to typescript code generation (#393)
+
+### Features
+
+* move to typescript code generation ([#393](https://www.github.com/googleapis/nodejs-dlp/issues/393)) ([67e0811](https://www.github.com/googleapis/nodejs-dlp/commit/67e08118c6c64e525b9ac1e7363353acf1cb0875))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.8.0...v1.9.0) (2019-12-30)
 
 
