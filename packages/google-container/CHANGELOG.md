@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.6.0...v1.6.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([595810b](https://www.github.com/googleapis/nodejs-cloud-container/commit/595810b240be49dddf14a05d616b99b398a09efe))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.5.0...v1.6.0) (2020-01-24)
 
 
