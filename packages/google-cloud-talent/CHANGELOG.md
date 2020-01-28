@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.2...v1.7.0) (2020-01-28)
+
+
+### Features
+
+* adds new type annotations ([341e495](https://www.github.com/googleapis/nodejs-talent/commit/341e4957b7586986c9a141b63913942881510a67))
+
 ### [1.6.2](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.1...v1.6.2) (2019-12-31)
 
 
