@@ -12,7 +12,7 @@
 
 
 This module provides a higher-level layer for working with
-[Stackdriver Logging](https://cloud.google.com/logging), compatible with
+[Stackdriver Logging](https://cloud.google.com/logging/docs), compatible with
 [Winston](https://www.npmjs.com/package/winston). Simply attach this as a
 transport to your existing Winston loggers.
 
