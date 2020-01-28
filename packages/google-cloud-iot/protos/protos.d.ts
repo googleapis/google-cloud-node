@@ -36,7 +36,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** Device numId */
-                    numId?: (number|Long|null);
+                    numId?: (number|Long|string|null);
 
                     /** Device credentials */
                     credentials?: (google.cloud.iot.v1.IDeviceCredential[]|null);
@@ -72,7 +72,7 @@ export namespace google {
                     state?: (google.cloud.iot.v1.IDeviceState|null);
 
                     /** Device logLevel */
-                    logLevel?: (google.cloud.iot.v1.LogLevel|null);
+                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
 
                     /** Device metadata */
                     metadata?: ({ [k: string]: string }|null);
@@ -97,7 +97,7 @@ export namespace google {
                     public name: string;
 
                     /** Device numId. */
-                    public numId: (number|Long);
+                    public numId: (number|Long|string);
 
                     /** Device credentials. */
                     public credentials: google.cloud.iot.v1.IDeviceCredential[];
@@ -133,7 +133,7 @@ export namespace google {
                     public state?: (google.cloud.iot.v1.IDeviceState|null);
 
                     /** Device logLevel. */
-                    public logLevel: google.cloud.iot.v1.LogLevel;
+                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
 
                     /** Device metadata. */
                     public metadata: { [k: string]: string };
@@ -216,10 +216,10 @@ export namespace google {
                 interface IGatewayConfig {
 
                     /** GatewayConfig gatewayType */
-                    gatewayType?: (google.cloud.iot.v1.GatewayType|null);
+                    gatewayType?: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType|null);
 
                     /** GatewayConfig gatewayAuthMethod */
-                    gatewayAuthMethod?: (google.cloud.iot.v1.GatewayAuthMethod|null);
+                    gatewayAuthMethod?: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod|null);
 
                     /** GatewayConfig lastAccessedGatewayId */
                     lastAccessedGatewayId?: (string|null);
@@ -238,10 +238,10 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IGatewayConfig);
 
                     /** GatewayConfig gatewayType. */
-                    public gatewayType: google.cloud.iot.v1.GatewayType;
+                    public gatewayType: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType);
 
                     /** GatewayConfig gatewayAuthMethod. */
-                    public gatewayAuthMethod: google.cloud.iot.v1.GatewayAuthMethod;
+                    public gatewayAuthMethod: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod);
 
                     /** GatewayConfig lastAccessedGatewayId. */
                     public lastAccessedGatewayId: string;
@@ -342,7 +342,7 @@ export namespace google {
                     httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
 
                     /** DeviceRegistry logLevel */
-                    logLevel?: (google.cloud.iot.v1.LogLevel|null);
+                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
 
                     /** DeviceRegistry credentials */
                     credentials?: (google.cloud.iot.v1.IRegistryCredential[]|null);
@@ -376,7 +376,7 @@ export namespace google {
                     public httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
 
                     /** DeviceRegistry logLevel. */
-                    public logLevel: google.cloud.iot.v1.LogLevel;
+                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
 
                     /** DeviceRegistry credentials. */
                     public credentials: google.cloud.iot.v1.IRegistryCredential[];
@@ -456,7 +456,7 @@ export namespace google {
                 interface IMqttConfig {
 
                     /** MqttConfig mqttEnabledState */
-                    mqttEnabledState?: (google.cloud.iot.v1.MqttState|null);
+                    mqttEnabledState?: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState|null);
                 }
 
                 /** Represents a MqttConfig. */
@@ -469,7 +469,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IMqttConfig);
 
                     /** MqttConfig mqttEnabledState. */
-                    public mqttEnabledState: google.cloud.iot.v1.MqttState;
+                    public mqttEnabledState: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState);
 
                     /**
                      * Creates a new MqttConfig instance using the specified properties.
@@ -553,7 +553,7 @@ export namespace google {
                 interface IHttpConfig {
 
                     /** HttpConfig httpEnabledState */
-                    httpEnabledState?: (google.cloud.iot.v1.HttpState|null);
+                    httpEnabledState?: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState|null);
                 }
 
                 /** Represents a HttpConfig. */
@@ -566,7 +566,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IHttpConfig);
 
                     /** HttpConfig httpEnabledState. */
-                    public httpEnabledState: google.cloud.iot.v1.HttpState;
+                    public httpEnabledState: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState);
 
                     /**
                      * Creates a new HttpConfig instance using the specified properties.
@@ -1073,7 +1073,7 @@ export namespace google {
                 interface IPublicKeyCertificate {
 
                     /** PublicKeyCertificate format */
-                    format?: (google.cloud.iot.v1.PublicKeyCertificateFormat|null);
+                    format?: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat|null);
 
                     /** PublicKeyCertificate certificate */
                     certificate?: (string|null);
@@ -1092,7 +1092,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IPublicKeyCertificate);
 
                     /** PublicKeyCertificate format. */
-                    public format: google.cloud.iot.v1.PublicKeyCertificateFormat;
+                    public format: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat);
 
                     /** PublicKeyCertificate certificate. */
                     public certificate: string;
@@ -1280,7 +1280,7 @@ export namespace google {
                 interface IPublicKeyCredential {
 
                     /** PublicKeyCredential format */
-                    format?: (google.cloud.iot.v1.PublicKeyFormat|null);
+                    format?: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat|null);
 
                     /** PublicKeyCredential key */
                     key?: (string|null);
@@ -1296,7 +1296,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IPublicKeyCredential);
 
                     /** PublicKeyCredential format. */
-                    public format: google.cloud.iot.v1.PublicKeyFormat;
+                    public format: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat);
 
                     /** PublicKeyCredential key. */
                     public key: string;
@@ -1385,7 +1385,7 @@ export namespace google {
                 interface IDeviceConfig {
 
                     /** DeviceConfig version */
-                    version?: (number|Long|null);
+                    version?: (number|Long|string|null);
 
                     /** DeviceConfig cloudUpdateTime */
                     cloudUpdateTime?: (google.protobuf.ITimestamp|null);
@@ -1394,7 +1394,7 @@ export namespace google {
                     deviceAckTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceConfig binaryData */
-                    binaryData?: (Uint8Array|null);
+                    binaryData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DeviceConfig. */
@@ -1407,7 +1407,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IDeviceConfig);
 
                     /** DeviceConfig version. */
-                    public version: (number|Long);
+                    public version: (number|Long|string);
 
                     /** DeviceConfig cloudUpdateTime. */
                     public cloudUpdateTime?: (google.protobuf.ITimestamp|null);
@@ -1416,7 +1416,7 @@ export namespace google {
                     public deviceAckTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceConfig binaryData. */
-                    public binaryData: Uint8Array;
+                    public binaryData: (Uint8Array|string);
 
                     /**
                      * Creates a new DeviceConfig instance using the specified properties.
@@ -1496,7 +1496,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceState binaryData */
-                    binaryData?: (Uint8Array|null);
+                    binaryData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a DeviceState. */
@@ -1512,7 +1512,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** DeviceState binaryData. */
-                    public binaryData: Uint8Array;
+                    public binaryData: (Uint8Array|string);
 
                     /**
                      * Creates a new DeviceState instance using the specified properties.
@@ -2963,7 +2963,7 @@ export namespace google {
                     parent?: (string|null);
 
                     /** ListDevicesRequest deviceNumIds */
-                    deviceNumIds?: ((number|Long)[]|null);
+                    deviceNumIds?: ((number|Long|string)[]|null);
 
                     /** ListDevicesRequest deviceIds */
                     deviceIds?: (string[]|null);
@@ -2994,7 +2994,7 @@ export namespace google {
                     public parent: string;
 
                     /** ListDevicesRequest deviceNumIds. */
-                    public deviceNumIds: (number|Long)[];
+                    public deviceNumIds: (number|Long|string)[];
 
                     /** ListDevicesRequest deviceIds. */
                     public deviceIds: string[];
@@ -3086,7 +3086,7 @@ export namespace google {
                 interface IGatewayListOptions {
 
                     /** GatewayListOptions gatewayType */
-                    gatewayType?: (google.cloud.iot.v1.GatewayType|null);
+                    gatewayType?: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType|null);
 
                     /** GatewayListOptions associationsGatewayId */
                     associationsGatewayId?: (string|null);
@@ -3105,7 +3105,7 @@ export namespace google {
                     constructor(properties?: google.cloud.iot.v1.IGatewayListOptions);
 
                     /** GatewayListOptions gatewayType. */
-                    public gatewayType: google.cloud.iot.v1.GatewayType;
+                    public gatewayType: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType);
 
                     /** GatewayListOptions associationsGatewayId. */
                     public associationsGatewayId: string;
@@ -3290,10 +3290,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** ModifyCloudToDeviceConfigRequest versionToUpdate */
-                    versionToUpdate?: (number|Long|null);
+                    versionToUpdate?: (number|Long|string|null);
 
                     /** ModifyCloudToDeviceConfigRequest binaryData */
-                    binaryData?: (Uint8Array|null);
+                    binaryData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a ModifyCloudToDeviceConfigRequest. */
@@ -3309,10 +3309,10 @@ export namespace google {
                     public name: string;
 
                     /** ModifyCloudToDeviceConfigRequest versionToUpdate. */
-                    public versionToUpdate: (number|Long);
+                    public versionToUpdate: (number|Long|string);
 
                     /** ModifyCloudToDeviceConfigRequest binaryData. */
-                    public binaryData: Uint8Array;
+                    public binaryData: (Uint8Array|string);
 
                     /**
                      * Creates a new ModifyCloudToDeviceConfigRequest instance using the specified properties.
@@ -3764,7 +3764,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** SendCommandToDeviceRequest binaryData */
-                    binaryData?: (Uint8Array|null);
+                    binaryData?: (Uint8Array|string|null);
 
                     /** SendCommandToDeviceRequest subfolder */
                     subfolder?: (string|null);
@@ -3783,7 +3783,7 @@ export namespace google {
                     public name: string;
 
                     /** SendCommandToDeviceRequest binaryData. */
-                    public binaryData: Uint8Array;
+                    public binaryData: (Uint8Array|string);
 
                     /** SendCommandToDeviceRequest subfolder. */
                     public subfolder: string;
@@ -4334,7 +4334,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -4362,7 +4362,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -5591,10 +5591,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -5631,10 +5631,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -6409,7 +6409,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -6485,7 +6485,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -6734,13 +6734,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -6771,13 +6771,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -7276,7 +7276,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -7301,7 +7301,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7397,16 +7397,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7428,16 +7428,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -8024,7 +8024,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -8040,7 +8040,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -8123,7 +8123,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -8139,7 +8139,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -9064,7 +9064,7 @@ export namespace google {
                 bindings?: (google.iam.v1.IBinding[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|null);
+                etag?: (Uint8Array|string|null);
             }
 
             /** Represents a Policy. */
@@ -9083,7 +9083,7 @@ export namespace google {
                 public bindings: google.iam.v1.IBinding[];
 
                 /** Policy etag. */
-                public etag: Uint8Array;
+                public etag: (Uint8Array|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
@@ -9358,7 +9358,7 @@ export namespace google {
             interface IBindingDelta {
 
                 /** BindingDelta action */
-                action?: (google.iam.v1.BindingDelta.Action|null);
+                action?: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action|null);
 
                 /** BindingDelta role */
                 role?: (string|null);
@@ -9380,7 +9380,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IBindingDelta);
 
                 /** BindingDelta action. */
-                public action: google.iam.v1.BindingDelta.Action;
+                public action: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action);
 
                 /** BindingDelta role. */
                 public role: string;
@@ -9476,7 +9476,7 @@ export namespace google {
             interface IAuditConfigDelta {
 
                 /** AuditConfigDelta action */
-                action?: (google.iam.v1.AuditConfigDelta.Action|null);
+                action?: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action|null);
 
                 /** AuditConfigDelta service */
                 service?: (string|null);
@@ -9498,7 +9498,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IAuditConfigDelta);
 
                 /** AuditConfigDelta action. */
-                public action: google.iam.v1.AuditConfigDelta.Action;
+                public action: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action);
 
                 /** AuditConfigDelta service. */
                 public service: string;
