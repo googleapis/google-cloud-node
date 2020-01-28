@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-24T12:23:56.944740Z",
+  "updateTime": "2020-01-28T12:25:29.340647Z",
   "sources": [
     {
       "template": {
@@ -246,6 +246,9 @@
     },
     {
       "path": "src/types/global.d.ts"
+    },
+    {
+      "path": "synth.metadata"
     },
     {
       "path": "synth.py"
