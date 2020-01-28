@@ -24,7 +24,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -40,7 +40,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -807,10 +807,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -847,10 +847,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -1625,7 +1625,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -1698,7 +1698,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -1944,13 +1944,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -1978,13 +1978,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -2483,7 +2483,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -2508,7 +2508,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -2604,16 +2604,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -2635,16 +2635,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -3418,10 +3418,10 @@ export namespace google {
                     alignmentPeriod?: (google.protobuf.IDuration|null);
 
                     /** Aggregation perSeriesAligner */
-                    perSeriesAligner?: (google.monitoring.dashboard.v1.Aggregation.Aligner|null);
+                    perSeriesAligner?: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner|null);
 
                     /** Aggregation crossSeriesReducer */
-                    crossSeriesReducer?: (google.monitoring.dashboard.v1.Aggregation.Reducer|null);
+                    crossSeriesReducer?: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer|null);
 
                     /** Aggregation groupByFields */
                     groupByFields?: (string[]|null);
@@ -3440,10 +3440,10 @@ export namespace google {
                     public alignmentPeriod?: (google.protobuf.IDuration|null);
 
                     /** Aggregation perSeriesAligner. */
-                    public perSeriesAligner: google.monitoring.dashboard.v1.Aggregation.Aligner;
+                    public perSeriesAligner: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner);
 
                     /** Aggregation crossSeriesReducer. */
-                    public crossSeriesReducer: google.monitoring.dashboard.v1.Aggregation.Reducer;
+                    public crossSeriesReducer: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer);
 
                     /** Aggregation groupByFields. */
                     public groupByFields: string[];
@@ -3567,13 +3567,13 @@ export namespace google {
                 interface IPickTimeSeriesFilter {
 
                     /** PickTimeSeriesFilter rankingMethod */
-                    rankingMethod?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|null);
+                    rankingMethod?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|null);
 
                     /** PickTimeSeriesFilter numTimeSeries */
                     numTimeSeries?: (number|null);
 
                     /** PickTimeSeriesFilter direction */
-                    direction?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|null);
+                    direction?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|null);
                 }
 
                 /** Represents a PickTimeSeriesFilter. */
@@ -3586,13 +3586,13 @@ export namespace google {
                     constructor(properties?: google.monitoring.dashboard.v1.IPickTimeSeriesFilter);
 
                     /** PickTimeSeriesFilter rankingMethod. */
-                    public rankingMethod: google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method;
+                    public rankingMethod: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method);
 
                     /** PickTimeSeriesFilter numTimeSeries. */
                     public numTimeSeries: number;
 
                     /** PickTimeSeriesFilter direction. */
-                    public direction: google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction;
+                    public direction: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction);
 
                     /**
                      * Creates a new PickTimeSeriesFilter instance using the specified properties.
@@ -3689,7 +3689,7 @@ export namespace google {
                 interface IStatisticalTimeSeriesFilter {
 
                     /** StatisticalTimeSeriesFilter rankingMethod */
-                    rankingMethod?: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|null);
+                    rankingMethod?: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|null);
 
                     /** StatisticalTimeSeriesFilter numTimeSeries */
                     numTimeSeries?: (number|null);
@@ -3705,7 +3705,7 @@ export namespace google {
                     constructor(properties?: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter);
 
                     /** StatisticalTimeSeriesFilter rankingMethod. */
-                    public rankingMethod: google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method;
+                    public rankingMethod: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method);
 
                     /** StatisticalTimeSeriesFilter numTimeSeries. */
                     public numTimeSeries: number;
@@ -4232,10 +4232,10 @@ export namespace google {
                     value?: (number|null);
 
                     /** Threshold color */
-                    color?: (google.monitoring.dashboard.v1.Threshold.Color|null);
+                    color?: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color|null);
 
                     /** Threshold direction */
-                    direction?: (google.monitoring.dashboard.v1.Threshold.Direction|null);
+                    direction?: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction|null);
                 }
 
                 /** Represents a Threshold. */
@@ -4254,10 +4254,10 @@ export namespace google {
                     public value: number;
 
                     /** Threshold color. */
-                    public color: google.monitoring.dashboard.v1.Threshold.Color;
+                    public color: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color);
 
                     /** Threshold direction. */
-                    public direction: google.monitoring.dashboard.v1.Threshold.Direction;
+                    public direction: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction);
 
                     /**
                      * Creates a new Threshold instance using the specified properties.
@@ -4567,7 +4567,7 @@ export namespace google {
                     interface ISparkChartView {
 
                         /** SparkChartView sparkChartType */
-                        sparkChartType?: (google.monitoring.dashboard.v1.SparkChartType|null);
+                        sparkChartType?: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType|null);
 
                         /** SparkChartView minAlignmentPeriod */
                         minAlignmentPeriod?: (google.protobuf.IDuration|null);
@@ -4583,7 +4583,7 @@ export namespace google {
                         constructor(properties?: google.monitoring.dashboard.v1.Scorecard.ISparkChartView);
 
                         /** SparkChartView sparkChartType. */
-                        public sparkChartType: google.monitoring.dashboard.v1.SparkChartType;
+                        public sparkChartType: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType);
 
                         /** SparkChartView minAlignmentPeriod. */
                         public minAlignmentPeriod?: (google.protobuf.IDuration|null);
@@ -4667,7 +4667,7 @@ export namespace google {
                     content?: (string|null);
 
                     /** Text format */
-                    format?: (google.monitoring.dashboard.v1.Text.Format|null);
+                    format?: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format|null);
                 }
 
                 /** Represents a Text. */
@@ -4683,7 +4683,7 @@ export namespace google {
                     public content: string;
 
                     /** Text format. */
-                    public format: google.monitoring.dashboard.v1.Text.Format;
+                    public format: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format);
 
                     /**
                      * Creates a new Text instance using the specified properties.
@@ -4895,7 +4895,7 @@ export namespace google {
                         timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
 
                         /** DataSet plotType */
-                        plotType?: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|null);
+                        plotType?: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|null);
 
                         /** DataSet legendTemplate */
                         legendTemplate?: (string|null);
@@ -4917,7 +4917,7 @@ export namespace google {
                         public timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
 
                         /** DataSet plotType. */
-                        public plotType: google.monitoring.dashboard.v1.XyChart.DataSet.PlotType;
+                        public plotType: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType);
 
                         /** DataSet legendTemplate. */
                         public legendTemplate: string;
@@ -5015,7 +5015,7 @@ export namespace google {
                         label?: (string|null);
 
                         /** Axis scale */
-                        scale?: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|null);
+                        scale?: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale|null);
                     }
 
                     /** Represents an Axis. */
@@ -5031,7 +5031,7 @@ export namespace google {
                         public label: string;
 
                         /** Axis scale. */
-                        public scale: google.monitoring.dashboard.v1.XyChart.Axis.Scale;
+                        public scale: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale);
 
                         /**
                          * Creates a new Axis instance using the specified properties.
@@ -5119,7 +5119,7 @@ export namespace google {
                 interface IChartOptions {
 
                     /** ChartOptions mode */
-                    mode?: (google.monitoring.dashboard.v1.ChartOptions.Mode|null);
+                    mode?: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode|null);
                 }
 
                 /** Represents a ChartOptions. */
@@ -5132,7 +5132,7 @@ export namespace google {
                     constructor(properties?: google.monitoring.dashboard.v1.IChartOptions);
 
                     /** ChartOptions mode. */
-                    public mode: google.monitoring.dashboard.v1.ChartOptions.Mode;
+                    public mode: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode);
 
                     /**
                      * Creates a new ChartOptions instance using the specified properties.
@@ -5337,7 +5337,7 @@ export namespace google {
                 interface IGridLayout {
 
                     /** GridLayout columns */
-                    columns?: (number|Long|null);
+                    columns?: (number|Long|string|null);
 
                     /** GridLayout widgets */
                     widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
@@ -5353,7 +5353,7 @@ export namespace google {
                     constructor(properties?: google.monitoring.dashboard.v1.IGridLayout);
 
                     /** GridLayout columns. */
-                    public columns: (number|Long);
+                    public columns: (number|Long|string);
 
                     /** GridLayout widgets. */
                     public widgets: google.monitoring.dashboard.v1.IWidget[];
@@ -5525,7 +5525,7 @@ export namespace google {
                     interface IRow {
 
                         /** Row weight */
-                        weight?: (number|Long|null);
+                        weight?: (number|Long|string|null);
 
                         /** Row widgets */
                         widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
@@ -5541,7 +5541,7 @@ export namespace google {
                         constructor(properties?: google.monitoring.dashboard.v1.RowLayout.IRow);
 
                         /** Row weight. */
-                        public weight: (number|Long);
+                        public weight: (number|Long|string);
 
                         /** Row widgets. */
                         public widgets: google.monitoring.dashboard.v1.IWidget[];
@@ -5714,7 +5714,7 @@ export namespace google {
                     interface IColumn {
 
                         /** Column weight */
-                        weight?: (number|Long|null);
+                        weight?: (number|Long|string|null);
 
                         /** Column widgets */
                         widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
@@ -5730,7 +5730,7 @@ export namespace google {
                         constructor(properties?: google.monitoring.dashboard.v1.ColumnLayout.IColumn);
 
                         /** Column weight. */
-                        public weight: (number|Long);
+                        public weight: (number|Long|string);
 
                         /** Column widgets. */
                         public widgets: google.monitoring.dashboard.v1.IWidget[];
