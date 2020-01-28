@@ -117,10 +117,10 @@ export namespace google {
                 interface IComputeThreatListDiffRequest {
 
                     /** ComputeThreatListDiffRequest threatType */
-                    threatType?: (google.cloud.webrisk.v1beta1.ThreatType|null);
+                    threatType?: (google.cloud.webrisk.v1beta1.ThreatType|keyof typeof google.cloud.webrisk.v1beta1.ThreatType|null);
 
                     /** ComputeThreatListDiffRequest versionToken */
-                    versionToken?: (Uint8Array|null);
+                    versionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffRequest constraints */
                     constraints?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -136,10 +136,10 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest);
 
                     /** ComputeThreatListDiffRequest threatType. */
-                    public threatType: google.cloud.webrisk.v1beta1.ThreatType;
+                    public threatType: (google.cloud.webrisk.v1beta1.ThreatType|keyof typeof google.cloud.webrisk.v1beta1.ThreatType);
 
                     /** ComputeThreatListDiffRequest versionToken. */
-                    public versionToken: Uint8Array;
+                    public versionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffRequest constraints. */
                     public constraints?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.IConstraints|null);
@@ -324,7 +324,7 @@ export namespace google {
                 interface IComputeThreatListDiffResponse {
 
                     /** ComputeThreatListDiffResponse responseType */
-                    responseType?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType|null);
+                    responseType?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType|keyof typeof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType|null);
 
                     /** ComputeThreatListDiffResponse additions */
                     additions?: (google.cloud.webrisk.v1beta1.IThreatEntryAdditions|null);
@@ -333,7 +333,7 @@ export namespace google {
                     removals?: (google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken */
-                    newVersionToken?: (Uint8Array|null);
+                    newVersionToken?: (Uint8Array|string|null);
 
                     /** ComputeThreatListDiffResponse checksum */
                     checksum?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -352,7 +352,7 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1beta1.IComputeThreatListDiffResponse);
 
                     /** ComputeThreatListDiffResponse responseType. */
-                    public responseType: google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType;
+                    public responseType: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType|keyof typeof google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType);
 
                     /** ComputeThreatListDiffResponse additions. */
                     public additions?: (google.cloud.webrisk.v1beta1.IThreatEntryAdditions|null);
@@ -361,7 +361,7 @@ export namespace google {
                     public removals?: (google.cloud.webrisk.v1beta1.IThreatEntryRemovals|null);
 
                     /** ComputeThreatListDiffResponse newVersionToken. */
-                    public newVersionToken: Uint8Array;
+                    public newVersionToken: (Uint8Array|string);
 
                     /** ComputeThreatListDiffResponse checksum. */
                     public checksum?: (google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum|null);
@@ -446,7 +446,7 @@ export namespace google {
                     interface IChecksum {
 
                         /** Checksum sha256 */
-                        sha256?: (Uint8Array|null);
+                        sha256?: (Uint8Array|string|null);
                     }
 
                     /** Represents a Checksum. */
@@ -459,7 +459,7 @@ export namespace google {
                         constructor(properties?: google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.IChecksum);
 
                         /** Checksum sha256. */
-                        public sha256: Uint8Array;
+                        public sha256: (Uint8Array|string);
 
                         /**
                          * Creates a new Checksum instance using the specified properties.
@@ -829,7 +829,7 @@ export namespace google {
                 interface ISearchHashesRequest {
 
                     /** SearchHashesRequest hashPrefix */
-                    hashPrefix?: (Uint8Array|null);
+                    hashPrefix?: (Uint8Array|string|null);
 
                     /** SearchHashesRequest threatTypes */
                     threatTypes?: (google.cloud.webrisk.v1beta1.ThreatType[]|null);
@@ -845,7 +845,7 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1beta1.ISearchHashesRequest);
 
                     /** SearchHashesRequest hashPrefix. */
-                    public hashPrefix: Uint8Array;
+                    public hashPrefix: (Uint8Array|string);
 
                     /** SearchHashesRequest threatTypes. */
                     public threatTypes: google.cloud.webrisk.v1beta1.ThreatType[];
@@ -1026,7 +1026,7 @@ export namespace google {
                         threatTypes?: (google.cloud.webrisk.v1beta1.ThreatType[]|null);
 
                         /** ThreatHash hash */
-                        hash?: (Uint8Array|null);
+                        hash?: (Uint8Array|string|null);
 
                         /** ThreatHash expireTime */
                         expireTime?: (google.protobuf.ITimestamp|null);
@@ -1045,7 +1045,7 @@ export namespace google {
                         public threatTypes: google.cloud.webrisk.v1beta1.ThreatType[];
 
                         /** ThreatHash hash. */
-                        public hash: Uint8Array;
+                        public hash: (Uint8Array|string);
 
                         /** ThreatHash expireTime. */
                         public expireTime?: (google.protobuf.ITimestamp|null);
@@ -1426,7 +1426,7 @@ export namespace google {
                     prefixSize?: (number|null);
 
                     /** RawHashes rawHashes */
-                    rawHashes?: (Uint8Array|null);
+                    rawHashes?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RawHashes. */
@@ -1442,7 +1442,7 @@ export namespace google {
                     public prefixSize: number;
 
                     /** RawHashes rawHashes. */
-                    public rawHashes: Uint8Array;
+                    public rawHashes: (Uint8Array|string);
 
                     /**
                      * Creates a new RawHashes instance using the specified properties.
@@ -1519,7 +1519,7 @@ export namespace google {
                 interface IRiceDeltaEncoding {
 
                     /** RiceDeltaEncoding firstValue */
-                    firstValue?: (number|Long|null);
+                    firstValue?: (number|Long|string|null);
 
                     /** RiceDeltaEncoding riceParameter */
                     riceParameter?: (number|null);
@@ -1528,7 +1528,7 @@ export namespace google {
                     entryCount?: (number|null);
 
                     /** RiceDeltaEncoding encodedData */
-                    encodedData?: (Uint8Array|null);
+                    encodedData?: (Uint8Array|string|null);
                 }
 
                 /** Represents a RiceDeltaEncoding. */
@@ -1541,7 +1541,7 @@ export namespace google {
                     constructor(properties?: google.cloud.webrisk.v1beta1.IRiceDeltaEncoding);
 
                     /** RiceDeltaEncoding firstValue. */
-                    public firstValue: (number|Long);
+                    public firstValue: (number|Long|string);
 
                     /** RiceDeltaEncoding riceParameter. */
                     public riceParameter: number;
@@ -1550,7 +1550,7 @@ export namespace google {
                     public entryCount: number;
 
                     /** RiceDeltaEncoding encodedData. */
-                    public encodedData: Uint8Array;
+                    public encodedData: (Uint8Array|string);
 
                     /**
                      * Creates a new RiceDeltaEncoding instance using the specified properties.
@@ -2673,10 +2673,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -2713,10 +2713,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -3491,7 +3491,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -3564,7 +3564,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -3810,13 +3810,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -3844,13 +3844,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -4349,7 +4349,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -4374,7 +4374,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -4470,16 +4470,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -4501,16 +4501,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -5097,7 +5097,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -5113,7 +5113,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
