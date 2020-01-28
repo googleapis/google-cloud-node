@@ -1,0 +1,522 @@
+{
+  "updateTime": "2020-01-24T12:39:25.395288Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
+        "internalRef": "291240093"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "translate",
+        "apiVersion": "v3beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "translate",
+        "apiVersion": "v3",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".bots/header-checker-lint.json"
+    },
+    {
+      "path": ".clang-format"
+    },
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/pre-system-test.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".readme-partials.yml"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/common_resources.proto"
+    },
+    {
+      "path": "protos/google/cloud/translate/v3/translation_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/translate/v3beta1/translation_service.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/automl/automlTranslationDataset.js"
+    },
+    {
+      "path": "samples/automl/automlTranslationModel.js"
+    },
+    {
+      "path": "samples/automl/automlTranslationPredict.js"
+    },
+    {
+      "path": "samples/automl/resources/testInput.txt"
+    },
+    {
+      "path": "samples/hybridGlossaries.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/resources/example.png"
+    },
+    {
+      "path": "samples/test/automlTranslation.test.js"
+    },
+    {
+      "path": "samples/test/hybridGlossaries.test.js"
+    },
+    {
+      "path": "samples/test/quickstart.test.js"
+    },
+    {
+      "path": "samples/test/translate.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_batch_translate_text.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_batch_translate_text_with_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_batch_translate_text_with_glossary_and_model.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_batch_translate_text_with_model.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_create_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_delete_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_detect_language.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_get_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_get_supported_languages.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_get_supported_languages_for_targets.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_list_codes.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_list_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_list_language_names.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_translate_text.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_translate_text_with_glossary.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_translate_text_with_glossary_and_model.test.js"
+    },
+    {
+      "path": "samples/test/v3/translate_translate_text_with_model.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_batch_translate_text_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_create_glossary_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_delete_glossary_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_detect_language_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_get_glossary_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_list_codes_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_list_glossary_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_list_language_names_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_translate_text_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_translate_text_with_glossary_beta.test.js"
+    },
+    {
+      "path": "samples/test/v3beta1/translate_translate_text_with_model_beta.test.js"
+    },
+    {
+      "path": "samples/translate.js"
+    },
+    {
+      "path": "samples/v3/translate_batch_translate_text.js"
+    },
+    {
+      "path": "samples/v3/translate_batch_translate_text_with_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_batch_translate_text_with_glossary_and_model.js"
+    },
+    {
+      "path": "samples/v3/translate_batch_translate_text_with_model.js"
+    },
+    {
+      "path": "samples/v3/translate_create_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_delete_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_detect_language.js"
+    },
+    {
+      "path": "samples/v3/translate_get_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_get_supported_languages.js"
+    },
+    {
+      "path": "samples/v3/translate_get_supported_languages_for_target.js"
+    },
+    {
+      "path": "samples/v3/translate_list_codes.js"
+    },
+    {
+      "path": "samples/v3/translate_list_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_list_language_names.js"
+    },
+    {
+      "path": "samples/v3/translate_translate_text.js"
+    },
+    {
+      "path": "samples/v3/translate_translate_text_with_glossary.js"
+    },
+    {
+      "path": "samples/v3/translate_translate_text_with_glossary_and_model.js"
+    },
+    {
+      "path": "samples/v3/translate_translate_text_with_model.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_batch_translate_text_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_create_glossary_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_delete_glossary_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_detect_language_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_get_glossary_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_list_codes_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_list_glossary_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_list_language_names_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_translate_text_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_translate_text_with_glossary_beta.js"
+    },
+    {
+      "path": "samples/v3beta1/translate_translate_text_with_model_beta.js"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/v2/index.ts"
+    },
+    {
+      "path": "src/v3/index.ts"
+    },
+    {
+      "path": "src/v3/translation_service_client.ts"
+    },
+    {
+      "path": "src/v3/translation_service_client_config.json"
+    },
+    {
+      "path": "src/v3/translation_service_proto_list.json"
+    },
+    {
+      "path": "src/v3beta1/index.ts"
+    },
+    {
+      "path": "src/v3beta1/translation_service_client.ts"
+    },
+    {
+      "path": "src/v3beta1/translation_service_client_config.json"
+    },
+    {
+      "path": "src/v3beta1/translation_service_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.js"
+    },
+    {
+      "path": "system-test/fixtures/sample/src/index.ts"
+    },
+    {
+      "path": "system-test/install.ts"
+    },
+    {
+      "path": "system-test/translate.ts"
+    },
+    {
+      "path": "test/gapic-translation_service-v3.ts"
+    },
+    {
+      "path": "test/gapic-translation_service-v3beta1.ts"
+    },
+    {
+      "path": "test/index.ts"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tslint.json"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
