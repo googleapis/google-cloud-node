@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-01-24T12:35:58.057386Z",
+  "updateTime": "2020-01-28T12:35:58.743223Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
+        "internalRef": "291821782",
+        "log": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea\nBeta launch for PersonDetection and FaceDetection features.\n\nPiperOrigin-RevId: 291821782\n\n994e067fae3b21e195f7da932b08fff806d70b5d\nasset: add annotations to v1p2beta1\n\nPiperOrigin-RevId: 291815259\n\n244e1d2c89346ca2e0701b39e65552330d68545a\nAdd Playable Locations service\n\nPiperOrigin-RevId: 291806349\n\n909f8f67963daf45dd88d020877fb9029b76788d\nasset: add annotations to v1beta2\n\nPiperOrigin-RevId: 291805301\n\n3c39a1d6e23c1ef63c7fba4019c25e76c40dfe19\nKMS: add file-level message for CryptoKeyPath, it is defined in gapic yaml but not\nin proto files.\n\nPiperOrigin-RevId: 291420695\n\nc6f3f350b8387f8d1b85ed4506f30187ebaaddc3\ncontaineranalysis: update v1beta1 and bazel build with annotations\n\nPiperOrigin-RevId: 291401900\n\n92887d74b44e4e636252b7b8477d0d2570cd82db\nfix: fix the location of grpc config file.\n\nPiperOrigin-RevId: 291396015\n\n"
       }
     },
     {
@@ -484,6 +485,9 @@
     },
     {
       "path": "src/v1p1beta1/speech_proto_list.json"
+    },
+    {
+      "path": "synth.metadata"
     },
     {
       "path": "synth.py"
