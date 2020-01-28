@@ -752,13 +752,27 @@ export class BudgetServiceClient {
   /**
    * Return a fully-qualified budget resource name string.
    *
+   * @param {string} billing_account
    * @param {string} budget
    * @returns {string} Resource name string.
    */
-  budgetPath(budget: string) {
+  budgetPath(billingAccount: string, budget: string) {
     return this._pathTemplates.budgetPathTemplate.render({
+      billing_account: billingAccount,
       budget,
     });
+  }
+
+  /**
+   * Parse the billing_account from Budget resource.
+   *
+   * @param {string} budgetName
+   *   A fully-qualified path representing Budget resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBilling_accountFromBudgetName(budgetName: string) {
+    return this._pathTemplates.budgetPathTemplate.match(budgetName)
+      .billing_account;
   }
 
   /**
