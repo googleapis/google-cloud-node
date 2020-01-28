@@ -19,15 +19,22 @@ import synthtool.gcp as gcp
 import subprocess
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 version = 'v2'
-library = gapic.node_library(
-    'dlp', version, config_path='/google/privacy/dlp/artman_dlp_v2.yaml')
-s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+library = gapic.typescript_library(
+    'dlp', version,
+    generator_args={
+            "grpc-service-config": f"google/privacy/dlp/{version}/dlp_grpc_service_config.json",
+            "package-name": f"@google-cloud/dlp"
+            },
+            proto_path=f'/google/privacy/dlp/{version}',
+            extra_proto_files=['google/cloud/common_resources.proto'],
+            )
+s.copy(library, excludes=['src/index.ts', 'README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 # [START fix-dead-link]
@@ -43,3 +50,4 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'compileProtos', 'run'])

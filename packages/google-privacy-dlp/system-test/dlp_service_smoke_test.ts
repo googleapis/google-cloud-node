@@ -1,4 +1,4 @@
-// Copyright 2017 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
-const {describe, it} = require('mocha');
+import {describe, it} from 'mocha';
 
 describe('DlpServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
@@ -30,17 +28,17 @@ describe('DlpServiceSmokeTest', () => {
     const type = 'text/plain';
     const value = 'my phone number is 215-512-1212';
     const item = {
-      type: type,
-      value: value,
+      type,
+      value,
     };
     const request = {
-      inspectConfig: inspectConfig,
-      item: item,
+      inspectConfig,
+      item,
       parent: client.projectPath(projectId),
     };
     client
       .inspectContent(request)
-      .then(responses => {
+      .then((responses: [{}]) => {
         const response = responses[0];
         console.log(response);
       })
