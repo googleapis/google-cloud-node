@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.10.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.10.0...v1.10.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([6737cad](https://www.github.com/googleapis/nodejs-automl/commit/6737cad17f359cb0c2b3edd28093638d47c0d59e))
+
 ## [1.10.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.9.2...v1.10.0) (2019-12-05)
 
 
