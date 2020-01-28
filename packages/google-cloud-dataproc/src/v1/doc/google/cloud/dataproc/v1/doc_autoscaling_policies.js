@@ -14,21 +14,3 @@
 
 // Note: this file is purely for documentation. Any contents are not expected
 // to be loaded as the JS file.
-
-/**
- * A generic empty message that you can re-use to avoid defining duplicated
- * empty messages in your APIs. A typical example is to use it as the request
- * or the response type of an API method. For instance:
- *
- *     service Foo {
- *       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
- *     }
- *
- * The JSON representation for `Empty` is empty JSON object `{}`.
- * @typedef Empty
- * @memberof google.protobuf
- * @see [google.protobuf.Empty definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/empty.proto}
- */
-const Empty = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};

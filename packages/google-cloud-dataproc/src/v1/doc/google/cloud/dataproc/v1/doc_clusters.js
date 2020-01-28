@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
  *   unique. Names of deleted clusters can be reused.
  *
  * @property {Object} config
- *   Required. The cluster config. Note that Cloud Dataproc may set
+ *   Required. The cluster config. Note that Dataproc may set
  *   default values, and values may change when clusters are updated.
  *
  *   This object should have the same structure as [ClusterConfig]{@link google.cloud.dataproc.v1.ClusterConfig}
@@ -52,7 +52,7 @@
  *   This object should have the same structure as [ClusterStatus]{@link google.cloud.dataproc.v1.ClusterStatus}
  *
  * @property {string} clusterUuid
- *   Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc
+ *   Output only. A cluster UUID (Unique Universal Identifier). Dataproc
  *   generates this value when it creates the cluster.
  *
  * @property {Object} metrics
@@ -75,14 +75,14 @@ const Cluster = {
  * The cluster config.
  *
  * @property {string} configBucket
- *   Optional. A Google Cloud Storage bucket used to stage job
+ *   Optional. A Cloud Storage bucket used to stage job
  *   dependencies, config files, and job driver console output.
  *   If you do not specify a staging bucket, Cloud
  *   Dataproc will determine a Cloud Storage location (US,
- *   ASIA, or EU) for your cluster's staging bucket according to the Google
+ *   ASIA, or EU) for your cluster's staging bucket according to the
  *   Compute Engine zone where your cluster is deployed, and then create
  *   and manage this project-level, per-location bucket (see
- *   [Cloud Dataproc staging
+ *   [Dataproc staging
  *   bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
  *
  * @property {Object} gceClusterConfig
@@ -136,11 +136,44 @@ const Cluster = {
  *
  *   This object should have the same structure as [EncryptionConfig]{@link google.cloud.dataproc.v1.EncryptionConfig}
  *
+ * @property {Object} autoscalingConfig
+ *   Optional. Autoscaling config for the policy associated with the cluster.
+ *   Cluster does not autoscale if this field is unset.
+ *
+ *   This object should have the same structure as [AutoscalingConfig]{@link google.cloud.dataproc.v1.AutoscalingConfig}
+ *
+ * @property {Object} securityConfig
+ *   Optional. Security settings for the cluster.
+ *
+ *   This object should have the same structure as [SecurityConfig]{@link google.cloud.dataproc.v1.SecurityConfig}
+ *
  * @typedef ClusterConfig
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
 const ClusterConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Autoscaling Policy config associated with the cluster.
+ *
+ * @property {string} policyUri
+ *   Optional. The autoscaling policy used by the cluster.
+ *
+ *   Only resource names including projectid and location (region) are valid.
+ *   Examples:
+ *
+ *   * `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
+ *   * `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
+ *
+ *   Note that the policy must be in the same project and Dataproc region.
+ *
+ * @typedef AutoscalingConfig
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.AutoscalingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const AutoscalingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -166,7 +199,7 @@ const EncryptionConfig = {
  * @property {string} zoneUri
  *   Optional. The zone where the Compute Engine cluster will be located.
  *   On a create request, it is required in the "global" region. If omitted
- *   in a non-global Cloud Dataproc region, the service will pick a zone in the
+ *   in a non-global Dataproc region, the service will pick a zone in the
  *   corresponding Compute Engine region. On a get request, zone will
  *   always be present.
  *
@@ -208,17 +241,17 @@ const EncryptionConfig = {
  *   configured to be accessible without external IP addresses.
  *
  * @property {string} serviceAccount
- *   Optional. The service account of the instances. Defaults to the default
- *   Compute Engine service account. Custom service accounts need
- *   permissions equivalent to the following IAM roles:
+ *   Optional. The [Dataproc service
+ *   account](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc)
+ *   (also see [VM Data Plane
+ *   identity](https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity))
+ *   used by Dataproc cluster VM instances to access Google Cloud Platform
+ *   services.
  *
- *   * roles/logging.logWriter
- *   * roles/storage.objectAdmin
- *
- *   (see
- *   https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
- *   for more information).
- *   Example: `[account_id]@[project_id].iam.gserviceaccount.com`
+ *   If not specified, the
+ *   [Compute Engine default service
+ *   account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account)
+ *   is used.
  *
  * @property {string[]} serviceAccountScopes
  *   Optional. The URIs of service account scopes to be included in
@@ -262,7 +295,7 @@ const GceClusterConfig = {
  *   For master instance groups, must be set to 1.
  *
  * @property {string[]} instanceNames
- *   Output only. The list of instance names. Cloud Dataproc derives the names
+ *   Output only. The list of instance names. Dataproc derives the names
  *   from `cluster_name`, `num_instances`, and the instance group.
  *
  * @property {string} imageUri
@@ -279,7 +312,7 @@ const GceClusterConfig = {
  *   * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
  *   * `n1-standard-2`
  *
- *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   **Auto Zone Exception**: If you are using the Dataproc
  *   [Auto Zone
  *   Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
  *   feature, you must use the short name of the machine type
@@ -305,10 +338,12 @@ const GceClusterConfig = {
  *   Optional. The Compute Engine accelerator configuration for these
  *   instances.
  *
- *   **Beta Feature**: This feature is still under development. It may be
- *   changed before final release.
- *
  *   This object should have the same structure as [AcceleratorConfig]{@link google.cloud.dataproc.v1.AcceleratorConfig}
+ *
+ * @property {string} minCpuPlatform
+ *   Optional. Specifies the minimum cpu platform for the Instance Group.
+ *   See [Dataproc&rarr;Minimum CPU Platform]
+ *   (/dataproc/docs/concepts/compute/dataproc-min-cpu).
  *
  * @typedef InstanceGroupConfig
  * @memberof google.cloud.dataproc.v1
@@ -352,7 +387,7 @@ const ManagedGroupConfig = {
  *   * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
  *   * `nvidia-tesla-k80`
  *
- *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   **Auto Zone Exception**: If you are using the Dataproc
  *   [Auto Zone
  *   Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
  *   feature, you must use the short name of the accelerator type
@@ -428,7 +463,7 @@ const NodeInitializationAction = {
  *   The number should be among the values of [State]{@link google.cloud.dataproc.v1.State}
  *
  * @property {string} detail
- *   Output only. Optional details of cluster's state.
+ *   Optional. Output only. Details of cluster's state.
  *
  * @property {Object} stateStartTime
  *   Output only. Time when this state was entered.
@@ -511,7 +546,7 @@ const ClusterStatus = {
 
     /**
      * The agent-reported status is out of date (may occur if
-     * Cloud Dataproc loses communication with Agent).
+     * Dataproc loses communication with Agent).
      *
      * Applies to RUNNING state.
      */
@@ -520,11 +555,104 @@ const ClusterStatus = {
 };
 
 /**
+ * Security related configuration, including Kerberos.
+ *
+ * @property {Object} kerberosConfig
+ *   Kerberos related configuration.
+ *
+ *   This object should have the same structure as [KerberosConfig]{@link google.cloud.dataproc.v1.KerberosConfig}
+ *
+ * @typedef SecurityConfig
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.SecurityConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const SecurityConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Specifies Kerberos related configuration.
+ *
+ * @property {boolean} enableKerberos
+ *   Optional. Flag to indicate whether to Kerberize the cluster.
+ *
+ * @property {string} rootPrincipalPasswordUri
+ *   Required. The Cloud Storage URI of a KMS encrypted file containing the root
+ *   principal password.
+ *
+ * @property {string} kmsKeyUri
+ *   Required. The uri of the KMS key used to encrypt various sensitive
+ *   files.
+ *
+ * @property {string} keystoreUri
+ *   Optional. The Cloud Storage URI of the keystore file used for SSL
+ *   encryption. If not provided, Dataproc will provide a self-signed
+ *   certificate.
+ *
+ * @property {string} truststoreUri
+ *   Optional. The Cloud Storage URI of the truststore file used for SSL
+ *   encryption. If not provided, Dataproc will provide a self-signed
+ *   certificate.
+ *
+ * @property {string} keystorePasswordUri
+ *   Optional. The Cloud Storage URI of a KMS encrypted file containing the
+ *   password to the user provided keystore. For the self-signed certificate,
+ *   this password is generated by Dataproc.
+ *
+ * @property {string} keyPasswordUri
+ *   Optional. The Cloud Storage URI of a KMS encrypted file containing the
+ *   password to the user provided key. For the self-signed certificate, this
+ *   password is generated by Dataproc.
+ *
+ * @property {string} truststorePasswordUri
+ *   Optional. The Cloud Storage URI of a KMS encrypted file containing the
+ *   password to the user provided truststore. For the self-signed certificate,
+ *   this password is generated by Dataproc.
+ *
+ * @property {string} crossRealmTrustRealm
+ *   Optional. The remote realm the Dataproc on-cluster KDC will trust, should
+ *   the user enable cross realm trust.
+ *
+ * @property {string} crossRealmTrustKdc
+ *   Optional. The KDC (IP or hostname) for the remote trusted realm in a cross
+ *   realm trust relationship.
+ *
+ * @property {string} crossRealmTrustAdminServer
+ *   Optional. The admin server (IP or hostname) for the remote trusted realm in
+ *   a cross realm trust relationship.
+ *
+ * @property {string} crossRealmTrustSharedPasswordUri
+ *   Optional. The Cloud Storage URI of a KMS encrypted file containing the
+ *   shared password between the on-cluster Kerberos realm and the remote
+ *   trusted realm, in a cross realm trust relationship.
+ *
+ * @property {string} kdcDbKeyUri
+ *   Optional. The Cloud Storage URI of a KMS encrypted file containing the
+ *   master key of the KDC database.
+ *
+ * @property {number} tgtLifetimeHours
+ *   Optional. The lifetime of the ticket granting ticket, in hours.
+ *   If not specified, or user specifies 0, then default value 10
+ *   will be used.
+ *
+ * @property {string} realm
+ *   Optional. The name of the on-cluster Kerberos realm.
+ *   If not specified, the uppercased domain of hostnames will be the realm.
+ *
+ * @typedef KerberosConfig
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.KerberosConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const KerberosConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Specifies the selection and config of software inside the cluster.
  *
  * @property {string} imageVersion
  *   Optional. The version of software inside the cluster. It must be one of the
- *   supported [Cloud Dataproc
+ *   supported [Dataproc
  *   Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
  *   such as "1.2" (including a subminor version, such as "1.2.29"), or the
  *   ["preview"
@@ -552,7 +680,7 @@ const ClusterStatus = {
  *   [Cluster properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
  *
  * @property {number[]} optionalComponents
- *   The set of optional components to activate on the cluster.
+ *   Optional. The set of components to activate on the cluster.
  *
  *   The number should be among the values of [Component]{@link google.cloud.dataproc.v1.Component}
  *
@@ -592,7 +720,7 @@ const ClusterMetrics = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {Object} cluster
  *   Required. The cluster to create.
@@ -628,7 +756,7 @@ const CreateClusterRequest = {
  *   cluster belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -696,6 +824,10 @@ const CreateClusterRequest = {
  *    <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
  *    <td>Resize secondary worker group</td>
  *    </tr>
+ *    <tr>
+ *    <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or
+ *    change autoscaling policies</td>
+ *    </tr>
  *    </tbody>
  *    </table>
  *
@@ -730,7 +862,7 @@ const UpdateClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -768,7 +900,7 @@ const DeleteClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.
@@ -789,7 +921,7 @@ const GetClusterRequest = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} filter
  *   Optional. A filter constraining the clusters to list. Filters are
@@ -855,7 +987,7 @@ const ListClustersResponse = {
  *   belongs to.
  *
  * @property {string} region
- *   Required. The Cloud Dataproc region in which to handle the request.
+ *   Required. The Dataproc region in which to handle the request.
  *
  * @property {string} clusterName
  *   Required. The cluster name.

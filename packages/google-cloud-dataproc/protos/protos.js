@@ -1,3 +1,17 @@
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 (function(global, factory) { /* global define, require, module */
 
@@ -700,6 +714,8 @@
                          * @property {google.cloud.dataproc.v1.ISoftwareConfig|null} [softwareConfig] ClusterConfig softwareConfig
                          * @property {Array.<google.cloud.dataproc.v1.INodeInitializationAction>|null} [initializationActions] ClusterConfig initializationActions
                          * @property {google.cloud.dataproc.v1.IEncryptionConfig|null} [encryptionConfig] ClusterConfig encryptionConfig
+                         * @property {google.cloud.dataproc.v1.IAutoscalingConfig|null} [autoscalingConfig] ClusterConfig autoscalingConfig
+                         * @property {google.cloud.dataproc.v1.ISecurityConfig|null} [securityConfig] ClusterConfig securityConfig
                          */
     
                         /**
@@ -783,6 +799,22 @@
                         ClusterConfig.prototype.encryptionConfig = null;
     
                         /**
+                         * ClusterConfig autoscalingConfig.
+                         * @member {google.cloud.dataproc.v1.IAutoscalingConfig|null|undefined} autoscalingConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.autoscalingConfig = null;
+    
+                        /**
+                         * ClusterConfig securityConfig.
+                         * @member {google.cloud.dataproc.v1.ISecurityConfig|null|undefined} securityConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.securityConfig = null;
+    
+                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterConfig
@@ -823,6 +855,10 @@
                                 $root.google.cloud.dataproc.v1.SoftwareConfig.encode(message.softwareConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig"))
                                 $root.google.cloud.dataproc.v1.EncryptionConfig.encode(message.encryptionConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.securityConfig != null && message.hasOwnProperty("securityConfig"))
+                                $root.google.cloud.dataproc.v1.SecurityConfig.encode(message.securityConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.autoscalingConfig != null && message.hasOwnProperty("autoscalingConfig"))
+                                $root.google.cloud.dataproc.v1.AutoscalingConfig.encode(message.autoscalingConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             return writer;
                         };
     
@@ -882,6 +918,12 @@
                                     break;
                                 case 15:
                                     message.encryptionConfig = $root.google.cloud.dataproc.v1.EncryptionConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 18:
+                                    message.autoscalingConfig = $root.google.cloud.dataproc.v1.AutoscalingConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 16:
+                                    message.securityConfig = $root.google.cloud.dataproc.v1.SecurityConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -960,6 +1002,16 @@
                                 if (error)
                                     return "encryptionConfig." + error;
                             }
+                            if (message.autoscalingConfig != null && message.hasOwnProperty("autoscalingConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.AutoscalingConfig.verify(message.autoscalingConfig);
+                                if (error)
+                                    return "autoscalingConfig." + error;
+                            }
+                            if (message.securityConfig != null && message.hasOwnProperty("securityConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.SecurityConfig.verify(message.securityConfig);
+                                if (error)
+                                    return "securityConfig." + error;
+                            }
                             return null;
                         };
     
@@ -1017,6 +1069,16 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.encryptionConfig: object expected");
                                 message.encryptionConfig = $root.google.cloud.dataproc.v1.EncryptionConfig.fromObject(object.encryptionConfig);
                             }
+                            if (object.autoscalingConfig != null) {
+                                if (typeof object.autoscalingConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.autoscalingConfig: object expected");
+                                message.autoscalingConfig = $root.google.cloud.dataproc.v1.AutoscalingConfig.fromObject(object.autoscalingConfig);
+                            }
+                            if (object.securityConfig != null) {
+                                if (typeof object.securityConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.securityConfig: object expected");
+                                message.securityConfig = $root.google.cloud.dataproc.v1.SecurityConfig.fromObject(object.securityConfig);
+                            }
                             return message;
                         };
     
@@ -1043,6 +1105,8 @@
                                 object.secondaryWorkerConfig = null;
                                 object.softwareConfig = null;
                                 object.encryptionConfig = null;
+                                object.securityConfig = null;
+                                object.autoscalingConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -1063,6 +1127,10 @@
                                 object.softwareConfig = $root.google.cloud.dataproc.v1.SoftwareConfig.toObject(message.softwareConfig, options);
                             if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig"))
                                 object.encryptionConfig = $root.google.cloud.dataproc.v1.EncryptionConfig.toObject(message.encryptionConfig, options);
+                            if (message.securityConfig != null && message.hasOwnProperty("securityConfig"))
+                                object.securityConfig = $root.google.cloud.dataproc.v1.SecurityConfig.toObject(message.securityConfig, options);
+                            if (message.autoscalingConfig != null && message.hasOwnProperty("autoscalingConfig"))
+                                object.autoscalingConfig = $root.google.cloud.dataproc.v1.AutoscalingConfig.toObject(message.autoscalingConfig, options);
                             return object;
                         };
     
@@ -1078,6 +1146,193 @@
                         };
     
                         return ClusterConfig;
+                    })();
+    
+                    v1.AutoscalingConfig = (function() {
+    
+                        /**
+                         * Properties of an AutoscalingConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IAutoscalingConfig
+                         * @property {string|null} [policyUri] AutoscalingConfig policyUri
+                         */
+    
+                        /**
+                         * Constructs a new AutoscalingConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an AutoscalingConfig.
+                         * @implements IAutoscalingConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IAutoscalingConfig=} [properties] Properties to set
+                         */
+                        function AutoscalingConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutoscalingConfig policyUri.
+                         * @member {string} policyUri
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @instance
+                         */
+                        AutoscalingConfig.prototype.policyUri = "";
+    
+                        /**
+                         * Creates a new AutoscalingConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAutoscalingConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.AutoscalingConfig} AutoscalingConfig instance
+                         */
+                        AutoscalingConfig.create = function create(properties) {
+                            return new AutoscalingConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutoscalingConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AutoscalingConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAutoscalingConfig} message AutoscalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutoscalingConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.policyUri != null && message.hasOwnProperty("policyUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.policyUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutoscalingConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AutoscalingConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IAutoscalingConfig} message AutoscalingConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutoscalingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutoscalingConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.AutoscalingConfig} AutoscalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutoscalingConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.AutoscalingConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.policyUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutoscalingConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.AutoscalingConfig} AutoscalingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutoscalingConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutoscalingConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutoscalingConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.policyUri != null && message.hasOwnProperty("policyUri"))
+                                if (!$util.isString(message.policyUri))
+                                    return "policyUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutoscalingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.AutoscalingConfig} AutoscalingConfig
+                         */
+                        AutoscalingConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.AutoscalingConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.AutoscalingConfig();
+                            if (object.policyUri != null)
+                                message.policyUri = String(object.policyUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutoscalingConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.AutoscalingConfig} message AutoscalingConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutoscalingConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.policyUri = "";
+                            if (message.policyUri != null && message.hasOwnProperty("policyUri"))
+                                object.policyUri = message.policyUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutoscalingConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.AutoscalingConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutoscalingConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AutoscalingConfig;
                     })();
     
                     v1.EncryptionConfig = (function() {
@@ -1679,6 +1934,7 @@
                          * @property {boolean|null} [isPreemptible] InstanceGroupConfig isPreemptible
                          * @property {google.cloud.dataproc.v1.IManagedGroupConfig|null} [managedGroupConfig] InstanceGroupConfig managedGroupConfig
                          * @property {Array.<google.cloud.dataproc.v1.IAcceleratorConfig>|null} [accelerators] InstanceGroupConfig accelerators
+                         * @property {string|null} [minCpuPlatform] InstanceGroupConfig minCpuPlatform
                          */
     
                         /**
@@ -1763,6 +2019,14 @@
                         InstanceGroupConfig.prototype.accelerators = $util.emptyArray;
     
                         /**
+                         * InstanceGroupConfig minCpuPlatform.
+                         * @member {string} minCpuPlatform
+                         * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.minCpuPlatform = "";
+    
+                        /**
                          * Creates a new InstanceGroupConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
@@ -1804,6 +2068,8 @@
                             if (message.accelerators != null && message.accelerators.length)
                                 for (var i = 0; i < message.accelerators.length; ++i)
                                     $root.google.cloud.dataproc.v1.AcceleratorConfig.encode(message.accelerators[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.minCpuPlatform);
                             return writer;
                         };
     
@@ -1865,6 +2131,9 @@
                                     if (!(message.accelerators && message.accelerators.length))
                                         message.accelerators = [];
                                     message.accelerators.push($root.google.cloud.dataproc.v1.AcceleratorConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 9:
+                                    message.minCpuPlatform = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1939,6 +2208,9 @@
                                         return "accelerators." + error;
                                 }
                             }
+                            if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
+                                if (!$util.isString(message.minCpuPlatform))
+                                    return "minCpuPlatform: string expected";
                             return null;
                         };
     
@@ -1989,6 +2261,8 @@
                                     message.accelerators[i] = $root.google.cloud.dataproc.v1.AcceleratorConfig.fromObject(object.accelerators[i]);
                                 }
                             }
+                            if (object.minCpuPlatform != null)
+                                message.minCpuPlatform = String(object.minCpuPlatform);
                             return message;
                         };
     
@@ -2016,6 +2290,7 @@
                                 object.diskConfig = null;
                                 object.isPreemptible = false;
                                 object.managedGroupConfig = null;
+                                object.minCpuPlatform = "";
                             }
                             if (message.numInstances != null && message.hasOwnProperty("numInstances"))
                                 object.numInstances = message.numInstances;
@@ -2039,6 +2314,8 @@
                                 for (var j = 0; j < message.accelerators.length; ++j)
                                     object.accelerators[j] = $root.google.cloud.dataproc.v1.AcceleratorConfig.toObject(message.accelerators[j], options);
                             }
+                            if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
+                                object.minCpuPlatform = message.minCpuPlatform;
                             return object;
                         };
     
@@ -3269,6 +3546,694 @@
                         })();
     
                         return ClusterStatus;
+                    })();
+    
+                    v1.SecurityConfig = (function() {
+    
+                        /**
+                         * Properties of a SecurityConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface ISecurityConfig
+                         * @property {google.cloud.dataproc.v1.IKerberosConfig|null} [kerberosConfig] SecurityConfig kerberosConfig
+                         */
+    
+                        /**
+                         * Constructs a new SecurityConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a SecurityConfig.
+                         * @implements ISecurityConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.ISecurityConfig=} [properties] Properties to set
+                         */
+                        function SecurityConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecurityConfig kerberosConfig.
+                         * @member {google.cloud.dataproc.v1.IKerberosConfig|null|undefined} kerberosConfig
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @instance
+                         */
+                        SecurityConfig.prototype.kerberosConfig = null;
+    
+                        /**
+                         * Creates a new SecurityConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISecurityConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.SecurityConfig} SecurityConfig instance
+                         */
+                        SecurityConfig.create = function create(properties) {
+                            return new SecurityConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityConfig message. Does not implicitly {@link google.cloud.dataproc.v1.SecurityConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISecurityConfig} message SecurityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
+                                $root.google.cloud.dataproc.v1.KerberosConfig.encode(message.kerberosConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SecurityConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISecurityConfig} message SecurityConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecurityConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.SecurityConfig} SecurityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SecurityConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecurityConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.SecurityConfig} SecurityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecurityConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecurityConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.KerberosConfig.verify(message.kerberosConfig);
+                                if (error)
+                                    return "kerberosConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecurityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.SecurityConfig} SecurityConfig
+                         */
+                        SecurityConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.SecurityConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.SecurityConfig();
+                            if (object.kerberosConfig != null) {
+                                if (typeof object.kerberosConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.SecurityConfig.kerberosConfig: object expected");
+                                message.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.fromObject(object.kerberosConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecurityConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.SecurityConfig} message SecurityConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecurityConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.kerberosConfig = null;
+                            if (message.kerberosConfig != null && message.hasOwnProperty("kerberosConfig"))
+                                object.kerberosConfig = $root.google.cloud.dataproc.v1.KerberosConfig.toObject(message.kerberosConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecurityConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.SecurityConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecurityConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SecurityConfig;
+                    })();
+    
+                    v1.KerberosConfig = (function() {
+    
+                        /**
+                         * Properties of a KerberosConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IKerberosConfig
+                         * @property {boolean|null} [enableKerberos] KerberosConfig enableKerberos
+                         * @property {string|null} [rootPrincipalPasswordUri] KerberosConfig rootPrincipalPasswordUri
+                         * @property {string|null} [kmsKeyUri] KerberosConfig kmsKeyUri
+                         * @property {string|null} [keystoreUri] KerberosConfig keystoreUri
+                         * @property {string|null} [truststoreUri] KerberosConfig truststoreUri
+                         * @property {string|null} [keystorePasswordUri] KerberosConfig keystorePasswordUri
+                         * @property {string|null} [keyPasswordUri] KerberosConfig keyPasswordUri
+                         * @property {string|null} [truststorePasswordUri] KerberosConfig truststorePasswordUri
+                         * @property {string|null} [crossRealmTrustRealm] KerberosConfig crossRealmTrustRealm
+                         * @property {string|null} [crossRealmTrustKdc] KerberosConfig crossRealmTrustKdc
+                         * @property {string|null} [crossRealmTrustAdminServer] KerberosConfig crossRealmTrustAdminServer
+                         * @property {string|null} [crossRealmTrustSharedPasswordUri] KerberosConfig crossRealmTrustSharedPasswordUri
+                         * @property {string|null} [kdcDbKeyUri] KerberosConfig kdcDbKeyUri
+                         * @property {number|null} [tgtLifetimeHours] KerberosConfig tgtLifetimeHours
+                         * @property {string|null} [realm] KerberosConfig realm
+                         */
+    
+                        /**
+                         * Constructs a new KerberosConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a KerberosConfig.
+                         * @implements IKerberosConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IKerberosConfig=} [properties] Properties to set
+                         */
+                        function KerberosConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KerberosConfig enableKerberos.
+                         * @member {boolean} enableKerberos
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.enableKerberos = false;
+    
+                        /**
+                         * KerberosConfig rootPrincipalPasswordUri.
+                         * @member {string} rootPrincipalPasswordUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.rootPrincipalPasswordUri = "";
+    
+                        /**
+                         * KerberosConfig kmsKeyUri.
+                         * @member {string} kmsKeyUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.kmsKeyUri = "";
+    
+                        /**
+                         * KerberosConfig keystoreUri.
+                         * @member {string} keystoreUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.keystoreUri = "";
+    
+                        /**
+                         * KerberosConfig truststoreUri.
+                         * @member {string} truststoreUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.truststoreUri = "";
+    
+                        /**
+                         * KerberosConfig keystorePasswordUri.
+                         * @member {string} keystorePasswordUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.keystorePasswordUri = "";
+    
+                        /**
+                         * KerberosConfig keyPasswordUri.
+                         * @member {string} keyPasswordUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.keyPasswordUri = "";
+    
+                        /**
+                         * KerberosConfig truststorePasswordUri.
+                         * @member {string} truststorePasswordUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.truststorePasswordUri = "";
+    
+                        /**
+                         * KerberosConfig crossRealmTrustRealm.
+                         * @member {string} crossRealmTrustRealm
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.crossRealmTrustRealm = "";
+    
+                        /**
+                         * KerberosConfig crossRealmTrustKdc.
+                         * @member {string} crossRealmTrustKdc
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.crossRealmTrustKdc = "";
+    
+                        /**
+                         * KerberosConfig crossRealmTrustAdminServer.
+                         * @member {string} crossRealmTrustAdminServer
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.crossRealmTrustAdminServer = "";
+    
+                        /**
+                         * KerberosConfig crossRealmTrustSharedPasswordUri.
+                         * @member {string} crossRealmTrustSharedPasswordUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.crossRealmTrustSharedPasswordUri = "";
+    
+                        /**
+                         * KerberosConfig kdcDbKeyUri.
+                         * @member {string} kdcDbKeyUri
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.kdcDbKeyUri = "";
+    
+                        /**
+                         * KerberosConfig tgtLifetimeHours.
+                         * @member {number} tgtLifetimeHours
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.tgtLifetimeHours = 0;
+    
+                        /**
+                         * KerberosConfig realm.
+                         * @member {string} realm
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.realm = "";
+    
+                        /**
+                         * Creates a new KerberosConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKerberosConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.KerberosConfig} KerberosConfig instance
+                         */
+                        KerberosConfig.create = function create(properties) {
+                            return new KerberosConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KerberosConfig message. Does not implicitly {@link google.cloud.dataproc.v1.KerberosConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKerberosConfig} message KerberosConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KerberosConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableKerberos != null && message.hasOwnProperty("enableKerberos"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableKerberos);
+                            if (message.rootPrincipalPasswordUri != null && message.hasOwnProperty("rootPrincipalPasswordUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rootPrincipalPasswordUri);
+                            if (message.kmsKeyUri != null && message.hasOwnProperty("kmsKeyUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.kmsKeyUri);
+                            if (message.keystoreUri != null && message.hasOwnProperty("keystoreUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.keystoreUri);
+                            if (message.truststoreUri != null && message.hasOwnProperty("truststoreUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.truststoreUri);
+                            if (message.keystorePasswordUri != null && message.hasOwnProperty("keystorePasswordUri"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.keystorePasswordUri);
+                            if (message.keyPasswordUri != null && message.hasOwnProperty("keyPasswordUri"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.keyPasswordUri);
+                            if (message.truststorePasswordUri != null && message.hasOwnProperty("truststorePasswordUri"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.truststorePasswordUri);
+                            if (message.crossRealmTrustRealm != null && message.hasOwnProperty("crossRealmTrustRealm"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.crossRealmTrustRealm);
+                            if (message.crossRealmTrustKdc != null && message.hasOwnProperty("crossRealmTrustKdc"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.crossRealmTrustKdc);
+                            if (message.crossRealmTrustAdminServer != null && message.hasOwnProperty("crossRealmTrustAdminServer"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.crossRealmTrustAdminServer);
+                            if (message.crossRealmTrustSharedPasswordUri != null && message.hasOwnProperty("crossRealmTrustSharedPasswordUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.crossRealmTrustSharedPasswordUri);
+                            if (message.kdcDbKeyUri != null && message.hasOwnProperty("kdcDbKeyUri"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.kdcDbKeyUri);
+                            if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.tgtLifetimeHours);
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.realm);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KerberosConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.KerberosConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IKerberosConfig} message KerberosConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KerberosConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KerberosConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.KerberosConfig} KerberosConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KerberosConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.KerberosConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.enableKerberos = reader.bool();
+                                    break;
+                                case 2:
+                                    message.rootPrincipalPasswordUri = reader.string();
+                                    break;
+                                case 3:
+                                    message.kmsKeyUri = reader.string();
+                                    break;
+                                case 4:
+                                    message.keystoreUri = reader.string();
+                                    break;
+                                case 5:
+                                    message.truststoreUri = reader.string();
+                                    break;
+                                case 6:
+                                    message.keystorePasswordUri = reader.string();
+                                    break;
+                                case 7:
+                                    message.keyPasswordUri = reader.string();
+                                    break;
+                                case 8:
+                                    message.truststorePasswordUri = reader.string();
+                                    break;
+                                case 9:
+                                    message.crossRealmTrustRealm = reader.string();
+                                    break;
+                                case 10:
+                                    message.crossRealmTrustKdc = reader.string();
+                                    break;
+                                case 11:
+                                    message.crossRealmTrustAdminServer = reader.string();
+                                    break;
+                                case 12:
+                                    message.crossRealmTrustSharedPasswordUri = reader.string();
+                                    break;
+                                case 13:
+                                    message.kdcDbKeyUri = reader.string();
+                                    break;
+                                case 14:
+                                    message.tgtLifetimeHours = reader.int32();
+                                    break;
+                                case 15:
+                                    message.realm = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KerberosConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.KerberosConfig} KerberosConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KerberosConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KerberosConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KerberosConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableKerberos != null && message.hasOwnProperty("enableKerberos"))
+                                if (typeof message.enableKerberos !== "boolean")
+                                    return "enableKerberos: boolean expected";
+                            if (message.rootPrincipalPasswordUri != null && message.hasOwnProperty("rootPrincipalPasswordUri"))
+                                if (!$util.isString(message.rootPrincipalPasswordUri))
+                                    return "rootPrincipalPasswordUri: string expected";
+                            if (message.kmsKeyUri != null && message.hasOwnProperty("kmsKeyUri"))
+                                if (!$util.isString(message.kmsKeyUri))
+                                    return "kmsKeyUri: string expected";
+                            if (message.keystoreUri != null && message.hasOwnProperty("keystoreUri"))
+                                if (!$util.isString(message.keystoreUri))
+                                    return "keystoreUri: string expected";
+                            if (message.truststoreUri != null && message.hasOwnProperty("truststoreUri"))
+                                if (!$util.isString(message.truststoreUri))
+                                    return "truststoreUri: string expected";
+                            if (message.keystorePasswordUri != null && message.hasOwnProperty("keystorePasswordUri"))
+                                if (!$util.isString(message.keystorePasswordUri))
+                                    return "keystorePasswordUri: string expected";
+                            if (message.keyPasswordUri != null && message.hasOwnProperty("keyPasswordUri"))
+                                if (!$util.isString(message.keyPasswordUri))
+                                    return "keyPasswordUri: string expected";
+                            if (message.truststorePasswordUri != null && message.hasOwnProperty("truststorePasswordUri"))
+                                if (!$util.isString(message.truststorePasswordUri))
+                                    return "truststorePasswordUri: string expected";
+                            if (message.crossRealmTrustRealm != null && message.hasOwnProperty("crossRealmTrustRealm"))
+                                if (!$util.isString(message.crossRealmTrustRealm))
+                                    return "crossRealmTrustRealm: string expected";
+                            if (message.crossRealmTrustKdc != null && message.hasOwnProperty("crossRealmTrustKdc"))
+                                if (!$util.isString(message.crossRealmTrustKdc))
+                                    return "crossRealmTrustKdc: string expected";
+                            if (message.crossRealmTrustAdminServer != null && message.hasOwnProperty("crossRealmTrustAdminServer"))
+                                if (!$util.isString(message.crossRealmTrustAdminServer))
+                                    return "crossRealmTrustAdminServer: string expected";
+                            if (message.crossRealmTrustSharedPasswordUri != null && message.hasOwnProperty("crossRealmTrustSharedPasswordUri"))
+                                if (!$util.isString(message.crossRealmTrustSharedPasswordUri))
+                                    return "crossRealmTrustSharedPasswordUri: string expected";
+                            if (message.kdcDbKeyUri != null && message.hasOwnProperty("kdcDbKeyUri"))
+                                if (!$util.isString(message.kdcDbKeyUri))
+                                    return "kdcDbKeyUri: string expected";
+                            if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
+                                if (!$util.isInteger(message.tgtLifetimeHours))
+                                    return "tgtLifetimeHours: integer expected";
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                if (!$util.isString(message.realm))
+                                    return "realm: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KerberosConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.KerberosConfig} KerberosConfig
+                         */
+                        KerberosConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.KerberosConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.KerberosConfig();
+                            if (object.enableKerberos != null)
+                                message.enableKerberos = Boolean(object.enableKerberos);
+                            if (object.rootPrincipalPasswordUri != null)
+                                message.rootPrincipalPasswordUri = String(object.rootPrincipalPasswordUri);
+                            if (object.kmsKeyUri != null)
+                                message.kmsKeyUri = String(object.kmsKeyUri);
+                            if (object.keystoreUri != null)
+                                message.keystoreUri = String(object.keystoreUri);
+                            if (object.truststoreUri != null)
+                                message.truststoreUri = String(object.truststoreUri);
+                            if (object.keystorePasswordUri != null)
+                                message.keystorePasswordUri = String(object.keystorePasswordUri);
+                            if (object.keyPasswordUri != null)
+                                message.keyPasswordUri = String(object.keyPasswordUri);
+                            if (object.truststorePasswordUri != null)
+                                message.truststorePasswordUri = String(object.truststorePasswordUri);
+                            if (object.crossRealmTrustRealm != null)
+                                message.crossRealmTrustRealm = String(object.crossRealmTrustRealm);
+                            if (object.crossRealmTrustKdc != null)
+                                message.crossRealmTrustKdc = String(object.crossRealmTrustKdc);
+                            if (object.crossRealmTrustAdminServer != null)
+                                message.crossRealmTrustAdminServer = String(object.crossRealmTrustAdminServer);
+                            if (object.crossRealmTrustSharedPasswordUri != null)
+                                message.crossRealmTrustSharedPasswordUri = String(object.crossRealmTrustSharedPasswordUri);
+                            if (object.kdcDbKeyUri != null)
+                                message.kdcDbKeyUri = String(object.kdcDbKeyUri);
+                            if (object.tgtLifetimeHours != null)
+                                message.tgtLifetimeHours = object.tgtLifetimeHours | 0;
+                            if (object.realm != null)
+                                message.realm = String(object.realm);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KerberosConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.KerberosConfig} message KerberosConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KerberosConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.enableKerberos = false;
+                                object.rootPrincipalPasswordUri = "";
+                                object.kmsKeyUri = "";
+                                object.keystoreUri = "";
+                                object.truststoreUri = "";
+                                object.keystorePasswordUri = "";
+                                object.keyPasswordUri = "";
+                                object.truststorePasswordUri = "";
+                                object.crossRealmTrustRealm = "";
+                                object.crossRealmTrustKdc = "";
+                                object.crossRealmTrustAdminServer = "";
+                                object.crossRealmTrustSharedPasswordUri = "";
+                                object.kdcDbKeyUri = "";
+                                object.tgtLifetimeHours = 0;
+                                object.realm = "";
+                            }
+                            if (message.enableKerberos != null && message.hasOwnProperty("enableKerberos"))
+                                object.enableKerberos = message.enableKerberos;
+                            if (message.rootPrincipalPasswordUri != null && message.hasOwnProperty("rootPrincipalPasswordUri"))
+                                object.rootPrincipalPasswordUri = message.rootPrincipalPasswordUri;
+                            if (message.kmsKeyUri != null && message.hasOwnProperty("kmsKeyUri"))
+                                object.kmsKeyUri = message.kmsKeyUri;
+                            if (message.keystoreUri != null && message.hasOwnProperty("keystoreUri"))
+                                object.keystoreUri = message.keystoreUri;
+                            if (message.truststoreUri != null && message.hasOwnProperty("truststoreUri"))
+                                object.truststoreUri = message.truststoreUri;
+                            if (message.keystorePasswordUri != null && message.hasOwnProperty("keystorePasswordUri"))
+                                object.keystorePasswordUri = message.keystorePasswordUri;
+                            if (message.keyPasswordUri != null && message.hasOwnProperty("keyPasswordUri"))
+                                object.keyPasswordUri = message.keyPasswordUri;
+                            if (message.truststorePasswordUri != null && message.hasOwnProperty("truststorePasswordUri"))
+                                object.truststorePasswordUri = message.truststorePasswordUri;
+                            if (message.crossRealmTrustRealm != null && message.hasOwnProperty("crossRealmTrustRealm"))
+                                object.crossRealmTrustRealm = message.crossRealmTrustRealm;
+                            if (message.crossRealmTrustKdc != null && message.hasOwnProperty("crossRealmTrustKdc"))
+                                object.crossRealmTrustKdc = message.crossRealmTrustKdc;
+                            if (message.crossRealmTrustAdminServer != null && message.hasOwnProperty("crossRealmTrustAdminServer"))
+                                object.crossRealmTrustAdminServer = message.crossRealmTrustAdminServer;
+                            if (message.crossRealmTrustSharedPasswordUri != null && message.hasOwnProperty("crossRealmTrustSharedPasswordUri"))
+                                object.crossRealmTrustSharedPasswordUri = message.crossRealmTrustSharedPasswordUri;
+                            if (message.kdcDbKeyUri != null && message.hasOwnProperty("kdcDbKeyUri"))
+                                object.kdcDbKeyUri = message.kdcDbKeyUri;
+                            if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
+                                object.tgtLifetimeHours = message.tgtLifetimeHours;
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                object.realm = message.realm;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KerberosConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.KerberosConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KerberosConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return KerberosConfig;
                     })();
     
                     v1.SoftwareConfig = (function() {
@@ -25443,6 +26408,7 @@
                          * @property {google.protobuf.IDuration|null} [idleDeleteTtl] LifecycleConfig idleDeleteTtl
                          * @property {google.protobuf.ITimestamp|null} [autoDeleteTime] LifecycleConfig autoDeleteTime
                          * @property {google.protobuf.IDuration|null} [autoDeleteTtl] LifecycleConfig autoDeleteTtl
+                         * @property {google.protobuf.ITimestamp|null} [idleStartTime] LifecycleConfig idleStartTime
                          */
     
                         /**
@@ -25483,6 +26449,14 @@
                          * @instance
                          */
                         LifecycleConfig.prototype.autoDeleteTtl = null;
+    
+                        /**
+                         * LifecycleConfig idleStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} idleStartTime
+                         * @memberof google.cloud.dataproc.v1beta2.LifecycleConfig
+                         * @instance
+                         */
+                        LifecycleConfig.prototype.idleStartTime = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -25528,6 +26502,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.autoDeleteTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.autoDeleteTtl != null && message.hasOwnProperty("autoDeleteTtl"))
                                 $root.google.protobuf.Duration.encode(message.autoDeleteTtl, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.idleStartTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -25570,6 +26546,9 @@
                                     break;
                                 case 3:
                                     message.autoDeleteTtl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.idleStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -25630,6 +26609,11 @@
                                         return "autoDeleteTtl." + error;
                                 }
                             }
+                            if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.idleStartTime);
+                                if (error)
+                                    return "idleStartTime." + error;
+                            }
                             return null;
                         };
     
@@ -25660,6 +26644,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1beta2.LifecycleConfig.autoDeleteTtl: object expected");
                                 message.autoDeleteTtl = $root.google.protobuf.Duration.fromObject(object.autoDeleteTtl);
                             }
+                            if (object.idleStartTime != null) {
+                                if (typeof object.idleStartTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1beta2.LifecycleConfig.idleStartTime: object expected");
+                                message.idleStartTime = $root.google.protobuf.Timestamp.fromObject(object.idleStartTime);
+                            }
                             return message;
                         };
     
@@ -25676,8 +26665,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.idleDeleteTtl = null;
+                                object.idleStartTime = null;
+                            }
                             if (message.idleDeleteTtl != null && message.hasOwnProperty("idleDeleteTtl"))
                                 object.idleDeleteTtl = $root.google.protobuf.Duration.toObject(message.idleDeleteTtl, options);
                             if (message.autoDeleteTime != null && message.hasOwnProperty("autoDeleteTime")) {
@@ -25690,6 +26681,8 @@
                                 if (options.oneofs)
                                     object.ttl = "autoDeleteTtl";
                             }
+                            if (message.idleStartTime != null && message.hasOwnProperty("idleStartTime"))
+                                object.idleStartTime = $root.google.protobuf.Timestamp.toObject(message.idleStartTime, options);
                             return object;
                         };
     
@@ -25919,6 +26912,7 @@
                          * @property {string|null} [crossRealmTrustSharedPasswordUri] KerberosConfig crossRealmTrustSharedPasswordUri
                          * @property {string|null} [kdcDbKeyUri] KerberosConfig kdcDbKeyUri
                          * @property {number|null} [tgtLifetimeHours] KerberosConfig tgtLifetimeHours
+                         * @property {string|null} [realm] KerberosConfig realm
                          */
     
                         /**
@@ -26049,6 +27043,14 @@
                         KerberosConfig.prototype.tgtLifetimeHours = 0;
     
                         /**
+                         * KerberosConfig realm.
+                         * @member {string} realm
+                         * @memberof google.cloud.dataproc.v1beta2.KerberosConfig
+                         * @instance
+                         */
+                        KerberosConfig.prototype.realm = "";
+    
+                        /**
                          * Creates a new KerberosConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1beta2.KerberosConfig
@@ -26100,6 +27102,8 @@
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.kdcDbKeyUri);
                             if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).int32(message.tgtLifetimeHours);
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.realm);
                             return writer;
                         };
     
@@ -26175,6 +27179,9 @@
                                     break;
                                 case 14:
                                     message.tgtLifetimeHours = reader.int32();
+                                    break;
+                                case 15:
+                                    message.realm = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -26253,6 +27260,9 @@
                             if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
                                 if (!$util.isInteger(message.tgtLifetimeHours))
                                     return "tgtLifetimeHours: integer expected";
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                if (!$util.isString(message.realm))
+                                    return "realm: string expected";
                             return null;
                         };
     
@@ -26296,6 +27306,8 @@
                                 message.kdcDbKeyUri = String(object.kdcDbKeyUri);
                             if (object.tgtLifetimeHours != null)
                                 message.tgtLifetimeHours = object.tgtLifetimeHours | 0;
+                            if (object.realm != null)
+                                message.realm = String(object.realm);
                             return message;
                         };
     
@@ -26327,6 +27339,7 @@
                                 object.crossRealmTrustSharedPasswordUri = "";
                                 object.kdcDbKeyUri = "";
                                 object.tgtLifetimeHours = 0;
+                                object.realm = "";
                             }
                             if (message.enableKerberos != null && message.hasOwnProperty("enableKerberos"))
                                 object.enableKerberos = message.enableKerberos;
@@ -26356,6 +27369,8 @@
                                 object.kdcDbKeyUri = message.kdcDbKeyUri;
                             if (message.tgtLifetimeHours != null && message.hasOwnProperty("tgtLifetimeHours"))
                                 object.tgtLifetimeHours = message.tgtLifetimeHours;
+                            if (message.realm != null && message.hasOwnProperty("realm"))
+                                object.realm = message.realm;
                             return object;
                         };
     
@@ -45083,6 +46098,587 @@
                 return CustomHttpPattern;
             })();
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
+    
             return api;
         })();
     
@@ -49254,6 +50850,7 @@
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
+                 * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
     
                 /**
@@ -49266,6 +50863,7 @@
                  */
                 function FileOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -49441,6 +51039,14 @@
                 FileOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FileOptions .google.api.resourceDefinition.
+                 * @member {Array.<google.api.IResourceDescriptor>} .google.api.resourceDefinition
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype[".google.api.resourceDefinition"] = $util.emptyArray;
+    
+                /**
                  * Creates a new FileOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FileOptions
@@ -49507,6 +51113,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resourceDefinition"] != null && message[".google.api.resourceDefinition"].length)
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i)
+                            $root.google.api.ResourceDescriptor.encode(message[".google.api.resourceDefinition"][i], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -49605,6 +51214,11 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
+                                message[".google.api.resourceDefinition"] = [];
+                            message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -49716,6 +51330,15 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                        if (!Array.isArray(message[".google.api.resourceDefinition"]))
+                            return ".google.api.resourceDefinition: array expected";
+                        for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            if (error)
+                                return ".google.api.resourceDefinition." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -49793,6 +51416,16 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resourceDefinition"]) {
+                        if (!Array.isArray(object[".google.api.resourceDefinition"]))
+                            throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: array expected");
+                        message[".google.api.resourceDefinition"] = [];
+                        for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
+                            if (typeof object[".google.api.resourceDefinition"][i] !== "object")
+                                throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -49809,8 +51442,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.resourceDefinition"] = [];
+                    }
                     if (options.defaults) {
                         object.javaPackage = "";
                         object.javaOuterClassname = "";
@@ -49878,6 +51513,11 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length) {
+                        object[".google.api.resourceDefinition"] = [];
+                        for (var j = 0; j < message[".google.api.resourceDefinition"].length; ++j)
+                            object[".google.api.resourceDefinition"][j] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resourceDefinition"][j], options);
+                    }
                     return object;
                 };
     
@@ -49922,6 +51562,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -49981,6 +51622,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -50015,6 +51664,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -50065,6 +51716,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -50122,6 +51776,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -50155,6 +51814,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -50178,6 +51842,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -50192,6 +51857,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -50222,6 +51889,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -50234,6 +51903,7 @@
                  */
                 function FieldOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -50297,6 +51967,22 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -50335,6 +52021,14 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -50391,6 +52085,19 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1052:
+                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                message[".google.api.fieldBehavior"] = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message[".google.api.fieldBehavior"].push(reader.int32());
+                            } else
+                                message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -50466,6 +52173,27 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                        if (!Array.isArray(message[".google.api.fieldBehavior"]))
+                            return ".google.api.fieldBehavior: array expected";
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            switch (message[".google.api.fieldBehavior"][i]) {
+                            default:
+                                return ".google.api.fieldBehavior: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                break;
+                            }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
+                    }
                     return null;
                 };
     
@@ -50527,6 +52255,44 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.fieldBehavior"]) {
+                        if (!Array.isArray(object[".google.api.fieldBehavior"]))
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
+                        message[".google.api.fieldBehavior"] = [];
+                        for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
+                            switch (object[".google.api.fieldBehavior"][i]) {
+                            default:
+                            case "FIELD_BEHAVIOR_UNSPECIFIED":
+                            case 0:
+                                message[".google.api.fieldBehavior"][i] = 0;
+                                break;
+                            case "OPTIONAL":
+                            case 1:
+                                message[".google.api.fieldBehavior"][i] = 1;
+                                break;
+                            case "REQUIRED":
+                            case 2:
+                                message[".google.api.fieldBehavior"][i] = 2;
+                                break;
+                            case "OUTPUT_ONLY":
+                            case 3:
+                                message[".google.api.fieldBehavior"][i] = 3;
+                                break;
+                            case "INPUT_ONLY":
+                            case 4:
+                                message[".google.api.fieldBehavior"][i] = 4;
+                                break;
+                            case "IMMUTABLE":
+                            case 5:
+                                message[".google.api.fieldBehavior"][i] = 5;
+                                break;
+                            }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -50543,8 +52309,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.fieldBehavior"] = [];
+                    }
                     if (options.defaults) {
                         object.ctype = options.enums === String ? "STRING" : 0;
                         object.packed = false;
@@ -50552,6 +52320,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -50570,6 +52339,13 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
+                        object[".google.api.fieldBehavior"] = [];
+                        for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     
@@ -51320,6 +53096,8 @@
                  * @interface IServiceOptions
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
+                 * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
+                 * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
                  */
     
                 /**
@@ -51355,6 +53133,22 @@
                 ServiceOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * ServiceOptions .google.api.defaultHost.
+                 * @member {string} .google.api.defaultHost
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.defaultHost"] = "";
+    
+                /**
+                 * ServiceOptions .google.api.oauthScopes.
+                 * @member {string} .google.api.oauthScopes
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.oauthScopes"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -51383,6 +53177,10 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
                     return writer;
                 };
     
@@ -51424,6 +53222,12 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1049:
+                            message[".google.api.defaultHost"] = reader.string();
+                            break;
+                        case 1050:
+                            message[".google.api.oauthScopes"] = reader.string();
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -51472,6 +53276,12 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        if (!$util.isString(message[".google.api.defaultHost"]))
+                            return ".google.api.defaultHost: string expected";
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        if (!$util.isString(message[".google.api.oauthScopes"]))
+                            return ".google.api.oauthScopes: string expected";
                     return null;
                 };
     
@@ -51499,6 +53309,10 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.defaultHost"] != null)
+                        message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
+                    if (object[".google.api.oauthScopes"] != null)
+                        message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
                     return message;
                 };
     
@@ -51517,8 +53331,11 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object[".google.api.defaultHost"] = "";
+                        object[".google.api.oauthScopes"] = "";
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
@@ -51526,6 +53343,10 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                        object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
+                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                        object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
                     return object;
                 };
     
@@ -51553,6 +53374,7 @@
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
+                 * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
                  * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
                  */
     
@@ -51566,6 +53388,7 @@
                  */
                 function MethodOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -51603,6 +53426,14 @@
                  * @instance
                  */
                 MethodOptions.prototype[".google.api.http"] = null;
+    
+                /**
+                 * MethodOptions .google.api.methodSignature.
+                 * @member {Array.<string>} .google.api.methodSignature
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
     
                 /**
                  * MethodOptions .google.longrunning.operationInfo.
@@ -51645,6 +53476,9 @@
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
                     if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
                         $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork()).ldelim();
+                    if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         $root.google.api.HttpRule.encode(message[".google.api.http"], writer.uint32(/* id 72295728, wireType 2 =*/578365826).fork()).ldelim();
                     return writer;
@@ -51694,6 +53528,11 @@
                             break;
                         case 72295728:
                             message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                            break;
+                        case 1051:
+                            if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
+                                message[".google.api.methodSignature"] = [];
+                            message[".google.api.methodSignature"].push(reader.string());
                             break;
                         case 1049:
                             message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
@@ -51759,6 +53598,13 @@
                         if (error)
                             return ".google.api.http." + error;
                     }
+                    if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
+                        if (!Array.isArray(message[".google.api.methodSignature"]))
+                            return ".google.api.methodSignature: array expected";
+                        for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
+                            if (!$util.isString(message[".google.api.methodSignature"][i]))
+                                return ".google.api.methodSignature: string[] expected";
+                    }
                     if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
                         var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
                         if (error)
@@ -51810,6 +53656,13 @@
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
                         message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
                     }
+                    if (object[".google.api.methodSignature"]) {
+                        if (!Array.isArray(object[".google.api.methodSignature"]))
+                            throw TypeError(".google.protobuf.MethodOptions..google.api.methodSignature: array expected");
+                        message[".google.api.methodSignature"] = [];
+                        for (var i = 0; i < object[".google.api.methodSignature"].length; ++i)
+                            message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
+                    }
                     if (object[".google.longrunning.operationInfo"] != null) {
                         if (typeof object[".google.longrunning.operationInfo"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
@@ -51831,8 +53684,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.methodSignature"] = [];
+                    }
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
@@ -51850,6 +53705,11 @@
                     }
                     if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
                         object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options);
+                    if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
+                        object[".google.api.methodSignature"] = [];
+                        for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
+                            object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
+                    }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
                         object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options);
                     return object;

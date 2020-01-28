@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -321,7 +321,7 @@ const GceClusterConfig = {
 };
 
 /**
- * Optional. The config settings for Compute Engine resources in
+ * The config settings for Compute Engine resources in
  * an instance group, such as a master or worker group.
  *
  * @property {number} numInstances
@@ -372,13 +372,10 @@ const GceClusterConfig = {
  *   Optional. The Compute Engine accelerator configuration for these
  *   instances.
  *
- *   **Beta Feature**: This feature is still under development. It may be
- *   changed before final release.
- *
  *   This object should have the same structure as [AcceleratorConfig]{@link google.cloud.dataproc.v1beta2.AcceleratorConfig}
  *
  * @property {string} minCpuPlatform
- *   Optional. Specifies the minimum cpu platform for the Instance Group.
+ *   Specifies the minimum cpu platform for the Instance Group.
  *   See [Cloud Dataproc&rarr;Minimum CPU Platform]
  *   (/dataproc/docs/concepts/compute/dataproc-min-cpu).
  *
@@ -452,7 +449,7 @@ const AcceleratorConfig = {
  *   Optional. Size in GB of the boot disk (default is 500GB).
  *
  * @property {number} numLocalSsds
- *   Optional. Number of attached SSDs, from 0 to 4 (default is 0).
+ *   Number of attached SSDs, from 0 to 4 (default is 0).
  *   If SSDs are not attached, the boot disk is used to store runtime logs and
  *   [HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data.
  *   If one or more SSDs are attached, this runtime bulk
@@ -492,6 +489,12 @@ const DiskConfig = {
  *   Example: **"1d"**, to delete the cluster 1 day after its creation..
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} idleStartTime
+ *   Output only. The time when cluster became idle (most recent job finished)
+ *   and became eligible for deletion due to idleness.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @typedef LifecycleConfig
  * @memberof google.cloud.dataproc.v1beta2
@@ -581,6 +584,10 @@ const SecurityConfig = {
  *   Optional. The lifetime of the ticket granting ticket, in hours.
  *   If not specified, or user specifies 0, then default value 10
  *   will be used.
+ *
+ * @property {string} realm
+ *   Optional. The name of the on-cluster Kerberos realm.
+ *   If not specified, the uppercased domain of hostnames will be the realm.
  *
  * @typedef KerberosConfig
  * @memberof google.cloud.dataproc.v1beta2
@@ -999,7 +1006,7 @@ const GetClusterRequest = {
  *   Required. The Cloud Dataproc region in which to handle the request.
  *
  * @property {string} filter
- *   Optional. A filter constraining the clusters to list. Filters are
+ *   Optional.  A filter constraining the clusters to list. Filters are
  *   case-sensitive and have the following syntax:
  *
  *   field = value [AND [field = value]] ...

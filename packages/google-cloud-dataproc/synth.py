@@ -33,6 +33,9 @@ s.replace('src/**/doc/google/cloud/dataproc/v1beta2/doc_clusters.js',
         'https:\/\/cloud\.google\.com[\s\*]*\/compute\/',
         'https://cloud.google.com/compute/')
 
+s.replace('src/v1beta2/cluster_controller_client.js',
+          '\[Empty\]\(https:\/\/cloud\.google\.comgoogle\.protobuf\.Empty\)',
+          'an empty object')
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])

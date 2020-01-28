@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -148,6 +148,11 @@ const HadoopJob = {
 /**
  * A Cloud Dataproc job for running [Apache Spark](http://spark.apache.org/)
  * applications on YARN.
+ * The specification of the main method to call to drive the job.
+ * Specify either the jar file that contains the main class or the main class
+ * name. To pass both a main jar and a main class in that jar, add the jar to
+ * `CommonJob.jar_file_uris`, and then specify the main class name in
+ * `main_class`.
  *
  * @property {string} mainJarFileUri
  *   The HCFS URI of the jar file that contains the main class.
@@ -616,18 +621,18 @@ const JobReference = {
  * be changed before final release.
  *
  * @property {string} name
- *   Required. The application name.
+ *   Output only. The application name.
  *
  * @property {number} state
- *   Required. The application state.
+ *   Output only. The application state.
  *
  *   The number should be among the values of [State]{@link google.cloud.dataproc.v1beta2.State}
  *
  * @property {number} progress
- *   Required. The numerical progress of the application, from 1 to 100.
+ *   Output only. The numerical progress of the application, from 1 to 100.
  *
  * @property {string} trackingUrl
- *   Optional. The HTTP URL of the ApplicationMaster, HistoryServer, or
+ *   Optional. Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or
  *   TimelineServer that provides application-specific information. The URL uses
  *   the internal hostname, and requires a proxy server for resolution and,
  *   possibly, access.

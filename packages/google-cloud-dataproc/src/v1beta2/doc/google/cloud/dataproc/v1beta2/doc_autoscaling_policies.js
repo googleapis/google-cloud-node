@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,9 +26,16 @@
  *   or hyphen. Must consist of between 3 and 50 characters.
  *
  * @property {string} name
- *   Output only. The "resource name" of the policy, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+ *   Output only. The "resource name" of the autoscaling policy, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.autoscalingPolicies`, the resource name of the
+ *     policy has the following format:
+ *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+ *
+ *   * For `projects.locations.autoscalingPolicies`, the resource name of the
+ *     policy has the following format:
+ *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
  *
  * @property {Object} basicAlgorithm
  *   This object should have the same structure as [BasicAutoscalingAlgorithm]{@link google.cloud.dataproc.v1beta2.BasicAutoscalingAlgorithm}
@@ -182,12 +189,19 @@ const InstanceGroupAutoscalingPolicyConfig = {
  * A request to create an autoscaling policy.
  *
  * @property {string} parent
- *   Required. The "resource name" of the region, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}`.
+ *   Required. The "resource name" of the region or location, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.autoscalingPolicies.create`, the resource name
+ *     has the following format:
+ *     `projects/{project_id}/regions/{region}`
+ *
+ *   * For `projects.locations.autoscalingPolicies.create`, the resource name
+ *     has the following format:
+ *     `projects/{project_id}/locations/{location}`
  *
  * @property {Object} policy
- *   The autoscaling policy to create.
+ *   Required. The autoscaling policy to create.
  *
  *   This object should have the same structure as [AutoscalingPolicy]{@link google.cloud.dataproc.v1beta2.AutoscalingPolicy}
  *
@@ -204,8 +218,15 @@ const CreateAutoscalingPolicyRequest = {
  *
  * @property {string} name
  *   Required. The "resource name" of the autoscaling policy, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.autoscalingPolicies.get`, the resource name
+ *     of the policy has the following format:
+ *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+ *
+ *   * For `projects.locations.autoscalingPolicies.get`, the resource name
+ *     of the policy has the following format:
+ *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
  *
  * @typedef GetAutoscalingPolicyRequest
  * @memberof google.cloud.dataproc.v1beta2
@@ -238,8 +259,15 @@ const UpdateAutoscalingPolicyRequest = {
  *
  * @property {string} name
  *   Required. The "resource name" of the autoscaling policy, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.autoscalingPolicies.delete`, the resource name
+ *     of the policy has the following format:
+ *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+ *
+ *   * For `projects.locations.autoscalingPolicies.delete`, the resource name
+ *     of the policy has the following format:
+ *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
  *
  * @typedef DeleteAutoscalingPolicyRequest
  * @memberof google.cloud.dataproc.v1beta2
@@ -253,12 +281,20 @@ const DeleteAutoscalingPolicyRequest = {
  * A request to list autoscaling policies in a project.
  *
  * @property {string} parent
- *   Required. The "resource name" of the region, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}`
+ *   Required. The "resource name" of the region or location, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.autoscalingPolicies.list`, the resource name
+ *     of the region has the following format:
+ *     `projects/{project_id}/regions/{region}`
+ *
+ *   * For `projects.locations.autoscalingPolicies.list`, the resource name
+ *     of the location has the following format:
+ *     `projects/{project_id}/locations/{location}`
  *
  * @property {number} pageSize
  *   Optional. The maximum number of results to return in each response.
+ *   Must be less than or equal to 1000. Defaults to 100.
  *
  * @property {string} pageToken
  *   Optional. The page token, returned by a previous call, to request the

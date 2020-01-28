@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -289,7 +289,9 @@ class ClusterControllerClient {
   // -------------------
 
   /**
-   * Creates a cluster in a project.
+   * Creates a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -420,7 +422,9 @@ class ClusterControllerClient {
   }
 
   /**
-   * Updates a cluster in a project.
+   * Updates a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -639,7 +643,9 @@ class ClusterControllerClient {
   }
 
   /**
-   * Deletes a cluster in a project.
+   * Deletes a cluster in a project. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -840,7 +846,7 @@ class ClusterControllerClient {
    * @param {string} request.region
    *   Required. The Cloud Dataproc region in which to handle the request.
    * @param {string} [request.filter]
-   *   Optional. A filter constraining the clusters to list. Filters are
+   *   Optional.  A filter constraining the clusters to list. Filters are
    *   case-sensitive and have the following syntax:
    *
    *   field = value [AND [field = value]] ...
@@ -978,7 +984,7 @@ class ClusterControllerClient {
    * @param {string} request.region
    *   Required. The Cloud Dataproc region in which to handle the request.
    * @param {string} [request.filter]
-   *   Optional. A filter constraining the clusters to list. Filters are
+   *   Optional.  A filter constraining the clusters to list. Filters are
    *   case-sensitive and have the following syntax:
    *
    *   field = value [AND [field = value]] ...
@@ -1041,9 +1047,13 @@ class ClusterControllerClient {
   }
 
   /**
-   * Gets cluster diagnostic information.
-   * After the operation completes, the Operation.response field
-   * contains `DiagnoseClusterOutputLocation`.
+   * Gets cluster diagnostic information. The returned
+   * Operation.metadata will be
+   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * After the operation completes,
+   * Operation.response
+   * contains
+   * an empty object.
    *
    * @param {Object} request
    *   The request object that will be sent.

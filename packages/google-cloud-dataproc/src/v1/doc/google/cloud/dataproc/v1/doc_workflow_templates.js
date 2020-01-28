@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,19 +16,21 @@
 // to be loaded as the JS file.
 
 /**
- * A Cloud Dataproc workflow template resource.
+ * A Dataproc workflow template resource.
  *
  * @property {string} id
- *   Required. The template id.
- *
- *   The id must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). Cannot begin or end with underscore
- *   or hyphen. Must consist of between 3 and 50 characters.
  *
  * @property {string} name
- *   Output only. The "resource name" of the template, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *   Output only. The resource name of the workflow template, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *
+ *   * For `projects.locations.workflowTemplates`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
  *
  * @property {number} version
  *   Optional. Used to perform a consistent read-modify-write.
@@ -76,7 +78,7 @@
  *   This object should have the same structure as [OrderedJob]{@link google.cloud.dataproc.v1.OrderedJob}
  *
  * @property {Object[]} parameters
- *   Optional. Template parameters whose values are substituted into the
+ *   Optional. emplate parameters whose values are substituted into the
  *   template. Values for parameters must be provided when the template is
  *   instantiated.
  *
@@ -96,7 +98,7 @@ const WorkflowTemplate = {
  * Either `managed_cluster` or `cluster_selector` is required.
  *
  * @property {Object} managedCluster
- *   Optional. A cluster that is managed by the workflow.
+ *   A cluster that is managed by the workflow.
  *
  *   This object should have the same structure as [ManagedCluster]{@link google.cloud.dataproc.v1.ManagedCluster}
  *
@@ -261,7 +263,7 @@ const OrderedJob = {
  * - Zone (in ClusterSelector)
  *
  * @property {string} name
- *   Required.  Parameter name.
+ *   Required. Parameter name.
  *   The parameter name is used as the key, and paired with the
  *   parameter value, which are passed to the template when the template
  *   is instantiated.
@@ -384,10 +386,19 @@ const ValueValidation = {
 };
 
 /**
- * A Cloud Dataproc workflow template resource.
+ * A Dataproc workflow template resource.
  *
  * @property {string} template
- *   Output only. The "resource name" of the template.
+ *   Output only. The resource name of the workflow template as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *
+ *   * For `projects.locations.workflowTemplates`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
  *
  * @property {number} version
  *   Output only. The version of template at the time of
@@ -577,9 +588,16 @@ const WorkflowNode = {
  * A request to create a workflow template.
  *
  * @property {string} parent
- *   Required. The "resource name" of the region, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}`
+ *   Required. The resource name of the region or location, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates,create`, the resource name of the
+ *     region has the following format:
+ *     `projects/{project_id}/regions/{region}`
+ *
+ *   * For `projects.locations.workflowTemplates.create`, the resource name of
+ *     the location has the following format:
+ *     `projects/{project_id}/locations/{location}`
  *
  * @property {Object} template
  *   Required. The Dataproc workflow template to create.
@@ -598,13 +616,20 @@ const CreateWorkflowTemplateRequest = {
  * A request to fetch a workflow template.
  *
  * @property {string} name
- *   Required. The "resource name" of the workflow template, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *   Required. The resource name of the workflow template, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates.get`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *
+ *   * For `projects.locations.workflowTemplates.get`, the resource name of the
+ *     template has the following format:
+ *     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
  *
  * @property {number} version
  *   Optional. The version of workflow template to retrieve. Only previously
- *   instatiated versions can be retrieved.
+ *   instantiated versions can be retrieved.
  *
  *   If unspecified, retrieves the current version.
  *
@@ -620,9 +645,16 @@ const GetWorkflowTemplateRequest = {
  * A request to instantiate a workflow template.
  *
  * @property {string} name
- *   Required. The "resource name" of the workflow template, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *   Required. The resource name of the workflow template, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates.instantiate`, the resource name
+ *   of the template has the following format:
+ *     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *
+ *   * For `projects.locations.workflowTemplates.instantiate`, the resource name
+ *     of the template has the following format:
+ *     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
  *
  * @property {number} version
  *   Optional. The version of workflow template to instantiate. If specified,
@@ -659,9 +691,16 @@ const InstantiateWorkflowTemplateRequest = {
  * A request to instantiate an inline workflow template.
  *
  * @property {string} parent
- *   Required. The "resource name" of the workflow template region, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}`
+ *   Required. The resource name of the region or location, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates,instantiateinline`, the resource
+ *     name of the region has the following format:
+ *     `projects/{project_id}/regions/{region}`
+ *
+ *   * For `projects.locations.workflowTemplates.instantiateinline`, the
+ *     resource name of the location has the following format:
+ *     `projects/{project_id}/locations/{location}`
  *
  * @property {Object} template
  *   Required. The workflow template to instantiate.
@@ -709,9 +748,16 @@ const UpdateWorkflowTemplateRequest = {
  * A request to list workflow templates in a project.
  *
  * @property {string} parent
- *   Required. The "resource name" of the region, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}`
+ *   Required. The resource name of the region or location, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates,list`, the resource
+ *     name of the region has the following format:
+ *     `projects/{project_id}/regions/{region}`
+ *
+ *   * For `projects.locations.workflowTemplates.list`, the
+ *     resource name of the location has the following format:
+ *     `projects/{project_id}/locations/{location}`
  *
  * @property {number} pageSize
  *   Optional. The maximum number of results to return in each response.
@@ -755,9 +801,16 @@ const ListWorkflowTemplatesResponse = {
  * Currently started workflows will remain running.
  *
  * @property {string} name
- *   Required. The "resource name" of the workflow template, as described
- *   in https://cloud.google.com/apis/design/resource_names of the form
- *   `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *   Required. The resource name of the workflow template, as described
+ *   in https://cloud.google.com/apis/design/resource_names.
+ *
+ *   * For `projects.regions.workflowTemplates.delete`, the resource name
+ *   of the template has the following format:
+ *     `projects/{project_id}/regions/{region}/workflowTemplates/{template_id}`
+ *
+ *   * For `projects.locations.workflowTemplates.instantiate`, the resource name
+ *     of the template has the following format:
+ *     `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
  *
  * @property {number} version
  *   Optional. The version of workflow template to delete. If specified,

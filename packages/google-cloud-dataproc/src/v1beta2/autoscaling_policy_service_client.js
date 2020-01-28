@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -244,11 +244,18 @@ class AutoscalingPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region, as described
-   *   in https://cloud.google.com/apis/design/resource_names of the form
-   *   `projects/{project_id}/regions/{region}`.
+   *   Required. The "resource name" of the region or location, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.create`, the resource name
+   *     has the following format:
+   *     `projects/{project_id}/regions/{region}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.create`, the resource name
+   *     has the following format:
+   *     `projects/{project_id}/locations/{location}`
    * @param {Object} request.policy
-   *   The autoscaling policy to create.
+   *   Required. The autoscaling policy to create.
    *
    *   This object should have the same structure as [AutoscalingPolicy]{@link google.cloud.dataproc.v1beta2.AutoscalingPolicy}
    * @param {Object} [options]
@@ -377,8 +384,15 @@ class AutoscalingPolicyServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names of the form
-   *   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.get`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.get`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -432,9 +446,16 @@ class AutoscalingPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region, as described
-   *   in https://cloud.google.com/apis/design/resource_names of the form
-   *   `projects/{project_id}/regions/{region}`
+   *   Required. The "resource name" of the region or location, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.list`, the resource name
+   *     of the region has the following format:
+   *     `projects/{project_id}/regions/{region}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.list`, the resource name
+   *     of the location has the following format:
+   *     `projects/{project_id}/locations/{location}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -550,9 +571,16 @@ class AutoscalingPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region, as described
-   *   in https://cloud.google.com/apis/design/resource_names of the form
-   *   `projects/{project_id}/regions/{region}`
+   *   Required. The "resource name" of the region or location, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.list`, the resource name
+   *     of the region has the following format:
+   *     `projects/{project_id}/regions/{region}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.list`, the resource name
+   *     of the location has the following format:
+   *     `projects/{project_id}/locations/{location}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -599,8 +627,15 @@ class AutoscalingPolicyServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names of the form
-   *   `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`.
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.delete`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.delete`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

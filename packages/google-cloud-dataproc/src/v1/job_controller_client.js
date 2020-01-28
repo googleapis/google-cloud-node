@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -233,7 +233,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {Object} request.job
    *   Required. The job resource.
    *
@@ -306,7 +306,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {string} request.jobId
    *   Required. The job ID.
    * @param {Object} [options]
@@ -365,7 +365,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -508,7 +508,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -586,7 +586,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {string} request.jobId
    *   Required. The job ID.
    * @param {Object} request.job
@@ -666,7 +666,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {string} request.jobId
    *   Required. The job ID.
    * @param {Object} [options]
@@ -726,7 +726,7 @@ class JobControllerClient {
    *   Required. The ID of the Google Cloud Platform project that the job
    *   belongs to.
    * @param {string} request.region
-   *   Required. The Cloud Dataproc region in which to handle the request.
+   *   Required. The Dataproc region in which to handle the request.
    * @param {string} request.jobId
    *   Required. The job ID.
    * @param {Object} [options]

@@ -1,0 +1,402 @@
+{
+  "updateTime": "2020-01-28T21:47:06.148353Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.3",
+        "dockerImage": "googleapis/artman@sha256:62b8b29acaae54b06a4183aa772e65b106e92d4bc466eb4db07953ab78bdb90c"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "e19209fac29731d0baf6d9ac23da1164f7bdca24",
+        "internalRef": "291999930"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dataproc",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/dataproc/artman_dataproc_v1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dataproc",
+        "apiVersion": "v1beta2",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/dataproc/artman_dataproc_v1beta2.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/autoscaling_policies.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/clusters.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/jobs.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/operations.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/shared.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1/workflow_templates.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/autoscaling_policies.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/clusters.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/jobs.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/operations.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/shared.proto"
+    },
+    {
+      "path": "protos/google/cloud/dataproc/v1beta2/workflow_templates.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "smoke-test/cluster_controller_smoke_test.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/v1/cluster_controller_client.js"
+    },
+    {
+      "path": "src/v1/cluster_controller_client_config.json"
+    },
+    {
+      "path": "src/v1/cluster_controller_proto_list.json"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/dataproc/v1/doc_autoscaling_policies.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/dataproc/v1/doc_clusters.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/dataproc/v1/doc_jobs.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/dataproc/v1/doc_workflow_templates.js"
+    },
+    {
+      "path": "src/v1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1/index.js"
+    },
+    {
+      "path": "src/v1/job_controller_client.js"
+    },
+    {
+      "path": "src/v1/job_controller_client_config.json"
+    },
+    {
+      "path": "src/v1/job_controller_proto_list.json"
+    },
+    {
+      "path": "src/v1/workflow_template_service_client.js"
+    },
+    {
+      "path": "src/v1/workflow_template_service_client_config.json"
+    },
+    {
+      "path": "src/v1/workflow_template_service_proto_list.json"
+    },
+    {
+      "path": "src/v1beta2/autoscaling_policy_service_client.js"
+    },
+    {
+      "path": "src/v1beta2/autoscaling_policy_service_client_config.json"
+    },
+    {
+      "path": "src/v1beta2/autoscaling_policy_service_proto_list.json"
+    },
+    {
+      "path": "src/v1beta2/cluster_controller_client.js"
+    },
+    {
+      "path": "src/v1beta2/cluster_controller_client_config.json"
+    },
+    {
+      "path": "src/v1beta2/cluster_controller_proto_list.json"
+    },
+    {
+      "path": "src/v1beta2/doc/google/cloud/dataproc/v1beta2/doc_autoscaling_policies.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/cloud/dataproc/v1beta2/doc_clusters.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/cloud/dataproc/v1beta2/doc_jobs.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/cloud/dataproc/v1beta2/doc_workflow_templates.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1beta2/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1beta2/index.js"
+    },
+    {
+      "path": "src/v1beta2/job_controller_client.js"
+    },
+    {
+      "path": "src/v1beta2/job_controller_client_config.json"
+    },
+    {
+      "path": "src/v1beta2/job_controller_proto_list.json"
+    },
+    {
+      "path": "src/v1beta2/workflow_template_service_client.js"
+    },
+    {
+      "path": "src/v1beta2/workflow_template_service_client_config.json"
+    },
+    {
+      "path": "src/v1beta2/workflow_template_service_proto_list.json"
+    },
+    {
+      "path": "test/gapic-v1.js"
+    },
+    {
+      "path": "test/gapic-v1beta2.js"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}
