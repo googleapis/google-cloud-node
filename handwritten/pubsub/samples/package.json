@@ -16,7 +16,7 @@
     "test": "mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^1.4.0"
+    "@google-cloud/pubsub": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
