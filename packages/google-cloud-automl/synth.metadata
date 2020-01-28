@@ -1,0 +1,1266 @@
+{
+  "updateTime": "2020-01-28T12:10:23.204966Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.44.3",
+        "dockerImage": "googleapis/artman@sha256:62b8b29acaae54b06a4183aa772e65b106e92d4bc466eb4db07953ab78bdb90c"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
+        "internalRef": "291821782"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "automl",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/automl/artman_automl_v1beta1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "automl",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/automl/artman_automl_v1.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".eslintignore"
+    },
+    {
+      "path": ".eslintrc.yml"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/support_request.md"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
+    },
+    {
+      "path": ".kokoro/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/docs.sh"
+    },
+    {
+      "path": ".kokoro/lint.sh"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/system-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node10/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node12/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/common.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/windows/test.cfg"
+    },
+    {
+      "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.cfg"
+    },
+    {
+      "path": ".kokoro/release/docs.sh"
+    },
+    {
+      "path": ".kokoro/release/publish.cfg"
+    },
+    {
+      "path": ".kokoro/samples-test.sh"
+    },
+    {
+      "path": ".kokoro/system-test.sh"
+    },
+    {
+      "path": ".kokoro/test.bat"
+    },
+    {
+      "path": ".kokoro/test.sh"
+    },
+    {
+      "path": ".kokoro/trampoline.sh"
+    },
+    {
+      "path": ".nycrc"
+    },
+    {
+      "path": ".prettierignore"
+    },
+    {
+      "path": ".prettierrc"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "codecov.yaml"
+    },
+    {
+      "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/annotation_payload.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/annotation_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/classification.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/data_items.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/dataset.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/detection.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/geometry.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/image.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/io.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/model.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/model_evaluation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/operations.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/prediction_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_extraction.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_segment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/text_sentiment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1/translation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/annotation_payload.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/annotation_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/classification.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/column_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_items.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_stats.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/data_types.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/dataset.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/detection.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/geometry.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/image.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/io.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/model.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/model_evaluation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/operations.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/prediction_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/ranges.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/regression.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/service.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/table_spec.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/tables.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/temporal.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_extraction.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_segment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/text_sentiment.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/translation.proto"
+    },
+    {
+      "path": "protos/google/cloud/automl/v1beta1/video.proto"
+    },
+    {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
+      "path": "renovate.json"
+    },
+    {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/README.md"
+    },
+    {
+      "path": "samples/batch_predict.js"
+    },
+    {
+      "path": "samples/beta/setEndpoint.js"
+    },
+    {
+      "path": "samples/delete_dataset.js"
+    },
+    {
+      "path": "samples/delete_model.js"
+    },
+    {
+      "path": "samples/deploy_model.js"
+    },
+    {
+      "path": "samples/export_dataset.js"
+    },
+    {
+      "path": "samples/get_dataset.js"
+    },
+    {
+      "path": "samples/get_model.js"
+    },
+    {
+      "path": "samples/get_model_evaluation.js"
+    },
+    {
+      "path": "samples/get_operation_status.js"
+    },
+    {
+      "path": "samples/import_dataset.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/list-operations-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/language/entity-extraction/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/language/sentiment-analysis/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_create_dataset.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_create_model.js"
+    },
+    {
+      "path": "samples/language_entity_extraction_predict.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_create_dataset.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_create_model.js"
+    },
+    {
+      "path": "samples/language_sentiment_analysis_predict.js"
+    },
+    {
+      "path": "samples/language_text_classification_create_dataset.js"
+    },
+    {
+      "path": "samples/language_text_classification_create_model.js"
+    },
+    {
+      "path": "samples/language_text_classification_predict.js"
+    },
+    {
+      "path": "samples/list_datasets.js"
+    },
+    {
+      "path": "samples/list_model_evaluations.js"
+    },
+    {
+      "path": "samples/list_models.js"
+    },
+    {
+      "path": "samples/list_operation_status.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/resources/input.txt"
+    },
+    {
+      "path": "samples/resources/salad.jpg"
+    },
+    {
+      "path": "samples/resources/test.png"
+    },
+    {
+      "path": "samples/tables/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-data-to-bigquery.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-data-to-csv.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/export-evaluated-examples.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-column-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/get-table-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-column-specs.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/list-table-specs.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-bq-source-bq-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-bq-source-gcs-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-gcs-source-bq-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict-gcs-source-gcs-dest.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/update-column-spec.v1beta1.js"
+    },
+    {
+      "path": "samples/tables/update-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/test/automlLangaugeSentimentDataSet.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityDataSet.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageEntityPrediction.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageSentimentModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlLanguageSentimentPrediction.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlTablesPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlTranslation.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVideoIntelligenceClassificationPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVision.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionDataset.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionModel.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/automlVisionObjectDetectionPredict.v1beta1.test.js"
+    },
+    {
+      "path": "samples/test/batch_predict.test.js"
+    },
+    {
+      "path": "samples/test/delete_dataset.test.js"
+    },
+    {
+      "path": "samples/test/delete_model.test.js"
+    },
+    {
+      "path": "samples/test/deploy_model.test.js"
+    },
+    {
+      "path": "samples/test/export_dataset.test.js"
+    },
+    {
+      "path": "samples/test/get_dataset.test.js"
+    },
+    {
+      "path": "samples/test/get_model.test.js"
+    },
+    {
+      "path": "samples/test/get_model_evaluation.test.js"
+    },
+    {
+      "path": "samples/test/get_operation_status.test.js"
+    },
+    {
+      "path": "samples/test/import_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_create_model.test.js"
+    },
+    {
+      "path": "samples/test/language_entity_extraction_predict.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_create_model.test.js"
+    },
+    {
+      "path": "samples/test/language_sentiment_analysis_predict.test.js"
+    },
+    {
+      "path": "samples/test/language_text_classification_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/language_text_classification_create_model.test.js"
+    },
+    {
+      "path": "samples/test/language_text_classification_predict.test.js"
+    },
+    {
+      "path": "samples/test/list_datasets.test.js"
+    },
+    {
+      "path": "samples/test/list_model_evaluations.test.js"
+    },
+    {
+      "path": "samples/test/list_models.test.js"
+    },
+    {
+      "path": "samples/test/list_operation_status.test.js"
+    },
+    {
+      "path": "samples/test/setEndpoint.test.js"
+    },
+    {
+      "path": "samples/test/translate_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/translate_create_model.test.js"
+    },
+    {
+      "path": "samples/test/translate_predict.test.js"
+    },
+    {
+      "path": "samples/test/undeploy_model.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_create_model.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_deploy_model_node_count.test.js"
+    },
+    {
+      "path": "samples/test/vision_classification_predict.test.js"
+    },
+    {
+      "path": "samples/test/vision_object_detection_create_dataset.test.js"
+    },
+    {
+      "path": "samples/test/vision_object_detection_create_model.test.js"
+    },
+    {
+      "path": "samples/test/vision_object_detection_deploy_model_node_count.test.js"
+    },
+    {
+      "path": "samples/test/vision_object_detection_predict.test.js"
+    },
+    {
+      "path": "samples/translate/datasets/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/datasets/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-model-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/models/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/translate/prediction/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/translate_create_dataset.js"
+    },
+    {
+      "path": "samples/translate_create_model.js"
+    },
+    {
+      "path": "samples/translate_predict.js"
+    },
+    {
+      "path": "samples/undeploy_model.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/video-intelligence/classification/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/automlVisionDataset.js"
+    },
+    {
+      "path": "samples/vision/automlVisionModel.js"
+    },
+    {
+      "path": "samples/vision/automlVisionPredict.js"
+    },
+    {
+      "path": "samples/vision/object-detection/create-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/create-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/delete-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/delete-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/deploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/display-evaluation.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/export-data.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-dataset.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/get-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/import-data.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-datasets.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-model-evaluations.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-models.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/list-operation-status.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/predict.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/object-detection/undeploy-model.v1beta1.js"
+    },
+    {
+      "path": "samples/vision/resources/flowerTraindata20lines.csv"
+    },
+    {
+      "path": "samples/vision/resources/songbird.jpg"
+    },
+    {
+      "path": "samples/vision/resources/testImage.jpg"
+    },
+    {
+      "path": "samples/vision/resources/testImage2.jpg"
+    },
+    {
+      "path": "samples/vision_classification_create_dataset.js"
+    },
+    {
+      "path": "samples/vision_classification_create_model.js"
+    },
+    {
+      "path": "samples/vision_classification_deploy_model_node_count.js"
+    },
+    {
+      "path": "samples/vision_classification_predict.js"
+    },
+    {
+      "path": "samples/vision_object_detection_create_dataset.js"
+    },
+    {
+      "path": "samples/vision_object_detection_create_model.js"
+    },
+    {
+      "path": "samples/vision_object_detection_deploy_model_node_count.js"
+    },
+    {
+      "path": "samples/vision_object_detection_predict.js"
+    },
+    {
+      "path": "src/browser.js"
+    },
+    {
+      "path": "src/extra_proto_list.json"
+    },
+    {
+      "path": "src/index.js"
+    },
+    {
+      "path": "src/v1/auto_ml_client.js"
+    },
+    {
+      "path": "src/v1/auto_ml_client_config.json"
+    },
+    {
+      "path": "src/v1/auto_ml_proto_list.json"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_payload.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_annotation_spec.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_classification.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_data_items.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_dataset.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_detection.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_geometry.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_image.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_io.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_model.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_model_evaluation.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_prediction_service.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_service.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_extraction.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_segment.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_text_sentiment.js"
+    },
+    {
+      "path": "src/v1/doc/google/cloud/automl/v1/doc_translation.js"
+    },
+    {
+      "path": "src/v1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1/index.js"
+    },
+    {
+      "path": "src/v1/prediction_service_client.js"
+    },
+    {
+      "path": "src/v1/prediction_service_client_config.json"
+    },
+    {
+      "path": "src/v1/prediction_service_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_client.js"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_client_config.json"
+    },
+    {
+      "path": "src/v1beta1/auto_ml_proto_list.json"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_payload.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_annotation_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_classification.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_column_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_items.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_stats.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_data_types.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_dataset.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_detection.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_geometry.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_image.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_io.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_model_evaluation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_prediction_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_ranges.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_regression.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_table_spec.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_tables.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_temporal.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_extraction.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_segment.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_text_sentiment.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_translation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/automl/v1beta1/doc_video.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_struct.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
+    },
+    {
+      "path": "src/v1beta1/index.js"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_client.js"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_client_config.json"
+    },
+    {
+      "path": "src/v1beta1/prediction_service_proto_list.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/automl.js"
+    },
+    {
+      "path": "test/gapic-v1.js"
+    },
+    {
+      "path": "test/gapic-v1beta1.js"
+    },
+    {
+      "path": "test/mocha.opts"
+    },
+    {
+      "path": "webpack.config.js"
+    }
+  ]
+}

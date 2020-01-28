@@ -1425,7 +1425,7 @@ export namespace google {
                 interface IImageClassificationDatasetMetadata {
 
                     /** ImageClassificationDatasetMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType|null);
                 }
 
                 /** Represents an ImageClassificationDatasetMetadata. */
@@ -1438,7 +1438,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IImageClassificationDatasetMetadata);
 
                     /** ImageClassificationDatasetMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType);
 
                     /**
                      * Creates a new ImageClassificationDatasetMetadata instance using the specified properties.
@@ -1602,10 +1602,10 @@ export namespace google {
                     baseModelId?: (string|null);
 
                     /** ImageClassificationModelMetadata trainBudgetMilliNodeHours */
-                    trainBudgetMilliNodeHours?: (number|Long|null);
+                    trainBudgetMilliNodeHours?: (number|Long|string|null);
 
                     /** ImageClassificationModelMetadata trainCostMilliNodeHours */
-                    trainCostMilliNodeHours?: (number|Long|null);
+                    trainCostMilliNodeHours?: (number|Long|string|null);
 
                     /** ImageClassificationModelMetadata stopReason */
                     stopReason?: (string|null);
@@ -1617,7 +1617,7 @@ export namespace google {
                     nodeQps?: (number|null);
 
                     /** ImageClassificationModelMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageClassificationModelMetadata. */
@@ -1633,10 +1633,10 @@ export namespace google {
                     public baseModelId: string;
 
                     /** ImageClassificationModelMetadata trainBudgetMilliNodeHours. */
-                    public trainBudgetMilliNodeHours: (number|Long);
+                    public trainBudgetMilliNodeHours: (number|Long|string);
 
                     /** ImageClassificationModelMetadata trainCostMilliNodeHours. */
-                    public trainCostMilliNodeHours: (number|Long);
+                    public trainCostMilliNodeHours: (number|Long|string);
 
                     /** ImageClassificationModelMetadata stopReason. */
                     public stopReason: string;
@@ -1648,7 +1648,7 @@ export namespace google {
                     public nodeQps: number;
 
                     /** ImageClassificationModelMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageClassificationModelMetadata instance using the specified properties.
@@ -1728,7 +1728,7 @@ export namespace google {
                     modelType?: (string|null);
 
                     /** ImageObjectDetectionModelMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
 
                     /** ImageObjectDetectionModelMetadata nodeQps */
                     nodeQps?: (number|null);
@@ -1737,10 +1737,10 @@ export namespace google {
                     stopReason?: (string|null);
 
                     /** ImageObjectDetectionModelMetadata trainBudgetMilliNodeHours */
-                    trainBudgetMilliNodeHours?: (number|Long|null);
+                    trainBudgetMilliNodeHours?: (number|Long|string|null);
 
                     /** ImageObjectDetectionModelMetadata trainCostMilliNodeHours */
-                    trainCostMilliNodeHours?: (number|Long|null);
+                    trainCostMilliNodeHours?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageObjectDetectionModelMetadata. */
@@ -1756,7 +1756,7 @@ export namespace google {
                     public modelType: string;
 
                     /** ImageObjectDetectionModelMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /** ImageObjectDetectionModelMetadata nodeQps. */
                     public nodeQps: number;
@@ -1765,10 +1765,10 @@ export namespace google {
                     public stopReason: string;
 
                     /** ImageObjectDetectionModelMetadata trainBudgetMilliNodeHours. */
-                    public trainBudgetMilliNodeHours: (number|Long);
+                    public trainBudgetMilliNodeHours: (number|Long|string);
 
                     /** ImageObjectDetectionModelMetadata trainCostMilliNodeHours. */
-                    public trainCostMilliNodeHours: (number|Long);
+                    public trainCostMilliNodeHours: (number|Long|string);
 
                     /**
                      * Creates a new ImageObjectDetectionModelMetadata instance using the specified properties.
@@ -1845,7 +1845,7 @@ export namespace google {
                 interface IImageClassificationModelDeploymentMetadata {
 
                     /** ImageClassificationModelDeploymentMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageClassificationModelDeploymentMetadata. */
@@ -1858,7 +1858,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IImageClassificationModelDeploymentMetadata);
 
                     /** ImageClassificationModelDeploymentMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageClassificationModelDeploymentMetadata instance using the specified properties.
@@ -1935,7 +1935,7 @@ export namespace google {
                 interface IImageObjectDetectionModelDeploymentMetadata {
 
                     /** ImageObjectDetectionModelDeploymentMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageObjectDetectionModelDeploymentMetadata. */
@@ -1948,7 +1948,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IImageObjectDetectionModelDeploymentMetadata);
 
                     /** ImageObjectDetectionModelDeploymentMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageObjectDetectionModelDeploymentMetadata instance using the specified properties.
@@ -2376,16 +2376,16 @@ export namespace google {
                         f1ScoreAt1?: (number|null);
 
                         /** ConfidenceMetricsEntry truePositiveCount */
-                        truePositiveCount?: (number|Long|null);
+                        truePositiveCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry falsePositiveCount */
-                        falsePositiveCount?: (number|Long|null);
+                        falsePositiveCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry falseNegativeCount */
-                        falseNegativeCount?: (number|Long|null);
+                        falseNegativeCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry trueNegativeCount */
-                        trueNegativeCount?: (number|Long|null);
+                        trueNegativeCount?: (number|Long|string|null);
                     }
 
                     /** Represents a ConfidenceMetricsEntry. */
@@ -2428,16 +2428,16 @@ export namespace google {
                         public f1ScoreAt1: number;
 
                         /** ConfidenceMetricsEntry truePositiveCount. */
-                        public truePositiveCount: (number|Long);
+                        public truePositiveCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry falsePositiveCount. */
-                        public falsePositiveCount: (number|Long);
+                        public falsePositiveCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry falseNegativeCount. */
-                        public falseNegativeCount: (number|Long);
+                        public falseNegativeCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry trueNegativeCount. */
-                        public trueNegativeCount: (number|Long);
+                        public trueNegativeCount: (number|Long|string);
 
                         /**
                          * Creates a new ConfidenceMetricsEntry instance using the specified properties.
@@ -2710,7 +2710,7 @@ export namespace google {
                 interface ITextClassificationDatasetMetadata {
 
                     /** TextClassificationDatasetMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType|null);
                 }
 
                 /** Represents a TextClassificationDatasetMetadata. */
@@ -2723,7 +2723,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.ITextClassificationDatasetMetadata);
 
                     /** TextClassificationDatasetMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType);
 
                     /**
                      * Creates a new TextClassificationDatasetMetadata instance using the specified properties.
@@ -2800,7 +2800,7 @@ export namespace google {
                 interface ITextClassificationModelMetadata {
 
                     /** TextClassificationModelMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType|null);
                 }
 
                 /** Represents a TextClassificationModelMetadata. */
@@ -2813,7 +2813,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.ITextClassificationModelMetadata);
 
                     /** TextClassificationModelMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1.ClassificationType|keyof typeof google.cloud.automl.v1.ClassificationType);
 
                     /**
                      * Creates a new TextClassificationModelMetadata instance using the specified properties.
@@ -3616,7 +3616,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image imageBytes */
-                    imageBytes?: (Uint8Array|null);
+                    imageBytes?: (Uint8Array|string|null);
 
                     /** Image thumbnailUri */
                     thumbnailUri?: (string|null);
@@ -3632,7 +3632,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IImage);
 
                     /** Image imageBytes. */
-                    public imageBytes: Uint8Array;
+                    public imageBytes: (Uint8Array|string);
 
                     /** Image thumbnailUri. */
                     public thumbnailUri: string;
@@ -3817,7 +3817,7 @@ export namespace google {
                 interface IDocumentDimensions {
 
                     /** DocumentDimensions unit */
-                    unit?: (google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit|null);
+                    unit?: (google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit|keyof typeof google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit|null);
 
                     /** DocumentDimensions width */
                     width?: (number|null);
@@ -3836,7 +3836,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IDocumentDimensions);
 
                     /** DocumentDimensions unit. */
-                    public unit: google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit;
+                    public unit: (google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit|keyof typeof google.cloud.automl.v1.DocumentDimensions.DocumentDimensionUnit);
 
                     /** DocumentDimensions width. */
                     public width: number;
@@ -4055,7 +4055,7 @@ export namespace google {
                         boundingPoly?: (google.cloud.automl.v1.IBoundingPoly|null);
 
                         /** Layout textSegmentType */
-                        textSegmentType?: (google.cloud.automl.v1.Document.Layout.TextSegmentType|null);
+                        textSegmentType?: (google.cloud.automl.v1.Document.Layout.TextSegmentType|keyof typeof google.cloud.automl.v1.Document.Layout.TextSegmentType|null);
                     }
 
                     /** Represents a Layout. */
@@ -4077,7 +4077,7 @@ export namespace google {
                         public boundingPoly?: (google.cloud.automl.v1.IBoundingPoly|null);
 
                         /** Layout textSegmentType. */
-                        public textSegmentType: google.cloud.automl.v1.Document.Layout.TextSegmentType;
+                        public textSegmentType: (google.cloud.automl.v1.Document.Layout.TextSegmentType|keyof typeof google.cloud.automl.v1.Document.Layout.TextSegmentType);
 
                         /**
                          * Creates a new Layout instance using the specified properties.
@@ -5219,10 +5219,10 @@ export namespace google {
                     content?: (string|null);
 
                     /** TextSegment startOffset */
-                    startOffset?: (number|Long|null);
+                    startOffset?: (number|Long|string|null);
 
                     /** TextSegment endOffset */
-                    endOffset?: (number|Long|null);
+                    endOffset?: (number|Long|string|null);
                 }
 
                 /** Represents a TextSegment. */
@@ -5238,10 +5238,10 @@ export namespace google {
                     public content: string;
 
                     /** TextSegment startOffset. */
-                    public startOffset: (number|Long);
+                    public startOffset: (number|Long|string);
 
                     /** TextSegment endOffset. */
-                    public endOffset: (number|Long);
+                    public endOffset: (number|Long|string);
 
                     /**
                      * Creates a new TextSegment instance using the specified properties.
@@ -7034,7 +7034,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** Model deploymentState */
-                    deploymentState?: (google.cloud.automl.v1.Model.DeploymentState|null);
+                    deploymentState?: (google.cloud.automl.v1.Model.DeploymentState|keyof typeof google.cloud.automl.v1.Model.DeploymentState|null);
 
                     /** Model etag */
                     etag?: (string|null);
@@ -7086,7 +7086,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** Model deploymentState. */
-                    public deploymentState: google.cloud.automl.v1.Model.DeploymentState;
+                    public deploymentState: (google.cloud.automl.v1.Model.DeploymentState|keyof typeof google.cloud.automl.v1.Model.DeploymentState);
 
                     /** Model etag. */
                     public etag: string;
@@ -13462,16 +13462,16 @@ export namespace google {
                         f1ScoreAt1?: (number|null);
 
                         /** ConfidenceMetricsEntry truePositiveCount */
-                        truePositiveCount?: (number|Long|null);
+                        truePositiveCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry falsePositiveCount */
-                        falsePositiveCount?: (number|Long|null);
+                        falsePositiveCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry falseNegativeCount */
-                        falseNegativeCount?: (number|Long|null);
+                        falseNegativeCount?: (number|Long|string|null);
 
                         /** ConfidenceMetricsEntry trueNegativeCount */
-                        trueNegativeCount?: (number|Long|null);
+                        trueNegativeCount?: (number|Long|string|null);
                     }
 
                     /** Represents a ConfidenceMetricsEntry. */
@@ -13514,16 +13514,16 @@ export namespace google {
                         public f1ScoreAt1: number;
 
                         /** ConfidenceMetricsEntry truePositiveCount. */
-                        public truePositiveCount: (number|Long);
+                        public truePositiveCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry falsePositiveCount. */
-                        public falsePositiveCount: (number|Long);
+                        public falsePositiveCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry falseNegativeCount. */
-                        public falseNegativeCount: (number|Long);
+                        public falseNegativeCount: (number|Long|string);
 
                         /** ConfidenceMetricsEntry trueNegativeCount. */
-                        public trueNegativeCount: (number|Long);
+                        public trueNegativeCount: (number|Long|string);
 
                         /**
                          * Creates a new ConfidenceMetricsEntry instance using the specified properties.
@@ -14843,10 +14843,10 @@ export namespace google {
                     tablesModelColumnInfo?: (google.cloud.automl.v1beta1.ITablesModelColumnInfo[]|null);
 
                     /** TablesModelMetadata trainBudgetMilliNodeHours */
-                    trainBudgetMilliNodeHours?: (number|Long|null);
+                    trainBudgetMilliNodeHours?: (number|Long|string|null);
 
                     /** TablesModelMetadata trainCostMilliNodeHours */
-                    trainCostMilliNodeHours?: (number|Long|null);
+                    trainCostMilliNodeHours?: (number|Long|string|null);
 
                     /** TablesModelMetadata disableEarlyStopping */
                     disableEarlyStopping?: (boolean|null);
@@ -14880,10 +14880,10 @@ export namespace google {
                     public tablesModelColumnInfo: google.cloud.automl.v1beta1.ITablesModelColumnInfo[];
 
                     /** TablesModelMetadata trainBudgetMilliNodeHours. */
-                    public trainBudgetMilliNodeHours: (number|Long);
+                    public trainBudgetMilliNodeHours: (number|Long|string);
 
                     /** TablesModelMetadata trainCostMilliNodeHours. */
-                    public trainCostMilliNodeHours: (number|Long);
+                    public trainCostMilliNodeHours: (number|Long|string);
 
                     /** TablesModelMetadata disableEarlyStopping. */
                     public disableEarlyStopping: boolean;
@@ -15413,13 +15413,13 @@ export namespace google {
                     categoryStats?: (google.cloud.automl.v1beta1.ICategoryStats|null);
 
                     /** DataStats distinctValueCount */
-                    distinctValueCount?: (number|Long|null);
+                    distinctValueCount?: (number|Long|string|null);
 
                     /** DataStats nullValueCount */
-                    nullValueCount?: (number|Long|null);
+                    nullValueCount?: (number|Long|string|null);
 
                     /** DataStats validValueCount */
-                    validValueCount?: (number|Long|null);
+                    validValueCount?: (number|Long|string|null);
                 }
 
                 /** Represents a DataStats. */
@@ -15450,13 +15450,13 @@ export namespace google {
                     public categoryStats?: (google.cloud.automl.v1beta1.ICategoryStats|null);
 
                     /** DataStats distinctValueCount. */
-                    public distinctValueCount: (number|Long);
+                    public distinctValueCount: (number|Long|string);
 
                     /** DataStats nullValueCount. */
-                    public nullValueCount: (number|Long);
+                    public nullValueCount: (number|Long|string);
 
                     /** DataStats validValueCount. */
-                    public validValueCount: (number|Long);
+                    public validValueCount: (number|Long|string);
 
                     /** DataStats stats. */
                     public stats?: ("float64Stats"|"stringStats"|"timestampStats"|"arrayStats"|"structStats"|"categoryStats");
@@ -15652,7 +15652,7 @@ export namespace google {
                         max?: (number|null);
 
                         /** HistogramBucket count */
-                        count?: (number|Long|null);
+                        count?: (number|Long|string|null);
                     }
 
                     /** Represents a HistogramBucket. */
@@ -15671,7 +15671,7 @@ export namespace google {
                         public max: number;
 
                         /** HistogramBucket count. */
-                        public count: (number|Long);
+                        public count: (number|Long|string);
 
                         /**
                          * Creates a new HistogramBucket instance using the specified properties.
@@ -15844,7 +15844,7 @@ export namespace google {
                         value?: (string|null);
 
                         /** UnigramStats count */
-                        count?: (number|Long|null);
+                        count?: (number|Long|string|null);
                     }
 
                     /** Represents an UnigramStats. */
@@ -15860,7 +15860,7 @@ export namespace google {
                         public value: string;
 
                         /** UnigramStats count. */
-                        public count: (number|Long);
+                        public count: (number|Long|string);
 
                         /**
                          * Creates a new UnigramStats instance using the specified properties.
@@ -16030,7 +16030,7 @@ export namespace google {
                     interface IGranularStats {
 
                         /** GranularStats buckets */
-                        buckets?: ({ [k: string]: (number|Long) }|null);
+                        buckets?: ({ [k: string]: (number|Long|string) }|null);
                     }
 
                     /** Represents a GranularStats. */
@@ -16043,7 +16043,7 @@ export namespace google {
                         constructor(properties?: google.cloud.automl.v1beta1.TimestampStats.IGranularStats);
 
                         /** GranularStats buckets. */
-                        public buckets: { [k: string]: (number|Long) };
+                        public buckets: { [k: string]: (number|Long|string) };
 
                         /**
                          * Creates a new GranularStats instance using the specified properties.
@@ -16396,7 +16396,7 @@ export namespace google {
                         value?: (string|null);
 
                         /** SingleCategoryStats count */
-                        count?: (number|Long|null);
+                        count?: (number|Long|string|null);
                     }
 
                     /** Represents a SingleCategoryStats. */
@@ -16412,7 +16412,7 @@ export namespace google {
                         public value: string;
 
                         /** SingleCategoryStats count. */
-                        public count: (number|Long);
+                        public count: (number|Long|string);
 
                         /**
                          * Creates a new SingleCategoryStats instance using the specified properties.
@@ -16600,7 +16600,7 @@ export namespace google {
                     timeFormat?: (string|null);
 
                     /** DataType typeCode */
-                    typeCode?: (google.cloud.automl.v1beta1.TypeCode|null);
+                    typeCode?: (google.cloud.automl.v1beta1.TypeCode|keyof typeof google.cloud.automl.v1beta1.TypeCode|null);
 
                     /** DataType nullable */
                     nullable?: (boolean|null);
@@ -16625,7 +16625,7 @@ export namespace google {
                     public timeFormat: string;
 
                     /** DataType typeCode. */
-                    public typeCode: google.cloud.automl.v1beta1.TypeCode;
+                    public typeCode: (google.cloud.automl.v1beta1.TypeCode|keyof typeof google.cloud.automl.v1beta1.TypeCode);
 
                     /** DataType nullable. */
                     public nullable: boolean;
@@ -16798,7 +16798,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image imageBytes */
-                    imageBytes?: (Uint8Array|null);
+                    imageBytes?: (Uint8Array|string|null);
 
                     /** Image inputConfig */
                     inputConfig?: (google.cloud.automl.v1beta1.IInputConfig|null);
@@ -16817,7 +16817,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IImage);
 
                     /** Image imageBytes. */
-                    public imageBytes: Uint8Array;
+                    public imageBytes: (Uint8Array|string);
 
                     /** Image inputConfig. */
                     public inputConfig?: (google.cloud.automl.v1beta1.IInputConfig|null);
@@ -17005,7 +17005,7 @@ export namespace google {
                 interface IDocumentDimensions {
 
                     /** DocumentDimensions unit */
-                    unit?: (google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit|null);
+                    unit?: (google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit|keyof typeof google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit|null);
 
                     /** DocumentDimensions width */
                     width?: (number|null);
@@ -17024,7 +17024,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IDocumentDimensions);
 
                     /** DocumentDimensions unit. */
-                    public unit: google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit;
+                    public unit: (google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit|keyof typeof google.cloud.automl.v1beta1.DocumentDimensions.DocumentDimensionUnit);
 
                     /** DocumentDimensions width. */
                     public width: number;
@@ -17243,7 +17243,7 @@ export namespace google {
                         boundingPoly?: (google.cloud.automl.v1beta1.IBoundingPoly|null);
 
                         /** Layout textSegmentType */
-                        textSegmentType?: (google.cloud.automl.v1beta1.Document.Layout.TextSegmentType|null);
+                        textSegmentType?: (google.cloud.automl.v1beta1.Document.Layout.TextSegmentType|keyof typeof google.cloud.automl.v1beta1.Document.Layout.TextSegmentType|null);
                     }
 
                     /** Represents a Layout. */
@@ -17265,7 +17265,7 @@ export namespace google {
                         public boundingPoly?: (google.cloud.automl.v1beta1.IBoundingPoly|null);
 
                         /** Layout textSegmentType. */
-                        public textSegmentType: google.cloud.automl.v1beta1.Document.Layout.TextSegmentType;
+                        public textSegmentType: (google.cloud.automl.v1beta1.Document.Layout.TextSegmentType|keyof typeof google.cloud.automl.v1beta1.Document.Layout.TextSegmentType);
 
                         /**
                          * Creates a new Layout instance using the specified properties.
@@ -18716,10 +18716,10 @@ export namespace google {
                     content?: (string|null);
 
                     /** TextSegment startOffset */
-                    startOffset?: (number|Long|null);
+                    startOffset?: (number|Long|string|null);
 
                     /** TextSegment endOffset */
-                    endOffset?: (number|Long|null);
+                    endOffset?: (number|Long|string|null);
                 }
 
                 /** Represents a TextSegment. */
@@ -18735,10 +18735,10 @@ export namespace google {
                     public content: string;
 
                     /** TextSegment startOffset. */
-                    public startOffset: (number|Long);
+                    public startOffset: (number|Long|string);
 
                     /** TextSegment endOffset. */
-                    public endOffset: (number|Long);
+                    public endOffset: (number|Long|string);
 
                     /**
                      * Creates a new TextSegment instance using the specified properties.
@@ -20108,7 +20108,7 @@ export namespace google {
                 interface IImageClassificationDatasetMetadata {
 
                     /** ImageClassificationDatasetMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType|null);
                 }
 
                 /** Represents an ImageClassificationDatasetMetadata. */
@@ -20121,7 +20121,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IImageClassificationDatasetMetadata);
 
                     /** ImageClassificationDatasetMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1beta1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType);
 
                     /**
                      * Creates a new ImageClassificationDatasetMetadata instance using the specified properties.
@@ -20285,10 +20285,10 @@ export namespace google {
                     baseModelId?: (string|null);
 
                     /** ImageClassificationModelMetadata trainBudget */
-                    trainBudget?: (number|Long|null);
+                    trainBudget?: (number|Long|string|null);
 
                     /** ImageClassificationModelMetadata trainCost */
-                    trainCost?: (number|Long|null);
+                    trainCost?: (number|Long|string|null);
 
                     /** ImageClassificationModelMetadata stopReason */
                     stopReason?: (string|null);
@@ -20300,7 +20300,7 @@ export namespace google {
                     nodeQps?: (number|null);
 
                     /** ImageClassificationModelMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageClassificationModelMetadata. */
@@ -20316,10 +20316,10 @@ export namespace google {
                     public baseModelId: string;
 
                     /** ImageClassificationModelMetadata trainBudget. */
-                    public trainBudget: (number|Long);
+                    public trainBudget: (number|Long|string);
 
                     /** ImageClassificationModelMetadata trainCost. */
-                    public trainCost: (number|Long);
+                    public trainCost: (number|Long|string);
 
                     /** ImageClassificationModelMetadata stopReason. */
                     public stopReason: string;
@@ -20331,7 +20331,7 @@ export namespace google {
                     public nodeQps: number;
 
                     /** ImageClassificationModelMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageClassificationModelMetadata instance using the specified properties.
@@ -20411,7 +20411,7 @@ export namespace google {
                     modelType?: (string|null);
 
                     /** ImageObjectDetectionModelMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
 
                     /** ImageObjectDetectionModelMetadata nodeQps */
                     nodeQps?: (number|null);
@@ -20420,10 +20420,10 @@ export namespace google {
                     stopReason?: (string|null);
 
                     /** ImageObjectDetectionModelMetadata trainBudgetMilliNodeHours */
-                    trainBudgetMilliNodeHours?: (number|Long|null);
+                    trainBudgetMilliNodeHours?: (number|Long|string|null);
 
                     /** ImageObjectDetectionModelMetadata trainCostMilliNodeHours */
-                    trainCostMilliNodeHours?: (number|Long|null);
+                    trainCostMilliNodeHours?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageObjectDetectionModelMetadata. */
@@ -20439,7 +20439,7 @@ export namespace google {
                     public modelType: string;
 
                     /** ImageObjectDetectionModelMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /** ImageObjectDetectionModelMetadata nodeQps. */
                     public nodeQps: number;
@@ -20448,10 +20448,10 @@ export namespace google {
                     public stopReason: string;
 
                     /** ImageObjectDetectionModelMetadata trainBudgetMilliNodeHours. */
-                    public trainBudgetMilliNodeHours: (number|Long);
+                    public trainBudgetMilliNodeHours: (number|Long|string);
 
                     /** ImageObjectDetectionModelMetadata trainCostMilliNodeHours. */
-                    public trainCostMilliNodeHours: (number|Long);
+                    public trainCostMilliNodeHours: (number|Long|string);
 
                     /**
                      * Creates a new ImageObjectDetectionModelMetadata instance using the specified properties.
@@ -20528,7 +20528,7 @@ export namespace google {
                 interface IImageClassificationModelDeploymentMetadata {
 
                     /** ImageClassificationModelDeploymentMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageClassificationModelDeploymentMetadata. */
@@ -20541,7 +20541,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IImageClassificationModelDeploymentMetadata);
 
                     /** ImageClassificationModelDeploymentMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageClassificationModelDeploymentMetadata instance using the specified properties.
@@ -20618,7 +20618,7 @@ export namespace google {
                 interface IImageObjectDetectionModelDeploymentMetadata {
 
                     /** ImageObjectDetectionModelDeploymentMetadata nodeCount */
-                    nodeCount?: (number|Long|null);
+                    nodeCount?: (number|Long|string|null);
                 }
 
                 /** Represents an ImageObjectDetectionModelDeploymentMetadata. */
@@ -20631,7 +20631,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IImageObjectDetectionModelDeploymentMetadata);
 
                     /** ImageObjectDetectionModelDeploymentMetadata nodeCount. */
-                    public nodeCount: (number|Long);
+                    public nodeCount: (number|Long|string);
 
                     /**
                      * Creates a new ImageObjectDetectionModelDeploymentMetadata instance using the specified properties.
@@ -20708,7 +20708,7 @@ export namespace google {
                 interface ITextClassificationDatasetMetadata {
 
                     /** TextClassificationDatasetMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType|null);
                 }
 
                 /** Represents a TextClassificationDatasetMetadata. */
@@ -20721,7 +20721,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.ITextClassificationDatasetMetadata);
 
                     /** TextClassificationDatasetMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1beta1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType);
 
                     /**
                      * Creates a new TextClassificationDatasetMetadata instance using the specified properties.
@@ -20798,7 +20798,7 @@ export namespace google {
                 interface ITextClassificationModelMetadata {
 
                     /** TextClassificationModelMetadata classificationType */
-                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|null);
+                    classificationType?: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType|null);
                 }
 
                 /** Represents a TextClassificationModelMetadata. */
@@ -20811,7 +20811,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.ITextClassificationModelMetadata);
 
                     /** TextClassificationModelMetadata classificationType. */
-                    public classificationType: google.cloud.automl.v1beta1.ClassificationType;
+                    public classificationType: (google.cloud.automl.v1beta1.ClassificationType|keyof typeof google.cloud.automl.v1beta1.ClassificationType);
 
                     /**
                      * Creates a new TextClassificationModelMetadata instance using the specified properties.
@@ -21608,7 +21608,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** Model deploymentState */
-                    deploymentState?: (google.cloud.automl.v1beta1.Model.DeploymentState|null);
+                    deploymentState?: (google.cloud.automl.v1beta1.Model.DeploymentState|keyof typeof google.cloud.automl.v1beta1.Model.DeploymentState|null);
                 }
 
                 /** Represents a Model. */
@@ -21663,7 +21663,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** Model deploymentState. */
-                    public deploymentState: google.cloud.automl.v1beta1.Model.DeploymentState;
+                    public deploymentState: (google.cloud.automl.v1beta1.Model.DeploymentState|keyof typeof google.cloud.automl.v1beta1.Model.DeploymentState);
 
                     /** Model modelMetadata. */
                     public modelMetadata?: ("translationModelMetadata"|"imageClassificationModelMetadata"|"textClassificationModelMetadata"|"imageObjectDetectionModelMetadata"|"videoClassificationModelMetadata"|"videoObjectTrackingModelMetadata"|"textExtractionModelMetadata"|"tablesModelMetadata"|"textSentimentModelMetadata");
@@ -23373,13 +23373,13 @@ export namespace google {
                     timeColumnSpecId?: (string|null);
 
                     /** TableSpec rowCount */
-                    rowCount?: (number|Long|null);
+                    rowCount?: (number|Long|string|null);
 
                     /** TableSpec validRowCount */
-                    validRowCount?: (number|Long|null);
+                    validRowCount?: (number|Long|string|null);
 
                     /** TableSpec columnCount */
-                    columnCount?: (number|Long|null);
+                    columnCount?: (number|Long|string|null);
 
                     /** TableSpec inputConfigs */
                     inputConfigs?: (google.cloud.automl.v1beta1.IInputConfig[]|null);
@@ -23404,13 +23404,13 @@ export namespace google {
                     public timeColumnSpecId: string;
 
                     /** TableSpec rowCount. */
-                    public rowCount: (number|Long);
+                    public rowCount: (number|Long|string);
 
                     /** TableSpec validRowCount. */
-                    public validRowCount: (number|Long);
+                    public validRowCount: (number|Long|string);
 
                     /** TableSpec columnCount. */
-                    public columnCount: (number|Long);
+                    public columnCount: (number|Long|string);
 
                     /** TableSpec inputConfigs. */
                     public inputConfigs: google.cloud.automl.v1beta1.IInputConfig[];
@@ -23976,7 +23976,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -24004,7 +24004,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -25233,10 +25233,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -25273,10 +25273,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -26051,7 +26051,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -26127,7 +26127,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -26376,13 +26376,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -26413,13 +26413,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -26918,7 +26918,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -26946,7 +26946,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -27042,16 +27042,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -27073,16 +27073,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -27669,7 +27669,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -27685,7 +27685,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -27768,7 +27768,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -27784,7 +27784,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -27861,7 +27861,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -27877,7 +27877,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -28047,7 +28047,7 @@ export namespace google {
         interface IValue {
 
             /** Value nullValue */
-            nullValue?: (google.protobuf.NullValue|null);
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue */
             numberValue?: (number|null);
@@ -28075,7 +28075,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: google.protobuf.NullValue;
+            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
 
             /** Value numberValue. */
             public numberValue: number;
