@@ -978,7 +978,7 @@ export namespace google {
                 value?: (string|null);
 
                 /** NodeTaint effect */
-                effect?: (google.container.v1.NodeTaint.Effect|null);
+                effect?: (google.container.v1.NodeTaint.Effect|keyof typeof google.container.v1.NodeTaint.Effect|null);
             }
 
             /** Represents a NodeTaint. */
@@ -997,7 +997,7 @@ export namespace google {
                 public value: string;
 
                 /** NodeTaint effect. */
-                public effect: google.container.v1.NodeTaint.Effect;
+                public effect: (google.container.v1.NodeTaint.Effect|keyof typeof google.container.v1.NodeTaint.Effect);
 
                 /**
                  * Creates a new NodeTaint instance using the specified properties.
@@ -2354,7 +2354,7 @@ export namespace google {
             interface INetworkPolicy {
 
                 /** NetworkPolicy provider */
-                provider?: (google.container.v1.NetworkPolicy.Provider|null);
+                provider?: (google.container.v1.NetworkPolicy.Provider|keyof typeof google.container.v1.NetworkPolicy.Provider|null);
 
                 /** NetworkPolicy enabled */
                 enabled?: (boolean|null);
@@ -2370,7 +2370,7 @@ export namespace google {
                 constructor(properties?: google.container.v1.INetworkPolicy);
 
                 /** NetworkPolicy provider. */
-                public provider: google.container.v1.NetworkPolicy.Provider;
+                public provider: (google.container.v1.NetworkPolicy.Provider|keyof typeof google.container.v1.NetworkPolicy.Provider);
 
                 /** NetworkPolicy enabled. */
                 public enabled: boolean;
@@ -2816,7 +2816,7 @@ export namespace google {
                 createTime?: (string|null);
 
                 /** Cluster status */
-                status?: (google.container.v1.Cluster.Status|null);
+                status?: (google.container.v1.Cluster.Status|keyof typeof google.container.v1.Cluster.Status|null);
 
                 /** Cluster statusMessage */
                 statusMessage?: (string|null);
@@ -2970,7 +2970,7 @@ export namespace google {
                 public createTime: string;
 
                 /** Cluster status. */
-                public status: google.container.v1.Cluster.Status;
+                public status: (google.container.v1.Cluster.Status|keyof typeof google.container.v1.Cluster.Status);
 
                 /** Cluster statusMessage. */
                 public statusMessage: string;
@@ -3277,10 +3277,10 @@ export namespace google {
                 zone?: (string|null);
 
                 /** Operation operationType */
-                operationType?: (google.container.v1.Operation.Type|null);
+                operationType?: (google.container.v1.Operation.Type|keyof typeof google.container.v1.Operation.Type|null);
 
                 /** Operation status */
-                status?: (google.container.v1.Operation.Status|null);
+                status?: (google.container.v1.Operation.Status|keyof typeof google.container.v1.Operation.Status|null);
 
                 /** Operation detail */
                 detail?: (string|null);
@@ -3326,10 +3326,10 @@ export namespace google {
                 public zone: string;
 
                 /** Operation operationType. */
-                public operationType: google.container.v1.Operation.Type;
+                public operationType: (google.container.v1.Operation.Type|keyof typeof google.container.v1.Operation.Type);
 
                 /** Operation status. */
-                public status: google.container.v1.Operation.Status;
+                public status: (google.container.v1.Operation.Status|keyof typeof google.container.v1.Operation.Status);
 
                 /** Operation detail. */
                 public detail: string;
@@ -4621,7 +4621,7 @@ export namespace google {
                 clusterId?: (string|null);
 
                 /** SetMasterAuthRequest action */
-                action?: (google.container.v1.SetMasterAuthRequest.Action|null);
+                action?: (google.container.v1.SetMasterAuthRequest.Action|keyof typeof google.container.v1.SetMasterAuthRequest.Action|null);
 
                 /** SetMasterAuthRequest update */
                 update?: (google.container.v1.IMasterAuth|null);
@@ -4649,7 +4649,7 @@ export namespace google {
                 public clusterId: string;
 
                 /** SetMasterAuthRequest action. */
-                public action: google.container.v1.SetMasterAuthRequest.Action;
+                public action: (google.container.v1.SetMasterAuthRequest.Action|keyof typeof google.container.v1.SetMasterAuthRequest.Action);
 
                 /** SetMasterAuthRequest update. */
                 public update?: (google.container.v1.IMasterAuth|null);
@@ -6147,7 +6147,7 @@ export namespace google {
                 instanceGroupUrls?: (string[]|null);
 
                 /** NodePool status */
-                status?: (google.container.v1.NodePool.Status|null);
+                status?: (google.container.v1.NodePool.Status|keyof typeof google.container.v1.NodePool.Status|null);
 
                 /** NodePool statusMessage */
                 statusMessage?: (string|null);
@@ -6196,7 +6196,7 @@ export namespace google {
                 public instanceGroupUrls: string[];
 
                 /** NodePool status. */
-                public status: google.container.v1.NodePool.Status;
+                public status: (google.container.v1.NodePool.Status|keyof typeof google.container.v1.NodePool.Status);
 
                 /** NodePool statusMessage. */
                 public statusMessage: string;
@@ -7643,10 +7643,10 @@ export namespace google {
                 resourceType?: (string|null);
 
                 /** ResourceLimit minimum */
-                minimum?: (number|Long|null);
+                minimum?: (number|Long|string|null);
 
                 /** ResourceLimit maximum */
-                maximum?: (number|Long|null);
+                maximum?: (number|Long|string|null);
             }
 
             /** Represents a ResourceLimit. */
@@ -7662,10 +7662,10 @@ export namespace google {
                 public resourceType: string;
 
                 /** ResourceLimit minimum. */
-                public minimum: (number|Long);
+                public minimum: (number|Long|string);
 
                 /** ResourceLimit maximum. */
-                public maximum: (number|Long);
+                public maximum: (number|Long|string);
 
                 /**
                  * Creates a new ResourceLimit instance using the specified properties.
@@ -8306,7 +8306,7 @@ export namespace google {
             interface IAcceleratorConfig {
 
                 /** AcceleratorConfig acceleratorCount */
-                acceleratorCount?: (number|Long|null);
+                acceleratorCount?: (number|Long|string|null);
 
                 /** AcceleratorConfig acceleratorType */
                 acceleratorType?: (string|null);
@@ -8322,7 +8322,7 @@ export namespace google {
                 constructor(properties?: google.container.v1.IAcceleratorConfig);
 
                 /** AcceleratorConfig acceleratorCount. */
-                public acceleratorCount: (number|Long);
+                public acceleratorCount: (number|Long|string);
 
                 /** AcceleratorConfig acceleratorType. */
                 public acceleratorType: string;
@@ -8630,7 +8630,7 @@ export namespace google {
             interface IStatusCondition {
 
                 /** StatusCondition code */
-                code?: (google.container.v1.StatusCondition.Code|null);
+                code?: (google.container.v1.StatusCondition.Code|keyof typeof google.container.v1.StatusCondition.Code|null);
 
                 /** StatusCondition message */
                 message?: (string|null);
@@ -8646,7 +8646,7 @@ export namespace google {
                 constructor(properties?: google.container.v1.IStatusCondition);
 
                 /** StatusCondition code. */
-                public code: google.container.v1.StatusCondition.Code;
+                public code: (google.container.v1.StatusCondition.Code|keyof typeof google.container.v1.StatusCondition.Code);
 
                 /** StatusCondition message. */
                 public message: string;
@@ -8931,7 +8931,7 @@ export namespace google {
             interface IMaxPodsConstraint {
 
                 /** MaxPodsConstraint maxPodsPerNode */
-                maxPodsPerNode?: (number|Long|null);
+                maxPodsPerNode?: (number|Long|string|null);
             }
 
             /** Represents a MaxPodsConstraint. */
@@ -8944,7 +8944,7 @@ export namespace google {
                 constructor(properties?: google.container.v1.IMaxPodsConstraint);
 
                 /** MaxPodsConstraint maxPodsPerNode. */
-                public maxPodsPerNode: (number|Long);
+                public maxPodsPerNode: (number|Long|string);
 
                 /**
                  * Creates a new MaxPodsConstraint instance using the specified properties.
@@ -9021,7 +9021,7 @@ export namespace google {
             interface IDatabaseEncryption {
 
                 /** DatabaseEncryption state */
-                state?: (google.container.v1.DatabaseEncryption.State|null);
+                state?: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State|null);
 
                 /** DatabaseEncryption keyName */
                 keyName?: (string|null);
@@ -9037,7 +9037,7 @@ export namespace google {
                 constructor(properties?: google.container.v1.IDatabaseEncryption);
 
                 /** DatabaseEncryption state. */
-                public state: google.container.v1.DatabaseEncryption.State;
+                public state: (google.container.v1.DatabaseEncryption.State|keyof typeof google.container.v1.DatabaseEncryption.State);
 
                 /** DatabaseEncryption keyName. */
                 public keyName: string;
@@ -9337,7 +9337,7 @@ export namespace google {
                 ipCidrRange?: (string|null);
 
                 /** UsableSubnetworkSecondaryRange status */
-                status?: (google.container.v1.UsableSubnetworkSecondaryRange.Status|null);
+                status?: (google.container.v1.UsableSubnetworkSecondaryRange.Status|keyof typeof google.container.v1.UsableSubnetworkSecondaryRange.Status|null);
             }
 
             /** Represents a UsableSubnetworkSecondaryRange. */
@@ -9356,7 +9356,7 @@ export namespace google {
                 public ipCidrRange: string;
 
                 /** UsableSubnetworkSecondaryRange status. */
-                public status: google.container.v1.UsableSubnetworkSecondaryRange.Status;
+                public status: (google.container.v1.UsableSubnetworkSecondaryRange.Status|keyof typeof google.container.v1.UsableSubnetworkSecondaryRange.Status);
 
                 /**
                  * Creates a new UsableSubnetworkSecondaryRange instance using the specified properties.
@@ -10979,10 +10979,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -11019,10 +11019,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -11797,7 +11797,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -11870,7 +11870,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -12116,13 +12116,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -12150,13 +12150,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -12655,7 +12655,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -12680,7 +12680,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -12776,16 +12776,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -12807,16 +12807,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -13487,7 +13487,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -13503,7 +13503,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
