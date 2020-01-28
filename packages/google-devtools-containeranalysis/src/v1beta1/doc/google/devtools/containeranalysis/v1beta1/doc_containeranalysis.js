@@ -53,7 +53,7 @@ const ScanConfig = {
  * Request to get a scan configuration.
  *
  * @property {string} name
- *   The name of the scan configuration in the form of
+ *   Required. The name of the scan configuration in the form of
  *   `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
  *
  * @typedef GetScanConfigRequest
@@ -68,11 +68,11 @@ const GetScanConfigRequest = {
  * Request to list scan configurations.
  *
  * @property {string} parent
- *   The name of the project to list scan configurations for in the form of
+ *   Required. The name of the project to list scan configurations for in the form of
  *   `projects/[PROJECT_ID]`.
  *
  * @property {string} filter
- *   The filter expression.
+ *   Required. The filter expression.
  *
  * @property {number} pageSize
  *   The number of scan configs to return in the list.
@@ -113,11 +113,11 @@ const ListScanConfigsResponse = {
  * A request to update a scan configuration.
  *
  * @property {string} name
- *   The name of the scan configuration in the form of
+ *   Required. The name of the scan configuration in the form of
  *   `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
  *
  * @property {Object} scanConfig
- *   The updated scan configuration.
+ *   Required. The updated scan configuration.
  *
  *   This object should have the same structure as [ScanConfig]{@link google.devtools.containeranalysis.v1beta1.ScanConfig}
  *

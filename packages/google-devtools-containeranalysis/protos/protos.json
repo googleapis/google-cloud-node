@@ -11,6 +11,10 @@
           },
           "nested": {
             "GrafeasV1Beta1": {
+              "options": {
+                "(google.api.default_host)": "containeranalysis.googleapis.com",
+                "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+              },
               "methods": {
                 "GetOccurrence": {
                   "requestType": "GetOccurrenceRequest",
@@ -1853,6 +1857,10 @@
                   },
                   "nested": {
                     "ContainerAnalysisV1Beta1": {
+                      "options": {
+                        "(google.api.default_host)": "containeranalysis.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "SetIamPolicy": {
                           "requestType": "google.iam.v1.SetIamPolicyRequest",
@@ -1861,7 +1869,8 @@
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/notes/*}:setIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/occurrences/*}:setIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,policy"
                           }
                         },
                         "GetIamPolicy": {
@@ -1871,7 +1880,8 @@
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/notes/*}:getIamPolicy",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/occurrences/*}:getIamPolicy",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource"
                           }
                         },
                         "TestIamPermissions": {
@@ -1881,21 +1891,24 @@
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/notes/*}:testIamPermissions",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/occurrences/*}:testIamPermissions",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "resource,permissions"
                           }
                         },
                         "GetScanConfig": {
                           "requestType": "GetScanConfigRequest",
                           "responseType": "ScanConfig",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/scanConfigs/*}"
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/scanConfigs/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListScanConfigs": {
                           "requestType": "ListScanConfigsRequest",
                           "responseType": "ListScanConfigsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*}/scanConfigs"
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*}/scanConfigs",
+                            "(google.api.method_signature)": "parent,filter"
                           }
                         },
                         "UpdateScanConfig": {
@@ -1903,12 +1916,17 @@
                           "responseType": "ScanConfig",
                           "options": {
                             "(google.api.http).put": "/v1beta1/{name=projects/*/scanConfigs/*}",
-                            "(google.api.http).body": "scan_config"
+                            "(google.api.http).body": "scan_config",
+                            "(google.api.method_signature)": "name,scan_config"
                           }
                         }
                       }
                     },
                     "ScanConfig": {
+                      "options": {
+                        "(google.api.resource).type": "containeranalysis.googleapis.com/ScanConfig",
+                        "(google.api.resource).pattern": "projects/{project}/scanConfigs/{scan_config}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1936,7 +1954,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "containeranalysis.googleapis.com/ScanConfig"
+                          }
                         }
                       }
                     },
@@ -1944,11 +1966,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1977,11 +2006,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "containeranalysis.googleapis.com/ScanConfig"
+                          }
                         },
                         "scanConfig": {
                           "type": "ScanConfig",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     }

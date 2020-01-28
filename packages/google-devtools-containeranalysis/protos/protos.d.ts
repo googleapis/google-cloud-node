@@ -372,7 +372,7 @@ export namespace grafeas {
             noteName?: (string|null);
 
             /** Occurrence kind */
-            kind?: (grafeas.v1beta1.NoteKind|null);
+            kind?: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind|null);
 
             /** Occurrence remediation */
             remediation?: (string|null);
@@ -424,7 +424,7 @@ export namespace grafeas {
             public noteName: string;
 
             /** Occurrence kind. */
-            public kind: grafeas.v1beta1.NoteKind;
+            public kind: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind);
 
             /** Occurrence remediation. */
             public remediation: string;
@@ -645,7 +645,7 @@ export namespace grafeas {
             longDescription?: (string|null);
 
             /** Note kind */
-            kind?: (grafeas.v1beta1.NoteKind|null);
+            kind?: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind|null);
 
             /** Note relatedUrl */
             relatedUrl?: (grafeas.v1beta1.IRelatedUrl[]|null);
@@ -703,7 +703,7 @@ export namespace grafeas {
             public longDescription: string;
 
             /** Note kind. */
-            public kind: grafeas.v1beta1.NoteKind;
+            public kind: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind);
 
             /** Note relatedUrl. */
             public relatedUrl: grafeas.v1beta1.IRelatedUrl[];
@@ -2846,13 +2846,13 @@ export namespace grafeas {
                 resource?: (grafeas.v1beta1.IResource|null);
 
                 /** FixableTotalByDigest severity */
-                severity?: (grafeas.v1beta1.vulnerability.Severity|null);
+                severity?: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity|null);
 
                 /** FixableTotalByDigest fixableCount */
-                fixableCount?: (number|Long|null);
+                fixableCount?: (number|Long|string|null);
 
                 /** FixableTotalByDigest totalCount */
-                totalCount?: (number|Long|null);
+                totalCount?: (number|Long|string|null);
             }
 
             /** Represents a FixableTotalByDigest. */
@@ -2868,13 +2868,13 @@ export namespace grafeas {
                 public resource?: (grafeas.v1beta1.IResource|null);
 
                 /** FixableTotalByDigest severity. */
-                public severity: grafeas.v1beta1.vulnerability.Severity;
+                public severity: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity);
 
                 /** FixableTotalByDigest fixableCount. */
-                public fixableCount: (number|Long);
+                public fixableCount: (number|Long|string);
 
                 /** FixableTotalByDigest totalCount. */
-                public totalCount: (number|Long);
+                public totalCount: (number|Long|string);
 
                 /**
                  * Creates a new FixableTotalByDigest instance using the specified properties.
@@ -2958,7 +2958,7 @@ export namespace grafeas {
                 signature?: (string|null);
 
                 /** PgpSignedAttestation contentType */
-                contentType?: (grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType|null);
+                contentType?: (grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType|null);
 
                 /** PgpSignedAttestation pgpKeyId */
                 pgpKeyId?: (string|null);
@@ -2977,7 +2977,7 @@ export namespace grafeas {
                 public signature: string;
 
                 /** PgpSignedAttestation contentType. */
-                public contentType: grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType;
+                public contentType: (grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.PgpSignedAttestation.ContentType);
 
                 /** PgpSignedAttestation pgpKeyId. */
                 public pgpKeyId: string;
@@ -3069,10 +3069,10 @@ export namespace grafeas {
             interface IGenericSignedAttestation {
 
                 /** GenericSignedAttestation contentType */
-                contentType?: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|null);
+                contentType?: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|null);
 
                 /** GenericSignedAttestation serializedPayload */
-                serializedPayload?: (Uint8Array|null);
+                serializedPayload?: (Uint8Array|string|null);
 
                 /** GenericSignedAttestation signatures */
                 signatures?: (grafeas.v1beta1.ISignature[]|null);
@@ -3088,10 +3088,10 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.attestation.IGenericSignedAttestation);
 
                 /** GenericSignedAttestation contentType. */
-                public contentType: grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType;
+                public contentType: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType);
 
                 /** GenericSignedAttestation serializedPayload. */
-                public serializedPayload: Uint8Array;
+                public serializedPayload: (Uint8Array|string);
 
                 /** GenericSignedAttestation signatures. */
                 public signatures: grafeas.v1beta1.ISignature[];
@@ -3661,7 +3661,7 @@ export namespace grafeas {
         interface ISignature {
 
             /** Signature signature */
-            signature?: (Uint8Array|null);
+            signature?: (Uint8Array|string|null);
 
             /** Signature publicKeyId */
             publicKeyId?: (string|null);
@@ -3677,7 +3677,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1beta1.ISignature);
 
             /** Signature signature. */
-            public signature: Uint8Array;
+            public signature: (Uint8Array|string);
 
             /** Signature publicKeyId. */
             public publicKeyId: string;
@@ -3859,13 +3859,13 @@ export namespace grafeas {
                 publicKey?: (string|null);
 
                 /** BuildSignature signature */
-                signature?: (Uint8Array|null);
+                signature?: (Uint8Array|string|null);
 
                 /** BuildSignature keyId */
                 keyId?: (string|null);
 
                 /** BuildSignature keyType */
-                keyType?: (grafeas.v1beta1.build.BuildSignature.KeyType|null);
+                keyType?: (grafeas.v1beta1.build.BuildSignature.KeyType|keyof typeof grafeas.v1beta1.build.BuildSignature.KeyType|null);
             }
 
             /** Represents a BuildSignature. */
@@ -3881,13 +3881,13 @@ export namespace grafeas {
                 public publicKey: string;
 
                 /** BuildSignature signature. */
-                public signature: Uint8Array;
+                public signature: (Uint8Array|string);
 
                 /** BuildSignature keyId. */
                 public keyId: string;
 
                 /** BuildSignature keyType. */
-                public keyType: grafeas.v1beta1.build.BuildSignature.KeyType;
+                public keyType: (grafeas.v1beta1.build.BuildSignature.KeyType|keyof typeof grafeas.v1beta1.build.BuildSignature.KeyType);
 
                 /**
                  * Creates a new BuildSignature instance using the specified properties.
@@ -4434,10 +4434,10 @@ export namespace grafeas {
             interface IHash {
 
                 /** Hash type */
-                type?: (grafeas.v1beta1.provenance.Hash.HashType|null);
+                type?: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType|null);
 
                 /** Hash value */
-                value?: (Uint8Array|null);
+                value?: (Uint8Array|string|null);
             }
 
             /** Represents a Hash. */
@@ -4450,10 +4450,10 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.provenance.IHash);
 
                 /** Hash type. */
-                public type: grafeas.v1beta1.provenance.Hash.HashType;
+                public type: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType);
 
                 /** Hash value. */
-                public value: Uint8Array;
+                public value: (Uint8Array|string);
 
                 /**
                  * Creates a new Hash instance using the specified properties.
@@ -4876,7 +4876,7 @@ export namespace grafeas {
             interface IAliasContext {
 
                 /** AliasContext kind */
-                kind?: (grafeas.v1beta1.source.AliasContext.Kind|null);
+                kind?: (grafeas.v1beta1.source.AliasContext.Kind|keyof typeof grafeas.v1beta1.source.AliasContext.Kind|null);
 
                 /** AliasContext name */
                 name?: (string|null);
@@ -4892,7 +4892,7 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.source.IAliasContext);
 
                 /** AliasContext kind. */
-                public kind: grafeas.v1beta1.source.AliasContext.Kind;
+                public kind: (grafeas.v1beta1.source.AliasContext.Kind|keyof typeof grafeas.v1beta1.source.AliasContext.Kind);
 
                 /** AliasContext name. */
                 public name: string;
@@ -5692,7 +5692,7 @@ export namespace grafeas {
                 resourceUri?: (string[]|null);
 
                 /** Deployment platform */
-                platform?: (grafeas.v1beta1.deployment.Deployment.Platform|null);
+                platform?: (grafeas.v1beta1.deployment.Deployment.Platform|keyof typeof grafeas.v1beta1.deployment.Deployment.Platform|null);
             }
 
             /** Represents a Deployment. */
@@ -5723,7 +5723,7 @@ export namespace grafeas {
                 public resourceUri: string[];
 
                 /** Deployment platform. */
-                public platform: grafeas.v1beta1.deployment.Deployment.Platform;
+                public platform: (grafeas.v1beta1.deployment.Deployment.Platform|keyof typeof grafeas.v1beta1.deployment.Deployment.Platform);
 
                 /**
                  * Creates a new Deployment instance using the specified properties.
@@ -5815,7 +5815,7 @@ export namespace grafeas {
             interface IDiscovery {
 
                 /** Discovery analysisKind */
-                analysisKind?: (grafeas.v1beta1.NoteKind|null);
+                analysisKind?: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind|null);
             }
 
             /** Represents a Discovery. */
@@ -5828,7 +5828,7 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.discovery.IDiscovery);
 
                 /** Discovery analysisKind. */
-                public analysisKind: grafeas.v1beta1.NoteKind;
+                public analysisKind: (grafeas.v1beta1.NoteKind|keyof typeof grafeas.v1beta1.NoteKind);
 
                 /**
                  * Creates a new Discovery instance using the specified properties.
@@ -5995,13 +5995,13 @@ export namespace grafeas {
             interface IDiscovered {
 
                 /** Discovered continuousAnalysis */
-                continuousAnalysis?: (grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis|null);
+                continuousAnalysis?: (grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis|keyof typeof grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis|null);
 
                 /** Discovered lastAnalysisTime */
                 lastAnalysisTime?: (google.protobuf.ITimestamp|null);
 
                 /** Discovered analysisStatus */
-                analysisStatus?: (grafeas.v1beta1.discovery.Discovered.AnalysisStatus|null);
+                analysisStatus?: (grafeas.v1beta1.discovery.Discovered.AnalysisStatus|keyof typeof grafeas.v1beta1.discovery.Discovered.AnalysisStatus|null);
 
                 /** Discovered analysisStatusError */
                 analysisStatusError?: (google.rpc.IStatus|null);
@@ -6017,13 +6017,13 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.discovery.IDiscovered);
 
                 /** Discovered continuousAnalysis. */
-                public continuousAnalysis: grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis;
+                public continuousAnalysis: (grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis|keyof typeof grafeas.v1beta1.discovery.Discovered.ContinuousAnalysis);
 
                 /** Discovered lastAnalysisTime. */
                 public lastAnalysisTime?: (google.protobuf.ITimestamp|null);
 
                 /** Discovered analysisStatus. */
-                public analysisStatus: grafeas.v1beta1.discovery.Discovered.AnalysisStatus;
+                public analysisStatus: (grafeas.v1beta1.discovery.Discovered.AnalysisStatus|keyof typeof grafeas.v1beta1.discovery.Discovered.AnalysisStatus);
 
                 /** Discovered analysisStatusError. */
                 public analysisStatusError?: (google.rpc.IStatus|null);
@@ -6127,7 +6127,7 @@ export namespace grafeas {
             interface ILayer {
 
                 /** Layer directive */
-                directive?: (grafeas.v1beta1.image.Layer.Directive|null);
+                directive?: (grafeas.v1beta1.image.Layer.Directive|keyof typeof grafeas.v1beta1.image.Layer.Directive|null);
 
                 /** Layer arguments */
                 "arguments"?: (string|null);
@@ -6143,7 +6143,7 @@ export namespace grafeas {
                 constructor(properties?: grafeas.v1beta1.image.ILayer);
 
                 /** Layer directive. */
-                public directive: grafeas.v1beta1.image.Layer.Directive;
+                public directive: (grafeas.v1beta1.image.Layer.Directive|keyof typeof grafeas.v1beta1.image.Layer.Directive);
 
                 /** Layer arguments. */
                 public arguments: string;
@@ -6658,7 +6658,7 @@ export namespace grafeas {
                 cpeUri?: (string|null);
 
                 /** Distribution architecture */
-                architecture?: (grafeas.v1beta1.package_.Architecture|null);
+                architecture?: (grafeas.v1beta1.package_.Architecture|keyof typeof grafeas.v1beta1.package_.Architecture|null);
 
                 /** Distribution latestVersion */
                 latestVersion?: (grafeas.v1beta1.package_.IVersion|null);
@@ -6686,7 +6686,7 @@ export namespace grafeas {
                 public cpeUri: string;
 
                 /** Distribution architecture. */
-                public architecture: grafeas.v1beta1.package_.Architecture;
+                public architecture: (grafeas.v1beta1.package_.Architecture|keyof typeof grafeas.v1beta1.package_.Architecture);
 
                 /** Distribution latestVersion. */
                 public latestVersion?: (grafeas.v1beta1.package_.IVersion|null);
@@ -7168,7 +7168,7 @@ export namespace grafeas {
                 revision?: (string|null);
 
                 /** Version kind */
-                kind?: (grafeas.v1beta1.package_.Version.VersionKind|null);
+                kind?: (grafeas.v1beta1.package_.Version.VersionKind|keyof typeof grafeas.v1beta1.package_.Version.VersionKind|null);
             }
 
             /** Represents a Version. */
@@ -7190,7 +7190,7 @@ export namespace grafeas {
                 public revision: string;
 
                 /** Version kind. */
-                public kind: grafeas.v1beta1.package_.Version.VersionKind;
+                public kind: (grafeas.v1beta1.package_.Version.VersionKind|keyof typeof grafeas.v1beta1.package_.Version.VersionKind);
 
                 /**
                  * Creates a new Version instance using the specified properties.
@@ -7295,7 +7295,7 @@ export namespace grafeas {
                 cvssScore?: (number|null);
 
                 /** Vulnerability severity */
-                severity?: (grafeas.v1beta1.vulnerability.Severity|null);
+                severity?: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity|null);
 
                 /** Vulnerability details */
                 details?: (grafeas.v1beta1.vulnerability.Vulnerability.IDetail[]|null);
@@ -7323,7 +7323,7 @@ export namespace grafeas {
                 public cvssScore: number;
 
                 /** Vulnerability severity. */
-                public severity: grafeas.v1beta1.vulnerability.Severity;
+                public severity: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity);
 
                 /** Vulnerability details. */
                 public details: grafeas.v1beta1.vulnerability.Vulnerability.IDetail[];
@@ -7769,7 +7769,7 @@ export namespace grafeas {
                 type?: (string|null);
 
                 /** Details severity */
-                severity?: (grafeas.v1beta1.vulnerability.Severity|null);
+                severity?: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity|null);
 
                 /** Details cvssScore */
                 cvssScore?: (number|null);
@@ -7787,7 +7787,7 @@ export namespace grafeas {
                 relatedUrls?: (grafeas.v1beta1.IRelatedUrl[]|null);
 
                 /** Details effectiveSeverity */
-                effectiveSeverity?: (grafeas.v1beta1.vulnerability.Severity|null);
+                effectiveSeverity?: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity|null);
             }
 
             /** Represents a Details. */
@@ -7803,7 +7803,7 @@ export namespace grafeas {
                 public type: string;
 
                 /** Details severity. */
-                public severity: grafeas.v1beta1.vulnerability.Severity;
+                public severity: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity);
 
                 /** Details cvssScore. */
                 public cvssScore: number;
@@ -7821,7 +7821,7 @@ export namespace grafeas {
                 public relatedUrls: grafeas.v1beta1.IRelatedUrl[];
 
                 /** Details effectiveSeverity. */
-                public effectiveSeverity: grafeas.v1beta1.vulnerability.Severity;
+                public effectiveSeverity: (grafeas.v1beta1.vulnerability.Severity|keyof typeof grafeas.v1beta1.vulnerability.Severity);
 
                 /**
                  * Creates a new Details instance using the specified properties.
@@ -8111,28 +8111,28 @@ export namespace grafeas {
                 impactScore?: (number|null);
 
                 /** CVSSv3 attackVector */
-                attackVector?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackVector|null);
+                attackVector?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackVector|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.AttackVector|null);
 
                 /** CVSSv3 attackComplexity */
-                attackComplexity?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity|null);
+                attackComplexity?: (grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity|null);
 
                 /** CVSSv3 privilegesRequired */
-                privilegesRequired?: (grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired|null);
+                privilegesRequired?: (grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired|null);
 
                 /** CVSSv3 userInteraction */
-                userInteraction?: (grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction|null);
+                userInteraction?: (grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction|null);
 
                 /** CVSSv3 scope */
-                scope?: (grafeas.v1beta1.vulnerability.CVSSv3.Scope|null);
+                scope?: (grafeas.v1beta1.vulnerability.CVSSv3.Scope|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Scope|null);
 
                 /** CVSSv3 confidentialityImpact */
-                confidentialityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+                confidentialityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
 
                 /** CVSSv3 integrityImpact */
-                integrityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+                integrityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
 
                 /** CVSSv3 availabilityImpact */
-                availabilityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
+                availabilityImpact?: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact|null);
             }
 
             /** Represents a CVSSv3. */
@@ -8154,28 +8154,28 @@ export namespace grafeas {
                 public impactScore: number;
 
                 /** CVSSv3 attackVector. */
-                public attackVector: grafeas.v1beta1.vulnerability.CVSSv3.AttackVector;
+                public attackVector: (grafeas.v1beta1.vulnerability.CVSSv3.AttackVector|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.AttackVector);
 
                 /** CVSSv3 attackComplexity. */
-                public attackComplexity: grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity;
+                public attackComplexity: (grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.AttackComplexity);
 
                 /** CVSSv3 privilegesRequired. */
-                public privilegesRequired: grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired;
+                public privilegesRequired: (grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.PrivilegesRequired);
 
                 /** CVSSv3 userInteraction. */
-                public userInteraction: grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction;
+                public userInteraction: (grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.UserInteraction);
 
                 /** CVSSv3 scope. */
-                public scope: grafeas.v1beta1.vulnerability.CVSSv3.Scope;
+                public scope: (grafeas.v1beta1.vulnerability.CVSSv3.Scope|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Scope);
 
                 /** CVSSv3 confidentialityImpact. */
-                public confidentialityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+                public confidentialityImpact: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact);
 
                 /** CVSSv3 integrityImpact. */
-                public integrityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+                public integrityImpact: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact);
 
                 /** CVSSv3 availabilityImpact. */
-                public availabilityImpact: grafeas.v1beta1.vulnerability.CVSSv3.Impact;
+                public availabilityImpact: (grafeas.v1beta1.vulnerability.CVSSv3.Impact|keyof typeof grafeas.v1beta1.vulnerability.CVSSv3.Impact);
 
                 /**
                  * Creates a new CVSSv3 instance using the specified properties.
@@ -9425,7 +9425,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -9453,7 +9453,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -10333,10 +10333,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -10373,10 +10373,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -11151,7 +11151,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -11227,7 +11227,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -11476,13 +11476,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -11513,13 +11513,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -12018,7 +12018,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -12043,7 +12043,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -12139,16 +12139,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -12170,16 +12170,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -12766,7 +12766,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -12782,7 +12782,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -12865,7 +12865,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -12881,7 +12881,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -13700,7 +13700,7 @@ export namespace google {
                 bindings?: (google.iam.v1.IBinding[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|null);
+                etag?: (Uint8Array|string|null);
             }
 
             /** Represents a Policy. */
@@ -13719,7 +13719,7 @@ export namespace google {
                 public bindings: google.iam.v1.IBinding[];
 
                 /** Policy etag. */
-                public etag: Uint8Array;
+                public etag: (Uint8Array|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.
@@ -13994,7 +13994,7 @@ export namespace google {
             interface IBindingDelta {
 
                 /** BindingDelta action */
-                action?: (google.iam.v1.BindingDelta.Action|null);
+                action?: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action|null);
 
                 /** BindingDelta role */
                 role?: (string|null);
@@ -14016,7 +14016,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IBindingDelta);
 
                 /** BindingDelta action. */
-                public action: google.iam.v1.BindingDelta.Action;
+                public action: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action);
 
                 /** BindingDelta role. */
                 public role: string;
@@ -14112,7 +14112,7 @@ export namespace google {
             interface IAuditConfigDelta {
 
                 /** AuditConfigDelta action */
-                action?: (google.iam.v1.AuditConfigDelta.Action|null);
+                action?: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action|null);
 
                 /** AuditConfigDelta service */
                 service?: (string|null);
@@ -14134,7 +14134,7 @@ export namespace google {
                 constructor(properties?: google.iam.v1.IAuditConfigDelta);
 
                 /** AuditConfigDelta action. */
-                public action: google.iam.v1.AuditConfigDelta.Action;
+                public action: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action);
 
                 /** AuditConfigDelta service. */
                 public service: string;
