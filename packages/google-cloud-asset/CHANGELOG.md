@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-asset/compare/v1.6.0...v1.6.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([21d58e1](https://www.github.com/googleapis/nodejs-asset/commit/21d58e1398b9af89a632083fa37e29a2157f3992))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.5.0...v1.6.0) (2020-01-06)
 
 
