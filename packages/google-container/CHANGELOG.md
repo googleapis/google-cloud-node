@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.5.0...v1.6.0) (2020-01-24)
+
+
+### Features
+
+* bump release level to GA ([#272](https://www.github.com/googleapis/nodejs-cloud-container/issues/272)) ([0d2d210](https://www.github.com/googleapis/nodejs-cloud-container/commit/0d2d21028e6323fd836e6a7ac166c65d39b7534a))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.4.0...v1.5.0) (2020-01-06)
 
 
