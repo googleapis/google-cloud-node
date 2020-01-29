@@ -2110,15 +2110,6 @@
                     }
                   }
                 },
-                "UptimeCheckRegion": {
-                  "values": {
-                    "REGION_UNSPECIFIED": 0,
-                    "USA": 1,
-                    "EUROPE": 2,
-                    "SOUTH_AMERICA": 3,
-                    "ASIA_PACIFIC": 4
-                  }
-                },
                 "UptimeCheckConfig": {
                   "oneofs": {
                     "resource": {
@@ -2284,6 +2275,15 @@
                         }
                       }
                     }
+                  }
+                },
+                "UptimeCheckRegion": {
+                  "values": {
+                    "REGION_UNSPECIFIED": 0,
+                    "USA": 1,
+                    "EUROPE": 2,
+                    "SOUTH_AMERICA": 3,
+                    "ASIA_PACIFIC": 4
                   }
                 },
                 "UptimeCheckIp": {

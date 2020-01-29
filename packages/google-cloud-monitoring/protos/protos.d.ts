@@ -753,7 +753,7 @@ export namespace google {
                 conditions?: (google.monitoring.v3.AlertPolicy.ICondition[]|null);
 
                 /** AlertPolicy combiner */
-                combiner?: (google.monitoring.v3.AlertPolicy.ConditionCombinerType|null);
+                combiner?: (google.monitoring.v3.AlertPolicy.ConditionCombinerType|keyof typeof google.monitoring.v3.AlertPolicy.ConditionCombinerType|null);
 
                 /** AlertPolicy enabled */
                 enabled?: (google.protobuf.IBoolValue|null);
@@ -796,7 +796,7 @@ export namespace google {
                 public conditions: google.monitoring.v3.AlertPolicy.ICondition[];
 
                 /** AlertPolicy combiner. */
-                public combiner: google.monitoring.v3.AlertPolicy.ConditionCombinerType;
+                public combiner: (google.monitoring.v3.AlertPolicy.ConditionCombinerType|keyof typeof google.monitoring.v3.AlertPolicy.ConditionCombinerType);
 
                 /** AlertPolicy enabled. */
                 public enabled?: (google.protobuf.IBoolValue|null);
@@ -1210,7 +1210,7 @@ export namespace google {
                         denominatorAggregations?: (google.monitoring.v3.IAggregation[]|null);
 
                         /** MetricThreshold comparison */
-                        comparison?: (google.monitoring.v3.ComparisonType|null);
+                        comparison?: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType|null);
 
                         /** MetricThreshold thresholdValue */
                         thresholdValue?: (number|null);
@@ -1244,7 +1244,7 @@ export namespace google {
                         public denominatorAggregations: google.monitoring.v3.IAggregation[];
 
                         /** MetricThreshold comparison. */
-                        public comparison: google.monitoring.v3.ComparisonType;
+                        public comparison: (google.monitoring.v3.ComparisonType|keyof typeof google.monitoring.v3.ComparisonType);
 
                         /** MetricThreshold thresholdValue. */
                         public thresholdValue: number;
@@ -1451,7 +1451,7 @@ export namespace google {
                 boolValue?: (boolean|null);
 
                 /** TypedValue int64Value */
-                int64Value?: (number|Long|null);
+                int64Value?: (number|Long|string|null);
 
                 /** TypedValue doubleValue */
                 doubleValue?: (number|null);
@@ -1476,7 +1476,7 @@ export namespace google {
                 public boolValue: boolean;
 
                 /** TypedValue int64Value. */
-                public int64Value: (number|Long);
+                public int64Value: (number|Long|string);
 
                 /** TypedValue doubleValue. */
                 public doubleValue: number;
@@ -1664,10 +1664,10 @@ export namespace google {
                 alignmentPeriod?: (google.protobuf.IDuration|null);
 
                 /** Aggregation perSeriesAligner */
-                perSeriesAligner?: (google.monitoring.v3.Aggregation.Aligner|null);
+                perSeriesAligner?: (google.monitoring.v3.Aggregation.Aligner|keyof typeof google.monitoring.v3.Aggregation.Aligner|null);
 
                 /** Aggregation crossSeriesReducer */
-                crossSeriesReducer?: (google.monitoring.v3.Aggregation.Reducer|null);
+                crossSeriesReducer?: (google.monitoring.v3.Aggregation.Reducer|keyof typeof google.monitoring.v3.Aggregation.Reducer|null);
 
                 /** Aggregation groupByFields */
                 groupByFields?: (string[]|null);
@@ -1686,10 +1686,10 @@ export namespace google {
                 public alignmentPeriod?: (google.protobuf.IDuration|null);
 
                 /** Aggregation perSeriesAligner. */
-                public perSeriesAligner: google.monitoring.v3.Aggregation.Aligner;
+                public perSeriesAligner: (google.monitoring.v3.Aggregation.Aligner|keyof typeof google.monitoring.v3.Aggregation.Aligner);
 
                 /** Aggregation crossSeriesReducer. */
-                public crossSeriesReducer: google.monitoring.v3.Aggregation.Reducer;
+                public crossSeriesReducer: (google.monitoring.v3.Aggregation.Reducer|keyof typeof google.monitoring.v3.Aggregation.Reducer);
 
                 /** Aggregation groupByFields. */
                 public groupByFields: string[];
@@ -3991,7 +3991,7 @@ export namespace google {
                 orderBy?: (string|null);
 
                 /** ListTimeSeriesRequest view */
-                view?: (google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView|null);
+                view?: (google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView|keyof typeof google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView|null);
 
                 /** ListTimeSeriesRequest pageSize */
                 pageSize?: (number|null);
@@ -4025,7 +4025,7 @@ export namespace google {
                 public orderBy: string;
 
                 /** ListTimeSeriesRequest view. */
-                public view: google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView;
+                public view: (google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView|keyof typeof google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView);
 
                 /** ListTimeSeriesRequest pageSize. */
                 public pageSize: number;
@@ -4717,10 +4717,10 @@ export namespace google {
                 metadata?: (google.api.IMonitoredResourceMetadata|null);
 
                 /** TimeSeries metricKind */
-                metricKind?: (google.api.MetricDescriptor.MetricKind|null);
+                metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
 
                 /** TimeSeries valueType */
-                valueType?: (google.api.MetricDescriptor.ValueType|null);
+                valueType?: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType|null);
 
                 /** TimeSeries points */
                 points?: (google.monitoring.v3.IPoint[]|null);
@@ -4745,10 +4745,10 @@ export namespace google {
                 public metadata?: (google.api.IMonitoredResourceMetadata|null);
 
                 /** TimeSeries metricKind. */
-                public metricKind: google.api.MetricDescriptor.MetricKind;
+                public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
 
                 /** TimeSeries valueType. */
-                public valueType: google.api.MetricDescriptor.ValueType;
+                public valueType: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType);
 
                 /** TimeSeries points. */
                 public points: google.monitoring.v3.IPoint[];
@@ -6454,7 +6454,7 @@ export namespace google {
                 userLabels?: ({ [k: string]: string }|null);
 
                 /** NotificationChannel verificationStatus */
-                verificationStatus?: (google.monitoring.v3.NotificationChannel.VerificationStatus|null);
+                verificationStatus?: (google.monitoring.v3.NotificationChannel.VerificationStatus|keyof typeof google.monitoring.v3.NotificationChannel.VerificationStatus|null);
 
                 /** NotificationChannel enabled */
                 enabled?: (google.protobuf.IBoolValue|null);
@@ -6488,7 +6488,7 @@ export namespace google {
                 public userLabels: { [k: string]: string };
 
                 /** NotificationChannel verificationStatus. */
-                public verificationStatus: google.monitoring.v3.NotificationChannel.VerificationStatus;
+                public verificationStatus: (google.monitoring.v3.NotificationChannel.VerificationStatus|keyof typeof google.monitoring.v3.NotificationChannel.VerificationStatus);
 
                 /** NotificationChannel enabled. */
                 public enabled?: (google.protobuf.IBoolValue|null);
@@ -7499,7 +7499,7 @@ export namespace google {
                 name?: (string|null);
 
                 /** GetServiceLevelObjectiveRequest view */
-                view?: (google.monitoring.v3.ServiceLevelObjective.View|null);
+                view?: (google.monitoring.v3.ServiceLevelObjective.View|keyof typeof google.monitoring.v3.ServiceLevelObjective.View|null);
             }
 
             /** Represents a GetServiceLevelObjectiveRequest. */
@@ -7515,7 +7515,7 @@ export namespace google {
                 public name: string;
 
                 /** GetServiceLevelObjectiveRequest view. */
-                public view: google.monitoring.v3.ServiceLevelObjective.View;
+                public view: (google.monitoring.v3.ServiceLevelObjective.View|keyof typeof google.monitoring.v3.ServiceLevelObjective.View);
 
                 /**
                  * Creates a new GetServiceLevelObjectiveRequest instance using the specified properties.
@@ -7604,7 +7604,7 @@ export namespace google {
                 pageToken?: (string|null);
 
                 /** ListServiceLevelObjectivesRequest view */
-                view?: (google.monitoring.v3.ServiceLevelObjective.View|null);
+                view?: (google.monitoring.v3.ServiceLevelObjective.View|keyof typeof google.monitoring.v3.ServiceLevelObjective.View|null);
             }
 
             /** Represents a ListServiceLevelObjectivesRequest. */
@@ -7629,7 +7629,7 @@ export namespace google {
                 public pageToken: string;
 
                 /** ListServiceLevelObjectivesRequest view. */
-                public view: google.monitoring.v3.ServiceLevelObjective.View;
+                public view: (google.monitoring.v3.ServiceLevelObjective.View|keyof typeof google.monitoring.v3.ServiceLevelObjective.View);
 
                 /**
                  * Creates a new ListServiceLevelObjectivesRequest instance using the specified properties.
@@ -8597,7 +8597,7 @@ export namespace google {
                 rollingPeriod?: (google.protobuf.IDuration|null);
 
                 /** ServiceLevelObjective calendarPeriod */
-                calendarPeriod?: (google.type.CalendarPeriod|null);
+                calendarPeriod?: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod|null);
             }
 
             /** Represents a ServiceLevelObjective. */
@@ -8625,7 +8625,7 @@ export namespace google {
                 public rollingPeriod?: (google.protobuf.IDuration|null);
 
                 /** ServiceLevelObjective calendarPeriod. */
-                public calendarPeriod: google.type.CalendarPeriod;
+                public calendarPeriod: (google.type.CalendarPeriod|keyof typeof google.type.CalendarPeriod);
 
                 /** ServiceLevelObjective period. */
                 public period?: ("rollingPeriod"|"calendarPeriod");
@@ -10761,7 +10761,7 @@ export namespace google {
                 peerProjectId?: (string|null);
 
                 /** InternalChecker state */
-                state?: (google.monitoring.v3.InternalChecker.State|null);
+                state?: (google.monitoring.v3.InternalChecker.State|keyof typeof google.monitoring.v3.InternalChecker.State|null);
             }
 
             /** Represents an InternalChecker. */
@@ -10789,7 +10789,7 @@ export namespace google {
                 public peerProjectId: string;
 
                 /** InternalChecker state. */
-                public state: google.monitoring.v3.InternalChecker.State;
+                public state: (google.monitoring.v3.InternalChecker.State|keyof typeof google.monitoring.v3.InternalChecker.State);
 
                 /**
                  * Creates a new InternalChecker instance using the specified properties.
@@ -10870,15 +10870,6 @@ export namespace google {
                     CREATING = 1,
                     RUNNING = 2
                 }
-            }
-
-            /** UptimeCheckRegion enum. */
-            enum UptimeCheckRegion {
-                REGION_UNSPECIFIED = 0,
-                USA = 1,
-                EUROPE = 2,
-                SOUTH_AMERICA = 3,
-                ASIA_PACIFIC = 4
             }
 
             /** Properties of an UptimeCheckConfig. */
@@ -11052,7 +11043,7 @@ export namespace google {
                     groupId?: (string|null);
 
                     /** ResourceGroup resourceType */
-                    resourceType?: (google.monitoring.v3.GroupResourceType|null);
+                    resourceType?: (google.monitoring.v3.GroupResourceType|keyof typeof google.monitoring.v3.GroupResourceType|null);
                 }
 
                 /** Represents a ResourceGroup. */
@@ -11068,7 +11059,7 @@ export namespace google {
                     public groupId: string;
 
                     /** ResourceGroup resourceType. */
-                    public resourceType: google.monitoring.v3.GroupResourceType;
+                    public resourceType: (google.monitoring.v3.GroupResourceType|keyof typeof google.monitoring.v3.GroupResourceType);
 
                     /**
                      * Creates a new ResourceGroup instance using the specified properties.
@@ -11463,7 +11454,7 @@ export namespace google {
                     content?: (string|null);
 
                     /** ContentMatcher matcher */
-                    matcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null);
+                    matcher?: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|null);
                 }
 
                 /** Represents a ContentMatcher. */
@@ -11479,7 +11470,7 @@ export namespace google {
                     public content: string;
 
                     /** ContentMatcher matcher. */
-                    public matcher: google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption;
+                    public matcher: (google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption|keyof typeof google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption);
 
                     /**
                      * Creates a new ContentMatcher instance using the specified properties.
@@ -11565,11 +11556,20 @@ export namespace google {
                 }
             }
 
+            /** UptimeCheckRegion enum. */
+            enum UptimeCheckRegion {
+                REGION_UNSPECIFIED = 0,
+                USA = 1,
+                EUROPE = 2,
+                SOUTH_AMERICA = 3,
+                ASIA_PACIFIC = 4
+            }
+
             /** Properties of an UptimeCheckIp. */
             interface IUptimeCheckIp {
 
                 /** UptimeCheckIp region */
-                region?: (google.monitoring.v3.UptimeCheckRegion|null);
+                region?: (google.monitoring.v3.UptimeCheckRegion|keyof typeof google.monitoring.v3.UptimeCheckRegion|null);
 
                 /** UptimeCheckIp location */
                 location?: (string|null);
@@ -11588,7 +11588,7 @@ export namespace google {
                 constructor(properties?: google.monitoring.v3.IUptimeCheckIp);
 
                 /** UptimeCheckIp region. */
-                public region: google.monitoring.v3.UptimeCheckRegion;
+                public region: (google.monitoring.v3.UptimeCheckRegion|keyof typeof google.monitoring.v3.UptimeCheckRegion);
 
                 /** UptimeCheckIp location. */
                 public location: string;
@@ -12022,7 +12022,7 @@ export namespace google {
         interface IDistribution {
 
             /** Distribution count */
-            count?: (number|Long|null);
+            count?: (number|Long|string|null);
 
             /** Distribution mean */
             mean?: (number|null);
@@ -12037,7 +12037,7 @@ export namespace google {
             bucketOptions?: (google.api.Distribution.IBucketOptions|null);
 
             /** Distribution bucketCounts */
-            bucketCounts?: ((number|Long)[]|null);
+            bucketCounts?: ((number|Long|string)[]|null);
 
             /** Distribution exemplars */
             exemplars?: (google.api.Distribution.IExemplar[]|null);
@@ -12053,7 +12053,7 @@ export namespace google {
             constructor(properties?: google.api.IDistribution);
 
             /** Distribution count. */
-            public count: (number|Long);
+            public count: (number|Long|string);
 
             /** Distribution mean. */
             public mean: number;
@@ -12068,7 +12068,7 @@ export namespace google {
             public bucketOptions?: (google.api.Distribution.IBucketOptions|null);
 
             /** Distribution bucketCounts. */
-            public bucketCounts: (number|Long)[];
+            public bucketCounts: (number|Long|string)[];
 
             /** Distribution exemplars. */
             public exemplars: google.api.Distribution.IExemplar[];
@@ -12766,7 +12766,7 @@ export namespace google {
             labels?: (google.api.ILabelDescriptor[]|null);
 
             /** MonitoredResourceDescriptor launchStage */
-            launchStage?: (google.api.LaunchStage|null);
+            launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
         }
 
         /** Represents a MonitoredResourceDescriptor. */
@@ -12794,7 +12794,7 @@ export namespace google {
             public labels: google.api.ILabelDescriptor[];
 
             /** MonitoredResourceDescriptor launchStage. */
-            public launchStage: google.api.LaunchStage;
+            public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
 
             /**
              * Creates a new MonitoredResourceDescriptor instance using the specified properties.
@@ -13066,7 +13066,7 @@ export namespace google {
             key?: (string|null);
 
             /** LabelDescriptor valueType */
-            valueType?: (google.api.LabelDescriptor.ValueType|null);
+            valueType?: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType|null);
 
             /** LabelDescriptor description */
             description?: (string|null);
@@ -13085,7 +13085,7 @@ export namespace google {
             public key: string;
 
             /** LabelDescriptor valueType. */
-            public valueType: google.api.LabelDescriptor.ValueType;
+            public valueType: (google.api.LabelDescriptor.ValueType|keyof typeof google.api.LabelDescriptor.ValueType);
 
             /** LabelDescriptor description. */
             public description: string;
@@ -13194,10 +13194,10 @@ export namespace google {
             labels?: (google.api.ILabelDescriptor[]|null);
 
             /** MetricDescriptor metricKind */
-            metricKind?: (google.api.MetricDescriptor.MetricKind|null);
+            metricKind?: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind|null);
 
             /** MetricDescriptor valueType */
-            valueType?: (google.api.MetricDescriptor.ValueType|null);
+            valueType?: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType|null);
 
             /** MetricDescriptor unit */
             unit?: (string|null);
@@ -13212,7 +13212,7 @@ export namespace google {
             metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
 
             /** MetricDescriptor launchStage */
-            launchStage?: (google.api.LaunchStage|null);
+            launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
         }
 
         /** Represents a MetricDescriptor. */
@@ -13234,10 +13234,10 @@ export namespace google {
             public labels: google.api.ILabelDescriptor[];
 
             /** MetricDescriptor metricKind. */
-            public metricKind: google.api.MetricDescriptor.MetricKind;
+            public metricKind: (google.api.MetricDescriptor.MetricKind|keyof typeof google.api.MetricDescriptor.MetricKind);
 
             /** MetricDescriptor valueType. */
-            public valueType: google.api.MetricDescriptor.ValueType;
+            public valueType: (google.api.MetricDescriptor.ValueType|keyof typeof google.api.MetricDescriptor.ValueType);
 
             /** MetricDescriptor unit. */
             public unit: string;
@@ -13252,7 +13252,7 @@ export namespace google {
             public metadata?: (google.api.MetricDescriptor.IMetricDescriptorMetadata|null);
 
             /** MetricDescriptor launchStage. */
-            public launchStage: google.api.LaunchStage;
+            public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
 
             /**
              * Creates a new MetricDescriptor instance using the specified properties.
@@ -13331,7 +13331,7 @@ export namespace google {
             interface IMetricDescriptorMetadata {
 
                 /** MetricDescriptorMetadata launchStage */
-                launchStage?: (google.api.LaunchStage|null);
+                launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
 
                 /** MetricDescriptorMetadata samplePeriod */
                 samplePeriod?: (google.protobuf.IDuration|null);
@@ -13350,7 +13350,7 @@ export namespace google {
                 constructor(properties?: google.api.MetricDescriptor.IMetricDescriptorMetadata);
 
                 /** MetricDescriptorMetadata launchStage. */
-                public launchStage: google.api.LaunchStage;
+                public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
 
                 /** MetricDescriptorMetadata samplePeriod. */
                 public samplePeriod?: (google.protobuf.IDuration|null);
@@ -14240,10 +14240,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -14280,10 +14280,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -15058,7 +15058,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -15131,7 +15131,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -15377,13 +15377,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -15408,13 +15408,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -15913,7 +15913,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15938,7 +15938,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16034,16 +16034,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -16065,16 +16065,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -16664,7 +16664,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -16680,7 +16680,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -16757,7 +16757,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -16773,7 +16773,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -16853,7 +16853,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -16869,7 +16869,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -17129,7 +17129,7 @@ export namespace google {
         interface IInt64Value {
 
             /** Int64Value value */
-            value?: (number|Long|null);
+            value?: (number|Long|string|null);
         }
 
         /** Represents an Int64Value. */
@@ -17142,7 +17142,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IInt64Value);
 
             /** Int64Value value. */
-            public value: (number|Long);
+            public value: (number|Long|string);
 
             /**
              * Creates a new Int64Value instance using the specified properties.
@@ -17219,7 +17219,7 @@ export namespace google {
         interface IUInt64Value {
 
             /** UInt64Value value */
-            value?: (number|Long|null);
+            value?: (number|Long|string|null);
         }
 
         /** Represents a UInt64Value. */
@@ -17232,7 +17232,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IUInt64Value);
 
             /** UInt64Value value. */
-            public value: (number|Long);
+            public value: (number|Long|string);
 
             /**
              * Creates a new UInt64Value instance using the specified properties.
@@ -17669,7 +17669,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -17682,7 +17682,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -18023,7 +18023,7 @@ export namespace google {
         interface IValue {
 
             /** Value nullValue */
-            nullValue?: (google.protobuf.NullValue|null);
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue */
             numberValue?: (number|null);
@@ -18051,7 +18051,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: google.protobuf.NullValue;
+            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
 
             /** Value numberValue. */
             public numberValue: number;

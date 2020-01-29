@@ -25406,26 +25406,6 @@
                     return InternalChecker;
                 })();
     
-                /**
-                 * UptimeCheckRegion enum.
-                 * @name google.monitoring.v3.UptimeCheckRegion
-                 * @enum {string}
-                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
-                 * @property {number} USA=1 USA value
-                 * @property {number} EUROPE=2 EUROPE value
-                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
-                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
-                 */
-                v3.UptimeCheckRegion = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "USA"] = 1;
-                    values[valuesById[2] = "EUROPE"] = 2;
-                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
-                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
-                    return values;
-                })();
-    
                 v3.UptimeCheckConfig = (function() {
     
                     /**
@@ -27262,6 +27242,26 @@
                     })();
     
                     return UptimeCheckConfig;
+                })();
+    
+                /**
+                 * UptimeCheckRegion enum.
+                 * @name google.monitoring.v3.UptimeCheckRegion
+                 * @enum {string}
+                 * @property {number} REGION_UNSPECIFIED=0 REGION_UNSPECIFIED value
+                 * @property {number} USA=1 USA value
+                 * @property {number} EUROPE=2 EUROPE value
+                 * @property {number} SOUTH_AMERICA=3 SOUTH_AMERICA value
+                 * @property {number} ASIA_PACIFIC=4 ASIA_PACIFIC value
+                 */
+                v3.UptimeCheckRegion = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REGION_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "USA"] = 1;
+                    values[valuesById[2] = "EUROPE"] = 2;
+                    values[valuesById[3] = "SOUTH_AMERICA"] = 3;
+                    values[valuesById[4] = "ASIA_PACIFIC"] = 4;
+                    return values;
                 })();
     
                 v3.UptimeCheckIp = (function() {
