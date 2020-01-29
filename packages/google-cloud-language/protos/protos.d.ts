@@ -180,7 +180,7 @@ export namespace google {
                 interface IDocument {
 
                     /** Document type */
-                    type?: (google.cloud.language.v1.Document.Type|null);
+                    type?: (google.cloud.language.v1.Document.Type|keyof typeof google.cloud.language.v1.Document.Type|null);
 
                     /** Document content */
                     content?: (string|null);
@@ -202,7 +202,7 @@ export namespace google {
                     constructor(properties?: google.cloud.language.v1.IDocument);
 
                     /** Document type. */
-                    public type: google.cloud.language.v1.Document.Type;
+                    public type: (google.cloud.language.v1.Document.Type|keyof typeof google.cloud.language.v1.Document.Type);
 
                     /** Document content. */
                     public content: string;
@@ -400,7 +400,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** Entity type */
-                    type?: (google.cloud.language.v1.Entity.Type|null);
+                    type?: (google.cloud.language.v1.Entity.Type|keyof typeof google.cloud.language.v1.Entity.Type|null);
 
                     /** Entity metadata */
                     metadata?: ({ [k: string]: string }|null);
@@ -428,7 +428,7 @@ export namespace google {
                     public name: string;
 
                     /** Entity type. */
-                    public type: google.cloud.language.v1.Entity.Type;
+                    public type: (google.cloud.language.v1.Entity.Type|keyof typeof google.cloud.language.v1.Entity.Type);
 
                     /** Entity metadata. */
                     public metadata: { [k: string]: string };
@@ -749,40 +749,40 @@ export namespace google {
                 interface IPartOfSpeech {
 
                     /** PartOfSpeech tag */
-                    tag?: (google.cloud.language.v1.PartOfSpeech.Tag|null);
+                    tag?: (google.cloud.language.v1.PartOfSpeech.Tag|keyof typeof google.cloud.language.v1.PartOfSpeech.Tag|null);
 
                     /** PartOfSpeech aspect */
-                    aspect?: (google.cloud.language.v1.PartOfSpeech.Aspect|null);
+                    aspect?: (google.cloud.language.v1.PartOfSpeech.Aspect|keyof typeof google.cloud.language.v1.PartOfSpeech.Aspect|null);
 
                     /** PartOfSpeech case */
-                    "case"?: (google.cloud.language.v1.PartOfSpeech.Case|null);
+                    "case"?: (google.cloud.language.v1.PartOfSpeech.Case|keyof typeof google.cloud.language.v1.PartOfSpeech.Case|null);
 
                     /** PartOfSpeech form */
-                    form?: (google.cloud.language.v1.PartOfSpeech.Form|null);
+                    form?: (google.cloud.language.v1.PartOfSpeech.Form|keyof typeof google.cloud.language.v1.PartOfSpeech.Form|null);
 
                     /** PartOfSpeech gender */
-                    gender?: (google.cloud.language.v1.PartOfSpeech.Gender|null);
+                    gender?: (google.cloud.language.v1.PartOfSpeech.Gender|keyof typeof google.cloud.language.v1.PartOfSpeech.Gender|null);
 
                     /** PartOfSpeech mood */
-                    mood?: (google.cloud.language.v1.PartOfSpeech.Mood|null);
+                    mood?: (google.cloud.language.v1.PartOfSpeech.Mood|keyof typeof google.cloud.language.v1.PartOfSpeech.Mood|null);
 
                     /** PartOfSpeech number */
-                    number?: (google.cloud.language.v1.PartOfSpeech.Number|null);
+                    number?: (google.cloud.language.v1.PartOfSpeech.Number|keyof typeof google.cloud.language.v1.PartOfSpeech.Number|null);
 
                     /** PartOfSpeech person */
-                    person?: (google.cloud.language.v1.PartOfSpeech.Person|null);
+                    person?: (google.cloud.language.v1.PartOfSpeech.Person|keyof typeof google.cloud.language.v1.PartOfSpeech.Person|null);
 
                     /** PartOfSpeech proper */
-                    proper?: (google.cloud.language.v1.PartOfSpeech.Proper|null);
+                    proper?: (google.cloud.language.v1.PartOfSpeech.Proper|keyof typeof google.cloud.language.v1.PartOfSpeech.Proper|null);
 
                     /** PartOfSpeech reciprocity */
-                    reciprocity?: (google.cloud.language.v1.PartOfSpeech.Reciprocity|null);
+                    reciprocity?: (google.cloud.language.v1.PartOfSpeech.Reciprocity|keyof typeof google.cloud.language.v1.PartOfSpeech.Reciprocity|null);
 
                     /** PartOfSpeech tense */
-                    tense?: (google.cloud.language.v1.PartOfSpeech.Tense|null);
+                    tense?: (google.cloud.language.v1.PartOfSpeech.Tense|keyof typeof google.cloud.language.v1.PartOfSpeech.Tense|null);
 
                     /** PartOfSpeech voice */
-                    voice?: (google.cloud.language.v1.PartOfSpeech.Voice|null);
+                    voice?: (google.cloud.language.v1.PartOfSpeech.Voice|keyof typeof google.cloud.language.v1.PartOfSpeech.Voice|null);
                 }
 
                 /** Represents a PartOfSpeech. */
@@ -795,40 +795,40 @@ export namespace google {
                     constructor(properties?: google.cloud.language.v1.IPartOfSpeech);
 
                     /** PartOfSpeech tag. */
-                    public tag: google.cloud.language.v1.PartOfSpeech.Tag;
+                    public tag: (google.cloud.language.v1.PartOfSpeech.Tag|keyof typeof google.cloud.language.v1.PartOfSpeech.Tag);
 
                     /** PartOfSpeech aspect. */
-                    public aspect: google.cloud.language.v1.PartOfSpeech.Aspect;
+                    public aspect: (google.cloud.language.v1.PartOfSpeech.Aspect|keyof typeof google.cloud.language.v1.PartOfSpeech.Aspect);
 
                     /** PartOfSpeech case. */
-                    public case: google.cloud.language.v1.PartOfSpeech.Case;
+                    public case: (google.cloud.language.v1.PartOfSpeech.Case|keyof typeof google.cloud.language.v1.PartOfSpeech.Case);
 
                     /** PartOfSpeech form. */
-                    public form: google.cloud.language.v1.PartOfSpeech.Form;
+                    public form: (google.cloud.language.v1.PartOfSpeech.Form|keyof typeof google.cloud.language.v1.PartOfSpeech.Form);
 
                     /** PartOfSpeech gender. */
-                    public gender: google.cloud.language.v1.PartOfSpeech.Gender;
+                    public gender: (google.cloud.language.v1.PartOfSpeech.Gender|keyof typeof google.cloud.language.v1.PartOfSpeech.Gender);
 
                     /** PartOfSpeech mood. */
-                    public mood: google.cloud.language.v1.PartOfSpeech.Mood;
+                    public mood: (google.cloud.language.v1.PartOfSpeech.Mood|keyof typeof google.cloud.language.v1.PartOfSpeech.Mood);
 
                     /** PartOfSpeech number. */
-                    public number: google.cloud.language.v1.PartOfSpeech.Number;
+                    public number: (google.cloud.language.v1.PartOfSpeech.Number|keyof typeof google.cloud.language.v1.PartOfSpeech.Number);
 
                     /** PartOfSpeech person. */
-                    public person: google.cloud.language.v1.PartOfSpeech.Person;
+                    public person: (google.cloud.language.v1.PartOfSpeech.Person|keyof typeof google.cloud.language.v1.PartOfSpeech.Person);
 
                     /** PartOfSpeech proper. */
-                    public proper: google.cloud.language.v1.PartOfSpeech.Proper;
+                    public proper: (google.cloud.language.v1.PartOfSpeech.Proper|keyof typeof google.cloud.language.v1.PartOfSpeech.Proper);
 
                     /** PartOfSpeech reciprocity. */
-                    public reciprocity: google.cloud.language.v1.PartOfSpeech.Reciprocity;
+                    public reciprocity: (google.cloud.language.v1.PartOfSpeech.Reciprocity|keyof typeof google.cloud.language.v1.PartOfSpeech.Reciprocity);
 
                     /** PartOfSpeech tense. */
-                    public tense: google.cloud.language.v1.PartOfSpeech.Tense;
+                    public tense: (google.cloud.language.v1.PartOfSpeech.Tense|keyof typeof google.cloud.language.v1.PartOfSpeech.Tense);
 
                     /** PartOfSpeech voice. */
-                    public voice: google.cloud.language.v1.PartOfSpeech.Voice;
+                    public voice: (google.cloud.language.v1.PartOfSpeech.Voice|keyof typeof google.cloud.language.v1.PartOfSpeech.Voice);
 
                     /**
                      * Creates a new PartOfSpeech instance using the specified properties.
@@ -1041,7 +1041,7 @@ export namespace google {
                     headTokenIndex?: (number|null);
 
                     /** DependencyEdge label */
-                    label?: (google.cloud.language.v1.DependencyEdge.Label|null);
+                    label?: (google.cloud.language.v1.DependencyEdge.Label|keyof typeof google.cloud.language.v1.DependencyEdge.Label|null);
                 }
 
                 /** Represents a DependencyEdge. */
@@ -1057,7 +1057,7 @@ export namespace google {
                     public headTokenIndex: number;
 
                     /** DependencyEdge label. */
-                    public label: google.cloud.language.v1.DependencyEdge.Label;
+                    public label: (google.cloud.language.v1.DependencyEdge.Label|keyof typeof google.cloud.language.v1.DependencyEdge.Label);
 
                     /**
                      * Creates a new DependencyEdge instance using the specified properties.
@@ -1227,7 +1227,7 @@ export namespace google {
                     text?: (google.cloud.language.v1.ITextSpan|null);
 
                     /** EntityMention type */
-                    type?: (google.cloud.language.v1.EntityMention.Type|null);
+                    type?: (google.cloud.language.v1.EntityMention.Type|keyof typeof google.cloud.language.v1.EntityMention.Type|null);
 
                     /** EntityMention sentiment */
                     sentiment?: (google.cloud.language.v1.ISentiment|null);
@@ -1246,7 +1246,7 @@ export namespace google {
                     public text?: (google.cloud.language.v1.ITextSpan|null);
 
                     /** EntityMention type. */
-                    public type: google.cloud.language.v1.EntityMention.Type;
+                    public type: (google.cloud.language.v1.EntityMention.Type|keyof typeof google.cloud.language.v1.EntityMention.Type);
 
                     /** EntityMention sentiment. */
                     public sentiment?: (google.cloud.language.v1.ISentiment|null);
@@ -1531,7 +1531,7 @@ export namespace google {
                     document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeSentimentRequest encodingType */
-                    encodingType?: (google.cloud.language.v1.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeSentimentRequest. */
@@ -1547,7 +1547,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeSentimentRequest encodingType. */
-                    public encodingType: google.cloud.language.v1.EncodingType;
+                    public encodingType: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType);
 
                     /**
                      * Creates a new AnalyzeSentimentRequest instance using the specified properties.
@@ -1729,7 +1729,7 @@ export namespace google {
                     document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeEntitySentimentRequest encodingType */
-                    encodingType?: (google.cloud.language.v1.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeEntitySentimentRequest. */
@@ -1745,7 +1745,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeEntitySentimentRequest encodingType. */
-                    public encodingType: google.cloud.language.v1.EncodingType;
+                    public encodingType: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType);
 
                     /**
                      * Creates a new AnalyzeEntitySentimentRequest instance using the specified properties.
@@ -1921,7 +1921,7 @@ export namespace google {
                     document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeEntitiesRequest encodingType */
-                    encodingType?: (google.cloud.language.v1.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeEntitiesRequest. */
@@ -1937,7 +1937,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeEntitiesRequest encodingType. */
-                    public encodingType: google.cloud.language.v1.EncodingType;
+                    public encodingType: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType);
 
                     /**
                      * Creates a new AnalyzeEntitiesRequest instance using the specified properties.
@@ -2113,7 +2113,7 @@ export namespace google {
                     document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeSyntaxRequest encodingType */
-                    encodingType?: (google.cloud.language.v1.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeSyntaxRequest. */
@@ -2129,7 +2129,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1.IDocument|null);
 
                     /** AnalyzeSyntaxRequest encodingType. */
-                    public encodingType: google.cloud.language.v1.EncodingType;
+                    public encodingType: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType);
 
                     /**
                      * Creates a new AnalyzeSyntaxRequest instance using the specified properties.
@@ -2494,7 +2494,7 @@ export namespace google {
                     features?: (google.cloud.language.v1.AnnotateTextRequest.IFeatures|null);
 
                     /** AnnotateTextRequest encodingType */
-                    encodingType?: (google.cloud.language.v1.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType|null);
                 }
 
                 /** Represents an AnnotateTextRequest. */
@@ -2513,7 +2513,7 @@ export namespace google {
                     public features?: (google.cloud.language.v1.AnnotateTextRequest.IFeatures|null);
 
                     /** AnnotateTextRequest encodingType. */
-                    public encodingType: google.cloud.language.v1.EncodingType;
+                    public encodingType: (google.cloud.language.v1.EncodingType|keyof typeof google.cloud.language.v1.EncodingType);
 
                     /**
                      * Creates a new AnnotateTextRequest instance using the specified properties.
@@ -2981,7 +2981,7 @@ export namespace google {
                 interface IDocument {
 
                     /** Document type */
-                    type?: (google.cloud.language.v1beta2.Document.Type|null);
+                    type?: (google.cloud.language.v1beta2.Document.Type|keyof typeof google.cloud.language.v1beta2.Document.Type|null);
 
                     /** Document content */
                     content?: (string|null);
@@ -3003,7 +3003,7 @@ export namespace google {
                     constructor(properties?: google.cloud.language.v1beta2.IDocument);
 
                     /** Document type. */
-                    public type: google.cloud.language.v1beta2.Document.Type;
+                    public type: (google.cloud.language.v1beta2.Document.Type|keyof typeof google.cloud.language.v1beta2.Document.Type);
 
                     /** Document content. */
                     public content: string;
@@ -3201,7 +3201,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** Entity type */
-                    type?: (google.cloud.language.v1beta2.Entity.Type|null);
+                    type?: (google.cloud.language.v1beta2.Entity.Type|keyof typeof google.cloud.language.v1beta2.Entity.Type|null);
 
                     /** Entity metadata */
                     metadata?: ({ [k: string]: string }|null);
@@ -3229,7 +3229,7 @@ export namespace google {
                     public name: string;
 
                     /** Entity type. */
-                    public type: google.cloud.language.v1beta2.Entity.Type;
+                    public type: (google.cloud.language.v1beta2.Entity.Type|keyof typeof google.cloud.language.v1beta2.Entity.Type);
 
                     /** Entity metadata. */
                     public metadata: { [k: string]: string };
@@ -3550,40 +3550,40 @@ export namespace google {
                 interface IPartOfSpeech {
 
                     /** PartOfSpeech tag */
-                    tag?: (google.cloud.language.v1beta2.PartOfSpeech.Tag|null);
+                    tag?: (google.cloud.language.v1beta2.PartOfSpeech.Tag|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Tag|null);
 
                     /** PartOfSpeech aspect */
-                    aspect?: (google.cloud.language.v1beta2.PartOfSpeech.Aspect|null);
+                    aspect?: (google.cloud.language.v1beta2.PartOfSpeech.Aspect|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Aspect|null);
 
                     /** PartOfSpeech case */
-                    "case"?: (google.cloud.language.v1beta2.PartOfSpeech.Case|null);
+                    "case"?: (google.cloud.language.v1beta2.PartOfSpeech.Case|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Case|null);
 
                     /** PartOfSpeech form */
-                    form?: (google.cloud.language.v1beta2.PartOfSpeech.Form|null);
+                    form?: (google.cloud.language.v1beta2.PartOfSpeech.Form|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Form|null);
 
                     /** PartOfSpeech gender */
-                    gender?: (google.cloud.language.v1beta2.PartOfSpeech.Gender|null);
+                    gender?: (google.cloud.language.v1beta2.PartOfSpeech.Gender|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Gender|null);
 
                     /** PartOfSpeech mood */
-                    mood?: (google.cloud.language.v1beta2.PartOfSpeech.Mood|null);
+                    mood?: (google.cloud.language.v1beta2.PartOfSpeech.Mood|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Mood|null);
 
                     /** PartOfSpeech number */
-                    number?: (google.cloud.language.v1beta2.PartOfSpeech.Number|null);
+                    number?: (google.cloud.language.v1beta2.PartOfSpeech.Number|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Number|null);
 
                     /** PartOfSpeech person */
-                    person?: (google.cloud.language.v1beta2.PartOfSpeech.Person|null);
+                    person?: (google.cloud.language.v1beta2.PartOfSpeech.Person|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Person|null);
 
                     /** PartOfSpeech proper */
-                    proper?: (google.cloud.language.v1beta2.PartOfSpeech.Proper|null);
+                    proper?: (google.cloud.language.v1beta2.PartOfSpeech.Proper|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Proper|null);
 
                     /** PartOfSpeech reciprocity */
-                    reciprocity?: (google.cloud.language.v1beta2.PartOfSpeech.Reciprocity|null);
+                    reciprocity?: (google.cloud.language.v1beta2.PartOfSpeech.Reciprocity|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Reciprocity|null);
 
                     /** PartOfSpeech tense */
-                    tense?: (google.cloud.language.v1beta2.PartOfSpeech.Tense|null);
+                    tense?: (google.cloud.language.v1beta2.PartOfSpeech.Tense|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Tense|null);
 
                     /** PartOfSpeech voice */
-                    voice?: (google.cloud.language.v1beta2.PartOfSpeech.Voice|null);
+                    voice?: (google.cloud.language.v1beta2.PartOfSpeech.Voice|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Voice|null);
                 }
 
                 /** Represents a PartOfSpeech. */
@@ -3596,40 +3596,40 @@ export namespace google {
                     constructor(properties?: google.cloud.language.v1beta2.IPartOfSpeech);
 
                     /** PartOfSpeech tag. */
-                    public tag: google.cloud.language.v1beta2.PartOfSpeech.Tag;
+                    public tag: (google.cloud.language.v1beta2.PartOfSpeech.Tag|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Tag);
 
                     /** PartOfSpeech aspect. */
-                    public aspect: google.cloud.language.v1beta2.PartOfSpeech.Aspect;
+                    public aspect: (google.cloud.language.v1beta2.PartOfSpeech.Aspect|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Aspect);
 
                     /** PartOfSpeech case. */
-                    public case: google.cloud.language.v1beta2.PartOfSpeech.Case;
+                    public case: (google.cloud.language.v1beta2.PartOfSpeech.Case|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Case);
 
                     /** PartOfSpeech form. */
-                    public form: google.cloud.language.v1beta2.PartOfSpeech.Form;
+                    public form: (google.cloud.language.v1beta2.PartOfSpeech.Form|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Form);
 
                     /** PartOfSpeech gender. */
-                    public gender: google.cloud.language.v1beta2.PartOfSpeech.Gender;
+                    public gender: (google.cloud.language.v1beta2.PartOfSpeech.Gender|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Gender);
 
                     /** PartOfSpeech mood. */
-                    public mood: google.cloud.language.v1beta2.PartOfSpeech.Mood;
+                    public mood: (google.cloud.language.v1beta2.PartOfSpeech.Mood|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Mood);
 
                     /** PartOfSpeech number. */
-                    public number: google.cloud.language.v1beta2.PartOfSpeech.Number;
+                    public number: (google.cloud.language.v1beta2.PartOfSpeech.Number|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Number);
 
                     /** PartOfSpeech person. */
-                    public person: google.cloud.language.v1beta2.PartOfSpeech.Person;
+                    public person: (google.cloud.language.v1beta2.PartOfSpeech.Person|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Person);
 
                     /** PartOfSpeech proper. */
-                    public proper: google.cloud.language.v1beta2.PartOfSpeech.Proper;
+                    public proper: (google.cloud.language.v1beta2.PartOfSpeech.Proper|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Proper);
 
                     /** PartOfSpeech reciprocity. */
-                    public reciprocity: google.cloud.language.v1beta2.PartOfSpeech.Reciprocity;
+                    public reciprocity: (google.cloud.language.v1beta2.PartOfSpeech.Reciprocity|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Reciprocity);
 
                     /** PartOfSpeech tense. */
-                    public tense: google.cloud.language.v1beta2.PartOfSpeech.Tense;
+                    public tense: (google.cloud.language.v1beta2.PartOfSpeech.Tense|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Tense);
 
                     /** PartOfSpeech voice. */
-                    public voice: google.cloud.language.v1beta2.PartOfSpeech.Voice;
+                    public voice: (google.cloud.language.v1beta2.PartOfSpeech.Voice|keyof typeof google.cloud.language.v1beta2.PartOfSpeech.Voice);
 
                     /**
                      * Creates a new PartOfSpeech instance using the specified properties.
@@ -3842,7 +3842,7 @@ export namespace google {
                     headTokenIndex?: (number|null);
 
                     /** DependencyEdge label */
-                    label?: (google.cloud.language.v1beta2.DependencyEdge.Label|null);
+                    label?: (google.cloud.language.v1beta2.DependencyEdge.Label|keyof typeof google.cloud.language.v1beta2.DependencyEdge.Label|null);
                 }
 
                 /** Represents a DependencyEdge. */
@@ -3858,7 +3858,7 @@ export namespace google {
                     public headTokenIndex: number;
 
                     /** DependencyEdge label. */
-                    public label: google.cloud.language.v1beta2.DependencyEdge.Label;
+                    public label: (google.cloud.language.v1beta2.DependencyEdge.Label|keyof typeof google.cloud.language.v1beta2.DependencyEdge.Label);
 
                     /**
                      * Creates a new DependencyEdge instance using the specified properties.
@@ -4028,7 +4028,7 @@ export namespace google {
                     text?: (google.cloud.language.v1beta2.ITextSpan|null);
 
                     /** EntityMention type */
-                    type?: (google.cloud.language.v1beta2.EntityMention.Type|null);
+                    type?: (google.cloud.language.v1beta2.EntityMention.Type|keyof typeof google.cloud.language.v1beta2.EntityMention.Type|null);
 
                     /** EntityMention sentiment */
                     sentiment?: (google.cloud.language.v1beta2.ISentiment|null);
@@ -4047,7 +4047,7 @@ export namespace google {
                     public text?: (google.cloud.language.v1beta2.ITextSpan|null);
 
                     /** EntityMention type. */
-                    public type: google.cloud.language.v1beta2.EntityMention.Type;
+                    public type: (google.cloud.language.v1beta2.EntityMention.Type|keyof typeof google.cloud.language.v1beta2.EntityMention.Type);
 
                     /** EntityMention sentiment. */
                     public sentiment?: (google.cloud.language.v1beta2.ISentiment|null);
@@ -4332,7 +4332,7 @@ export namespace google {
                     document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeSentimentRequest encodingType */
-                    encodingType?: (google.cloud.language.v1beta2.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeSentimentRequest. */
@@ -4348,7 +4348,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeSentimentRequest encodingType. */
-                    public encodingType: google.cloud.language.v1beta2.EncodingType;
+                    public encodingType: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType);
 
                     /**
                      * Creates a new AnalyzeSentimentRequest instance using the specified properties.
@@ -4530,7 +4530,7 @@ export namespace google {
                     document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeEntitySentimentRequest encodingType */
-                    encodingType?: (google.cloud.language.v1beta2.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeEntitySentimentRequest. */
@@ -4546,7 +4546,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeEntitySentimentRequest encodingType. */
-                    public encodingType: google.cloud.language.v1beta2.EncodingType;
+                    public encodingType: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType);
 
                     /**
                      * Creates a new AnalyzeEntitySentimentRequest instance using the specified properties.
@@ -4722,7 +4722,7 @@ export namespace google {
                     document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeEntitiesRequest encodingType */
-                    encodingType?: (google.cloud.language.v1beta2.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeEntitiesRequest. */
@@ -4738,7 +4738,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeEntitiesRequest encodingType. */
-                    public encodingType: google.cloud.language.v1beta2.EncodingType;
+                    public encodingType: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType);
 
                     /**
                      * Creates a new AnalyzeEntitiesRequest instance using the specified properties.
@@ -4914,7 +4914,7 @@ export namespace google {
                     document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeSyntaxRequest encodingType */
-                    encodingType?: (google.cloud.language.v1beta2.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType|null);
                 }
 
                 /** Represents an AnalyzeSyntaxRequest. */
@@ -4930,7 +4930,7 @@ export namespace google {
                     public document?: (google.cloud.language.v1beta2.IDocument|null);
 
                     /** AnalyzeSyntaxRequest encodingType. */
-                    public encodingType: google.cloud.language.v1beta2.EncodingType;
+                    public encodingType: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType);
 
                     /**
                      * Creates a new AnalyzeSyntaxRequest instance using the specified properties.
@@ -5295,7 +5295,7 @@ export namespace google {
                     features?: (google.cloud.language.v1beta2.AnnotateTextRequest.IFeatures|null);
 
                     /** AnnotateTextRequest encodingType */
-                    encodingType?: (google.cloud.language.v1beta2.EncodingType|null);
+                    encodingType?: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType|null);
                 }
 
                 /** Represents an AnnotateTextRequest. */
@@ -5314,7 +5314,7 @@ export namespace google {
                     public features?: (google.cloud.language.v1beta2.AnnotateTextRequest.IFeatures|null);
 
                     /** AnnotateTextRequest encodingType. */
-                    public encodingType: google.cloud.language.v1beta2.EncodingType;
+                    public encodingType: (google.cloud.language.v1beta2.EncodingType|keyof typeof google.cloud.language.v1beta2.EncodingType);
 
                     /**
                      * Creates a new AnnotateTextRequest instance using the specified properties.
@@ -6674,10 +6674,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -6714,10 +6714,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -7492,7 +7492,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -7565,7 +7565,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -7811,13 +7811,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -7845,13 +7845,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -8350,7 +8350,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -8375,7 +8375,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8471,16 +8471,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -8502,16 +8502,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -9098,7 +9098,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -9114,7 +9114,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;

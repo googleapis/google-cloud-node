@@ -1,12 +1,12 @@
 {
-  "updateTime": "2020-01-24T12:23:42.923708Z",
+  "updateTime": "2020-01-29T04:11:42.726010Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "cf3b61102ed5f36b827bc82ec39be09525f018c8",
+        "internalRef": "292034635"
       }
     },
     {
@@ -60,13 +60,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -147,9 +141,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -183,15 +174,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".readme-partials.yml"
-    },
-    {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -208,9 +190,6 @@
     },
     {
       "path": "linkinator.config.json"
-    },
-    {
-      "path": "package.json"
     },
     {
       "path": "protos/google/cloud/language/v1/language_service.proto"
@@ -231,73 +210,7 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
-    },
-    {
-      "path": "samples/analyze.v1.js"
-    },
-    {
-      "path": "samples/analyze.v1beta2.js"
-    },
-    {
-      "path": "samples/automl/automlNaturalLanguageDataset.js"
-    },
-    {
-      "path": "samples/automl/automlNaturalLanguageModel.js"
-    },
-    {
-      "path": "samples/automl/automlNaturalLanguagePredict.js"
-    },
-    {
-      "path": "samples/automl/resources/test.txt"
-    },
-    {
-      "path": "samples/automlNaturalLanguageDataset.js"
-    },
-    {
-      "path": "samples/automlNaturalLanguageModel.js"
-    },
-    {
-      "path": "samples/automlNaturalLanguagePredict.js"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/resources/android_text.txt"
-    },
-    {
-      "path": "samples/resources/text.txt"
-    },
-    {
-      "path": "samples/setEndpoint.js"
-    },
-    {
-      "path": "samples/test/analyze.v1.test.js"
-    },
-    {
-      "path": "samples/test/analyze.v1beta2.test.js"
-    },
-    {
-      "path": "samples/test/automlNaturalLanguage.test.js"
-    },
-    {
-      "path": "samples/test/quickstart.test.js"
-    },
-    {
-      "path": "samples/test/setEndpoint.test.js"
-    },
-    {
-      "path": "smoke-test/.eslintrc.yml"
-    },
-    {
-      "path": "src/index.ts"
     },
     {
       "path": "src/v1/index.ts"
@@ -324,9 +237,6 @@
       "path": "src/v1beta2/language_service_proto_list.json"
     },
     {
-      "path": "synth.py"
-    },
-    {
       "path": "system-test/fixtures/sample/src/index.js"
     },
     {
@@ -336,16 +246,10 @@
       "path": "system-test/install.ts"
     },
     {
-      "path": "system-test/language_service_smoke_test.js"
-    },
-    {
       "path": "test/gapic-language_service-v1.ts"
     },
     {
       "path": "test/gapic-language_service-v1beta2.ts"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "tsconfig.json"
