@@ -1,12 +1,12 @@
 {
-  "updateTime": "2020-01-24T12:26:01.431173Z",
+  "updateTime": "2020-01-28T22:48:45.104148Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "9c483584f8fd5a1b862ae07973f4cc7bb3e46648",
+        "internalRef": "292009868"
       }
     },
     {
@@ -51,13 +51,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -138,9 +132,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -174,12 +165,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -198,16 +183,7 @@
       "path": "linkinator.config.json"
     },
     {
-      "path": "package.json"
-    },
-    {
-      "path": "protos/google/cloud/oslogin/common.proto"
-    },
-    {
       "path": "protos/google/cloud/oslogin/common/common.proto"
-    },
-    {
-      "path": "protos/google/cloud/oslogin/v1alpha/oslogin.proto"
     },
     {
       "path": "protos/google/cloud/oslogin/v1beta/oslogin.proto"
@@ -225,37 +201,7 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/test/sample.test.js"
-    },
-    {
-      "path": "src/index.js"
-    },
-    {
-      "path": "src/index.ts"
-    },
-    {
-      "path": "src/v1beta/doc/google/cloud/oslogin/common/doc_common.js"
-    },
-    {
-      "path": "src/v1beta/doc/google/cloud/oslogin/v1beta/doc_oslogin.js"
-    },
-    {
-      "path": "src/v1beta/doc/google/protobuf/doc_empty.js"
-    },
-    {
-      "path": "src/v1beta/doc/google/protobuf/doc_field_mask.js"
     },
     {
       "path": "src/v1beta/index.ts"
@@ -270,9 +216,6 @@
       "path": "src/v1beta/os_login_service_proto_list.json"
     },
     {
-      "path": "synth.py"
-    },
-    {
       "path": "system-test/fixtures/sample/src/index.js"
     },
     {
@@ -283,9 +226,6 @@
     },
     {
       "path": "test/gapic-os_login_service-v1beta.ts"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "tsconfig.json"
