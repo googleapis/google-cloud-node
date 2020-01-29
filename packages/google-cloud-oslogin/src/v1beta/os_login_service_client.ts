@@ -783,14 +783,14 @@ export class OsLoginServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified posixaccount resource name string.
+   * Return a fully-qualified posixAccount resource name string.
    *
    * @param {string} user
    * @param {string} project
    * @returns {string} Resource name string.
    */
   posixAccountPath(user: string, project: string) {
-    return this._pathTemplates.posixaccountPathTemplate.render({
+    return this._pathTemplates.posixAccountPathTemplate.render({
       user,
       project,
     });
@@ -799,36 +799,36 @@ export class OsLoginServiceClient {
   /**
    * Parse the user from PosixAccount resource.
    *
-   * @param {string} posixaccountName
+   * @param {string} posixAccountName
    *   A fully-qualified path representing PosixAccount resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromPosixAccountName(posixaccountName: string) {
-    return this._pathTemplates.posixaccountPathTemplate.match(posixaccountName)
+  matchUserFromPosixAccountName(posixAccountName: string) {
+    return this._pathTemplates.posixAccountPathTemplate.match(posixAccountName)
       .user;
   }
 
   /**
    * Parse the project from PosixAccount resource.
    *
-   * @param {string} posixaccountName
+   * @param {string} posixAccountName
    *   A fully-qualified path representing PosixAccount resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromPosixAccountName(posixaccountName: string) {
-    return this._pathTemplates.posixaccountPathTemplate.match(posixaccountName)
+  matchProjectFromPosixAccountName(posixAccountName: string) {
+    return this._pathTemplates.posixAccountPathTemplate.match(posixAccountName)
       .project;
   }
 
   /**
-   * Return a fully-qualified sshpublickey resource name string.
+   * Return a fully-qualified sshPublicKey resource name string.
    *
    * @param {string} user
    * @param {string} fingerprint
    * @returns {string} Resource name string.
    */
   sshPublicKeyPath(user: string, fingerprint: string) {
-    return this._pathTemplates.sshpublickeyPathTemplate.render({
+    return this._pathTemplates.sshPublicKeyPathTemplate.render({
       user,
       fingerprint,
     });
@@ -837,24 +837,24 @@ export class OsLoginServiceClient {
   /**
    * Parse the user from SshPublicKey resource.
    *
-   * @param {string} sshpublickeyName
+   * @param {string} sshPublicKeyName
    *   A fully-qualified path representing SshPublicKey resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromSshPublicKeyName(sshpublickeyName: string) {
-    return this._pathTemplates.sshpublickeyPathTemplate.match(sshpublickeyName)
+  matchUserFromSshPublicKeyName(sshPublicKeyName: string) {
+    return this._pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName)
       .user;
   }
 
   /**
    * Parse the fingerprint from SshPublicKey resource.
    *
-   * @param {string} sshpublickeyName
+   * @param {string} sshPublicKeyName
    *   A fully-qualified path representing SshPublicKey resource.
    * @returns {string} A string representing the fingerprint.
    */
-  matchFingerprintFromSshPublicKeyName(sshpublickeyName: string) {
-    return this._pathTemplates.sshpublickeyPathTemplate.match(sshpublickeyName)
+  matchFingerprintFromSshPublicKeyName(sshPublicKeyName: string) {
+    return this._pathTemplates.sshPublicKeyPathTemplate.match(sshPublicKeyName)
       .fingerprint;
   }
 
