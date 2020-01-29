@@ -91,6 +91,11 @@ const AnnotateVideoRequest = {
  *
  *   This object should have the same structure as [ExplicitContentDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig}
  *
+ * @property {Object} faceDetectionConfig
+ *   Config for FACE_DETECTION.
+ *
+ *   This object should have the same structure as [FaceDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig}
+ *
  * @property {Object} speechTranscriptionConfig
  *   Config for SPEECH_TRANSCRIPTION.
  *
@@ -100,6 +105,11 @@ const AnnotateVideoRequest = {
  *   Config for TEXT_DETECTION.
  *
  *   This object should have the same structure as [TextDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.TextDetectionConfig}
+ *
+ * @property {Object} personDetectionConfig
+ *   Config for PERSON_DETECTION.
+ *
+ *   This object should have the same structure as [PersonDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig}
  *
  * @property {Object} objectTrackingConfig
  *   Config for OBJECT_TRACKING.
@@ -203,6 +213,54 @@ const ObjectTrackingConfig = {
  * @see [google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
  */
 const ExplicitContentDetectionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for FACE_DETECTION.
+ *
+ * @property {string} model
+ *   Model to use for face detection.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
+ *
+ * @property {boolean} includeBoundingBoxes
+ *   Whether bounding boxes be included in the face annotation output.
+ *
+ * @property {boolean} includeAttributes
+ *   Whether to enable face attributes detection, such as glasses, dark_glasses,
+ *   mouth_open etc. Ignored if 'include_bounding_boxes' is false.
+ *
+ * @typedef FaceDetectionConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const FaceDetectionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for PERSON_DETECTION.
+ *
+ * @property {boolean} includeBoundingBoxes
+ *   Whether bounding boxes be included in the person detection annotation
+ *   output.
+ *
+ * @property {boolean} includePoseLandmarks
+ *   Whether to enable pose landmarks detection. Ignored if
+ *   'include_bounding_boxes' is false.
+ *
+ * @property {boolean} includeAttributes
+ *   Whether to enable person attributes detection, such as cloth color (black,
+ *   blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair
+ *   color (black, blonde, etc), hair length (long, short, bald), etc.
+ *   Ignored if 'include_bounding_boxes' is false.
+ *
+ * @typedef PersonDetectionConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const PersonDetectionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -433,6 +491,11 @@ const NormalizedBoundingBox = {
  *
  *   This object should have the same structure as [DetectedAttribute]{@link google.cloud.videointelligence.v1p3beta1.DetectedAttribute}
  *
+ * @property {Object[]} landmarks
+ *   Optional. The detected landmarks.
+ *
+ *   This object should have the same structure as [DetectedLandmark]{@link google.cloud.videointelligence.v1p3beta1.DetectedLandmark}
+ *
  * @typedef TimestampedObject
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.TimestampedObject definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -575,6 +638,65 @@ const CelebrityRecognitionAnnotation = {
 };
 
 /**
+ * A generic detected landmark represented by name in string format and a 2D
+ * location.
+ *
+ * @property {string} name
+ *   The name of this landmark, i.e. left_hand, right_shoulder.
+ *
+ * @property {Object} point
+ *   The 2D point of the detected landmark using the normalized image
+ *   coordindate system. The normalized coordinates have the range from 0 to 1.
+ *
+ *   This object should have the same structure as [NormalizedVertex]{@link google.cloud.videointelligence.v1p3beta1.NormalizedVertex}
+ *
+ * @property {number} confidence
+ *   The confidence score of the detected landmark. Range [0, 1].
+ *
+ * @typedef DetectedLandmark
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.DetectedLandmark definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const DetectedLandmark = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Face detection annotation.
+ *
+ * @property {Object[]} tracks
+ *   The face tracks with attributes.
+ *
+ *   This object should have the same structure as [Track]{@link google.cloud.videointelligence.v1p3beta1.Track}
+ *
+ * @property {Buffer} thumbnail
+ *   The thumbnail of a person's face.
+ *
+ * @typedef FaceDetectionAnnotation
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const FaceDetectionAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Person detection annotation per video.
+ *
+ * @property {Object[]} tracks
+ *   The trackes that a person is detected.
+ *
+ *   This object should have the same structure as [Track]{@link google.cloud.videointelligence.v1p3beta1.Track}
+ *
+ * @typedef PersonDetectionAnnotation
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const PersonDetectionAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
@@ -623,6 +745,11 @@ const CelebrityRecognitionAnnotation = {
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
  *
+ * @property {Object[]} faceDetectionAnnotations
+ *   Face detection annotations.
+ *
+ *   This object should have the same structure as [FaceDetectionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation}
+ *
  * @property {Object[]} shotAnnotations
  *   Shot annotations. Each shot is represented as a video segment.
  *
@@ -654,6 +781,11 @@ const CelebrityRecognitionAnnotation = {
  *   Annotations for list of logos detected, tracked and recognized in video.
  *
  *   This object should have the same structure as [LogoRecognitionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation}
+ *
+ * @property {Object[]} personDetectionAnnotations
+ *   Person detection annotations.
+ *
+ *   This object should have the same structure as [PersonDetectionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation}
  *
  * @property {Object} celebrityRecognitionAnnotations
  *   Celebrity recognition annotations.
@@ -1424,6 +1556,11 @@ const Feature = {
   EXPLICIT_CONTENT_DETECTION: 3,
 
   /**
+   * Human face detection.
+   */
+  FACE_DETECTION: 4,
+
+  /**
    * Speech transcription.
    */
   SPEECH_TRANSCRIPTION: 6,
@@ -1446,7 +1583,12 @@ const Feature = {
   /**
    * Celebrity recognition.
    */
-  CELEBRITY_RECOGNITION: 13
+  CELEBRITY_RECOGNITION: 13,
+
+  /**
+   * Person detection.
+   */
+  PERSON_DETECTION: 14
 };
 
 /**

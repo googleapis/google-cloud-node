@@ -78,7 +78,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1.Feature[]|null);
@@ -106,7 +106,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1.Feature[];
@@ -357,7 +357,7 @@ export namespace google {
                 interface ILabelDetectionConfig {
 
                     /** LabelDetectionConfig labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1.LabelDetectionMode|null);
+                    labelDetectionMode?: (google.cloud.videointelligence.v1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1.LabelDetectionMode|null);
 
                     /** LabelDetectionConfig stationaryCamera */
                     stationaryCamera?: (boolean|null);
@@ -382,7 +382,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1.ILabelDetectionConfig);
 
                     /** LabelDetectionConfig labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1.LabelDetectionMode;
+                    public labelDetectionMode: (google.cloud.videointelligence.v1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1.LabelDetectionMode);
 
                     /** LabelDetectionConfig stationaryCamera. */
                     public stationaryCamera: boolean;
@@ -1434,7 +1434,7 @@ export namespace google {
                     timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood */
-                    pornographyLikelihood?: (google.cloud.videointelligence.v1.Likelihood|null);
+                    pornographyLikelihood?: (google.cloud.videointelligence.v1.Likelihood|keyof typeof google.cloud.videointelligence.v1.Likelihood|null);
                 }
 
                 /** Represents an ExplicitContentFrame. */
@@ -1450,7 +1450,7 @@ export namespace google {
                     public timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood. */
-                    public pornographyLikelihood: google.cloud.videointelligence.v1.Likelihood;
+                    public pornographyLikelihood: (google.cloud.videointelligence.v1.Likelihood|keyof typeof google.cloud.videointelligence.v1.Likelihood);
 
                     /**
                      * Creates a new ExplicitContentFrame instance using the specified properties.
@@ -1911,7 +1911,7 @@ export namespace google {
                 interface IFaceAnnotation {
 
                     /** FaceAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|null);
+                    thumbnail?: (Uint8Array|string|null);
 
                     /** FaceAnnotation segments */
                     segments?: (google.cloud.videointelligence.v1.IFaceSegment[]|null);
@@ -1930,7 +1930,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1.IFaceAnnotation);
 
                     /** FaceAnnotation thumbnail. */
-                    public thumbnail: Uint8Array;
+                    public thumbnail: (Uint8Array|string);
 
                     /** FaceAnnotation segments. */
                     public segments: google.cloud.videointelligence.v1.IFaceSegment[];
@@ -2283,7 +2283,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VideoAnnotationProgress feature */
-                    feature?: (google.cloud.videointelligence.v1.Feature|null);
+                    feature?: (google.cloud.videointelligence.v1.Feature|keyof typeof google.cloud.videointelligence.v1.Feature|null);
 
                     /** VideoAnnotationProgress segment */
                     segment?: (google.cloud.videointelligence.v1.IVideoSegment|null);
@@ -2311,7 +2311,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VideoAnnotationProgress feature. */
-                    public feature: google.cloud.videointelligence.v1.Feature;
+                    public feature: (google.cloud.videointelligence.v1.Feature|keyof typeof google.cloud.videointelligence.v1.Feature);
 
                     /** VideoAnnotationProgress segment. */
                     public segment?: (google.cloud.videointelligence.v1.IVideoSegment|null);
@@ -3600,7 +3600,7 @@ export namespace google {
                     segment?: (google.cloud.videointelligence.v1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId */
-                    trackId?: (number|Long|null);
+                    trackId?: (number|Long|string|null);
 
                     /** ObjectTrackingAnnotation entity */
                     entity?: (google.cloud.videointelligence.v1.IEntity|null);
@@ -3625,7 +3625,7 @@ export namespace google {
                     public segment?: (google.cloud.videointelligence.v1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId. */
-                    public trackId: (number|Long);
+                    public trackId: (number|Long|string);
 
                     /** ObjectTrackingAnnotation entity. */
                     public entity?: (google.cloud.videointelligence.v1.IEntity|null);
@@ -3766,7 +3766,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1beta2.Feature[]|null);
@@ -3794,7 +3794,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1beta2.Feature[];
@@ -3997,7 +3997,7 @@ export namespace google {
                 interface ILabelDetectionConfig {
 
                     /** LabelDetectionConfig labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1beta2.LabelDetectionMode|null);
+                    labelDetectionMode?: (google.cloud.videointelligence.v1beta2.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1beta2.LabelDetectionMode|null);
 
                     /** LabelDetectionConfig stationaryCamera */
                     stationaryCamera?: (boolean|null);
@@ -4016,7 +4016,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1beta2.ILabelDetectionConfig);
 
                     /** LabelDetectionConfig labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1beta2.LabelDetectionMode;
+                    public labelDetectionMode: (google.cloud.videointelligence.v1beta2.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1beta2.LabelDetectionMode);
 
                     /** LabelDetectionConfig stationaryCamera. */
                     public stationaryCamera: boolean;
@@ -4876,7 +4876,7 @@ export namespace google {
                     timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood */
-                    pornographyLikelihood?: (google.cloud.videointelligence.v1beta2.Likelihood|null);
+                    pornographyLikelihood?: (google.cloud.videointelligence.v1beta2.Likelihood|keyof typeof google.cloud.videointelligence.v1beta2.Likelihood|null);
                 }
 
                 /** Represents an ExplicitContentFrame. */
@@ -4892,7 +4892,7 @@ export namespace google {
                     public timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood. */
-                    public pornographyLikelihood: google.cloud.videointelligence.v1beta2.Likelihood;
+                    public pornographyLikelihood: (google.cloud.videointelligence.v1beta2.Likelihood|keyof typeof google.cloud.videointelligence.v1beta2.Likelihood);
 
                     /**
                      * Creates a new ExplicitContentFrame instance using the specified properties.
@@ -5353,7 +5353,7 @@ export namespace google {
                 interface IFaceAnnotation {
 
                     /** FaceAnnotation thumbnail */
-                    thumbnail?: (Uint8Array|null);
+                    thumbnail?: (Uint8Array|string|null);
 
                     /** FaceAnnotation segments */
                     segments?: (google.cloud.videointelligence.v1beta2.IFaceSegment[]|null);
@@ -5372,7 +5372,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1beta2.IFaceAnnotation);
 
                     /** FaceAnnotation thumbnail. */
-                    public thumbnail: Uint8Array;
+                    public thumbnail: (Uint8Array|string);
 
                     /** FaceAnnotation segments. */
                     public segments: google.cloud.videointelligence.v1beta2.IFaceSegment[];
@@ -5954,7 +5954,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p1beta1.Feature[]|null);
@@ -5982,7 +5982,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p1beta1.Feature[];
@@ -6185,7 +6185,7 @@ export namespace google {
                 interface ILabelDetectionConfig {
 
                     /** LabelDetectionConfig labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1p1beta1.LabelDetectionMode|null);
+                    labelDetectionMode?: (google.cloud.videointelligence.v1p1beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p1beta1.LabelDetectionMode|null);
 
                     /** LabelDetectionConfig stationaryCamera */
                     stationaryCamera?: (boolean|null);
@@ -6204,7 +6204,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1p1beta1.ILabelDetectionConfig);
 
                     /** LabelDetectionConfig labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1p1beta1.LabelDetectionMode;
+                    public labelDetectionMode: (google.cloud.videointelligence.v1p1beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p1beta1.LabelDetectionMode);
 
                     /** LabelDetectionConfig stationaryCamera. */
                     public stationaryCamera: boolean;
@@ -6968,7 +6968,7 @@ export namespace google {
                     timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood */
-                    pornographyLikelihood?: (google.cloud.videointelligence.v1p1beta1.Likelihood|null);
+                    pornographyLikelihood?: (google.cloud.videointelligence.v1p1beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p1beta1.Likelihood|null);
                 }
 
                 /** Represents an ExplicitContentFrame. */
@@ -6984,7 +6984,7 @@ export namespace google {
                     public timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood. */
-                    public pornographyLikelihood: google.cloud.videointelligence.v1p1beta1.Likelihood;
+                    public pornographyLikelihood: (google.cloud.videointelligence.v1p1beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p1beta1.Likelihood);
 
                     /**
                      * Creates a new ExplicitContentFrame instance using the specified properties.
@@ -8154,7 +8154,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p2beta1.Feature[]|null);
@@ -8182,7 +8182,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p2beta1.Feature[];
@@ -8385,7 +8385,7 @@ export namespace google {
                 interface ILabelDetectionConfig {
 
                     /** LabelDetectionConfig labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1p2beta1.LabelDetectionMode|null);
+                    labelDetectionMode?: (google.cloud.videointelligence.v1p2beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p2beta1.LabelDetectionMode|null);
 
                     /** LabelDetectionConfig stationaryCamera */
                     stationaryCamera?: (boolean|null);
@@ -8404,7 +8404,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1p2beta1.ILabelDetectionConfig);
 
                     /** LabelDetectionConfig labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1p2beta1.LabelDetectionMode;
+                    public labelDetectionMode: (google.cloud.videointelligence.v1p2beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p2beta1.LabelDetectionMode);
 
                     /** LabelDetectionConfig stationaryCamera. */
                     public stationaryCamera: boolean;
@@ -9258,7 +9258,7 @@ export namespace google {
                     timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood */
-                    pornographyLikelihood?: (google.cloud.videointelligence.v1p2beta1.Likelihood|null);
+                    pornographyLikelihood?: (google.cloud.videointelligence.v1p2beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p2beta1.Likelihood|null);
                 }
 
                 /** Represents an ExplicitContentFrame. */
@@ -9274,7 +9274,7 @@ export namespace google {
                     public timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood. */
-                    public pornographyLikelihood: google.cloud.videointelligence.v1p2beta1.Likelihood;
+                    public pornographyLikelihood: (google.cloud.videointelligence.v1p2beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p2beta1.Likelihood);
 
                     /**
                      * Creates a new ExplicitContentFrame instance using the specified properties.
@@ -10784,7 +10784,7 @@ export namespace google {
                     inputUri?: (string|null);
 
                     /** AnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
 
                     /** AnnotateVideoRequest features */
                     features?: (google.cloud.videointelligence.v1p3beta1.Feature[]|null);
@@ -10812,7 +10812,7 @@ export namespace google {
                     public inputUri: string;
 
                     /** AnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** AnnotateVideoRequest features. */
                     public features: google.cloud.videointelligence.v1p3beta1.Feature[];
@@ -10912,11 +10912,17 @@ export namespace google {
                     /** VideoContext explicitContentDetectionConfig */
                     explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentDetectionConfig|null);
 
+                    /** VideoContext faceDetectionConfig */
+                    faceDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig|null);
+
                     /** VideoContext speechTranscriptionConfig */
                     speechTranscriptionConfig?: (google.cloud.videointelligence.v1p3beta1.ISpeechTranscriptionConfig|null);
 
                     /** VideoContext textDetectionConfig */
                     textDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.ITextDetectionConfig|null);
+
+                    /** VideoContext personDetectionConfig */
+                    personDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig|null);
 
                     /** VideoContext objectTrackingConfig */
                     objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IObjectTrackingConfig|null);
@@ -10943,11 +10949,17 @@ export namespace google {
                     /** VideoContext explicitContentDetectionConfig. */
                     public explicitContentDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IExplicitContentDetectionConfig|null);
 
+                    /** VideoContext faceDetectionConfig. */
+                    public faceDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig|null);
+
                     /** VideoContext speechTranscriptionConfig. */
                     public speechTranscriptionConfig?: (google.cloud.videointelligence.v1p3beta1.ISpeechTranscriptionConfig|null);
 
                     /** VideoContext textDetectionConfig. */
                     public textDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.ITextDetectionConfig|null);
+
+                    /** VideoContext personDetectionConfig. */
+                    public personDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig|null);
 
                     /** VideoContext objectTrackingConfig. */
                     public objectTrackingConfig?: (google.cloud.videointelligence.v1p3beta1.IObjectTrackingConfig|null);
@@ -11027,7 +11039,7 @@ export namespace google {
                 interface ILabelDetectionConfig {
 
                     /** LabelDetectionConfig labelDetectionMode */
-                    labelDetectionMode?: (google.cloud.videointelligence.v1p3beta1.LabelDetectionMode|null);
+                    labelDetectionMode?: (google.cloud.videointelligence.v1p3beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p3beta1.LabelDetectionMode|null);
 
                     /** LabelDetectionConfig stationaryCamera */
                     stationaryCamera?: (boolean|null);
@@ -11052,7 +11064,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1p3beta1.ILabelDetectionConfig);
 
                     /** LabelDetectionConfig labelDetectionMode. */
-                    public labelDetectionMode: google.cloud.videointelligence.v1p3beta1.LabelDetectionMode;
+                    public labelDetectionMode: (google.cloud.videointelligence.v1p3beta1.LabelDetectionMode|keyof typeof google.cloud.videointelligence.v1p3beta1.LabelDetectionMode);
 
                     /** LabelDetectionConfig stationaryCamera. */
                     public stationaryCamera: boolean;
@@ -11402,6 +11414,210 @@ export namespace google {
 
                     /**
                      * Converts this ExplicitContentDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FaceDetectionConfig. */
+                interface IFaceDetectionConfig {
+
+                    /** FaceDetectionConfig model */
+                    model?: (string|null);
+
+                    /** FaceDetectionConfig includeBoundingBoxes */
+                    includeBoundingBoxes?: (boolean|null);
+
+                    /** FaceDetectionConfig includeAttributes */
+                    includeAttributes?: (boolean|null);
+                }
+
+                /** Represents a FaceDetectionConfig. */
+                class FaceDetectionConfig implements IFaceDetectionConfig {
+
+                    /**
+                     * Constructs a new FaceDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig);
+
+                    /** FaceDetectionConfig model. */
+                    public model: string;
+
+                    /** FaceDetectionConfig includeBoundingBoxes. */
+                    public includeBoundingBoxes: boolean;
+
+                    /** FaceDetectionConfig includeAttributes. */
+                    public includeAttributes: boolean;
+
+                    /**
+                     * Creates a new FaceDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig): google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig;
+
+                    /**
+                     * Encodes the specified FaceDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.verify|verify} messages.
+                     * @param message FaceDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.verify|verify} messages.
+                     * @param message FaceDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig;
+
+                    /**
+                     * Decodes a FaceDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig;
+
+                    /**
+                     * Verifies a FaceDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a FaceDetectionConfig message. Also converts values to other types if specified.
+                     * @param message FaceDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceDetectionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PersonDetectionConfig. */
+                interface IPersonDetectionConfig {
+
+                    /** PersonDetectionConfig includeBoundingBoxes */
+                    includeBoundingBoxes?: (boolean|null);
+
+                    /** PersonDetectionConfig includePoseLandmarks */
+                    includePoseLandmarks?: (boolean|null);
+
+                    /** PersonDetectionConfig includeAttributes */
+                    includeAttributes?: (boolean|null);
+                }
+
+                /** Represents a PersonDetectionConfig. */
+                class PersonDetectionConfig implements IPersonDetectionConfig {
+
+                    /**
+                     * Constructs a new PersonDetectionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig);
+
+                    /** PersonDetectionConfig includeBoundingBoxes. */
+                    public includeBoundingBoxes: boolean;
+
+                    /** PersonDetectionConfig includePoseLandmarks. */
+                    public includePoseLandmarks: boolean;
+
+                    /** PersonDetectionConfig includeAttributes. */
+                    public includeAttributes: boolean;
+
+                    /**
+                     * Creates a new PersonDetectionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersonDetectionConfig instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig): google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig;
+
+                    /**
+                     * Encodes the specified PersonDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.verify|verify} messages.
+                     * @param message PersonDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersonDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.verify|verify} messages.
+                     * @param message PersonDetectionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersonDetectionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersonDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig;
+
+                    /**
+                     * Decodes a PersonDetectionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersonDetectionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig;
+
+                    /**
+                     * Verifies a PersonDetectionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersonDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersonDetectionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig;
+
+                    /**
+                     * Creates a plain object from a PersonDetectionConfig message. Also converts values to other types if specified.
+                     * @param message PersonDetectionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersonDetectionConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -12008,7 +12224,7 @@ export namespace google {
                     timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood */
-                    pornographyLikelihood?: (google.cloud.videointelligence.v1p3beta1.Likelihood|null);
+                    pornographyLikelihood?: (google.cloud.videointelligence.v1p3beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p3beta1.Likelihood|null);
                 }
 
                 /** Represents an ExplicitContentFrame. */
@@ -12024,7 +12240,7 @@ export namespace google {
                     public timeOffset?: (google.protobuf.IDuration|null);
 
                     /** ExplicitContentFrame pornographyLikelihood. */
-                    public pornographyLikelihood: google.cloud.videointelligence.v1p3beta1.Likelihood;
+                    public pornographyLikelihood: (google.cloud.videointelligence.v1p3beta1.Likelihood|keyof typeof google.cloud.videointelligence.v1p3beta1.Likelihood);
 
                     /**
                      * Creates a new ExplicitContentFrame instance using the specified properties.
@@ -12306,6 +12522,9 @@ export namespace google {
 
                     /** TimestampedObject attributes */
                     attributes?: (google.cloud.videointelligence.v1p3beta1.IDetectedAttribute[]|null);
+
+                    /** TimestampedObject landmarks */
+                    landmarks?: (google.cloud.videointelligence.v1p3beta1.IDetectedLandmark[]|null);
                 }
 
                 /** Represents a TimestampedObject. */
@@ -12325,6 +12544,9 @@ export namespace google {
 
                     /** TimestampedObject attributes. */
                     public attributes: google.cloud.videointelligence.v1p3beta1.IDetectedAttribute[];
+
+                    /** TimestampedObject landmarks. */
+                    public landmarks: google.cloud.videointelligence.v1p3beta1.IDetectedLandmark[];
 
                     /**
                      * Creates a new TimestampedObject instance using the specified properties.
@@ -12994,6 +13216,294 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DetectedLandmark. */
+                interface IDetectedLandmark {
+
+                    /** DetectedLandmark name */
+                    name?: (string|null);
+
+                    /** DetectedLandmark point */
+                    point?: (google.cloud.videointelligence.v1p3beta1.INormalizedVertex|null);
+
+                    /** DetectedLandmark confidence */
+                    confidence?: (number|null);
+                }
+
+                /** Represents a DetectedLandmark. */
+                class DetectedLandmark implements IDetectedLandmark {
+
+                    /**
+                     * Constructs a new DetectedLandmark.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IDetectedLandmark);
+
+                    /** DetectedLandmark name. */
+                    public name: string;
+
+                    /** DetectedLandmark point. */
+                    public point?: (google.cloud.videointelligence.v1p3beta1.INormalizedVertex|null);
+
+                    /** DetectedLandmark confidence. */
+                    public confidence: number;
+
+                    /**
+                     * Creates a new DetectedLandmark instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectedLandmark instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IDetectedLandmark): google.cloud.videointelligence.v1p3beta1.DetectedLandmark;
+
+                    /**
+                     * Encodes the specified DetectedLandmark message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.DetectedLandmark.verify|verify} messages.
+                     * @param message DetectedLandmark message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IDetectedLandmark, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectedLandmark message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.DetectedLandmark.verify|verify} messages.
+                     * @param message DetectedLandmark message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IDetectedLandmark, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectedLandmark message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectedLandmark
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.DetectedLandmark;
+
+                    /**
+                     * Decodes a DetectedLandmark message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectedLandmark
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.DetectedLandmark;
+
+                    /**
+                     * Verifies a DetectedLandmark message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectedLandmark message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectedLandmark
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.DetectedLandmark;
+
+                    /**
+                     * Creates a plain object from a DetectedLandmark message. Also converts values to other types if specified.
+                     * @param message DetectedLandmark
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.DetectedLandmark, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectedLandmark to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FaceDetectionAnnotation. */
+                interface IFaceDetectionAnnotation {
+
+                    /** FaceDetectionAnnotation tracks */
+                    tracks?: (google.cloud.videointelligence.v1p3beta1.ITrack[]|null);
+
+                    /** FaceDetectionAnnotation thumbnail */
+                    thumbnail?: (Uint8Array|string|null);
+                }
+
+                /** Represents a FaceDetectionAnnotation. */
+                class FaceDetectionAnnotation implements IFaceDetectionAnnotation {
+
+                    /**
+                     * Constructs a new FaceDetectionAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation);
+
+                    /** FaceDetectionAnnotation tracks. */
+                    public tracks: google.cloud.videointelligence.v1p3beta1.ITrack[];
+
+                    /** FaceDetectionAnnotation thumbnail. */
+                    public thumbnail: (Uint8Array|string);
+
+                    /**
+                     * Creates a new FaceDetectionAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FaceDetectionAnnotation instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation): google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation;
+
+                    /**
+                     * Encodes the specified FaceDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.verify|verify} messages.
+                     * @param message FaceDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FaceDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.verify|verify} messages.
+                     * @param message FaceDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FaceDetectionAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FaceDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation;
+
+                    /**
+                     * Decodes a FaceDetectionAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FaceDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation;
+
+                    /**
+                     * Verifies a FaceDetectionAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FaceDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FaceDetectionAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation;
+
+                    /**
+                     * Creates a plain object from a FaceDetectionAnnotation message. Also converts values to other types if specified.
+                     * @param message FaceDetectionAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FaceDetectionAnnotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PersonDetectionAnnotation. */
+                interface IPersonDetectionAnnotation {
+
+                    /** PersonDetectionAnnotation tracks */
+                    tracks?: (google.cloud.videointelligence.v1p3beta1.ITrack[]|null);
+                }
+
+                /** Represents a PersonDetectionAnnotation. */
+                class PersonDetectionAnnotation implements IPersonDetectionAnnotation {
+
+                    /**
+                     * Constructs a new PersonDetectionAnnotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation);
+
+                    /** PersonDetectionAnnotation tracks. */
+                    public tracks: google.cloud.videointelligence.v1p3beta1.ITrack[];
+
+                    /**
+                     * Creates a new PersonDetectionAnnotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PersonDetectionAnnotation instance
+                     */
+                    public static create(properties?: google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation): google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation;
+
+                    /**
+                     * Encodes the specified PersonDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.verify|verify} messages.
+                     * @param message PersonDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PersonDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.verify|verify} messages.
+                     * @param message PersonDetectionAnnotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PersonDetectionAnnotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PersonDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation;
+
+                    /**
+                     * Decodes a PersonDetectionAnnotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PersonDetectionAnnotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation;
+
+                    /**
+                     * Verifies a PersonDetectionAnnotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PersonDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PersonDetectionAnnotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation;
+
+                    /**
+                     * Creates a plain object from a PersonDetectionAnnotation message. Also converts values to other types if specified.
+                     * @param message PersonDetectionAnnotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PersonDetectionAnnotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a VideoAnnotationResults. */
                 interface IVideoAnnotationResults {
 
@@ -13018,6 +13528,9 @@ export namespace google {
                     /** VideoAnnotationResults frameLabelAnnotations */
                     frameLabelAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[]|null);
 
+                    /** VideoAnnotationResults faceDetectionAnnotations */
+                    faceDetectionAnnotations?: (google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation[]|null);
+
                     /** VideoAnnotationResults shotAnnotations */
                     shotAnnotations?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment[]|null);
 
@@ -13035,6 +13548,9 @@ export namespace google {
 
                     /** VideoAnnotationResults logoRecognitionAnnotations */
                     logoRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation[]|null);
+
+                    /** VideoAnnotationResults personDetectionAnnotations */
+                    personDetectionAnnotations?: (google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation[]|null);
 
                     /** VideoAnnotationResults celebrityRecognitionAnnotations */
                     celebrityRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null);
@@ -13073,6 +13589,9 @@ export namespace google {
                     /** VideoAnnotationResults frameLabelAnnotations. */
                     public frameLabelAnnotations: google.cloud.videointelligence.v1p3beta1.ILabelAnnotation[];
 
+                    /** VideoAnnotationResults faceDetectionAnnotations. */
+                    public faceDetectionAnnotations: google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation[];
+
                     /** VideoAnnotationResults shotAnnotations. */
                     public shotAnnotations: google.cloud.videointelligence.v1p3beta1.IVideoSegment[];
 
@@ -13090,6 +13609,9 @@ export namespace google {
 
                     /** VideoAnnotationResults logoRecognitionAnnotations. */
                     public logoRecognitionAnnotations: google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation[];
+
+                    /** VideoAnnotationResults personDetectionAnnotations. */
+                    public personDetectionAnnotations: google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation[];
 
                     /** VideoAnnotationResults celebrityRecognitionAnnotations. */
                     public celebrityRecognitionAnnotations?: (google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null);
@@ -13274,7 +13796,7 @@ export namespace google {
                     updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VideoAnnotationProgress feature */
-                    feature?: (google.cloud.videointelligence.v1p3beta1.Feature|null);
+                    feature?: (google.cloud.videointelligence.v1p3beta1.Feature|keyof typeof google.cloud.videointelligence.v1p3beta1.Feature|null);
 
                     /** VideoAnnotationProgress segment */
                     segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
@@ -13302,7 +13824,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VideoAnnotationProgress feature. */
-                    public feature: google.cloud.videointelligence.v1p3beta1.Feature;
+                    public feature: (google.cloud.videointelligence.v1p3beta1.Feature|keyof typeof google.cloud.videointelligence.v1p3beta1.Feature);
 
                     /** VideoAnnotationProgress segment. */
                     public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
@@ -14600,7 +15122,7 @@ export namespace google {
                     segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId */
-                    trackId?: (number|Long|null);
+                    trackId?: (number|Long|string|null);
                 }
 
                 /** Represents an ObjectTrackingAnnotation. */
@@ -14625,7 +15147,7 @@ export namespace google {
                     public segment?: (google.cloud.videointelligence.v1p3beta1.IVideoSegment|null);
 
                     /** ObjectTrackingAnnotation trackId. */
-                    public trackId: (number|Long);
+                    public trackId: (number|Long|string);
 
                     /** ObjectTrackingAnnotation trackInfo. */
                     public trackInfo?: ("segment"|"trackId");
@@ -14810,7 +15332,7 @@ export namespace google {
                     videoConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig|null);
 
                     /** StreamingAnnotateVideoRequest inputContent */
-                    inputContent?: (Uint8Array|null);
+                    inputContent?: (Uint8Array|string|null);
                 }
 
                 /** Represents a StreamingAnnotateVideoRequest. */
@@ -14826,7 +15348,7 @@ export namespace google {
                     public videoConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig|null);
 
                     /** StreamingAnnotateVideoRequest inputContent. */
-                    public inputContent: Uint8Array;
+                    public inputContent: (Uint8Array|string);
 
                     /** StreamingAnnotateVideoRequest streamingRequest. */
                     public streamingRequest?: ("videoConfig"|"inputContent");
@@ -15734,7 +16256,7 @@ export namespace google {
                 interface IStreamingVideoConfig {
 
                     /** StreamingVideoConfig feature */
-                    feature?: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|null);
+                    feature?: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature|null);
 
                     /** StreamingVideoConfig shotChangeDetectionConfig */
                     shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
@@ -15768,7 +16290,7 @@ export namespace google {
                     constructor(properties?: google.cloud.videointelligence.v1p3beta1.IStreamingVideoConfig);
 
                     /** StreamingVideoConfig feature. */
-                    public feature: google.cloud.videointelligence.v1p3beta1.StreamingFeature;
+                    public feature: (google.cloud.videointelligence.v1p3beta1.StreamingFeature|keyof typeof google.cloud.videointelligence.v1p3beta1.StreamingFeature);
 
                     /** StreamingVideoConfig shotChangeDetectionConfig. */
                     public shotChangeDetectionConfig?: (google.cloud.videointelligence.v1p3beta1.IStreamingShotChangeDetectionConfig|null);
@@ -15871,11 +16393,13 @@ export namespace google {
                     LABEL_DETECTION = 1,
                     SHOT_CHANGE_DETECTION = 2,
                     EXPLICIT_CONTENT_DETECTION = 3,
+                    FACE_DETECTION = 4,
                     SPEECH_TRANSCRIPTION = 6,
                     TEXT_DETECTION = 7,
                     OBJECT_TRACKING = 9,
                     LOGO_RECOGNITION = 12,
-                    CELEBRITY_RECOGNITION = 13
+                    CELEBRITY_RECOGNITION = 13,
+                    PERSON_DETECTION = 14
                 }
 
                 /** LabelDetectionMode enum. */
@@ -16957,10 +17481,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -16997,10 +17521,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -17775,7 +18299,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -17848,7 +18372,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -18094,13 +18618,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -18128,13 +18652,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -18633,7 +19157,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -18661,7 +19185,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -18757,16 +19281,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -18788,16 +19312,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -19387,7 +19911,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -19403,7 +19927,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -19480,7 +20004,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -19496,7 +20020,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -19660,7 +20184,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -19676,7 +20200,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;

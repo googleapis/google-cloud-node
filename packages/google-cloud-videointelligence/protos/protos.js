@@ -27162,11 +27162,13 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                     case 6:
                                     case 7:
                                     case 9:
                                     case 12:
                                     case 13:
+                                    case 14:
                                         break;
                                     }
                             }
@@ -27226,6 +27228,10 @@
                                     case 3:
                                         message.features[i] = 3;
                                         break;
+                                    case "FACE_DETECTION":
+                                    case 4:
+                                        message.features[i] = 4;
+                                        break;
                                     case "SPEECH_TRANSCRIPTION":
                                     case 6:
                                         message.features[i] = 6;
@@ -27245,6 +27251,10 @@
                                     case "CELEBRITY_RECOGNITION":
                                     case 13:
                                         message.features[i] = 13;
+                                        break;
+                                    case "PERSON_DETECTION":
+                                    case 14:
+                                        message.features[i] = 14;
                                         break;
                                     }
                             }
@@ -27330,8 +27340,10 @@
                          * @property {google.cloud.videointelligence.v1p3beta1.ILabelDetectionConfig|null} [labelDetectionConfig] VideoContext labelDetectionConfig
                          * @property {google.cloud.videointelligence.v1p3beta1.IShotChangeDetectionConfig|null} [shotChangeDetectionConfig] VideoContext shotChangeDetectionConfig
                          * @property {google.cloud.videointelligence.v1p3beta1.IExplicitContentDetectionConfig|null} [explicitContentDetectionConfig] VideoContext explicitContentDetectionConfig
+                         * @property {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig|null} [faceDetectionConfig] VideoContext faceDetectionConfig
                          * @property {google.cloud.videointelligence.v1p3beta1.ISpeechTranscriptionConfig|null} [speechTranscriptionConfig] VideoContext speechTranscriptionConfig
                          * @property {google.cloud.videointelligence.v1p3beta1.ITextDetectionConfig|null} [textDetectionConfig] VideoContext textDetectionConfig
+                         * @property {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig|null} [personDetectionConfig] VideoContext personDetectionConfig
                          * @property {google.cloud.videointelligence.v1p3beta1.IObjectTrackingConfig|null} [objectTrackingConfig] VideoContext objectTrackingConfig
                          */
     
@@ -27384,6 +27396,14 @@
                         VideoContext.prototype.explicitContentDetectionConfig = null;
     
                         /**
+                         * VideoContext faceDetectionConfig.
+                         * @member {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig|null|undefined} faceDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoContext
+                         * @instance
+                         */
+                        VideoContext.prototype.faceDetectionConfig = null;
+    
+                        /**
                          * VideoContext speechTranscriptionConfig.
                          * @member {google.cloud.videointelligence.v1p3beta1.ISpeechTranscriptionConfig|null|undefined} speechTranscriptionConfig
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoContext
@@ -27398,6 +27418,14 @@
                          * @instance
                          */
                         VideoContext.prototype.textDetectionConfig = null;
+    
+                        /**
+                         * VideoContext personDetectionConfig.
+                         * @member {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig|null|undefined} personDetectionConfig
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoContext
+                         * @instance
+                         */
+                        VideoContext.prototype.personDetectionConfig = null;
     
                         /**
                          * VideoContext objectTrackingConfig.
@@ -27440,10 +27468,14 @@
                                 $root.google.cloud.videointelligence.v1p3beta1.ShotChangeDetectionConfig.encode(message.shotChangeDetectionConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.explicitContentDetectionConfig != null && message.hasOwnProperty("explicitContentDetectionConfig"))
                                 $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig.encode(message.explicitContentDetectionConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.faceDetectionConfig != null && message.hasOwnProperty("faceDetectionConfig"))
+                                $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.encode(message.faceDetectionConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.speechTranscriptionConfig != null && message.hasOwnProperty("speechTranscriptionConfig"))
                                 $root.google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig.encode(message.speechTranscriptionConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.textDetectionConfig != null && message.hasOwnProperty("textDetectionConfig"))
                                 $root.google.cloud.videointelligence.v1p3beta1.TextDetectionConfig.encode(message.textDetectionConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.personDetectionConfig != null && message.hasOwnProperty("personDetectionConfig"))
+                                $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.encode(message.personDetectionConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.objectTrackingConfig != null && message.hasOwnProperty("objectTrackingConfig"))
                                 $root.google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig.encode(message.objectTrackingConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
@@ -27494,11 +27526,17 @@
                                 case 4:
                                     message.explicitContentDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig.decode(reader, reader.uint32());
                                     break;
+                                case 5:
+                                    message.faceDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.decode(reader, reader.uint32());
+                                    break;
                                 case 6:
                                     message.speechTranscriptionConfig = $root.google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     message.textDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.TextDetectionConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.personDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.decode(reader, reader.uint32());
                                     break;
                                 case 13:
                                     message.objectTrackingConfig = $root.google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig.decode(reader, reader.uint32());
@@ -27562,6 +27600,11 @@
                                 if (error)
                                     return "explicitContentDetectionConfig." + error;
                             }
+                            if (message.faceDetectionConfig != null && message.hasOwnProperty("faceDetectionConfig")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.verify(message.faceDetectionConfig);
+                                if (error)
+                                    return "faceDetectionConfig." + error;
+                            }
                             if (message.speechTranscriptionConfig != null && message.hasOwnProperty("speechTranscriptionConfig")) {
                                 var error = $root.google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig.verify(message.speechTranscriptionConfig);
                                 if (error)
@@ -27571,6 +27614,11 @@
                                 var error = $root.google.cloud.videointelligence.v1p3beta1.TextDetectionConfig.verify(message.textDetectionConfig);
                                 if (error)
                                     return "textDetectionConfig." + error;
+                            }
+                            if (message.personDetectionConfig != null && message.hasOwnProperty("personDetectionConfig")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.verify(message.personDetectionConfig);
+                                if (error)
+                                    return "personDetectionConfig." + error;
                             }
                             if (message.objectTrackingConfig != null && message.hasOwnProperty("objectTrackingConfig")) {
                                 var error = $root.google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig.verify(message.objectTrackingConfig);
@@ -27617,6 +27665,11 @@
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoContext.explicitContentDetectionConfig: object expected");
                                 message.explicitContentDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig.fromObject(object.explicitContentDetectionConfig);
                             }
+                            if (object.faceDetectionConfig != null) {
+                                if (typeof object.faceDetectionConfig !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoContext.faceDetectionConfig: object expected");
+                                message.faceDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.fromObject(object.faceDetectionConfig);
+                            }
                             if (object.speechTranscriptionConfig != null) {
                                 if (typeof object.speechTranscriptionConfig !== "object")
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoContext.speechTranscriptionConfig: object expected");
@@ -27626,6 +27679,11 @@
                                 if (typeof object.textDetectionConfig !== "object")
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoContext.textDetectionConfig: object expected");
                                 message.textDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.TextDetectionConfig.fromObject(object.textDetectionConfig);
+                            }
+                            if (object.personDetectionConfig != null) {
+                                if (typeof object.personDetectionConfig !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoContext.personDetectionConfig: object expected");
+                                message.personDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.fromObject(object.personDetectionConfig);
                             }
                             if (object.objectTrackingConfig != null) {
                                 if (typeof object.objectTrackingConfig !== "object")
@@ -27654,8 +27712,10 @@
                                 object.labelDetectionConfig = null;
                                 object.shotChangeDetectionConfig = null;
                                 object.explicitContentDetectionConfig = null;
+                                object.faceDetectionConfig = null;
                                 object.speechTranscriptionConfig = null;
                                 object.textDetectionConfig = null;
+                                object.personDetectionConfig = null;
                                 object.objectTrackingConfig = null;
                             }
                             if (message.segments && message.segments.length) {
@@ -27669,10 +27729,14 @@
                                 object.shotChangeDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.ShotChangeDetectionConfig.toObject(message.shotChangeDetectionConfig, options);
                             if (message.explicitContentDetectionConfig != null && message.hasOwnProperty("explicitContentDetectionConfig"))
                                 object.explicitContentDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig.toObject(message.explicitContentDetectionConfig, options);
+                            if (message.faceDetectionConfig != null && message.hasOwnProperty("faceDetectionConfig"))
+                                object.faceDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.toObject(message.faceDetectionConfig, options);
                             if (message.speechTranscriptionConfig != null && message.hasOwnProperty("speechTranscriptionConfig"))
                                 object.speechTranscriptionConfig = $root.google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig.toObject(message.speechTranscriptionConfig, options);
                             if (message.textDetectionConfig != null && message.hasOwnProperty("textDetectionConfig"))
                                 object.textDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.TextDetectionConfig.toObject(message.textDetectionConfig, options);
+                            if (message.personDetectionConfig != null && message.hasOwnProperty("personDetectionConfig"))
+                                object.personDetectionConfig = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.toObject(message.personDetectionConfig, options);
                             if (message.objectTrackingConfig != null && message.hasOwnProperty("objectTrackingConfig"))
                                 object.objectTrackingConfig = $root.google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig.toObject(message.objectTrackingConfig, options);
                             return object;
@@ -28550,6 +28614,470 @@
                         };
     
                         return ExplicitContentDetectionConfig;
+                    })();
+    
+                    v1p3beta1.FaceDetectionConfig = (function() {
+    
+                        /**
+                         * Properties of a FaceDetectionConfig.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface IFaceDetectionConfig
+                         * @property {string|null} [model] FaceDetectionConfig model
+                         * @property {boolean|null} [includeBoundingBoxes] FaceDetectionConfig includeBoundingBoxes
+                         * @property {boolean|null} [includeAttributes] FaceDetectionConfig includeAttributes
+                         */
+    
+                        /**
+                         * Constructs a new FaceDetectionConfig.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a FaceDetectionConfig.
+                         * @implements IFaceDetectionConfig
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig=} [properties] Properties to set
+                         */
+                        function FaceDetectionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FaceDetectionConfig model.
+                         * @member {string} model
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @instance
+                         */
+                        FaceDetectionConfig.prototype.model = "";
+    
+                        /**
+                         * FaceDetectionConfig includeBoundingBoxes.
+                         * @member {boolean} includeBoundingBoxes
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @instance
+                         */
+                        FaceDetectionConfig.prototype.includeBoundingBoxes = false;
+    
+                        /**
+                         * FaceDetectionConfig includeAttributes.
+                         * @member {boolean} includeAttributes
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @instance
+                         */
+                        FaceDetectionConfig.prototype.includeAttributes = false;
+    
+                        /**
+                         * Creates a new FaceDetectionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig} FaceDetectionConfig instance
+                         */
+                        FaceDetectionConfig.create = function create(properties) {
+                            return new FaceDetectionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FaceDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig} message FaceDetectionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FaceDetectionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.model);
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.includeBoundingBoxes);
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.includeAttributes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FaceDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionConfig} message FaceDetectionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FaceDetectionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FaceDetectionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig} FaceDetectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FaceDetectionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.model = reader.string();
+                                    break;
+                                case 2:
+                                    message.includeBoundingBoxes = reader.bool();
+                                    break;
+                                case 5:
+                                    message.includeAttributes = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FaceDetectionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig} FaceDetectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FaceDetectionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FaceDetectionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FaceDetectionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                if (typeof message.includeBoundingBoxes !== "boolean")
+                                    return "includeBoundingBoxes: boolean expected";
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                if (typeof message.includeAttributes !== "boolean")
+                                    return "includeAttributes: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FaceDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig} FaceDetectionConfig
+                         */
+                        FaceDetectionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig();
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.includeBoundingBoxes != null)
+                                message.includeBoundingBoxes = Boolean(object.includeBoundingBoxes);
+                            if (object.includeAttributes != null)
+                                message.includeAttributes = Boolean(object.includeAttributes);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FaceDetectionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig} message FaceDetectionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FaceDetectionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.model = "";
+                                object.includeBoundingBoxes = false;
+                                object.includeAttributes = false;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                object.includeBoundingBoxes = message.includeBoundingBoxes;
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                object.includeAttributes = message.includeAttributes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FaceDetectionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FaceDetectionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FaceDetectionConfig;
+                    })();
+    
+                    v1p3beta1.PersonDetectionConfig = (function() {
+    
+                        /**
+                         * Properties of a PersonDetectionConfig.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface IPersonDetectionConfig
+                         * @property {boolean|null} [includeBoundingBoxes] PersonDetectionConfig includeBoundingBoxes
+                         * @property {boolean|null} [includePoseLandmarks] PersonDetectionConfig includePoseLandmarks
+                         * @property {boolean|null} [includeAttributes] PersonDetectionConfig includeAttributes
+                         */
+    
+                        /**
+                         * Constructs a new PersonDetectionConfig.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a PersonDetectionConfig.
+                         * @implements IPersonDetectionConfig
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig=} [properties] Properties to set
+                         */
+                        function PersonDetectionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PersonDetectionConfig includeBoundingBoxes.
+                         * @member {boolean} includeBoundingBoxes
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @instance
+                         */
+                        PersonDetectionConfig.prototype.includeBoundingBoxes = false;
+    
+                        /**
+                         * PersonDetectionConfig includePoseLandmarks.
+                         * @member {boolean} includePoseLandmarks
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @instance
+                         */
+                        PersonDetectionConfig.prototype.includePoseLandmarks = false;
+    
+                        /**
+                         * PersonDetectionConfig includeAttributes.
+                         * @member {boolean} includeAttributes
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @instance
+                         */
+                        PersonDetectionConfig.prototype.includeAttributes = false;
+    
+                        /**
+                         * Creates a new PersonDetectionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig} PersonDetectionConfig instance
+                         */
+                        PersonDetectionConfig.create = function create(properties) {
+                            return new PersonDetectionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PersonDetectionConfig message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig} message PersonDetectionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersonDetectionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.includeBoundingBoxes);
+                            if (message.includePoseLandmarks != null && message.hasOwnProperty("includePoseLandmarks"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.includePoseLandmarks);
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.includeAttributes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PersonDetectionConfig message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionConfig} message PersonDetectionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersonDetectionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PersonDetectionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig} PersonDetectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersonDetectionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.includeBoundingBoxes = reader.bool();
+                                    break;
+                                case 2:
+                                    message.includePoseLandmarks = reader.bool();
+                                    break;
+                                case 3:
+                                    message.includeAttributes = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PersonDetectionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig} PersonDetectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersonDetectionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PersonDetectionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PersonDetectionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                if (typeof message.includeBoundingBoxes !== "boolean")
+                                    return "includeBoundingBoxes: boolean expected";
+                            if (message.includePoseLandmarks != null && message.hasOwnProperty("includePoseLandmarks"))
+                                if (typeof message.includePoseLandmarks !== "boolean")
+                                    return "includePoseLandmarks: boolean expected";
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                if (typeof message.includeAttributes !== "boolean")
+                                    return "includeAttributes: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PersonDetectionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig} PersonDetectionConfig
+                         */
+                        PersonDetectionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig();
+                            if (object.includeBoundingBoxes != null)
+                                message.includeBoundingBoxes = Boolean(object.includeBoundingBoxes);
+                            if (object.includePoseLandmarks != null)
+                                message.includePoseLandmarks = Boolean(object.includePoseLandmarks);
+                            if (object.includeAttributes != null)
+                                message.includeAttributes = Boolean(object.includeAttributes);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PersonDetectionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig} message PersonDetectionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PersonDetectionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.includeBoundingBoxes = false;
+                                object.includePoseLandmarks = false;
+                                object.includeAttributes = false;
+                            }
+                            if (message.includeBoundingBoxes != null && message.hasOwnProperty("includeBoundingBoxes"))
+                                object.includeBoundingBoxes = message.includeBoundingBoxes;
+                            if (message.includePoseLandmarks != null && message.hasOwnProperty("includePoseLandmarks"))
+                                object.includePoseLandmarks = message.includePoseLandmarks;
+                            if (message.includeAttributes != null && message.hasOwnProperty("includeAttributes"))
+                                object.includeAttributes = message.includeAttributes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PersonDetectionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PersonDetectionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PersonDetectionConfig;
                     })();
     
                     v1p3beta1.TextDetectionConfig = (function() {
@@ -30702,6 +31230,7 @@
                          * @property {google.cloud.videointelligence.v1p3beta1.INormalizedBoundingBox|null} [normalizedBoundingBox] TimestampedObject normalizedBoundingBox
                          * @property {google.protobuf.IDuration|null} [timeOffset] TimestampedObject timeOffset
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.IDetectedAttribute>|null} [attributes] TimestampedObject attributes
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.IDetectedLandmark>|null} [landmarks] TimestampedObject landmarks
                          */
     
                         /**
@@ -30714,6 +31243,7 @@
                          */
                         function TimestampedObject(properties) {
                             this.attributes = [];
+                            this.landmarks = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -30743,6 +31273,14 @@
                          * @instance
                          */
                         TimestampedObject.prototype.attributes = $util.emptyArray;
+    
+                        /**
+                         * TimestampedObject landmarks.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.IDetectedLandmark>} landmarks
+                         * @memberof google.cloud.videointelligence.v1p3beta1.TimestampedObject
+                         * @instance
+                         */
+                        TimestampedObject.prototype.landmarks = $util.emptyArray;
     
                         /**
                          * Creates a new TimestampedObject instance using the specified properties.
@@ -30775,6 +31313,9 @@
                             if (message.attributes != null && message.attributes.length)
                                 for (var i = 0; i < message.attributes.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.DetectedAttribute.encode(message.attributes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.landmarks != null && message.landmarks.length)
+                                for (var i = 0; i < message.landmarks.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark.encode(message.landmarks[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -30819,6 +31360,11 @@
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
                                     message.attributes.push($root.google.cloud.videointelligence.v1p3beta1.DetectedAttribute.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    if (!(message.landmarks && message.landmarks.length))
+                                        message.landmarks = [];
+                                    message.landmarks.push($root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -30874,6 +31420,15 @@
                                         return "attributes." + error;
                                 }
                             }
+                            if (message.landmarks != null && message.hasOwnProperty("landmarks")) {
+                                if (!Array.isArray(message.landmarks))
+                                    return "landmarks: array expected";
+                                for (var i = 0; i < message.landmarks.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark.verify(message.landmarks[i]);
+                                    if (error)
+                                        return "landmarks." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -30909,6 +31464,16 @@
                                     message.attributes[i] = $root.google.cloud.videointelligence.v1p3beta1.DetectedAttribute.fromObject(object.attributes[i]);
                                 }
                             }
+                            if (object.landmarks) {
+                                if (!Array.isArray(object.landmarks))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.TimestampedObject.landmarks: array expected");
+                                message.landmarks = [];
+                                for (var i = 0; i < object.landmarks.length; ++i) {
+                                    if (typeof object.landmarks[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.TimestampedObject.landmarks: object expected");
+                                    message.landmarks[i] = $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark.fromObject(object.landmarks[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -30925,8 +31490,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.attributes = [];
+                                object.landmarks = [];
+                            }
                             if (options.defaults) {
                                 object.normalizedBoundingBox = null;
                                 object.timeOffset = null;
@@ -30939,6 +31506,11 @@
                                 object.attributes = [];
                                 for (var j = 0; j < message.attributes.length; ++j)
                                     object.attributes[j] = $root.google.cloud.videointelligence.v1p3beta1.DetectedAttribute.toObject(message.attributes[j], options);
+                            }
+                            if (message.landmarks && message.landmarks.length) {
+                                object.landmarks = [];
+                                for (var j = 0; j < message.landmarks.length; ++j)
+                                    object.landmarks[j] = $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark.toObject(message.landmarks[j], options);
                             }
                             return object;
                         };
@@ -32383,6 +32955,691 @@
                         return CelebrityRecognitionAnnotation;
                     })();
     
+                    v1p3beta1.DetectedLandmark = (function() {
+    
+                        /**
+                         * Properties of a DetectedLandmark.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface IDetectedLandmark
+                         * @property {string|null} [name] DetectedLandmark name
+                         * @property {google.cloud.videointelligence.v1p3beta1.INormalizedVertex|null} [point] DetectedLandmark point
+                         * @property {number|null} [confidence] DetectedLandmark confidence
+                         */
+    
+                        /**
+                         * Constructs a new DetectedLandmark.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a DetectedLandmark.
+                         * @implements IDetectedLandmark
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.IDetectedLandmark=} [properties] Properties to set
+                         */
+                        function DetectedLandmark(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DetectedLandmark name.
+                         * @member {string} name
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @instance
+                         */
+                        DetectedLandmark.prototype.name = "";
+    
+                        /**
+                         * DetectedLandmark point.
+                         * @member {google.cloud.videointelligence.v1p3beta1.INormalizedVertex|null|undefined} point
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @instance
+                         */
+                        DetectedLandmark.prototype.point = null;
+    
+                        /**
+                         * DetectedLandmark confidence.
+                         * @member {number} confidence
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @instance
+                         */
+                        DetectedLandmark.prototype.confidence = 0;
+    
+                        /**
+                         * Creates a new DetectedLandmark instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IDetectedLandmark=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.DetectedLandmark} DetectedLandmark instance
+                         */
+                        DetectedLandmark.create = function create(properties) {
+                            return new DetectedLandmark(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DetectedLandmark message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.DetectedLandmark.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IDetectedLandmark} message DetectedLandmark message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectedLandmark.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.point != null && message.hasOwnProperty("point"))
+                                $root.google.cloud.videointelligence.v1p3beta1.NormalizedVertex.encode(message.point, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.confidence);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DetectedLandmark message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.DetectedLandmark.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IDetectedLandmark} message DetectedLandmark message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DetectedLandmark.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DetectedLandmark message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.DetectedLandmark} DetectedLandmark
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectedLandmark.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.point = $root.google.cloud.videointelligence.v1p3beta1.NormalizedVertex.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.confidence = reader.float();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DetectedLandmark message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.DetectedLandmark} DetectedLandmark
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DetectedLandmark.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DetectedLandmark message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DetectedLandmark.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.point != null && message.hasOwnProperty("point")) {
+                                var error = $root.google.cloud.videointelligence.v1p3beta1.NormalizedVertex.verify(message.point);
+                                if (error)
+                                    return "point." + error;
+                            }
+                            if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                if (typeof message.confidence !== "number")
+                                    return "confidence: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DetectedLandmark message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.DetectedLandmark} DetectedLandmark
+                         */
+                        DetectedLandmark.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.DetectedLandmark();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.point != null) {
+                                if (typeof object.point !== "object")
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.DetectedLandmark.point: object expected");
+                                message.point = $root.google.cloud.videointelligence.v1p3beta1.NormalizedVertex.fromObject(object.point);
+                            }
+                            if (object.confidence != null)
+                                message.confidence = Number(object.confidence);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DetectedLandmark message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.DetectedLandmark} message DetectedLandmark
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DetectedLandmark.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.point = null;
+                                object.confidence = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.point != null && message.hasOwnProperty("point"))
+                                object.point = $root.google.cloud.videointelligence.v1p3beta1.NormalizedVertex.toObject(message.point, options);
+                            if (message.confidence != null && message.hasOwnProperty("confidence"))
+                                object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DetectedLandmark to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.DetectedLandmark
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DetectedLandmark.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DetectedLandmark;
+                    })();
+    
+                    v1p3beta1.FaceDetectionAnnotation = (function() {
+    
+                        /**
+                         * Properties of a FaceDetectionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface IFaceDetectionAnnotation
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.ITrack>|null} [tracks] FaceDetectionAnnotation tracks
+                         * @property {Uint8Array|null} [thumbnail] FaceDetectionAnnotation thumbnail
+                         */
+    
+                        /**
+                         * Constructs a new FaceDetectionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a FaceDetectionAnnotation.
+                         * @implements IFaceDetectionAnnotation
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation=} [properties] Properties to set
+                         */
+                        function FaceDetectionAnnotation(properties) {
+                            this.tracks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FaceDetectionAnnotation tracks.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.ITrack>} tracks
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @instance
+                         */
+                        FaceDetectionAnnotation.prototype.tracks = $util.emptyArray;
+    
+                        /**
+                         * FaceDetectionAnnotation thumbnail.
+                         * @member {Uint8Array} thumbnail
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @instance
+                         */
+                        FaceDetectionAnnotation.prototype.thumbnail = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new FaceDetectionAnnotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation} FaceDetectionAnnotation instance
+                         */
+                        FaceDetectionAnnotation.create = function create(properties) {
+                            return new FaceDetectionAnnotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FaceDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation} message FaceDetectionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FaceDetectionAnnotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tracks != null && message.tracks.length)
+                                for (var i = 0; i < message.tracks.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.Track.encode(message.tracks[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.thumbnail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FaceDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation} message FaceDetectionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FaceDetectionAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FaceDetectionAnnotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation} FaceDetectionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FaceDetectionAnnotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    if (!(message.tracks && message.tracks.length))
+                                        message.tracks = [];
+                                    message.tracks.push($root.google.cloud.videointelligence.v1p3beta1.Track.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.thumbnail = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FaceDetectionAnnotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation} FaceDetectionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FaceDetectionAnnotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FaceDetectionAnnotation message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FaceDetectionAnnotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tracks != null && message.hasOwnProperty("tracks")) {
+                                if (!Array.isArray(message.tracks))
+                                    return "tracks: array expected";
+                                for (var i = 0; i < message.tracks.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.Track.verify(message.tracks[i]);
+                                    if (error)
+                                        return "tracks." + error;
+                                }
+                            }
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                if (!(message.thumbnail && typeof message.thumbnail.length === "number" || $util.isString(message.thumbnail)))
+                                    return "thumbnail: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FaceDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation} FaceDetectionAnnotation
+                         */
+                        FaceDetectionAnnotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation();
+                            if (object.tracks) {
+                                if (!Array.isArray(object.tracks))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.tracks: array expected");
+                                message.tracks = [];
+                                for (var i = 0; i < object.tracks.length; ++i) {
+                                    if (typeof object.tracks[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.tracks: object expected");
+                                    message.tracks[i] = $root.google.cloud.videointelligence.v1p3beta1.Track.fromObject(object.tracks[i]);
+                                }
+                            }
+                            if (object.thumbnail != null)
+                                if (typeof object.thumbnail === "string")
+                                    $util.base64.decode(object.thumbnail, message.thumbnail = $util.newBuffer($util.base64.length(object.thumbnail)), 0);
+                                else if (object.thumbnail.length)
+                                    message.thumbnail = object.thumbnail;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FaceDetectionAnnotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation} message FaceDetectionAnnotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FaceDetectionAnnotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tracks = [];
+                            if (options.defaults)
+                                if (options.bytes === String)
+                                    object.thumbnail = "";
+                                else {
+                                    object.thumbnail = [];
+                                    if (options.bytes !== Array)
+                                        object.thumbnail = $util.newBuffer(object.thumbnail);
+                                }
+                            if (message.tracks && message.tracks.length) {
+                                object.tracks = [];
+                                for (var j = 0; j < message.tracks.length; ++j)
+                                    object.tracks[j] = $root.google.cloud.videointelligence.v1p3beta1.Track.toObject(message.tracks[j], options);
+                            }
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                object.thumbnail = options.bytes === String ? $util.base64.encode(message.thumbnail, 0, message.thumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.thumbnail) : message.thumbnail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FaceDetectionAnnotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FaceDetectionAnnotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return FaceDetectionAnnotation;
+                    })();
+    
+                    v1p3beta1.PersonDetectionAnnotation = (function() {
+    
+                        /**
+                         * Properties of a PersonDetectionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @interface IPersonDetectionAnnotation
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.ITrack>|null} [tracks] PersonDetectionAnnotation tracks
+                         */
+    
+                        /**
+                         * Constructs a new PersonDetectionAnnotation.
+                         * @memberof google.cloud.videointelligence.v1p3beta1
+                         * @classdesc Represents a PersonDetectionAnnotation.
+                         * @implements IPersonDetectionAnnotation
+                         * @constructor
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation=} [properties] Properties to set
+                         */
+                        function PersonDetectionAnnotation(properties) {
+                            this.tracks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PersonDetectionAnnotation tracks.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.ITrack>} tracks
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @instance
+                         */
+                        PersonDetectionAnnotation.prototype.tracks = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PersonDetectionAnnotation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation=} [properties] Properties to set
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation} PersonDetectionAnnotation instance
+                         */
+                        PersonDetectionAnnotation.create = function create(properties) {
+                            return new PersonDetectionAnnotation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PersonDetectionAnnotation message. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation} message PersonDetectionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersonDetectionAnnotation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tracks != null && message.tracks.length)
+                                for (var i = 0; i < message.tracks.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.Track.encode(message.tracks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PersonDetectionAnnotation message, length delimited. Does not implicitly {@link google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation} message PersonDetectionAnnotation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PersonDetectionAnnotation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PersonDetectionAnnotation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation} PersonDetectionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersonDetectionAnnotation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.tracks && message.tracks.length))
+                                        message.tracks = [];
+                                    message.tracks.push($root.google.cloud.videointelligence.v1p3beta1.Track.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PersonDetectionAnnotation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation} PersonDetectionAnnotation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PersonDetectionAnnotation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PersonDetectionAnnotation message.
+                         * @function verify
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PersonDetectionAnnotation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tracks != null && message.hasOwnProperty("tracks")) {
+                                if (!Array.isArray(message.tracks))
+                                    return "tracks: array expected";
+                                for (var i = 0; i < message.tracks.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.Track.verify(message.tracks[i]);
+                                    if (error)
+                                        return "tracks." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PersonDetectionAnnotation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation} PersonDetectionAnnotation
+                         */
+                        PersonDetectionAnnotation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation)
+                                return object;
+                            var message = new $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation();
+                            if (object.tracks) {
+                                if (!Array.isArray(object.tracks))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.tracks: array expected");
+                                message.tracks = [];
+                                for (var i = 0; i < object.tracks.length; ++i) {
+                                    if (typeof object.tracks[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.tracks: object expected");
+                                    message.tracks[i] = $root.google.cloud.videointelligence.v1p3beta1.Track.fromObject(object.tracks[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PersonDetectionAnnotation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @static
+                         * @param {google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation} message PersonDetectionAnnotation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PersonDetectionAnnotation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tracks = [];
+                            if (message.tracks && message.tracks.length) {
+                                object.tracks = [];
+                                for (var j = 0; j < message.tracks.length; ++j)
+                                    object.tracks[j] = $root.google.cloud.videointelligence.v1p3beta1.Track.toObject(message.tracks[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PersonDetectionAnnotation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PersonDetectionAnnotation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PersonDetectionAnnotation;
+                    })();
+    
                     v1p3beta1.VideoAnnotationResults = (function() {
     
                         /**
@@ -32396,12 +33653,14 @@
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [shotLabelAnnotations] VideoAnnotationResults shotLabelAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [shotPresenceLabelAnnotations] VideoAnnotationResults shotPresenceLabelAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILabelAnnotation>|null} [frameLabelAnnotations] VideoAnnotationResults frameLabelAnnotations
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation>|null} [faceDetectionAnnotations] VideoAnnotationResults faceDetectionAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.IVideoSegment>|null} [shotAnnotations] VideoAnnotationResults shotAnnotations
                          * @property {google.cloud.videointelligence.v1p3beta1.IExplicitContentAnnotation|null} [explicitAnnotation] VideoAnnotationResults explicitAnnotation
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ISpeechTranscription>|null} [speechTranscriptions] VideoAnnotationResults speechTranscriptions
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ITextAnnotation>|null} [textAnnotations] VideoAnnotationResults textAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.IObjectTrackingAnnotation>|null} [objectAnnotations] VideoAnnotationResults objectAnnotations
                          * @property {Array.<google.cloud.videointelligence.v1p3beta1.ILogoRecognitionAnnotation>|null} [logoRecognitionAnnotations] VideoAnnotationResults logoRecognitionAnnotations
+                         * @property {Array.<google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation>|null} [personDetectionAnnotations] VideoAnnotationResults personDetectionAnnotations
                          * @property {google.cloud.videointelligence.v1p3beta1.ICelebrityRecognitionAnnotation|null} [celebrityRecognitionAnnotations] VideoAnnotationResults celebrityRecognitionAnnotations
                          * @property {google.rpc.IStatus|null} [error] VideoAnnotationResults error
                          */
@@ -32420,11 +33679,13 @@
                             this.shotLabelAnnotations = [];
                             this.shotPresenceLabelAnnotations = [];
                             this.frameLabelAnnotations = [];
+                            this.faceDetectionAnnotations = [];
                             this.shotAnnotations = [];
                             this.speechTranscriptions = [];
                             this.textAnnotations = [];
                             this.objectAnnotations = [];
                             this.logoRecognitionAnnotations = [];
+                            this.personDetectionAnnotations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -32488,6 +33749,14 @@
                         VideoAnnotationResults.prototype.frameLabelAnnotations = $util.emptyArray;
     
                         /**
+                         * VideoAnnotationResults faceDetectionAnnotations.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.IFaceDetectionAnnotation>} faceDetectionAnnotations
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.faceDetectionAnnotations = $util.emptyArray;
+    
+                        /**
                          * VideoAnnotationResults shotAnnotations.
                          * @member {Array.<google.cloud.videointelligence.v1p3beta1.IVideoSegment>} shotAnnotations
                          * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
@@ -32534,6 +33803,14 @@
                          * @instance
                          */
                         VideoAnnotationResults.prototype.logoRecognitionAnnotations = $util.emptyArray;
+    
+                        /**
+                         * VideoAnnotationResults personDetectionAnnotations.
+                         * @member {Array.<google.cloud.videointelligence.v1p3beta1.IPersonDetectionAnnotation>} personDetectionAnnotations
+                         * @memberof google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults
+                         * @instance
+                         */
+                        VideoAnnotationResults.prototype.personDetectionAnnotations = $util.emptyArray;
     
                         /**
                          * VideoAnnotationResults celebrityRecognitionAnnotations.
@@ -32601,12 +33878,18 @@
                             if (message.textAnnotations != null && message.textAnnotations.length)
                                 for (var i = 0; i < message.textAnnotations.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.TextAnnotation.encode(message.textAnnotations[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.faceDetectionAnnotations != null && message.faceDetectionAnnotations.length)
+                                for (var i = 0; i < message.faceDetectionAnnotations.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.encode(message.faceDetectionAnnotations[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.objectAnnotations != null && message.objectAnnotations.length)
                                 for (var i = 0; i < message.objectAnnotations.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.ObjectTrackingAnnotation.encode(message.objectAnnotations[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.logoRecognitionAnnotations != null && message.logoRecognitionAnnotations.length)
                                 for (var i = 0; i < message.logoRecognitionAnnotations.length; ++i)
                                     $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.encode(message.logoRecognitionAnnotations[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.personDetectionAnnotations != null && message.personDetectionAnnotations.length)
+                                for (var i = 0; i < message.personDetectionAnnotations.length; ++i)
+                                    $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.encode(message.personDetectionAnnotations[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations"))
                                 $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.encode(message.celebrityRecognitionAnnotations, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.segmentPresenceLabelAnnotations != null && message.segmentPresenceLabelAnnotations.length)
@@ -32680,6 +33963,11 @@
                                         message.frameLabelAnnotations = [];
                                     message.frameLabelAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.decode(reader, reader.uint32()));
                                     break;
+                                case 13:
+                                    if (!(message.faceDetectionAnnotations && message.faceDetectionAnnotations.length))
+                                        message.faceDetectionAnnotations = [];
+                                    message.faceDetectionAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.decode(reader, reader.uint32()));
+                                    break;
                                 case 6:
                                     if (!(message.shotAnnotations && message.shotAnnotations.length))
                                         message.shotAnnotations = [];
@@ -32707,6 +33995,11 @@
                                     if (!(message.logoRecognitionAnnotations && message.logoRecognitionAnnotations.length))
                                         message.logoRecognitionAnnotations = [];
                                     message.logoRecognitionAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.decode(reader, reader.uint32()));
+                                    break;
+                                case 20:
+                                    if (!(message.personDetectionAnnotations && message.personDetectionAnnotations.length))
+                                        message.personDetectionAnnotations = [];
+                                    message.personDetectionAnnotations.push($root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.decode(reader, reader.uint32()));
                                     break;
                                 case 21:
                                     message.celebrityRecognitionAnnotations = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.decode(reader, reader.uint32());
@@ -32802,6 +34095,15 @@
                                         return "frameLabelAnnotations." + error;
                                 }
                             }
+                            if (message.faceDetectionAnnotations != null && message.hasOwnProperty("faceDetectionAnnotations")) {
+                                if (!Array.isArray(message.faceDetectionAnnotations))
+                                    return "faceDetectionAnnotations: array expected";
+                                for (var i = 0; i < message.faceDetectionAnnotations.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.verify(message.faceDetectionAnnotations[i]);
+                                    if (error)
+                                        return "faceDetectionAnnotations." + error;
+                                }
+                            }
                             if (message.shotAnnotations != null && message.hasOwnProperty("shotAnnotations")) {
                                 if (!Array.isArray(message.shotAnnotations))
                                     return "shotAnnotations: array expected";
@@ -32850,6 +34152,15 @@
                                     var error = $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.verify(message.logoRecognitionAnnotations[i]);
                                     if (error)
                                         return "logoRecognitionAnnotations." + error;
+                                }
+                            }
+                            if (message.personDetectionAnnotations != null && message.hasOwnProperty("personDetectionAnnotations")) {
+                                if (!Array.isArray(message.personDetectionAnnotations))
+                                    return "personDetectionAnnotations: array expected";
+                                for (var i = 0; i < message.personDetectionAnnotations.length; ++i) {
+                                    var error = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.verify(message.personDetectionAnnotations[i]);
+                                    if (error)
+                                        return "personDetectionAnnotations." + error;
                                 }
                             }
                             if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations")) {
@@ -32934,6 +34245,16 @@
                                     message.frameLabelAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LabelAnnotation.fromObject(object.frameLabelAnnotations[i]);
                                 }
                             }
+                            if (object.faceDetectionAnnotations) {
+                                if (!Array.isArray(object.faceDetectionAnnotations))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.faceDetectionAnnotations: array expected");
+                                message.faceDetectionAnnotations = [];
+                                for (var i = 0; i < object.faceDetectionAnnotations.length; ++i) {
+                                    if (typeof object.faceDetectionAnnotations[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.faceDetectionAnnotations: object expected");
+                                    message.faceDetectionAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.fromObject(object.faceDetectionAnnotations[i]);
+                                }
+                            }
                             if (object.shotAnnotations) {
                                 if (!Array.isArray(object.shotAnnotations))
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.shotAnnotations: array expected");
@@ -32989,6 +34310,16 @@
                                     message.logoRecognitionAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.fromObject(object.logoRecognitionAnnotations[i]);
                                 }
                             }
+                            if (object.personDetectionAnnotations) {
+                                if (!Array.isArray(object.personDetectionAnnotations))
+                                    throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.personDetectionAnnotations: array expected");
+                                message.personDetectionAnnotations = [];
+                                for (var i = 0; i < object.personDetectionAnnotations.length; ++i) {
+                                    if (typeof object.personDetectionAnnotations[i] !== "object")
+                                        throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.personDetectionAnnotations: object expected");
+                                    message.personDetectionAnnotations[i] = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.fromObject(object.personDetectionAnnotations[i]);
+                                }
+                            }
                             if (object.celebrityRecognitionAnnotations != null) {
                                 if (typeof object.celebrityRecognitionAnnotations !== "object")
                                     throw TypeError(".google.cloud.videointelligence.v1p3beta1.VideoAnnotationResults.celebrityRecognitionAnnotations: object expected");
@@ -33022,8 +34353,10 @@
                                 object.shotAnnotations = [];
                                 object.speechTranscriptions = [];
                                 object.textAnnotations = [];
+                                object.faceDetectionAnnotations = [];
                                 object.objectAnnotations = [];
                                 object.logoRecognitionAnnotations = [];
+                                object.personDetectionAnnotations = [];
                                 object.segmentPresenceLabelAnnotations = [];
                                 object.shotPresenceLabelAnnotations = [];
                             }
@@ -33072,6 +34405,11 @@
                                 for (var j = 0; j < message.textAnnotations.length; ++j)
                                     object.textAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.TextAnnotation.toObject(message.textAnnotations[j], options);
                             }
+                            if (message.faceDetectionAnnotations && message.faceDetectionAnnotations.length) {
+                                object.faceDetectionAnnotations = [];
+                                for (var j = 0; j < message.faceDetectionAnnotations.length; ++j)
+                                    object.faceDetectionAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.FaceDetectionAnnotation.toObject(message.faceDetectionAnnotations[j], options);
+                            }
                             if (message.objectAnnotations && message.objectAnnotations.length) {
                                 object.objectAnnotations = [];
                                 for (var j = 0; j < message.objectAnnotations.length; ++j)
@@ -33081,6 +34419,11 @@
                                 object.logoRecognitionAnnotations = [];
                                 for (var j = 0; j < message.logoRecognitionAnnotations.length; ++j)
                                     object.logoRecognitionAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation.toObject(message.logoRecognitionAnnotations[j], options);
+                            }
+                            if (message.personDetectionAnnotations && message.personDetectionAnnotations.length) {
+                                object.personDetectionAnnotations = [];
+                                for (var j = 0; j < message.personDetectionAnnotations.length; ++j)
+                                    object.personDetectionAnnotations[j] = $root.google.cloud.videointelligence.v1p3beta1.PersonDetectionAnnotation.toObject(message.personDetectionAnnotations[j], options);
                             }
                             if (message.celebrityRecognitionAnnotations != null && message.hasOwnProperty("celebrityRecognitionAnnotations"))
                                 object.celebrityRecognitionAnnotations = $root.google.cloud.videointelligence.v1p3beta1.CelebrityRecognitionAnnotation.toObject(message.celebrityRecognitionAnnotations, options);
@@ -33543,11 +34886,13 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                 case 6:
                                 case 7:
                                 case 9:
                                 case 12:
                                 case 13:
+                                case 14:
                                     break;
                                 }
                             if (message.segment != null && message.hasOwnProperty("segment")) {
@@ -33601,6 +34946,10 @@
                             case 3:
                                 message.feature = 3;
                                 break;
+                            case "FACE_DETECTION":
+                            case 4:
+                                message.feature = 4;
+                                break;
                             case "SPEECH_TRANSCRIPTION":
                             case 6:
                                 message.feature = 6;
@@ -33620,6 +34969,10 @@
                             case "CELEBRITY_RECOGNITION":
                             case 13:
                                 message.feature = 13;
+                                break;
+                            case "PERSON_DETECTION":
+                            case 14:
+                                message.feature = 14;
                                 break;
                             }
                             if (object.segment != null) {
@@ -39781,11 +41134,13 @@
                      * @property {number} LABEL_DETECTION=1 LABEL_DETECTION value
                      * @property {number} SHOT_CHANGE_DETECTION=2 SHOT_CHANGE_DETECTION value
                      * @property {number} EXPLICIT_CONTENT_DETECTION=3 EXPLICIT_CONTENT_DETECTION value
+                     * @property {number} FACE_DETECTION=4 FACE_DETECTION value
                      * @property {number} SPEECH_TRANSCRIPTION=6 SPEECH_TRANSCRIPTION value
                      * @property {number} TEXT_DETECTION=7 TEXT_DETECTION value
                      * @property {number} OBJECT_TRACKING=9 OBJECT_TRACKING value
                      * @property {number} LOGO_RECOGNITION=12 LOGO_RECOGNITION value
                      * @property {number} CELEBRITY_RECOGNITION=13 CELEBRITY_RECOGNITION value
+                     * @property {number} PERSON_DETECTION=14 PERSON_DETECTION value
                      */
                     v1p3beta1.Feature = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -39793,11 +41148,13 @@
                         values[valuesById[1] = "LABEL_DETECTION"] = 1;
                         values[valuesById[2] = "SHOT_CHANGE_DETECTION"] = 2;
                         values[valuesById[3] = "EXPLICIT_CONTENT_DETECTION"] = 3;
+                        values[valuesById[4] = "FACE_DETECTION"] = 4;
                         values[valuesById[6] = "SPEECH_TRANSCRIPTION"] = 6;
                         values[valuesById[7] = "TEXT_DETECTION"] = 7;
                         values[valuesById[9] = "OBJECT_TRACKING"] = 9;
                         values[valuesById[12] = "LOGO_RECOGNITION"] = 12;
                         values[valuesById[13] = "CELEBRITY_RECOGNITION"] = 13;
+                        values[valuesById[14] = "PERSON_DETECTION"] = 14;
                         return values;
                     })();
     
