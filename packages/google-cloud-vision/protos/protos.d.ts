@@ -138,7 +138,7 @@ export namespace google {
                 interface IFeature {
 
                     /** Feature type */
-                    type?: (google.cloud.vision.v1.Feature.Type|null);
+                    type?: (google.cloud.vision.v1.Feature.Type|keyof typeof google.cloud.vision.v1.Feature.Type|null);
 
                     /** Feature maxResults */
                     maxResults?: (number|null);
@@ -157,7 +157,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.IFeature);
 
                     /** Feature type. */
-                    public type: google.cloud.vision.v1.Feature.Type;
+                    public type: (google.cloud.vision.v1.Feature.Type|keyof typeof google.cloud.vision.v1.Feature.Type);
 
                     /** Feature maxResults. */
                     public maxResults: number;
@@ -356,7 +356,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1.IImageSource|null);
@@ -372,7 +372,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.IImage);
 
                     /** Image content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1.IImageSource|null);
@@ -486,25 +486,25 @@ export namespace google {
                     landmarkingConfidence?: (number|null);
 
                     /** FaceAnnotation joyLikelihood */
-                    joyLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    joyLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation sorrowLikelihood */
-                    sorrowLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    sorrowLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation angerLikelihood */
-                    angerLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    angerLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation surpriseLikelihood */
-                    surpriseLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    surpriseLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation underExposedLikelihood */
-                    underExposedLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    underExposedLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation blurredLikelihood */
-                    blurredLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    blurredLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** FaceAnnotation headwearLikelihood */
-                    headwearLikelihood?: (google.cloud.vision.v1.Likelihood|null);
+                    headwearLikelihood?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
                 }
 
                 /** Represents a FaceAnnotation. */
@@ -541,25 +541,25 @@ export namespace google {
                     public landmarkingConfidence: number;
 
                     /** FaceAnnotation joyLikelihood. */
-                    public joyLikelihood: google.cloud.vision.v1.Likelihood;
+                    public joyLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation sorrowLikelihood. */
-                    public sorrowLikelihood: google.cloud.vision.v1.Likelihood;
+                    public sorrowLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation angerLikelihood. */
-                    public angerLikelihood: google.cloud.vision.v1.Likelihood;
+                    public angerLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation surpriseLikelihood. */
-                    public surpriseLikelihood: google.cloud.vision.v1.Likelihood;
+                    public surpriseLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation underExposedLikelihood. */
-                    public underExposedLikelihood: google.cloud.vision.v1.Likelihood;
+                    public underExposedLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation blurredLikelihood. */
-                    public blurredLikelihood: google.cloud.vision.v1.Likelihood;
+                    public blurredLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** FaceAnnotation headwearLikelihood. */
-                    public headwearLikelihood: google.cloud.vision.v1.Likelihood;
+                    public headwearLikelihood: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /**
                      * Creates a new FaceAnnotation instance using the specified properties.
@@ -638,7 +638,7 @@ export namespace google {
                     interface ILandmark {
 
                         /** Landmark type */
-                        type?: (google.cloud.vision.v1.FaceAnnotation.Landmark.Type|null);
+                        type?: (google.cloud.vision.v1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1.FaceAnnotation.Landmark.Type|null);
 
                         /** Landmark position */
                         position?: (google.cloud.vision.v1.IPosition|null);
@@ -654,7 +654,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1.FaceAnnotation.ILandmark);
 
                         /** Landmark type. */
-                        public type: google.cloud.vision.v1.FaceAnnotation.Landmark.Type;
+                        public type: (google.cloud.vision.v1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1.FaceAnnotation.Landmark.Type);
 
                         /** Landmark position. */
                         public position?: (google.cloud.vision.v1.IPosition|null);
@@ -873,7 +873,7 @@ export namespace google {
                     value?: (string|null);
 
                     /** Property uint64Value */
-                    uint64Value?: (number|Long|null);
+                    uint64Value?: (number|Long|string|null);
                 }
 
                 /** Represents a Property. */
@@ -892,7 +892,7 @@ export namespace google {
                     public value: string;
 
                     /** Property uint64Value. */
-                    public uint64Value: (number|Long);
+                    public uint64Value: (number|Long|string);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -1221,19 +1221,19 @@ export namespace google {
                 interface ISafeSearchAnnotation {
 
                     /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.vision.v1.Likelihood|null);
+                    adult?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.vision.v1.Likelihood|null);
+                    spoof?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.vision.v1.Likelihood|null);
+                    medical?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** SafeSearchAnnotation violence */
-                    violence?: (google.cloud.vision.v1.Likelihood|null);
+                    violence?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.vision.v1.Likelihood|null);
+                    racy?: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood|null);
 
                     /** SafeSearchAnnotation adultConfidence */
                     adultConfidence?: (number|null);
@@ -1264,19 +1264,19 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.ISafeSearchAnnotation);
 
                     /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.vision.v1.Likelihood;
+                    public adult: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.vision.v1.Likelihood;
+                    public spoof: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.vision.v1.Likelihood;
+                    public medical: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** SafeSearchAnnotation violence. */
-                    public violence: google.cloud.vision.v1.Likelihood;
+                    public violence: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.vision.v1.Likelihood;
+                    public racy: (google.cloud.vision.v1.Likelihood|keyof typeof google.cloud.vision.v1.Likelihood);
 
                     /** SafeSearchAnnotation adultConfidence. */
                     public adultConfidence: number;
@@ -3768,7 +3768,7 @@ export namespace google {
                     gcsSource?: (google.cloud.vision.v1.IGcsSource|null);
 
                     /** InputConfig content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** InputConfig mimeType */
                     mimeType?: (string|null);
@@ -3787,7 +3787,7 @@ export namespace google {
                     public gcsSource?: (google.cloud.vision.v1.IGcsSource|null);
 
                     /** InputConfig content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** InputConfig mimeType. */
                     public mimeType: string;
@@ -4143,7 +4143,7 @@ export namespace google {
                 interface IOperationMetadata {
 
                     /** OperationMetadata state */
-                    state?: (google.cloud.vision.v1.OperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1.OperationMetadata.State|keyof typeof google.cloud.vision.v1.OperationMetadata.State|null);
 
                     /** OperationMetadata createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -4162,7 +4162,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.IOperationMetadata);
 
                     /** OperationMetadata state. */
-                    public state: google.cloud.vision.v1.OperationMetadata.State;
+                    public state: (google.cloud.vision.v1.OperationMetadata.State|keyof typeof google.cloud.vision.v1.OperationMetadata.State);
 
                     /** OperationMetadata createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -8421,7 +8421,7 @@ export namespace google {
                 interface IBatchOperationMetadata {
 
                     /** BatchOperationMetadata state */
-                    state?: (google.cloud.vision.v1.BatchOperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1.BatchOperationMetadata.State|null);
 
                     /** BatchOperationMetadata submitTime */
                     submitTime?: (google.protobuf.ITimestamp|null);
@@ -8440,7 +8440,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1.IBatchOperationMetadata);
 
                     /** BatchOperationMetadata state. */
-                    public state: google.cloud.vision.v1.BatchOperationMetadata.State;
+                    public state: (google.cloud.vision.v1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1.BatchOperationMetadata.State);
 
                     /** BatchOperationMetadata submitTime. */
                     public submitTime?: (google.protobuf.ITimestamp|null);
@@ -8930,7 +8930,7 @@ export namespace google {
                     interface IDetectedBreak {
 
                         /** DetectedBreak type */
-                        type?: (google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType|null);
+                        type?: (google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType|null);
 
                         /** DetectedBreak isPrefix */
                         isPrefix?: (boolean|null);
@@ -8946,7 +8946,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1.TextAnnotation.IDetectedBreak);
 
                         /** DetectedBreak type. */
-                        public type: google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType;
+                        public type: (google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1.TextAnnotation.DetectedBreak.BreakType);
 
                         /** DetectedBreak isPrefix. */
                         public isPrefix: boolean;
@@ -9259,7 +9259,7 @@ export namespace google {
                     paragraphs?: (google.cloud.vision.v1.IParagraph[]|null);
 
                     /** Block blockType */
-                    blockType?: (google.cloud.vision.v1.Block.BlockType|null);
+                    blockType?: (google.cloud.vision.v1.Block.BlockType|keyof typeof google.cloud.vision.v1.Block.BlockType|null);
 
                     /** Block confidence */
                     confidence?: (number|null);
@@ -9284,7 +9284,7 @@ export namespace google {
                     public paragraphs: google.cloud.vision.v1.IParagraph[];
 
                     /** Block blockType. */
-                    public blockType: google.cloud.vision.v1.Block.BlockType;
+                    public blockType: (google.cloud.vision.v1.Block.BlockType|keyof typeof google.cloud.vision.v1.Block.BlockType);
 
                     /** Block confidence. */
                     public confidence: number;
@@ -10281,7 +10281,7 @@ export namespace google {
                 interface IFeature {
 
                     /** Feature type */
-                    type?: (google.cloud.vision.v1p1beta1.Feature.Type|null);
+                    type?: (google.cloud.vision.v1p1beta1.Feature.Type|keyof typeof google.cloud.vision.v1p1beta1.Feature.Type|null);
 
                     /** Feature maxResults */
                     maxResults?: (number|null);
@@ -10300,7 +10300,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p1beta1.IFeature);
 
                     /** Feature type. */
-                    public type: google.cloud.vision.v1p1beta1.Feature.Type;
+                    public type: (google.cloud.vision.v1p1beta1.Feature.Type|keyof typeof google.cloud.vision.v1p1beta1.Feature.Type);
 
                     /** Feature maxResults. */
                     public maxResults: number;
@@ -10497,7 +10497,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p1beta1.IImageSource|null);
@@ -10513,7 +10513,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p1beta1.IImage);
 
                     /** Image content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p1beta1.IImageSource|null);
@@ -10617,25 +10617,25 @@ export namespace google {
                     landmarkingConfidence?: (number|null);
 
                     /** FaceAnnotation joyLikelihood */
-                    joyLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    joyLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation sorrowLikelihood */
-                    sorrowLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    sorrowLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation angerLikelihood */
-                    angerLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    angerLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation surpriseLikelihood */
-                    surpriseLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    surpriseLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation underExposedLikelihood */
-                    underExposedLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    underExposedLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation blurredLikelihood */
-                    blurredLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    blurredLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** FaceAnnotation headwearLikelihood */
-                    headwearLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    headwearLikelihood?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
                 }
 
                 /** Represents a FaceAnnotation. */
@@ -10672,25 +10672,25 @@ export namespace google {
                     public landmarkingConfidence: number;
 
                     /** FaceAnnotation joyLikelihood. */
-                    public joyLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public joyLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation sorrowLikelihood. */
-                    public sorrowLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public sorrowLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation angerLikelihood. */
-                    public angerLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public angerLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation surpriseLikelihood. */
-                    public surpriseLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public surpriseLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation underExposedLikelihood. */
-                    public underExposedLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public underExposedLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation blurredLikelihood. */
-                    public blurredLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public blurredLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** FaceAnnotation headwearLikelihood. */
-                    public headwearLikelihood: google.cloud.vision.v1p1beta1.Likelihood;
+                    public headwearLikelihood: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /**
                      * Creates a new FaceAnnotation instance using the specified properties.
@@ -10769,7 +10769,7 @@ export namespace google {
                     interface ILandmark {
 
                         /** Landmark type */
-                        type?: (google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type|null);
+                        type?: (google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type|null);
 
                         /** Landmark position */
                         position?: (google.cloud.vision.v1p1beta1.IPosition|null);
@@ -10785,7 +10785,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p1beta1.FaceAnnotation.ILandmark);
 
                         /** Landmark type. */
-                        public type: google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type;
+                        public type: (google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p1beta1.FaceAnnotation.Landmark.Type);
 
                         /** Landmark position. */
                         public position?: (google.cloud.vision.v1p1beta1.IPosition|null);
@@ -11004,7 +11004,7 @@ export namespace google {
                     value?: (string|null);
 
                     /** Property uint64Value */
-                    uint64Value?: (number|Long|null);
+                    uint64Value?: (number|Long|string|null);
                 }
 
                 /** Represents a Property. */
@@ -11023,7 +11023,7 @@ export namespace google {
                     public value: string;
 
                     /** Property uint64Value. */
-                    public uint64Value: (number|Long);
+                    public uint64Value: (number|Long|string);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -11238,19 +11238,19 @@ export namespace google {
                 interface ISafeSearchAnnotation {
 
                     /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    adult?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    spoof?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    medical?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation violence */
-                    violence?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    violence?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.vision.v1p1beta1.Likelihood|null);
+                    racy?: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood|null);
                 }
 
                 /** Represents a SafeSearchAnnotation. */
@@ -11263,19 +11263,19 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p1beta1.ISafeSearchAnnotation);
 
                     /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.vision.v1p1beta1.Likelihood;
+                    public adult: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.vision.v1p1beta1.Likelihood;
+                    public spoof: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.vision.v1p1beta1.Likelihood;
+                    public medical: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** SafeSearchAnnotation violence. */
-                    public violence: google.cloud.vision.v1p1beta1.Likelihood;
+                    public violence: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.vision.v1p1beta1.Likelihood;
+                    public racy: (google.cloud.vision.v1p1beta1.Likelihood|keyof typeof google.cloud.vision.v1p1beta1.Likelihood);
 
                     /**
                      * Creates a new SafeSearchAnnotation instance using the specified properties.
@@ -13134,7 +13134,7 @@ export namespace google {
                     interface IDetectedBreak {
 
                         /** DetectedBreak type */
-                        type?: (google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType|null);
+                        type?: (google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType|null);
 
                         /** DetectedBreak isPrefix */
                         isPrefix?: (boolean|null);
@@ -13150,7 +13150,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p1beta1.TextAnnotation.IDetectedBreak);
 
                         /** DetectedBreak type. */
-                        public type: google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType;
+                        public type: (google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p1beta1.TextAnnotation.DetectedBreak.BreakType);
 
                         /** DetectedBreak isPrefix. */
                         public isPrefix: boolean;
@@ -13463,7 +13463,7 @@ export namespace google {
                     paragraphs?: (google.cloud.vision.v1p1beta1.IParagraph[]|null);
 
                     /** Block blockType */
-                    blockType?: (google.cloud.vision.v1p1beta1.Block.BlockType|null);
+                    blockType?: (google.cloud.vision.v1p1beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p1beta1.Block.BlockType|null);
 
                     /** Block confidence */
                     confidence?: (number|null);
@@ -13488,7 +13488,7 @@ export namespace google {
                     public paragraphs: google.cloud.vision.v1p1beta1.IParagraph[];
 
                     /** Block blockType. */
-                    public blockType: google.cloud.vision.v1p1beta1.Block.BlockType;
+                    public blockType: (google.cloud.vision.v1p1beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p1beta1.Block.BlockType);
 
                     /** Block confidence. */
                     public confidence: number;
@@ -14506,7 +14506,7 @@ export namespace google {
                 interface IFeature {
 
                     /** Feature type */
-                    type?: (google.cloud.vision.v1p2beta1.Feature.Type|null);
+                    type?: (google.cloud.vision.v1p2beta1.Feature.Type|keyof typeof google.cloud.vision.v1p2beta1.Feature.Type|null);
 
                     /** Feature maxResults */
                     maxResults?: (number|null);
@@ -14525,7 +14525,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p2beta1.IFeature);
 
                     /** Feature type. */
-                    public type: google.cloud.vision.v1p2beta1.Feature.Type;
+                    public type: (google.cloud.vision.v1p2beta1.Feature.Type|keyof typeof google.cloud.vision.v1p2beta1.Feature.Type);
 
                     /** Feature maxResults. */
                     public maxResults: number;
@@ -14722,7 +14722,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p2beta1.IImageSource|null);
@@ -14738,7 +14738,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p2beta1.IImage);
 
                     /** Image content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p2beta1.IImageSource|null);
@@ -14842,25 +14842,25 @@ export namespace google {
                     landmarkingConfidence?: (number|null);
 
                     /** FaceAnnotation joyLikelihood */
-                    joyLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    joyLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation sorrowLikelihood */
-                    sorrowLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    sorrowLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation angerLikelihood */
-                    angerLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    angerLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation surpriseLikelihood */
-                    surpriseLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    surpriseLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation underExposedLikelihood */
-                    underExposedLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    underExposedLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation blurredLikelihood */
-                    blurredLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    blurredLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** FaceAnnotation headwearLikelihood */
-                    headwearLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    headwearLikelihood?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
                 }
 
                 /** Represents a FaceAnnotation. */
@@ -14897,25 +14897,25 @@ export namespace google {
                     public landmarkingConfidence: number;
 
                     /** FaceAnnotation joyLikelihood. */
-                    public joyLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public joyLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation sorrowLikelihood. */
-                    public sorrowLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public sorrowLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation angerLikelihood. */
-                    public angerLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public angerLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation surpriseLikelihood. */
-                    public surpriseLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public surpriseLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation underExposedLikelihood. */
-                    public underExposedLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public underExposedLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation blurredLikelihood. */
-                    public blurredLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public blurredLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** FaceAnnotation headwearLikelihood. */
-                    public headwearLikelihood: google.cloud.vision.v1p2beta1.Likelihood;
+                    public headwearLikelihood: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /**
                      * Creates a new FaceAnnotation instance using the specified properties.
@@ -14994,7 +14994,7 @@ export namespace google {
                     interface ILandmark {
 
                         /** Landmark type */
-                        type?: (google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type|null);
+                        type?: (google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type|null);
 
                         /** Landmark position */
                         position?: (google.cloud.vision.v1p2beta1.IPosition|null);
@@ -15010,7 +15010,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p2beta1.FaceAnnotation.ILandmark);
 
                         /** Landmark type. */
-                        public type: google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type;
+                        public type: (google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p2beta1.FaceAnnotation.Landmark.Type);
 
                         /** Landmark position. */
                         public position?: (google.cloud.vision.v1p2beta1.IPosition|null);
@@ -15229,7 +15229,7 @@ export namespace google {
                     value?: (string|null);
 
                     /** Property uint64Value */
-                    uint64Value?: (number|Long|null);
+                    uint64Value?: (number|Long|string|null);
                 }
 
                 /** Represents a Property. */
@@ -15248,7 +15248,7 @@ export namespace google {
                     public value: string;
 
                     /** Property uint64Value. */
-                    public uint64Value: (number|Long);
+                    public uint64Value: (number|Long|string);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -15463,19 +15463,19 @@ export namespace google {
                 interface ISafeSearchAnnotation {
 
                     /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    adult?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    spoof?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    medical?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation violence */
-                    violence?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    violence?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.vision.v1p2beta1.Likelihood|null);
+                    racy?: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood|null);
                 }
 
                 /** Represents a SafeSearchAnnotation. */
@@ -15488,19 +15488,19 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p2beta1.ISafeSearchAnnotation);
 
                     /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.vision.v1p2beta1.Likelihood;
+                    public adult: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.vision.v1p2beta1.Likelihood;
+                    public spoof: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.vision.v1p2beta1.Likelihood;
+                    public medical: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** SafeSearchAnnotation violence. */
-                    public violence: google.cloud.vision.v1p2beta1.Likelihood;
+                    public violence: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.vision.v1p2beta1.Likelihood;
+                    public racy: (google.cloud.vision.v1p2beta1.Likelihood|keyof typeof google.cloud.vision.v1p2beta1.Likelihood);
 
                     /**
                      * Creates a new SafeSearchAnnotation instance using the specified properties.
@@ -17815,7 +17815,7 @@ export namespace google {
                 interface IOperationMetadata {
 
                     /** OperationMetadata state */
-                    state?: (google.cloud.vision.v1p2beta1.OperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1p2beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p2beta1.OperationMetadata.State|null);
 
                     /** OperationMetadata createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -17834,7 +17834,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p2beta1.IOperationMetadata);
 
                     /** OperationMetadata state. */
-                    public state: google.cloud.vision.v1p2beta1.OperationMetadata.State;
+                    public state: (google.cloud.vision.v1p2beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p2beta1.OperationMetadata.State);
 
                     /** OperationMetadata createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -18523,7 +18523,7 @@ export namespace google {
                     interface IDetectedBreak {
 
                         /** DetectedBreak type */
-                        type?: (google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType|null);
+                        type?: (google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType|null);
 
                         /** DetectedBreak isPrefix */
                         isPrefix?: (boolean|null);
@@ -18539,7 +18539,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p2beta1.TextAnnotation.IDetectedBreak);
 
                         /** DetectedBreak type. */
-                        public type: google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType;
+                        public type: (google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p2beta1.TextAnnotation.DetectedBreak.BreakType);
 
                         /** DetectedBreak isPrefix. */
                         public isPrefix: boolean;
@@ -18852,7 +18852,7 @@ export namespace google {
                     paragraphs?: (google.cloud.vision.v1p2beta1.IParagraph[]|null);
 
                     /** Block blockType */
-                    blockType?: (google.cloud.vision.v1p2beta1.Block.BlockType|null);
+                    blockType?: (google.cloud.vision.v1p2beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p2beta1.Block.BlockType|null);
 
                     /** Block confidence */
                     confidence?: (number|null);
@@ -18877,7 +18877,7 @@ export namespace google {
                     public paragraphs: google.cloud.vision.v1p2beta1.IParagraph[];
 
                     /** Block blockType. */
-                    public blockType: google.cloud.vision.v1p2beta1.Block.BlockType;
+                    public blockType: (google.cloud.vision.v1p2beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p2beta1.Block.BlockType);
 
                     /** Block confidence. */
                     public confidence: number;
@@ -19895,7 +19895,7 @@ export namespace google {
                 interface IFeature {
 
                     /** Feature type */
-                    type?: (google.cloud.vision.v1p3beta1.Feature.Type|null);
+                    type?: (google.cloud.vision.v1p3beta1.Feature.Type|keyof typeof google.cloud.vision.v1p3beta1.Feature.Type|null);
 
                     /** Feature maxResults */
                     maxResults?: (number|null);
@@ -19914,7 +19914,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IFeature);
 
                     /** Feature type. */
-                    public type: google.cloud.vision.v1p3beta1.Feature.Type;
+                    public type: (google.cloud.vision.v1p3beta1.Feature.Type|keyof typeof google.cloud.vision.v1p3beta1.Feature.Type);
 
                     /** Feature maxResults. */
                     public maxResults: number;
@@ -20113,7 +20113,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p3beta1.IImageSource|null);
@@ -20129,7 +20129,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IImage);
 
                     /** Image content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p3beta1.IImageSource|null);
@@ -20233,25 +20233,25 @@ export namespace google {
                     landmarkingConfidence?: (number|null);
 
                     /** FaceAnnotation joyLikelihood */
-                    joyLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    joyLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation sorrowLikelihood */
-                    sorrowLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    sorrowLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation angerLikelihood */
-                    angerLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    angerLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation surpriseLikelihood */
-                    surpriseLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    surpriseLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation underExposedLikelihood */
-                    underExposedLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    underExposedLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation blurredLikelihood */
-                    blurredLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    blurredLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** FaceAnnotation headwearLikelihood */
-                    headwearLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    headwearLikelihood?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
                 }
 
                 /** Represents a FaceAnnotation. */
@@ -20288,25 +20288,25 @@ export namespace google {
                     public landmarkingConfidence: number;
 
                     /** FaceAnnotation joyLikelihood. */
-                    public joyLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public joyLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation sorrowLikelihood. */
-                    public sorrowLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public sorrowLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation angerLikelihood. */
-                    public angerLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public angerLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation surpriseLikelihood. */
-                    public surpriseLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public surpriseLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation underExposedLikelihood. */
-                    public underExposedLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public underExposedLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation blurredLikelihood. */
-                    public blurredLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public blurredLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** FaceAnnotation headwearLikelihood. */
-                    public headwearLikelihood: google.cloud.vision.v1p3beta1.Likelihood;
+                    public headwearLikelihood: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /**
                      * Creates a new FaceAnnotation instance using the specified properties.
@@ -20385,7 +20385,7 @@ export namespace google {
                     interface ILandmark {
 
                         /** Landmark type */
-                        type?: (google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type|null);
+                        type?: (google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type|null);
 
                         /** Landmark position */
                         position?: (google.cloud.vision.v1p3beta1.IPosition|null);
@@ -20401,7 +20401,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p3beta1.FaceAnnotation.ILandmark);
 
                         /** Landmark type. */
-                        public type: google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type;
+                        public type: (google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p3beta1.FaceAnnotation.Landmark.Type);
 
                         /** Landmark position. */
                         public position?: (google.cloud.vision.v1p3beta1.IPosition|null);
@@ -20620,7 +20620,7 @@ export namespace google {
                     value?: (string|null);
 
                     /** Property uint64Value */
-                    uint64Value?: (number|Long|null);
+                    uint64Value?: (number|Long|string|null);
                 }
 
                 /** Represents a Property. */
@@ -20639,7 +20639,7 @@ export namespace google {
                     public value: string;
 
                     /** Property uint64Value. */
-                    public uint64Value: (number|Long);
+                    public uint64Value: (number|Long|string);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -20968,19 +20968,19 @@ export namespace google {
                 interface ISafeSearchAnnotation {
 
                     /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    adult?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    spoof?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    medical?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation violence */
-                    violence?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    violence?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.vision.v1p3beta1.Likelihood|null);
+                    racy?: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood|null);
                 }
 
                 /** Represents a SafeSearchAnnotation. */
@@ -20993,19 +20993,19 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.ISafeSearchAnnotation);
 
                     /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.vision.v1p3beta1.Likelihood;
+                    public adult: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.vision.v1p3beta1.Likelihood;
+                    public spoof: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.vision.v1p3beta1.Likelihood;
+                    public medical: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** SafeSearchAnnotation violence. */
-                    public violence: google.cloud.vision.v1p3beta1.Likelihood;
+                    public violence: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.vision.v1p3beta1.Likelihood;
+                    public racy: (google.cloud.vision.v1p3beta1.Likelihood|keyof typeof google.cloud.vision.v1p3beta1.Likelihood);
 
                     /**
                      * Creates a new SafeSearchAnnotation instance using the specified properties.
@@ -23348,7 +23348,7 @@ export namespace google {
                 interface IOperationMetadata {
 
                     /** OperationMetadata state */
-                    state?: (google.cloud.vision.v1p3beta1.OperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1p3beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p3beta1.OperationMetadata.State|null);
 
                     /** OperationMetadata createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -23367,7 +23367,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IOperationMetadata);
 
                     /** OperationMetadata state. */
-                    public state: google.cloud.vision.v1p3beta1.OperationMetadata.State;
+                    public state: (google.cloud.vision.v1p3beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p3beta1.OperationMetadata.State);
 
                     /** OperationMetadata createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -23945,7 +23945,7 @@ export namespace google {
                     catalogName?: (string|null);
 
                     /** ProductSearchParams category */
-                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
+                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
 
                     /** ProductSearchParams productCategory */
                     productCategory?: (string|null);
@@ -23957,7 +23957,7 @@ export namespace google {
                     boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
 
                     /** ProductSearchParams view */
-                    view?: (google.cloud.vision.v1p3beta1.ProductSearchResultsView|null);
+                    view?: (google.cloud.vision.v1p3beta1.ProductSearchResultsView|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchResultsView|null);
 
                     /** ProductSearchParams productSet */
                     productSet?: (string|null);
@@ -23982,7 +23982,7 @@ export namespace google {
                     public catalogName: string;
 
                     /** ProductSearchParams category. */
-                    public category: google.cloud.vision.v1p3beta1.ProductSearchCategory;
+                    public category: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory);
 
                     /** ProductSearchParams productCategory. */
                     public productCategory: string;
@@ -23994,7 +23994,7 @@ export namespace google {
                     public boundingPoly?: (google.cloud.vision.v1p3beta1.IBoundingPoly|null);
 
                     /** ProductSearchParams view. */
-                    public view: google.cloud.vision.v1p3beta1.ProductSearchResultsView;
+                    public view: (google.cloud.vision.v1p3beta1.ProductSearchResultsView|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchResultsView);
 
                     /** ProductSearchParams productSet. */
                     public productSet: string;
@@ -24080,7 +24080,7 @@ export namespace google {
                 interface IProductSearchResults {
 
                     /** ProductSearchResults category */
-                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
+                    category?: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory|null);
 
                     /** ProductSearchResults productCategory */
                     productCategory?: (string|null);
@@ -24105,7 +24105,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IProductSearchResults);
 
                     /** ProductSearchResults category. */
-                    public category: google.cloud.vision.v1p3beta1.ProductSearchCategory;
+                    public category: (google.cloud.vision.v1p3beta1.ProductSearchCategory|keyof typeof google.cloud.vision.v1p3beta1.ProductSearchCategory);
 
                     /** ProductSearchResults productCategory. */
                     public productCategory: string;
@@ -27642,7 +27642,7 @@ export namespace google {
                 interface IBatchOperationMetadata {
 
                     /** BatchOperationMetadata state */
-                    state?: (google.cloud.vision.v1p3beta1.BatchOperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1p3beta1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1p3beta1.BatchOperationMetadata.State|null);
 
                     /** BatchOperationMetadata submitTime */
                     submitTime?: (google.protobuf.ITimestamp|null);
@@ -27661,7 +27661,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p3beta1.IBatchOperationMetadata);
 
                     /** BatchOperationMetadata state. */
-                    public state: google.cloud.vision.v1p3beta1.BatchOperationMetadata.State;
+                    public state: (google.cloud.vision.v1p3beta1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1p3beta1.BatchOperationMetadata.State);
 
                     /** BatchOperationMetadata submitTime. */
                     public submitTime?: (google.protobuf.ITimestamp|null);
@@ -27950,7 +27950,7 @@ export namespace google {
                     interface IDetectedBreak {
 
                         /** DetectedBreak type */
-                        type?: (google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType|null);
+                        type?: (google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType|null);
 
                         /** DetectedBreak isPrefix */
                         isPrefix?: (boolean|null);
@@ -27966,7 +27966,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p3beta1.TextAnnotation.IDetectedBreak);
 
                         /** DetectedBreak type. */
-                        public type: google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType;
+                        public type: (google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p3beta1.TextAnnotation.DetectedBreak.BreakType);
 
                         /** DetectedBreak isPrefix. */
                         public isPrefix: boolean;
@@ -28279,7 +28279,7 @@ export namespace google {
                     paragraphs?: (google.cloud.vision.v1p3beta1.IParagraph[]|null);
 
                     /** Block blockType */
-                    blockType?: (google.cloud.vision.v1p3beta1.Block.BlockType|null);
+                    blockType?: (google.cloud.vision.v1p3beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p3beta1.Block.BlockType|null);
 
                     /** Block confidence */
                     confidence?: (number|null);
@@ -28304,7 +28304,7 @@ export namespace google {
                     public paragraphs: google.cloud.vision.v1p3beta1.IParagraph[];
 
                     /** Block blockType. */
-                    public blockType: google.cloud.vision.v1p3beta1.Block.BlockType;
+                    public blockType: (google.cloud.vision.v1p3beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p3beta1.Block.BlockType);
 
                     /** Block confidence. */
                     public confidence: number;
@@ -29364,7 +29364,7 @@ export namespace google {
                 interface IFeature {
 
                     /** Feature type */
-                    type?: (google.cloud.vision.v1p4beta1.Feature.Type|null);
+                    type?: (google.cloud.vision.v1p4beta1.Feature.Type|keyof typeof google.cloud.vision.v1p4beta1.Feature.Type|null);
 
                     /** Feature maxResults */
                     maxResults?: (number|null);
@@ -29383,7 +29383,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.IFeature);
 
                     /** Feature type. */
-                    public type: google.cloud.vision.v1p4beta1.Feature.Type;
+                    public type: (google.cloud.vision.v1p4beta1.Feature.Type|keyof typeof google.cloud.vision.v1p4beta1.Feature.Type);
 
                     /** Feature maxResults. */
                     public maxResults: number;
@@ -29582,7 +29582,7 @@ export namespace google {
                 interface IImage {
 
                     /** Image content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** Image source */
                     source?: (google.cloud.vision.v1p4beta1.IImageSource|null);
@@ -29598,7 +29598,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.IImage);
 
                     /** Image content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** Image source. */
                     public source?: (google.cloud.vision.v1p4beta1.IImageSource|null);
@@ -29712,25 +29712,25 @@ export namespace google {
                     landmarkingConfidence?: (number|null);
 
                     /** FaceAnnotation joyLikelihood */
-                    joyLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    joyLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation sorrowLikelihood */
-                    sorrowLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    sorrowLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation angerLikelihood */
-                    angerLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    angerLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation surpriseLikelihood */
-                    surpriseLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    surpriseLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation underExposedLikelihood */
-                    underExposedLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    underExposedLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation blurredLikelihood */
-                    blurredLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    blurredLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation headwearLikelihood */
-                    headwearLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    headwearLikelihood?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** FaceAnnotation recognitionResult */
                     recognitionResult?: (google.cloud.vision.v1p4beta1.IFaceRecognitionResult[]|null);
@@ -29770,25 +29770,25 @@ export namespace google {
                     public landmarkingConfidence: number;
 
                     /** FaceAnnotation joyLikelihood. */
-                    public joyLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public joyLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation sorrowLikelihood. */
-                    public sorrowLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public sorrowLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation angerLikelihood. */
-                    public angerLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public angerLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation surpriseLikelihood. */
-                    public surpriseLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public surpriseLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation underExposedLikelihood. */
-                    public underExposedLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public underExposedLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation blurredLikelihood. */
-                    public blurredLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public blurredLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation headwearLikelihood. */
-                    public headwearLikelihood: google.cloud.vision.v1p4beta1.Likelihood;
+                    public headwearLikelihood: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** FaceAnnotation recognitionResult. */
                     public recognitionResult: google.cloud.vision.v1p4beta1.IFaceRecognitionResult[];
@@ -29870,7 +29870,7 @@ export namespace google {
                     interface ILandmark {
 
                         /** Landmark type */
-                        type?: (google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type|null);
+                        type?: (google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type|null);
 
                         /** Landmark position */
                         position?: (google.cloud.vision.v1p4beta1.IPosition|null);
@@ -29886,7 +29886,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p4beta1.FaceAnnotation.ILandmark);
 
                         /** Landmark type. */
-                        public type: google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type;
+                        public type: (google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type|keyof typeof google.cloud.vision.v1p4beta1.FaceAnnotation.Landmark.Type);
 
                         /** Landmark position. */
                         public position?: (google.cloud.vision.v1p4beta1.IPosition|null);
@@ -30105,7 +30105,7 @@ export namespace google {
                     value?: (string|null);
 
                     /** Property uint64Value */
-                    uint64Value?: (number|Long|null);
+                    uint64Value?: (number|Long|string|null);
                 }
 
                 /** Represents a Property. */
@@ -30124,7 +30124,7 @@ export namespace google {
                     public value: string;
 
                     /** Property uint64Value. */
-                    public uint64Value: (number|Long);
+                    public uint64Value: (number|Long|string);
 
                     /**
                      * Creates a new Property instance using the specified properties.
@@ -30453,19 +30453,19 @@ export namespace google {
                 interface ISafeSearchAnnotation {
 
                     /** SafeSearchAnnotation adult */
-                    adult?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    adult?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation spoof */
-                    spoof?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    spoof?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation medical */
-                    medical?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    medical?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation violence */
-                    violence?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    violence?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
 
                     /** SafeSearchAnnotation racy */
-                    racy?: (google.cloud.vision.v1p4beta1.Likelihood|null);
+                    racy?: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood|null);
                 }
 
                 /** Represents a SafeSearchAnnotation. */
@@ -30478,19 +30478,19 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.ISafeSearchAnnotation);
 
                     /** SafeSearchAnnotation adult. */
-                    public adult: google.cloud.vision.v1p4beta1.Likelihood;
+                    public adult: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** SafeSearchAnnotation spoof. */
-                    public spoof: google.cloud.vision.v1p4beta1.Likelihood;
+                    public spoof: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** SafeSearchAnnotation medical. */
-                    public medical: google.cloud.vision.v1p4beta1.Likelihood;
+                    public medical: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** SafeSearchAnnotation violence. */
-                    public violence: google.cloud.vision.v1p4beta1.Likelihood;
+                    public violence: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /** SafeSearchAnnotation racy. */
-                    public racy: google.cloud.vision.v1p4beta1.Likelihood;
+                    public racy: (google.cloud.vision.v1p4beta1.Likelihood|keyof typeof google.cloud.vision.v1p4beta1.Likelihood);
 
                     /**
                      * Creates a new SafeSearchAnnotation instance using the specified properties.
@@ -32946,7 +32946,7 @@ export namespace google {
                     gcsSource?: (google.cloud.vision.v1p4beta1.IGcsSource|null);
 
                     /** InputConfig content */
-                    content?: (Uint8Array|null);
+                    content?: (Uint8Array|string|null);
 
                     /** InputConfig mimeType */
                     mimeType?: (string|null);
@@ -32965,7 +32965,7 @@ export namespace google {
                     public gcsSource?: (google.cloud.vision.v1p4beta1.IGcsSource|null);
 
                     /** InputConfig content. */
-                    public content: Uint8Array;
+                    public content: (Uint8Array|string);
 
                     /** InputConfig mimeType. */
                     public mimeType: string;
@@ -33321,7 +33321,7 @@ export namespace google {
                 interface IOperationMetadata {
 
                     /** OperationMetadata state */
-                    state?: (google.cloud.vision.v1p4beta1.OperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1p4beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p4beta1.OperationMetadata.State|null);
 
                     /** OperationMetadata createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -33340,7 +33340,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.IOperationMetadata);
 
                     /** OperationMetadata state. */
-                    public state: google.cloud.vision.v1p4beta1.OperationMetadata.State;
+                    public state: (google.cloud.vision.v1p4beta1.OperationMetadata.State|keyof typeof google.cloud.vision.v1p4beta1.OperationMetadata.State);
 
                     /** OperationMetadata createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -37887,7 +37887,7 @@ export namespace google {
                 interface IBatchOperationMetadata {
 
                     /** BatchOperationMetadata state */
-                    state?: (google.cloud.vision.v1p4beta1.BatchOperationMetadata.State|null);
+                    state?: (google.cloud.vision.v1p4beta1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1p4beta1.BatchOperationMetadata.State|null);
 
                     /** BatchOperationMetadata submitTime */
                     submitTime?: (google.protobuf.ITimestamp|null);
@@ -37906,7 +37906,7 @@ export namespace google {
                     constructor(properties?: google.cloud.vision.v1p4beta1.IBatchOperationMetadata);
 
                     /** BatchOperationMetadata state. */
-                    public state: google.cloud.vision.v1p4beta1.BatchOperationMetadata.State;
+                    public state: (google.cloud.vision.v1p4beta1.BatchOperationMetadata.State|keyof typeof google.cloud.vision.v1p4beta1.BatchOperationMetadata.State);
 
                     /** BatchOperationMetadata submitTime. */
                     public submitTime?: (google.protobuf.ITimestamp|null);
@@ -38396,7 +38396,7 @@ export namespace google {
                     interface IDetectedBreak {
 
                         /** DetectedBreak type */
-                        type?: (google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType|null);
+                        type?: (google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType|null);
 
                         /** DetectedBreak isPrefix */
                         isPrefix?: (boolean|null);
@@ -38412,7 +38412,7 @@ export namespace google {
                         constructor(properties?: google.cloud.vision.v1p4beta1.TextAnnotation.IDetectedBreak);
 
                         /** DetectedBreak type. */
-                        public type: google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType;
+                        public type: (google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType|keyof typeof google.cloud.vision.v1p4beta1.TextAnnotation.DetectedBreak.BreakType);
 
                         /** DetectedBreak isPrefix. */
                         public isPrefix: boolean;
@@ -38725,7 +38725,7 @@ export namespace google {
                     paragraphs?: (google.cloud.vision.v1p4beta1.IParagraph[]|null);
 
                     /** Block blockType */
-                    blockType?: (google.cloud.vision.v1p4beta1.Block.BlockType|null);
+                    blockType?: (google.cloud.vision.v1p4beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p4beta1.Block.BlockType|null);
 
                     /** Block confidence */
                     confidence?: (number|null);
@@ -38750,7 +38750,7 @@ export namespace google {
                     public paragraphs: google.cloud.vision.v1p4beta1.IParagraph[];
 
                     /** Block blockType. */
-                    public blockType: google.cloud.vision.v1p4beta1.Block.BlockType;
+                    public blockType: (google.cloud.vision.v1p4beta1.Block.BlockType|keyof typeof google.cloud.vision.v1p4beta1.Block.BlockType);
 
                     /** Block confidence. */
                     public confidence: number;
@@ -40062,7 +40062,7 @@ export namespace google {
             nameField?: (string|null);
 
             /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|null);
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
 
             /** ResourceDescriptor plural */
             plural?: (string|null);
@@ -40090,7 +40090,7 @@ export namespace google {
             public nameField: string;
 
             /** ResourceDescriptor history. */
-            public history: google.api.ResourceDescriptor.History;
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
 
             /** ResourceDescriptor plural. */
             public plural: string;
@@ -40970,10 +40970,10 @@ export namespace google {
             number?: (number|null);
 
             /** FieldDescriptorProto label */
-            label?: (google.protobuf.FieldDescriptorProto.Label|null);
+            label?: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label|null);
 
             /** FieldDescriptorProto type */
-            type?: (google.protobuf.FieldDescriptorProto.Type|null);
+            type?: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type|null);
 
             /** FieldDescriptorProto typeName */
             typeName?: (string|null);
@@ -41010,10 +41010,10 @@ export namespace google {
             public number: number;
 
             /** FieldDescriptorProto label. */
-            public label: google.protobuf.FieldDescriptorProto.Label;
+            public label: (google.protobuf.FieldDescriptorProto.Label|keyof typeof google.protobuf.FieldDescriptorProto.Label);
 
             /** FieldDescriptorProto type. */
-            public type: google.protobuf.FieldDescriptorProto.Type;
+            public type: (google.protobuf.FieldDescriptorProto.Type|keyof typeof google.protobuf.FieldDescriptorProto.Type);
 
             /** FieldDescriptorProto typeName. */
             public typeName: string;
@@ -41788,7 +41788,7 @@ export namespace google {
             javaStringCheckUtf8?: (boolean|null);
 
             /** FileOptions optimizeFor */
-            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|null);
+            optimizeFor?: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode|null);
 
             /** FileOptions goPackage */
             goPackage?: (string|null);
@@ -41864,7 +41864,7 @@ export namespace google {
             public javaStringCheckUtf8: boolean;
 
             /** FileOptions optimizeFor. */
-            public optimizeFor: google.protobuf.FileOptions.OptimizeMode;
+            public optimizeFor: (google.protobuf.FileOptions.OptimizeMode|keyof typeof google.protobuf.FileOptions.OptimizeMode);
 
             /** FileOptions goPackage. */
             public goPackage: string;
@@ -42113,13 +42113,13 @@ export namespace google {
         interface IFieldOptions {
 
             /** FieldOptions ctype */
-            ctype?: (google.protobuf.FieldOptions.CType|null);
+            ctype?: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType|null);
 
             /** FieldOptions packed */
             packed?: (boolean|null);
 
             /** FieldOptions jstype */
-            jstype?: (google.protobuf.FieldOptions.JSType|null);
+            jstype?: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType|null);
 
             /** FieldOptions lazy */
             lazy?: (boolean|null);
@@ -42150,13 +42150,13 @@ export namespace google {
             constructor(properties?: google.protobuf.IFieldOptions);
 
             /** FieldOptions ctype. */
-            public ctype: google.protobuf.FieldOptions.CType;
+            public ctype: (google.protobuf.FieldOptions.CType|keyof typeof google.protobuf.FieldOptions.CType);
 
             /** FieldOptions packed. */
             public packed: boolean;
 
             /** FieldOptions jstype. */
-            public jstype: google.protobuf.FieldOptions.JSType;
+            public jstype: (google.protobuf.FieldOptions.JSType|keyof typeof google.protobuf.FieldOptions.JSType);
 
             /** FieldOptions lazy. */
             public lazy: boolean;
@@ -42655,7 +42655,7 @@ export namespace google {
             deprecated?: (boolean|null);
 
             /** MethodOptions idempotencyLevel */
-            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|null);
+            idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -42683,7 +42683,7 @@ export namespace google {
             public deprecated: boolean;
 
             /** MethodOptions idempotencyLevel. */
-            public idempotencyLevel: google.protobuf.MethodOptions.IdempotencyLevel;
+            public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -42779,16 +42779,16 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (number|Long|string|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|null);
+            stringValue?: (Uint8Array|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -42810,16 +42810,16 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: (number|Long|string);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: (number|Long|string);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: Uint8Array;
+            public stringValue: (Uint8Array|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -43409,7 +43409,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents an Any. */
@@ -43425,7 +43425,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -43502,7 +43502,7 @@ export namespace google {
         interface IDuration {
 
             /** Duration seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Duration nanos */
             nanos?: (number|null);
@@ -43518,7 +43518,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IDuration);
 
             /** Duration seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Duration nanos. */
             public nanos: number;
@@ -43772,7 +43772,7 @@ export namespace google {
         interface ITimestamp {
 
             /** Timestamp seconds */
-            seconds?: (number|Long|null);
+            seconds?: (number|Long|string|null);
 
             /** Timestamp nanos */
             nanos?: (number|null);
@@ -43788,7 +43788,7 @@ export namespace google {
             constructor(properties?: google.protobuf.ITimestamp);
 
             /** Timestamp seconds. */
-            public seconds: (number|Long);
+            public seconds: (number|Long|string);
 
             /** Timestamp nanos. */
             public nanos: number;
@@ -44048,7 +44048,7 @@ export namespace google {
         interface IInt64Value {
 
             /** Int64Value value */
-            value?: (number|Long|null);
+            value?: (number|Long|string|null);
         }
 
         /** Represents an Int64Value. */
@@ -44061,7 +44061,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IInt64Value);
 
             /** Int64Value value. */
-            public value: (number|Long);
+            public value: (number|Long|string);
 
             /**
              * Creates a new Int64Value instance using the specified properties.
@@ -44138,7 +44138,7 @@ export namespace google {
         interface IUInt64Value {
 
             /** UInt64Value value */
-            value?: (number|Long|null);
+            value?: (number|Long|string|null);
         }
 
         /** Represents a UInt64Value. */
@@ -44151,7 +44151,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IUInt64Value);
 
             /** UInt64Value value. */
-            public value: (number|Long);
+            public value: (number|Long|string);
 
             /**
              * Creates a new UInt64Value instance using the specified properties.
@@ -44588,7 +44588,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|null);
+            value?: (Uint8Array|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -44601,7 +44601,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: Uint8Array;
+            public value: (Uint8Array|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
