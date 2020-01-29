@@ -1,19 +1,19 @@
 {
-  "updateTime": "2020-01-24T12:41:24.060995Z",
+  "updateTime": "2020-01-28T22:44:43.779282Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.44.1",
-        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
+        "version": "0.44.3",
+        "dockerImage": "googleapis/artman@sha256:62b8b29acaae54b06a4183aa772e65b106e92d4bc466eb4db07953ab78bdb90c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "9c483584f8fd5a1b862ae07973f4cc7bb3e46648",
+        "internalRef": "292009868"
       }
     },
     {
@@ -99,13 +99,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -145,9 +139,6 @@
     },
     {
       "path": ".kokoro/lint.sh"
-    },
-    {
-      "path": ".kokoro/pre-samples-test.sh"
     },
     {
       "path": ".kokoro/presubmit/node10/common.cfg"
@@ -222,12 +213,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -243,16 +228,7 @@
       "path": "codecov.yaml"
     },
     {
-      "path": "linkinator.config.json"
-    },
-    {
-      "path": "package.json"
-    },
-    {
       "path": "protos/google/cloud/videointelligence/v1/video_intelligence.proto"
-    },
-    {
-      "path": "protos/google/cloud/videointelligence/v1beta1/video_intelligence.proto"
     },
     {
       "path": "protos/google/cloud/videointelligence/v1beta2/video_intelligence.proto"
@@ -279,79 +255,10 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
     },
     {
-      "path": "samples/analyze-streaming-annotation-to-storage.js"
-    },
-    {
-      "path": "samples/analyze-streaming-automl-classification.js"
-    },
-    {
-      "path": "samples/analyze-streaming-labels.js"
-    },
-    {
-      "path": "samples/analyze-streaming-object.js"
-    },
-    {
-      "path": "samples/analyze-streaming-safe-search.js"
-    },
-    {
-      "path": "samples/analyze-streaming-shot-change.js"
-    },
-    {
-      "path": "samples/analyze.js"
-    },
-    {
-      "path": "samples/analyze.v1p2beta1.js"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/resources/cat.mp4"
-    },
-    {
-      "path": "samples/resources/googlework_short.mp4"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-annotation-to-storage.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-automl-classification.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-labels.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-object.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-safe-search.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze-streaming-shot-change.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze.test.js"
-    },
-    {
-      "path": "samples/system-test/analyze.v1p2beta1.test.js"
-    },
-    {
-      "path": "samples/system-test/quickstart.test.js"
-    },
-    {
       "path": "src/browser.js"
-    },
-    {
-      "path": "src/index.js"
     },
     {
       "path": "src/v1/doc/google/cloud/videointelligence/v1/doc_video_intelligence.js"
@@ -498,15 +405,6 @@
       "path": "src/v1p3beta1/video_intelligence_service_proto_list.json"
     },
     {
-      "path": "synth.py"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
-    },
-    {
-      "path": "system-test/video_intelligence_service_smoke_test.js"
-    },
-    {
       "path": "test/gapic-v1.js"
     },
     {
@@ -520,9 +418,6 @@
     },
     {
       "path": "test/gapic-v1p3beta1.js"
-    },
-    {
-      "path": "test/mocha.opts"
     },
     {
       "path": "webpack.config.js"

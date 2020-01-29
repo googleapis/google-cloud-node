@@ -757,13 +757,20 @@
                   },
                   "nested": {
                     "VideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnnotateVideo": {
                           "requestType": "AnnotateVideoRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1beta2/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
@@ -781,7 +788,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -789,11 +799,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1141,13 +1157,20 @@
                   },
                   "nested": {
                     "VideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnnotateVideo": {
                           "requestType": "AnnotateVideoRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
@@ -1165,7 +1188,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -1173,11 +1199,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1417,29 +1449,47 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxAlternatives": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filterProfanity": {
                           "type": "bool",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableAutomaticPunctuation": {
                           "type": "bool",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "audioTracks": {
                           "rule": "repeated",
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1448,7 +1498,10 @@
                         "phrases": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1469,7 +1522,10 @@
                         },
                         "confidence": {
                           "type": "float",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "words": {
                           "rule": "repeated",
@@ -1535,13 +1591,20 @@
                   },
                   "nested": {
                     "VideoIntelligenceService": {
+                      "options": {
+                        "(google.api.default_host)": "videointelligence.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnnotateVideo": {
                           "requestType": "AnnotateVideoRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1p2beta1/videos:annotate",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input_uri,features",
+                            "(google.longrunning.operation_info).response_type": "AnnotateVideoResponse",
+                            "(google.longrunning.operation_info).metadata_type": "AnnotateVideoProgress"
                           }
                         }
                       }
@@ -1559,7 +1622,10 @@
                         "features": {
                           "rule": "repeated",
                           "type": "Feature",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "videoContext": {
                           "type": "VideoContext",
@@ -1567,11 +1633,17 @@
                         },
                         "outputUri": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "locationId": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2067,6 +2139,10 @@
                           "type": "ExplicitContentDetectionConfig",
                           "id": 4
                         },
+                        "faceDetectionConfig": {
+                          "type": "FaceDetectionConfig",
+                          "id": 5
+                        },
                         "speechTranscriptionConfig": {
                           "type": "SpeechTranscriptionConfig",
                           "id": 6
@@ -2074,6 +2150,10 @@
                         "textDetectionConfig": {
                           "type": "TextDetectionConfig",
                           "id": 8
+                        },
+                        "personDetectionConfig": {
+                          "type": "PersonDetectionConfig",
+                          "id": 11
                         },
                         "objectTrackingConfig": {
                           "type": "ObjectTrackingConfig",
@@ -2126,6 +2206,38 @@
                         "model": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "FaceDetectionConfig": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "includeBoundingBoxes": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "includeAttributes": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "PersonDetectionConfig": {
+                      "fields": {
+                        "includeBoundingBoxes": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "includePoseLandmarks": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "includeAttributes": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -2275,6 +2387,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "landmarks": {
+                          "rule": "repeated",
+                          "type": "DetectedLandmark",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2374,6 +2494,44 @@
                         }
                       }
                     },
+                    "DetectedLandmark": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "point": {
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FaceDetectionAnnotation": {
+                      "fields": {
+                        "tracks": {
+                          "rule": "repeated",
+                          "type": "Track",
+                          "id": 3
+                        },
+                        "thumbnail": {
+                          "type": "bytes",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PersonDetectionAnnotation": {
+                      "fields": {
+                        "tracks": {
+                          "rule": "repeated",
+                          "type": "Track",
+                          "id": 1
+                        }
+                      }
+                    },
                     "VideoAnnotationResults": {
                       "fields": {
                         "inputUri": {
@@ -2409,6 +2567,11 @@
                           "type": "LabelAnnotation",
                           "id": 4
                         },
+                        "faceDetectionAnnotations": {
+                          "rule": "repeated",
+                          "type": "FaceDetectionAnnotation",
+                          "id": 13
+                        },
                         "shotAnnotations": {
                           "rule": "repeated",
                           "type": "VideoSegment",
@@ -2437,6 +2600,11 @@
                           "rule": "repeated",
                           "type": "LogoRecognitionAnnotation",
                           "id": 19
+                        },
+                        "personDetectionAnnotations": {
+                          "rule": "repeated",
+                          "type": "PersonDetectionAnnotation",
+                          "id": 20
                         },
                         "celebrityRecognitionAnnotations": {
                           "type": "CelebrityRecognitionAnnotation",
@@ -2928,11 +3096,13 @@
                         "LABEL_DETECTION": 1,
                         "SHOT_CHANGE_DETECTION": 2,
                         "EXPLICIT_CONTENT_DETECTION": 3,
+                        "FACE_DETECTION": 4,
                         "SPEECH_TRANSCRIPTION": 6,
                         "TEXT_DETECTION": 7,
                         "OBJECT_TRACKING": 9,
                         "LOGO_RECOGNITION": 12,
-                        "CELEBRITY_RECOGNITION": 13
+                        "CELEBRITY_RECOGNITION": 13,
+                        "PERSON_DETECTION": 14
                       }
                     },
                     "LabelDetectionMode": {
