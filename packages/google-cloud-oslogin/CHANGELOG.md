@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-os-login/compare/v2.0.0...v2.0.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* update generated proto.json and proto.d.ts ([7a1b082](https://www.github.com/googleapis/nodejs-os-login/commit/7a1b082b0f50df5ccf3e5da8f43319eebc4b842b))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.3.2...v2.0.0) (2020-01-25)
 
 
