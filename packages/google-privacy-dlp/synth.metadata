@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-01-28T01:12:36.738540Z",
+  "updateTime": "2020-01-29T12:20:20.782440Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
-        "internalRef": "291821782"
+        "sha": "cf3b61102ed5f36b827bc82ec39be09525f018c8",
+        "internalRef": "292034635",
+        "log": "cf3b61102ed5f36b827bc82ec39be09525f018c8\n  Fix to protos for v1p1beta1 release of Cloud Security Command Center\n\nPiperOrigin-RevId: 292034635\n\n4e1cfaa7c0fede9e65d64213ca3da1b1255816c0\nUpdate the public proto to support UTF-8 encoded id for CatalogService API, increase the ListCatalogItems deadline to 300s and some minor documentation change\n\nPiperOrigin-RevId: 292030970\n\n9c483584f8fd5a1b862ae07973f4cc7bb3e46648\nasset: add annotations to v1p1beta1\n\nPiperOrigin-RevId: 292009868\n\ne19209fac29731d0baf6d9ac23da1164f7bdca24\nAdd the google.rpc.context.AttributeContext message to the open source\ndirectories.\n\nPiperOrigin-RevId: 291999930\n\nae5662960573f279502bf98a108a35ba1175e782\noslogin API: move file level option on top of the file to avoid protobuf.js bug.\n\nPiperOrigin-RevId: 291990506\n\neba3897fff7c49ed85d3c47fc96fe96e47f6f684\nAdd cc_proto_library and cc_grpc_library targets for Spanner and IAM protos.\n\nPiperOrigin-RevId: 291988651\n\n"
       }
     },
     {
@@ -51,7 +52,13 @@
       "path": ".github/release-please.yml"
     },
     {
+      "path": ".gitignore"
+    },
+    {
       "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -165,6 +172,15 @@
       "path": ".prettierrc"
     },
     {
+      "path": ".readme-partials.yml"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -183,6 +199,9 @@
       "path": "linkinator.config.json"
     },
     {
+      "path": "package.json"
+    },
+    {
       "path": "protos/google/cloud/common_resources.proto"
     },
     {
@@ -192,10 +211,112 @@
       "path": "protos/google/privacy/dlp/v2/storage.proto"
     },
     {
+      "path": "protos/protos.d.ts"
+    },
+    {
+      "path": "protos/protos.js"
+    },
+    {
+      "path": "protos/protos.json"
+    },
+    {
       "path": "renovate.json"
     },
     {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
+      "path": "samples/.gitignore"
+    },
+    {
       "path": "samples/README.md"
+    },
+    {
+      "path": "samples/deid.js"
+    },
+    {
+      "path": "samples/inspect.js"
+    },
+    {
+      "path": "samples/jobs.js"
+    },
+    {
+      "path": "samples/metadata.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/redact.js"
+    },
+    {
+      "path": "samples/resources/accounts.txt"
+    },
+    {
+      "path": "samples/resources/dates.csv"
+    },
+    {
+      "path": "samples/resources/harmless.txt"
+    },
+    {
+      "path": "samples/resources/test.png"
+    },
+    {
+      "path": "samples/resources/test.txt"
+    },
+    {
+      "path": "samples/risk.js"
+    },
+    {
+      "path": "samples/system-test/deid.test.js"
+    },
+    {
+      "path": "samples/system-test/inspect.test.js"
+    },
+    {
+      "path": "samples/system-test/jobs.test.js"
+    },
+    {
+      "path": "samples/system-test/metadata.test.js"
+    },
+    {
+      "path": "samples/system-test/quickstart.test.js"
+    },
+    {
+      "path": "samples/system-test/redact.test.js"
+    },
+    {
+      "path": "samples/system-test/resources/date-shift-context.expected.csv"
+    },
+    {
+      "path": "samples/system-test/resources/redact-multiple-types.expected.png"
+    },
+    {
+      "path": "samples/system-test/resources/redact-single-type.expected.png"
+    },
+    {
+      "path": "samples/system-test/risk.test.js"
+    },
+    {
+      "path": "samples/system-test/templates.test.js"
+    },
+    {
+      "path": "samples/system-test/triggers.test.js"
+    },
+    {
+      "path": "samples/templates.js"
+    },
+    {
+      "path": "samples/triggers.js"
+    },
+    {
+      "path": "src/index.ts"
+    },
+    {
+      "path": "src/service_proto_list.json"
     },
     {
       "path": "src/v2/dlp_service_client.ts"
@@ -208,6 +329,15 @@
     },
     {
       "path": "src/v2/index.ts"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/dlp_service_smoke_test.ts"
     },
     {
       "path": "system-test/fixtures/sample/src/index.js"
