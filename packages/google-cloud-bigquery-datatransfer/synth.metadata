@@ -1,19 +1,13 @@
 {
-  "updateTime": "2020-01-23T23:23:01.946019Z",
+  "updateTime": "2020-01-29T04:07:18.717825Z",
   "sources": [
-    {
-      "generator": {
-        "name": "artman",
-        "version": "0.44.1",
-        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
-      }
-    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26cab8afd19d396b929039dac5d874cf0b5336c",
-        "internalRef": "291240093"
+        "sha": "cf3b61102ed5f36b827bc82ec39be09525f018c8",
+        "internalRef": "292034635",
+        "log": "cf3b61102ed5f36b827bc82ec39be09525f018c8\n  Fix to protos for v1p1beta1 release of Cloud Security Command Center\n\nPiperOrigin-RevId: 292034635\n\n4e1cfaa7c0fede9e65d64213ca3da1b1255816c0\nUpdate the public proto to support UTF-8 encoded id for CatalogService API, increase the ListCatalogItems deadline to 300s and some minor documentation change\n\nPiperOrigin-RevId: 292030970\n\n"
       }
     },
     {
@@ -30,9 +24,8 @@
         "source": "googleapis",
         "apiName": "bigquerydatatransfer",
         "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/bigquery/datatransfer/artman_bigquerydatatransfer.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ],
@@ -188,19 +181,16 @@
       "path": "codecov.yaml"
     },
     {
+      "path": "linkinator.config.json"
+    },
+    {
       "path": "protos/google/cloud/bigquery/datatransfer/v1/datatransfer.proto"
     },
     {
       "path": "protos/google/cloud/bigquery/datatransfer/v1/transfer.proto"
     },
     {
-      "path": "protos/protos.d.ts"
-    },
-    {
-      "path": "protos/protos.js"
-    },
-    {
-      "path": "protos/protos.json"
+      "path": "protos/google/cloud/common_resources.proto"
     },
     {
       "path": "renovate.json"
@@ -209,13 +199,7 @@
       "path": "samples/README.md"
     },
     {
-      "path": "smoke-test/data_transfer_service_smoke_test.js"
-    },
-    {
-      "path": "src/browser.js"
-    },
-    {
-      "path": "src/v1/data_transfer_service_client.js"
+      "path": "src/v1/data_transfer_service_client.ts"
     },
     {
       "path": "src/v1/data_transfer_service_client_config.json"
@@ -224,34 +208,22 @@
       "path": "src/v1/data_transfer_service_proto_list.json"
     },
     {
-      "path": "src/v1/doc/google/cloud/bigquery/datatransfer/v1/doc_datatransfer.js"
+      "path": "system-test/fixtures/sample/src/index.js"
     },
     {
-      "path": "src/v1/doc/google/cloud/bigquery/datatransfer/v1/doc_transfer.js"
+      "path": "system-test/fixtures/sample/src/index.ts"
     },
     {
-      "path": "src/v1/doc/google/protobuf/doc_any.js"
+      "path": "system-test/install.ts"
     },
     {
-      "path": "src/v1/doc/google/protobuf/doc_duration.js"
+      "path": "test/gapic-data_transfer_service-v1.ts"
     },
     {
-      "path": "src/v1/doc/google/protobuf/doc_empty.js"
+      "path": "tsconfig.json"
     },
     {
-      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_struct.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
-    },
-    {
-      "path": "src/v1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "test/gapic-v1.js"
+      "path": "tslint.json"
     },
     {
       "path": "webpack.config.js"

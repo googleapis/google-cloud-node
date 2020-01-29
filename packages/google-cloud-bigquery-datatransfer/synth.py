@@ -5,26 +5,32 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 
 # tasks has two product names, and a poorly named artman yaml
 version = 'v1'
 
-library = gapic.node_library(
+library = gapic.typescript_library(
     'bigquerydatatransfer', version,
-    config_path="/google/cloud/bigquery/datatransfer/"
-                "artman_bigquerydatatransfer.yaml")
+    generator_args={
+            "grpc-service-config": f"google/cloud/bigquery/datatransfer/{version}/bigquerydatatransfer_grpc_service_config.json",
+            "package-name": f"@google-cloud/bigquery-data-transfer"
+            },
+            proto_path=f'/google/cloud/bigquery/datatransfer/{version}',
+            extra_proto_files=['google/cloud/common_resources.proto'],
+            )
 
 # skip index, protos, package.json, and README.md
 s.copy(
     library,
-    excludes=['package.json', 'README.md', 'src/index.js',
-              f'src/{version}/index.js'])
+    excludes=['package.json', 'README.md', 'src/index.ts',
+              f'src/{version}/index.ts'])
 
 # Copy over templated files
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npm', 'compileProtos', 'run'])
