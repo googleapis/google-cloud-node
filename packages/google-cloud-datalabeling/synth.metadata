@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-01-28T20:13:23.060447Z",
+  "updateTime": "2020-01-29T12:17:02.057766Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
-        "internalRef": "291821782"
+        "sha": "cf3b61102ed5f36b827bc82ec39be09525f018c8",
+        "internalRef": "292034635",
+        "log": "cf3b61102ed5f36b827bc82ec39be09525f018c8\n  Fix to protos for v1p1beta1 release of Cloud Security Command Center\n\nPiperOrigin-RevId: 292034635\n\n4e1cfaa7c0fede9e65d64213ca3da1b1255816c0\nUpdate the public proto to support UTF-8 encoded id for CatalogService API, increase the ListCatalogItems deadline to 300s and some minor documentation change\n\nPiperOrigin-RevId: 292030970\n\n9c483584f8fd5a1b862ae07973f4cc7bb3e46648\nasset: add annotations to v1p1beta1\n\nPiperOrigin-RevId: 292009868\n\ne19209fac29731d0baf6d9ac23da1164f7bdca24\nAdd the google.rpc.context.AttributeContext message to the open source\ndirectories.\n\nPiperOrigin-RevId: 291999930\n\nae5662960573f279502bf98a108a35ba1175e782\noslogin API: move file level option on top of the file to avoid protobuf.js bug.\n\nPiperOrigin-RevId: 291990506\n\neba3897fff7c49ed85d3c47fc96fe96e47f6f684\nAdd cc_proto_library and cc_grpc_library targets for Spanner and IAM protos.\n\nPiperOrigin-RevId: 291988651\n\n"
       }
     },
     {
@@ -36,6 +37,12 @@
       "path": ".eslintrc.yml"
     },
     {
+      "path": ".github/CONTRIBUTING.md"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE.md"
+    },
+    {
       "path": ".github/ISSUE_TEMPLATE/bug_report.md"
     },
     {
@@ -51,7 +58,13 @@
       "path": ".github/release-please.yml"
     },
     {
+      "path": ".gitignore"
+    },
+    {
       "path": ".jsdoc.js"
+    },
+    {
+      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -82,6 +95,21 @@
     },
     {
       "path": ".kokoro/continuous/node8/common.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/docs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/lint.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/system-test-grpcjs.cfg"
+    },
+    {
+      "path": ".kokoro/continuous/node8/system-test.cfg"
     },
     {
       "path": ".kokoro/continuous/node8/test.cfg"
@@ -120,6 +148,21 @@
       "path": ".kokoro/presubmit/node8/common.cfg"
     },
     {
+      "path": ".kokoro/presubmit/node8/docs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/lint.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/samples-test.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/system-test-grpcjs.cfg"
+    },
+    {
+      "path": ".kokoro/presubmit/node8/system-test.cfg"
+    },
+    {
       "path": ".kokoro/presubmit/node8/test.cfg"
     },
     {
@@ -130,6 +173,9 @@
     },
     {
       "path": ".kokoro/publish.sh"
+    },
+    {
+      "path": ".kokoro/release/common.cfg"
     },
     {
       "path": ".kokoro/release/docs.cfg"
@@ -165,6 +211,12 @@
       "path": ".prettierrc"
     },
     {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -181,6 +233,9 @@
     },
     {
       "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
     },
     {
       "path": "protos/google/cloud/common_resources.proto"
@@ -228,7 +283,22 @@
       "path": "renovate.json"
     },
     {
+      "path": "samples/.eslintrc.yml"
+    },
+    {
       "path": "samples/README.md"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/test/test.js"
+    },
+    {
+      "path": "src/index.ts"
     },
     {
       "path": "src/v1beta1/data_labeling_service_client.ts"
@@ -240,7 +310,61 @@
       "path": "src/v1beta1/data_labeling_service_proto_list.json"
     },
     {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_annotation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_annotation_spec_set.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_data_labeling_service.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_data_payloads.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_dataset.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_evaluation.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_evaluation_job.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_human_annotation_config.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/cloud/datalabeling/v1beta1/doc_instruction.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_duration.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_empty.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_field_mask.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
+    },
+    {
+      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
+    },
+    {
       "path": "src/v1beta1/index.ts"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
     },
     {
       "path": "system-test/fixtures/sample/src/index.js"

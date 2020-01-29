@@ -26,6 +26,414 @@ export namespace google {
             /** Namespace v1beta1. */
             namespace v1beta1 {
 
+                /** Properties of an ImagePayload. */
+                interface IImagePayload {
+
+                    /** ImagePayload mimeType */
+                    mimeType?: (string|null);
+
+                    /** ImagePayload imageThumbnail */
+                    imageThumbnail?: (Uint8Array|string|null);
+
+                    /** ImagePayload imageUri */
+                    imageUri?: (string|null);
+
+                    /** ImagePayload signedUri */
+                    signedUri?: (string|null);
+                }
+
+                /** Represents an ImagePayload. */
+                class ImagePayload implements IImagePayload {
+
+                    /**
+                     * Constructs a new ImagePayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datalabeling.v1beta1.IImagePayload);
+
+                    /** ImagePayload mimeType. */
+                    public mimeType: string;
+
+                    /** ImagePayload imageThumbnail. */
+                    public imageThumbnail: (Uint8Array|string);
+
+                    /** ImagePayload imageUri. */
+                    public imageUri: string;
+
+                    /** ImagePayload signedUri. */
+                    public signedUri: string;
+
+                    /**
+                     * Creates a new ImagePayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImagePayload instance
+                     */
+                    public static create(properties?: google.cloud.datalabeling.v1beta1.IImagePayload): google.cloud.datalabeling.v1beta1.ImagePayload;
+
+                    /**
+                     * Encodes the specified ImagePayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
+                     * @param message ImagePayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datalabeling.v1beta1.IImagePayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImagePayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
+                     * @param message ImagePayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IImagePayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImagePayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImagePayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.ImagePayload;
+
+                    /**
+                     * Decodes an ImagePayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImagePayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.ImagePayload;
+
+                    /**
+                     * Verifies an ImagePayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImagePayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImagePayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.ImagePayload;
+
+                    /**
+                     * Creates a plain object from an ImagePayload message. Also converts values to other types if specified.
+                     * @param message ImagePayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datalabeling.v1beta1.ImagePayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImagePayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TextPayload. */
+                interface ITextPayload {
+
+                    /** TextPayload textContent */
+                    textContent?: (string|null);
+                }
+
+                /** Represents a TextPayload. */
+                class TextPayload implements ITextPayload {
+
+                    /**
+                     * Constructs a new TextPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datalabeling.v1beta1.ITextPayload);
+
+                    /** TextPayload textContent. */
+                    public textContent: string;
+
+                    /**
+                     * Creates a new TextPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextPayload instance
+                     */
+                    public static create(properties?: google.cloud.datalabeling.v1beta1.ITextPayload): google.cloud.datalabeling.v1beta1.TextPayload;
+
+                    /**
+                     * Encodes the specified TextPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
+                     * @param message TextPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datalabeling.v1beta1.ITextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
+                     * @param message TextPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.ITextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.TextPayload;
+
+                    /**
+                     * Decodes a TextPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.TextPayload;
+
+                    /**
+                     * Verifies a TextPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.TextPayload;
+
+                    /**
+                     * Creates a plain object from a TextPayload message. Also converts values to other types if specified.
+                     * @param message TextPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datalabeling.v1beta1.TextPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a VideoThumbnail. */
+                interface IVideoThumbnail {
+
+                    /** VideoThumbnail thumbnail */
+                    thumbnail?: (Uint8Array|string|null);
+
+                    /** VideoThumbnail timeOffset */
+                    timeOffset?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a VideoThumbnail. */
+                class VideoThumbnail implements IVideoThumbnail {
+
+                    /**
+                     * Constructs a new VideoThumbnail.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datalabeling.v1beta1.IVideoThumbnail);
+
+                    /** VideoThumbnail thumbnail. */
+                    public thumbnail: (Uint8Array|string);
+
+                    /** VideoThumbnail timeOffset. */
+                    public timeOffset?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new VideoThumbnail instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoThumbnail instance
+                     */
+                    public static create(properties?: google.cloud.datalabeling.v1beta1.IVideoThumbnail): google.cloud.datalabeling.v1beta1.VideoThumbnail;
+
+                    /**
+                     * Encodes the specified VideoThumbnail message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
+                     * @param message VideoThumbnail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datalabeling.v1beta1.IVideoThumbnail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoThumbnail message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
+                     * @param message VideoThumbnail message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IVideoThumbnail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoThumbnail message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoThumbnail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.VideoThumbnail;
+
+                    /**
+                     * Decodes a VideoThumbnail message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoThumbnail
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.VideoThumbnail;
+
+                    /**
+                     * Verifies a VideoThumbnail message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoThumbnail message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoThumbnail
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.VideoThumbnail;
+
+                    /**
+                     * Creates a plain object from a VideoThumbnail message. Also converts values to other types if specified.
+                     * @param message VideoThumbnail
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datalabeling.v1beta1.VideoThumbnail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoThumbnail to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a VideoPayload. */
+                interface IVideoPayload {
+
+                    /** VideoPayload mimeType */
+                    mimeType?: (string|null);
+
+                    /** VideoPayload videoUri */
+                    videoUri?: (string|null);
+
+                    /** VideoPayload videoThumbnails */
+                    videoThumbnails?: (google.cloud.datalabeling.v1beta1.IVideoThumbnail[]|null);
+
+                    /** VideoPayload frameRate */
+                    frameRate?: (number|null);
+
+                    /** VideoPayload signedUri */
+                    signedUri?: (string|null);
+                }
+
+                /** Represents a VideoPayload. */
+                class VideoPayload implements IVideoPayload {
+
+                    /**
+                     * Constructs a new VideoPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datalabeling.v1beta1.IVideoPayload);
+
+                    /** VideoPayload mimeType. */
+                    public mimeType: string;
+
+                    /** VideoPayload videoUri. */
+                    public videoUri: string;
+
+                    /** VideoPayload videoThumbnails. */
+                    public videoThumbnails: google.cloud.datalabeling.v1beta1.IVideoThumbnail[];
+
+                    /** VideoPayload frameRate. */
+                    public frameRate: number;
+
+                    /** VideoPayload signedUri. */
+                    public signedUri: string;
+
+                    /**
+                     * Creates a new VideoPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoPayload instance
+                     */
+                    public static create(properties?: google.cloud.datalabeling.v1beta1.IVideoPayload): google.cloud.datalabeling.v1beta1.VideoPayload;
+
+                    /**
+                     * Encodes the specified VideoPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
+                     * @param message VideoPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datalabeling.v1beta1.IVideoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
+                     * @param message VideoPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IVideoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.VideoPayload;
+
+                    /**
+                     * Decodes a VideoPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.VideoPayload;
+
+                    /**
+                     * Verifies a VideoPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.VideoPayload;
+
+                    /**
+                     * Creates a plain object from a VideoPayload message. Also converts values to other types if specified.
+                     * @param message VideoPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datalabeling.v1beta1.VideoPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an AnnotationSpecSet. */
                 interface IAnnotationSpecSet {
 
@@ -2446,414 +2854,6 @@ export namespace google {
 
                     /**
                      * Converts this OperatorMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ImagePayload. */
-                interface IImagePayload {
-
-                    /** ImagePayload mimeType */
-                    mimeType?: (string|null);
-
-                    /** ImagePayload imageThumbnail */
-                    imageThumbnail?: (Uint8Array|string|null);
-
-                    /** ImagePayload imageUri */
-                    imageUri?: (string|null);
-
-                    /** ImagePayload signedUri */
-                    signedUri?: (string|null);
-                }
-
-                /** Represents an ImagePayload. */
-                class ImagePayload implements IImagePayload {
-
-                    /**
-                     * Constructs a new ImagePayload.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datalabeling.v1beta1.IImagePayload);
-
-                    /** ImagePayload mimeType. */
-                    public mimeType: string;
-
-                    /** ImagePayload imageThumbnail. */
-                    public imageThumbnail: (Uint8Array|string);
-
-                    /** ImagePayload imageUri. */
-                    public imageUri: string;
-
-                    /** ImagePayload signedUri. */
-                    public signedUri: string;
-
-                    /**
-                     * Creates a new ImagePayload instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ImagePayload instance
-                     */
-                    public static create(properties?: google.cloud.datalabeling.v1beta1.IImagePayload): google.cloud.datalabeling.v1beta1.ImagePayload;
-
-                    /**
-                     * Encodes the specified ImagePayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
-                     * @param message ImagePayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datalabeling.v1beta1.IImagePayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ImagePayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
-                     * @param message ImagePayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IImagePayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ImagePayload message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ImagePayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.ImagePayload;
-
-                    /**
-                     * Decodes an ImagePayload message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ImagePayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.ImagePayload;
-
-                    /**
-                     * Verifies an ImagePayload message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ImagePayload message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ImagePayload
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.ImagePayload;
-
-                    /**
-                     * Creates a plain object from an ImagePayload message. Also converts values to other types if specified.
-                     * @param message ImagePayload
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datalabeling.v1beta1.ImagePayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ImagePayload to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TextPayload. */
-                interface ITextPayload {
-
-                    /** TextPayload textContent */
-                    textContent?: (string|null);
-                }
-
-                /** Represents a TextPayload. */
-                class TextPayload implements ITextPayload {
-
-                    /**
-                     * Constructs a new TextPayload.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datalabeling.v1beta1.ITextPayload);
-
-                    /** TextPayload textContent. */
-                    public textContent: string;
-
-                    /**
-                     * Creates a new TextPayload instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TextPayload instance
-                     */
-                    public static create(properties?: google.cloud.datalabeling.v1beta1.ITextPayload): google.cloud.datalabeling.v1beta1.TextPayload;
-
-                    /**
-                     * Encodes the specified TextPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
-                     * @param message TextPayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datalabeling.v1beta1.ITextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TextPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
-                     * @param message TextPayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.ITextPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TextPayload message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TextPayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.TextPayload;
-
-                    /**
-                     * Decodes a TextPayload message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TextPayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.TextPayload;
-
-                    /**
-                     * Verifies a TextPayload message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TextPayload message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TextPayload
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.TextPayload;
-
-                    /**
-                     * Creates a plain object from a TextPayload message. Also converts values to other types if specified.
-                     * @param message TextPayload
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datalabeling.v1beta1.TextPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TextPayload to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoThumbnail. */
-                interface IVideoThumbnail {
-
-                    /** VideoThumbnail thumbnail */
-                    thumbnail?: (Uint8Array|string|null);
-
-                    /** VideoThumbnail timeOffset */
-                    timeOffset?: (google.protobuf.IDuration|null);
-                }
-
-                /** Represents a VideoThumbnail. */
-                class VideoThumbnail implements IVideoThumbnail {
-
-                    /**
-                     * Constructs a new VideoThumbnail.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datalabeling.v1beta1.IVideoThumbnail);
-
-                    /** VideoThumbnail thumbnail. */
-                    public thumbnail: (Uint8Array|string);
-
-                    /** VideoThumbnail timeOffset. */
-                    public timeOffset?: (google.protobuf.IDuration|null);
-
-                    /**
-                     * Creates a new VideoThumbnail instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoThumbnail instance
-                     */
-                    public static create(properties?: google.cloud.datalabeling.v1beta1.IVideoThumbnail): google.cloud.datalabeling.v1beta1.VideoThumbnail;
-
-                    /**
-                     * Encodes the specified VideoThumbnail message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
-                     * @param message VideoThumbnail message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datalabeling.v1beta1.IVideoThumbnail, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoThumbnail message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
-                     * @param message VideoThumbnail message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IVideoThumbnail, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoThumbnail message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoThumbnail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.VideoThumbnail;
-
-                    /**
-                     * Decodes a VideoThumbnail message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoThumbnail
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.VideoThumbnail;
-
-                    /**
-                     * Verifies a VideoThumbnail message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoThumbnail message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoThumbnail
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.VideoThumbnail;
-
-                    /**
-                     * Creates a plain object from a VideoThumbnail message. Also converts values to other types if specified.
-                     * @param message VideoThumbnail
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datalabeling.v1beta1.VideoThumbnail, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoThumbnail to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a VideoPayload. */
-                interface IVideoPayload {
-
-                    /** VideoPayload mimeType */
-                    mimeType?: (string|null);
-
-                    /** VideoPayload videoUri */
-                    videoUri?: (string|null);
-
-                    /** VideoPayload videoThumbnails */
-                    videoThumbnails?: (google.cloud.datalabeling.v1beta1.IVideoThumbnail[]|null);
-
-                    /** VideoPayload frameRate */
-                    frameRate?: (number|null);
-
-                    /** VideoPayload signedUri */
-                    signedUri?: (string|null);
-                }
-
-                /** Represents a VideoPayload. */
-                class VideoPayload implements IVideoPayload {
-
-                    /**
-                     * Constructs a new VideoPayload.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datalabeling.v1beta1.IVideoPayload);
-
-                    /** VideoPayload mimeType. */
-                    public mimeType: string;
-
-                    /** VideoPayload videoUri. */
-                    public videoUri: string;
-
-                    /** VideoPayload videoThumbnails. */
-                    public videoThumbnails: google.cloud.datalabeling.v1beta1.IVideoThumbnail[];
-
-                    /** VideoPayload frameRate. */
-                    public frameRate: number;
-
-                    /** VideoPayload signedUri. */
-                    public signedUri: string;
-
-                    /**
-                     * Creates a new VideoPayload instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns VideoPayload instance
-                     */
-                    public static create(properties?: google.cloud.datalabeling.v1beta1.IVideoPayload): google.cloud.datalabeling.v1beta1.VideoPayload;
-
-                    /**
-                     * Encodes the specified VideoPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
-                     * @param message VideoPayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datalabeling.v1beta1.IVideoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified VideoPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
-                     * @param message VideoPayload message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datalabeling.v1beta1.IVideoPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a VideoPayload message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns VideoPayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datalabeling.v1beta1.VideoPayload;
-
-                    /**
-                     * Decodes a VideoPayload message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns VideoPayload
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datalabeling.v1beta1.VideoPayload;
-
-                    /**
-                     * Verifies a VideoPayload message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a VideoPayload message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns VideoPayload
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datalabeling.v1beta1.VideoPayload;
-
-                    /**
-                     * Creates a plain object from a VideoPayload message. Also converts values to other types if specified.
-                     * @param message VideoPayload
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datalabeling.v1beta1.VideoPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this VideoPayload to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
