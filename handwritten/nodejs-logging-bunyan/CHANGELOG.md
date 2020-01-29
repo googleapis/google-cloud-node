@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.2...v2.0.3) (2020-01-24)
+
+
+### Bug Fixes
+
+* **docs:** bump release level to GA ([#378](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/378)) ([2d99634](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/2d99634ef4950bea81c64f1355b59ace3138b63e))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v2.0.1...v2.0.2) (2019-12-05)
 
 
