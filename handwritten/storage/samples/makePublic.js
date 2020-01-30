@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(`gs://${bucketName}/${filename} is now public.`);
   }
 
-  makePublic();
+  makePublic().catch(console.error);
   // [END storage_make_public]
 }
 main(...process.argv.slice(2));

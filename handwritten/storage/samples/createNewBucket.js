@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Bucket ${bucket.name} created.`);
   }
 
-  createBucket();
+  createBucket().catch(console.error);
   // [END storage_create_bucket]
 }
 

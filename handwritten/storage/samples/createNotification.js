@@ -45,7 +45,7 @@ function main(
     console.log('Notification subscription created.');
   }
 
-  createNotification();
+  createNotification().catch(console.error);
   // [END storage_create_notification]
 }
 main(...process.argv.slice(2));

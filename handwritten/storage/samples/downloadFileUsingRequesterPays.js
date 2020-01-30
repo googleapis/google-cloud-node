@@ -65,7 +65,7 @@ function main(
     );
   }
 
-  downloadFileUsingRequesterPays();
+  downloadFileUsingRequesterPays().catch(console.error);
   // [END storage_download_file_requester_pays]
 }
 main(...process.argv.slice(2));

@@ -51,7 +51,7 @@ function main(
     console.log(`Removed user ${userEmail} from file ${filename}.`);
   }
 
-  removeFileOwner();
+  removeFileOwner().catch(console.error);
   // [END storage_remove_file_owner]
 }
 

@@ -45,7 +45,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`Event-based hold was set for ${fileName}.`);
   }
 
-  setEventBasedHold();
+  setEventBasedHold().catch(console.error);
   // [END storage_set_event_based_hold]
 }
 main(...process.argv.slice(2));

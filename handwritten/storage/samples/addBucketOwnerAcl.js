@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', userEmail = 'jdobry@google.com') {
     console.log(`Added user ${userEmail} as an owner on bucket ${bucketName}.`);
   }
 
-  addBucketOwner();
+  addBucketOwner().catch(console.error);
   // [END storage_add_bucket_owner]
 }
 main(...process.argv.slice(2));

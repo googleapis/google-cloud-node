@@ -55,7 +55,7 @@ function main(
     console.log(`Encryption key rotated successfully.`);
   }
 
-  rotateEncryptionKey();
+  rotateEncryptionKey().catch(console.error);
   // [END storage_rotate_encryption_key]
 }
 main(...process.argv.slice(2));

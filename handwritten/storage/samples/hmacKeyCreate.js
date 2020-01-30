@@ -50,7 +50,7 @@ function main(
     }
   }
   // [END storage_create_hmac_key]
-  createHmacKey();
+  createHmacKey().catch(console.error);
 }
 
 main(...process.argv.slice(2));

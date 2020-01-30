@@ -46,7 +46,7 @@ function main(
     );
   }
   // [END storage_delete_hmac_key]
-  deleteHmacKey();
+  deleteHmacKey().catch(console.error);
 }
 
 main(...process.argv.slice(2));

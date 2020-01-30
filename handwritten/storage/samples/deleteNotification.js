@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
     console.log(`Notification ${notificationId} deleted.`);
   }
 
-  deleteNotification();
+  deleteNotification().catch(console.error);
   // [END storage_delete_notification]
 }
 main(...process.argv.slice(2));

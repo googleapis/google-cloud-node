@@ -33,7 +33,7 @@ function main() {
     });
   }
 
-  listBuckets();
+  listBuckets().catch(console.error);
   // [END storage_list_buckets]
 }
 

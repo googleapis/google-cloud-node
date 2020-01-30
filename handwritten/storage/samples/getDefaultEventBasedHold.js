@@ -39,7 +39,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Default event-based hold: ${metadata.defaultEventBasedHold}.`);
   }
 
-  getDefaultEventBasedHold();
+  getDefaultEventBasedHold().catch(console.error);
   // [END storage_get_default_event_based_hold]
 }
 main(...process.argv.slice(2));

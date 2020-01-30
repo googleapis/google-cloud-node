@@ -54,7 +54,7 @@ function main(
     console.log(`${aclObject.role}: ${aclObject.entity}`);
   }
 
-  printFileAclForUser();
+  printFileAclForUser().catch(console.error);
   // [END storage_print_file_acl_for_user]
 }
 main(...process.argv.slice(2));

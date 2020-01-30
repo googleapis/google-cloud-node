@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`Temporary hold was set for ${fileName}.`);
   }
 
-  setTemporarydHold();
+  setTemporarydHold().catch(console.error);
   // [END storage_set_temporary_hold]
 }
 main(...process.argv.slice(2));

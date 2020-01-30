@@ -53,7 +53,7 @@ function main(
     );
   }
 
-  copyFile();
+  copyFile().catch(console.error);
   // [END storage_copy_file]
 }
 main(...process.argv.slice(2));

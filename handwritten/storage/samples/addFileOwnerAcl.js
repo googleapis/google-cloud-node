@@ -48,7 +48,7 @@ function main(
     console.log(`Added user ${userEmail} as an owner on file ${filename}.`);
   }
 
-  addFileOwner();
+  addFileOwner().catch(console.error);
   // [END storage_add_file_owner]
 }
 main(...process.argv.slice(2));

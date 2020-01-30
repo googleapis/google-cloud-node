@@ -43,7 +43,7 @@ function main(bucketName = 'my-bucket') {
     );
   }
 
-  disableRequesterPays();
+  disableRequesterPays().catch(console.error);
   // [END storage_disable_requester_pays]
 }
 main(...process.argv.slice(2));

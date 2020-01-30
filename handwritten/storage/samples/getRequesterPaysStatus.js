@@ -48,7 +48,7 @@ function main(bucketName = 'my-bucket') {
     );
   }
 
-  getRequesterPaysStatus();
+  getRequesterPaysStatus().catch(console.error);
   // [END storage_get_requester_pays_status]
 }
 main(...process.argv.slice(2));

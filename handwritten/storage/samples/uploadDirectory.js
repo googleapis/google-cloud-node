@@ -92,7 +92,7 @@ async function main(bucketName, directoryPath) {
     }
   }
 
-  uploadDirectory();
+  uploadDirectory().catch(console.error);
   // [END upload_directory]
 }
 

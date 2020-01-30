@@ -51,7 +51,7 @@ function main(
     );
   }
 
-  moveFile();
+  moveFile().catch(console.error);
   // [END storage_move_file]
 }
 main(...process.argv.slice(2));

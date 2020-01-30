@@ -51,7 +51,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(`The signed url for ${filename} is ${url}.`);
   }
 
-  generateSignedUrl();
+  generateSignedUrl().catch(console.error);
   // [END storage_generate_signed_url]
 }
 main(...process.argv.slice(2));

@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket') {
     }
   }
 
-  getRetentionPolicy();
+  getRetentionPolicy().catch(console.error);
   // [END storage_get_retention_policy]
 }
 main(...process.argv.slice(2));

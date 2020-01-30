@@ -70,7 +70,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(`Metadata: ${metadata.metadata}`);
   }
 
-  getMetadata();
+  getMetadata().catch(console.error);
   // [END storage_get_metadata]
 }
 main(...process.argv.slice(2));

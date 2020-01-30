@@ -87,7 +87,7 @@ function main(
     console.log(`  Expression: ${expression}`);
   }
 
-  addBucketConditionalBinding();
+  addBucketConditionalBinding().catch(console.error);
   // [END storage_add_bucket_conditional_iam_binding]
 }
 main(...process.argv.slice(2));

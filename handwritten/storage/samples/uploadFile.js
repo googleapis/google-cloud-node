@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', filename = './local/path/to/file.txt') {
     console.log(`${filename} uploaded to ${bucketName}.`);
   }
 
-  uploadFile();
+  uploadFile().catch(console.error);
   // [END storage_upload_file]
 }
 

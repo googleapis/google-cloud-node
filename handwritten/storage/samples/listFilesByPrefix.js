@@ -72,7 +72,7 @@ function main(bucketName = 'my-bucket', prefix = 'test', delimiter = '/') {
     });
   }
 
-  listFilesByPrefix();
+  listFilesByPrefix().catch(console.error);
   // [END storage_list_files_with_prefix]
 }
 main(...process.argv.slice(2));

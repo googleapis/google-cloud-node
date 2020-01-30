@@ -75,7 +75,7 @@ function main(
     });
   }
 
-  removeBucketIamMember();
+  removeBucketIamMember().catch(console.error);
   // [END storage_remove_bucket_iam_member]
 }
 main(...process.argv.slice(2));

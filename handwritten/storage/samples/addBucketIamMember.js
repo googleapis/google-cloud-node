@@ -61,7 +61,7 @@ function main(
     });
   }
 
-  addBucketIamMember();
+  addBucketIamMember().catch(console.error);
   // [END storage_add_bucket_iam_member]
 }
 main(...process.argv.slice(2));

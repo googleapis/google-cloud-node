@@ -49,7 +49,7 @@ function main(
     );
   }
 
-  enableDefaultKMSKey();
+  enableDefaultKMSKey().catch(console.error);
   // [END storage_set_bucket_default_kms_key]
 }
 

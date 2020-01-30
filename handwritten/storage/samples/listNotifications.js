@@ -43,7 +43,7 @@ function main(bucketName = 'my-bucket') {
     });
   }
 
-  listNotifications();
+  listNotifications().catch(console.error);
   // [END storage_list_notifications]
 }
 main(...process.argv.slice(2));

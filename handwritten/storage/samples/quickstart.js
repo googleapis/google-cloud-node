@@ -37,7 +37,7 @@ function main(
     console.log(`Bucket ${bucketName} created.`);
   }
 
-  createBucket();
+  createBucket().catch(console.error);
   // [END storage_quickstart]
 }
 

@@ -48,7 +48,7 @@ function main(
     }
   }
   // [END storage_get_hmac_key]
-  getHmacKey();
+  getHmacKey().catch(console.error);
 }
 
 main(...process.argv.slice(2));

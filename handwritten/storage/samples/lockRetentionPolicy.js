@@ -46,7 +46,7 @@ function main(bucketName = 'my-bucket') {
     return lockedMetadata;
   }
 
-  lockRetentionPolicy();
+  lockRetentionPolicy().catch(console.error);
   // [END storage_lock_retention_policy]
 }
 main(...process.argv.slice(2));

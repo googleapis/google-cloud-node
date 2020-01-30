@@ -39,7 +39,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Bucket ${bucketName} deleted.`);
   }
 
-  deleteBucket();
+  deleteBucket().catch(console.error);
   // [END storage_delete_bucket]
 }
 

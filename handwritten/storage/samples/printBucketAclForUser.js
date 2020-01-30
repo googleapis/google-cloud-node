@@ -46,7 +46,7 @@ function main(bucketName = 'my-bucket', userEmail = 'jdobry@google.com') {
     console.log(`${aclObject.role}: ${aclObject.entity}`);
   }
 
-  printBucketAclForUser();
+  printBucketAclForUser().catch(console.error);
   // [END storage_print_bucket_acl_for_user]
 }
 

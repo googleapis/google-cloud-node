@@ -48,7 +48,7 @@ function main(
     console.log(`${filename} uploaded to ${bucketName} using ${kmsKeyName}.`);
   }
 
-  uploadFileWithKmsKey();
+  uploadFileWithKmsKey().catch(console.error);
   // [END storage_upload_with_kms_key]
 }
 main(...process.argv.slice(2));

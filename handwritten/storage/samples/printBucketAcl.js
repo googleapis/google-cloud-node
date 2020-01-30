@@ -41,7 +41,7 @@ function main(bucketName = 'my-bucket') {
       console.log(`${acl.role}: ${acl.entity}`);
     });
   }
-  printBucketAcl();
+  printBucketAcl().catch(console.error);
   // [END storage_print_bucket_acl]
 }
 

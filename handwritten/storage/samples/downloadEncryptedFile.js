@@ -59,7 +59,7 @@ function main(
     console.log(`File ${srcFilename} downloaded to ${destFilename}.`);
   }
 
-  downloadEncryptedFile();
+  downloadEncryptedFile().catch(console.error);
   // [END storage_download_encrypted_file]
 }
 main(...process.argv.slice(2));

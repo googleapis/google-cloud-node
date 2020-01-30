@@ -54,7 +54,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(`curl '${url}'`);
   }
 
-  generateV4ReadSignedUrl();
+  generateV4ReadSignedUrl().catch(console.error);
   // [END storage_generate_signed_url_v4]
 }
 main(...process.argv.slice(2));

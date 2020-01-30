@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket') {
     }
   }
   // [END storage_get_bucket_metadata]
-  getBucketMetadata();
+  getBucketMetadata().catch(console.error);
 }
 
 main(...process.argv.slice(2));

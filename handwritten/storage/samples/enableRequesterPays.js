@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket') {
     );
   }
 
-  enableRequesterPays();
+  enableRequesterPays().catch(console.error);
   // [END storage_enable_requester_pays]
 }
 main(...process.argv.slice(2));

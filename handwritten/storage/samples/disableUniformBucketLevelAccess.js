@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Uniform bucket-level access was disabled for ${bucketName}.`);
   }
 
-  disableUniformBucketLevelAccess();
+  disableUniformBucketLevelAccess().catch(console.error);
   // [END storage_disable_uniform_bucket_level_access]
 }
 main(...process.argv.slice(2));

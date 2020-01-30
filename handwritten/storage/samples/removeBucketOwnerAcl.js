@@ -42,7 +42,7 @@ function main(bucketName = 'my-bucket', userEmail = 'jdobry@google.com') {
     console.log(`Removed user ${userEmail} from bucket ${bucketName}.`);
   }
 
-  removeBucketOwner();
+  removeBucketOwner().catch(console.error);
 
   // [END storage_remove_bucket_owner]
 }

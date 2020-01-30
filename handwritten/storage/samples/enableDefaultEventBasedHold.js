@@ -45,7 +45,7 @@ function main(bucketName = 'my-bucket') {
     console.log(`Default event-based hold was enabled for ${bucketName}.`);
   }
 
-  enableDefaultEventBasedHold();
+  enableDefaultEventBasedHold().catch(console.error);
   // [END storage_enable_default_event_based_hold]
 }
 main(...process.argv.slice(2));

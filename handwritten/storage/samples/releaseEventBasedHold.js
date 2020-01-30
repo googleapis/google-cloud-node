@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`Event-based hold was released for ${fileName}.`);
   }
 
-  releaseEventBasedHold();
+  releaseEventBasedHold().catch(console.error);
   // [END storage_release_event_based_hold]
 }
 main(...process.argv.slice(2));

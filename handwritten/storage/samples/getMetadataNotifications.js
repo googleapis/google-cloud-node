@@ -52,7 +52,7 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
     console.log(`Kind: ${metadata.kind}`);
   }
 
-  getMetadata();
+  getMetadata().catch(console.error);
   // [END storage_notifications_get_metadata]
 }
 main(...process.argv.slice(2));

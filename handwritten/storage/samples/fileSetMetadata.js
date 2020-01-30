@@ -54,7 +54,7 @@ function main(bucketName = 'my-bucket', filename = 'file.txt') {
     console.log(metadata);
   }
 
-  setFileMetadata();
+  setFileMetadata().catch(console.error);
   // [END storage_set_metadata]
 }
 

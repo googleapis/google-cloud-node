@@ -51,7 +51,7 @@ function main(
     );
   }
 
-  uploadEncryptedFile();
+  uploadEncryptedFile().catch(console.error);
   // [END storage_upload_encrypted_file]
 }
 main(...process.argv.slice(2));

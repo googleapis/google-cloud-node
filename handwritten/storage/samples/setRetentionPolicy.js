@@ -38,7 +38,7 @@ function main(bucketName = 'my-bucket', retentionPeriod = 5) {
     );
   }
 
-  setRetentionPolicy();
+  setRetentionPolicy().catch(console.error);
   // [END storage_set_retention_policy]
 }
 main(...process.argv.slice(2));

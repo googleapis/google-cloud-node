@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     console.log(`gs://${bucketName}/${filename} deleted.`);
   }
 
-  deleteFile();
+  deleteFile().catch(console.error);
   // [END storage_delete_file]
 }
 main(...process.argv.slice(2));

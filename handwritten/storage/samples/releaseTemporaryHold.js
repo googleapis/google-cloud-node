@@ -44,7 +44,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     console.log(`Temporary hold was released for ${fileName}.`);
   }
 
-  releaseTemporaryHold();
+  releaseTemporaryHold().catch(console.error);
   // [END storage_release_temporary_hold]
 }
 main(...process.argv.slice(2));

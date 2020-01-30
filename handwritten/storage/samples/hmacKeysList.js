@@ -44,7 +44,7 @@ function main(projectId = 'serviceAccountProjectId') {
     }
   }
   // [END storage_list_hmac_keys]
-  listHmacKeys();
+  listHmacKeys().catch(console.error);
 }
 
 main(...process.argv.slice(2));

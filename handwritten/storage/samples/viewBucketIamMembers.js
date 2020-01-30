@@ -55,7 +55,7 @@ function main(bucketName = 'my-bucket') {
     }
   }
 
-  viewBucketIamMembers();
+  viewBucketIamMembers().catch(console.error);
   // [END storage_view_bucket_iam_members]
 }
 main(...process.argv.slice(2));

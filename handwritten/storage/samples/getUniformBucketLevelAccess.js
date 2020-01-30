@@ -51,7 +51,7 @@ function main(bucketName = 'my-bucket') {
     }
   }
 
-  getUniformBucketLevelAccess();
+  getUniformBucketLevelAccess().catch(console.error);
 
   // [END storage_get_uniform_bucket_level_access]
 }

@@ -46,7 +46,7 @@ function main(bucketName = 'my-bucket', filename = 'test.txt') {
     });
   }
 
-  printFileAcl();
+  printFileAcl().catch(console.error);
   // [END storage_print_file_acl]
 }
 main(...process.argv.slice(2));
