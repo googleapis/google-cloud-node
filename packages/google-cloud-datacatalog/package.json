@@ -28,7 +28,7 @@
     "google-gax": "^1.7.5"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^7.0.0",
     "@types/node": "^10.0.3",
     "c8": "^7.0.0",
     "chai": "^4.2.0",
