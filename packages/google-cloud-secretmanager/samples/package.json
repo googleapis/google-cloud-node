@@ -14,7 +14,7 @@
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/secret-manager": "^1.1.2"
+    "@google-cloud/secret-manager": "^1.2.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",
