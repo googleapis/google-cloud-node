@@ -3,6 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "setEndpoint.js"
+    "setEndpoint.js",
+    "https://www.tensorflow.org/js"
   ]
 }
