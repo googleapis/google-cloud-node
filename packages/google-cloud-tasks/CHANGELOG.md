@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.7.2](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.1...v1.7.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([58aa504](https://www.github.com/googleapis/nodejs-tasks/commit/58aa504d6d2076a0dc8c08d4c6b2b397f09cb3de))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.0...v1.7.1) (2020-01-09)
 
 
