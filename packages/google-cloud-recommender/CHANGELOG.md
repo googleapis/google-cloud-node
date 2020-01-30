@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-recommender/compare/v2.0.0...v2.0.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([3934bd8](https://www.github.com/googleapis/nodejs-recommender/commit/3934bd8d2aaac6985adb40b0f74b83448015008e))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-recommender/compare/v1.0.0...v2.0.0) (2020-01-22)
 
 
