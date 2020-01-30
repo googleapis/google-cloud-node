@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.4.0...v1.4.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([e832c00](https://www.github.com/googleapis/nodejs-web-risk/commit/e832c00e75ac0600d145509db5473f8787f32a3a))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.3.3...v1.4.0) (2020-01-04)
 
 
