@@ -62,7 +62,7 @@ npm install @google-cloud/asset
 
   async function quickstart() {
     const projectId = await client.getProjectId();
-    const projectResource = client.projectPath(projectId);
+    const projectResource = `projects/${projectId}`;
     // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
     // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
 

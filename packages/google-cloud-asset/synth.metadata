@@ -1,28 +1,24 @@
 {
-  "updateTime": "2020-01-28T12:09:25.073655Z",
+  "updateTime": "2020-01-30T19:19:18.903592Z",
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "0.44.3",
-        "dockerImage": "googleapis/artman@sha256:62b8b29acaae54b06a4183aa772e65b106e92d4bc466eb4db07953ab78bdb90c"
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/nodejs-asset.git",
+        "sha": "603d73dabc4a5979b6b4bec3412b145c9994c8f2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea",
-        "internalRef": "291821782",
-        "log": "8e981acfd9b97ea2f312f11bbaa7b6c16e412dea\nBeta launch for PersonDetection and FaceDetection features.\n\nPiperOrigin-RevId: 291821782\n\n994e067fae3b21e195f7da932b08fff806d70b5d\nasset: add annotations to v1p2beta1\n\nPiperOrigin-RevId: 291815259\n\n244e1d2c89346ca2e0701b39e65552330d68545a\nAdd Playable Locations service\n\nPiperOrigin-RevId: 291806349\n\n909f8f67963daf45dd88d020877fb9029b76788d\nasset: add annotations to v1beta2\n\nPiperOrigin-RevId: 291805301\n\n3c39a1d6e23c1ef63c7fba4019c25e76c40dfe19\nKMS: add file-level message for CryptoKeyPath, it is defined in gapic yaml but not\nin proto files.\n\nPiperOrigin-RevId: 291420695\n\nc6f3f350b8387f8d1b85ed4506f30187ebaaddc3\ncontaineranalysis: update v1beta1 and bazel build with annotations\n\nPiperOrigin-RevId: 291401900\n\n92887d74b44e4e636252b7b8477d0d2570cd82db\nfix: fix the location of grpc config file.\n\nPiperOrigin-RevId: 291396015\n\n"
+        "sha": "3ca2c014e24eb5111c8e7248b1e1eb833977c83d",
+        "internalRef": "292382559",
+        "log": "3ca2c014e24eb5111c8e7248b1e1eb833977c83d\nbazel: Add --flaky_test_attempts=3 argument to prevent CI failures caused by flaky tests\n\nPiperOrigin-RevId: 292382559\n\n9933347c1f677e81e19a844c2ef95bfceaf694fe\nbazel:Integrate latest protoc-java-resource-names-plugin changes (fix for PyYAML dependency in bazel rules)\n\nPiperOrigin-RevId: 292376626\n\nb835ab9d2f62c88561392aa26074c0b849fb0bd3\nasset: v1p2beta1 add client config annotations\n\n* remove unintentionally exposed RPCs\n* remove messages relevant to removed RPCs\n\nPiperOrigin-RevId: 292369593\n\nc1246a29e22b0f98e800a536b5b0da2d933a55f2\nUpdating v1 protos with the latest inline documentation (in comments) and config options. Also adding a per-service .yaml file.\n\nPiperOrigin-RevId: 292310790\n\n"
       }
     },
     {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2019.10.17"
-      }
+      "git": {}
     }
   ],
   "destinations": [
@@ -31,9 +27,8 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/asset/artman_cloudasset_v1beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -41,9 +36,17 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/asset/artman_cloudasset_v1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1p1beta1",
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     },
     {
@@ -51,9 +54,8 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1p2beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/asset/artman_cloudasset_v1p2beta1.yaml"
+        "language": "typescript",
+        "generator": "gapic-generator-typescript"
       }
     }
   ],
@@ -80,13 +82,7 @@
       "path": ".github/release-please.yml"
     },
     {
-      "path": ".gitignore"
-    },
-    {
       "path": ".jsdoc.js"
-    },
-    {
-      "path": ".kokoro/.gitattributes"
     },
     {
       "path": ".kokoro/common.cfg"
@@ -167,9 +163,6 @@
       "path": ".kokoro/publish.sh"
     },
     {
-      "path": ".kokoro/release/common.cfg"
-    },
-    {
       "path": ".kokoro/release/docs.cfg"
     },
     {
@@ -203,12 +196,6 @@
       "path": ".prettierrc"
     },
     {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -227,9 +214,6 @@
       "path": "linkinator.config.json"
     },
     {
-      "path": "package.json"
-    },
-    {
       "path": "protos/google/cloud/asset/v1/asset_service.proto"
     },
     {
@@ -242,10 +226,19 @@
       "path": "protos/google/cloud/asset/v1beta1/assets.proto"
     },
     {
+      "path": "protos/google/cloud/asset/v1p1beta1/asset_service.proto"
+    },
+    {
+      "path": "protos/google/cloud/asset/v1p1beta1/assets.proto"
+    },
+    {
       "path": "protos/google/cloud/asset/v1p2beta1/asset_service.proto"
     },
     {
       "path": "protos/google/cloud/asset/v1p2beta1/assets.proto"
+    },
+    {
+      "path": "protos/google/cloud/common_resources.proto"
     },
     {
       "path": "protos/protos.d.ts"
@@ -260,49 +253,10 @@
       "path": "renovate.json"
     },
     {
-      "path": "samples/.eslintrc.yml"
-    },
-    {
       "path": "samples/README.md"
     },
     {
-      "path": "samples/createFeed.js"
-    },
-    {
-      "path": "samples/deleteFeed.js"
-    },
-    {
-      "path": "samples/exportAssets.js"
-    },
-    {
-      "path": "samples/getBatchAssetHistory.js"
-    },
-    {
-      "path": "samples/getFeed.js"
-    },
-    {
-      "path": "samples/listFeeds.js"
-    },
-    {
-      "path": "samples/package.json"
-    },
-    {
-      "path": "samples/quickstart.js"
-    },
-    {
-      "path": "samples/test/sample.test.js"
-    },
-    {
-      "path": "samples/updateFeed.js"
-    },
-    {
-      "path": "src/browser.js"
-    },
-    {
-      "path": "src/index.js"
-    },
-    {
-      "path": "src/v1/asset_service_client.js"
+      "path": "src/v1/asset_service_client.ts"
     },
     {
       "path": "src/v1/asset_service_client_config.json"
@@ -311,43 +265,10 @@
       "path": "src/v1/asset_service_proto_list.json"
     },
     {
-      "path": "src/v1/doc/google/cloud/asset/v1/doc_asset_service.js"
+      "path": "src/v1/index.ts"
     },
     {
-      "path": "src/v1/doc/google/cloud/asset/v1/doc_assets.js"
-    },
-    {
-      "path": "src/v1/doc/google/iam/v1/doc_policy.js"
-    },
-    {
-      "path": "src/v1/doc/google/longrunning/doc_operations.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_any.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_empty.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_field_mask.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_struct.js"
-    },
-    {
-      "path": "src/v1/doc/google/protobuf/doc_timestamp.js"
-    },
-    {
-      "path": "src/v1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "src/v1/doc/google/type/doc_expr.js"
-    },
-    {
-      "path": "src/v1/index.js"
-    },
-    {
-      "path": "src/v1beta1/asset_service_client.js"
+      "path": "src/v1beta1/asset_service_client.ts"
     },
     {
       "path": "src/v1beta1/asset_service_client_config.json"
@@ -356,37 +277,22 @@
       "path": "src/v1beta1/asset_service_proto_list.json"
     },
     {
-      "path": "src/v1beta1/doc/google/cloud/asset/v1beta1/doc_asset_service.js"
+      "path": "src/v1beta1/index.ts"
     },
     {
-      "path": "src/v1beta1/doc/google/cloud/asset/v1beta1/doc_assets.js"
+      "path": "src/v1p1beta1/asset_service_client.ts"
     },
     {
-      "path": "src/v1beta1/doc/google/iam/v1/doc_policy.js"
+      "path": "src/v1p1beta1/asset_service_client_config.json"
     },
     {
-      "path": "src/v1beta1/doc/google/longrunning/doc_operations.js"
+      "path": "src/v1p1beta1/asset_service_proto_list.json"
     },
     {
-      "path": "src/v1beta1/doc/google/protobuf/doc_any.js"
+      "path": "src/v1p1beta1/index.ts"
     },
     {
-      "path": "src/v1beta1/doc/google/protobuf/doc_struct.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/protobuf/doc_timestamp.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "src/v1beta1/doc/google/type/doc_expr.js"
-    },
-    {
-      "path": "src/v1beta1/index.js"
-    },
-    {
-      "path": "src/v1p2beta1/asset_service_client.js"
+      "path": "src/v1p2beta1/asset_service_client.ts"
     },
     {
       "path": "src/v1p2beta1/asset_service_client_config.json"
@@ -395,64 +301,38 @@
       "path": "src/v1p2beta1/asset_service_proto_list.json"
     },
     {
-      "path": "src/v1p2beta1/doc/google/cloud/asset/v1p2beta1/doc_asset_service.js"
+      "path": "src/v1p2beta1/index.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/cloud/asset/v1p2beta1/doc_assets.js"
+      "path": "system-test/fixtures/sample/src/index.js"
     },
     {
-      "path": "src/v1p2beta1/doc/google/iam/v1/doc_policy.js"
+      "path": "system-test/fixtures/sample/src/index.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/longrunning/doc_operations.js"
+      "path": "system-test/install.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/protobuf/doc_any.js"
+      "path": "test/gapic-asset_service-v1.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/protobuf/doc_empty.js"
+      "path": "test/gapic-asset_service-v1beta1.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/protobuf/doc_field_mask.js"
+      "path": "test/gapic-asset_service-v1p1beta1.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/protobuf/doc_struct.js"
+      "path": "test/gapic-asset_service-v1p2beta1.ts"
     },
     {
-      "path": "src/v1p2beta1/doc/google/protobuf/doc_timestamp.js"
+      "path": "tsconfig.json"
     },
     {
-      "path": "src/v1p2beta1/doc/google/rpc/doc_status.js"
-    },
-    {
-      "path": "src/v1p2beta1/doc/google/type/doc_expr.js"
-    },
-    {
-      "path": "src/v1p2beta1/index.js"
-    },
-    {
-      "path": "synth.metadata"
-    },
-    {
-      "path": "synth.py"
-    },
-    {
-      "path": "system-test/.eslintrc.yml"
-    },
-    {
-      "path": "system-test/no-tests.js"
-    },
-    {
-      "path": "test/gapic-v1.js"
-    },
-    {
-      "path": "test/gapic-v1beta1.js"
-    },
-    {
-      "path": "test/gapic-v1p2beta1.js"
+      "path": "tslint.json"
     },
     {
       "path": "webpack.config.js"
     }
-  ]
+  ],
+  "combinedCommitLog": "Changes in googleapis:\n3ca2c014e24eb5111c8e7248b1e1eb833977c83d\nbazel: Add --flaky_test_attempts=3 argument to prevent CI failures caused by flaky tests\n\nPiperOrigin-RevId: 292382559\n\n9933347c1f677e81e19a844c2ef95bfceaf694fe\nbazel:Integrate latest protoc-java-resource-names-plugin changes (fix for PyYAML dependency in bazel rules)\n\nPiperOrigin-RevId: 292376626\n\nb835ab9d2f62c88561392aa26074c0b849fb0bd3\nasset: v1p2beta1 add client config annotations\n\n* remove unintentionally exposed RPCs\n* remove messages relevant to removed RPCs\n\nPiperOrigin-RevId: 292369593\n\nc1246a29e22b0f98e800a536b5b0da2d933a55f2\nUpdating v1 protos with the latest inline documentation (in comments) and config options. Also adding a per-service .yaml file.\n\nPiperOrigin-RevId: 292310790\n\n"
 }
