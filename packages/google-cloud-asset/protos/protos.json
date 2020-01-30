@@ -8,15 +8,100 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.Asset.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1;asset",
                     "java_multiple_files": true,
-                    "java_outer_classname": "AssetProto",
+                    "java_outer_classname": "AssetServiceProto",
                     "java_package": "com.google.cloud.asset.v1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1",
-                    "cc_enable_arenas": true
+                    "php_namespace": "Google\\Cloud\\Asset\\V1"
                   },
                   "nested": {
+                    "TemporalAsset": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "asset": {
+                          "type": "Asset",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "*"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        },
+                        "iamPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "discoveryDocumentUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "discoveryName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
+                      }
+                    },
                     "AssetService": {
                       "options": {
                         "(google.api.default_host)": "cloudasset.googleapis.com",
@@ -385,7 +470,20 @@
                           }
                         }
                       }
-                    },
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Asset.V1Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetServiceProto",
+                    "java_package": "com.google.cloud.asset.v1beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\V1beta1"
+                  },
+                  "nested": {
                     "TemporalAsset": {
                       "fields": {
                         "window": {
@@ -435,11 +533,6 @@
                         "iamPolicy": {
                           "type": "google.iam.v1.Policy",
                           "id": 4
-                        },
-                        "ancestors": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 10
                         }
                       }
                     },
@@ -470,20 +563,12 @@
                           "id": 6
                         }
                       }
-                    }
-                  }
-                },
-                "v1beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.Asset.V1Beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1beta1;asset",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssetProto",
-                    "java_package": "com.google.cloud.asset.v1beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1beta1"
-                  },
-                  "nested": {
+                    },
                     "AssetService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudasset.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ExportAssets": {
                           "requestType": "ExportAssetsRequest",
@@ -492,7 +577,9 @@
                             "(google.api.http).post": "/v1beta1/{parent=projects/*}:exportAssets",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1beta1/{parent=organizations/*}:exportAssets",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.asset.v1beta1.ExportAssetsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.asset.v1beta1.ExportAssetsRequest"
                           }
                         },
                         "BatchGetAssetsHistory": {
@@ -509,7 +596,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/Asset"
+                          }
                         },
                         "readTime": {
                           "type": "google.protobuf.Timestamp",
@@ -526,7 +617,10 @@
                         },
                         "outputConfig": {
                           "type": "OutputConfig",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -546,7 +640,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/Asset"
+                          }
                         },
                         "assetNames": {
                           "rule": "repeated",
@@ -555,11 +653,17 @@
                         },
                         "contentType": {
                           "type": "ContentType",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "readTimeWindow": {
                           "type": "TimeWindow",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -569,6 +673,573 @@
                           "rule": "repeated",
                           "type": "TemporalAsset",
                           "id": 1
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "oneofs": {
+                        "objectUri": {
+                          "oneof": [
+                            "uri",
+                            "uriPrefix"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uriPrefix": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2
+                      }
+                    }
+                  }
+                },
+                "v1p1beta1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Asset.V1P1Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p1beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetServiceProto",
+                    "java_package": "com.google.cloud.asset.v1p1beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\V1p1beta1"
+                  },
+                  "nested": {
+                    "StandardResourceMetadata": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "additionalAttributes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "IamPolicySearchResult": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "policy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AssetService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudasset.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SearchResources": {
+                          "requestType": "SearchResourcesRequest",
+                          "responseType": "SearchResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/resources:search",
+                            "(google.api.method_signature)": "scope,query,asset_types"
+                          }
+                        },
+                        "SearchIamPolicies": {
+                          "requestType": "SearchIamPoliciesRequest",
+                          "responseType": "SearchIamPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/iamPolicies:search",
+                            "(google.api.method_signature)": "scope,query"
+                          }
+                        },
+                        "SearchAllResources": {
+                          "requestType": "SearchAllResourcesRequest",
+                          "responseType": "SearchAllResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{scope=*/*}/resources:searchAll",
+                            "(google.api.method_signature)": "scope,query,asset_types"
+                          }
+                        },
+                        "SearchAllIamPolicies": {
+                          "requestType": "SearchAllIamPoliciesRequest",
+                          "responseType": "SearchAllIamPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p1beta1/{scope=*/*}/iamPolicies:searchAll",
+                            "(google.api.method_signature)": "scope,query"
+                          }
+                        }
+                      }
+                    },
+                    "SearchResourcesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchResourcesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "StandardResourceMetadata",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchIamPoliciesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchIamPoliciesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "IamPolicySearchResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchAllResourcesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchAllResourcesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "StandardResourceMetadata",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchAllIamPoliciesRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchAllIamPoliciesResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "IamPolicySearchResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1p2beta1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.Asset.V1p2Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "AssetServiceProto",
+                    "java_package": "com.google.cloud.asset.v1p2beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\V1p2Beta1"
+                  },
+                  "nested": {
+                    "TemporalAsset": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "asset": {
+                          "type": "Asset",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        },
+                        "iamPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "discoveryDocumentUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "discoveryName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AssetService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudasset.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateFeed": {
+                          "requestType": "CreateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).post": "/v1p2beta1/{parent=*/*}/feeds",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "GetFeed": {
+                          "requestType": "GetFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).get": "/v1p2beta1/{name=*/*/feeds/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "ListFeeds": {
+                          "requestType": "ListFeedsRequest",
+                          "responseType": "ListFeedsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p2beta1/{parent=*/*}/feeds",
+                            "(google.api.method_signature)": "parent"
+                          }
+                        },
+                        "UpdateFeed": {
+                          "requestType": "UpdateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).patch": "/v1p2beta1/{feed.name=*/*/feeds/*}",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "feed"
+                          }
+                        },
+                        "DeleteFeed": {
+                          "requestType": "DeleteFeedRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1p2beta1/{name=*/*/feeds/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFeedRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feedId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "feed": {
+                          "type": "Feed",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/Feed"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListFeedsResponse": {
+                      "fields": {
+                        "feeds": {
+                          "rule": "repeated",
+                          "type": "Feed",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateFeedRequest": {
+                      "fields": {
+                        "feed": {
+                          "type": "Feed",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/Feed"
+                          }
                         }
                       }
                     },
@@ -602,362 +1273,12 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2
-                      }
-                    },
-                    "TemporalAsset": {
-                      "fields": {
-                        "window": {
-                          "type": "TimeWindow",
-                          "id": 1
-                        },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "asset": {
-                          "type": "Asset",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TimeWindow": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "assetType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "resource": {
-                          "type": "Resource",
-                          "id": 3
-                        },
-                        "iamPolicy": {
-                          "type": "google.iam.v1.Policy",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "Resource": {
-                      "fields": {
-                        "version": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "discoveryDocumentUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "discoveryName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "resourceUrl": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "data": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6
-                        }
-                      }
-                    }
-                  }
-                },
-                "v1p2beta1": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "AssetProto",
-                    "java_package": "com.google.cloud.asset.v1p2beta1",
-                    "php_namespace": "Google\\Cloud\\Asset\\v1p2beta1",
-                    "cc_enable_arenas": true
-                  },
-                  "nested": {
-                    "AssetService": {
-                      "options": {
-                        "(google.api.default_host)": "cloudasset.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "ExportAssets": {
-                          "requestType": "ExportAssetsRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1p2beta1/{parent=*/*}:exportAssets",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "BatchGetAssetsHistory": {
-                          "requestType": "BatchGetAssetsHistoryRequest",
-                          "responseType": "BatchGetAssetsHistoryResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1p2beta1/{parent=*/*}:batchGetAssetsHistory"
-                          }
-                        },
-                        "CreateFeed": {
-                          "requestType": "CreateFeedRequest",
-                          "responseType": "Feed",
-                          "options": {
-                            "(google.api.http).post": "/v1p2beta1/{parent=*/*}/feeds",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "GetFeed": {
-                          "requestType": "GetFeedRequest",
-                          "responseType": "Feed",
-                          "options": {
-                            "(google.api.http).get": "/v1p2beta1/{name=*/*/feeds/*}"
-                          }
-                        },
-                        "ListFeeds": {
-                          "requestType": "ListFeedsRequest",
-                          "responseType": "ListFeedsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1p2beta1/{parent=*/*}/feeds"
-                          }
-                        },
-                        "UpdateFeed": {
-                          "requestType": "UpdateFeedRequest",
-                          "responseType": "Feed",
-                          "options": {
-                            "(google.api.http).patch": "/v1p2beta1/{feed.name=*/*/feeds/*}",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "DeleteFeed": {
-                          "requestType": "DeleteFeedRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1p2beta1/{name=*/*/feeds/*}"
-                          }
-                        }
-                      }
-                    },
-                    "ExportAssetsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "readTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "assetTypes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "contentType": {
-                          "type": "ContentType",
-                          "id": 4
-                        },
-                        "outputConfig": {
-                          "type": "OutputConfig",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ExportAssetsResponse": {
-                      "fields": {
-                        "readTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "outputConfig": {
-                          "type": "OutputConfig",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchGetAssetsHistoryRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "assetNames": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "contentType": {
-                          "type": "ContentType",
-                          "id": 3
-                        },
-                        "readTimeWindow": {
-                          "type": "TimeWindow",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "BatchGetAssetsHistoryResponse": {
-                      "fields": {
-                        "assets": {
-                          "rule": "repeated",
-                          "type": "TemporalAsset",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CreateFeedRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "feedId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "feed": {
-                          "type": "Feed",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "GetFeedRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListFeedsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListFeedsResponse": {
-                      "fields": {
-                        "feeds": {
-                          "rule": "repeated",
-                          "type": "Feed",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateFeedRequest": {
-                      "fields": {
-                        "feed": {
-                          "type": "Feed",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteFeedRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "OutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsDestination",
-                            "bigqueryDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsDestination": {
-                          "type": "GcsDestination",
-                          "id": 1
-                        },
-                        "bigqueryDestination": {
-                          "type": "BigQueryDestination",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsDestination": {
-                      "oneofs": {
-                        "objectUri": {
-                          "oneof": [
-                            "uri",
-                            "uriPrefix"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "uri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "uriPrefix": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BigQueryDestination": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "table": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 3
-                        }
-                      }
-                    },
                     "PubsubDestination": {
                       "fields": {
                         "topic": {
                           "type": "string",
                           "id": 1
                         }
-                      }
-                    },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2,
-                        "IAM_POLICY_NAME": 3,
-                        "ORG_POLICY": 4,
-                        "ACCESS_POLICY": 5
                       }
                     },
                     "FeedOutputConfig": {
@@ -976,10 +1297,18 @@
                       }
                     },
                     "Feed": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Feed",
+                        "(google.api.resource).pattern": "organizations/{organization}/feeds/{feed}",
+                        "(google.api.resource).history": "ORIGINALLY_SINGLE_PATTERN"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "assetNames": {
                           "rule": "repeated",
@@ -997,97 +1326,18 @@
                         },
                         "feedOutputConfig": {
                           "type": "FeedOutputConfig",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
-                    "TemporalAsset": {
-                      "fields": {
-                        "window": {
-                          "type": "TimeWindow",
-                          "id": 1
-                        },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "asset": {
-                          "type": "Asset",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TimeWindow": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "assetType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "resource": {
-                          "type": "Resource",
-                          "id": 3
-                        },
-                        "iamPolicy": {
-                          "type": "google.iam.v1.Policy",
-                          "id": 4
-                        },
-                        "iamPolicyName": {
-                          "type": "bytes",
-                          "id": 5
-                        },
-                        "ancestors": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "Resource": {
-                      "fields": {
-                        "version": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "discoveryDocumentUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "discoveryName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "resourceUrl": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "data": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6
-                        },
-                        "internalData": {
-                          "type": "google.protobuf.Any",
-                          "id": 7
-                        }
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2
                       }
                     }
                   }
@@ -1098,14 +1348,80 @@
         },
         "api": {
           "options": {
+            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1223,72 +1539,6 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
               }
             }
           }

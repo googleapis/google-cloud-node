@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.asset.v1.AssetService": {
+    "google.cloud.asset.v1p1beta1.AssetService": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -20,34 +20,24 @@
         }
       },
       "methods": {
-        "ExportAssets": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "BatchGetAssetsHistory": {
-          "timeout_millis": 60000,
+        "SearchResources": {
+          "timeout_millis": 15000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "CreateFeed": {
-          "retry_codes_name": "non_idempotent",
+        "SearchIamPolicies": {
+          "timeout_millis": 15000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "GetFeed": {
-          "retry_codes_name": "non_idempotent",
+        "SearchAllResources": {
+          "timeout_millis": 15000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "ListFeeds": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "UpdateFeed": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "DeleteFeed": {
-          "retry_codes_name": "non_idempotent",
+        "SearchAllIamPolicies": {
+          "timeout_millis": 15000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         }
       }

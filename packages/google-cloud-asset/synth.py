@@ -20,37 +20,29 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-# run the gapic generator
-gapic = gcp.GAPICGenerator()
-versions = ['v1beta1', 'v1', 'v1p2beta1']
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v1beta1', 'v1', 'v1p1beta1', 'v1p2beta1']
+name = 'asset'
 for version in versions:
-  library = gapic.node_library(
-    'asset',
-    version,
-    config_path=f"artman_cloudasset_{version}.yaml",
-    artman_output_name=f"asset-{version}")
-  s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+    library = gapic.typescript_library(
+        name,
+        proto_path=f'google/cloud/{name}/{version}',
+        generator_args={
+            'grpc-service-config': f'google/cloud/{name}/{version}/cloud{name}_grpc_service_config.json',
+            'package-name': f'@google-cloud/{name}'
+        },
+        extra_proto_files=['google/cloud/common_resources.proto'],
+        version=version)
+    # skip index, protos, package.json, and README.md
+    s.copy(
+        library,
+        excludes=['package.json', 'src/index.ts']
+    )
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
-
-# [START fix-dead-link]
-discovery_url = 'https://www.googleapis.com/discovery/v1/apis/compute/v1/rest'
-s.replace('**/doc/google/cloud/asset/*/doc_assets.js',
-        f'`"{discovery_url}"`',
-        f'[`"{discovery_url}"`]({discovery_url})')
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-# [END fix-dead-link]
-
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])

@@ -26,7 +26,7 @@ async function main(dumpFilePath) {
 
   async function exportAssets() {
     const projectId = await client.getProjectId();
-    const projectResource = client.projectPath(projectId);
+    const projectResource = `projects/${projectId}`;
 
     // TODO(developer): choose the dump file path
     // const dumpFilePath = 'Dump file path, e.g.: gs://<my_bucket>/<my_asset_file>'
