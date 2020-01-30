@@ -13,71 +13,6 @@
                     "java_package": "com.google.cloud.datalabeling.v1beta1"
                   },
                   "nested": {
-                    "ImagePayload": {
-                      "fields": {
-                        "mimeType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "imageThumbnail": {
-                          "type": "bytes",
-                          "id": 2
-                        },
-                        "imageUri": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "signedUri": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "TextPayload": {
-                      "fields": {
-                        "textContent": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VideoThumbnail": {
-                      "fields": {
-                        "thumbnail": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "timeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "VideoPayload": {
-                      "fields": {
-                        "mimeType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "videoUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "videoThumbnails": {
-                          "rule": "repeated",
-                          "type": "VideoThumbnail",
-                          "id": 3
-                        },
-                        "frameRate": {
-                          "type": "float",
-                          "id": 4
-                        },
-                        "signedUri": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
                     "AnnotationSpecSet": {
                       "options": {
                         "(google.api.resource).type": "datalabeling.googleapis.com/AnnotationSpecSet",
@@ -498,6 +433,71 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "ImagePayload": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "imageThumbnail": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "signedUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TextPayload": {
+                      "fields": {
+                        "textContent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VideoThumbnail": {
+                      "fields": {
+                        "thumbnail": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "timeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VideoPayload": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "videoUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "videoThumbnails": {
+                          "rule": "repeated",
+                          "type": "VideoThumbnail",
+                          "id": 3
+                        },
+                        "frameRate": {
+                          "type": "float",
+                          "id": 4
+                        },
+                        "signedUri": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

@@ -66,978 +66,6 @@
                      */
                     var v1beta1 = {};
     
-                    v1beta1.ImagePayload = (function() {
-    
-                        /**
-                         * Properties of an ImagePayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @interface IImagePayload
-                         * @property {string|null} [mimeType] ImagePayload mimeType
-                         * @property {Uint8Array|null} [imageThumbnail] ImagePayload imageThumbnail
-                         * @property {string|null} [imageUri] ImagePayload imageUri
-                         * @property {string|null} [signedUri] ImagePayload signedUri
-                         */
-    
-                        /**
-                         * Constructs a new ImagePayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @classdesc Represents an ImagePayload.
-                         * @implements IImagePayload
-                         * @constructor
-                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload=} [properties] Properties to set
-                         */
-                        function ImagePayload(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ImagePayload mimeType.
-                         * @member {string} mimeType
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @instance
-                         */
-                        ImagePayload.prototype.mimeType = "";
-    
-                        /**
-                         * ImagePayload imageThumbnail.
-                         * @member {Uint8Array} imageThumbnail
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @instance
-                         */
-                        ImagePayload.prototype.imageThumbnail = $util.newBuffer([]);
-    
-                        /**
-                         * ImagePayload imageUri.
-                         * @member {string} imageUri
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @instance
-                         */
-                        ImagePayload.prototype.imageUri = "";
-    
-                        /**
-                         * ImagePayload signedUri.
-                         * @member {string} signedUri
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @instance
-                         */
-                        ImagePayload.prototype.signedUri = "";
-    
-                        /**
-                         * Creates a new ImagePayload instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload=} [properties] Properties to set
-                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload instance
-                         */
-                        ImagePayload.create = function create(properties) {
-                            return new ImagePayload(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ImagePayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload} message ImagePayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImagePayload.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
-                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.imageThumbnail);
-                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageUri);
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.signedUri);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ImagePayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload} message ImagePayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ImagePayload.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ImagePayload message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImagePayload.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.ImagePayload();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.mimeType = reader.string();
-                                    break;
-                                case 2:
-                                    message.imageThumbnail = reader.bytes();
-                                    break;
-                                case 3:
-                                    message.imageUri = reader.string();
-                                    break;
-                                case 4:
-                                    message.signedUri = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ImagePayload message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ImagePayload.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ImagePayload message.
-                         * @function verify
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ImagePayload.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                if (!$util.isString(message.mimeType))
-                                    return "mimeType: string expected";
-                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
-                                if (!(message.imageThumbnail && typeof message.imageThumbnail.length === "number" || $util.isString(message.imageThumbnail)))
-                                    return "imageThumbnail: buffer expected";
-                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
-                                if (!$util.isString(message.imageUri))
-                                    return "imageUri: string expected";
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                if (!$util.isString(message.signedUri))
-                                    return "signedUri: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ImagePayload message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
-                         */
-                        ImagePayload.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.ImagePayload)
-                                return object;
-                            var message = new $root.google.cloud.datalabeling.v1beta1.ImagePayload();
-                            if (object.mimeType != null)
-                                message.mimeType = String(object.mimeType);
-                            if (object.imageThumbnail != null)
-                                if (typeof object.imageThumbnail === "string")
-                                    $util.base64.decode(object.imageThumbnail, message.imageThumbnail = $util.newBuffer($util.base64.length(object.imageThumbnail)), 0);
-                                else if (object.imageThumbnail.length)
-                                    message.imageThumbnail = object.imageThumbnail;
-                            if (object.imageUri != null)
-                                message.imageUri = String(object.imageUri);
-                            if (object.signedUri != null)
-                                message.signedUri = String(object.signedUri);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ImagePayload message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.ImagePayload} message ImagePayload
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ImagePayload.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.mimeType = "";
-                                if (options.bytes === String)
-                                    object.imageThumbnail = "";
-                                else {
-                                    object.imageThumbnail = [];
-                                    if (options.bytes !== Array)
-                                        object.imageThumbnail = $util.newBuffer(object.imageThumbnail);
-                                }
-                                object.imageUri = "";
-                                object.signedUri = "";
-                            }
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                object.mimeType = message.mimeType;
-                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
-                                object.imageThumbnail = options.bytes === String ? $util.base64.encode(message.imageThumbnail, 0, message.imageThumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.imageThumbnail) : message.imageThumbnail;
-                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
-                                object.imageUri = message.imageUri;
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                object.signedUri = message.signedUri;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ImagePayload to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ImagePayload.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return ImagePayload;
-                    })();
-    
-                    v1beta1.TextPayload = (function() {
-    
-                        /**
-                         * Properties of a TextPayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @interface ITextPayload
-                         * @property {string|null} [textContent] TextPayload textContent
-                         */
-    
-                        /**
-                         * Constructs a new TextPayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @classdesc Represents a TextPayload.
-                         * @implements ITextPayload
-                         * @constructor
-                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload=} [properties] Properties to set
-                         */
-                        function TextPayload(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * TextPayload textContent.
-                         * @member {string} textContent
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @instance
-                         */
-                        TextPayload.prototype.textContent = "";
-    
-                        /**
-                         * Creates a new TextPayload instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload=} [properties] Properties to set
-                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload instance
-                         */
-                        TextPayload.create = function create(properties) {
-                            return new TextPayload(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified TextPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload} message TextPayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TextPayload.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.textContent != null && message.hasOwnProperty("textContent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.textContent);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified TextPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload} message TextPayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        TextPayload.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a TextPayload message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TextPayload.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.TextPayload();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.textContent = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a TextPayload message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        TextPayload.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a TextPayload message.
-                         * @function verify
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        TextPayload.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.textContent != null && message.hasOwnProperty("textContent"))
-                                if (!$util.isString(message.textContent))
-                                    return "textContent: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a TextPayload message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
-                         */
-                        TextPayload.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.TextPayload)
-                                return object;
-                            var message = new $root.google.cloud.datalabeling.v1beta1.TextPayload();
-                            if (object.textContent != null)
-                                message.textContent = String(object.textContent);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a TextPayload message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.TextPayload} message TextPayload
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        TextPayload.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.textContent = "";
-                            if (message.textContent != null && message.hasOwnProperty("textContent"))
-                                object.textContent = message.textContent;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this TextPayload to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        TextPayload.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return TextPayload;
-                    })();
-    
-                    v1beta1.VideoThumbnail = (function() {
-    
-                        /**
-                         * Properties of a VideoThumbnail.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @interface IVideoThumbnail
-                         * @property {Uint8Array|null} [thumbnail] VideoThumbnail thumbnail
-                         * @property {google.protobuf.IDuration|null} [timeOffset] VideoThumbnail timeOffset
-                         */
-    
-                        /**
-                         * Constructs a new VideoThumbnail.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @classdesc Represents a VideoThumbnail.
-                         * @implements IVideoThumbnail
-                         * @constructor
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail=} [properties] Properties to set
-                         */
-                        function VideoThumbnail(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoThumbnail thumbnail.
-                         * @member {Uint8Array} thumbnail
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @instance
-                         */
-                        VideoThumbnail.prototype.thumbnail = $util.newBuffer([]);
-    
-                        /**
-                         * VideoThumbnail timeOffset.
-                         * @member {google.protobuf.IDuration|null|undefined} timeOffset
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @instance
-                         */
-                        VideoThumbnail.prototype.timeOffset = null;
-    
-                        /**
-                         * Creates a new VideoThumbnail instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail=} [properties] Properties to set
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail instance
-                         */
-                        VideoThumbnail.create = function create(properties) {
-                            return new VideoThumbnail(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoThumbnail message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail} message VideoThumbnail message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoThumbnail.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.thumbnail);
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                $root.google.protobuf.Duration.encode(message.timeOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoThumbnail message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail} message VideoThumbnail message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoThumbnail.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoThumbnail message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoThumbnail.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.VideoThumbnail();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.thumbnail = reader.bytes();
-                                    break;
-                                case 2:
-                                    message.timeOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoThumbnail message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoThumbnail.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoThumbnail message.
-                         * @function verify
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoThumbnail.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                if (!(message.thumbnail && typeof message.thumbnail.length === "number" || $util.isString(message.thumbnail)))
-                                    return "thumbnail: buffer expected";
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset")) {
-                                var error = $root.google.protobuf.Duration.verify(message.timeOffset);
-                                if (error)
-                                    return "timeOffset." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoThumbnail message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
-                         */
-                        VideoThumbnail.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.VideoThumbnail)
-                                return object;
-                            var message = new $root.google.cloud.datalabeling.v1beta1.VideoThumbnail();
-                            if (object.thumbnail != null)
-                                if (typeof object.thumbnail === "string")
-                                    $util.base64.decode(object.thumbnail, message.thumbnail = $util.newBuffer($util.base64.length(object.thumbnail)), 0);
-                                else if (object.thumbnail.length)
-                                    message.thumbnail = object.thumbnail;
-                            if (object.timeOffset != null) {
-                                if (typeof object.timeOffset !== "object")
-                                    throw TypeError(".google.cloud.datalabeling.v1beta1.VideoThumbnail.timeOffset: object expected");
-                                message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoThumbnail message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.VideoThumbnail} message VideoThumbnail
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoThumbnail.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if (options.bytes === String)
-                                    object.thumbnail = "";
-                                else {
-                                    object.thumbnail = [];
-                                    if (options.bytes !== Array)
-                                        object.thumbnail = $util.newBuffer(object.thumbnail);
-                                }
-                                object.timeOffset = null;
-                            }
-                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
-                                object.thumbnail = options.bytes === String ? $util.base64.encode(message.thumbnail, 0, message.thumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.thumbnail) : message.thumbnail;
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
-                                object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoThumbnail to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoThumbnail.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoThumbnail;
-                    })();
-    
-                    v1beta1.VideoPayload = (function() {
-    
-                        /**
-                         * Properties of a VideoPayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @interface IVideoPayload
-                         * @property {string|null} [mimeType] VideoPayload mimeType
-                         * @property {string|null} [videoUri] VideoPayload videoUri
-                         * @property {Array.<google.cloud.datalabeling.v1beta1.IVideoThumbnail>|null} [videoThumbnails] VideoPayload videoThumbnails
-                         * @property {number|null} [frameRate] VideoPayload frameRate
-                         * @property {string|null} [signedUri] VideoPayload signedUri
-                         */
-    
-                        /**
-                         * Constructs a new VideoPayload.
-                         * @memberof google.cloud.datalabeling.v1beta1
-                         * @classdesc Represents a VideoPayload.
-                         * @implements IVideoPayload
-                         * @constructor
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload=} [properties] Properties to set
-                         */
-                        function VideoPayload(properties) {
-                            this.videoThumbnails = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * VideoPayload mimeType.
-                         * @member {string} mimeType
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         */
-                        VideoPayload.prototype.mimeType = "";
-    
-                        /**
-                         * VideoPayload videoUri.
-                         * @member {string} videoUri
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         */
-                        VideoPayload.prototype.videoUri = "";
-    
-                        /**
-                         * VideoPayload videoThumbnails.
-                         * @member {Array.<google.cloud.datalabeling.v1beta1.IVideoThumbnail>} videoThumbnails
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         */
-                        VideoPayload.prototype.videoThumbnails = $util.emptyArray;
-    
-                        /**
-                         * VideoPayload frameRate.
-                         * @member {number} frameRate
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         */
-                        VideoPayload.prototype.frameRate = 0;
-    
-                        /**
-                         * VideoPayload signedUri.
-                         * @member {string} signedUri
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         */
-                        VideoPayload.prototype.signedUri = "";
-    
-                        /**
-                         * Creates a new VideoPayload instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload=} [properties] Properties to set
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload instance
-                         */
-                        VideoPayload.create = function create(properties) {
-                            return new VideoPayload(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified VideoPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload} message VideoPayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoPayload.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
-                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.videoUri);
-                            if (message.videoThumbnails != null && message.videoThumbnails.length)
-                                for (var i = 0; i < message.videoThumbnails.length; ++i)
-                                    $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.encode(message.videoThumbnails[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
-                                writer.uint32(/* id 4, wireType 5 =*/37).float(message.frameRate);
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.signedUri);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified VideoPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload} message VideoPayload message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        VideoPayload.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a VideoPayload message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoPayload.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.VideoPayload();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.mimeType = reader.string();
-                                    break;
-                                case 2:
-                                    message.videoUri = reader.string();
-                                    break;
-                                case 3:
-                                    if (!(message.videoThumbnails && message.videoThumbnails.length))
-                                        message.videoThumbnails = [];
-                                    message.videoThumbnails.push($root.google.cloud.datalabeling.v1beta1.VideoThumbnail.decode(reader, reader.uint32()));
-                                    break;
-                                case 4:
-                                    message.frameRate = reader.float();
-                                    break;
-                                case 5:
-                                    message.signedUri = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a VideoPayload message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        VideoPayload.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a VideoPayload message.
-                         * @function verify
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        VideoPayload.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                if (!$util.isString(message.mimeType))
-                                    return "mimeType: string expected";
-                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
-                                if (!$util.isString(message.videoUri))
-                                    return "videoUri: string expected";
-                            if (message.videoThumbnails != null && message.hasOwnProperty("videoThumbnails")) {
-                                if (!Array.isArray(message.videoThumbnails))
-                                    return "videoThumbnails: array expected";
-                                for (var i = 0; i < message.videoThumbnails.length; ++i) {
-                                    var error = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.verify(message.videoThumbnails[i]);
-                                    if (error)
-                                        return "videoThumbnails." + error;
-                                }
-                            }
-                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
-                                if (typeof message.frameRate !== "number")
-                                    return "frameRate: number expected";
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                if (!$util.isString(message.signedUri))
-                                    return "signedUri: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a VideoPayload message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
-                         */
-                        VideoPayload.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.VideoPayload)
-                                return object;
-                            var message = new $root.google.cloud.datalabeling.v1beta1.VideoPayload();
-                            if (object.mimeType != null)
-                                message.mimeType = String(object.mimeType);
-                            if (object.videoUri != null)
-                                message.videoUri = String(object.videoUri);
-                            if (object.videoThumbnails) {
-                                if (!Array.isArray(object.videoThumbnails))
-                                    throw TypeError(".google.cloud.datalabeling.v1beta1.VideoPayload.videoThumbnails: array expected");
-                                message.videoThumbnails = [];
-                                for (var i = 0; i < object.videoThumbnails.length; ++i) {
-                                    if (typeof object.videoThumbnails[i] !== "object")
-                                        throw TypeError(".google.cloud.datalabeling.v1beta1.VideoPayload.videoThumbnails: object expected");
-                                    message.videoThumbnails[i] = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.fromObject(object.videoThumbnails[i]);
-                                }
-                            }
-                            if (object.frameRate != null)
-                                message.frameRate = Number(object.frameRate);
-                            if (object.signedUri != null)
-                                message.signedUri = String(object.signedUri);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a VideoPayload message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @static
-                         * @param {google.cloud.datalabeling.v1beta1.VideoPayload} message VideoPayload
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        VideoPayload.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.videoThumbnails = [];
-                            if (options.defaults) {
-                                object.mimeType = "";
-                                object.videoUri = "";
-                                object.frameRate = 0;
-                                object.signedUri = "";
-                            }
-                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
-                                object.mimeType = message.mimeType;
-                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
-                                object.videoUri = message.videoUri;
-                            if (message.videoThumbnails && message.videoThumbnails.length) {
-                                object.videoThumbnails = [];
-                                for (var j = 0; j < message.videoThumbnails.length; ++j)
-                                    object.videoThumbnails[j] = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.toObject(message.videoThumbnails[j], options);
-                            }
-                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
-                                object.frameRate = options.json && !isFinite(message.frameRate) ? String(message.frameRate) : message.frameRate;
-                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
-                                object.signedUri = message.signedUri;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this VideoPayload to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        VideoPayload.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return VideoPayload;
-                    })();
-    
                     v1beta1.AnnotationSpecSet = (function() {
     
                         /**
@@ -6971,6 +5999,978 @@
                         };
     
                         return OperatorMetadata;
+                    })();
+    
+                    v1beta1.ImagePayload = (function() {
+    
+                        /**
+                         * Properties of an ImagePayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @interface IImagePayload
+                         * @property {string|null} [mimeType] ImagePayload mimeType
+                         * @property {Uint8Array|null} [imageThumbnail] ImagePayload imageThumbnail
+                         * @property {string|null} [imageUri] ImagePayload imageUri
+                         * @property {string|null} [signedUri] ImagePayload signedUri
+                         */
+    
+                        /**
+                         * Constructs a new ImagePayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @classdesc Represents an ImagePayload.
+                         * @implements IImagePayload
+                         * @constructor
+                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload=} [properties] Properties to set
+                         */
+                        function ImagePayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImagePayload mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @instance
+                         */
+                        ImagePayload.prototype.mimeType = "";
+    
+                        /**
+                         * ImagePayload imageThumbnail.
+                         * @member {Uint8Array} imageThumbnail
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @instance
+                         */
+                        ImagePayload.prototype.imageThumbnail = $util.newBuffer([]);
+    
+                        /**
+                         * ImagePayload imageUri.
+                         * @member {string} imageUri
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @instance
+                         */
+                        ImagePayload.prototype.imageUri = "";
+    
+                        /**
+                         * ImagePayload signedUri.
+                         * @member {string} signedUri
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @instance
+                         */
+                        ImagePayload.prototype.signedUri = "";
+    
+                        /**
+                         * Creates a new ImagePayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload=} [properties] Properties to set
+                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload instance
+                         */
+                        ImagePayload.create = function create(properties) {
+                            return new ImagePayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImagePayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload} message ImagePayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImagePayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.imageThumbnail);
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.imageUri);
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.signedUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImagePayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.ImagePayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IImagePayload} message ImagePayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImagePayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImagePayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImagePayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.ImagePayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.mimeType = reader.string();
+                                    break;
+                                case 2:
+                                    message.imageThumbnail = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.imageUri = reader.string();
+                                    break;
+                                case 4:
+                                    message.signedUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImagePayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImagePayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImagePayload message.
+                         * @function verify
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImagePayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
+                                if (!(message.imageThumbnail && typeof message.imageThumbnail.length === "number" || $util.isString(message.imageThumbnail)))
+                                    return "imageThumbnail: buffer expected";
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                if (!$util.isString(message.imageUri))
+                                    return "imageUri: string expected";
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                if (!$util.isString(message.signedUri))
+                                    return "signedUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImagePayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datalabeling.v1beta1.ImagePayload} ImagePayload
+                         */
+                        ImagePayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.ImagePayload)
+                                return object;
+                            var message = new $root.google.cloud.datalabeling.v1beta1.ImagePayload();
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.imageThumbnail != null)
+                                if (typeof object.imageThumbnail === "string")
+                                    $util.base64.decode(object.imageThumbnail, message.imageThumbnail = $util.newBuffer($util.base64.length(object.imageThumbnail)), 0);
+                                else if (object.imageThumbnail.length)
+                                    message.imageThumbnail = object.imageThumbnail;
+                            if (object.imageUri != null)
+                                message.imageUri = String(object.imageUri);
+                            if (object.signedUri != null)
+                                message.signedUri = String(object.signedUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImagePayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.ImagePayload} message ImagePayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImagePayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                if (options.bytes === String)
+                                    object.imageThumbnail = "";
+                                else {
+                                    object.imageThumbnail = [];
+                                    if (options.bytes !== Array)
+                                        object.imageThumbnail = $util.newBuffer(object.imageThumbnail);
+                                }
+                                object.imageUri = "";
+                                object.signedUri = "";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.imageThumbnail != null && message.hasOwnProperty("imageThumbnail"))
+                                object.imageThumbnail = options.bytes === String ? $util.base64.encode(message.imageThumbnail, 0, message.imageThumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.imageThumbnail) : message.imageThumbnail;
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                object.imageUri = message.imageUri;
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                object.signedUri = message.signedUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImagePayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datalabeling.v1beta1.ImagePayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImagePayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImagePayload;
+                    })();
+    
+                    v1beta1.TextPayload = (function() {
+    
+                        /**
+                         * Properties of a TextPayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @interface ITextPayload
+                         * @property {string|null} [textContent] TextPayload textContent
+                         */
+    
+                        /**
+                         * Constructs a new TextPayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @classdesc Represents a TextPayload.
+                         * @implements ITextPayload
+                         * @constructor
+                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload=} [properties] Properties to set
+                         */
+                        function TextPayload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TextPayload textContent.
+                         * @member {string} textContent
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @instance
+                         */
+                        TextPayload.prototype.textContent = "";
+    
+                        /**
+                         * Creates a new TextPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload=} [properties] Properties to set
+                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload instance
+                         */
+                        TextPayload.create = function create(properties) {
+                            return new TextPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TextPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload} message TextPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TextPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.textContent != null && message.hasOwnProperty("textContent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.textContent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TextPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.TextPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.ITextPayload} message TextPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TextPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TextPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TextPayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.TextPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.textContent = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TextPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TextPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TextPayload message.
+                         * @function verify
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TextPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.textContent != null && message.hasOwnProperty("textContent"))
+                                if (!$util.isString(message.textContent))
+                                    return "textContent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TextPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datalabeling.v1beta1.TextPayload} TextPayload
+                         */
+                        TextPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.TextPayload)
+                                return object;
+                            var message = new $root.google.cloud.datalabeling.v1beta1.TextPayload();
+                            if (object.textContent != null)
+                                message.textContent = String(object.textContent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TextPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.TextPayload} message TextPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TextPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.textContent = "";
+                            if (message.textContent != null && message.hasOwnProperty("textContent"))
+                                object.textContent = message.textContent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TextPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datalabeling.v1beta1.TextPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TextPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TextPayload;
+                    })();
+    
+                    v1beta1.VideoThumbnail = (function() {
+    
+                        /**
+                         * Properties of a VideoThumbnail.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @interface IVideoThumbnail
+                         * @property {Uint8Array|null} [thumbnail] VideoThumbnail thumbnail
+                         * @property {google.protobuf.IDuration|null} [timeOffset] VideoThumbnail timeOffset
+                         */
+    
+                        /**
+                         * Constructs a new VideoThumbnail.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @classdesc Represents a VideoThumbnail.
+                         * @implements IVideoThumbnail
+                         * @constructor
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail=} [properties] Properties to set
+                         */
+                        function VideoThumbnail(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VideoThumbnail thumbnail.
+                         * @member {Uint8Array} thumbnail
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @instance
+                         */
+                        VideoThumbnail.prototype.thumbnail = $util.newBuffer([]);
+    
+                        /**
+                         * VideoThumbnail timeOffset.
+                         * @member {google.protobuf.IDuration|null|undefined} timeOffset
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @instance
+                         */
+                        VideoThumbnail.prototype.timeOffset = null;
+    
+                        /**
+                         * Creates a new VideoThumbnail instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail=} [properties] Properties to set
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail instance
+                         */
+                        VideoThumbnail.create = function create(properties) {
+                            return new VideoThumbnail(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VideoThumbnail message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail} message VideoThumbnail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoThumbnail.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.thumbnail);
+                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
+                                $root.google.protobuf.Duration.encode(message.timeOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VideoThumbnail message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoThumbnail.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoThumbnail} message VideoThumbnail message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoThumbnail.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VideoThumbnail message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoThumbnail.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.VideoThumbnail();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.thumbnail = reader.bytes();
+                                    break;
+                                case 2:
+                                    message.timeOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VideoThumbnail message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoThumbnail.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VideoThumbnail message.
+                         * @function verify
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VideoThumbnail.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                if (!(message.thumbnail && typeof message.thumbnail.length === "number" || $util.isString(message.thumbnail)))
+                                    return "thumbnail: buffer expected";
+                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset")) {
+                                var error = $root.google.protobuf.Duration.verify(message.timeOffset);
+                                if (error)
+                                    return "timeOffset." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VideoThumbnail message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoThumbnail} VideoThumbnail
+                         */
+                        VideoThumbnail.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.VideoThumbnail)
+                                return object;
+                            var message = new $root.google.cloud.datalabeling.v1beta1.VideoThumbnail();
+                            if (object.thumbnail != null)
+                                if (typeof object.thumbnail === "string")
+                                    $util.base64.decode(object.thumbnail, message.thumbnail = $util.newBuffer($util.base64.length(object.thumbnail)), 0);
+                                else if (object.thumbnail.length)
+                                    message.thumbnail = object.thumbnail;
+                            if (object.timeOffset != null) {
+                                if (typeof object.timeOffset !== "object")
+                                    throw TypeError(".google.cloud.datalabeling.v1beta1.VideoThumbnail.timeOffset: object expected");
+                                message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VideoThumbnail message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.VideoThumbnail} message VideoThumbnail
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VideoThumbnail.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.thumbnail = "";
+                                else {
+                                    object.thumbnail = [];
+                                    if (options.bytes !== Array)
+                                        object.thumbnail = $util.newBuffer(object.thumbnail);
+                                }
+                                object.timeOffset = null;
+                            }
+                            if (message.thumbnail != null && message.hasOwnProperty("thumbnail"))
+                                object.thumbnail = options.bytes === String ? $util.base64.encode(message.thumbnail, 0, message.thumbnail.length) : options.bytes === Array ? Array.prototype.slice.call(message.thumbnail) : message.thumbnail;
+                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset"))
+                                object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VideoThumbnail to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoThumbnail
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VideoThumbnail.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return VideoThumbnail;
+                    })();
+    
+                    v1beta1.VideoPayload = (function() {
+    
+                        /**
+                         * Properties of a VideoPayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @interface IVideoPayload
+                         * @property {string|null} [mimeType] VideoPayload mimeType
+                         * @property {string|null} [videoUri] VideoPayload videoUri
+                         * @property {Array.<google.cloud.datalabeling.v1beta1.IVideoThumbnail>|null} [videoThumbnails] VideoPayload videoThumbnails
+                         * @property {number|null} [frameRate] VideoPayload frameRate
+                         * @property {string|null} [signedUri] VideoPayload signedUri
+                         */
+    
+                        /**
+                         * Constructs a new VideoPayload.
+                         * @memberof google.cloud.datalabeling.v1beta1
+                         * @classdesc Represents a VideoPayload.
+                         * @implements IVideoPayload
+                         * @constructor
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload=} [properties] Properties to set
+                         */
+                        function VideoPayload(properties) {
+                            this.videoThumbnails = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VideoPayload mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         */
+                        VideoPayload.prototype.mimeType = "";
+    
+                        /**
+                         * VideoPayload videoUri.
+                         * @member {string} videoUri
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         */
+                        VideoPayload.prototype.videoUri = "";
+    
+                        /**
+                         * VideoPayload videoThumbnails.
+                         * @member {Array.<google.cloud.datalabeling.v1beta1.IVideoThumbnail>} videoThumbnails
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         */
+                        VideoPayload.prototype.videoThumbnails = $util.emptyArray;
+    
+                        /**
+                         * VideoPayload frameRate.
+                         * @member {number} frameRate
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         */
+                        VideoPayload.prototype.frameRate = 0;
+    
+                        /**
+                         * VideoPayload signedUri.
+                         * @member {string} signedUri
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         */
+                        VideoPayload.prototype.signedUri = "";
+    
+                        /**
+                         * Creates a new VideoPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload=} [properties] Properties to set
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload instance
+                         */
+                        VideoPayload.create = function create(properties) {
+                            return new VideoPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VideoPayload message. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload} message VideoPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.videoUri);
+                            if (message.videoThumbnails != null && message.videoThumbnails.length)
+                                for (var i = 0; i < message.videoThumbnails.length; ++i)
+                                    $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.encode(message.videoThumbnails[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
+                                writer.uint32(/* id 4, wireType 5 =*/37).float(message.frameRate);
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.signedUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VideoPayload message, length delimited. Does not implicitly {@link google.cloud.datalabeling.v1beta1.VideoPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.IVideoPayload} message VideoPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VideoPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoPayload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datalabeling.v1beta1.VideoPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.mimeType = reader.string();
+                                    break;
+                                case 2:
+                                    message.videoUri = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.videoThumbnails && message.videoThumbnails.length))
+                                        message.videoThumbnails = [];
+                                    message.videoThumbnails.push($root.google.cloud.datalabeling.v1beta1.VideoThumbnail.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.frameRate = reader.float();
+                                    break;
+                                case 5:
+                                    message.signedUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VideoPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VideoPayload message.
+                         * @function verify
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VideoPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
+                                if (!$util.isString(message.videoUri))
+                                    return "videoUri: string expected";
+                            if (message.videoThumbnails != null && message.hasOwnProperty("videoThumbnails")) {
+                                if (!Array.isArray(message.videoThumbnails))
+                                    return "videoThumbnails: array expected";
+                                for (var i = 0; i < message.videoThumbnails.length; ++i) {
+                                    var error = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.verify(message.videoThumbnails[i]);
+                                    if (error)
+                                        return "videoThumbnails." + error;
+                                }
+                            }
+                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
+                                if (typeof message.frameRate !== "number")
+                                    return "frameRate: number expected";
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                if (!$util.isString(message.signedUri))
+                                    return "signedUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VideoPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datalabeling.v1beta1.VideoPayload} VideoPayload
+                         */
+                        VideoPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datalabeling.v1beta1.VideoPayload)
+                                return object;
+                            var message = new $root.google.cloud.datalabeling.v1beta1.VideoPayload();
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.videoUri != null)
+                                message.videoUri = String(object.videoUri);
+                            if (object.videoThumbnails) {
+                                if (!Array.isArray(object.videoThumbnails))
+                                    throw TypeError(".google.cloud.datalabeling.v1beta1.VideoPayload.videoThumbnails: array expected");
+                                message.videoThumbnails = [];
+                                for (var i = 0; i < object.videoThumbnails.length; ++i) {
+                                    if (typeof object.videoThumbnails[i] !== "object")
+                                        throw TypeError(".google.cloud.datalabeling.v1beta1.VideoPayload.videoThumbnails: object expected");
+                                    message.videoThumbnails[i] = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.fromObject(object.videoThumbnails[i]);
+                                }
+                            }
+                            if (object.frameRate != null)
+                                message.frameRate = Number(object.frameRate);
+                            if (object.signedUri != null)
+                                message.signedUri = String(object.signedUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VideoPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @static
+                         * @param {google.cloud.datalabeling.v1beta1.VideoPayload} message VideoPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VideoPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.videoThumbnails = [];
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                object.videoUri = "";
+                                object.frameRate = 0;
+                                object.signedUri = "";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.videoUri != null && message.hasOwnProperty("videoUri"))
+                                object.videoUri = message.videoUri;
+                            if (message.videoThumbnails && message.videoThumbnails.length) {
+                                object.videoThumbnails = [];
+                                for (var j = 0; j < message.videoThumbnails.length; ++j)
+                                    object.videoThumbnails[j] = $root.google.cloud.datalabeling.v1beta1.VideoThumbnail.toObject(message.videoThumbnails[j], options);
+                            }
+                            if (message.frameRate != null && message.hasOwnProperty("frameRate"))
+                                object.frameRate = options.json && !isFinite(message.frameRate) ? String(message.frameRate) : message.frameRate;
+                            if (message.signedUri != null && message.hasOwnProperty("signedUri"))
+                                object.signedUri = message.signedUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VideoPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datalabeling.v1beta1.VideoPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VideoPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return VideoPayload;
                     })();
     
                     /**
