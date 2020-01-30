@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.6.1...v2.0.0) (2020-01-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* removes projectPath helper, instead use "projects/${project}".
+
+### Features
+
+* converts library to TypeScript adding v1p1beta1 surface ([#250](https://www.github.com/googleapis/nodejs-asset/issues/250)) ([54c1c48](https://www.github.com/googleapis/nodejs-asset/commit/54c1c48ebe364b665763fe056bd89401d11e020b))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-asset/compare/v1.6.0...v1.6.1) (2020-01-28)
 
 
