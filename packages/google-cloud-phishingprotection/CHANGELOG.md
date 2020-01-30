@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.5.0...v1.5.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([2002577](https://www.github.com/googleapis/nodejs-phishing-protection/commit/2002577d39528d0a817b5788830704f5ef397033))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v1.4.0...v1.5.0) (2020-01-03)
 
 
