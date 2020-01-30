@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.1...v2.3.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([be83dd6](https://www.github.com/googleapis/nodejs-security-center/commit/be83dd689fa51bd1dd0acce63a144e195a1b7688))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.0...v2.3.1) (2020-01-05)
 
 
