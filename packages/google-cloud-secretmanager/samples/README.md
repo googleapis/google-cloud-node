@@ -21,6 +21,8 @@
   * [Enable Secret Version](#enable-secret-version)
   * [Get Secret](#get-secret)
   * [Get Secret Version](#get-secret-version)
+  * [Iam Grant Access](#iam-grant-access)
+  * [Iam Revoke Access](#iam-revoke-access)
   * [List Secret Versions](#list-secret-versions)
   * [List Secrets](#list-secrets)
   * [Quickstart](#quickstart)
@@ -187,6 +189,40 @@ __Usage:__
 
 
 `node samples/getSecretVersion.js`
+
+
+-----
+
+
+
+
+### Iam Grant Access
+
+View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/iamGrantAccess.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/iamGrantAccess.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/iamGrantAccess.js`
+
+
+-----
+
+
+
+
+### Iam Revoke Access
+
+View the [source code](https://github.com/googleapis/nodejs-secret-manager/blob/master/samples/iamRevokeAccess.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-secret-manager&page=editor&open_in_editor=samples/iamRevokeAccess.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/iamRevokeAccess.js`
 
 
 -----

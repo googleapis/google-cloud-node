@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-01-28T22:32:47.936114Z",
+  "updateTime": "2020-01-30T12:32:04.615295Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9c483584f8fd5a1b862ae07973f4cc7bb3e46648",
-        "internalRef": "292009868"
+        "sha": "c1246a29e22b0f98e800a536b5b0da2d933a55f2",
+        "internalRef": "292310790",
+        "log": "c1246a29e22b0f98e800a536b5b0da2d933a55f2\nUpdating v1 protos with the latest inline documentation (in comments) and config options. Also adding a per-service .yaml file.\n\nPiperOrigin-RevId: 292310790\n\nb491d07cadaae7cde5608321f913e5ca1459b32d\nRevert accidental local_repository change\n\nPiperOrigin-RevId: 292245373\n\naf3400a8cb6110025198b59a0f7d018ae3cda700\nUpdate gapic-generator dependency (prebuilt PHP binary support).\n\nPiperOrigin-RevId: 292243997\n\n341fd5690fae36f36cf626ef048fbcf4bbe7cee6\ngrafeas: v1 add resource_definition for the grafeas.io/Project and change references for Project.\n\nPiperOrigin-RevId: 292221998\n\n42e915ec2ece1cd37a590fbcd10aa2c0fb0e5b06\nUpdate the gapic-generator, protoc-java-resource-name-plugin and protoc-docs-plugin to the latest commit.\n\nPiperOrigin-RevId: 292182368\n\nf035f47250675d31492a09f4a7586cfa395520a7\nFix grafeas build and update build.sh script to include gerafeas.\n\nPiperOrigin-RevId: 292168753\n\n26ccb214b7bc4a716032a6266bcb0a9ca55d6dbb\nasset: v1p1beta1 add client config annotations and retry config\n\nPiperOrigin-RevId: 292154210\n\n974ee5c0b5d03e81a50dafcedf41e0efebb5b749\nasset: v1beta1 add client config annotations\n\nPiperOrigin-RevId: 292152573\n\ncf3b61102ed5f36b827bc82ec39be09525f018c8\n  Fix to protos for v1p1beta1 release of Cloud Security Command Center\n\nPiperOrigin-RevId: 292034635\n\n4e1cfaa7c0fede9e65d64213ca3da1b1255816c0\nUpdate the public proto to support UTF-8 encoded id for CatalogService API, increase the ListCatalogItems deadline to 300s and some minor documentation change\n\nPiperOrigin-RevId: 292030970\n\n"
       }
     },
     {
@@ -48,7 +49,13 @@
       "path": ".github/PULL_REQUEST_TEMPLATE.md"
     },
     {
+      "path": ".github/publish.yml"
+    },
+    {
       "path": ".github/release-please.yml"
+    },
+    {
+      "path": ".gitignore"
     },
     {
       "path": ".jsdoc.js"
@@ -165,6 +172,12 @@
       "path": ".prettierrc"
     },
     {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
       "path": "CODE_OF_CONDUCT.md"
     },
     {
@@ -181,6 +194,9 @@
     },
     {
       "path": "linkinator.config.json"
+    },
+    {
+      "path": "package.json"
     },
     {
       "path": "protos/google/cloud/secrets/v1beta1/resources.proto"
@@ -204,6 +220,60 @@
       "path": "samples/README.md"
     },
     {
+      "path": "samples/accessSecretVersion.js"
+    },
+    {
+      "path": "samples/addSecretVersion.js"
+    },
+    {
+      "path": "samples/createSecret.js"
+    },
+    {
+      "path": "samples/deleteSecret.js"
+    },
+    {
+      "path": "samples/destroySecretVersion.js"
+    },
+    {
+      "path": "samples/disableSecretVersion.js"
+    },
+    {
+      "path": "samples/enableSecretVersion.js"
+    },
+    {
+      "path": "samples/getSecret.js"
+    },
+    {
+      "path": "samples/getSecretVersion.js"
+    },
+    {
+      "path": "samples/iamGrantAccess.js"
+    },
+    {
+      "path": "samples/iamRevokeAccess.js"
+    },
+    {
+      "path": "samples/listSecretVersions.js"
+    },
+    {
+      "path": "samples/listSecrets.js"
+    },
+    {
+      "path": "samples/package.json"
+    },
+    {
+      "path": "samples/quickstart.js"
+    },
+    {
+      "path": "samples/test/.eslintrc.yml"
+    },
+    {
+      "path": "samples/test/secretmanager.test.js"
+    },
+    {
+      "path": "samples/updateSecret.js"
+    },
+    {
       "path": "src/index.ts"
     },
     {
@@ -217,6 +287,15 @@
     },
     {
       "path": "src/v1beta1/secret_manager_service_proto_list.json"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "system-test/.eslintrc.yml"
     },
     {
       "path": "system-test/fixtures/sample/src/index.js"
