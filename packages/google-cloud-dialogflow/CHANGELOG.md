@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.1.1...v1.1.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([79bc7bc](https://www.github.com/googleapis/nodejs-dialogflow/commit/79bc7bcd08bc7a786e0d75a55de38b30e0d1a569))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.1.0...v1.1.1) (2020-01-09)
 
 
