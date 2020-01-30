@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.7.1](https://www.github.com/googleapis/nodejs-language/compare/v3.7.0...v3.7.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([#353](https://www.github.com/googleapis/nodejs-language/issues/353)) ([bc20af5](https://www.github.com/googleapis/nodejs-language/commit/bc20af562dd29a0a1b3663e40062e70d07760185))
+
 ## [3.7.0](https://www.github.com/googleapis/nodejs-language/compare/v3.6.3...v3.7.0) (2020-01-03)
 
 
