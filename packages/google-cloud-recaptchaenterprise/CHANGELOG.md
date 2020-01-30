@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [1.5.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.1...v1.5.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([394cfd8](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/394cfd824a655245d1430afd68682b51e99b90d3))
+
 ### [1.5.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.5.0...v1.5.1) (2020-01-09)
 
 
