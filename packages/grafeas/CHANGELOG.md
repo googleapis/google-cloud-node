@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.0...v2.5.1) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([7917d43](https://www.github.com/googleapis/nodejs-grafeas/commit/7917d43c82c6c43d5ef4a3ec99f934fba6f89928))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.4.0...v2.5.0) (2020-01-25)
 
 
