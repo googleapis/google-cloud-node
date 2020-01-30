@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.6.5](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.4...v2.6.5) (2020-01-29)
+
+
+### Bug Fixes
+
+* new proto annotations; .d.ts enums support strings ([#358](https://www.github.com/googleapis/nodejs-video-intelligence/issues/358)) ([fabc337](https://www.github.com/googleapis/nodejs-video-intelligence/commit/fabc337168c70a7cead33e6b782a408d691149b1))
+
 ### [2.6.4](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.6.3...v2.6.4) (2020-01-06)
 
 
