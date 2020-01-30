@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.6.1...v1.7.0) (2020-01-30)
+
+
+### Features
+
+* bump release level to GA ([#257](https://www.github.com/googleapis/nodejs-iot/issues/257)) ([aeb5ff6](https://www.github.com/googleapis/nodejs-iot/commit/aeb5ff6f0e9dc01f68c41d7cf7eeda770ee4d35e))
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([629e2ed](https://www.github.com/googleapis/nodejs-iot/commit/629e2edcf7a693e156ca2a144615c2b5a4daa4ee))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-iot/compare/v1.6.0...v1.6.1) (2020-01-09)
 
 
