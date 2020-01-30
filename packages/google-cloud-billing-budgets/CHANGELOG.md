@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.1...v1.0.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* fixed resource helper functions; enum, bytes, and Long types now accept strings ([#21](https://www.github.com/googleapis/nodejs-billing-budgets/issues/21)) ([0162076](https://www.github.com/googleapis/nodejs-billing-budgets/commit/01620765e328b323caa52ad7544d0293d856e767))
+* improve doc headers and timeouts ([#14](https://www.github.com/googleapis/nodejs-billing-budgets/issues/14)) ([ea0e1bb](https://www.github.com/googleapis/nodejs-billing-budgets/commit/ea0e1bb70ab346e8a858e0f602c9ba7b4932e5ba))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v1.0.0...v1.0.1) (2020-01-14)
 
 
