@@ -7,7 +7,9 @@
             "go_package": "google.golang.org/genproto/googleapis/grafeas/v1;grafeas",
             "java_multiple_files": true,
             "java_package": "io.grafeas.v1",
-            "objc_class_prefix": "GRA"
+            "objc_class_prefix": "GRA",
+            "(google.api.resource_definition).type": "grafeas.io/Project",
+            "(google.api.resource_definition).pattern": "projects/{project}"
           },
           "nested": {
             "NoteKind": {
@@ -1413,7 +1415,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "filter": {
@@ -1462,7 +1464,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "occurrence": {
@@ -1528,7 +1530,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "filter": {
@@ -1577,7 +1579,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "noteId": {
@@ -1663,7 +1665,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "notes": {
@@ -1692,7 +1694,7 @@
                   "id": 1,
                   "options": {
                     "(google.api.field_behavior)": "REQUIRED",
-                    "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                    "(google.api.resource_reference).type": "grafeas.io/Project"
                   }
                 },
                 "occurrences": {
