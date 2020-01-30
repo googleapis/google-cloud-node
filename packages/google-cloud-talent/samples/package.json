@@ -15,7 +15,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/talent": "^1.7.0"
+    "@google-cloud/talent": "^1.7.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

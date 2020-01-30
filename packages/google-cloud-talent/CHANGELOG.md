@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.7.0...v1.7.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([15f03b7](https://www.github.com/googleapis/nodejs-talent/commit/15f03b7fce125422207467fbb40e21f9054fa75e))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.6.2...v1.7.0) (2020-01-28)
 
 
