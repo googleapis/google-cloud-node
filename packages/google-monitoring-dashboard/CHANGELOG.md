@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.0.1...v1.0.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([beecd33](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/beecd3387117e9d52b845f938000a8284ed8212f))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v1.0.0...v1.0.1) (2020-01-09)
 
 
