@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.1...v1.3.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([64538fe](https://www.github.com/googleapis/nodejs-cloudbuild/commit/64538fe21aae6430f8f3e1ec6604b286bd890535))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v1.3.0...v1.3.1) (2020-01-06)
 
 
