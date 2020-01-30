@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.4.1...v1.5.0) (2020-01-30)
+
+
+### Features
+
+* bump release level to GA ([#101](https://www.github.com/googleapis/nodejs-web-risk/issues/101)) ([a3ee7c4](https://www.github.com/googleapis/nodejs-web-risk/commit/a3ee7c4eaae0864360c3c46eaa97ddb3ae3f692b))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.4.0...v1.4.1) (2020-01-28)
 
 
