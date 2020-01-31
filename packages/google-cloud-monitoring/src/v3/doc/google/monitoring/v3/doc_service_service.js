@@ -19,7 +19,7 @@
  * The `CreateService` request.
  *
  * @property {string} parent
- *   Resource name of the parent workspace.
+ *   Required. Resource name of the parent workspace.
  *   Of the form `projects/{project_id}`.
  *
  * @property {string} serviceId
@@ -27,7 +27,7 @@
  *   generated instead. Must match the pattern [a-z0-9\-]+
  *
  * @property {Object} service
- *   The `Service` to create.
+ *   Required. The `Service` to create.
  *
  *   This object should have the same structure as [Service]{@link google.monitoring.v3.Service}
  *
@@ -43,7 +43,7 @@ const CreateServiceRequest = {
  * The `GetService` request.
  *
  * @property {string} name
- *   Resource name of the `Service`.
+ *   Required. Resource name of the `Service`.
  *   Of the form `projects/{project_id}/services/{service_id}`.
  *
  * @typedef GetServiceRequest
@@ -58,7 +58,7 @@ const GetServiceRequest = {
  * The `ListServices` request.
  *
  * @property {string} parent
- *   Resource name of the parent `Workspace`.
+ *   Required. Resource name of the parent `Workspace`.
  *   Of the form `projects/{project_id}`.
  *
  * @property {string} filter
@@ -120,7 +120,7 @@ const ListServicesResponse = {
  * The `UpdateService` request.
  *
  * @property {Object} service
- *   The `Service` to draw updates from.
+ *   Required. The `Service` to draw updates from.
  *   The given `name` specifies the resource to update.
  *
  *   This object should have the same structure as [Service]{@link google.monitoring.v3.Service}
@@ -142,8 +142,8 @@ const UpdateServiceRequest = {
  * The `DeleteService` request.
  *
  * @property {string} name
- *   Resource name of the `Service` to delete.
- *   Of the form `projects/{project_id}/service/{service_id}`.
+ *   Required. Resource name of the `Service` to delete.
+ *   Of the form `projects/{project_id}/services/{service_id}`.
  *
  * @typedef DeleteServiceRequest
  * @memberof google.monitoring.v3
@@ -157,7 +157,7 @@ const DeleteServiceRequest = {
  * The `CreateServiceLevelObjective` request.
  *
  * @property {string} parent
- *   Resource name of the parent `Service`.
+ *   Required. Resource name of the parent `Service`.
  *   Of the form `projects/{project_id}/services/{service_id}`.
  *
  * @property {string} serviceLevelObjectiveId
@@ -166,7 +166,7 @@ const DeleteServiceRequest = {
  *   match the pattern [a-z0-9\-]+
  *
  * @property {Object} serviceLevelObjective
- *   The `ServiceLevelObjective` to create.
+ *   Required. The `ServiceLevelObjective` to create.
  *   The provided `name` will be respected if no `ServiceLevelObjective` exists
  *   with this name.
  *
@@ -184,7 +184,7 @@ const CreateServiceLevelObjectiveRequest = {
  * The `GetServiceLevelObjective` request.
  *
  * @property {string} name
- *   Resource name of the `ServiceLevelObjective` to get.
+ *   Required. Resource name of the `ServiceLevelObjective` to get.
  *   Of the form
  *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
  *
@@ -208,7 +208,7 @@ const GetServiceLevelObjectiveRequest = {
  * The `ListServiceLevelObjectives` request.
  *
  * @property {string} parent
- *   Resource name of the parent `Service`.
+ *   Required. Resource name of the parent `Service`.
  *   Of the form `projects/{project_id}/services/{service_id}`.
  *
  * @property {string} filter
@@ -264,7 +264,7 @@ const ListServiceLevelObjectivesResponse = {
  * The `UpdateServiceLevelObjective` request.
  *
  * @property {Object} serviceLevelObjective
- *   The `ServiceLevelObjective` to draw updates from.
+ *   Required. The `ServiceLevelObjective` to draw updates from.
  *   The given `name` specifies the resource to update.
  *
  *   This object should have the same structure as [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}
@@ -286,7 +286,7 @@ const UpdateServiceLevelObjectiveRequest = {
  * The `DeleteServiceLevelObjective` request.
  *
  * @property {string} name
- *   Resource name of the `ServiceLevelObjective` to delete.
+ *   Required. Resource name of the `ServiceLevelObjective` to delete.
  *   Of the form
  *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
  *

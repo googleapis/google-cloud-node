@@ -19,7 +19,7 @@
  * The `ListMonitoredResourceDescriptors` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {string} filter
@@ -73,7 +73,7 @@ const ListMonitoredResourceDescriptorsResponse = {
  * The `GetMonitoredResourceDescriptor` request.
  *
  * @property {string} name
- *   The monitored resource descriptor to get.  The format is
+ *   Required. The monitored resource descriptor to get.  The format is
  *   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
  *   The `{resource_type}` is a predefined type, such as
  *   `cloudsql_database`.
@@ -90,7 +90,7 @@ const GetMonitoredResourceDescriptorRequest = {
  * The `ListMetricDescriptors` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {string} filter
@@ -145,7 +145,7 @@ const ListMetricDescriptorsResponse = {
  * The `GetMetricDescriptor` request.
  *
  * @property {string} name
- *   The metric descriptor on which to execute the request. The format is
+ *   Required. The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example value of `{metric_id}` is
  *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
@@ -162,11 +162,11 @@ const GetMetricDescriptorRequest = {
  * The `CreateMetricDescriptor` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {Object} metricDescriptor
- *   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
+ *   Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
  *   descriptor.
  *
  *   This object should have the same structure as [MetricDescriptor]{@link google.api.MetricDescriptor}
@@ -183,7 +183,7 @@ const CreateMetricDescriptorRequest = {
  * The `DeleteMetricDescriptor` request.
  *
  * @property {string} name
- *   The metric descriptor on which to execute the request. The format is
+ *   Required. The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example of `{metric_id}` is:
  *   `"custom.googleapis.com/my_test_metric"`.
@@ -200,11 +200,11 @@ const DeleteMetricDescriptorRequest = {
  * The `ListTimeSeries` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   "projects/{project_id_or_number}".
  *
  * @property {string} filter
- *   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
+ *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
  *   series should be returned.  The filter must specify a single metric type,
  *   and can additionally specify metric labels and other information. For
  *   example:
@@ -213,7 +213,7 @@ const DeleteMetricDescriptorRequest = {
  *           metric.labels.instance_name = "my-instance-name"
  *
  * @property {Object} interval
- *   The time interval for which results should be returned. Only time series
+ *   Required. The time interval for which results should be returned. Only time series
  *   that contain data points in the specified interval are included
  *   in the response.
  *
@@ -233,7 +233,7 @@ const DeleteMetricDescriptorRequest = {
  *   currently returned in reverse time order (most recent to oldest).
  *
  * @property {number} view
- *   Specifies which information is returned about the time series.
+ *   Required. Specifies which information is returned about the time series.
  *
  *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
  *
@@ -309,11 +309,11 @@ const ListTimeSeriesResponse = {
  * The `CreateTimeSeries` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {Object[]} timeSeries
- *   The new data to be added to a list of time series.
+ *   Required. The new data to be added to a list of time series.
  *   Adds at most one data point to each of several time series.  The new data
  *   point must be more recent than any other point in its time series.  Each
  *   `TimeSeries` value must fully specify a unique time series by supplying

@@ -19,7 +19,7 @@
  * The `ListNotificationChannelDescriptors` request.
  *
  * @property {string} name
- *   The REST resource name of the parent from which to retrieve
+ *   Required. The REST resource name of the parent from which to retrieve
  *   the notification channel descriptors. The expected syntax is:
  *
  *       projects/[PROJECT_ID]
@@ -74,7 +74,7 @@ const ListNotificationChannelDescriptorsResponse = {
  * The `GetNotificationChannelDescriptor` response.
  *
  * @property {string} name
- *   The channel type for which to execute the request. The format is
+ *   Required. The channel type for which to execute the request. The format is
  *   `projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}`.
  *
  * @typedef GetNotificationChannelDescriptorRequest
@@ -89,7 +89,7 @@ const GetNotificationChannelDescriptorRequest = {
  * The `CreateNotificationChannel` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is:
+ *   Required. The project on which to execute the request. The format is:
  *
  *       projects/[PROJECT_ID]
  *
@@ -99,7 +99,7 @@ const GetNotificationChannelDescriptorRequest = {
  *   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
  *
  * @property {Object} notificationChannel
- *   The definition of the `NotificationChannel` to create.
+ *   Required. The definition of the `NotificationChannel` to create.
  *
  *   This object should have the same structure as [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}
  *
@@ -115,7 +115,7 @@ const CreateNotificationChannelRequest = {
  * The `ListNotificationChannels` request.
  *
  * @property {string} name
- *   The project on which to execute the request. The format is
+ *   Required. The project on which to execute the request. The format is
  *   `projects/[PROJECT_ID]`. That is, this names the container
  *   in which to look for the notification channels; it does not name a
  *   specific channel. To query a specific channel by REST resource name, use
@@ -182,7 +182,7 @@ const ListNotificationChannelsResponse = {
  * The `GetNotificationChannel` request.
  *
  * @property {string} name
- *   The channel for which to execute the request. The format is
+ *   Required. The channel for which to execute the request. The format is
  *   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
  *
  * @typedef GetNotificationChannelRequest
@@ -202,7 +202,7 @@ const GetNotificationChannelRequest = {
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
  * @property {Object} notificationChannel
- *   A description of the changes to be applied to the specified
+ *   Required. A description of the changes to be applied to the specified
  *   notification channel. The description must provide a definition for
  *   fields to be updated; the names of these fields should also be
  *   included in the `update_mask`.
@@ -221,7 +221,7 @@ const UpdateNotificationChannelRequest = {
  * The `DeleteNotificationChannel` request.
  *
  * @property {string} name
- *   The channel for which to execute the request. The format is
+ *   Required. The channel for which to execute the request. The format is
  *   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
  *
  * @property {boolean} force
@@ -242,7 +242,7 @@ const DeleteNotificationChannelRequest = {
  * The `SendNotificationChannelVerificationCode` request.
  *
  * @property {string} name
- *   The notification channel to which to send a verification code.
+ *   Required. The notification channel to which to send a verification code.
  *
  * @typedef SendNotificationChannelVerificationCodeRequest
  * @memberof google.monitoring.v3
@@ -256,7 +256,7 @@ const SendNotificationChannelVerificationCodeRequest = {
  * The `GetNotificationChannelVerificationCode` request.
  *
  * @property {string} name
- *   The notification channel for which a verification code is to be generated
+ *   Required. The notification channel for which a verification code is to be generated
  *   and retrieved. This must name a channel that is already verified; if
  *   the specified channel is not verified, the request will fail.
  *
@@ -309,10 +309,10 @@ const GetNotificationChannelVerificationCodeResponse = {
  * The `VerifyNotificationChannel` request.
  *
  * @property {string} name
- *   The notification channel to verify.
+ *   Required. The notification channel to verify.
  *
  * @property {string} code
- *   The verification code that was delivered to the channel as
+ *   Required. The verification code that was delivered to the channel as
  *   a result of invoking the `SendNotificationChannelVerificationCode` API
  *   method or that was retrieved from a verified channel via
  *   `GetNotificationChannelVerificationCode`. For example, one might have

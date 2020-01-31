@@ -258,7 +258,7 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose Uptime check configurations are listed. The format
+   *   Required. The project whose Uptime check configurations are listed. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -375,7 +375,7 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project whose Uptime check configurations are listed. The format
+   *   Required. The project whose Uptime check configurations are listed. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -421,7 +421,7 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The Uptime check configuration to retrieve. The format
+   *   Required. The Uptime check configuration to retrieve. The format
    *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -476,10 +476,10 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which to create the Uptime check. The format
+   *   Required. The project in which to create the Uptime check. The format
    *     is `projects/[PROJECT_ID]`.
    * @param {Object} request.uptimeCheckConfig
-   *   The new Uptime check configuration.
+   *   Required. The new Uptime check configuration.
    *
    *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
    * @param {Object} [options]
@@ -626,7 +626,7 @@ class UptimeCheckServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The Uptime check configuration to delete. The format
+   *   Required. The Uptime check configuration to delete. The format
    *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,

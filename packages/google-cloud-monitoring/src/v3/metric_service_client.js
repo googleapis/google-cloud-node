@@ -261,7 +261,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.filter]
    *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
@@ -386,7 +386,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.filter]
    *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
@@ -440,7 +440,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The monitored resource descriptor to get.  The format is
+   *   Required. The monitored resource descriptor to get.  The format is
    *   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
    *   The `{resource_type}` is a predefined type, such as
    *   `cloudsql_database`.
@@ -501,7 +501,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.filter]
    *   If this field is empty, all custom and
@@ -627,7 +627,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.filter]
    *   If this field is empty, all custom and
@@ -682,7 +682,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The metric descriptor on which to execute the request. The format is
+   *   Required. The metric descriptor on which to execute the request. The format is
    *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
    *   An example value of `{metric_id}` is
    *   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
@@ -741,10 +741,10 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {Object} request.metricDescriptor
-   *   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
+   *   Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
    *   descriptor.
    *
    *   This object should have the same structure as [MetricDescriptor]{@link google.api.MetricDescriptor}
@@ -811,7 +811,7 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The metric descriptor on which to execute the request. The format is
+   *   Required. The metric descriptor on which to execute the request. The format is
    *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
    *   An example of `{metric_id}` is:
    *   `"custom.googleapis.com/my_test_metric"`.
@@ -864,10 +864,10 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   "projects/{project_id_or_number}".
    * @param {string} request.filter
-   *   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
+   *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
    *   series should be returned.  The filter must specify a single metric type,
    *   and can additionally specify metric labels and other information. For
    *   example:
@@ -875,13 +875,13 @@ class MetricServiceClient {
    *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
    *           metric.labels.instance_name = "my-instance-name"
    * @param {Object} request.interval
-   *   The time interval for which results should be returned. Only time series
+   *   Required. The time interval for which results should be returned. Only time series
    *   that contain data points in the specified interval are included
    *   in the response.
    *
    *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
    * @param {number} request.view
-   *   Specifies which information is returned about the time series.
+   *   Required. Specifies which information is returned about the time series.
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
    * @param {Object} [request.aggregation]
@@ -1024,10 +1024,10 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   "projects/{project_id_or_number}".
    * @param {string} request.filter
-   *   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
+   *   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
    *   series should be returned.  The filter must specify a single metric type,
    *   and can additionally specify metric labels and other information. For
    *   example:
@@ -1035,13 +1035,13 @@ class MetricServiceClient {
    *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
    *           metric.labels.instance_name = "my-instance-name"
    * @param {Object} request.interval
-   *   The time interval for which results should be returned. Only time series
+   *   Required. The time interval for which results should be returned. Only time series
    *   that contain data points in the specified interval are included
    *   in the response.
    *
    *   This object should have the same structure as [TimeInterval]{@link google.monitoring.v3.TimeInterval}
    * @param {number} request.view
-   *   Specifies which information is returned about the time series.
+   *   Required. Specifies which information is returned about the time series.
    *
    *   The number should be among the values of [TimeSeriesView]{@link google.monitoring.v3.TimeSeriesView}
    * @param {Object} [request.aggregation]
@@ -1111,10 +1111,10 @@ class MetricServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {Object[]} request.timeSeries
-   *   The new data to be added to a list of time series.
+   *   Required. The new data to be added to a list of time series.
    *   Adds at most one data point to each of several time series.  The new data
    *   point must be more recent than any other point in its time series.  Each
    *   `TimeSeries` value must fully specify a unique time series by supplying

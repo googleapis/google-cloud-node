@@ -261,7 +261,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The REST resource name of the parent from which to retrieve
+   *   Required. The REST resource name of the parent from which to retrieve
    *   the notification channel descriptors. The expected syntax is:
    *
    *       projects/[PROJECT_ID]
@@ -385,7 +385,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The REST resource name of the parent from which to retrieve
+   *   Required. The REST resource name of the parent from which to retrieve
    *   the notification channel descriptors. The expected syntax is:
    *
    *       projects/[PROJECT_ID]
@@ -439,7 +439,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The channel type for which to execute the request. The format is
+   *   Required. The channel type for which to execute the request. The format is
    *   `projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -498,7 +498,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `projects/[PROJECT_ID]`. That is, this names the container
    *   in which to look for the notification channels; it does not name a
    *   specific channel. To query a specific channel by REST resource name, use
@@ -633,7 +633,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is
+   *   Required. The project on which to execute the request. The format is
    *   `projects/[PROJECT_ID]`. That is, this names the container
    *   in which to look for the notification channels; it does not name a
    *   specific channel. To query a specific channel by REST resource name, use
@@ -701,7 +701,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The channel for which to execute the request. The format is
+   *   Required. The channel for which to execute the request. The format is
    *   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -761,7 +761,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project on which to execute the request. The format is:
+   *   Required. The project on which to execute the request. The format is:
    *
    *       projects/[PROJECT_ID]
    *
@@ -770,7 +770,7 @@ class NotificationChannelServiceClient {
    *   channel's name will have a normalized version of this field as a prefix,
    *   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
    * @param {Object} request.notificationChannel
-   *   The definition of the `NotificationChannel` to create.
+   *   Required. The definition of the `NotificationChannel` to create.
    *
    *   This object should have the same structure as [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}
    * @param {Object} [options]
@@ -836,7 +836,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.notificationChannel
-   *   A description of the changes to be applied to the specified
+   *   Required. A description of the changes to be applied to the specified
    *   notification channel. The description must provide a definition for
    *   fields to be updated; the names of these fields should also be
    *   included in the `update_mask`.
@@ -903,7 +903,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The channel for which to execute the request. The format is
+   *   Required. The channel for which to execute the request. The format is
    *   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
    * @param {boolean} [request.force]
    *   If true, the notification channel will be deleted regardless of its
@@ -960,7 +960,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The notification channel to which to send a verification code.
+   *   Required. The notification channel to which to send a verification code.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1030,7 +1030,7 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The notification channel for which a verification code is to be generated
+   *   Required. The notification channel for which a verification code is to be generated
    *   and retrieved. This must name a channel that is already verified; if
    *   the specified channel is not verified, the request will fail.
    * @param {Object} [request.expireTime]
@@ -1104,9 +1104,9 @@ class NotificationChannelServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The notification channel to verify.
+   *   Required. The notification channel to verify.
    * @param {string} request.code
-   *   The verification code that was delivered to the channel as
+   *   Required. The verification code that was delivered to the channel as
    *   a result of invoking the `SendNotificationChannelVerificationCode` API
    *   method or that was retrieved from a verified channel via
    *   `GetNotificationChannelVerificationCode`. For example, one might have

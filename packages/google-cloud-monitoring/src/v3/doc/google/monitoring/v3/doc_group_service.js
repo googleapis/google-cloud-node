@@ -19,7 +19,7 @@
  * The `ListGroup` request.
  *
  * @property {string} name
- *   The project whose groups are to be listed. The format is
+ *   Required. The project whose groups are to be listed. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {string} childrenOfGroup
@@ -81,7 +81,7 @@ const ListGroupsResponse = {
  * The `GetGroup` request.
  *
  * @property {string} name
- *   The group to retrieve. The format is
+ *   Required. The group to retrieve. The format is
  *   `"projects/{project_id_or_number}/groups/{group_id}"`.
  *
  * @typedef GetGroupRequest
@@ -96,11 +96,11 @@ const GetGroupRequest = {
  * The `CreateGroup` request.
  *
  * @property {string} name
- *   The project in which to create the group. The format is
+ *   Required. The project in which to create the group. The format is
  *   `"projects/{project_id_or_number}"`.
  *
  * @property {Object} group
- *   A group definition. It is an error to define the `name` field because
+ *   Required. A group definition. It is an error to define the `name` field because
  *   the system assigns the name.
  *
  *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
@@ -120,7 +120,7 @@ const CreateGroupRequest = {
  * The `UpdateGroup` request.
  *
  * @property {Object} group
- *   The new definition of the group.  All fields of the existing group,
+ *   Required. The new definition of the group.  All fields of the existing group,
  *   excepting `name`, are replaced with the corresponding fields of this group.
  *
  *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
@@ -141,7 +141,7 @@ const UpdateGroupRequest = {
  * single group without any descendants.
  *
  * @property {string} name
- *   The group to delete. The format is
+ *   Required. The group to delete. The format is
  *   `"projects/{project_id_or_number}/groups/{group_id}"`.
  *
  * @property {boolean} recursive
@@ -161,7 +161,7 @@ const DeleteGroupRequest = {
  * The `ListGroupMembers` request.
  *
  * @property {string} name
- *   The group whose members are listed. The format is
+ *   Required. The group whose members are listed. The format is
  *   `"projects/{project_id_or_number}/groups/{group_id}"`.
  *
  * @property {number} pageSize

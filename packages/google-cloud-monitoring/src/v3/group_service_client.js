@@ -261,7 +261,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project whose groups are to be listed. The format is
+   *   Required. The project whose groups are to be listed. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.childrenOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
@@ -389,7 +389,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project whose groups are to be listed. The format is
+   *   Required. The project whose groups are to be listed. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {string} [request.childrenOfGroup]
    *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
@@ -450,7 +450,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group to retrieve. The format is
+   *   Required. The group to retrieve. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -505,10 +505,10 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project in which to create the group. The format is
+   *   Required. The project in which to create the group. The format is
    *   `"projects/{project_id_or_number}"`.
    * @param {Object} request.group
-   *   A group definition. It is an error to define the `name` field because
+   *   Required. A group definition. It is an error to define the `name` field because
    *   the system assigns the name.
    *
    *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
@@ -573,7 +573,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.group
-   *   The new definition of the group.  All fields of the existing group,
+   *   Required. The new definition of the group.  All fields of the existing group,
    *   excepting `name`, are replaced with the corresponding fields of this group.
    *
    *   This object should have the same structure as [Group]{@link google.monitoring.v3.Group}
@@ -632,7 +632,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group to delete. The format is
+   *   Required. The group to delete. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {boolean} [request.recursive]
    *   If this field is true, then the request means to delete a group with all
@@ -683,7 +683,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group whose members are listed. The format is
+   *   Required. The group whose members are listed. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -811,7 +811,7 @@ class GroupServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The group whose members are listed. The format is
+   *   Required. The group whose members are listed. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API

@@ -53,6 +53,11 @@
  *
  *   The number should be among the values of [ServiceTier]{@link google.monitoring.v3.ServiceTier}
  *
+ * @property {number} launchStage
+ *   The product launch stage for channels of this type.
+ *
+ *   The number should be among the values of [LaunchStage]{@link google.api.LaunchStage}
+ *
  * @typedef NotificationChannelDescriptor
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.NotificationChannelDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification.proto}

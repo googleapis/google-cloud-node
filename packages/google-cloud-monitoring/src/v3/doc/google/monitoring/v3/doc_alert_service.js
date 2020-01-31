@@ -19,7 +19,7 @@
  * The protocol for the `CreateAlertPolicy` request.
  *
  * @property {string} name
- *   The project in which to create the alerting policy. The format is
+ *   Required. The project in which to create the alerting policy. The format is
  *   `projects/[PROJECT_ID]`.
  *
  *   Note that this field names the parent container in which the alerting
@@ -29,7 +29,7 @@
  *   `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
  *
  * @property {Object} alertPolicy
- *   The requested alerting policy. You should omit the `name` field in this
+ *   Required. The requested alerting policy. You should omit the `name` field in this
  *   policy. The name will be returned in the new policy, including
  *   a new [ALERT_POLICY_ID] value.
  *
@@ -47,7 +47,7 @@ const CreateAlertPolicyRequest = {
  * The protocol for the `GetAlertPolicy` request.
  *
  * @property {string} name
- *   The alerting policy to retrieve. The format is
+ *   Required. The alerting policy to retrieve. The format is
  *
  *       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
  *
@@ -63,7 +63,7 @@ const GetAlertPolicyRequest = {
  * The protocol for the `ListAlertPolicies` request.
  *
  * @property {string} name
- *   The project whose alert policies are to be listed. The format is
+ *   Required. The project whose alert policies are to be listed. The format is
  *
  *       projects/[PROJECT_ID]
  *
@@ -173,7 +173,7 @@ const UpdateAlertPolicyRequest = {
  * The protocol for the `DeleteAlertPolicy` request.
  *
  * @property {string} name
- *   The alerting policy to delete. The format is:
+ *   Required. The alerting policy to delete. The format is:
  *
  *       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
  *

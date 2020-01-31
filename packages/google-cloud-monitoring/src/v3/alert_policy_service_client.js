@@ -255,7 +255,7 @@ class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project whose alert policies are to be listed. The format is
+   *   Required. The project whose alert policies are to be listed. The format is
    *
    *       projects/[PROJECT_ID]
    *
@@ -388,7 +388,7 @@ class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project whose alert policies are to be listed. The format is
+   *   Required. The project whose alert policies are to be listed. The format is
    *
    *       projects/[PROJECT_ID]
    *
@@ -454,7 +454,7 @@ class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The alerting policy to retrieve. The format is
+   *   Required. The alerting policy to retrieve. The format is
    *
    *       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
    * @param {Object} [options]
@@ -510,7 +510,7 @@ class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The project in which to create the alerting policy. The format is
+   *   Required. The project in which to create the alerting policy. The format is
    *   `projects/[PROJECT_ID]`.
    *
    *   Note that this field names the parent container in which the alerting
@@ -519,7 +519,7 @@ class AlertPolicyServiceClient {
    *   representation of this name as a prefix but adds a suffix of the form
    *   `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
    * @param {Object} request.alertPolicy
-   *   The requested alerting policy. You should omit the `name` field in this
+   *   Required. The requested alerting policy. You should omit the `name` field in this
    *   policy. The name will be returned in the new policy, including
    *   a new [ALERT_POLICY_ID] value.
    *
@@ -582,7 +582,7 @@ class AlertPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The alerting policy to delete. The format is:
+   *   Required. The alerting policy to delete. The format is:
    *
    *       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
    *

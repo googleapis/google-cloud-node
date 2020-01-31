@@ -260,10 +260,10 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent workspace.
+   *   Required. Resource name of the parent workspace.
    *   Of the form `projects/{project_id}`.
    * @param {Object} request.service
-   *   The `Service` to create.
+   *   Required. The `Service` to create.
    *
    *   This object should have the same structure as [Service]{@link google.monitoring.v3.Service}
    * @param {string} [request.serviceId]
@@ -327,7 +327,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the `Service`.
+   *   Required. Resource name of the `Service`.
    *   Of the form `projects/{project_id}/services/{service_id}`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -382,7 +382,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent `Workspace`.
+   *   Required. Resource name of the parent `Workspace`.
    *   Of the form `projects/{project_id}`.
    * @param {string} [request.filter]
    *   A filter specifying what `Service`s to return. The filter currently
@@ -511,7 +511,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent `Workspace`.
+   *   Required. Resource name of the parent `Workspace`.
    *   Of the form `projects/{project_id}`.
    * @param {string} [request.filter]
    *   A filter specifying what `Service`s to return. The filter currently
@@ -573,7 +573,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.service
-   *   The `Service` to draw updates from.
+   *   Required. The `Service` to draw updates from.
    *   The given `name` specifies the resource to update.
    *
    *   This object should have the same structure as [Service]{@link google.monitoring.v3.Service}
@@ -634,8 +634,8 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the `Service` to delete.
-   *   Of the form `projects/{project_id}/service/{service_id}`.
+   *   Required. Resource name of the `Service` to delete.
+   *   Of the form `projects/{project_id}/services/{service_id}`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -681,10 +681,10 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent `Service`.
+   *   Required. Resource name of the parent `Service`.
    *   Of the form `projects/{project_id}/services/{service_id}`.
    * @param {Object} request.serviceLevelObjective
-   *   The `ServiceLevelObjective` to create.
+   *   Required. The `ServiceLevelObjective` to create.
    *   The provided `name` will be respected if no `ServiceLevelObjective` exists
    *   with this name.
    *
@@ -755,7 +755,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the `ServiceLevelObjective` to get.
+   *   Required. Resource name of the `ServiceLevelObjective` to get.
    *   Of the form
    *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
    * @param {number} [request.view]
@@ -822,7 +822,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent `Service`.
+   *   Required. Resource name of the parent `Service`.
    *   Of the form `projects/{project_id}/services/{service_id}`.
    * @param {string} [request.filter]
    *   A filter specifying what `ServiceLevelObjective`s to return.
@@ -948,7 +948,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the parent `Service`.
+   *   Required. Resource name of the parent `Service`.
    *   Of the form `projects/{project_id}/services/{service_id}`.
    * @param {string} [request.filter]
    *   A filter specifying what `ServiceLevelObjective`s to return.
@@ -1003,7 +1003,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.serviceLevelObjective
-   *   The `ServiceLevelObjective` to draw updates from.
+   *   Required. The `ServiceLevelObjective` to draw updates from.
    *   The given `name` specifies the resource to update.
    *
    *   This object should have the same structure as [ServiceLevelObjective]{@link google.monitoring.v3.ServiceLevelObjective}
@@ -1068,7 +1068,7 @@ class ServiceMonitoringServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the `ServiceLevelObjective` to delete.
+   *   Required. Resource name of the `ServiceLevelObjective` to delete.
    *   Of the form
    *   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
    * @param {Object} [options]

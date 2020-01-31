@@ -62,12 +62,16 @@
  *   OR according to the `combiner` field. If the combined conditions evaluate
  *   to true, then an incident is created. A policy can have from one to six
  *   conditions.
+ *   If |condition_time_series_uery_language| is present, it must be the only
+ *   |condition|.
  *
  *   This object should have the same structure as [Condition]{@link google.monitoring.v3.Condition}
  *
  * @property {number} combiner
  *   How to combine the results of multiple conditions to determine if an
  *   incident should be opened.
+ *   If condition_time_series_query_language is present, this must be
+ *   COMBINE_UNSPECIFIED.
  *
  *   The number should be among the values of [ConditionCombinerType]{@link google.monitoring.v3.ConditionCombinerType}
  *

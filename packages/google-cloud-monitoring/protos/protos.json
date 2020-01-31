@@ -11,7 +11,10 @@
                 "java_multiple_files": true,
                 "java_outer_classname": "UptimeProto",
                 "java_package": "com.google.monitoring.v3",
-                "php_namespace": "Google\\Cloud\\Monitoring\\V3"
+                "php_namespace": "Google\\Cloud\\Monitoring\\V3",
+                "(google.api.resource_definition).type": "monitoring.googleapis.com/MonitoredResourceDescriptor",
+                "(google.api.resource_definition).pattern": "*",
+                "(google.api.resource_definition).history": "ORIGINALLY_SINGLE_PATTERN"
               },
               "nested": {
                 "AlertPolicyService": {
@@ -24,14 +27,16 @@
                       "requestType": "ListAlertPoliciesRequest",
                       "responseType": "ListAlertPoliciesResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/alertPolicies"
+                        "(google.api.http).get": "/v3/{name=projects/*}/alertPolicies",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetAlertPolicy": {
                       "requestType": "GetAlertPolicyRequest",
                       "responseType": "AlertPolicy",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/alertPolicies/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/alertPolicies/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateAlertPolicy": {
@@ -39,14 +44,16 @@
                       "responseType": "AlertPolicy",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*}/alertPolicies",
-                        "(google.api.http).body": "alert_policy"
+                        "(google.api.http).body": "alert_policy",
+                        "(google.api.method_signature)": "name,alert_policy"
                       }
                     },
                     "DeleteAlertPolicy": {
                       "requestType": "DeleteAlertPolicyRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/alertPolicies/*}"
+                        "(google.api.http).delete": "/v3/{name=projects/*/alertPolicies/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "UpdateAlertPolicy": {
@@ -54,7 +61,8 @@
                       "responseType": "AlertPolicy",
                       "options": {
                         "(google.api.http).patch": "/v3/{alert_policy.name=projects/*/alertPolicies/*}",
-                        "(google.api.http).body": "alert_policy"
+                        "(google.api.http).body": "alert_policy",
+                        "(google.api.method_signature)": "update_mask,alert_policy"
                       }
                     }
                   }
@@ -63,11 +71,18 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
+                      }
                     },
                     "alertPolicy": {
                       "type": "AlertPolicy",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -75,7 +90,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
+                      }
                     }
                   }
                 },
@@ -83,7 +102,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/AlertPolicy"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -124,7 +147,10 @@
                     },
                     "alertPolicy": {
                       "type": "AlertPolicy",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -132,7 +158,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/AlertPolicy"
+                      }
                     }
                   }
                 },
@@ -472,14 +502,16 @@
                       "requestType": "ListGroupsRequest",
                       "responseType": "ListGroupsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/groups"
+                        "(google.api.http).get": "/v3/{name=projects/*}/groups",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetGroup": {
                       "requestType": "GetGroupRequest",
                       "responseType": "Group",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/groups/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/groups/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateGroup": {
@@ -487,7 +519,8 @@
                       "responseType": "Group",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*}/groups",
-                        "(google.api.http).body": "group"
+                        "(google.api.http).body": "group",
+                        "(google.api.method_signature)": "name,group"
                       }
                     },
                     "UpdateGroup": {
@@ -495,21 +528,24 @@
                       "responseType": "Group",
                       "options": {
                         "(google.api.http).put": "/v3/{group.name=projects/*/groups/*}",
-                        "(google.api.http).body": "group"
+                        "(google.api.http).body": "group",
+                        "(google.api.method_signature)": "group"
                       }
                     },
                     "DeleteGroup": {
                       "requestType": "DeleteGroupRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/groups/*}"
+                        "(google.api.http).delete": "/v3/{name=projects/*/groups/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListGroupMembers": {
                       "requestType": "ListGroupMembersRequest",
                       "responseType": "ListGroupMembersResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/groups/*}/members"
+                        "(google.api.http).get": "/v3/{name=projects/*/groups/*}/members",
+                        "(google.api.method_signature)": "name"
                       }
                     }
                   }
@@ -527,19 +563,32 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "childrenOfGroup": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "ancestorsOfGroup": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "descendantsOfGroup": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -568,7 +617,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     }
                   }
                 },
@@ -576,11 +629,18 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "group": {
                       "type": "Group",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "validateOnly": {
                       "type": "bool",
@@ -592,7 +652,10 @@
                   "fields": {
                     "group": {
                       "type": "Group",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "validateOnly": {
                       "type": "bool",
@@ -604,7 +667,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "recursive": {
                       "type": "bool",
@@ -616,7 +683,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Group"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -687,28 +758,32 @@
                       "requestType": "ListMonitoredResourceDescriptorsRequest",
                       "responseType": "ListMonitoredResourceDescriptorsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/monitoredResourceDescriptors"
+                        "(google.api.http).get": "/v3/{name=projects/*}/monitoredResourceDescriptors",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetMonitoredResourceDescriptor": {
                       "requestType": "GetMonitoredResourceDescriptorRequest",
                       "responseType": "google.api.MonitoredResourceDescriptor",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/monitoredResourceDescriptors/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/monitoredResourceDescriptors/**}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListMetricDescriptors": {
                       "requestType": "ListMetricDescriptorsRequest",
                       "responseType": "ListMetricDescriptorsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/metricDescriptors"
+                        "(google.api.http).get": "/v3/{name=projects/*}/metricDescriptors",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetMetricDescriptor": {
                       "requestType": "GetMetricDescriptorRequest",
                       "responseType": "google.api.MetricDescriptor",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/metricDescriptors/**}"
+                        "(google.api.http).get": "/v3/{name=projects/*/metricDescriptors/**}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateMetricDescriptor": {
@@ -716,21 +791,24 @@
                       "responseType": "google.api.MetricDescriptor",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*}/metricDescriptors",
-                        "(google.api.http).body": "metric_descriptor"
+                        "(google.api.http).body": "metric_descriptor",
+                        "(google.api.method_signature)": "name,metric_descriptor"
                       }
                     },
                     "DeleteMetricDescriptor": {
                       "requestType": "DeleteMetricDescriptorRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/metricDescriptors/**}"
+                        "(google.api.http).delete": "/v3/{name=projects/*/metricDescriptors/**}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListTimeSeries": {
                       "requestType": "ListTimeSeriesRequest",
                       "responseType": "ListTimeSeriesResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/timeSeries"
+                        "(google.api.http).get": "/v3/{name=projects/*}/timeSeries",
+                        "(google.api.method_signature)": "name,filter,interval,view"
                       }
                     },
                     "CreateTimeSeries": {
@@ -738,7 +816,8 @@
                       "responseType": "google.protobuf.Empty",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*}/timeSeries",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name,time_series"
                       }
                     }
                   }
@@ -747,7 +826,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/MonitoredResourceDescriptor"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -780,7 +863,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/MonitoredResourceDescriptor"
+                      }
                     }
                   }
                 },
@@ -788,7 +875,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/MetricDescriptor"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -821,7 +912,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/MetricDescriptor"
+                      }
                     }
                   }
                 },
@@ -829,11 +924,18 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/MetricDescriptor"
+                      }
                     },
                     "metricDescriptor": {
                       "type": "google.api.MetricDescriptor",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -841,7 +943,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/MetricDescriptor"
+                      }
                     }
                   }
                 },
@@ -849,15 +955,25 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 10
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/TimeSeries"
+                      }
                     },
                     "filter": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "interval": {
                       "type": "TimeInterval",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "aggregation": {
                       "type": "Aggregation",
@@ -869,7 +985,10 @@
                     },
                     "view": {
                       "type": "TimeSeriesView",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -911,12 +1030,19 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/TimeSeries"
+                      }
                     },
                     "timeSeries": {
                       "rule": "repeated",
                       "type": "TimeSeries",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1020,28 +1146,32 @@
                       "requestType": "ListNotificationChannelDescriptorsRequest",
                       "responseType": "ListNotificationChannelDescriptorsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/notificationChannelDescriptors"
+                        "(google.api.http).get": "/v3/{name=projects/*}/notificationChannelDescriptors",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetNotificationChannelDescriptor": {
                       "requestType": "GetNotificationChannelDescriptorRequest",
                       "responseType": "NotificationChannelDescriptor",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/notificationChannelDescriptors/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/notificationChannelDescriptors/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListNotificationChannels": {
                       "requestType": "ListNotificationChannelsRequest",
                       "responseType": "ListNotificationChannelsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*}/notificationChannels"
+                        "(google.api.http).get": "/v3/{name=projects/*}/notificationChannels",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetNotificationChannel": {
                       "requestType": "GetNotificationChannelRequest",
                       "responseType": "NotificationChannel",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/notificationChannels/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/notificationChannels/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateNotificationChannel": {
@@ -1049,7 +1179,8 @@
                       "responseType": "NotificationChannel",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*}/notificationChannels",
-                        "(google.api.http).body": "notification_channel"
+                        "(google.api.http).body": "notification_channel",
+                        "(google.api.method_signature)": "name,notification_channel"
                       }
                     },
                     "UpdateNotificationChannel": {
@@ -1057,14 +1188,16 @@
                       "responseType": "NotificationChannel",
                       "options": {
                         "(google.api.http).patch": "/v3/{notification_channel.name=projects/*/notificationChannels/*}",
-                        "(google.api.http).body": "notification_channel"
+                        "(google.api.http).body": "notification_channel",
+                        "(google.api.method_signature)": "update_mask,notification_channel"
                       }
                     },
                     "DeleteNotificationChannel": {
                       "requestType": "DeleteNotificationChannelRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/notificationChannels/*}"
+                        "(google.api.http).delete": "/v3/{name=projects/*/notificationChannels/*}",
+                        "(google.api.method_signature)": "name,force"
                       }
                     },
                     "SendNotificationChannelVerificationCode": {
@@ -1072,7 +1205,8 @@
                       "responseType": "google.protobuf.Empty",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:sendVerificationCode",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "GetNotificationChannelVerificationCode": {
@@ -1080,7 +1214,8 @@
                       "responseType": "GetNotificationChannelVerificationCodeResponse",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:getVerificationCode",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "VerifyNotificationChannel": {
@@ -1088,7 +1223,8 @@
                       "responseType": "NotificationChannel",
                       "options": {
                         "(google.api.http).post": "/v3/{name=projects/*/notificationChannels/*}:verify",
-                        "(google.api.http).body": "*"
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "name,code"
                       }
                     }
                   }
@@ -1097,7 +1233,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/NotificationChannelDescriptor"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -1126,7 +1266,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannelDescriptor"
+                      }
                     }
                   }
                 },
@@ -1134,11 +1278,18 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     },
                     "notificationChannel": {
                       "type": "NotificationChannel",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1146,7 +1297,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -1183,7 +1338,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     }
                   }
                 },
@@ -1195,7 +1354,10 @@
                     },
                     "notificationChannel": {
                       "type": "NotificationChannel",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1203,7 +1365,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     },
                     "force": {
                       "type": "bool",
@@ -1215,7 +1381,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     }
                   }
                 },
@@ -1223,7 +1393,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     },
                     "expireTime": {
                       "type": "google.protobuf.Timestamp",
@@ -1247,11 +1421,18 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                      }
                     },
                     "code": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1346,21 +1527,24 @@
                       "responseType": "Service",
                       "options": {
                         "(google.api.http).post": "/v3/{parent=*/*}/services",
-                        "(google.api.http).body": "service"
+                        "(google.api.http).body": "service",
+                        "(google.api.method_signature)": "parent,service"
                       }
                     },
                     "GetService": {
                       "requestType": "GetServiceRequest",
                       "responseType": "Service",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=*/*/services/*}"
+                        "(google.api.http).get": "/v3/{name=*/*/services/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListServices": {
                       "requestType": "ListServicesRequest",
                       "responseType": "ListServicesResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{parent=*/*}/services"
+                        "(google.api.http).get": "/v3/{parent=*/*}/services",
+                        "(google.api.method_signature)": "parent"
                       }
                     },
                     "UpdateService": {
@@ -1368,14 +1552,16 @@
                       "responseType": "Service",
                       "options": {
                         "(google.api.http).patch": "/v3/{service.name=*/*/services/*}",
-                        "(google.api.http).body": "service"
+                        "(google.api.http).body": "service",
+                        "(google.api.method_signature)": "service"
                       }
                     },
                     "DeleteService": {
                       "requestType": "DeleteServiceRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=*/*/services/*}"
+                        "(google.api.http).delete": "/v3/{name=*/*/services/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateServiceLevelObjective": {
@@ -1383,21 +1569,24 @@
                       "responseType": "ServiceLevelObjective",
                       "options": {
                         "(google.api.http).post": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
-                        "(google.api.http).body": "service_level_objective"
+                        "(google.api.http).body": "service_level_objective",
+                        "(google.api.method_signature)": "parent,service_level_objective"
                       }
                     },
                     "GetServiceLevelObjective": {
                       "requestType": "GetServiceLevelObjectiveRequest",
                       "responseType": "ServiceLevelObjective",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                        "(google.api.http).get": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListServiceLevelObjectives": {
                       "requestType": "ListServiceLevelObjectivesRequest",
                       "responseType": "ListServiceLevelObjectivesResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{parent=*/*/services/*}/serviceLevelObjectives"
+                        "(google.api.http).get": "/v3/{parent=*/*/services/*}/serviceLevelObjectives",
+                        "(google.api.method_signature)": "parent"
                       }
                     },
                     "UpdateServiceLevelObjective": {
@@ -1405,14 +1594,16 @@
                       "responseType": "ServiceLevelObjective",
                       "options": {
                         "(google.api.http).patch": "/v3/{service_level_objective.name=*/*/services/*/serviceLevelObjectives/*}",
-                        "(google.api.http).body": "service_level_objective"
+                        "(google.api.http).body": "service_level_objective",
+                        "(google.api.method_signature)": "service_level_objective"
                       }
                     },
                     "DeleteServiceLevelObjective": {
                       "requestType": "DeleteServiceLevelObjectiveRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}"
+                        "(google.api.http).delete": "/v3/{name=*/*/services/*/serviceLevelObjectives/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     }
                   }
@@ -1421,7 +1612,11 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Service"
+                      }
                     },
                     "serviceId": {
                       "type": "string",
@@ -1429,7 +1624,10 @@
                     },
                     "service": {
                       "type": "Service",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1437,7 +1635,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Service"
+                      }
                     }
                   }
                 },
@@ -1445,7 +1647,11 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/Service"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -1478,7 +1684,10 @@
                   "fields": {
                     "service": {
                       "type": "Service",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "updateMask": {
                       "type": "google.protobuf.FieldMask",
@@ -1490,7 +1699,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Service"
+                      }
                     }
                   }
                 },
@@ -1498,7 +1711,11 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Service"
+                      }
                     },
                     "serviceLevelObjectiveId": {
                       "type": "string",
@@ -1506,7 +1723,10 @@
                     },
                     "serviceLevelObjective": {
                       "type": "ServiceLevelObjective",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -1514,7 +1734,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/ServiceLevelObjective"
+                      }
                     },
                     "view": {
                       "type": "ServiceLevelObjective.View",
@@ -1526,7 +1750,11 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/Service"
+                      }
                     },
                     "filter": {
                       "type": "string",
@@ -1563,7 +1791,10 @@
                   "fields": {
                     "serviceLevelObjective": {
                       "type": "ServiceLevelObjective",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     },
                     "updateMask": {
                       "type": "google.protobuf.FieldMask",
@@ -1575,7 +1806,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/ServiceLevelObjective"
+                      }
                     }
                   }
                 },
@@ -1930,14 +2165,16 @@
                       "requestType": "ListUptimeCheckConfigsRequest",
                       "responseType": "ListUptimeCheckConfigsResponse",
                       "options": {
-                        "(google.api.http).get": "/v3/{parent=projects/*}/uptimeCheckConfigs"
+                        "(google.api.http).get": "/v3/{parent=projects/*}/uptimeCheckConfigs",
+                        "(google.api.method_signature)": "parent"
                       }
                     },
                     "GetUptimeCheckConfig": {
                       "requestType": "GetUptimeCheckConfigRequest",
                       "responseType": "UptimeCheckConfig",
                       "options": {
-                        "(google.api.http).get": "/v3/{name=projects/*/uptimeCheckConfigs/*}"
+                        "(google.api.http).get": "/v3/{name=projects/*/uptimeCheckConfigs/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "CreateUptimeCheckConfig": {
@@ -1945,7 +2182,8 @@
                       "responseType": "UptimeCheckConfig",
                       "options": {
                         "(google.api.http).post": "/v3/{parent=projects/*}/uptimeCheckConfigs",
-                        "(google.api.http).body": "uptime_check_config"
+                        "(google.api.http).body": "uptime_check_config",
+                        "(google.api.method_signature)": "parent,uptime_check_config"
                       }
                     },
                     "UpdateUptimeCheckConfig": {
@@ -1953,14 +2191,16 @@
                       "responseType": "UptimeCheckConfig",
                       "options": {
                         "(google.api.http).patch": "/v3/{uptime_check_config.name=projects/*/uptimeCheckConfigs/*}",
-                        "(google.api.http).body": "uptime_check_config"
+                        "(google.api.http).body": "uptime_check_config",
+                        "(google.api.method_signature)": "uptime_check_config"
                       }
                     },
                     "DeleteUptimeCheckConfig": {
                       "requestType": "DeleteUptimeCheckConfigRequest",
                       "responseType": "google.protobuf.Empty",
                       "options": {
-                        "(google.api.http).delete": "/v3/{name=projects/*/uptimeCheckConfigs/*}"
+                        "(google.api.http).delete": "/v3/{name=projects/*/uptimeCheckConfigs/*}",
+                        "(google.api.method_signature)": "name"
                       }
                     },
                     "ListUptimeCheckIps": {
@@ -1976,7 +2216,11 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/UptimeCheckConfig"
+                      }
                     },
                     "pageSize": {
                       "type": "int32",
@@ -2009,7 +2253,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/UptimeCheckConfig"
+                      }
                     }
                   }
                 },
@@ -2017,11 +2265,18 @@
                   "fields": {
                     "parent": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "monitoring.googleapis.com/UptimeCheckConfig"
+                      }
                     },
                     "uptimeCheckConfig": {
                       "type": "UptimeCheckConfig",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -2033,7 +2288,10 @@
                     },
                     "uptimeCheckConfig": {
                       "type": "UptimeCheckConfig",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
                     }
                   }
                 },
@@ -2041,7 +2299,11 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "monitoring.googleapis.com/UptimeCheckConfig"
+                      }
                     }
                   }
                 },
@@ -2410,6 +2672,104 @@
                 }
               }
             },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "Distribution": {
               "fields": {
                 "count": {
@@ -2542,22 +2902,6 @@
                   }
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             },
             "MonitoredResourceDescriptor": {
               "fields": {

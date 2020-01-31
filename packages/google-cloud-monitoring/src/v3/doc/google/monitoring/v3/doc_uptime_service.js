@@ -19,7 +19,7 @@
  * The protocol for the `ListUptimeCheckConfigs` request.
  *
  * @property {string} parent
- *   The project whose Uptime check configurations are listed. The format
+ *   Required. The project whose Uptime check configurations are listed. The format
  *     is `projects/[PROJECT_ID]`.
  *
  * @property {number} pageSize
@@ -72,7 +72,7 @@ const ListUptimeCheckConfigsResponse = {
  * The protocol for the `GetUptimeCheckConfig` request.
  *
  * @property {string} name
- *   The Uptime check configuration to retrieve. The format
+ *   Required. The Uptime check configuration to retrieve. The format
  *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
  *
  * @typedef GetUptimeCheckConfigRequest
@@ -87,11 +87,11 @@ const GetUptimeCheckConfigRequest = {
  * The protocol for the `CreateUptimeCheckConfig` request.
  *
  * @property {string} parent
- *   The project in which to create the Uptime check. The format
+ *   Required. The project in which to create the Uptime check. The format
  *     is `projects/[PROJECT_ID]`.
  *
  * @property {Object} uptimeCheckConfig
- *   The new Uptime check configuration.
+ *   Required. The new Uptime check configuration.
  *
  *   This object should have the same structure as [UptimeCheckConfig]{@link google.monitoring.v3.UptimeCheckConfig}
  *
@@ -141,7 +141,7 @@ const UpdateUptimeCheckConfigRequest = {
  * The protocol for the `DeleteUptimeCheckConfig` request.
  *
  * @property {string} name
- *   The Uptime check configuration to delete. The format
+ *   Required. The Uptime check configuration to delete. The format
  *     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
  *
  * @typedef DeleteUptimeCheckConfigRequest
