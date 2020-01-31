@@ -80,7 +80,7 @@ npm install @google-cloud/storage
     console.log(`Bucket ${bucketName} created.`);
   }
 
-  createBucket();
+  createBucket().catch(console.error);
 
 ```
 
