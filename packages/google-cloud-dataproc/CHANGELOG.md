@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.4.7](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.6...v1.4.7) (2020-01-28)
+
+
+### Bug Fixes
+
+* proto annotations, broken link in docs, enum types in protos.d.ts ([#290](https://www.github.com/googleapis/nodejs-dataproc/issues/290)) ([0565df1](https://www.github.com/googleapis/nodejs-dataproc/commit/0565df116157c7daf99fd1aedc950cbe16dbcf2d))
+
 ### [1.4.6](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.5...v1.4.6) (2020-01-15)
 
 

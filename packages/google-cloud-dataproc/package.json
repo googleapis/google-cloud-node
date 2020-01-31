@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dataproc",
   "description": "Google Cloud Dataproc API client for Node.js",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
