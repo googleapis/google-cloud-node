@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [5.0.4](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.3...v5.0.4) (2020-01-29)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([86a48fa](https://www.github.com/googleapis/nodejs-datastore/commit/86a48fa60058216b2dec4e8c45fd74f9e77ff558))
+
 ### [5.0.3](https://www.github.com/googleapis/nodejs-datastore/compare/v5.0.2...v5.0.3) (2019-12-31)
 
 
