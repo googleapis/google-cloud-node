@@ -3,6 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "circleci.com/gh/googleapis/cloud-profiler-nodejs"
+    "circleci.com/gh/googleapis/cloud-profiler-nodejs",
+    "img.shields.io"
   ]
 }
