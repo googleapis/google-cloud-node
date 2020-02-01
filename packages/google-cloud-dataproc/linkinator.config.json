@@ -3,6 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "createCluster.js"
+    "createCluster.js",
+    "img.shields.io"
   ]
 }
