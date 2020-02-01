@@ -4,6 +4,7 @@
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
     "setEndpoint.js",
-    "https://www.tensorflow.org/js"
+    "https://www.tensorflow.org/js",
+    "img.shields.io"
   ]
 }
