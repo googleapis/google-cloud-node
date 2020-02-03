@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.4.0...v1.4.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* resource names helper functions; enum, bytes, and Long types now accept strings ([#117](https://www.github.com/googleapis/nodejs-datalabeling/issues/117)) ([e9793d6](https://www.github.com/googleapis/nodejs-datalabeling/commit/e9793d67bc76e781e8f52f700cf20915bac4c3b4))
+* update proto files ([3e53076](https://www.github.com/googleapis/nodejs-datalabeling/commit/3e530762affd4896b65921fe7a13717cb0fdcb0d))
+* updated proto files ([cc8f27d](https://www.github.com/googleapis/nodejs-datalabeling/commit/cc8f27d05c58a4cba2f5544fad07752f49ca56da))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.3.4...v1.4.0) (2020-01-17)
 
 
