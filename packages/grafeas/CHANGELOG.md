@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.5.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.1...v2.5.2) (2020-02-01)
+
+
+### Bug Fixes
+
+* update resource references in protos ([8252114](https://www.github.com/googleapis/nodejs-grafeas/commit/8252114799a771c2e5b91cda2912a7e87f1f579a))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.5.0...v2.5.1) (2020-01-28)
 
 
