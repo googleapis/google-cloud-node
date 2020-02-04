@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.5.0...v1.5.1) (2020-02-04)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([9a4af3e](https://www.github.com/googleapis/nodejs-redis/commit/9a4af3e30b531c6af0bb2f2dae1c92fb19b3b2ba))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.4.2...v1.5.0) (2020-01-27)
 
 
