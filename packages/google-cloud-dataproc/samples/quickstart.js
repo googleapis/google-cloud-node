@@ -12,10 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// [START dataproc_quickstart]
+// This quickstart sample walks a user through creating a Cloud Dataproc
+// cluster, submitting a PySpark job from Google Cloud Storage to the
+// cluster, reading the output of the job and deleting the cluster, all
+// using the Node.js client library.
+//
+// Usage:
+//     node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <GCS_JOB_FILE_PATH>
+
 'use strict';
 
 function main(projectId, region, clusterName, jobFilePath) {
-  // [START dataproc_quickstart]
   const dataproc = require('@google-cloud/dataproc').v1;
   const {Storage} = require('@google-cloud/storage');
 
@@ -32,12 +40,6 @@ function main(projectId, region, clusterName, jobFilePath) {
   });
 
   async function quickstart() {
-    // TODO(developer): Uncomment and set the following variables
-    // projectId = 'YOUR_PROJECT_ID'
-    // region = 'YOUR_CLUSTER_REGION'
-    // clusterName = 'YOUR_CLUSTER_NAME'
-    // jobFilePath = 'YOUR_JOB_FILE_PATH'
-
     // Create the cluster config
     const cluster = {
       projectId: projectId,
@@ -142,7 +144,16 @@ function main(projectId, region, clusterName, jobFilePath) {
   }
 
   quickstart();
-  // [END dataproc_quickstart]
 }
 
-main(...process.argv.slice(2));
+const args = process.argv.slice(2);
+
+if (args.length !== 4) {
+  console.log(
+    'Insufficient number of parameters provided. Please make sure a ' +
+      'PROJECT_ID, REGION, CLUSTER_NAME and JOB_FILE_PATH are provided, in this order.'
+  );
+}
+
+main(...args);
+// [END dataproc_quickstart]
