@@ -20,65 +20,29 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
-versions = ['v1beta1', 'v1']
+gapic = gcp.GAPICMicrogenerator()
+versions = ['v1beta1', 'v1', 'v1p1beta1']
+name = 'securitycenter'
 for version in versions:
-    library = gapic.node_library('securitycenter', version)
-    s.copy(library, excludes=['README.md', 'package.json', 'test/gapic-v1beta1.js'])
+    library = gapic.typescript_library(
+        name,
+        proto_path=f'google/cloud/{name}/{version}',
+        generator_args={
+            'grpc-service-config': f'google/cloud/{name}/{version}/{name}_grpc_service_config.json',
+            'package-name': f'@google-cloud/security-center',
+        },
+        extra_proto_files=['google/cloud/common_resources.proto'],
+        version=version)
+    # skip index, protos, package.json, and README.md
+    s.copy(
+        library,
+        excludes=['package.json', 'src/index.ts', 'README.md']
+    )
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
-s.copy(templates, excludes=['.kokoro/samples-test.sh'])
-
-s.replace('src/v1*/doc/google/cloud/securitycenter/v1*/doc_source.js',
-        r"\[\\p\{L\}\\p\{N\}\]\(https:\/\/cloud\.google\.com\{\\p\{L\}\\p\{N\}_- \]\{0\,30\}\[\\p\{L\}\\p\{N\}\]\)\?",
-        r"`\[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`")
-
-# cleanup some hiccups in jsdoc comments.
-s.replace("src/index.js",
-r"""\/\*\*
- \* @namespace google
- \*/""",
-r"""
-/**
- * @namespace google
- */
-/**
- * @namespace google.type
- */
-/**
- * @namespace google.longrunning
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.type
- */
-/**
- * @namespace google.rpc
- */
-/**
- * @namespace google.cloud.securitycenter.v1
- */
-/**
- * @namespace google.cloud.securitycenter.v1beta1
- */
-/**
- * @namespace google.iam.v1
- */
-""")
-
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-# [END fix-dead-link]
+templates = common_templates.node_library(source_location='build/src')
+s.copy(templates, excludes=['.kokoro/samples-test.sh', '.kokoro/samples-test.sh'])
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])

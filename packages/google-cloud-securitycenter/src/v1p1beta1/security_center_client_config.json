@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.securitycenter.v1.SecurityCenter": {
+    "google.cloud.securitycenter.v1p1beta1.SecurityCenter": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -30,7 +30,22 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateNotificationConfig": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteNotificationConfig": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetIamPolicy": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetNotificationConfig": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -65,6 +80,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListNotificationConfigs": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "ListSources": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
@@ -91,6 +111,11 @@
           "retry_params_name": "default"
         },
         "UpdateFinding": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateNotificationConfig": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
