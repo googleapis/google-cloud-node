@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.2...v3.0.0) (2020-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* convert library to TypeScript, adding v1p1beta1 import (#198)
+
+### Features
+
+* convert library to TypeScript, adding v1p1beta1 import ([#198](https://www.github.com/googleapis/nodejs-security-center/issues/198)) ([0adb7d0](https://www.github.com/googleapis/nodejs-security-center/commit/0adb7d0ea27a07ba0ad0ee235ddfde1f44cd3c24))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-security-center/compare/v2.3.1...v2.3.2) (2020-01-28)
 
 
