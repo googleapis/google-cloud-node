@@ -13,18 +13,12 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
-import * as mocha from 'mocha';
+import {describe, it, afterEach} from 'mocha';
 import * as sinon from 'sinon';
-
 import * as util from '../src';
 
 const noop = () => {};
 const sandbox = sinon.createSandbox();
-
-afterEach(() => {
-  sandbox.restore();
-});
 
 describe('promisifyAll', () => {
   const fakeArgs = [null, 1, 2, 3];
@@ -52,6 +46,10 @@ describe('promisifyAll', () => {
 
     util.promisifyAll(FakeClass);
     const fc = new FakeClass();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   it('should promisify the correct method', () => {
@@ -129,12 +127,10 @@ describe('promisifyAll', () => {
 describe('promisify', () => {
   const fakeContext = {};
   let func: Function;
-  // tslint:disable-next-line:no-any
-  let fakeArgs: any[];
+  let fakeArgs: Array<Error | number | null>;
 
   beforeEach(() => {
     fakeArgs = [null, 1, 2, 3];
-
     func = util.promisify(function(this: {}, callback: () => void) {
       // tslint:disable-next-line no-any
       (callback as any).apply(this, fakeArgs);
@@ -312,8 +308,7 @@ describe('callbackifyAll', () => {
 
 describe('callbackify', () => {
   let func: Function;
-  // tslint:disable-next-line:no-any
-  let fakeArgs: any[];
+  let fakeArgs: number[];
 
   beforeEach(() => {
     fakeArgs = [1, 2, 3];
@@ -345,8 +340,7 @@ describe('callbackify', () => {
 
   it('should call the provided callback with undefined', done => {
     func = util.callbackify(async function(this: {}) {});
-    // tslint:disable-next-line:no-any
-    func((err: Error, resp: any) => {
+    func((err: Error, resp: {}) => {
       assert.strictEqual(err, null);
       assert.strictEqual(resp, undefined);
       done();
@@ -375,7 +369,6 @@ describe('callbackify', () => {
   it('should call the callback only a single time when the promise resolves but callback throws an error', () => {
     const error = new Error('err');
     const callback = sinon.stub().throws(error);
-
     const originalRejection = process.listeners('unhandledRejection').pop();
     process.removeListener('unhandledRejection', originalRejection!);
     process.once('unhandledRejection', err => {
@@ -383,7 +376,6 @@ describe('callbackify', () => {
       assert.ok(callback.calledOnce);
       process.listeners('unhandledRejection').push(originalRejection!);
     });
-
     func(callback);
   });
 });

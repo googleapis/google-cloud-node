@@ -5,3 +5,4 @@ docs
 package-lock.json
 .vscode
 __pycache__
+.coverage
