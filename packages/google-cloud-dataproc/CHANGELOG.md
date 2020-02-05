@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.7...v1.5.0) (2020-02-04)
+
+
+### Features
+
+* added cli functionality to dataproc quickstart sample ([#291](https://www.github.com/googleapis/nodejs-dataproc/issues/291)) ([44df468](https://www.github.com/googleapis/nodejs-dataproc/commit/44df4684b65df598f7fba6337e6275e419589170))
+
 ### [1.4.7](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.4.6...v1.4.7) (2020-01-28)
 
 
