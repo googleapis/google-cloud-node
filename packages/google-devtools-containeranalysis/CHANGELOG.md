@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.7.0...v1.7.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* proto annotations; enum, bytes, and Long types now accept strings ([34b461f](https://www.github.com/googleapis/nodejs-containeranalysis/commit/34b461f4f721fbf0bd1908518d1a9f16ff180270))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.6.1...v1.7.0) (2020-01-02)
 
 
