@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/translate",
   "description": "Cloud Translation API Client Library for Node.js",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -74,7 +74,7 @@
     "linkinator": "^1.5.0",
     "mocha": "^7.0.0",
     "pack-n-play": "^1.0.0-2",
-        "prettier": "^1.13.5",
+    "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
     "typescript": "3.6.4"
   }

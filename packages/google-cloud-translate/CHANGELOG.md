@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.5](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.4...v5.1.5) (2020-02-04)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([19891e0](https://www.github.com/googleapis/nodejs-translate/commit/19891e07b2f1aaad5552999f1701dc81b5447754))
+
 ### [5.1.4](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.3...v5.1.4) (2020-01-04)
 
 
