@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.2...v2.1.3) (2020-02-01)
+
+
+### Bug Fixes
+
+* enum, bytes, and Long types now accept strings ([3839359](https://www.github.com/googleapis/nodejs-text-to-speech/commit/3839359a2cc8397f93fdb656a9b4c3a04b0ef488))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v2.1.1...v2.1.2) (2020-01-03)
 
 
