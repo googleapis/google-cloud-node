@@ -14,7 +14,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "SessionProto",
                     "java_package": "com.google.cloud.dialogflow.v2",
-                    "objc_class_prefix": "DF"
+                    "objc_class_prefix": "DF",
+                    "(google.api.resource_definition).type": "dialogflow.googleapis.com/Session",
+                    "(google.api.resource_definition).pattern": "projects/{project}/agent/sessions/{session}"
                   },
                   "nested": {
                     "Agents": {
@@ -2778,7 +2780,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Session"
                           }
                         },
                         "queryParams": {
@@ -3178,7 +3181,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "SessionProto",
                     "java_package": "com.google.cloud.dialogflow.v2beta1",
-                    "objc_class_prefix": "DF"
+                    "objc_class_prefix": "DF",
+                    "(google.api.resource_definition).type": "dialogflow.googleapis.com/Session",
+                    "(google.api.resource_definition).pattern": "projects/{project}/agent/sessions/{session}"
                   },
                   "nested": {
                     "Agents": {

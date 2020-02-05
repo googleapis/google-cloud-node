@@ -16,6 +16,8 @@
 // to be loaded as the JS file.
 
 /**
+ * ============================================================================
+ * Requests and responses for custom methods.
  * The request to detect user's intent.
  *
  * @property {string} session
