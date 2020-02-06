@@ -1293,7 +1293,7 @@ describe('File', () => {
 
     describe('validation', () => {
       const data = 'test';
-      let fakeValidationStream: stream.Stream;
+      let fakeValidationStream: stream.Stream & {test: Function};
 
       beforeEach(() => {
         file.metadata.mediaLink = 'http://uri';
@@ -1306,14 +1306,58 @@ describe('File', () => {
           callback();
         };
 
-        fakeValidationStream = through();
-        // tslint:disable-next-line no-any
-        (fakeValidationStream as any).test = () => {
-          return true;
-        };
+        fakeValidationStream = Object.assign(through(), {test: () => true});
         hashStreamValidationOverride = () => {
           return fakeValidationStream;
         };
+      });
+
+      describe('server decompression', () => {
+        beforeEach(() => {
+          handleRespOverride = (
+            err: Error,
+            res: {},
+            body: {},
+            callback: Function
+          ) => {
+            const rawResponseStream = through();
+            Object.assign(rawResponseStream, {
+              toJSON() {
+                return {
+                  headers: {},
+                };
+              },
+            });
+            callback(null, null, rawResponseStream);
+            setImmediate(() => {
+              rawResponseStream.end(data);
+            });
+          };
+          file.requestStream = getFakeSuccessfulRequest(data);
+        });
+
+        it('should skip validation if file was stored compressed', done => {
+          const validateStub = sinon.stub().returns(true);
+          fakeValidationStream.test = validateStub;
+
+          file.getMetadata = (options: {}, callback: Function) => {
+            file.metadata = {
+              crc32c: '####wA==',
+              md5Hash: 'CY9rzUYh03PK3k6DJie09g==',
+              contentEncoding: 'gzip',
+            };
+            callback();
+          };
+
+          file
+            .createReadStream({validation: 'crc32c'})
+            .on('error', done)
+            .on('end', () => {
+              assert(validateStub.notCalled);
+              done();
+            })
+            .resume();
+        });
       });
 
       it('should emit errors from the validation stream', done => {

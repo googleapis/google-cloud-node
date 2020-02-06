@@ -1212,6 +1212,7 @@ class File extends ServiceObject<File> {
     // once Node 8 support is discontinued
     const throughStream = streamEvents(through()) as Duplex;
 
+    let isServedCompressed = true;
     let crc32c = true;
     let md5 = false;
 
@@ -1294,7 +1295,7 @@ class File extends ServiceObject<File> {
       //      applicable, to the user.
       const onResponse = (
         err: Error | null,
-        body: ResponseBody,
+        _body: ResponseBody,
         rawResponseStream: Metadata
       ) => {
         if (err) {
@@ -1312,7 +1313,7 @@ class File extends ServiceObject<File> {
         rawResponseStream.on('error', onComplete);
 
         const headers = rawResponseStream.toJSON().headers;
-        const isCompressed = headers['content-encoding'] === 'gzip';
+        isServedCompressed = headers['content-encoding'] === 'gzip';
         const shouldRunValidation = !rangeRequest && (crc32c || md5);
         const throughStreams: Writable[] = [];
 
@@ -1321,7 +1322,7 @@ class File extends ServiceObject<File> {
           throughStreams.push(validateStream);
         }
 
-        if (isCompressed && options.decompress) {
+        if (isServedCompressed && options.decompress) {
           throughStreams.push(zlib.createGunzip());
         }
 
@@ -1368,6 +1369,16 @@ class File extends ServiceObject<File> {
         }
 
         onCompleteCalled = true;
+
+        // TODO(https://github.com/googleapis/nodejs-storage/issues/709):
+        // Remove once the backend issue is fixed.
+        // If object is stored compressed (having metadata.contentEncoding === 'gzip')
+        // and was served decompressed, then skip checksum validation because the
+        // remote checksum is computed against the compressed version of the object.
+        if (this.metadata.contentEncoding === 'gzip' && !isServedCompressed) {
+          throughStream.end();
+          return;
+        }
 
         const hashes = {
           crc32c: this.metadata.crc32c,
@@ -1602,6 +1613,8 @@ class File extends ServiceObject<File> {
    *     supported for composite objects. An error will be raised if MD5 is
    *     specified but is not available. You may also choose to skip validation
    *     completely, however this is **not recommended**.
+   *     NOTE: Validation is automatically skipped for objects that were
+   *     uploaded using the `gzip` option and have already compressed content.
    */
   /**
    * Create a writable stream to overwrite the contents of the file in your
