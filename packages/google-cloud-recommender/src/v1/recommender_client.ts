@@ -145,11 +145,11 @@ export class RecommenderClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      recommenderPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/recommenders/{recommender}'
-      ),
       recommendationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/recommenders/{recommender}/recommendations/{recommendation}'
+      ),
+      recommenderPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/recommenders/{recommender}'
       ),
     };
 
@@ -811,9 +811,17 @@ export class RecommenderClient {
    */
   listRecommendationsStream(
     request?: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listRecommendations.createStream(
       this._innerApiCalls.listRecommendations as gax.GaxCall,
@@ -824,58 +832,6 @@ export class RecommenderClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified recommender resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} recommender
-   * @returns {string} Resource name string.
-   */
-  recommenderPath(project: string, location: string, recommender: string) {
-    return this._pathTemplates.recommenderPathTemplate.render({
-      project,
-      location,
-      recommender,
-    });
-  }
-
-  /**
-   * Parse the project from Recommender resource.
-   *
-   * @param {string} recommenderName
-   *   A fully-qualified path representing Recommender resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Recommender resource.
-   *
-   * @param {string} recommenderName
-   *   A fully-qualified path representing Recommender resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
-      .location;
-  }
-
-  /**
-   * Parse the recommender from Recommender resource.
-   *
-   * @param {string} recommenderName
-   *   A fully-qualified path representing Recommender resource.
-   * @returns {string} A string representing the recommender.
-   */
-  matchRecommenderFromRecommenderName(recommenderName: string) {
-    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
-      .recommender;
-  }
 
   /**
    * Return a fully-qualified recommendation resource name string.
@@ -950,6 +906,58 @@ export class RecommenderClient {
     return this._pathTemplates.recommendationPathTemplate.match(
       recommendationName
     ).recommendation;
+  }
+
+  /**
+   * Return a fully-qualified recommender resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} recommender
+   * @returns {string} Resource name string.
+   */
+  recommenderPath(project: string, location: string, recommender: string) {
+    return this._pathTemplates.recommenderPathTemplate.render({
+      project,
+      location,
+      recommender,
+    });
+  }
+
+  /**
+   * Parse the project from Recommender resource.
+   *
+   * @param {string} recommenderName
+   *   A fully-qualified path representing Recommender resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRecommenderName(recommenderName: string) {
+    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Recommender resource.
+   *
+   * @param {string} recommenderName
+   *   A fully-qualified path representing Recommender resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRecommenderName(recommenderName: string) {
+    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+      .location;
+  }
+
+  /**
+   * Parse the recommender from Recommender resource.
+   *
+   * @param {string} recommenderName
+   *   A fully-qualified path representing Recommender resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromRecommenderName(recommenderName: string) {
+    return this._pathTemplates.recommenderPathTemplate.match(recommenderName)
+      .recommender;
   }
 
   /**

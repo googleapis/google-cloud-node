@@ -89,6 +89,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -111,6 +112,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IGetRecommendationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -135,6 +137,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -157,6 +160,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -184,6 +188,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -206,6 +211,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -233,6 +239,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -255,6 +262,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IMarkRecommendationFailedRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -282,6 +290,7 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -308,8 +317,9 @@ describe('v1.RecommenderClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.recommender.v1.IListRecommendationsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listRecommendations = (
         actualRequest: {},
@@ -328,7 +338,7 @@ describe('v1.RecommenderClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
