@@ -18,6 +18,7 @@
   * [Quickstart](#quickstart)
   * [Recognize](#recognize)
   * [Recognize.v1p1beta1](#recognize.v1p1beta1)
+  * [Transcribe Context Classes](#transcribe-context-classes)
 
 ## Before you begin
 
@@ -129,6 +130,23 @@ __Usage:__
 
 
 `node samples/recognize.v1p1beta1.js`
+
+
+-----
+
+
+
+
+### Transcribe Context Classes
+
+View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/transcribeContextClasses.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/transcribeContextClasses.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/transcribeContextClasses.js`
 
 
 
