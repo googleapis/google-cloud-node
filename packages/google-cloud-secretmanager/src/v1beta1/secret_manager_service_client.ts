@@ -1445,9 +1445,17 @@ export class SecretManagerServiceClient {
    */
   listSecretsStream(
     request?: protosTypes.google.cloud.secrets.v1beta1.IListSecretsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listSecrets.createStream(
       this._innerApiCalls.listSecrets as gax.GaxCall,
@@ -1582,9 +1590,17 @@ export class SecretManagerServiceClient {
    */
   listSecretVersionsStream(
     request?: protosTypes.google.cloud.secrets.v1beta1.IListSecretVersionsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listSecretVersions.createStream(
       this._innerApiCalls.listSecretVersions as gax.GaxCall,

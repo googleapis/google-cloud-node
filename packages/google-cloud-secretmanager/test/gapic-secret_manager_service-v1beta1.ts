@@ -96,6 +96,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.ICreateSecretRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -120,6 +121,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.ICreateSecretRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -146,6 +148,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAddSecretVersionRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -170,6 +173,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAddSecretVersionRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -196,6 +200,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -220,6 +225,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -300,6 +306,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDeleteSecretRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -324,6 +331,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDeleteSecretRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -350,6 +358,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -374,6 +383,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IGetSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -400,6 +410,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -424,6 +435,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -450,6 +462,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -474,6 +487,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -500,6 +514,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -524,6 +539,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -550,6 +566,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -574,6 +591,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -600,6 +618,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -624,6 +643,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -650,6 +670,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -674,6 +695,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -700,6 +722,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -724,6 +747,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -750,6 +774,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -778,8 +803,9 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listSecrets = (
         actualRequest: {},
@@ -798,7 +824,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listSecretVersions', () => {
@@ -811,6 +837,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretVersionsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -839,8 +866,9 @@ describe('v1beta1.SecretManagerServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.secrets.v1beta1.IListSecretVersionsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listSecretVersions = (
         actualRequest: {},
@@ -859,7 +887,7 @@ describe('v1beta1.SecretManagerServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
