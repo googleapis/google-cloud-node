@@ -1,4 +1,4 @@
 [
-  "../../protos/google/cloud/iot/v1/resources.proto",
-  "../../protos/google/cloud/iot/v1/device_manager.proto"
+  "../../protos/google/cloud/iot/v1/device_manager.proto",
+  "../../protos/google/cloud/iot/v1/resources.proto"
 ]

@@ -66,4095 +66,6 @@
                      */
                     var v1 = {};
     
-                    v1.Device = (function() {
-    
-                        /**
-                         * Properties of a Device.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IDevice
-                         * @property {string|null} [id] Device id
-                         * @property {string|null} [name] Device name
-                         * @property {number|Long|null} [numId] Device numId
-                         * @property {Array.<google.cloud.iot.v1.IDeviceCredential>|null} [credentials] Device credentials
-                         * @property {google.protobuf.ITimestamp|null} [lastHeartbeatTime] Device lastHeartbeatTime
-                         * @property {google.protobuf.ITimestamp|null} [lastEventTime] Device lastEventTime
-                         * @property {google.protobuf.ITimestamp|null} [lastStateTime] Device lastStateTime
-                         * @property {google.protobuf.ITimestamp|null} [lastConfigAckTime] Device lastConfigAckTime
-                         * @property {google.protobuf.ITimestamp|null} [lastConfigSendTime] Device lastConfigSendTime
-                         * @property {boolean|null} [blocked] Device blocked
-                         * @property {google.protobuf.ITimestamp|null} [lastErrorTime] Device lastErrorTime
-                         * @property {google.rpc.IStatus|null} [lastErrorStatus] Device lastErrorStatus
-                         * @property {google.cloud.iot.v1.IDeviceConfig|null} [config] Device config
-                         * @property {google.cloud.iot.v1.IDeviceState|null} [state] Device state
-                         * @property {google.cloud.iot.v1.LogLevel|null} [logLevel] Device logLevel
-                         * @property {Object.<string,string>|null} [metadata] Device metadata
-                         * @property {google.cloud.iot.v1.IGatewayConfig|null} [gatewayConfig] Device gatewayConfig
-                         */
-    
-                        /**
-                         * Constructs a new Device.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a Device.
-                         * @implements IDevice
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IDevice=} [properties] Properties to set
-                         */
-                        function Device(properties) {
-                            this.credentials = [];
-                            this.metadata = {};
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Device id.
-                         * @member {string} id
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.id = "";
-    
-                        /**
-                         * Device name.
-                         * @member {string} name
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.name = "";
-    
-                        /**
-                         * Device numId.
-                         * @member {number|Long} numId
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.numId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-    
-                        /**
-                         * Device credentials.
-                         * @member {Array.<google.cloud.iot.v1.IDeviceCredential>} credentials
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.credentials = $util.emptyArray;
-    
-                        /**
-                         * Device lastHeartbeatTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastHeartbeatTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastHeartbeatTime = null;
-    
-                        /**
-                         * Device lastEventTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastEventTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastEventTime = null;
-    
-                        /**
-                         * Device lastStateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastStateTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastStateTime = null;
-    
-                        /**
-                         * Device lastConfigAckTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastConfigAckTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastConfigAckTime = null;
-    
-                        /**
-                         * Device lastConfigSendTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastConfigSendTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastConfigSendTime = null;
-    
-                        /**
-                         * Device blocked.
-                         * @member {boolean} blocked
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.blocked = false;
-    
-                        /**
-                         * Device lastErrorTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastErrorTime
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastErrorTime = null;
-    
-                        /**
-                         * Device lastErrorStatus.
-                         * @member {google.rpc.IStatus|null|undefined} lastErrorStatus
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.lastErrorStatus = null;
-    
-                        /**
-                         * Device config.
-                         * @member {google.cloud.iot.v1.IDeviceConfig|null|undefined} config
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.config = null;
-    
-                        /**
-                         * Device state.
-                         * @member {google.cloud.iot.v1.IDeviceState|null|undefined} state
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.state = null;
-    
-                        /**
-                         * Device logLevel.
-                         * @member {google.cloud.iot.v1.LogLevel} logLevel
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.logLevel = 0;
-    
-                        /**
-                         * Device metadata.
-                         * @member {Object.<string,string>} metadata
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.metadata = $util.emptyObject;
-    
-                        /**
-                         * Device gatewayConfig.
-                         * @member {google.cloud.iot.v1.IGatewayConfig|null|undefined} gatewayConfig
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         */
-                        Device.prototype.gatewayConfig = null;
-    
-                        /**
-                         * Creates a new Device instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {google.cloud.iot.v1.IDevice=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.Device} Device instance
-                         */
-                        Device.create = function create(properties) {
-                            return new Device(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Device message. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {google.cloud.iot.v1.IDevice} message Device message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Device.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                            if (message.numId != null && message.hasOwnProperty("numId"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.numId);
-                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastHeartbeatTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastEventTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastErrorTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus"))
-                                $root.google.rpc.Status.encode(message.lastErrorStatus, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
-                            if (message.credentials != null && message.credentials.length)
-                                for (var i = 0; i < message.credentials.length; ++i)
-                                    $root.google.cloud.iot.v1.DeviceCredential.encode(message.credentials[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
-                            if (message.config != null && message.hasOwnProperty("config"))
-                                $root.google.cloud.iot.v1.DeviceConfig.encode(message.config, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
-                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastConfigAckTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                $root.google.cloud.iot.v1.DeviceState.encode(message.state, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
-                            if (message.metadata != null && message.hasOwnProperty("metadata"))
-                                for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
-                                    writer.uint32(/* id 17, wireType 2 =*/138).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
-                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastConfigSendTime, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
-                            if (message.blocked != null && message.hasOwnProperty("blocked"))
-                                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.blocked);
-                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastStateTime, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.logLevel);
-                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig"))
-                                $root.google.cloud.iot.v1.GatewayConfig.encode(message.gatewayConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Device message, length delimited. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {google.cloud.iot.v1.IDevice} message Device message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Device.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Device message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.Device} Device
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Device.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.Device(), key;
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.id = reader.string();
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 3:
-                                    message.numId = reader.uint64();
-                                    break;
-                                case 12:
-                                    if (!(message.credentials && message.credentials.length))
-                                        message.credentials = [];
-                                    message.credentials.push($root.google.cloud.iot.v1.DeviceCredential.decode(reader, reader.uint32()));
-                                    break;
-                                case 7:
-                                    message.lastHeartbeatTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.lastEventTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 20:
-                                    message.lastStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 14:
-                                    message.lastConfigAckTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 18:
-                                    message.lastConfigSendTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 19:
-                                    message.blocked = reader.bool();
-                                    break;
-                                case 10:
-                                    message.lastErrorTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 11:
-                                    message.lastErrorStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
-                                    break;
-                                case 13:
-                                    message.config = $root.google.cloud.iot.v1.DeviceConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 16:
-                                    message.state = $root.google.cloud.iot.v1.DeviceState.decode(reader, reader.uint32());
-                                    break;
-                                case 21:
-                                    message.logLevel = reader.int32();
-                                    break;
-                                case 17:
-                                    reader.skip().pos++;
-                                    if (message.metadata === $util.emptyObject)
-                                        message.metadata = {};
-                                    key = reader.string();
-                                    reader.pos++;
-                                    message.metadata[key] = reader.string();
-                                    break;
-                                case 24:
-                                    message.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Device message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.Device} Device
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Device.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Device message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Device.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                if (!$util.isString(message.id))
-                                    return "id: string expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.numId != null && message.hasOwnProperty("numId"))
-                                if (!$util.isInteger(message.numId) && !(message.numId && $util.isInteger(message.numId.low) && $util.isInteger(message.numId.high)))
-                                    return "numId: integer|Long expected";
-                            if (message.credentials != null && message.hasOwnProperty("credentials")) {
-                                if (!Array.isArray(message.credentials))
-                                    return "credentials: array expected";
-                                for (var i = 0; i < message.credentials.length; ++i) {
-                                    var error = $root.google.cloud.iot.v1.DeviceCredential.verify(message.credentials[i]);
-                                    if (error)
-                                        return "credentials." + error;
-                                }
-                            }
-                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastHeartbeatTime);
-                                if (error)
-                                    return "lastHeartbeatTime." + error;
-                            }
-                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastEventTime);
-                                if (error)
-                                    return "lastEventTime." + error;
-                            }
-                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastStateTime);
-                                if (error)
-                                    return "lastStateTime." + error;
-                            }
-                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastConfigAckTime);
-                                if (error)
-                                    return "lastConfigAckTime." + error;
-                            }
-                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastConfigSendTime);
-                                if (error)
-                                    return "lastConfigSendTime." + error;
-                            }
-                            if (message.blocked != null && message.hasOwnProperty("blocked"))
-                                if (typeof message.blocked !== "boolean")
-                                    return "blocked: boolean expected";
-                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastErrorTime);
-                                if (error)
-                                    return "lastErrorTime." + error;
-                            }
-                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus")) {
-                                var error = $root.google.rpc.Status.verify(message.lastErrorStatus);
-                                if (error)
-                                    return "lastErrorStatus." + error;
-                            }
-                            if (message.config != null && message.hasOwnProperty("config")) {
-                                var error = $root.google.cloud.iot.v1.DeviceConfig.verify(message.config);
-                                if (error)
-                                    return "config." + error;
-                            }
-                            if (message.state != null && message.hasOwnProperty("state")) {
-                                var error = $root.google.cloud.iot.v1.DeviceState.verify(message.state);
-                                if (error)
-                                    return "state." + error;
-                            }
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                switch (message.logLevel) {
-                                default:
-                                    return "logLevel: enum value expected";
-                                case 0:
-                                case 10:
-                                case 20:
-                                case 30:
-                                case 40:
-                                    break;
-                                }
-                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
-                                if (!$util.isObject(message.metadata))
-                                    return "metadata: object expected";
-                                var key = Object.keys(message.metadata);
-                                for (var i = 0; i < key.length; ++i)
-                                    if (!$util.isString(message.metadata[key[i]]))
-                                        return "metadata: string{k:string} expected";
-                            }
-                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig")) {
-                                var error = $root.google.cloud.iot.v1.GatewayConfig.verify(message.gatewayConfig);
-                                if (error)
-                                    return "gatewayConfig." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Device message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.Device} Device
-                         */
-                        Device.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.Device)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.Device();
-                            if (object.id != null)
-                                message.id = String(object.id);
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.numId != null)
-                                if ($util.Long)
-                                    (message.numId = $util.Long.fromValue(object.numId)).unsigned = true;
-                                else if (typeof object.numId === "string")
-                                    message.numId = parseInt(object.numId, 10);
-                                else if (typeof object.numId === "number")
-                                    message.numId = object.numId;
-                                else if (typeof object.numId === "object")
-                                    message.numId = new $util.LongBits(object.numId.low >>> 0, object.numId.high >>> 0).toNumber(true);
-                            if (object.credentials) {
-                                if (!Array.isArray(object.credentials))
-                                    throw TypeError(".google.cloud.iot.v1.Device.credentials: array expected");
-                                message.credentials = [];
-                                for (var i = 0; i < object.credentials.length; ++i) {
-                                    if (typeof object.credentials[i] !== "object")
-                                        throw TypeError(".google.cloud.iot.v1.Device.credentials: object expected");
-                                    message.credentials[i] = $root.google.cloud.iot.v1.DeviceCredential.fromObject(object.credentials[i]);
-                                }
-                            }
-                            if (object.lastHeartbeatTime != null) {
-                                if (typeof object.lastHeartbeatTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastHeartbeatTime: object expected");
-                                message.lastHeartbeatTime = $root.google.protobuf.Timestamp.fromObject(object.lastHeartbeatTime);
-                            }
-                            if (object.lastEventTime != null) {
-                                if (typeof object.lastEventTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastEventTime: object expected");
-                                message.lastEventTime = $root.google.protobuf.Timestamp.fromObject(object.lastEventTime);
-                            }
-                            if (object.lastStateTime != null) {
-                                if (typeof object.lastStateTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastStateTime: object expected");
-                                message.lastStateTime = $root.google.protobuf.Timestamp.fromObject(object.lastStateTime);
-                            }
-                            if (object.lastConfigAckTime != null) {
-                                if (typeof object.lastConfigAckTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastConfigAckTime: object expected");
-                                message.lastConfigAckTime = $root.google.protobuf.Timestamp.fromObject(object.lastConfigAckTime);
-                            }
-                            if (object.lastConfigSendTime != null) {
-                                if (typeof object.lastConfigSendTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastConfigSendTime: object expected");
-                                message.lastConfigSendTime = $root.google.protobuf.Timestamp.fromObject(object.lastConfigSendTime);
-                            }
-                            if (object.blocked != null)
-                                message.blocked = Boolean(object.blocked);
-                            if (object.lastErrorTime != null) {
-                                if (typeof object.lastErrorTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastErrorTime: object expected");
-                                message.lastErrorTime = $root.google.protobuf.Timestamp.fromObject(object.lastErrorTime);
-                            }
-                            if (object.lastErrorStatus != null) {
-                                if (typeof object.lastErrorStatus !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.lastErrorStatus: object expected");
-                                message.lastErrorStatus = $root.google.rpc.Status.fromObject(object.lastErrorStatus);
-                            }
-                            if (object.config != null) {
-                                if (typeof object.config !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.config: object expected");
-                                message.config = $root.google.cloud.iot.v1.DeviceConfig.fromObject(object.config);
-                            }
-                            if (object.state != null) {
-                                if (typeof object.state !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.state: object expected");
-                                message.state = $root.google.cloud.iot.v1.DeviceState.fromObject(object.state);
-                            }
-                            switch (object.logLevel) {
-                            case "LOG_LEVEL_UNSPECIFIED":
-                            case 0:
-                                message.logLevel = 0;
-                                break;
-                            case "NONE":
-                            case 10:
-                                message.logLevel = 10;
-                                break;
-                            case "ERROR":
-                            case 20:
-                                message.logLevel = 20;
-                                break;
-                            case "INFO":
-                            case 30:
-                                message.logLevel = 30;
-                                break;
-                            case "DEBUG":
-                            case 40:
-                                message.logLevel = 40;
-                                break;
-                            }
-                            if (object.metadata) {
-                                if (typeof object.metadata !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.metadata: object expected");
-                                message.metadata = {};
-                                for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
-                                    message.metadata[keys[i]] = String(object.metadata[keys[i]]);
-                            }
-                            if (object.gatewayConfig != null) {
-                                if (typeof object.gatewayConfig !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.Device.gatewayConfig: object expected");
-                                message.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.fromObject(object.gatewayConfig);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Device message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.Device
-                         * @static
-                         * @param {google.cloud.iot.v1.Device} message Device
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Device.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.credentials = [];
-                            if (options.objects || options.defaults)
-                                object.metadata = {};
-                            if (options.defaults) {
-                                object.id = "";
-                                object.name = "";
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, true);
-                                    object.numId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.numId = options.longs === String ? "0" : 0;
-                                object.lastHeartbeatTime = null;
-                                object.lastEventTime = null;
-                                object.lastErrorTime = null;
-                                object.lastErrorStatus = null;
-                                object.config = null;
-                                object.lastConfigAckTime = null;
-                                object.state = null;
-                                object.lastConfigSendTime = null;
-                                object.blocked = false;
-                                object.lastStateTime = null;
-                                object.logLevel = options.enums === String ? "LOG_LEVEL_UNSPECIFIED" : 0;
-                                object.gatewayConfig = null;
-                            }
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                object.id = message.id;
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.numId != null && message.hasOwnProperty("numId"))
-                                if (typeof message.numId === "number")
-                                    object.numId = options.longs === String ? String(message.numId) : message.numId;
-                                else
-                                    object.numId = options.longs === String ? $util.Long.prototype.toString.call(message.numId) : options.longs === Number ? new $util.LongBits(message.numId.low >>> 0, message.numId.high >>> 0).toNumber(true) : message.numId;
-                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime"))
-                                object.lastHeartbeatTime = $root.google.protobuf.Timestamp.toObject(message.lastHeartbeatTime, options);
-                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime"))
-                                object.lastEventTime = $root.google.protobuf.Timestamp.toObject(message.lastEventTime, options);
-                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime"))
-                                object.lastErrorTime = $root.google.protobuf.Timestamp.toObject(message.lastErrorTime, options);
-                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus"))
-                                object.lastErrorStatus = $root.google.rpc.Status.toObject(message.lastErrorStatus, options);
-                            if (message.credentials && message.credentials.length) {
-                                object.credentials = [];
-                                for (var j = 0; j < message.credentials.length; ++j)
-                                    object.credentials[j] = $root.google.cloud.iot.v1.DeviceCredential.toObject(message.credentials[j], options);
-                            }
-                            if (message.config != null && message.hasOwnProperty("config"))
-                                object.config = $root.google.cloud.iot.v1.DeviceConfig.toObject(message.config, options);
-                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime"))
-                                object.lastConfigAckTime = $root.google.protobuf.Timestamp.toObject(message.lastConfigAckTime, options);
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = $root.google.cloud.iot.v1.DeviceState.toObject(message.state, options);
-                            var keys2;
-                            if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
-                                object.metadata = {};
-                                for (var j = 0; j < keys2.length; ++j)
-                                    object.metadata[keys2[j]] = message.metadata[keys2[j]];
-                            }
-                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime"))
-                                object.lastConfigSendTime = $root.google.protobuf.Timestamp.toObject(message.lastConfigSendTime, options);
-                            if (message.blocked != null && message.hasOwnProperty("blocked"))
-                                object.blocked = message.blocked;
-                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime"))
-                                object.lastStateTime = $root.google.protobuf.Timestamp.toObject(message.lastStateTime, options);
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
-                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig"))
-                                object.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.toObject(message.gatewayConfig, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Device to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.Device
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Device.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return Device;
-                    })();
-    
-                    v1.GatewayConfig = (function() {
-    
-                        /**
-                         * Properties of a GatewayConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IGatewayConfig
-                         * @property {google.cloud.iot.v1.GatewayType|null} [gatewayType] GatewayConfig gatewayType
-                         * @property {google.cloud.iot.v1.GatewayAuthMethod|null} [gatewayAuthMethod] GatewayConfig gatewayAuthMethod
-                         * @property {string|null} [lastAccessedGatewayId] GatewayConfig lastAccessedGatewayId
-                         * @property {google.protobuf.ITimestamp|null} [lastAccessedGatewayTime] GatewayConfig lastAccessedGatewayTime
-                         */
-    
-                        /**
-                         * Constructs a new GatewayConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a GatewayConfig.
-                         * @implements IGatewayConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IGatewayConfig=} [properties] Properties to set
-                         */
-                        function GatewayConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GatewayConfig gatewayType.
-                         * @member {google.cloud.iot.v1.GatewayType} gatewayType
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @instance
-                         */
-                        GatewayConfig.prototype.gatewayType = 0;
-    
-                        /**
-                         * GatewayConfig gatewayAuthMethod.
-                         * @member {google.cloud.iot.v1.GatewayAuthMethod} gatewayAuthMethod
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @instance
-                         */
-                        GatewayConfig.prototype.gatewayAuthMethod = 0;
-    
-                        /**
-                         * GatewayConfig lastAccessedGatewayId.
-                         * @member {string} lastAccessedGatewayId
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @instance
-                         */
-                        GatewayConfig.prototype.lastAccessedGatewayId = "";
-    
-                        /**
-                         * GatewayConfig lastAccessedGatewayTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} lastAccessedGatewayTime
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @instance
-                         */
-                        GatewayConfig.prototype.lastAccessedGatewayTime = null;
-    
-                        /**
-                         * Creates a new GatewayConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IGatewayConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig instance
-                         */
-                        GatewayConfig.create = function create(properties) {
-                            return new GatewayConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GatewayConfig message. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IGatewayConfig} message GatewayConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GatewayConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.gatewayType);
-                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gatewayAuthMethod);
-                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.lastAccessedGatewayId);
-                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime"))
-                                $root.google.protobuf.Timestamp.encode(message.lastAccessedGatewayTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GatewayConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IGatewayConfig} message GatewayConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GatewayConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GatewayConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GatewayConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.GatewayConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.gatewayType = reader.int32();
-                                    break;
-                                case 2:
-                                    message.gatewayAuthMethod = reader.int32();
-                                    break;
-                                case 3:
-                                    message.lastAccessedGatewayId = reader.string();
-                                    break;
-                                case 4:
-                                    message.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GatewayConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GatewayConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GatewayConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GatewayConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
-                                switch (message.gatewayType) {
-                                default:
-                                    return "gatewayType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
-                                switch (message.gatewayAuthMethod) {
-                                default:
-                                    return "gatewayAuthMethod: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
-                                if (!$util.isString(message.lastAccessedGatewayId))
-                                    return "lastAccessedGatewayId: string expected";
-                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.lastAccessedGatewayTime);
-                                if (error)
-                                    return "lastAccessedGatewayTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GatewayConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
-                         */
-                        GatewayConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.GatewayConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.GatewayConfig();
-                            switch (object.gatewayType) {
-                            case "GATEWAY_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.gatewayType = 0;
-                                break;
-                            case "GATEWAY":
-                            case 1:
-                                message.gatewayType = 1;
-                                break;
-                            case "NON_GATEWAY":
-                            case 2:
-                                message.gatewayType = 2;
-                                break;
-                            }
-                            switch (object.gatewayAuthMethod) {
-                            case "GATEWAY_AUTH_METHOD_UNSPECIFIED":
-                            case 0:
-                                message.gatewayAuthMethod = 0;
-                                break;
-                            case "ASSOCIATION_ONLY":
-                            case 1:
-                                message.gatewayAuthMethod = 1;
-                                break;
-                            case "DEVICE_AUTH_TOKEN_ONLY":
-                            case 2:
-                                message.gatewayAuthMethod = 2;
-                                break;
-                            case "ASSOCIATION_AND_DEVICE_AUTH_TOKEN":
-                            case 3:
-                                message.gatewayAuthMethod = 3;
-                                break;
-                            }
-                            if (object.lastAccessedGatewayId != null)
-                                message.lastAccessedGatewayId = String(object.lastAccessedGatewayId);
-                            if (object.lastAccessedGatewayTime != null) {
-                                if (typeof object.lastAccessedGatewayTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.GatewayConfig.lastAccessedGatewayTime: object expected");
-                                message.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.fromObject(object.lastAccessedGatewayTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GatewayConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.GatewayConfig} message GatewayConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GatewayConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.gatewayType = options.enums === String ? "GATEWAY_TYPE_UNSPECIFIED" : 0;
-                                object.gatewayAuthMethod = options.enums === String ? "GATEWAY_AUTH_METHOD_UNSPECIFIED" : 0;
-                                object.lastAccessedGatewayId = "";
-                                object.lastAccessedGatewayTime = null;
-                            }
-                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
-                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
-                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
-                                object.gatewayAuthMethod = options.enums === String ? $root.google.cloud.iot.v1.GatewayAuthMethod[message.gatewayAuthMethod] : message.gatewayAuthMethod;
-                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
-                                object.lastAccessedGatewayId = message.lastAccessedGatewayId;
-                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime"))
-                                object.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.toObject(message.lastAccessedGatewayTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GatewayConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.GatewayConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GatewayConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return GatewayConfig;
-                    })();
-    
-                    v1.DeviceRegistry = (function() {
-    
-                        /**
-                         * Properties of a DeviceRegistry.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IDeviceRegistry
-                         * @property {string|null} [id] DeviceRegistry id
-                         * @property {string|null} [name] DeviceRegistry name
-                         * @property {Array.<google.cloud.iot.v1.IEventNotificationConfig>|null} [eventNotificationConfigs] DeviceRegistry eventNotificationConfigs
-                         * @property {google.cloud.iot.v1.IStateNotificationConfig|null} [stateNotificationConfig] DeviceRegistry stateNotificationConfig
-                         * @property {google.cloud.iot.v1.IMqttConfig|null} [mqttConfig] DeviceRegistry mqttConfig
-                         * @property {google.cloud.iot.v1.IHttpConfig|null} [httpConfig] DeviceRegistry httpConfig
-                         * @property {google.cloud.iot.v1.LogLevel|null} [logLevel] DeviceRegistry logLevel
-                         * @property {Array.<google.cloud.iot.v1.IRegistryCredential>|null} [credentials] DeviceRegistry credentials
-                         */
-    
-                        /**
-                         * Constructs a new DeviceRegistry.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a DeviceRegistry.
-                         * @implements IDeviceRegistry
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IDeviceRegistry=} [properties] Properties to set
-                         */
-                        function DeviceRegistry(properties) {
-                            this.eventNotificationConfigs = [];
-                            this.credentials = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeviceRegistry id.
-                         * @member {string} id
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.id = "";
-    
-                        /**
-                         * DeviceRegistry name.
-                         * @member {string} name
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.name = "";
-    
-                        /**
-                         * DeviceRegistry eventNotificationConfigs.
-                         * @member {Array.<google.cloud.iot.v1.IEventNotificationConfig>} eventNotificationConfigs
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.eventNotificationConfigs = $util.emptyArray;
-    
-                        /**
-                         * DeviceRegistry stateNotificationConfig.
-                         * @member {google.cloud.iot.v1.IStateNotificationConfig|null|undefined} stateNotificationConfig
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.stateNotificationConfig = null;
-    
-                        /**
-                         * DeviceRegistry mqttConfig.
-                         * @member {google.cloud.iot.v1.IMqttConfig|null|undefined} mqttConfig
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.mqttConfig = null;
-    
-                        /**
-                         * DeviceRegistry httpConfig.
-                         * @member {google.cloud.iot.v1.IHttpConfig|null|undefined} httpConfig
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.httpConfig = null;
-    
-                        /**
-                         * DeviceRegistry logLevel.
-                         * @member {google.cloud.iot.v1.LogLevel} logLevel
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.logLevel = 0;
-    
-                        /**
-                         * DeviceRegistry credentials.
-                         * @member {Array.<google.cloud.iot.v1.IRegistryCredential>} credentials
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         */
-                        DeviceRegistry.prototype.credentials = $util.emptyArray;
-    
-                        /**
-                         * Creates a new DeviceRegistry instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceRegistry=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry instance
-                         */
-                        DeviceRegistry.create = function create(properties) {
-                            return new DeviceRegistry(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceRegistry message. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceRegistry} message DeviceRegistry message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceRegistry.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig"))
-                                $root.google.cloud.iot.v1.MqttConfig.encode(message.mqttConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig"))
-                                $root.google.cloud.iot.v1.StateNotificationConfig.encode(message.stateNotificationConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                            if (message.credentials != null && message.credentials.length)
-                                for (var i = 0; i < message.credentials.length; ++i)
-                                    $root.google.cloud.iot.v1.RegistryCredential.encode(message.credentials[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig"))
-                                $root.google.cloud.iot.v1.HttpConfig.encode(message.httpConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                            if (message.eventNotificationConfigs != null && message.eventNotificationConfigs.length)
-                                for (var i = 0; i < message.eventNotificationConfigs.length; ++i)
-                                    $root.google.cloud.iot.v1.EventNotificationConfig.encode(message.eventNotificationConfigs[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.logLevel);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceRegistry message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceRegistry} message DeviceRegistry message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceRegistry.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeviceRegistry message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceRegistry.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceRegistry();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.id = reader.string();
-                                    break;
-                                case 2:
-                                    message.name = reader.string();
-                                    break;
-                                case 10:
-                                    if (!(message.eventNotificationConfigs && message.eventNotificationConfigs.length))
-                                        message.eventNotificationConfigs = [];
-                                    message.eventNotificationConfigs.push($root.google.cloud.iot.v1.EventNotificationConfig.decode(reader, reader.uint32()));
-                                    break;
-                                case 7:
-                                    message.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 9:
-                                    message.httpConfig = $root.google.cloud.iot.v1.HttpConfig.decode(reader, reader.uint32());
-                                    break;
-                                case 11:
-                                    message.logLevel = reader.int32();
-                                    break;
-                                case 8:
-                                    if (!(message.credentials && message.credentials.length))
-                                        message.credentials = [];
-                                    message.credentials.push($root.google.cloud.iot.v1.RegistryCredential.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeviceRegistry message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceRegistry.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeviceRegistry message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeviceRegistry.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                if (!$util.isString(message.id))
-                                    return "id: string expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.eventNotificationConfigs != null && message.hasOwnProperty("eventNotificationConfigs")) {
-                                if (!Array.isArray(message.eventNotificationConfigs))
-                                    return "eventNotificationConfigs: array expected";
-                                for (var i = 0; i < message.eventNotificationConfigs.length; ++i) {
-                                    var error = $root.google.cloud.iot.v1.EventNotificationConfig.verify(message.eventNotificationConfigs[i]);
-                                    if (error)
-                                        return "eventNotificationConfigs." + error;
-                                }
-                            }
-                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig")) {
-                                var error = $root.google.cloud.iot.v1.StateNotificationConfig.verify(message.stateNotificationConfig);
-                                if (error)
-                                    return "stateNotificationConfig." + error;
-                            }
-                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig")) {
-                                var error = $root.google.cloud.iot.v1.MqttConfig.verify(message.mqttConfig);
-                                if (error)
-                                    return "mqttConfig." + error;
-                            }
-                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig")) {
-                                var error = $root.google.cloud.iot.v1.HttpConfig.verify(message.httpConfig);
-                                if (error)
-                                    return "httpConfig." + error;
-                            }
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                switch (message.logLevel) {
-                                default:
-                                    return "logLevel: enum value expected";
-                                case 0:
-                                case 10:
-                                case 20:
-                                case 30:
-                                case 40:
-                                    break;
-                                }
-                            if (message.credentials != null && message.hasOwnProperty("credentials")) {
-                                if (!Array.isArray(message.credentials))
-                                    return "credentials: array expected";
-                                for (var i = 0; i < message.credentials.length; ++i) {
-                                    var error = $root.google.cloud.iot.v1.RegistryCredential.verify(message.credentials[i]);
-                                    if (error)
-                                        return "credentials." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeviceRegistry message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
-                         */
-                        DeviceRegistry.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.DeviceRegistry)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.DeviceRegistry();
-                            if (object.id != null)
-                                message.id = String(object.id);
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.eventNotificationConfigs) {
-                                if (!Array.isArray(object.eventNotificationConfigs))
-                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.eventNotificationConfigs: array expected");
-                                message.eventNotificationConfigs = [];
-                                for (var i = 0; i < object.eventNotificationConfigs.length; ++i) {
-                                    if (typeof object.eventNotificationConfigs[i] !== "object")
-                                        throw TypeError(".google.cloud.iot.v1.DeviceRegistry.eventNotificationConfigs: object expected");
-                                    message.eventNotificationConfigs[i] = $root.google.cloud.iot.v1.EventNotificationConfig.fromObject(object.eventNotificationConfigs[i]);
-                                }
-                            }
-                            if (object.stateNotificationConfig != null) {
-                                if (typeof object.stateNotificationConfig !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.stateNotificationConfig: object expected");
-                                message.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.fromObject(object.stateNotificationConfig);
-                            }
-                            if (object.mqttConfig != null) {
-                                if (typeof object.mqttConfig !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.mqttConfig: object expected");
-                                message.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.fromObject(object.mqttConfig);
-                            }
-                            if (object.httpConfig != null) {
-                                if (typeof object.httpConfig !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.httpConfig: object expected");
-                                message.httpConfig = $root.google.cloud.iot.v1.HttpConfig.fromObject(object.httpConfig);
-                            }
-                            switch (object.logLevel) {
-                            case "LOG_LEVEL_UNSPECIFIED":
-                            case 0:
-                                message.logLevel = 0;
-                                break;
-                            case "NONE":
-                            case 10:
-                                message.logLevel = 10;
-                                break;
-                            case "ERROR":
-                            case 20:
-                                message.logLevel = 20;
-                                break;
-                            case "INFO":
-                            case 30:
-                                message.logLevel = 30;
-                                break;
-                            case "DEBUG":
-                            case 40:
-                                message.logLevel = 40;
-                                break;
-                            }
-                            if (object.credentials) {
-                                if (!Array.isArray(object.credentials))
-                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.credentials: array expected");
-                                message.credentials = [];
-                                for (var i = 0; i < object.credentials.length; ++i) {
-                                    if (typeof object.credentials[i] !== "object")
-                                        throw TypeError(".google.cloud.iot.v1.DeviceRegistry.credentials: object expected");
-                                    message.credentials[i] = $root.google.cloud.iot.v1.RegistryCredential.fromObject(object.credentials[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeviceRegistry message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @static
-                         * @param {google.cloud.iot.v1.DeviceRegistry} message DeviceRegistry
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeviceRegistry.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.credentials = [];
-                                object.eventNotificationConfigs = [];
-                            }
-                            if (options.defaults) {
-                                object.id = "";
-                                object.name = "";
-                                object.mqttConfig = null;
-                                object.stateNotificationConfig = null;
-                                object.httpConfig = null;
-                                object.logLevel = options.enums === String ? "LOG_LEVEL_UNSPECIFIED" : 0;
-                            }
-                            if (message.id != null && message.hasOwnProperty("id"))
-                                object.id = message.id;
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig"))
-                                object.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.toObject(message.mqttConfig, options);
-                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig"))
-                                object.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.toObject(message.stateNotificationConfig, options);
-                            if (message.credentials && message.credentials.length) {
-                                object.credentials = [];
-                                for (var j = 0; j < message.credentials.length; ++j)
-                                    object.credentials[j] = $root.google.cloud.iot.v1.RegistryCredential.toObject(message.credentials[j], options);
-                            }
-                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig"))
-                                object.httpConfig = $root.google.cloud.iot.v1.HttpConfig.toObject(message.httpConfig, options);
-                            if (message.eventNotificationConfigs && message.eventNotificationConfigs.length) {
-                                object.eventNotificationConfigs = [];
-                                for (var j = 0; j < message.eventNotificationConfigs.length; ++j)
-                                    object.eventNotificationConfigs[j] = $root.google.cloud.iot.v1.EventNotificationConfig.toObject(message.eventNotificationConfigs[j], options);
-                            }
-                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
-                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeviceRegistry to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.DeviceRegistry
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeviceRegistry.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return DeviceRegistry;
-                    })();
-    
-                    v1.MqttConfig = (function() {
-    
-                        /**
-                         * Properties of a MqttConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IMqttConfig
-                         * @property {google.cloud.iot.v1.MqttState|null} [mqttEnabledState] MqttConfig mqttEnabledState
-                         */
-    
-                        /**
-                         * Constructs a new MqttConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a MqttConfig.
-                         * @implements IMqttConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IMqttConfig=} [properties] Properties to set
-                         */
-                        function MqttConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * MqttConfig mqttEnabledState.
-                         * @member {google.cloud.iot.v1.MqttState} mqttEnabledState
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @instance
-                         */
-                        MqttConfig.prototype.mqttEnabledState = 0;
-    
-                        /**
-                         * Creates a new MqttConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IMqttConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig instance
-                         */
-                        MqttConfig.create = function create(properties) {
-                            return new MqttConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified MqttConfig message. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IMqttConfig} message MqttConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        MqttConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mqttEnabledState);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified MqttConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IMqttConfig} message MqttConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        MqttConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a MqttConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        MqttConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.MqttConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.mqttEnabledState = reader.int32();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a MqttConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        MqttConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a MqttConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        MqttConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
-                                switch (message.mqttEnabledState) {
-                                default:
-                                    return "mqttEnabledState: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a MqttConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
-                         */
-                        MqttConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.MqttConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.MqttConfig();
-                            switch (object.mqttEnabledState) {
-                            case "MQTT_STATE_UNSPECIFIED":
-                            case 0:
-                                message.mqttEnabledState = 0;
-                                break;
-                            case "MQTT_ENABLED":
-                            case 1:
-                                message.mqttEnabledState = 1;
-                                break;
-                            case "MQTT_DISABLED":
-                            case 2:
-                                message.mqttEnabledState = 2;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a MqttConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.MqttConfig} message MqttConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        MqttConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.mqttEnabledState = options.enums === String ? "MQTT_STATE_UNSPECIFIED" : 0;
-                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
-                                object.mqttEnabledState = options.enums === String ? $root.google.cloud.iot.v1.MqttState[message.mqttEnabledState] : message.mqttEnabledState;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this MqttConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.MqttConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        MqttConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return MqttConfig;
-                    })();
-    
-                    /**
-                     * MqttState enum.
-                     * @name google.cloud.iot.v1.MqttState
-                     * @enum {string}
-                     * @property {number} MQTT_STATE_UNSPECIFIED=0 MQTT_STATE_UNSPECIFIED value
-                     * @property {number} MQTT_ENABLED=1 MQTT_ENABLED value
-                     * @property {number} MQTT_DISABLED=2 MQTT_DISABLED value
-                     */
-                    v1.MqttState = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MQTT_STATE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "MQTT_ENABLED"] = 1;
-                        values[valuesById[2] = "MQTT_DISABLED"] = 2;
-                        return values;
-                    })();
-    
-                    v1.HttpConfig = (function() {
-    
-                        /**
-                         * Properties of a HttpConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IHttpConfig
-                         * @property {google.cloud.iot.v1.HttpState|null} [httpEnabledState] HttpConfig httpEnabledState
-                         */
-    
-                        /**
-                         * Constructs a new HttpConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a HttpConfig.
-                         * @implements IHttpConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IHttpConfig=} [properties] Properties to set
-                         */
-                        function HttpConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * HttpConfig httpEnabledState.
-                         * @member {google.cloud.iot.v1.HttpState} httpEnabledState
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @instance
-                         */
-                        HttpConfig.prototype.httpEnabledState = 0;
-    
-                        /**
-                         * Creates a new HttpConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IHttpConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig instance
-                         */
-                        HttpConfig.create = function create(properties) {
-                            return new HttpConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified HttpConfig message. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IHttpConfig} message HttpConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        HttpConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.httpEnabledState);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IHttpConfig} message HttpConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        HttpConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a HttpConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        HttpConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.HttpConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.httpEnabledState = reader.int32();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        HttpConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a HttpConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        HttpConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
-                                switch (message.httpEnabledState) {
-                                default:
-                                    return "httpEnabledState: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
-                         */
-                        HttpConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.HttpConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.HttpConfig();
-                            switch (object.httpEnabledState) {
-                            case "HTTP_STATE_UNSPECIFIED":
-                            case 0:
-                                message.httpEnabledState = 0;
-                                break;
-                            case "HTTP_ENABLED":
-                            case 1:
-                                message.httpEnabledState = 1;
-                                break;
-                            case "HTTP_DISABLED":
-                            case 2:
-                                message.httpEnabledState = 2;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.HttpConfig} message HttpConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        HttpConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.httpEnabledState = options.enums === String ? "HTTP_STATE_UNSPECIFIED" : 0;
-                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
-                                object.httpEnabledState = options.enums === String ? $root.google.cloud.iot.v1.HttpState[message.httpEnabledState] : message.httpEnabledState;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this HttpConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.HttpConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        HttpConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return HttpConfig;
-                    })();
-    
-                    /**
-                     * HttpState enum.
-                     * @name google.cloud.iot.v1.HttpState
-                     * @enum {string}
-                     * @property {number} HTTP_STATE_UNSPECIFIED=0 HTTP_STATE_UNSPECIFIED value
-                     * @property {number} HTTP_ENABLED=1 HTTP_ENABLED value
-                     * @property {number} HTTP_DISABLED=2 HTTP_DISABLED value
-                     */
-                    v1.HttpState = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "HTTP_STATE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "HTTP_ENABLED"] = 1;
-                        values[valuesById[2] = "HTTP_DISABLED"] = 2;
-                        return values;
-                    })();
-    
-                    /**
-                     * LogLevel enum.
-                     * @name google.cloud.iot.v1.LogLevel
-                     * @enum {string}
-                     * @property {number} LOG_LEVEL_UNSPECIFIED=0 LOG_LEVEL_UNSPECIFIED value
-                     * @property {number} NONE=10 NONE value
-                     * @property {number} ERROR=20 ERROR value
-                     * @property {number} INFO=30 INFO value
-                     * @property {number} DEBUG=40 DEBUG value
-                     */
-                    v1.LogLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "LOG_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[10] = "NONE"] = 10;
-                        values[valuesById[20] = "ERROR"] = 20;
-                        values[valuesById[30] = "INFO"] = 30;
-                        values[valuesById[40] = "DEBUG"] = 40;
-                        return values;
-                    })();
-    
-                    /**
-                     * GatewayType enum.
-                     * @name google.cloud.iot.v1.GatewayType
-                     * @enum {string}
-                     * @property {number} GATEWAY_TYPE_UNSPECIFIED=0 GATEWAY_TYPE_UNSPECIFIED value
-                     * @property {number} GATEWAY=1 GATEWAY value
-                     * @property {number} NON_GATEWAY=2 NON_GATEWAY value
-                     */
-                    v1.GatewayType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "GATEWAY_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "GATEWAY"] = 1;
-                        values[valuesById[2] = "NON_GATEWAY"] = 2;
-                        return values;
-                    })();
-    
-                    /**
-                     * GatewayAuthMethod enum.
-                     * @name google.cloud.iot.v1.GatewayAuthMethod
-                     * @enum {string}
-                     * @property {number} GATEWAY_AUTH_METHOD_UNSPECIFIED=0 GATEWAY_AUTH_METHOD_UNSPECIFIED value
-                     * @property {number} ASSOCIATION_ONLY=1 ASSOCIATION_ONLY value
-                     * @property {number} DEVICE_AUTH_TOKEN_ONLY=2 DEVICE_AUTH_TOKEN_ONLY value
-                     * @property {number} ASSOCIATION_AND_DEVICE_AUTH_TOKEN=3 ASSOCIATION_AND_DEVICE_AUTH_TOKEN value
-                     */
-                    v1.GatewayAuthMethod = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "GATEWAY_AUTH_METHOD_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ASSOCIATION_ONLY"] = 1;
-                        values[valuesById[2] = "DEVICE_AUTH_TOKEN_ONLY"] = 2;
-                        values[valuesById[3] = "ASSOCIATION_AND_DEVICE_AUTH_TOKEN"] = 3;
-                        return values;
-                    })();
-    
-                    v1.EventNotificationConfig = (function() {
-    
-                        /**
-                         * Properties of an EventNotificationConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IEventNotificationConfig
-                         * @property {string|null} [subfolderMatches] EventNotificationConfig subfolderMatches
-                         * @property {string|null} [pubsubTopicName] EventNotificationConfig pubsubTopicName
-                         */
-    
-                        /**
-                         * Constructs a new EventNotificationConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents an EventNotificationConfig.
-                         * @implements IEventNotificationConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IEventNotificationConfig=} [properties] Properties to set
-                         */
-                        function EventNotificationConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * EventNotificationConfig subfolderMatches.
-                         * @member {string} subfolderMatches
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @instance
-                         */
-                        EventNotificationConfig.prototype.subfolderMatches = "";
-    
-                        /**
-                         * EventNotificationConfig pubsubTopicName.
-                         * @member {string} pubsubTopicName
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @instance
-                         */
-                        EventNotificationConfig.prototype.pubsubTopicName = "";
-    
-                        /**
-                         * Creates a new EventNotificationConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IEventNotificationConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig instance
-                         */
-                        EventNotificationConfig.create = function create(properties) {
-                            return new EventNotificationConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified EventNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IEventNotificationConfig} message EventNotificationConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        EventNotificationConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopicName);
-                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subfolderMatches);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified EventNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IEventNotificationConfig} message EventNotificationConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        EventNotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an EventNotificationConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        EventNotificationConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.EventNotificationConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 2:
-                                    message.subfolderMatches = reader.string();
-                                    break;
-                                case 1:
-                                    message.pubsubTopicName = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an EventNotificationConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        EventNotificationConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an EventNotificationConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        EventNotificationConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
-                                if (!$util.isString(message.subfolderMatches))
-                                    return "subfolderMatches: string expected";
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                if (!$util.isString(message.pubsubTopicName))
-                                    return "pubsubTopicName: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an EventNotificationConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
-                         */
-                        EventNotificationConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.EventNotificationConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.EventNotificationConfig();
-                            if (object.subfolderMatches != null)
-                                message.subfolderMatches = String(object.subfolderMatches);
-                            if (object.pubsubTopicName != null)
-                                message.pubsubTopicName = String(object.pubsubTopicName);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an EventNotificationConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.EventNotificationConfig} message EventNotificationConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        EventNotificationConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.pubsubTopicName = "";
-                                object.subfolderMatches = "";
-                            }
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                object.pubsubTopicName = message.pubsubTopicName;
-                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
-                                object.subfolderMatches = message.subfolderMatches;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this EventNotificationConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.EventNotificationConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        EventNotificationConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return EventNotificationConfig;
-                    })();
-    
-                    v1.StateNotificationConfig = (function() {
-    
-                        /**
-                         * Properties of a StateNotificationConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IStateNotificationConfig
-                         * @property {string|null} [pubsubTopicName] StateNotificationConfig pubsubTopicName
-                         */
-    
-                        /**
-                         * Constructs a new StateNotificationConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a StateNotificationConfig.
-                         * @implements IStateNotificationConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IStateNotificationConfig=} [properties] Properties to set
-                         */
-                        function StateNotificationConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * StateNotificationConfig pubsubTopicName.
-                         * @member {string} pubsubTopicName
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @instance
-                         */
-                        StateNotificationConfig.prototype.pubsubTopicName = "";
-    
-                        /**
-                         * Creates a new StateNotificationConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IStateNotificationConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig instance
-                         */
-                        StateNotificationConfig.create = function create(properties) {
-                            return new StateNotificationConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified StateNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IStateNotificationConfig} message StateNotificationConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        StateNotificationConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopicName);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified StateNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IStateNotificationConfig} message StateNotificationConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        StateNotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a StateNotificationConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        StateNotificationConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.StateNotificationConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.pubsubTopicName = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a StateNotificationConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        StateNotificationConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a StateNotificationConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        StateNotificationConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                if (!$util.isString(message.pubsubTopicName))
-                                    return "pubsubTopicName: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a StateNotificationConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
-                         */
-                        StateNotificationConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.StateNotificationConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.StateNotificationConfig();
-                            if (object.pubsubTopicName != null)
-                                message.pubsubTopicName = String(object.pubsubTopicName);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a StateNotificationConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.StateNotificationConfig} message StateNotificationConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        StateNotificationConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.pubsubTopicName = "";
-                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
-                                object.pubsubTopicName = message.pubsubTopicName;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this StateNotificationConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.StateNotificationConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        StateNotificationConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return StateNotificationConfig;
-                    })();
-    
-                    v1.RegistryCredential = (function() {
-    
-                        /**
-                         * Properties of a RegistryCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IRegistryCredential
-                         * @property {google.cloud.iot.v1.IPublicKeyCertificate|null} [publicKeyCertificate] RegistryCredential publicKeyCertificate
-                         */
-    
-                        /**
-                         * Constructs a new RegistryCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a RegistryCredential.
-                         * @implements IRegistryCredential
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IRegistryCredential=} [properties] Properties to set
-                         */
-                        function RegistryCredential(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * RegistryCredential publicKeyCertificate.
-                         * @member {google.cloud.iot.v1.IPublicKeyCertificate|null|undefined} publicKeyCertificate
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @instance
-                         */
-                        RegistryCredential.prototype.publicKeyCertificate = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * RegistryCredential credential.
-                         * @member {"publicKeyCertificate"|undefined} credential
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @instance
-                         */
-                        Object.defineProperty(RegistryCredential.prototype, "credential", {
-                            get: $util.oneOfGetter($oneOfFields = ["publicKeyCertificate"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new RegistryCredential instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IRegistryCredential=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential instance
-                         */
-                        RegistryCredential.create = function create(properties) {
-                            return new RegistryCredential(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified RegistryCredential message. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IRegistryCredential} message RegistryCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RegistryCredential.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate"))
-                                $root.google.cloud.iot.v1.PublicKeyCertificate.encode(message.publicKeyCertificate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified RegistryCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IRegistryCredential} message RegistryCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RegistryCredential.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a RegistryCredential message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RegistryCredential.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.RegistryCredential();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a RegistryCredential message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RegistryCredential.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a RegistryCredential message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        RegistryCredential.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate")) {
-                                properties.credential = 1;
-                                {
-                                    var error = $root.google.cloud.iot.v1.PublicKeyCertificate.verify(message.publicKeyCertificate);
-                                    if (error)
-                                        return "publicKeyCertificate." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a RegistryCredential message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
-                         */
-                        RegistryCredential.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.RegistryCredential)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.RegistryCredential();
-                            if (object.publicKeyCertificate != null) {
-                                if (typeof object.publicKeyCertificate !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.RegistryCredential.publicKeyCertificate: object expected");
-                                message.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.fromObject(object.publicKeyCertificate);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a RegistryCredential message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.RegistryCredential} message RegistryCredential
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        RegistryCredential.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate")) {
-                                object.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.toObject(message.publicKeyCertificate, options);
-                                if (options.oneofs)
-                                    object.credential = "publicKeyCertificate";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this RegistryCredential to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.RegistryCredential
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        RegistryCredential.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return RegistryCredential;
-                    })();
-    
-                    v1.X509CertificateDetails = (function() {
-    
-                        /**
-                         * Properties of a X509CertificateDetails.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IX509CertificateDetails
-                         * @property {string|null} [issuer] X509CertificateDetails issuer
-                         * @property {string|null} [subject] X509CertificateDetails subject
-                         * @property {google.protobuf.ITimestamp|null} [startTime] X509CertificateDetails startTime
-                         * @property {google.protobuf.ITimestamp|null} [expiryTime] X509CertificateDetails expiryTime
-                         * @property {string|null} [signatureAlgorithm] X509CertificateDetails signatureAlgorithm
-                         * @property {string|null} [publicKeyType] X509CertificateDetails publicKeyType
-                         */
-    
-                        /**
-                         * Constructs a new X509CertificateDetails.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a X509CertificateDetails.
-                         * @implements IX509CertificateDetails
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IX509CertificateDetails=} [properties] Properties to set
-                         */
-                        function X509CertificateDetails(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * X509CertificateDetails issuer.
-                         * @member {string} issuer
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.issuer = "";
-    
-                        /**
-                         * X509CertificateDetails subject.
-                         * @member {string} subject
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.subject = "";
-    
-                        /**
-                         * X509CertificateDetails startTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.startTime = null;
-    
-                        /**
-                         * X509CertificateDetails expiryTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expiryTime
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.expiryTime = null;
-    
-                        /**
-                         * X509CertificateDetails signatureAlgorithm.
-                         * @member {string} signatureAlgorithm
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.signatureAlgorithm = "";
-    
-                        /**
-                         * X509CertificateDetails publicKeyType.
-                         * @member {string} publicKeyType
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         */
-                        X509CertificateDetails.prototype.publicKeyType = "";
-    
-                        /**
-                         * Creates a new X509CertificateDetails instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {google.cloud.iot.v1.IX509CertificateDetails=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails instance
-                         */
-                        X509CertificateDetails.create = function create(properties) {
-                            return new X509CertificateDetails(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified X509CertificateDetails message. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {google.cloud.iot.v1.IX509CertificateDetails} message X509CertificateDetails message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        X509CertificateDetails.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.issuer != null && message.hasOwnProperty("issuer"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.issuer);
-                            if (message.subject != null && message.hasOwnProperty("subject"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subject);
-                            if (message.startTime != null && message.hasOwnProperty("startTime"))
-                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expiryTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.signatureAlgorithm);
-                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.publicKeyType);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified X509CertificateDetails message, length delimited. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {google.cloud.iot.v1.IX509CertificateDetails} message X509CertificateDetails message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        X509CertificateDetails.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a X509CertificateDetails message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        X509CertificateDetails.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.X509CertificateDetails();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.issuer = reader.string();
-                                    break;
-                                case 2:
-                                    message.subject = reader.string();
-                                    break;
-                                case 3:
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.expiryTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.signatureAlgorithm = reader.string();
-                                    break;
-                                case 6:
-                                    message.publicKeyType = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a X509CertificateDetails message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        X509CertificateDetails.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a X509CertificateDetails message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        X509CertificateDetails.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.issuer != null && message.hasOwnProperty("issuer"))
-                                if (!$util.isString(message.issuer))
-                                    return "issuer: string expected";
-                            if (message.subject != null && message.hasOwnProperty("subject"))
-                                if (!$util.isString(message.subject))
-                                    return "subject: string expected";
-                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
-                                if (error)
-                                    return "startTime." + error;
-                            }
-                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expiryTime);
-                                if (error)
-                                    return "expiryTime." + error;
-                            }
-                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
-                                if (!$util.isString(message.signatureAlgorithm))
-                                    return "signatureAlgorithm: string expected";
-                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
-                                if (!$util.isString(message.publicKeyType))
-                                    return "publicKeyType: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a X509CertificateDetails message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
-                         */
-                        X509CertificateDetails.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.X509CertificateDetails)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.X509CertificateDetails();
-                            if (object.issuer != null)
-                                message.issuer = String(object.issuer);
-                            if (object.subject != null)
-                                message.subject = String(object.subject);
-                            if (object.startTime != null) {
-                                if (typeof object.startTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.X509CertificateDetails.startTime: object expected");
-                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
-                            }
-                            if (object.expiryTime != null) {
-                                if (typeof object.expiryTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.X509CertificateDetails.expiryTime: object expected");
-                                message.expiryTime = $root.google.protobuf.Timestamp.fromObject(object.expiryTime);
-                            }
-                            if (object.signatureAlgorithm != null)
-                                message.signatureAlgorithm = String(object.signatureAlgorithm);
-                            if (object.publicKeyType != null)
-                                message.publicKeyType = String(object.publicKeyType);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a X509CertificateDetails message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @static
-                         * @param {google.cloud.iot.v1.X509CertificateDetails} message X509CertificateDetails
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        X509CertificateDetails.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.issuer = "";
-                                object.subject = "";
-                                object.startTime = null;
-                                object.expiryTime = null;
-                                object.signatureAlgorithm = "";
-                                object.publicKeyType = "";
-                            }
-                            if (message.issuer != null && message.hasOwnProperty("issuer"))
-                                object.issuer = message.issuer;
-                            if (message.subject != null && message.hasOwnProperty("subject"))
-                                object.subject = message.subject;
-                            if (message.startTime != null && message.hasOwnProperty("startTime"))
-                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
-                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime"))
-                                object.expiryTime = $root.google.protobuf.Timestamp.toObject(message.expiryTime, options);
-                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
-                                object.signatureAlgorithm = message.signatureAlgorithm;
-                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
-                                object.publicKeyType = message.publicKeyType;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this X509CertificateDetails to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.X509CertificateDetails
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        X509CertificateDetails.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return X509CertificateDetails;
-                    })();
-    
-                    v1.PublicKeyCertificate = (function() {
-    
-                        /**
-                         * Properties of a PublicKeyCertificate.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IPublicKeyCertificate
-                         * @property {google.cloud.iot.v1.PublicKeyCertificateFormat|null} [format] PublicKeyCertificate format
-                         * @property {string|null} [certificate] PublicKeyCertificate certificate
-                         * @property {google.cloud.iot.v1.IX509CertificateDetails|null} [x509Details] PublicKeyCertificate x509Details
-                         */
-    
-                        /**
-                         * Constructs a new PublicKeyCertificate.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a PublicKeyCertificate.
-                         * @implements IPublicKeyCertificate
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IPublicKeyCertificate=} [properties] Properties to set
-                         */
-                        function PublicKeyCertificate(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PublicKeyCertificate format.
-                         * @member {google.cloud.iot.v1.PublicKeyCertificateFormat} format
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @instance
-                         */
-                        PublicKeyCertificate.prototype.format = 0;
-    
-                        /**
-                         * PublicKeyCertificate certificate.
-                         * @member {string} certificate
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @instance
-                         */
-                        PublicKeyCertificate.prototype.certificate = "";
-    
-                        /**
-                         * PublicKeyCertificate x509Details.
-                         * @member {google.cloud.iot.v1.IX509CertificateDetails|null|undefined} x509Details
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @instance
-                         */
-                        PublicKeyCertificate.prototype.x509Details = null;
-    
-                        /**
-                         * Creates a new PublicKeyCertificate instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCertificate=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate instance
-                         */
-                        PublicKeyCertificate.create = function create(properties) {
-                            return new PublicKeyCertificate(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PublicKeyCertificate message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCertificate} message PublicKeyCertificate message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PublicKeyCertificate.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
-                            if (message.certificate != null && message.hasOwnProperty("certificate"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.certificate);
-                            if (message.x509Details != null && message.hasOwnProperty("x509Details"))
-                                $root.google.cloud.iot.v1.X509CertificateDetails.encode(message.x509Details, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PublicKeyCertificate message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCertificate} message PublicKeyCertificate message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PublicKeyCertificate.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PublicKeyCertificate message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PublicKeyCertificate.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.PublicKeyCertificate();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.format = reader.int32();
-                                    break;
-                                case 2:
-                                    message.certificate = reader.string();
-                                    break;
-                                case 3:
-                                    message.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PublicKeyCertificate message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PublicKeyCertificate.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PublicKeyCertificate message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PublicKeyCertificate.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                switch (message.format) {
-                                default:
-                                    return "format: enum value expected";
-                                case 0:
-                                case 1:
-                                    break;
-                                }
-                            if (message.certificate != null && message.hasOwnProperty("certificate"))
-                                if (!$util.isString(message.certificate))
-                                    return "certificate: string expected";
-                            if (message.x509Details != null && message.hasOwnProperty("x509Details")) {
-                                var error = $root.google.cloud.iot.v1.X509CertificateDetails.verify(message.x509Details);
-                                if (error)
-                                    return "x509Details." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PublicKeyCertificate message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
-                         */
-                        PublicKeyCertificate.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.PublicKeyCertificate)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.PublicKeyCertificate();
-                            switch (object.format) {
-                            case "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT":
-                            case 0:
-                                message.format = 0;
-                                break;
-                            case "X509_CERTIFICATE_PEM":
-                            case 1:
-                                message.format = 1;
-                                break;
-                            }
-                            if (object.certificate != null)
-                                message.certificate = String(object.certificate);
-                            if (object.x509Details != null) {
-                                if (typeof object.x509Details !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.PublicKeyCertificate.x509Details: object expected");
-                                message.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.fromObject(object.x509Details);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PublicKeyCertificate message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @static
-                         * @param {google.cloud.iot.v1.PublicKeyCertificate} message PublicKeyCertificate
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PublicKeyCertificate.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.format = options.enums === String ? "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT" : 0;
-                                object.certificate = "";
-                                object.x509Details = null;
-                            }
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyCertificateFormat[message.format] : message.format;
-                            if (message.certificate != null && message.hasOwnProperty("certificate"))
-                                object.certificate = message.certificate;
-                            if (message.x509Details != null && message.hasOwnProperty("x509Details"))
-                                object.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.toObject(message.x509Details, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PublicKeyCertificate to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PublicKeyCertificate.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return PublicKeyCertificate;
-                    })();
-    
-                    /**
-                     * PublicKeyCertificateFormat enum.
-                     * @name google.cloud.iot.v1.PublicKeyCertificateFormat
-                     * @enum {string}
-                     * @property {number} UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT=0 UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT value
-                     * @property {number} X509_CERTIFICATE_PEM=1 X509_CERTIFICATE_PEM value
-                     */
-                    v1.PublicKeyCertificateFormat = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT"] = 0;
-                        values[valuesById[1] = "X509_CERTIFICATE_PEM"] = 1;
-                        return values;
-                    })();
-    
-                    v1.DeviceCredential = (function() {
-    
-                        /**
-                         * Properties of a DeviceCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IDeviceCredential
-                         * @property {google.cloud.iot.v1.IPublicKeyCredential|null} [publicKey] DeviceCredential publicKey
-                         * @property {google.protobuf.ITimestamp|null} [expirationTime] DeviceCredential expirationTime
-                         */
-    
-                        /**
-                         * Constructs a new DeviceCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a DeviceCredential.
-                         * @implements IDeviceCredential
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IDeviceCredential=} [properties] Properties to set
-                         */
-                        function DeviceCredential(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeviceCredential publicKey.
-                         * @member {google.cloud.iot.v1.IPublicKeyCredential|null|undefined} publicKey
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @instance
-                         */
-                        DeviceCredential.prototype.publicKey = null;
-    
-                        /**
-                         * DeviceCredential expirationTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expirationTime
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @instance
-                         */
-                        DeviceCredential.prototype.expirationTime = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * DeviceCredential credential.
-                         * @member {"publicKey"|undefined} credential
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @instance
-                         */
-                        Object.defineProperty(DeviceCredential.prototype, "credential", {
-                            get: $util.oneOfGetter($oneOfFields = ["publicKey"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new DeviceCredential instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceCredential=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential instance
-                         */
-                        DeviceCredential.create = function create(properties) {
-                            return new DeviceCredential(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceCredential message. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceCredential} message DeviceCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceCredential.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
-                                $root.google.cloud.iot.v1.PublicKeyCredential.encode(message.publicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceCredential} message DeviceCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceCredential.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeviceCredential message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceCredential.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceCredential();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 2:
-                                    message.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeviceCredential message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceCredential.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeviceCredential message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeviceCredential.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
-                                properties.credential = 1;
-                                {
-                                    var error = $root.google.cloud.iot.v1.PublicKeyCredential.verify(message.publicKey);
-                                    if (error)
-                                        return "publicKey." + error;
-                                }
-                            }
-                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expirationTime);
-                                if (error)
-                                    return "expirationTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeviceCredential message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
-                         */
-                        DeviceCredential.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.DeviceCredential)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.DeviceCredential();
-                            if (object.publicKey != null) {
-                                if (typeof object.publicKey !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceCredential.publicKey: object expected");
-                                message.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.fromObject(object.publicKey);
-                            }
-                            if (object.expirationTime != null) {
-                                if (typeof object.expirationTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceCredential.expirationTime: object expected");
-                                message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeviceCredential message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.DeviceCredential} message DeviceCredential
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeviceCredential.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.expirationTime = null;
-                            if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
-                                object.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.toObject(message.publicKey, options);
-                                if (options.oneofs)
-                                    object.credential = "publicKey";
-                            }
-                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
-                                object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeviceCredential to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.DeviceCredential
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeviceCredential.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return DeviceCredential;
-                    })();
-    
-                    v1.PublicKeyCredential = (function() {
-    
-                        /**
-                         * Properties of a PublicKeyCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IPublicKeyCredential
-                         * @property {google.cloud.iot.v1.PublicKeyFormat|null} [format] PublicKeyCredential format
-                         * @property {string|null} [key] PublicKeyCredential key
-                         */
-    
-                        /**
-                         * Constructs a new PublicKeyCredential.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a PublicKeyCredential.
-                         * @implements IPublicKeyCredential
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IPublicKeyCredential=} [properties] Properties to set
-                         */
-                        function PublicKeyCredential(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PublicKeyCredential format.
-                         * @member {google.cloud.iot.v1.PublicKeyFormat} format
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @instance
-                         */
-                        PublicKeyCredential.prototype.format = 0;
-    
-                        /**
-                         * PublicKeyCredential key.
-                         * @member {string} key
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @instance
-                         */
-                        PublicKeyCredential.prototype.key = "";
-    
-                        /**
-                         * Creates a new PublicKeyCredential instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCredential=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential instance
-                         */
-                        PublicKeyCredential.create = function create(properties) {
-                            return new PublicKeyCredential(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PublicKeyCredential message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCredential} message PublicKeyCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PublicKeyCredential.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
-                            if (message.key != null && message.hasOwnProperty("key"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PublicKeyCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.IPublicKeyCredential} message PublicKeyCredential message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PublicKeyCredential.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PublicKeyCredential message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PublicKeyCredential.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.PublicKeyCredential();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.format = reader.int32();
-                                    break;
-                                case 2:
-                                    message.key = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PublicKeyCredential message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PublicKeyCredential.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PublicKeyCredential message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PublicKeyCredential.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                switch (message.format) {
-                                default:
-                                    return "format: enum value expected";
-                                case 0:
-                                case 3:
-                                case 1:
-                                case 2:
-                                case 4:
-                                    break;
-                                }
-                            if (message.key != null && message.hasOwnProperty("key"))
-                                if (!$util.isString(message.key))
-                                    return "key: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PublicKeyCredential message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
-                         */
-                        PublicKeyCredential.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.PublicKeyCredential)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.PublicKeyCredential();
-                            switch (object.format) {
-                            case "UNSPECIFIED_PUBLIC_KEY_FORMAT":
-                            case 0:
-                                message.format = 0;
-                                break;
-                            case "RSA_PEM":
-                            case 3:
-                                message.format = 3;
-                                break;
-                            case "RSA_X509_PEM":
-                            case 1:
-                                message.format = 1;
-                                break;
-                            case "ES256_PEM":
-                            case 2:
-                                message.format = 2;
-                                break;
-                            case "ES256_X509_PEM":
-                            case 4:
-                                message.format = 4;
-                                break;
-                            }
-                            if (object.key != null)
-                                message.key = String(object.key);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PublicKeyCredential message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @static
-                         * @param {google.cloud.iot.v1.PublicKeyCredential} message PublicKeyCredential
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PublicKeyCredential.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.format = options.enums === String ? "UNSPECIFIED_PUBLIC_KEY_FORMAT" : 0;
-                                object.key = "";
-                            }
-                            if (message.format != null && message.hasOwnProperty("format"))
-                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyFormat[message.format] : message.format;
-                            if (message.key != null && message.hasOwnProperty("key"))
-                                object.key = message.key;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PublicKeyCredential to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.PublicKeyCredential
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PublicKeyCredential.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return PublicKeyCredential;
-                    })();
-    
-                    /**
-                     * PublicKeyFormat enum.
-                     * @name google.cloud.iot.v1.PublicKeyFormat
-                     * @enum {string}
-                     * @property {number} UNSPECIFIED_PUBLIC_KEY_FORMAT=0 UNSPECIFIED_PUBLIC_KEY_FORMAT value
-                     * @property {number} RSA_PEM=3 RSA_PEM value
-                     * @property {number} RSA_X509_PEM=1 RSA_X509_PEM value
-                     * @property {number} ES256_PEM=2 ES256_PEM value
-                     * @property {number} ES256_X509_PEM=4 ES256_X509_PEM value
-                     */
-                    v1.PublicKeyFormat = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "UNSPECIFIED_PUBLIC_KEY_FORMAT"] = 0;
-                        values[valuesById[3] = "RSA_PEM"] = 3;
-                        values[valuesById[1] = "RSA_X509_PEM"] = 1;
-                        values[valuesById[2] = "ES256_PEM"] = 2;
-                        values[valuesById[4] = "ES256_X509_PEM"] = 4;
-                        return values;
-                    })();
-    
-                    v1.DeviceConfig = (function() {
-    
-                        /**
-                         * Properties of a DeviceConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IDeviceConfig
-                         * @property {number|Long|null} [version] DeviceConfig version
-                         * @property {google.protobuf.ITimestamp|null} [cloudUpdateTime] DeviceConfig cloudUpdateTime
-                         * @property {google.protobuf.ITimestamp|null} [deviceAckTime] DeviceConfig deviceAckTime
-                         * @property {Uint8Array|null} [binaryData] DeviceConfig binaryData
-                         */
-    
-                        /**
-                         * Constructs a new DeviceConfig.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a DeviceConfig.
-                         * @implements IDeviceConfig
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IDeviceConfig=} [properties] Properties to set
-                         */
-                        function DeviceConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeviceConfig version.
-                         * @member {number|Long} version
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @instance
-                         */
-                        DeviceConfig.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * DeviceConfig cloudUpdateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} cloudUpdateTime
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @instance
-                         */
-                        DeviceConfig.prototype.cloudUpdateTime = null;
-    
-                        /**
-                         * DeviceConfig deviceAckTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} deviceAckTime
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @instance
-                         */
-                        DeviceConfig.prototype.deviceAckTime = null;
-    
-                        /**
-                         * DeviceConfig binaryData.
-                         * @member {Uint8Array} binaryData
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @instance
-                         */
-                        DeviceConfig.prototype.binaryData = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new DeviceConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceConfig=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig instance
-                         */
-                        DeviceConfig.create = function create(properties) {
-                            return new DeviceConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceConfig message. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceConfig} message DeviceConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.version != null && message.hasOwnProperty("version"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.version);
-                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.cloudUpdateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime"))
-                                $root.google.protobuf.Timestamp.encode(message.deviceAckTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.binaryData);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceConfig} message DeviceConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeviceConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.version = reader.int64();
-                                    break;
-                                case 2:
-                                    message.cloudUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.deviceAckTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.binaryData = reader.bytes();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeviceConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeviceConfig message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeviceConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.version != null && message.hasOwnProperty("version"))
-                                if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
-                                    return "version: integer|Long expected";
-                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.cloudUpdateTime);
-                                if (error)
-                                    return "cloudUpdateTime." + error;
-                            }
-                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.deviceAckTime);
-                                if (error)
-                                    return "deviceAckTime." + error;
-                            }
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                if (!(message.binaryData && typeof message.binaryData.length === "number" || $util.isString(message.binaryData)))
-                                    return "binaryData: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeviceConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
-                         */
-                        DeviceConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.DeviceConfig)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.DeviceConfig();
-                            if (object.version != null)
-                                if ($util.Long)
-                                    (message.version = $util.Long.fromValue(object.version)).unsigned = false;
-                                else if (typeof object.version === "string")
-                                    message.version = parseInt(object.version, 10);
-                                else if (typeof object.version === "number")
-                                    message.version = object.version;
-                                else if (typeof object.version === "object")
-                                    message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
-                            if (object.cloudUpdateTime != null) {
-                                if (typeof object.cloudUpdateTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceConfig.cloudUpdateTime: object expected");
-                                message.cloudUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.cloudUpdateTime);
-                            }
-                            if (object.deviceAckTime != null) {
-                                if (typeof object.deviceAckTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceConfig.deviceAckTime: object expected");
-                                message.deviceAckTime = $root.google.protobuf.Timestamp.fromObject(object.deviceAckTime);
-                            }
-                            if (object.binaryData != null)
-                                if (typeof object.binaryData === "string")
-                                    $util.base64.decode(object.binaryData, message.binaryData = $util.newBuffer($util.base64.length(object.binaryData)), 0);
-                                else if (object.binaryData.length)
-                                    message.binaryData = object.binaryData;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeviceConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @static
-                         * @param {google.cloud.iot.v1.DeviceConfig} message DeviceConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeviceConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.version = options.longs === String ? "0" : 0;
-                                object.cloudUpdateTime = null;
-                                object.deviceAckTime = null;
-                                if (options.bytes === String)
-                                    object.binaryData = "";
-                                else {
-                                    object.binaryData = [];
-                                    if (options.bytes !== Array)
-                                        object.binaryData = $util.newBuffer(object.binaryData);
-                                }
-                            }
-                            if (message.version != null && message.hasOwnProperty("version"))
-                                if (typeof message.version === "number")
-                                    object.version = options.longs === String ? String(message.version) : message.version;
-                                else
-                                    object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
-                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime"))
-                                object.cloudUpdateTime = $root.google.protobuf.Timestamp.toObject(message.cloudUpdateTime, options);
-                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime"))
-                                object.deviceAckTime = $root.google.protobuf.Timestamp.toObject(message.deviceAckTime, options);
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                object.binaryData = options.bytes === String ? $util.base64.encode(message.binaryData, 0, message.binaryData.length) : options.bytes === Array ? Array.prototype.slice.call(message.binaryData) : message.binaryData;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeviceConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.DeviceConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeviceConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return DeviceConfig;
-                    })();
-    
-                    v1.DeviceState = (function() {
-    
-                        /**
-                         * Properties of a DeviceState.
-                         * @memberof google.cloud.iot.v1
-                         * @interface IDeviceState
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeviceState updateTime
-                         * @property {Uint8Array|null} [binaryData] DeviceState binaryData
-                         */
-    
-                        /**
-                         * Constructs a new DeviceState.
-                         * @memberof google.cloud.iot.v1
-                         * @classdesc Represents a DeviceState.
-                         * @implements IDeviceState
-                         * @constructor
-                         * @param {google.cloud.iot.v1.IDeviceState=} [properties] Properties to set
-                         */
-                        function DeviceState(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeviceState updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @instance
-                         */
-                        DeviceState.prototype.updateTime = null;
-    
-                        /**
-                         * DeviceState binaryData.
-                         * @member {Uint8Array} binaryData
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @instance
-                         */
-                        DeviceState.prototype.binaryData = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new DeviceState instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceState=} [properties] Properties to set
-                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState instance
-                         */
-                        DeviceState.create = function create(properties) {
-                            return new DeviceState(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceState message. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceState} message DeviceState message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceState.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.binaryData);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeviceState message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {google.cloud.iot.v1.IDeviceState} message DeviceState message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeviceState.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeviceState message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceState.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceState();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.binaryData = reader.bytes();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeviceState message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeviceState.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeviceState message.
-                         * @function verify
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeviceState.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                if (!(message.binaryData && typeof message.binaryData.length === "number" || $util.isString(message.binaryData)))
-                                    return "binaryData: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeviceState message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
-                         */
-                        DeviceState.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.iot.v1.DeviceState)
-                                return object;
-                            var message = new $root.google.cloud.iot.v1.DeviceState();
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.iot.v1.DeviceState.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            if (object.binaryData != null)
-                                if (typeof object.binaryData === "string")
-                                    $util.base64.decode(object.binaryData, message.binaryData = $util.newBuffer($util.base64.length(object.binaryData)), 0);
-                                else if (object.binaryData.length)
-                                    message.binaryData = object.binaryData;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeviceState message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @static
-                         * @param {google.cloud.iot.v1.DeviceState} message DeviceState
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeviceState.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.updateTime = null;
-                                if (options.bytes === String)
-                                    object.binaryData = "";
-                                else {
-                                    object.binaryData = [];
-                                    if (options.bytes !== Array)
-                                        object.binaryData = $util.newBuffer(object.binaryData);
-                                }
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
-                                object.binaryData = options.bytes === String ? $util.base64.encode(message.binaryData, 0, message.binaryData.length) : options.bytes === Array ? Array.prototype.slice.call(message.binaryData) : message.binaryData;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeviceState to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.iot.v1.DeviceState
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeviceState.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return DeviceState;
-                    })();
-    
                     v1.DeviceManager = (function() {
     
                         /**
@@ -10094,6 +6005,4095 @@
                         return UnbindDeviceFromGatewayResponse;
                     })();
     
+                    v1.Device = (function() {
+    
+                        /**
+                         * Properties of a Device.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IDevice
+                         * @property {string|null} [id] Device id
+                         * @property {string|null} [name] Device name
+                         * @property {number|Long|null} [numId] Device numId
+                         * @property {Array.<google.cloud.iot.v1.IDeviceCredential>|null} [credentials] Device credentials
+                         * @property {google.protobuf.ITimestamp|null} [lastHeartbeatTime] Device lastHeartbeatTime
+                         * @property {google.protobuf.ITimestamp|null} [lastEventTime] Device lastEventTime
+                         * @property {google.protobuf.ITimestamp|null} [lastStateTime] Device lastStateTime
+                         * @property {google.protobuf.ITimestamp|null} [lastConfigAckTime] Device lastConfigAckTime
+                         * @property {google.protobuf.ITimestamp|null} [lastConfigSendTime] Device lastConfigSendTime
+                         * @property {boolean|null} [blocked] Device blocked
+                         * @property {google.protobuf.ITimestamp|null} [lastErrorTime] Device lastErrorTime
+                         * @property {google.rpc.IStatus|null} [lastErrorStatus] Device lastErrorStatus
+                         * @property {google.cloud.iot.v1.IDeviceConfig|null} [config] Device config
+                         * @property {google.cloud.iot.v1.IDeviceState|null} [state] Device state
+                         * @property {google.cloud.iot.v1.LogLevel|null} [logLevel] Device logLevel
+                         * @property {Object.<string,string>|null} [metadata] Device metadata
+                         * @property {google.cloud.iot.v1.IGatewayConfig|null} [gatewayConfig] Device gatewayConfig
+                         */
+    
+                        /**
+                         * Constructs a new Device.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a Device.
+                         * @implements IDevice
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IDevice=} [properties] Properties to set
+                         */
+                        function Device(properties) {
+                            this.credentials = [];
+                            this.metadata = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Device id.
+                         * @member {string} id
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.id = "";
+    
+                        /**
+                         * Device name.
+                         * @member {string} name
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.name = "";
+    
+                        /**
+                         * Device numId.
+                         * @member {number|Long} numId
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.numId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+    
+                        /**
+                         * Device credentials.
+                         * @member {Array.<google.cloud.iot.v1.IDeviceCredential>} credentials
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.credentials = $util.emptyArray;
+    
+                        /**
+                         * Device lastHeartbeatTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastHeartbeatTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastHeartbeatTime = null;
+    
+                        /**
+                         * Device lastEventTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastEventTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastEventTime = null;
+    
+                        /**
+                         * Device lastStateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastStateTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastStateTime = null;
+    
+                        /**
+                         * Device lastConfigAckTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastConfigAckTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastConfigAckTime = null;
+    
+                        /**
+                         * Device lastConfigSendTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastConfigSendTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastConfigSendTime = null;
+    
+                        /**
+                         * Device blocked.
+                         * @member {boolean} blocked
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.blocked = false;
+    
+                        /**
+                         * Device lastErrorTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastErrorTime
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastErrorTime = null;
+    
+                        /**
+                         * Device lastErrorStatus.
+                         * @member {google.rpc.IStatus|null|undefined} lastErrorStatus
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.lastErrorStatus = null;
+    
+                        /**
+                         * Device config.
+                         * @member {google.cloud.iot.v1.IDeviceConfig|null|undefined} config
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.config = null;
+    
+                        /**
+                         * Device state.
+                         * @member {google.cloud.iot.v1.IDeviceState|null|undefined} state
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.state = null;
+    
+                        /**
+                         * Device logLevel.
+                         * @member {google.cloud.iot.v1.LogLevel} logLevel
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.logLevel = 0;
+    
+                        /**
+                         * Device metadata.
+                         * @member {Object.<string,string>} metadata
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.metadata = $util.emptyObject;
+    
+                        /**
+                         * Device gatewayConfig.
+                         * @member {google.cloud.iot.v1.IGatewayConfig|null|undefined} gatewayConfig
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         */
+                        Device.prototype.gatewayConfig = null;
+    
+                        /**
+                         * Creates a new Device instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {google.cloud.iot.v1.IDevice=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.Device} Device instance
+                         */
+                        Device.create = function create(properties) {
+                            return new Device(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Device message. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {google.cloud.iot.v1.IDevice} message Device message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Device.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            if (message.numId != null && message.hasOwnProperty("numId"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.numId);
+                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastHeartbeatTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastEventTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastErrorTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus"))
+                                $root.google.rpc.Status.encode(message.lastErrorStatus, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.credentials != null && message.credentials.length)
+                                for (var i = 0; i < message.credentials.length; ++i)
+                                    $root.google.cloud.iot.v1.DeviceCredential.encode(message.credentials[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.config != null && message.hasOwnProperty("config"))
+                                $root.google.cloud.iot.v1.DeviceConfig.encode(message.config, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastConfigAckTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                $root.google.cloud.iot.v1.DeviceState.encode(message.state, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.metadata != null && message.hasOwnProperty("metadata"))
+                                for (var keys = Object.keys(message.metadata), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.metadata[keys[i]]).ldelim();
+                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastConfigSendTime, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.blocked != null && message.hasOwnProperty("blocked"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).bool(message.blocked);
+                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastStateTime, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.logLevel);
+                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig"))
+                                $root.google.cloud.iot.v1.GatewayConfig.encode(message.gatewayConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Device message, length delimited. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {google.cloud.iot.v1.IDevice} message Device message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Device.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Device message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.Device} Device
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Device.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.Device(), key;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.numId = reader.uint64();
+                                    break;
+                                case 12:
+                                    if (!(message.credentials && message.credentials.length))
+                                        message.credentials = [];
+                                    message.credentials.push($root.google.cloud.iot.v1.DeviceCredential.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.lastHeartbeatTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.lastEventTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 20:
+                                    message.lastStateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    message.lastConfigAckTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 18:
+                                    message.lastConfigSendTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 19:
+                                    message.blocked = reader.bool();
+                                    break;
+                                case 10:
+                                    message.lastErrorTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.lastErrorStatus = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.config = $root.google.cloud.iot.v1.DeviceConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 16:
+                                    message.state = $root.google.cloud.iot.v1.DeviceState.decode(reader, reader.uint32());
+                                    break;
+                                case 21:
+                                    message.logLevel = reader.int32();
+                                    break;
+                                case 17:
+                                    reader.skip().pos++;
+                                    if (message.metadata === $util.emptyObject)
+                                        message.metadata = {};
+                                    key = reader.string();
+                                    reader.pos++;
+                                    message.metadata[key] = reader.string();
+                                    break;
+                                case 24:
+                                    message.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Device message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.Device} Device
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Device.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Device message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Device.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.numId != null && message.hasOwnProperty("numId"))
+                                if (!$util.isInteger(message.numId) && !(message.numId && $util.isInteger(message.numId.low) && $util.isInteger(message.numId.high)))
+                                    return "numId: integer|Long expected";
+                            if (message.credentials != null && message.hasOwnProperty("credentials")) {
+                                if (!Array.isArray(message.credentials))
+                                    return "credentials: array expected";
+                                for (var i = 0; i < message.credentials.length; ++i) {
+                                    var error = $root.google.cloud.iot.v1.DeviceCredential.verify(message.credentials[i]);
+                                    if (error)
+                                        return "credentials." + error;
+                                }
+                            }
+                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastHeartbeatTime);
+                                if (error)
+                                    return "lastHeartbeatTime." + error;
+                            }
+                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastEventTime);
+                                if (error)
+                                    return "lastEventTime." + error;
+                            }
+                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastStateTime);
+                                if (error)
+                                    return "lastStateTime." + error;
+                            }
+                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastConfigAckTime);
+                                if (error)
+                                    return "lastConfigAckTime." + error;
+                            }
+                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastConfigSendTime);
+                                if (error)
+                                    return "lastConfigSendTime." + error;
+                            }
+                            if (message.blocked != null && message.hasOwnProperty("blocked"))
+                                if (typeof message.blocked !== "boolean")
+                                    return "blocked: boolean expected";
+                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastErrorTime);
+                                if (error)
+                                    return "lastErrorTime." + error;
+                            }
+                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus")) {
+                                var error = $root.google.rpc.Status.verify(message.lastErrorStatus);
+                                if (error)
+                                    return "lastErrorStatus." + error;
+                            }
+                            if (message.config != null && message.hasOwnProperty("config")) {
+                                var error = $root.google.cloud.iot.v1.DeviceConfig.verify(message.config);
+                                if (error)
+                                    return "config." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                var error = $root.google.cloud.iot.v1.DeviceState.verify(message.state);
+                                if (error)
+                                    return "state." + error;
+                            }
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                switch (message.logLevel) {
+                                default:
+                                    return "logLevel: enum value expected";
+                                case 0:
+                                case 10:
+                                case 20:
+                                case 30:
+                                case 40:
+                                    break;
+                                }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                if (!$util.isObject(message.metadata))
+                                    return "metadata: object expected";
+                                var key = Object.keys(message.metadata);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.metadata[key[i]]))
+                                        return "metadata: string{k:string} expected";
+                            }
+                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig")) {
+                                var error = $root.google.cloud.iot.v1.GatewayConfig.verify(message.gatewayConfig);
+                                if (error)
+                                    return "gatewayConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Device message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.Device} Device
+                         */
+                        Device.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.Device)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.Device();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.numId != null)
+                                if ($util.Long)
+                                    (message.numId = $util.Long.fromValue(object.numId)).unsigned = true;
+                                else if (typeof object.numId === "string")
+                                    message.numId = parseInt(object.numId, 10);
+                                else if (typeof object.numId === "number")
+                                    message.numId = object.numId;
+                                else if (typeof object.numId === "object")
+                                    message.numId = new $util.LongBits(object.numId.low >>> 0, object.numId.high >>> 0).toNumber(true);
+                            if (object.credentials) {
+                                if (!Array.isArray(object.credentials))
+                                    throw TypeError(".google.cloud.iot.v1.Device.credentials: array expected");
+                                message.credentials = [];
+                                for (var i = 0; i < object.credentials.length; ++i) {
+                                    if (typeof object.credentials[i] !== "object")
+                                        throw TypeError(".google.cloud.iot.v1.Device.credentials: object expected");
+                                    message.credentials[i] = $root.google.cloud.iot.v1.DeviceCredential.fromObject(object.credentials[i]);
+                                }
+                            }
+                            if (object.lastHeartbeatTime != null) {
+                                if (typeof object.lastHeartbeatTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastHeartbeatTime: object expected");
+                                message.lastHeartbeatTime = $root.google.protobuf.Timestamp.fromObject(object.lastHeartbeatTime);
+                            }
+                            if (object.lastEventTime != null) {
+                                if (typeof object.lastEventTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastEventTime: object expected");
+                                message.lastEventTime = $root.google.protobuf.Timestamp.fromObject(object.lastEventTime);
+                            }
+                            if (object.lastStateTime != null) {
+                                if (typeof object.lastStateTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastStateTime: object expected");
+                                message.lastStateTime = $root.google.protobuf.Timestamp.fromObject(object.lastStateTime);
+                            }
+                            if (object.lastConfigAckTime != null) {
+                                if (typeof object.lastConfigAckTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastConfigAckTime: object expected");
+                                message.lastConfigAckTime = $root.google.protobuf.Timestamp.fromObject(object.lastConfigAckTime);
+                            }
+                            if (object.lastConfigSendTime != null) {
+                                if (typeof object.lastConfigSendTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastConfigSendTime: object expected");
+                                message.lastConfigSendTime = $root.google.protobuf.Timestamp.fromObject(object.lastConfigSendTime);
+                            }
+                            if (object.blocked != null)
+                                message.blocked = Boolean(object.blocked);
+                            if (object.lastErrorTime != null) {
+                                if (typeof object.lastErrorTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastErrorTime: object expected");
+                                message.lastErrorTime = $root.google.protobuf.Timestamp.fromObject(object.lastErrorTime);
+                            }
+                            if (object.lastErrorStatus != null) {
+                                if (typeof object.lastErrorStatus !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.lastErrorStatus: object expected");
+                                message.lastErrorStatus = $root.google.rpc.Status.fromObject(object.lastErrorStatus);
+                            }
+                            if (object.config != null) {
+                                if (typeof object.config !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.config: object expected");
+                                message.config = $root.google.cloud.iot.v1.DeviceConfig.fromObject(object.config);
+                            }
+                            if (object.state != null) {
+                                if (typeof object.state !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.state: object expected");
+                                message.state = $root.google.cloud.iot.v1.DeviceState.fromObject(object.state);
+                            }
+                            switch (object.logLevel) {
+                            case "LOG_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.logLevel = 0;
+                                break;
+                            case "NONE":
+                            case 10:
+                                message.logLevel = 10;
+                                break;
+                            case "ERROR":
+                            case 20:
+                                message.logLevel = 20;
+                                break;
+                            case "INFO":
+                            case 30:
+                                message.logLevel = 30;
+                                break;
+                            case "DEBUG":
+                            case 40:
+                                message.logLevel = 40;
+                                break;
+                            }
+                            if (object.metadata) {
+                                if (typeof object.metadata !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.metadata: object expected");
+                                message.metadata = {};
+                                for (var keys = Object.keys(object.metadata), i = 0; i < keys.length; ++i)
+                                    message.metadata[keys[i]] = String(object.metadata[keys[i]]);
+                            }
+                            if (object.gatewayConfig != null) {
+                                if (typeof object.gatewayConfig !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.Device.gatewayConfig: object expected");
+                                message.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.fromObject(object.gatewayConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Device message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.Device
+                         * @static
+                         * @param {google.cloud.iot.v1.Device} message Device
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Device.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.credentials = [];
+                            if (options.objects || options.defaults)
+                                object.metadata = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, true);
+                                    object.numId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.numId = options.longs === String ? "0" : 0;
+                                object.lastHeartbeatTime = null;
+                                object.lastEventTime = null;
+                                object.lastErrorTime = null;
+                                object.lastErrorStatus = null;
+                                object.config = null;
+                                object.lastConfigAckTime = null;
+                                object.state = null;
+                                object.lastConfigSendTime = null;
+                                object.blocked = false;
+                                object.lastStateTime = null;
+                                object.logLevel = options.enums === String ? "LOG_LEVEL_UNSPECIFIED" : 0;
+                                object.gatewayConfig = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.numId != null && message.hasOwnProperty("numId"))
+                                if (typeof message.numId === "number")
+                                    object.numId = options.longs === String ? String(message.numId) : message.numId;
+                                else
+                                    object.numId = options.longs === String ? $util.Long.prototype.toString.call(message.numId) : options.longs === Number ? new $util.LongBits(message.numId.low >>> 0, message.numId.high >>> 0).toNumber(true) : message.numId;
+                            if (message.lastHeartbeatTime != null && message.hasOwnProperty("lastHeartbeatTime"))
+                                object.lastHeartbeatTime = $root.google.protobuf.Timestamp.toObject(message.lastHeartbeatTime, options);
+                            if (message.lastEventTime != null && message.hasOwnProperty("lastEventTime"))
+                                object.lastEventTime = $root.google.protobuf.Timestamp.toObject(message.lastEventTime, options);
+                            if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime"))
+                                object.lastErrorTime = $root.google.protobuf.Timestamp.toObject(message.lastErrorTime, options);
+                            if (message.lastErrorStatus != null && message.hasOwnProperty("lastErrorStatus"))
+                                object.lastErrorStatus = $root.google.rpc.Status.toObject(message.lastErrorStatus, options);
+                            if (message.credentials && message.credentials.length) {
+                                object.credentials = [];
+                                for (var j = 0; j < message.credentials.length; ++j)
+                                    object.credentials[j] = $root.google.cloud.iot.v1.DeviceCredential.toObject(message.credentials[j], options);
+                            }
+                            if (message.config != null && message.hasOwnProperty("config"))
+                                object.config = $root.google.cloud.iot.v1.DeviceConfig.toObject(message.config, options);
+                            if (message.lastConfigAckTime != null && message.hasOwnProperty("lastConfigAckTime"))
+                                object.lastConfigAckTime = $root.google.protobuf.Timestamp.toObject(message.lastConfigAckTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = $root.google.cloud.iot.v1.DeviceState.toObject(message.state, options);
+                            var keys2;
+                            if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
+                                object.metadata = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.metadata[keys2[j]] = message.metadata[keys2[j]];
+                            }
+                            if (message.lastConfigSendTime != null && message.hasOwnProperty("lastConfigSendTime"))
+                                object.lastConfigSendTime = $root.google.protobuf.Timestamp.toObject(message.lastConfigSendTime, options);
+                            if (message.blocked != null && message.hasOwnProperty("blocked"))
+                                object.blocked = message.blocked;
+                            if (message.lastStateTime != null && message.hasOwnProperty("lastStateTime"))
+                                object.lastStateTime = $root.google.protobuf.Timestamp.toObject(message.lastStateTime, options);
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
+                            if (message.gatewayConfig != null && message.hasOwnProperty("gatewayConfig"))
+                                object.gatewayConfig = $root.google.cloud.iot.v1.GatewayConfig.toObject(message.gatewayConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Device to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.Device
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Device.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Device;
+                    })();
+    
+                    v1.GatewayConfig = (function() {
+    
+                        /**
+                         * Properties of a GatewayConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IGatewayConfig
+                         * @property {google.cloud.iot.v1.GatewayType|null} [gatewayType] GatewayConfig gatewayType
+                         * @property {google.cloud.iot.v1.GatewayAuthMethod|null} [gatewayAuthMethod] GatewayConfig gatewayAuthMethod
+                         * @property {string|null} [lastAccessedGatewayId] GatewayConfig lastAccessedGatewayId
+                         * @property {google.protobuf.ITimestamp|null} [lastAccessedGatewayTime] GatewayConfig lastAccessedGatewayTime
+                         */
+    
+                        /**
+                         * Constructs a new GatewayConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a GatewayConfig.
+                         * @implements IGatewayConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IGatewayConfig=} [properties] Properties to set
+                         */
+                        function GatewayConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GatewayConfig gatewayType.
+                         * @member {google.cloud.iot.v1.GatewayType} gatewayType
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @instance
+                         */
+                        GatewayConfig.prototype.gatewayType = 0;
+    
+                        /**
+                         * GatewayConfig gatewayAuthMethod.
+                         * @member {google.cloud.iot.v1.GatewayAuthMethod} gatewayAuthMethod
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @instance
+                         */
+                        GatewayConfig.prototype.gatewayAuthMethod = 0;
+    
+                        /**
+                         * GatewayConfig lastAccessedGatewayId.
+                         * @member {string} lastAccessedGatewayId
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @instance
+                         */
+                        GatewayConfig.prototype.lastAccessedGatewayId = "";
+    
+                        /**
+                         * GatewayConfig lastAccessedGatewayTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastAccessedGatewayTime
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @instance
+                         */
+                        GatewayConfig.prototype.lastAccessedGatewayTime = null;
+    
+                        /**
+                         * Creates a new GatewayConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IGatewayConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig instance
+                         */
+                        GatewayConfig.create = function create(properties) {
+                            return new GatewayConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GatewayConfig message. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IGatewayConfig} message GatewayConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GatewayConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.gatewayType);
+                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gatewayAuthMethod);
+                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.lastAccessedGatewayId);
+                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastAccessedGatewayTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GatewayConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IGatewayConfig} message GatewayConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GatewayConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GatewayConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GatewayConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.GatewayConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gatewayType = reader.int32();
+                                    break;
+                                case 2:
+                                    message.gatewayAuthMethod = reader.int32();
+                                    break;
+                                case 3:
+                                    message.lastAccessedGatewayId = reader.string();
+                                    break;
+                                case 4:
+                                    message.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GatewayConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GatewayConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GatewayConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GatewayConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
+                                switch (message.gatewayType) {
+                                default:
+                                    return "gatewayType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
+                                switch (message.gatewayAuthMethod) {
+                                default:
+                                    return "gatewayAuthMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
+                                if (!$util.isString(message.lastAccessedGatewayId))
+                                    return "lastAccessedGatewayId: string expected";
+                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastAccessedGatewayTime);
+                                if (error)
+                                    return "lastAccessedGatewayTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GatewayConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.GatewayConfig} GatewayConfig
+                         */
+                        GatewayConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.GatewayConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.GatewayConfig();
+                            switch (object.gatewayType) {
+                            case "GATEWAY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.gatewayType = 0;
+                                break;
+                            case "GATEWAY":
+                            case 1:
+                                message.gatewayType = 1;
+                                break;
+                            case "NON_GATEWAY":
+                            case 2:
+                                message.gatewayType = 2;
+                                break;
+                            }
+                            switch (object.gatewayAuthMethod) {
+                            case "GATEWAY_AUTH_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.gatewayAuthMethod = 0;
+                                break;
+                            case "ASSOCIATION_ONLY":
+                            case 1:
+                                message.gatewayAuthMethod = 1;
+                                break;
+                            case "DEVICE_AUTH_TOKEN_ONLY":
+                            case 2:
+                                message.gatewayAuthMethod = 2;
+                                break;
+                            case "ASSOCIATION_AND_DEVICE_AUTH_TOKEN":
+                            case 3:
+                                message.gatewayAuthMethod = 3;
+                                break;
+                            }
+                            if (object.lastAccessedGatewayId != null)
+                                message.lastAccessedGatewayId = String(object.lastAccessedGatewayId);
+                            if (object.lastAccessedGatewayTime != null) {
+                                if (typeof object.lastAccessedGatewayTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.GatewayConfig.lastAccessedGatewayTime: object expected");
+                                message.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.fromObject(object.lastAccessedGatewayTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GatewayConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.GatewayConfig} message GatewayConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GatewayConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.gatewayType = options.enums === String ? "GATEWAY_TYPE_UNSPECIFIED" : 0;
+                                object.gatewayAuthMethod = options.enums === String ? "GATEWAY_AUTH_METHOD_UNSPECIFIED" : 0;
+                                object.lastAccessedGatewayId = "";
+                                object.lastAccessedGatewayTime = null;
+                            }
+                            if (message.gatewayType != null && message.hasOwnProperty("gatewayType"))
+                                object.gatewayType = options.enums === String ? $root.google.cloud.iot.v1.GatewayType[message.gatewayType] : message.gatewayType;
+                            if (message.gatewayAuthMethod != null && message.hasOwnProperty("gatewayAuthMethod"))
+                                object.gatewayAuthMethod = options.enums === String ? $root.google.cloud.iot.v1.GatewayAuthMethod[message.gatewayAuthMethod] : message.gatewayAuthMethod;
+                            if (message.lastAccessedGatewayId != null && message.hasOwnProperty("lastAccessedGatewayId"))
+                                object.lastAccessedGatewayId = message.lastAccessedGatewayId;
+                            if (message.lastAccessedGatewayTime != null && message.hasOwnProperty("lastAccessedGatewayTime"))
+                                object.lastAccessedGatewayTime = $root.google.protobuf.Timestamp.toObject(message.lastAccessedGatewayTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GatewayConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.GatewayConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GatewayConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GatewayConfig;
+                    })();
+    
+                    v1.DeviceRegistry = (function() {
+    
+                        /**
+                         * Properties of a DeviceRegistry.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IDeviceRegistry
+                         * @property {string|null} [id] DeviceRegistry id
+                         * @property {string|null} [name] DeviceRegistry name
+                         * @property {Array.<google.cloud.iot.v1.IEventNotificationConfig>|null} [eventNotificationConfigs] DeviceRegistry eventNotificationConfigs
+                         * @property {google.cloud.iot.v1.IStateNotificationConfig|null} [stateNotificationConfig] DeviceRegistry stateNotificationConfig
+                         * @property {google.cloud.iot.v1.IMqttConfig|null} [mqttConfig] DeviceRegistry mqttConfig
+                         * @property {google.cloud.iot.v1.IHttpConfig|null} [httpConfig] DeviceRegistry httpConfig
+                         * @property {google.cloud.iot.v1.LogLevel|null} [logLevel] DeviceRegistry logLevel
+                         * @property {Array.<google.cloud.iot.v1.IRegistryCredential>|null} [credentials] DeviceRegistry credentials
+                         */
+    
+                        /**
+                         * Constructs a new DeviceRegistry.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a DeviceRegistry.
+                         * @implements IDeviceRegistry
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IDeviceRegistry=} [properties] Properties to set
+                         */
+                        function DeviceRegistry(properties) {
+                            this.eventNotificationConfigs = [];
+                            this.credentials = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeviceRegistry id.
+                         * @member {string} id
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.id = "";
+    
+                        /**
+                         * DeviceRegistry name.
+                         * @member {string} name
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.name = "";
+    
+                        /**
+                         * DeviceRegistry eventNotificationConfigs.
+                         * @member {Array.<google.cloud.iot.v1.IEventNotificationConfig>} eventNotificationConfigs
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.eventNotificationConfigs = $util.emptyArray;
+    
+                        /**
+                         * DeviceRegistry stateNotificationConfig.
+                         * @member {google.cloud.iot.v1.IStateNotificationConfig|null|undefined} stateNotificationConfig
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.stateNotificationConfig = null;
+    
+                        /**
+                         * DeviceRegistry mqttConfig.
+                         * @member {google.cloud.iot.v1.IMqttConfig|null|undefined} mqttConfig
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.mqttConfig = null;
+    
+                        /**
+                         * DeviceRegistry httpConfig.
+                         * @member {google.cloud.iot.v1.IHttpConfig|null|undefined} httpConfig
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.httpConfig = null;
+    
+                        /**
+                         * DeviceRegistry logLevel.
+                         * @member {google.cloud.iot.v1.LogLevel} logLevel
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.logLevel = 0;
+    
+                        /**
+                         * DeviceRegistry credentials.
+                         * @member {Array.<google.cloud.iot.v1.IRegistryCredential>} credentials
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         */
+                        DeviceRegistry.prototype.credentials = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DeviceRegistry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceRegistry=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry instance
+                         */
+                        DeviceRegistry.create = function create(properties) {
+                            return new DeviceRegistry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceRegistry message. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceRegistry} message DeviceRegistry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceRegistry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig"))
+                                $root.google.cloud.iot.v1.MqttConfig.encode(message.mqttConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig"))
+                                $root.google.cloud.iot.v1.StateNotificationConfig.encode(message.stateNotificationConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.credentials != null && message.credentials.length)
+                                for (var i = 0; i < message.credentials.length; ++i)
+                                    $root.google.cloud.iot.v1.RegistryCredential.encode(message.credentials[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig"))
+                                $root.google.cloud.iot.v1.HttpConfig.encode(message.httpConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.eventNotificationConfigs != null && message.eventNotificationConfigs.length)
+                                for (var i = 0; i < message.eventNotificationConfigs.length; ++i)
+                                    $root.google.cloud.iot.v1.EventNotificationConfig.encode(message.eventNotificationConfigs[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.logLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceRegistry message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceRegistry} message DeviceRegistry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceRegistry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeviceRegistry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceRegistry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceRegistry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    message.name = reader.string();
+                                    break;
+                                case 10:
+                                    if (!(message.eventNotificationConfigs && message.eventNotificationConfigs.length))
+                                        message.eventNotificationConfigs = [];
+                                    message.eventNotificationConfigs.push($root.google.cloud.iot.v1.EventNotificationConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 7:
+                                    message.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.httpConfig = $root.google.cloud.iot.v1.HttpConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.logLevel = reader.int32();
+                                    break;
+                                case 8:
+                                    if (!(message.credentials && message.credentials.length))
+                                        message.credentials = [];
+                                    message.credentials.push($root.google.cloud.iot.v1.RegistryCredential.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeviceRegistry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceRegistry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeviceRegistry message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeviceRegistry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.eventNotificationConfigs != null && message.hasOwnProperty("eventNotificationConfigs")) {
+                                if (!Array.isArray(message.eventNotificationConfigs))
+                                    return "eventNotificationConfigs: array expected";
+                                for (var i = 0; i < message.eventNotificationConfigs.length; ++i) {
+                                    var error = $root.google.cloud.iot.v1.EventNotificationConfig.verify(message.eventNotificationConfigs[i]);
+                                    if (error)
+                                        return "eventNotificationConfigs." + error;
+                                }
+                            }
+                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig")) {
+                                var error = $root.google.cloud.iot.v1.StateNotificationConfig.verify(message.stateNotificationConfig);
+                                if (error)
+                                    return "stateNotificationConfig." + error;
+                            }
+                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig")) {
+                                var error = $root.google.cloud.iot.v1.MqttConfig.verify(message.mqttConfig);
+                                if (error)
+                                    return "mqttConfig." + error;
+                            }
+                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig")) {
+                                var error = $root.google.cloud.iot.v1.HttpConfig.verify(message.httpConfig);
+                                if (error)
+                                    return "httpConfig." + error;
+                            }
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                switch (message.logLevel) {
+                                default:
+                                    return "logLevel: enum value expected";
+                                case 0:
+                                case 10:
+                                case 20:
+                                case 30:
+                                case 40:
+                                    break;
+                                }
+                            if (message.credentials != null && message.hasOwnProperty("credentials")) {
+                                if (!Array.isArray(message.credentials))
+                                    return "credentials: array expected";
+                                for (var i = 0; i < message.credentials.length; ++i) {
+                                    var error = $root.google.cloud.iot.v1.RegistryCredential.verify(message.credentials[i]);
+                                    if (error)
+                                        return "credentials." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeviceRegistry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.DeviceRegistry} DeviceRegistry
+                         */
+                        DeviceRegistry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.DeviceRegistry)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.DeviceRegistry();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.eventNotificationConfigs) {
+                                if (!Array.isArray(object.eventNotificationConfigs))
+                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.eventNotificationConfigs: array expected");
+                                message.eventNotificationConfigs = [];
+                                for (var i = 0; i < object.eventNotificationConfigs.length; ++i) {
+                                    if (typeof object.eventNotificationConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.iot.v1.DeviceRegistry.eventNotificationConfigs: object expected");
+                                    message.eventNotificationConfigs[i] = $root.google.cloud.iot.v1.EventNotificationConfig.fromObject(object.eventNotificationConfigs[i]);
+                                }
+                            }
+                            if (object.stateNotificationConfig != null) {
+                                if (typeof object.stateNotificationConfig !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.stateNotificationConfig: object expected");
+                                message.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.fromObject(object.stateNotificationConfig);
+                            }
+                            if (object.mqttConfig != null) {
+                                if (typeof object.mqttConfig !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.mqttConfig: object expected");
+                                message.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.fromObject(object.mqttConfig);
+                            }
+                            if (object.httpConfig != null) {
+                                if (typeof object.httpConfig !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.httpConfig: object expected");
+                                message.httpConfig = $root.google.cloud.iot.v1.HttpConfig.fromObject(object.httpConfig);
+                            }
+                            switch (object.logLevel) {
+                            case "LOG_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.logLevel = 0;
+                                break;
+                            case "NONE":
+                            case 10:
+                                message.logLevel = 10;
+                                break;
+                            case "ERROR":
+                            case 20:
+                                message.logLevel = 20;
+                                break;
+                            case "INFO":
+                            case 30:
+                                message.logLevel = 30;
+                                break;
+                            case "DEBUG":
+                            case 40:
+                                message.logLevel = 40;
+                                break;
+                            }
+                            if (object.credentials) {
+                                if (!Array.isArray(object.credentials))
+                                    throw TypeError(".google.cloud.iot.v1.DeviceRegistry.credentials: array expected");
+                                message.credentials = [];
+                                for (var i = 0; i < object.credentials.length; ++i) {
+                                    if (typeof object.credentials[i] !== "object")
+                                        throw TypeError(".google.cloud.iot.v1.DeviceRegistry.credentials: object expected");
+                                    message.credentials[i] = $root.google.cloud.iot.v1.RegistryCredential.fromObject(object.credentials[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeviceRegistry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @static
+                         * @param {google.cloud.iot.v1.DeviceRegistry} message DeviceRegistry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeviceRegistry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.credentials = [];
+                                object.eventNotificationConfigs = [];
+                            }
+                            if (options.defaults) {
+                                object.id = "";
+                                object.name = "";
+                                object.mqttConfig = null;
+                                object.stateNotificationConfig = null;
+                                object.httpConfig = null;
+                                object.logLevel = options.enums === String ? "LOG_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.mqttConfig != null && message.hasOwnProperty("mqttConfig"))
+                                object.mqttConfig = $root.google.cloud.iot.v1.MqttConfig.toObject(message.mqttConfig, options);
+                            if (message.stateNotificationConfig != null && message.hasOwnProperty("stateNotificationConfig"))
+                                object.stateNotificationConfig = $root.google.cloud.iot.v1.StateNotificationConfig.toObject(message.stateNotificationConfig, options);
+                            if (message.credentials && message.credentials.length) {
+                                object.credentials = [];
+                                for (var j = 0; j < message.credentials.length; ++j)
+                                    object.credentials[j] = $root.google.cloud.iot.v1.RegistryCredential.toObject(message.credentials[j], options);
+                            }
+                            if (message.httpConfig != null && message.hasOwnProperty("httpConfig"))
+                                object.httpConfig = $root.google.cloud.iot.v1.HttpConfig.toObject(message.httpConfig, options);
+                            if (message.eventNotificationConfigs && message.eventNotificationConfigs.length) {
+                                object.eventNotificationConfigs = [];
+                                for (var j = 0; j < message.eventNotificationConfigs.length; ++j)
+                                    object.eventNotificationConfigs[j] = $root.google.cloud.iot.v1.EventNotificationConfig.toObject(message.eventNotificationConfigs[j], options);
+                            }
+                            if (message.logLevel != null && message.hasOwnProperty("logLevel"))
+                                object.logLevel = options.enums === String ? $root.google.cloud.iot.v1.LogLevel[message.logLevel] : message.logLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeviceRegistry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.DeviceRegistry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeviceRegistry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeviceRegistry;
+                    })();
+    
+                    v1.MqttConfig = (function() {
+    
+                        /**
+                         * Properties of a MqttConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IMqttConfig
+                         * @property {google.cloud.iot.v1.MqttState|null} [mqttEnabledState] MqttConfig mqttEnabledState
+                         */
+    
+                        /**
+                         * Constructs a new MqttConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a MqttConfig.
+                         * @implements IMqttConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IMqttConfig=} [properties] Properties to set
+                         */
+                        function MqttConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MqttConfig mqttEnabledState.
+                         * @member {google.cloud.iot.v1.MqttState} mqttEnabledState
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @instance
+                         */
+                        MqttConfig.prototype.mqttEnabledState = 0;
+    
+                        /**
+                         * Creates a new MqttConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IMqttConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig instance
+                         */
+                        MqttConfig.create = function create(properties) {
+                            return new MqttConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MqttConfig message. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IMqttConfig} message MqttConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MqttConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.mqttEnabledState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MqttConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IMqttConfig} message MqttConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MqttConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MqttConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MqttConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.MqttConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.mqttEnabledState = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MqttConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MqttConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MqttConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MqttConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
+                                switch (message.mqttEnabledState) {
+                                default:
+                                    return "mqttEnabledState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MqttConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.MqttConfig} MqttConfig
+                         */
+                        MqttConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.MqttConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.MqttConfig();
+                            switch (object.mqttEnabledState) {
+                            case "MQTT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.mqttEnabledState = 0;
+                                break;
+                            case "MQTT_ENABLED":
+                            case 1:
+                                message.mqttEnabledState = 1;
+                                break;
+                            case "MQTT_DISABLED":
+                            case 2:
+                                message.mqttEnabledState = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MqttConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.MqttConfig} message MqttConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MqttConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.mqttEnabledState = options.enums === String ? "MQTT_STATE_UNSPECIFIED" : 0;
+                            if (message.mqttEnabledState != null && message.hasOwnProperty("mqttEnabledState"))
+                                object.mqttEnabledState = options.enums === String ? $root.google.cloud.iot.v1.MqttState[message.mqttEnabledState] : message.mqttEnabledState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MqttConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.MqttConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MqttConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MqttConfig;
+                    })();
+    
+                    /**
+                     * MqttState enum.
+                     * @name google.cloud.iot.v1.MqttState
+                     * @enum {string}
+                     * @property {number} MQTT_STATE_UNSPECIFIED=0 MQTT_STATE_UNSPECIFIED value
+                     * @property {number} MQTT_ENABLED=1 MQTT_ENABLED value
+                     * @property {number} MQTT_DISABLED=2 MQTT_DISABLED value
+                     */
+                    v1.MqttState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MQTT_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MQTT_ENABLED"] = 1;
+                        values[valuesById[2] = "MQTT_DISABLED"] = 2;
+                        return values;
+                    })();
+    
+                    v1.HttpConfig = (function() {
+    
+                        /**
+                         * Properties of a HttpConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IHttpConfig
+                         * @property {google.cloud.iot.v1.HttpState|null} [httpEnabledState] HttpConfig httpEnabledState
+                         */
+    
+                        /**
+                         * Constructs a new HttpConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a HttpConfig.
+                         * @implements IHttpConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IHttpConfig=} [properties] Properties to set
+                         */
+                        function HttpConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HttpConfig httpEnabledState.
+                         * @member {google.cloud.iot.v1.HttpState} httpEnabledState
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @instance
+                         */
+                        HttpConfig.prototype.httpEnabledState = 0;
+    
+                        /**
+                         * Creates a new HttpConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IHttpConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig instance
+                         */
+                        HttpConfig.create = function create(properties) {
+                            return new HttpConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HttpConfig message. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IHttpConfig} message HttpConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.httpEnabledState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IHttpConfig} message HttpConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HttpConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.HttpConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.httpEnabledState = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HttpConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HttpConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HttpConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
+                                switch (message.httpEnabledState) {
+                                default:
+                                    return "httpEnabledState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.HttpConfig} HttpConfig
+                         */
+                        HttpConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.HttpConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.HttpConfig();
+                            switch (object.httpEnabledState) {
+                            case "HTTP_STATE_UNSPECIFIED":
+                            case 0:
+                                message.httpEnabledState = 0;
+                                break;
+                            case "HTTP_ENABLED":
+                            case 1:
+                                message.httpEnabledState = 1;
+                                break;
+                            case "HTTP_DISABLED":
+                            case 2:
+                                message.httpEnabledState = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.HttpConfig} message HttpConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HttpConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.httpEnabledState = options.enums === String ? "HTTP_STATE_UNSPECIFIED" : 0;
+                            if (message.httpEnabledState != null && message.hasOwnProperty("httpEnabledState"))
+                                object.httpEnabledState = options.enums === String ? $root.google.cloud.iot.v1.HttpState[message.httpEnabledState] : message.httpEnabledState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HttpConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.HttpConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HttpConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return HttpConfig;
+                    })();
+    
+                    /**
+                     * HttpState enum.
+                     * @name google.cloud.iot.v1.HttpState
+                     * @enum {string}
+                     * @property {number} HTTP_STATE_UNSPECIFIED=0 HTTP_STATE_UNSPECIFIED value
+                     * @property {number} HTTP_ENABLED=1 HTTP_ENABLED value
+                     * @property {number} HTTP_DISABLED=2 HTTP_DISABLED value
+                     */
+                    v1.HttpState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HTTP_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HTTP_ENABLED"] = 1;
+                        values[valuesById[2] = "HTTP_DISABLED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * LogLevel enum.
+                     * @name google.cloud.iot.v1.LogLevel
+                     * @enum {string}
+                     * @property {number} LOG_LEVEL_UNSPECIFIED=0 LOG_LEVEL_UNSPECIFIED value
+                     * @property {number} NONE=10 NONE value
+                     * @property {number} ERROR=20 ERROR value
+                     * @property {number} INFO=30 INFO value
+                     * @property {number} DEBUG=40 DEBUG value
+                     */
+                    v1.LogLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOG_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[10] = "NONE"] = 10;
+                        values[valuesById[20] = "ERROR"] = 20;
+                        values[valuesById[30] = "INFO"] = 30;
+                        values[valuesById[40] = "DEBUG"] = 40;
+                        return values;
+                    })();
+    
+                    /**
+                     * GatewayType enum.
+                     * @name google.cloud.iot.v1.GatewayType
+                     * @enum {string}
+                     * @property {number} GATEWAY_TYPE_UNSPECIFIED=0 GATEWAY_TYPE_UNSPECIFIED value
+                     * @property {number} GATEWAY=1 GATEWAY value
+                     * @property {number} NON_GATEWAY=2 NON_GATEWAY value
+                     */
+                    v1.GatewayType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GATEWAY_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GATEWAY"] = 1;
+                        values[valuesById[2] = "NON_GATEWAY"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * GatewayAuthMethod enum.
+                     * @name google.cloud.iot.v1.GatewayAuthMethod
+                     * @enum {string}
+                     * @property {number} GATEWAY_AUTH_METHOD_UNSPECIFIED=0 GATEWAY_AUTH_METHOD_UNSPECIFIED value
+                     * @property {number} ASSOCIATION_ONLY=1 ASSOCIATION_ONLY value
+                     * @property {number} DEVICE_AUTH_TOKEN_ONLY=2 DEVICE_AUTH_TOKEN_ONLY value
+                     * @property {number} ASSOCIATION_AND_DEVICE_AUTH_TOKEN=3 ASSOCIATION_AND_DEVICE_AUTH_TOKEN value
+                     */
+                    v1.GatewayAuthMethod = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GATEWAY_AUTH_METHOD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ASSOCIATION_ONLY"] = 1;
+                        values[valuesById[2] = "DEVICE_AUTH_TOKEN_ONLY"] = 2;
+                        values[valuesById[3] = "ASSOCIATION_AND_DEVICE_AUTH_TOKEN"] = 3;
+                        return values;
+                    })();
+    
+                    v1.EventNotificationConfig = (function() {
+    
+                        /**
+                         * Properties of an EventNotificationConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IEventNotificationConfig
+                         * @property {string|null} [subfolderMatches] EventNotificationConfig subfolderMatches
+                         * @property {string|null} [pubsubTopicName] EventNotificationConfig pubsubTopicName
+                         */
+    
+                        /**
+                         * Constructs a new EventNotificationConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents an EventNotificationConfig.
+                         * @implements IEventNotificationConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IEventNotificationConfig=} [properties] Properties to set
+                         */
+                        function EventNotificationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EventNotificationConfig subfolderMatches.
+                         * @member {string} subfolderMatches
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @instance
+                         */
+                        EventNotificationConfig.prototype.subfolderMatches = "";
+    
+                        /**
+                         * EventNotificationConfig pubsubTopicName.
+                         * @member {string} pubsubTopicName
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @instance
+                         */
+                        EventNotificationConfig.prototype.pubsubTopicName = "";
+    
+                        /**
+                         * Creates a new EventNotificationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IEventNotificationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig instance
+                         */
+                        EventNotificationConfig.create = function create(properties) {
+                            return new EventNotificationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EventNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IEventNotificationConfig} message EventNotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EventNotificationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopicName);
+                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subfolderMatches);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EventNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IEventNotificationConfig} message EventNotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EventNotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EventNotificationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EventNotificationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.EventNotificationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.subfolderMatches = reader.string();
+                                    break;
+                                case 1:
+                                    message.pubsubTopicName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EventNotificationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EventNotificationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EventNotificationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EventNotificationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
+                                if (!$util.isString(message.subfolderMatches))
+                                    return "subfolderMatches: string expected";
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                if (!$util.isString(message.pubsubTopicName))
+                                    return "pubsubTopicName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EventNotificationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.EventNotificationConfig} EventNotificationConfig
+                         */
+                        EventNotificationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.EventNotificationConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.EventNotificationConfig();
+                            if (object.subfolderMatches != null)
+                                message.subfolderMatches = String(object.subfolderMatches);
+                            if (object.pubsubTopicName != null)
+                                message.pubsubTopicName = String(object.pubsubTopicName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EventNotificationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.EventNotificationConfig} message EventNotificationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EventNotificationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pubsubTopicName = "";
+                                object.subfolderMatches = "";
+                            }
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                object.pubsubTopicName = message.pubsubTopicName;
+                            if (message.subfolderMatches != null && message.hasOwnProperty("subfolderMatches"))
+                                object.subfolderMatches = message.subfolderMatches;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EventNotificationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.EventNotificationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EventNotificationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EventNotificationConfig;
+                    })();
+    
+                    v1.StateNotificationConfig = (function() {
+    
+                        /**
+                         * Properties of a StateNotificationConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IStateNotificationConfig
+                         * @property {string|null} [pubsubTopicName] StateNotificationConfig pubsubTopicName
+                         */
+    
+                        /**
+                         * Constructs a new StateNotificationConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a StateNotificationConfig.
+                         * @implements IStateNotificationConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IStateNotificationConfig=} [properties] Properties to set
+                         */
+                        function StateNotificationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StateNotificationConfig pubsubTopicName.
+                         * @member {string} pubsubTopicName
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @instance
+                         */
+                        StateNotificationConfig.prototype.pubsubTopicName = "";
+    
+                        /**
+                         * Creates a new StateNotificationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IStateNotificationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig instance
+                         */
+                        StateNotificationConfig.create = function create(properties) {
+                            return new StateNotificationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StateNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IStateNotificationConfig} message StateNotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateNotificationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pubsubTopicName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StateNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IStateNotificationConfig} message StateNotificationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateNotificationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StateNotificationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateNotificationConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.StateNotificationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pubsubTopicName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StateNotificationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateNotificationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StateNotificationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StateNotificationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                if (!$util.isString(message.pubsubTopicName))
+                                    return "pubsubTopicName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StateNotificationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.StateNotificationConfig} StateNotificationConfig
+                         */
+                        StateNotificationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.StateNotificationConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.StateNotificationConfig();
+                            if (object.pubsubTopicName != null)
+                                message.pubsubTopicName = String(object.pubsubTopicName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StateNotificationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.StateNotificationConfig} message StateNotificationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StateNotificationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.pubsubTopicName = "";
+                            if (message.pubsubTopicName != null && message.hasOwnProperty("pubsubTopicName"))
+                                object.pubsubTopicName = message.pubsubTopicName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StateNotificationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.StateNotificationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StateNotificationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StateNotificationConfig;
+                    })();
+    
+                    v1.RegistryCredential = (function() {
+    
+                        /**
+                         * Properties of a RegistryCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IRegistryCredential
+                         * @property {google.cloud.iot.v1.IPublicKeyCertificate|null} [publicKeyCertificate] RegistryCredential publicKeyCertificate
+                         */
+    
+                        /**
+                         * Constructs a new RegistryCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a RegistryCredential.
+                         * @implements IRegistryCredential
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IRegistryCredential=} [properties] Properties to set
+                         */
+                        function RegistryCredential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegistryCredential publicKeyCertificate.
+                         * @member {google.cloud.iot.v1.IPublicKeyCertificate|null|undefined} publicKeyCertificate
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @instance
+                         */
+                        RegistryCredential.prototype.publicKeyCertificate = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RegistryCredential credential.
+                         * @member {"publicKeyCertificate"|undefined} credential
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @instance
+                         */
+                        Object.defineProperty(RegistryCredential.prototype, "credential", {
+                            get: $util.oneOfGetter($oneOfFields = ["publicKeyCertificate"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RegistryCredential instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IRegistryCredential=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential instance
+                         */
+                        RegistryCredential.create = function create(properties) {
+                            return new RegistryCredential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegistryCredential message. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IRegistryCredential} message RegistryCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegistryCredential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate"))
+                                $root.google.cloud.iot.v1.PublicKeyCertificate.encode(message.publicKeyCertificate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegistryCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IRegistryCredential} message RegistryCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegistryCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegistryCredential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegistryCredential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.RegistryCredential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegistryCredential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegistryCredential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegistryCredential message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegistryCredential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate")) {
+                                properties.credential = 1;
+                                {
+                                    var error = $root.google.cloud.iot.v1.PublicKeyCertificate.verify(message.publicKeyCertificate);
+                                    if (error)
+                                        return "publicKeyCertificate." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegistryCredential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.RegistryCredential} RegistryCredential
+                         */
+                        RegistryCredential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.RegistryCredential)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.RegistryCredential();
+                            if (object.publicKeyCertificate != null) {
+                                if (typeof object.publicKeyCertificate !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.RegistryCredential.publicKeyCertificate: object expected");
+                                message.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.fromObject(object.publicKeyCertificate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegistryCredential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.RegistryCredential} message RegistryCredential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegistryCredential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.publicKeyCertificate != null && message.hasOwnProperty("publicKeyCertificate")) {
+                                object.publicKeyCertificate = $root.google.cloud.iot.v1.PublicKeyCertificate.toObject(message.publicKeyCertificate, options);
+                                if (options.oneofs)
+                                    object.credential = "publicKeyCertificate";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegistryCredential to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.RegistryCredential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegistryCredential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RegistryCredential;
+                    })();
+    
+                    v1.X509CertificateDetails = (function() {
+    
+                        /**
+                         * Properties of a X509CertificateDetails.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IX509CertificateDetails
+                         * @property {string|null} [issuer] X509CertificateDetails issuer
+                         * @property {string|null} [subject] X509CertificateDetails subject
+                         * @property {google.protobuf.ITimestamp|null} [startTime] X509CertificateDetails startTime
+                         * @property {google.protobuf.ITimestamp|null} [expiryTime] X509CertificateDetails expiryTime
+                         * @property {string|null} [signatureAlgorithm] X509CertificateDetails signatureAlgorithm
+                         * @property {string|null} [publicKeyType] X509CertificateDetails publicKeyType
+                         */
+    
+                        /**
+                         * Constructs a new X509CertificateDetails.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a X509CertificateDetails.
+                         * @implements IX509CertificateDetails
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IX509CertificateDetails=} [properties] Properties to set
+                         */
+                        function X509CertificateDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * X509CertificateDetails issuer.
+                         * @member {string} issuer
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.issuer = "";
+    
+                        /**
+                         * X509CertificateDetails subject.
+                         * @member {string} subject
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.subject = "";
+    
+                        /**
+                         * X509CertificateDetails startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.startTime = null;
+    
+                        /**
+                         * X509CertificateDetails expiryTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expiryTime
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.expiryTime = null;
+    
+                        /**
+                         * X509CertificateDetails signatureAlgorithm.
+                         * @member {string} signatureAlgorithm
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.signatureAlgorithm = "";
+    
+                        /**
+                         * X509CertificateDetails publicKeyType.
+                         * @member {string} publicKeyType
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         */
+                        X509CertificateDetails.prototype.publicKeyType = "";
+    
+                        /**
+                         * Creates a new X509CertificateDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {google.cloud.iot.v1.IX509CertificateDetails=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails instance
+                         */
+                        X509CertificateDetails.create = function create(properties) {
+                            return new X509CertificateDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified X509CertificateDetails message. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {google.cloud.iot.v1.IX509CertificateDetails} message X509CertificateDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        X509CertificateDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.issuer);
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subject);
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expiryTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.signatureAlgorithm);
+                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.publicKeyType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified X509CertificateDetails message, length delimited. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {google.cloud.iot.v1.IX509CertificateDetails} message X509CertificateDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        X509CertificateDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a X509CertificateDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        X509CertificateDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.X509CertificateDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.issuer = reader.string();
+                                    break;
+                                case 2:
+                                    message.subject = reader.string();
+                                    break;
+                                case 3:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.expiryTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.signatureAlgorithm = reader.string();
+                                    break;
+                                case 6:
+                                    message.publicKeyType = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a X509CertificateDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        X509CertificateDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a X509CertificateDetails message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        X509CertificateDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                if (!$util.isString(message.issuer))
+                                    return "issuer: string expected";
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                if (!$util.isString(message.subject))
+                                    return "subject: string expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expiryTime);
+                                if (error)
+                                    return "expiryTime." + error;
+                            }
+                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                if (!$util.isString(message.signatureAlgorithm))
+                                    return "signatureAlgorithm: string expected";
+                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
+                                if (!$util.isString(message.publicKeyType))
+                                    return "publicKeyType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a X509CertificateDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.X509CertificateDetails} X509CertificateDetails
+                         */
+                        X509CertificateDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.X509CertificateDetails)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.X509CertificateDetails();
+                            if (object.issuer != null)
+                                message.issuer = String(object.issuer);
+                            if (object.subject != null)
+                                message.subject = String(object.subject);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.X509CertificateDetails.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.expiryTime != null) {
+                                if (typeof object.expiryTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.X509CertificateDetails.expiryTime: object expected");
+                                message.expiryTime = $root.google.protobuf.Timestamp.fromObject(object.expiryTime);
+                            }
+                            if (object.signatureAlgorithm != null)
+                                message.signatureAlgorithm = String(object.signatureAlgorithm);
+                            if (object.publicKeyType != null)
+                                message.publicKeyType = String(object.publicKeyType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a X509CertificateDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @static
+                         * @param {google.cloud.iot.v1.X509CertificateDetails} message X509CertificateDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        X509CertificateDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.issuer = "";
+                                object.subject = "";
+                                object.startTime = null;
+                                object.expiryTime = null;
+                                object.signatureAlgorithm = "";
+                                object.publicKeyType = "";
+                            }
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                object.issuer = message.issuer;
+                            if (message.subject != null && message.hasOwnProperty("subject"))
+                                object.subject = message.subject;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.expiryTime != null && message.hasOwnProperty("expiryTime"))
+                                object.expiryTime = $root.google.protobuf.Timestamp.toObject(message.expiryTime, options);
+                            if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
+                                object.signatureAlgorithm = message.signatureAlgorithm;
+                            if (message.publicKeyType != null && message.hasOwnProperty("publicKeyType"))
+                                object.publicKeyType = message.publicKeyType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this X509CertificateDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.X509CertificateDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        X509CertificateDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return X509CertificateDetails;
+                    })();
+    
+                    v1.PublicKeyCertificate = (function() {
+    
+                        /**
+                         * Properties of a PublicKeyCertificate.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IPublicKeyCertificate
+                         * @property {google.cloud.iot.v1.PublicKeyCertificateFormat|null} [format] PublicKeyCertificate format
+                         * @property {string|null} [certificate] PublicKeyCertificate certificate
+                         * @property {google.cloud.iot.v1.IX509CertificateDetails|null} [x509Details] PublicKeyCertificate x509Details
+                         */
+    
+                        /**
+                         * Constructs a new PublicKeyCertificate.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a PublicKeyCertificate.
+                         * @implements IPublicKeyCertificate
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IPublicKeyCertificate=} [properties] Properties to set
+                         */
+                        function PublicKeyCertificate(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PublicKeyCertificate format.
+                         * @member {google.cloud.iot.v1.PublicKeyCertificateFormat} format
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @instance
+                         */
+                        PublicKeyCertificate.prototype.format = 0;
+    
+                        /**
+                         * PublicKeyCertificate certificate.
+                         * @member {string} certificate
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @instance
+                         */
+                        PublicKeyCertificate.prototype.certificate = "";
+    
+                        /**
+                         * PublicKeyCertificate x509Details.
+                         * @member {google.cloud.iot.v1.IX509CertificateDetails|null|undefined} x509Details
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @instance
+                         */
+                        PublicKeyCertificate.prototype.x509Details = null;
+    
+                        /**
+                         * Creates a new PublicKeyCertificate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCertificate=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate instance
+                         */
+                        PublicKeyCertificate.create = function create(properties) {
+                            return new PublicKeyCertificate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PublicKeyCertificate message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCertificate} message PublicKeyCertificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PublicKeyCertificate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                            if (message.certificate != null && message.hasOwnProperty("certificate"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.certificate);
+                            if (message.x509Details != null && message.hasOwnProperty("x509Details"))
+                                $root.google.cloud.iot.v1.X509CertificateDetails.encode(message.x509Details, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PublicKeyCertificate message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCertificate} message PublicKeyCertificate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PublicKeyCertificate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PublicKeyCertificate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PublicKeyCertificate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.PublicKeyCertificate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.format = reader.int32();
+                                    break;
+                                case 2:
+                                    message.certificate = reader.string();
+                                    break;
+                                case 3:
+                                    message.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PublicKeyCertificate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PublicKeyCertificate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PublicKeyCertificate message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PublicKeyCertificate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                switch (message.format) {
+                                default:
+                                    return "format: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.certificate != null && message.hasOwnProperty("certificate"))
+                                if (!$util.isString(message.certificate))
+                                    return "certificate: string expected";
+                            if (message.x509Details != null && message.hasOwnProperty("x509Details")) {
+                                var error = $root.google.cloud.iot.v1.X509CertificateDetails.verify(message.x509Details);
+                                if (error)
+                                    return "x509Details." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PublicKeyCertificate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.PublicKeyCertificate} PublicKeyCertificate
+                         */
+                        PublicKeyCertificate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.PublicKeyCertificate)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.PublicKeyCertificate();
+                            switch (object.format) {
+                            case "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT":
+                            case 0:
+                                message.format = 0;
+                                break;
+                            case "X509_CERTIFICATE_PEM":
+                            case 1:
+                                message.format = 1;
+                                break;
+                            }
+                            if (object.certificate != null)
+                                message.certificate = String(object.certificate);
+                            if (object.x509Details != null) {
+                                if (typeof object.x509Details !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.PublicKeyCertificate.x509Details: object expected");
+                                message.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.fromObject(object.x509Details);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PublicKeyCertificate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @static
+                         * @param {google.cloud.iot.v1.PublicKeyCertificate} message PublicKeyCertificate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PublicKeyCertificate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.format = options.enums === String ? "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT" : 0;
+                                object.certificate = "";
+                                object.x509Details = null;
+                            }
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyCertificateFormat[message.format] : message.format;
+                            if (message.certificate != null && message.hasOwnProperty("certificate"))
+                                object.certificate = message.certificate;
+                            if (message.x509Details != null && message.hasOwnProperty("x509Details"))
+                                object.x509Details = $root.google.cloud.iot.v1.X509CertificateDetails.toObject(message.x509Details, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PublicKeyCertificate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.PublicKeyCertificate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PublicKeyCertificate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PublicKeyCertificate;
+                    })();
+    
+                    /**
+                     * PublicKeyCertificateFormat enum.
+                     * @name google.cloud.iot.v1.PublicKeyCertificateFormat
+                     * @enum {string}
+                     * @property {number} UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT=0 UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT value
+                     * @property {number} X509_CERTIFICATE_PEM=1 X509_CERTIFICATE_PEM value
+                     */
+                    v1.PublicKeyCertificateFormat = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT"] = 0;
+                        values[valuesById[1] = "X509_CERTIFICATE_PEM"] = 1;
+                        return values;
+                    })();
+    
+                    v1.DeviceCredential = (function() {
+    
+                        /**
+                         * Properties of a DeviceCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IDeviceCredential
+                         * @property {google.cloud.iot.v1.IPublicKeyCredential|null} [publicKey] DeviceCredential publicKey
+                         * @property {google.protobuf.ITimestamp|null} [expirationTime] DeviceCredential expirationTime
+                         */
+    
+                        /**
+                         * Constructs a new DeviceCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a DeviceCredential.
+                         * @implements IDeviceCredential
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IDeviceCredential=} [properties] Properties to set
+                         */
+                        function DeviceCredential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeviceCredential publicKey.
+                         * @member {google.cloud.iot.v1.IPublicKeyCredential|null|undefined} publicKey
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @instance
+                         */
+                        DeviceCredential.prototype.publicKey = null;
+    
+                        /**
+                         * DeviceCredential expirationTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expirationTime
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @instance
+                         */
+                        DeviceCredential.prototype.expirationTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DeviceCredential credential.
+                         * @member {"publicKey"|undefined} credential
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @instance
+                         */
+                        Object.defineProperty(DeviceCredential.prototype, "credential", {
+                            get: $util.oneOfGetter($oneOfFields = ["publicKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DeviceCredential instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceCredential=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential instance
+                         */
+                        DeviceCredential.create = function create(properties) {
+                            return new DeviceCredential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceCredential message. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceCredential} message DeviceCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceCredential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                $root.google.cloud.iot.v1.PublicKeyCredential.encode(message.publicKey, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expirationTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceCredential} message DeviceCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeviceCredential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceCredential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceCredential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.expirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeviceCredential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceCredential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeviceCredential message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeviceCredential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
+                                properties.credential = 1;
+                                {
+                                    var error = $root.google.cloud.iot.v1.PublicKeyCredential.verify(message.publicKey);
+                                    if (error)
+                                        return "publicKey." + error;
+                                }
+                            }
+                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expirationTime);
+                                if (error)
+                                    return "expirationTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeviceCredential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.DeviceCredential} DeviceCredential
+                         */
+                        DeviceCredential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.DeviceCredential)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.DeviceCredential();
+                            if (object.publicKey != null) {
+                                if (typeof object.publicKey !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceCredential.publicKey: object expected");
+                                message.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.fromObject(object.publicKey);
+                            }
+                            if (object.expirationTime != null) {
+                                if (typeof object.expirationTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceCredential.expirationTime: object expected");
+                                message.expirationTime = $root.google.protobuf.Timestamp.fromObject(object.expirationTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeviceCredential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.DeviceCredential} message DeviceCredential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeviceCredential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.expirationTime = null;
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
+                                object.publicKey = $root.google.cloud.iot.v1.PublicKeyCredential.toObject(message.publicKey, options);
+                                if (options.oneofs)
+                                    object.credential = "publicKey";
+                            }
+                            if (message.expirationTime != null && message.hasOwnProperty("expirationTime"))
+                                object.expirationTime = $root.google.protobuf.Timestamp.toObject(message.expirationTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeviceCredential to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.DeviceCredential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeviceCredential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeviceCredential;
+                    })();
+    
+                    v1.PublicKeyCredential = (function() {
+    
+                        /**
+                         * Properties of a PublicKeyCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IPublicKeyCredential
+                         * @property {google.cloud.iot.v1.PublicKeyFormat|null} [format] PublicKeyCredential format
+                         * @property {string|null} [key] PublicKeyCredential key
+                         */
+    
+                        /**
+                         * Constructs a new PublicKeyCredential.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a PublicKeyCredential.
+                         * @implements IPublicKeyCredential
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IPublicKeyCredential=} [properties] Properties to set
+                         */
+                        function PublicKeyCredential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PublicKeyCredential format.
+                         * @member {google.cloud.iot.v1.PublicKeyFormat} format
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @instance
+                         */
+                        PublicKeyCredential.prototype.format = 0;
+    
+                        /**
+                         * PublicKeyCredential key.
+                         * @member {string} key
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @instance
+                         */
+                        PublicKeyCredential.prototype.key = "";
+    
+                        /**
+                         * Creates a new PublicKeyCredential instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCredential=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential instance
+                         */
+                        PublicKeyCredential.create = function create(properties) {
+                            return new PublicKeyCredential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PublicKeyCredential message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCredential} message PublicKeyCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PublicKeyCredential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.key);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PublicKeyCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.IPublicKeyCredential} message PublicKeyCredential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PublicKeyCredential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PublicKeyCredential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PublicKeyCredential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.PublicKeyCredential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.format = reader.int32();
+                                    break;
+                                case 2:
+                                    message.key = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PublicKeyCredential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PublicKeyCredential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PublicKeyCredential message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PublicKeyCredential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                switch (message.format) {
+                                default:
+                                    return "format: enum value expected";
+                                case 0:
+                                case 3:
+                                case 1:
+                                case 2:
+                                case 4:
+                                    break;
+                                }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PublicKeyCredential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.PublicKeyCredential} PublicKeyCredential
+                         */
+                        PublicKeyCredential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.PublicKeyCredential)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.PublicKeyCredential();
+                            switch (object.format) {
+                            case "UNSPECIFIED_PUBLIC_KEY_FORMAT":
+                            case 0:
+                                message.format = 0;
+                                break;
+                            case "RSA_PEM":
+                            case 3:
+                                message.format = 3;
+                                break;
+                            case "RSA_X509_PEM":
+                            case 1:
+                                message.format = 1;
+                                break;
+                            case "ES256_PEM":
+                            case 2:
+                                message.format = 2;
+                                break;
+                            case "ES256_X509_PEM":
+                            case 4:
+                                message.format = 4;
+                                break;
+                            }
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PublicKeyCredential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @static
+                         * @param {google.cloud.iot.v1.PublicKeyCredential} message PublicKeyCredential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PublicKeyCredential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.format = options.enums === String ? "UNSPECIFIED_PUBLIC_KEY_FORMAT" : 0;
+                                object.key = "";
+                            }
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                object.format = options.enums === String ? $root.google.cloud.iot.v1.PublicKeyFormat[message.format] : message.format;
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PublicKeyCredential to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.PublicKeyCredential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PublicKeyCredential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PublicKeyCredential;
+                    })();
+    
+                    /**
+                     * PublicKeyFormat enum.
+                     * @name google.cloud.iot.v1.PublicKeyFormat
+                     * @enum {string}
+                     * @property {number} UNSPECIFIED_PUBLIC_KEY_FORMAT=0 UNSPECIFIED_PUBLIC_KEY_FORMAT value
+                     * @property {number} RSA_PEM=3 RSA_PEM value
+                     * @property {number} RSA_X509_PEM=1 RSA_X509_PEM value
+                     * @property {number} ES256_PEM=2 ES256_PEM value
+                     * @property {number} ES256_X509_PEM=4 ES256_X509_PEM value
+                     */
+                    v1.PublicKeyFormat = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "UNSPECIFIED_PUBLIC_KEY_FORMAT"] = 0;
+                        values[valuesById[3] = "RSA_PEM"] = 3;
+                        values[valuesById[1] = "RSA_X509_PEM"] = 1;
+                        values[valuesById[2] = "ES256_PEM"] = 2;
+                        values[valuesById[4] = "ES256_X509_PEM"] = 4;
+                        return values;
+                    })();
+    
+                    v1.DeviceConfig = (function() {
+    
+                        /**
+                         * Properties of a DeviceConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IDeviceConfig
+                         * @property {number|Long|null} [version] DeviceConfig version
+                         * @property {google.protobuf.ITimestamp|null} [cloudUpdateTime] DeviceConfig cloudUpdateTime
+                         * @property {google.protobuf.ITimestamp|null} [deviceAckTime] DeviceConfig deviceAckTime
+                         * @property {Uint8Array|null} [binaryData] DeviceConfig binaryData
+                         */
+    
+                        /**
+                         * Constructs a new DeviceConfig.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a DeviceConfig.
+                         * @implements IDeviceConfig
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IDeviceConfig=} [properties] Properties to set
+                         */
+                        function DeviceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeviceConfig version.
+                         * @member {number|Long} version
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @instance
+                         */
+                        DeviceConfig.prototype.version = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DeviceConfig cloudUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} cloudUpdateTime
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @instance
+                         */
+                        DeviceConfig.prototype.cloudUpdateTime = null;
+    
+                        /**
+                         * DeviceConfig deviceAckTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deviceAckTime
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @instance
+                         */
+                        DeviceConfig.prototype.deviceAckTime = null;
+    
+                        /**
+                         * DeviceConfig binaryData.
+                         * @member {Uint8Array} binaryData
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @instance
+                         */
+                        DeviceConfig.prototype.binaryData = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new DeviceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig instance
+                         */
+                        DeviceConfig.create = function create(properties) {
+                            return new DeviceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceConfig message. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceConfig} message DeviceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.version);
+                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.cloudUpdateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deviceAckTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.binaryData);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceConfig} message DeviceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeviceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.int64();
+                                    break;
+                                case 2:
+                                    message.cloudUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.deviceAckTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.binaryData = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeviceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeviceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeviceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isInteger(message.version) && !(message.version && $util.isInteger(message.version.low) && $util.isInteger(message.version.high)))
+                                    return "version: integer|Long expected";
+                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.cloudUpdateTime);
+                                if (error)
+                                    return "cloudUpdateTime." + error;
+                            }
+                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deviceAckTime);
+                                if (error)
+                                    return "deviceAckTime." + error;
+                            }
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                if (!(message.binaryData && typeof message.binaryData.length === "number" || $util.isString(message.binaryData)))
+                                    return "binaryData: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeviceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.DeviceConfig} DeviceConfig
+                         */
+                        DeviceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.DeviceConfig)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.DeviceConfig();
+                            if (object.version != null)
+                                if ($util.Long)
+                                    (message.version = $util.Long.fromValue(object.version)).unsigned = false;
+                                else if (typeof object.version === "string")
+                                    message.version = parseInt(object.version, 10);
+                                else if (typeof object.version === "number")
+                                    message.version = object.version;
+                                else if (typeof object.version === "object")
+                                    message.version = new $util.LongBits(object.version.low >>> 0, object.version.high >>> 0).toNumber();
+                            if (object.cloudUpdateTime != null) {
+                                if (typeof object.cloudUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceConfig.cloudUpdateTime: object expected");
+                                message.cloudUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.cloudUpdateTime);
+                            }
+                            if (object.deviceAckTime != null) {
+                                if (typeof object.deviceAckTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceConfig.deviceAckTime: object expected");
+                                message.deviceAckTime = $root.google.protobuf.Timestamp.fromObject(object.deviceAckTime);
+                            }
+                            if (object.binaryData != null)
+                                if (typeof object.binaryData === "string")
+                                    $util.base64.decode(object.binaryData, message.binaryData = $util.newBuffer($util.base64.length(object.binaryData)), 0);
+                                else if (object.binaryData.length)
+                                    message.binaryData = object.binaryData;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeviceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @static
+                         * @param {google.cloud.iot.v1.DeviceConfig} message DeviceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeviceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.version = options.longs === String ? "0" : 0;
+                                object.cloudUpdateTime = null;
+                                object.deviceAckTime = null;
+                                if (options.bytes === String)
+                                    object.binaryData = "";
+                                else {
+                                    object.binaryData = [];
+                                    if (options.bytes !== Array)
+                                        object.binaryData = $util.newBuffer(object.binaryData);
+                                }
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (typeof message.version === "number")
+                                    object.version = options.longs === String ? String(message.version) : message.version;
+                                else
+                                    object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
+                            if (message.cloudUpdateTime != null && message.hasOwnProperty("cloudUpdateTime"))
+                                object.cloudUpdateTime = $root.google.protobuf.Timestamp.toObject(message.cloudUpdateTime, options);
+                            if (message.deviceAckTime != null && message.hasOwnProperty("deviceAckTime"))
+                                object.deviceAckTime = $root.google.protobuf.Timestamp.toObject(message.deviceAckTime, options);
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                object.binaryData = options.bytes === String ? $util.base64.encode(message.binaryData, 0, message.binaryData.length) : options.bytes === Array ? Array.prototype.slice.call(message.binaryData) : message.binaryData;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeviceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.DeviceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeviceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeviceConfig;
+                    })();
+    
+                    v1.DeviceState = (function() {
+    
+                        /**
+                         * Properties of a DeviceState.
+                         * @memberof google.cloud.iot.v1
+                         * @interface IDeviceState
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeviceState updateTime
+                         * @property {Uint8Array|null} [binaryData] DeviceState binaryData
+                         */
+    
+                        /**
+                         * Constructs a new DeviceState.
+                         * @memberof google.cloud.iot.v1
+                         * @classdesc Represents a DeviceState.
+                         * @implements IDeviceState
+                         * @constructor
+                         * @param {google.cloud.iot.v1.IDeviceState=} [properties] Properties to set
+                         */
+                        function DeviceState(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeviceState updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @instance
+                         */
+                        DeviceState.prototype.updateTime = null;
+    
+                        /**
+                         * DeviceState binaryData.
+                         * @member {Uint8Array} binaryData
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @instance
+                         */
+                        DeviceState.prototype.binaryData = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new DeviceState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceState=} [properties] Properties to set
+                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState instance
+                         */
+                        DeviceState.create = function create(properties) {
+                            return new DeviceState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceState message. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceState} message DeviceState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.binaryData);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeviceState message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {google.cloud.iot.v1.IDeviceState} message DeviceState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeviceState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeviceState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceState.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.iot.v1.DeviceState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.binaryData = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeviceState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeviceState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeviceState message.
+                         * @function verify
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeviceState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                if (!(message.binaryData && typeof message.binaryData.length === "number" || $util.isString(message.binaryData)))
+                                    return "binaryData: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeviceState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.iot.v1.DeviceState} DeviceState
+                         */
+                        DeviceState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.iot.v1.DeviceState)
+                                return object;
+                            var message = new $root.google.cloud.iot.v1.DeviceState();
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.iot.v1.DeviceState.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.binaryData != null)
+                                if (typeof object.binaryData === "string")
+                                    $util.base64.decode(object.binaryData, message.binaryData = $util.newBuffer($util.base64.length(object.binaryData)), 0);
+                                else if (object.binaryData.length)
+                                    message.binaryData = object.binaryData;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeviceState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @static
+                         * @param {google.cloud.iot.v1.DeviceState} message DeviceState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeviceState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateTime = null;
+                                if (options.bytes === String)
+                                    object.binaryData = "";
+                                else {
+                                    object.binaryData = [];
+                                    if (options.bytes !== Array)
+                                        object.binaryData = $util.newBuffer(object.binaryData);
+                                }
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.binaryData != null && message.hasOwnProperty("binaryData"))
+                                object.binaryData = options.bytes === String ? $util.base64.encode(message.binaryData, 0, message.binaryData.length) : options.bytes === Array ? Array.prototype.slice.call(message.binaryData) : message.binaryData;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeviceState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.iot.v1.DeviceState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeviceState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeviceState;
+                    })();
+    
                     return v1;
                 })();
     
@@ -10111,565 +10111,6 @@
              * @namespace
              */
             var api = {};
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.pattern = [];
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {string}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
-            })();
     
             api.Http = (function() {
     
@@ -11595,6 +11036,565 @@
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -16807,8 +16807,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -16885,20 +16885,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -17004,9 +17004,6 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
                         case 1052:
                             if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                 message[".google.api.fieldBehavior"] = [];
@@ -17016,6 +17013,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -17091,11 +17091,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -17111,6 +17106,11 @@
                             case 5:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -17173,11 +17173,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -17210,6 +17205,11 @@
                                 message[".google.api.fieldBehavior"][i] = 5;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };

@@ -26,1565 +26,6 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
-                /** Properties of a Device. */
-                interface IDevice {
-
-                    /** Device id */
-                    id?: (string|null);
-
-                    /** Device name */
-                    name?: (string|null);
-
-                    /** Device numId */
-                    numId?: (number|Long|string|null);
-
-                    /** Device credentials */
-                    credentials?: (google.cloud.iot.v1.IDeviceCredential[]|null);
-
-                    /** Device lastHeartbeatTime */
-                    lastHeartbeatTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastEventTime */
-                    lastEventTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastStateTime */
-                    lastStateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastConfigAckTime */
-                    lastConfigAckTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastConfigSendTime */
-                    lastConfigSendTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device blocked */
-                    blocked?: (boolean|null);
-
-                    /** Device lastErrorTime */
-                    lastErrorTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastErrorStatus */
-                    lastErrorStatus?: (google.rpc.IStatus|null);
-
-                    /** Device config */
-                    config?: (google.cloud.iot.v1.IDeviceConfig|null);
-
-                    /** Device state */
-                    state?: (google.cloud.iot.v1.IDeviceState|null);
-
-                    /** Device logLevel */
-                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
-
-                    /** Device metadata */
-                    metadata?: ({ [k: string]: string }|null);
-
-                    /** Device gatewayConfig */
-                    gatewayConfig?: (google.cloud.iot.v1.IGatewayConfig|null);
-                }
-
-                /** Represents a Device. */
-                class Device implements IDevice {
-
-                    /**
-                     * Constructs a new Device.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IDevice);
-
-                    /** Device id. */
-                    public id: string;
-
-                    /** Device name. */
-                    public name: string;
-
-                    /** Device numId. */
-                    public numId: (number|Long|string);
-
-                    /** Device credentials. */
-                    public credentials: google.cloud.iot.v1.IDeviceCredential[];
-
-                    /** Device lastHeartbeatTime. */
-                    public lastHeartbeatTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastEventTime. */
-                    public lastEventTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastStateTime. */
-                    public lastStateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastConfigAckTime. */
-                    public lastConfigAckTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastConfigSendTime. */
-                    public lastConfigSendTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device blocked. */
-                    public blocked: boolean;
-
-                    /** Device lastErrorTime. */
-                    public lastErrorTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Device lastErrorStatus. */
-                    public lastErrorStatus?: (google.rpc.IStatus|null);
-
-                    /** Device config. */
-                    public config?: (google.cloud.iot.v1.IDeviceConfig|null);
-
-                    /** Device state. */
-                    public state?: (google.cloud.iot.v1.IDeviceState|null);
-
-                    /** Device logLevel. */
-                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
-
-                    /** Device metadata. */
-                    public metadata: { [k: string]: string };
-
-                    /** Device gatewayConfig. */
-                    public gatewayConfig?: (google.cloud.iot.v1.IGatewayConfig|null);
-
-                    /**
-                     * Creates a new Device instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Device instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IDevice): google.cloud.iot.v1.Device;
-
-                    /**
-                     * Encodes the specified Device message. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
-                     * @param message Device message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IDevice, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Device message, length delimited. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
-                     * @param message Device message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IDevice, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Device message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Device
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.Device;
-
-                    /**
-                     * Decodes a Device message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Device
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.Device;
-
-                    /**
-                     * Verifies a Device message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Device message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Device
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.Device;
-
-                    /**
-                     * Creates a plain object from a Device message. Also converts values to other types if specified.
-                     * @param message Device
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.Device, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Device to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GatewayConfig. */
-                interface IGatewayConfig {
-
-                    /** GatewayConfig gatewayType */
-                    gatewayType?: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType|null);
-
-                    /** GatewayConfig gatewayAuthMethod */
-                    gatewayAuthMethod?: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod|null);
-
-                    /** GatewayConfig lastAccessedGatewayId */
-                    lastAccessedGatewayId?: (string|null);
-
-                    /** GatewayConfig lastAccessedGatewayTime */
-                    lastAccessedGatewayTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a GatewayConfig. */
-                class GatewayConfig implements IGatewayConfig {
-
-                    /**
-                     * Constructs a new GatewayConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IGatewayConfig);
-
-                    /** GatewayConfig gatewayType. */
-                    public gatewayType: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType);
-
-                    /** GatewayConfig gatewayAuthMethod. */
-                    public gatewayAuthMethod: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod);
-
-                    /** GatewayConfig lastAccessedGatewayId. */
-                    public lastAccessedGatewayId: string;
-
-                    /** GatewayConfig lastAccessedGatewayTime. */
-                    public lastAccessedGatewayTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new GatewayConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GatewayConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IGatewayConfig): google.cloud.iot.v1.GatewayConfig;
-
-                    /**
-                     * Encodes the specified GatewayConfig message. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
-                     * @param message GatewayConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GatewayConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
-                     * @param message GatewayConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GatewayConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GatewayConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.GatewayConfig;
-
-                    /**
-                     * Decodes a GatewayConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GatewayConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.GatewayConfig;
-
-                    /**
-                     * Verifies a GatewayConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GatewayConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GatewayConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.GatewayConfig;
-
-                    /**
-                     * Creates a plain object from a GatewayConfig message. Also converts values to other types if specified.
-                     * @param message GatewayConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.GatewayConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GatewayConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeviceRegistry. */
-                interface IDeviceRegistry {
-
-                    /** DeviceRegistry id */
-                    id?: (string|null);
-
-                    /** DeviceRegistry name */
-                    name?: (string|null);
-
-                    /** DeviceRegistry eventNotificationConfigs */
-                    eventNotificationConfigs?: (google.cloud.iot.v1.IEventNotificationConfig[]|null);
-
-                    /** DeviceRegistry stateNotificationConfig */
-                    stateNotificationConfig?: (google.cloud.iot.v1.IStateNotificationConfig|null);
-
-                    /** DeviceRegistry mqttConfig */
-                    mqttConfig?: (google.cloud.iot.v1.IMqttConfig|null);
-
-                    /** DeviceRegistry httpConfig */
-                    httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
-
-                    /** DeviceRegistry logLevel */
-                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
-
-                    /** DeviceRegistry credentials */
-                    credentials?: (google.cloud.iot.v1.IRegistryCredential[]|null);
-                }
-
-                /** Represents a DeviceRegistry. */
-                class DeviceRegistry implements IDeviceRegistry {
-
-                    /**
-                     * Constructs a new DeviceRegistry.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IDeviceRegistry);
-
-                    /** DeviceRegistry id. */
-                    public id: string;
-
-                    /** DeviceRegistry name. */
-                    public name: string;
-
-                    /** DeviceRegistry eventNotificationConfigs. */
-                    public eventNotificationConfigs: google.cloud.iot.v1.IEventNotificationConfig[];
-
-                    /** DeviceRegistry stateNotificationConfig. */
-                    public stateNotificationConfig?: (google.cloud.iot.v1.IStateNotificationConfig|null);
-
-                    /** DeviceRegistry mqttConfig. */
-                    public mqttConfig?: (google.cloud.iot.v1.IMqttConfig|null);
-
-                    /** DeviceRegistry httpConfig. */
-                    public httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
-
-                    /** DeviceRegistry logLevel. */
-                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
-
-                    /** DeviceRegistry credentials. */
-                    public credentials: google.cloud.iot.v1.IRegistryCredential[];
-
-                    /**
-                     * Creates a new DeviceRegistry instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeviceRegistry instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IDeviceRegistry): google.cloud.iot.v1.DeviceRegistry;
-
-                    /**
-                     * Encodes the specified DeviceRegistry message. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
-                     * @param message DeviceRegistry message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IDeviceRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeviceRegistry message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
-                     * @param message DeviceRegistry message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeviceRegistry message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeviceRegistry
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceRegistry;
-
-                    /**
-                     * Decodes a DeviceRegistry message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeviceRegistry
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceRegistry;
-
-                    /**
-                     * Verifies a DeviceRegistry message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeviceRegistry message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeviceRegistry
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceRegistry;
-
-                    /**
-                     * Creates a plain object from a DeviceRegistry message. Also converts values to other types if specified.
-                     * @param message DeviceRegistry
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.DeviceRegistry, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeviceRegistry to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a MqttConfig. */
-                interface IMqttConfig {
-
-                    /** MqttConfig mqttEnabledState */
-                    mqttEnabledState?: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState|null);
-                }
-
-                /** Represents a MqttConfig. */
-                class MqttConfig implements IMqttConfig {
-
-                    /**
-                     * Constructs a new MqttConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IMqttConfig);
-
-                    /** MqttConfig mqttEnabledState. */
-                    public mqttEnabledState: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState);
-
-                    /**
-                     * Creates a new MqttConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns MqttConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IMqttConfig): google.cloud.iot.v1.MqttConfig;
-
-                    /**
-                     * Encodes the specified MqttConfig message. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
-                     * @param message MqttConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IMqttConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified MqttConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
-                     * @param message MqttConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IMqttConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a MqttConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns MqttConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.MqttConfig;
-
-                    /**
-                     * Decodes a MqttConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns MqttConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.MqttConfig;
-
-                    /**
-                     * Verifies a MqttConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a MqttConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns MqttConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.MqttConfig;
-
-                    /**
-                     * Creates a plain object from a MqttConfig message. Also converts values to other types if specified.
-                     * @param message MqttConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.MqttConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this MqttConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** MqttState enum. */
-                enum MqttState {
-                    MQTT_STATE_UNSPECIFIED = 0,
-                    MQTT_ENABLED = 1,
-                    MQTT_DISABLED = 2
-                }
-
-                /** Properties of a HttpConfig. */
-                interface IHttpConfig {
-
-                    /** HttpConfig httpEnabledState */
-                    httpEnabledState?: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState|null);
-                }
-
-                /** Represents a HttpConfig. */
-                class HttpConfig implements IHttpConfig {
-
-                    /**
-                     * Constructs a new HttpConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IHttpConfig);
-
-                    /** HttpConfig httpEnabledState. */
-                    public httpEnabledState: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState);
-
-                    /**
-                     * Creates a new HttpConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns HttpConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IHttpConfig): google.cloud.iot.v1.HttpConfig;
-
-                    /**
-                     * Encodes the specified HttpConfig message. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
-                     * @param message HttpConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
-                     * @param message HttpConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a HttpConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns HttpConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.HttpConfig;
-
-                    /**
-                     * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns HttpConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.HttpConfig;
-
-                    /**
-                     * Verifies a HttpConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns HttpConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.HttpConfig;
-
-                    /**
-                     * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
-                     * @param message HttpConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.HttpConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this HttpConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** HttpState enum. */
-                enum HttpState {
-                    HTTP_STATE_UNSPECIFIED = 0,
-                    HTTP_ENABLED = 1,
-                    HTTP_DISABLED = 2
-                }
-
-                /** LogLevel enum. */
-                enum LogLevel {
-                    LOG_LEVEL_UNSPECIFIED = 0,
-                    NONE = 10,
-                    ERROR = 20,
-                    INFO = 30,
-                    DEBUG = 40
-                }
-
-                /** GatewayType enum. */
-                enum GatewayType {
-                    GATEWAY_TYPE_UNSPECIFIED = 0,
-                    GATEWAY = 1,
-                    NON_GATEWAY = 2
-                }
-
-                /** GatewayAuthMethod enum. */
-                enum GatewayAuthMethod {
-                    GATEWAY_AUTH_METHOD_UNSPECIFIED = 0,
-                    ASSOCIATION_ONLY = 1,
-                    DEVICE_AUTH_TOKEN_ONLY = 2,
-                    ASSOCIATION_AND_DEVICE_AUTH_TOKEN = 3
-                }
-
-                /** Properties of an EventNotificationConfig. */
-                interface IEventNotificationConfig {
-
-                    /** EventNotificationConfig subfolderMatches */
-                    subfolderMatches?: (string|null);
-
-                    /** EventNotificationConfig pubsubTopicName */
-                    pubsubTopicName?: (string|null);
-                }
-
-                /** Represents an EventNotificationConfig. */
-                class EventNotificationConfig implements IEventNotificationConfig {
-
-                    /**
-                     * Constructs a new EventNotificationConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IEventNotificationConfig);
-
-                    /** EventNotificationConfig subfolderMatches. */
-                    public subfolderMatches: string;
-
-                    /** EventNotificationConfig pubsubTopicName. */
-                    public pubsubTopicName: string;
-
-                    /**
-                     * Creates a new EventNotificationConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns EventNotificationConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IEventNotificationConfig): google.cloud.iot.v1.EventNotificationConfig;
-
-                    /**
-                     * Encodes the specified EventNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
-                     * @param message EventNotificationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IEventNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified EventNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
-                     * @param message EventNotificationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IEventNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an EventNotificationConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns EventNotificationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.EventNotificationConfig;
-
-                    /**
-                     * Decodes an EventNotificationConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns EventNotificationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.EventNotificationConfig;
-
-                    /**
-                     * Verifies an EventNotificationConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an EventNotificationConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns EventNotificationConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.EventNotificationConfig;
-
-                    /**
-                     * Creates a plain object from an EventNotificationConfig message. Also converts values to other types if specified.
-                     * @param message EventNotificationConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.EventNotificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this EventNotificationConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a StateNotificationConfig. */
-                interface IStateNotificationConfig {
-
-                    /** StateNotificationConfig pubsubTopicName */
-                    pubsubTopicName?: (string|null);
-                }
-
-                /** Represents a StateNotificationConfig. */
-                class StateNotificationConfig implements IStateNotificationConfig {
-
-                    /**
-                     * Constructs a new StateNotificationConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IStateNotificationConfig);
-
-                    /** StateNotificationConfig pubsubTopicName. */
-                    public pubsubTopicName: string;
-
-                    /**
-                     * Creates a new StateNotificationConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StateNotificationConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IStateNotificationConfig): google.cloud.iot.v1.StateNotificationConfig;
-
-                    /**
-                     * Encodes the specified StateNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
-                     * @param message StateNotificationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IStateNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StateNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
-                     * @param message StateNotificationConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IStateNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StateNotificationConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StateNotificationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.StateNotificationConfig;
-
-                    /**
-                     * Decodes a StateNotificationConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StateNotificationConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.StateNotificationConfig;
-
-                    /**
-                     * Verifies a StateNotificationConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StateNotificationConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StateNotificationConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.StateNotificationConfig;
-
-                    /**
-                     * Creates a plain object from a StateNotificationConfig message. Also converts values to other types if specified.
-                     * @param message StateNotificationConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.StateNotificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StateNotificationConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a RegistryCredential. */
-                interface IRegistryCredential {
-
-                    /** RegistryCredential publicKeyCertificate */
-                    publicKeyCertificate?: (google.cloud.iot.v1.IPublicKeyCertificate|null);
-                }
-
-                /** Represents a RegistryCredential. */
-                class RegistryCredential implements IRegistryCredential {
-
-                    /**
-                     * Constructs a new RegistryCredential.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IRegistryCredential);
-
-                    /** RegistryCredential publicKeyCertificate. */
-                    public publicKeyCertificate?: (google.cloud.iot.v1.IPublicKeyCertificate|null);
-
-                    /** RegistryCredential credential. */
-                    public credential?: "publicKeyCertificate";
-
-                    /**
-                     * Creates a new RegistryCredential instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RegistryCredential instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IRegistryCredential): google.cloud.iot.v1.RegistryCredential;
-
-                    /**
-                     * Encodes the specified RegistryCredential message. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
-                     * @param message RegistryCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IRegistryCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RegistryCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
-                     * @param message RegistryCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IRegistryCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RegistryCredential message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RegistryCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.RegistryCredential;
-
-                    /**
-                     * Decodes a RegistryCredential message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RegistryCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.RegistryCredential;
-
-                    /**
-                     * Verifies a RegistryCredential message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RegistryCredential message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RegistryCredential
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.RegistryCredential;
-
-                    /**
-                     * Creates a plain object from a RegistryCredential message. Also converts values to other types if specified.
-                     * @param message RegistryCredential
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.RegistryCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RegistryCredential to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a X509CertificateDetails. */
-                interface IX509CertificateDetails {
-
-                    /** X509CertificateDetails issuer */
-                    issuer?: (string|null);
-
-                    /** X509CertificateDetails subject */
-                    subject?: (string|null);
-
-                    /** X509CertificateDetails startTime */
-                    startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** X509CertificateDetails expiryTime */
-                    expiryTime?: (google.protobuf.ITimestamp|null);
-
-                    /** X509CertificateDetails signatureAlgorithm */
-                    signatureAlgorithm?: (string|null);
-
-                    /** X509CertificateDetails publicKeyType */
-                    publicKeyType?: (string|null);
-                }
-
-                /** Represents a X509CertificateDetails. */
-                class X509CertificateDetails implements IX509CertificateDetails {
-
-                    /**
-                     * Constructs a new X509CertificateDetails.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IX509CertificateDetails);
-
-                    /** X509CertificateDetails issuer. */
-                    public issuer: string;
-
-                    /** X509CertificateDetails subject. */
-                    public subject: string;
-
-                    /** X509CertificateDetails startTime. */
-                    public startTime?: (google.protobuf.ITimestamp|null);
-
-                    /** X509CertificateDetails expiryTime. */
-                    public expiryTime?: (google.protobuf.ITimestamp|null);
-
-                    /** X509CertificateDetails signatureAlgorithm. */
-                    public signatureAlgorithm: string;
-
-                    /** X509CertificateDetails publicKeyType. */
-                    public publicKeyType: string;
-
-                    /**
-                     * Creates a new X509CertificateDetails instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns X509CertificateDetails instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IX509CertificateDetails): google.cloud.iot.v1.X509CertificateDetails;
-
-                    /**
-                     * Encodes the specified X509CertificateDetails message. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
-                     * @param message X509CertificateDetails message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IX509CertificateDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified X509CertificateDetails message, length delimited. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
-                     * @param message X509CertificateDetails message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IX509CertificateDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a X509CertificateDetails message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns X509CertificateDetails
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.X509CertificateDetails;
-
-                    /**
-                     * Decodes a X509CertificateDetails message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns X509CertificateDetails
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.X509CertificateDetails;
-
-                    /**
-                     * Verifies a X509CertificateDetails message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a X509CertificateDetails message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns X509CertificateDetails
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.X509CertificateDetails;
-
-                    /**
-                     * Creates a plain object from a X509CertificateDetails message. Also converts values to other types if specified.
-                     * @param message X509CertificateDetails
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.X509CertificateDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this X509CertificateDetails to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a PublicKeyCertificate. */
-                interface IPublicKeyCertificate {
-
-                    /** PublicKeyCertificate format */
-                    format?: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat|null);
-
-                    /** PublicKeyCertificate certificate */
-                    certificate?: (string|null);
-
-                    /** PublicKeyCertificate x509Details */
-                    x509Details?: (google.cloud.iot.v1.IX509CertificateDetails|null);
-                }
-
-                /** Represents a PublicKeyCertificate. */
-                class PublicKeyCertificate implements IPublicKeyCertificate {
-
-                    /**
-                     * Constructs a new PublicKeyCertificate.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IPublicKeyCertificate);
-
-                    /** PublicKeyCertificate format. */
-                    public format: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat);
-
-                    /** PublicKeyCertificate certificate. */
-                    public certificate: string;
-
-                    /** PublicKeyCertificate x509Details. */
-                    public x509Details?: (google.cloud.iot.v1.IX509CertificateDetails|null);
-
-                    /**
-                     * Creates a new PublicKeyCertificate instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PublicKeyCertificate instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IPublicKeyCertificate): google.cloud.iot.v1.PublicKeyCertificate;
-
-                    /**
-                     * Encodes the specified PublicKeyCertificate message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
-                     * @param message PublicKeyCertificate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IPublicKeyCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PublicKeyCertificate message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
-                     * @param message PublicKeyCertificate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IPublicKeyCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PublicKeyCertificate message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PublicKeyCertificate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.PublicKeyCertificate;
-
-                    /**
-                     * Decodes a PublicKeyCertificate message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PublicKeyCertificate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.PublicKeyCertificate;
-
-                    /**
-                     * Verifies a PublicKeyCertificate message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PublicKeyCertificate message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PublicKeyCertificate
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.PublicKeyCertificate;
-
-                    /**
-                     * Creates a plain object from a PublicKeyCertificate message. Also converts values to other types if specified.
-                     * @param message PublicKeyCertificate
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.PublicKeyCertificate, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PublicKeyCertificate to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** PublicKeyCertificateFormat enum. */
-                enum PublicKeyCertificateFormat {
-                    UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT = 0,
-                    X509_CERTIFICATE_PEM = 1
-                }
-
-                /** Properties of a DeviceCredential. */
-                interface IDeviceCredential {
-
-                    /** DeviceCredential publicKey */
-                    publicKey?: (google.cloud.iot.v1.IPublicKeyCredential|null);
-
-                    /** DeviceCredential expirationTime */
-                    expirationTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a DeviceCredential. */
-                class DeviceCredential implements IDeviceCredential {
-
-                    /**
-                     * Constructs a new DeviceCredential.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IDeviceCredential);
-
-                    /** DeviceCredential publicKey. */
-                    public publicKey?: (google.cloud.iot.v1.IPublicKeyCredential|null);
-
-                    /** DeviceCredential expirationTime. */
-                    public expirationTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceCredential credential. */
-                    public credential?: "publicKey";
-
-                    /**
-                     * Creates a new DeviceCredential instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeviceCredential instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IDeviceCredential): google.cloud.iot.v1.DeviceCredential;
-
-                    /**
-                     * Encodes the specified DeviceCredential message. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
-                     * @param message DeviceCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IDeviceCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeviceCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
-                     * @param message DeviceCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeviceCredential message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeviceCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceCredential;
-
-                    /**
-                     * Decodes a DeviceCredential message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeviceCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceCredential;
-
-                    /**
-                     * Verifies a DeviceCredential message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeviceCredential message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeviceCredential
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceCredential;
-
-                    /**
-                     * Creates a plain object from a DeviceCredential message. Also converts values to other types if specified.
-                     * @param message DeviceCredential
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.DeviceCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeviceCredential to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a PublicKeyCredential. */
-                interface IPublicKeyCredential {
-
-                    /** PublicKeyCredential format */
-                    format?: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat|null);
-
-                    /** PublicKeyCredential key */
-                    key?: (string|null);
-                }
-
-                /** Represents a PublicKeyCredential. */
-                class PublicKeyCredential implements IPublicKeyCredential {
-
-                    /**
-                     * Constructs a new PublicKeyCredential.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IPublicKeyCredential);
-
-                    /** PublicKeyCredential format. */
-                    public format: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat);
-
-                    /** PublicKeyCredential key. */
-                    public key: string;
-
-                    /**
-                     * Creates a new PublicKeyCredential instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PublicKeyCredential instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IPublicKeyCredential): google.cloud.iot.v1.PublicKeyCredential;
-
-                    /**
-                     * Encodes the specified PublicKeyCredential message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
-                     * @param message PublicKeyCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IPublicKeyCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PublicKeyCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
-                     * @param message PublicKeyCredential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IPublicKeyCredential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PublicKeyCredential message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PublicKeyCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.PublicKeyCredential;
-
-                    /**
-                     * Decodes a PublicKeyCredential message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PublicKeyCredential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.PublicKeyCredential;
-
-                    /**
-                     * Verifies a PublicKeyCredential message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PublicKeyCredential message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PublicKeyCredential
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.PublicKeyCredential;
-
-                    /**
-                     * Creates a plain object from a PublicKeyCredential message. Also converts values to other types if specified.
-                     * @param message PublicKeyCredential
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.PublicKeyCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PublicKeyCredential to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** PublicKeyFormat enum. */
-                enum PublicKeyFormat {
-                    UNSPECIFIED_PUBLIC_KEY_FORMAT = 0,
-                    RSA_PEM = 3,
-                    RSA_X509_PEM = 1,
-                    ES256_PEM = 2,
-                    ES256_X509_PEM = 4
-                }
-
-                /** Properties of a DeviceConfig. */
-                interface IDeviceConfig {
-
-                    /** DeviceConfig version */
-                    version?: (number|Long|string|null);
-
-                    /** DeviceConfig cloudUpdateTime */
-                    cloudUpdateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceConfig deviceAckTime */
-                    deviceAckTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceConfig binaryData */
-                    binaryData?: (Uint8Array|string|null);
-                }
-
-                /** Represents a DeviceConfig. */
-                class DeviceConfig implements IDeviceConfig {
-
-                    /**
-                     * Constructs a new DeviceConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IDeviceConfig);
-
-                    /** DeviceConfig version. */
-                    public version: (number|Long|string);
-
-                    /** DeviceConfig cloudUpdateTime. */
-                    public cloudUpdateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceConfig deviceAckTime. */
-                    public deviceAckTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceConfig binaryData. */
-                    public binaryData: (Uint8Array|string);
-
-                    /**
-                     * Creates a new DeviceConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeviceConfig instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IDeviceConfig): google.cloud.iot.v1.DeviceConfig;
-
-                    /**
-                     * Encodes the specified DeviceConfig message. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
-                     * @param message DeviceConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IDeviceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeviceConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
-                     * @param message DeviceConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeviceConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeviceConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceConfig;
-
-                    /**
-                     * Decodes a DeviceConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeviceConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceConfig;
-
-                    /**
-                     * Verifies a DeviceConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeviceConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeviceConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceConfig;
-
-                    /**
-                     * Creates a plain object from a DeviceConfig message. Also converts values to other types if specified.
-                     * @param message DeviceConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.DeviceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeviceConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeviceState. */
-                interface IDeviceState {
-
-                    /** DeviceState updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceState binaryData */
-                    binaryData?: (Uint8Array|string|null);
-                }
-
-                /** Represents a DeviceState. */
-                class DeviceState implements IDeviceState {
-
-                    /**
-                     * Constructs a new DeviceState.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.iot.v1.IDeviceState);
-
-                    /** DeviceState updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** DeviceState binaryData. */
-                    public binaryData: (Uint8Array|string);
-
-                    /**
-                     * Creates a new DeviceState instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeviceState instance
-                     */
-                    public static create(properties?: google.cloud.iot.v1.IDeviceState): google.cloud.iot.v1.DeviceState;
-
-                    /**
-                     * Encodes the specified DeviceState message. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
-                     * @param message DeviceState message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.iot.v1.IDeviceState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeviceState message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
-                     * @param message DeviceState message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeviceState message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeviceState
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceState;
-
-                    /**
-                     * Decodes a DeviceState message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeviceState
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceState;
-
-                    /**
-                     * Verifies a DeviceState message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeviceState message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeviceState
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceState;
-
-                    /**
-                     * Creates a plain object from a DeviceState message. Also converts values to other types if specified.
-                     * @param message DeviceState
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.iot.v1.DeviceState, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeviceState to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Represents a DeviceManager */
                 class DeviceManager extends $protobuf.rpc.Service {
 
@@ -4314,238 +2755,1571 @@ export namespace google {
                      */
                     public toJSON(): { [k: string]: any };
                 }
+
+                /** Properties of a Device. */
+                interface IDevice {
+
+                    /** Device id */
+                    id?: (string|null);
+
+                    /** Device name */
+                    name?: (string|null);
+
+                    /** Device numId */
+                    numId?: (number|Long|string|null);
+
+                    /** Device credentials */
+                    credentials?: (google.cloud.iot.v1.IDeviceCredential[]|null);
+
+                    /** Device lastHeartbeatTime */
+                    lastHeartbeatTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastEventTime */
+                    lastEventTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastStateTime */
+                    lastStateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastConfigAckTime */
+                    lastConfigAckTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastConfigSendTime */
+                    lastConfigSendTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device blocked */
+                    blocked?: (boolean|null);
+
+                    /** Device lastErrorTime */
+                    lastErrorTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastErrorStatus */
+                    lastErrorStatus?: (google.rpc.IStatus|null);
+
+                    /** Device config */
+                    config?: (google.cloud.iot.v1.IDeviceConfig|null);
+
+                    /** Device state */
+                    state?: (google.cloud.iot.v1.IDeviceState|null);
+
+                    /** Device logLevel */
+                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
+
+                    /** Device metadata */
+                    metadata?: ({ [k: string]: string }|null);
+
+                    /** Device gatewayConfig */
+                    gatewayConfig?: (google.cloud.iot.v1.IGatewayConfig|null);
+                }
+
+                /** Represents a Device. */
+                class Device implements IDevice {
+
+                    /**
+                     * Constructs a new Device.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IDevice);
+
+                    /** Device id. */
+                    public id: string;
+
+                    /** Device name. */
+                    public name: string;
+
+                    /** Device numId. */
+                    public numId: (number|Long|string);
+
+                    /** Device credentials. */
+                    public credentials: google.cloud.iot.v1.IDeviceCredential[];
+
+                    /** Device lastHeartbeatTime. */
+                    public lastHeartbeatTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastEventTime. */
+                    public lastEventTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastStateTime. */
+                    public lastStateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastConfigAckTime. */
+                    public lastConfigAckTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastConfigSendTime. */
+                    public lastConfigSendTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device blocked. */
+                    public blocked: boolean;
+
+                    /** Device lastErrorTime. */
+                    public lastErrorTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Device lastErrorStatus. */
+                    public lastErrorStatus?: (google.rpc.IStatus|null);
+
+                    /** Device config. */
+                    public config?: (google.cloud.iot.v1.IDeviceConfig|null);
+
+                    /** Device state. */
+                    public state?: (google.cloud.iot.v1.IDeviceState|null);
+
+                    /** Device logLevel. */
+                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
+
+                    /** Device metadata. */
+                    public metadata: { [k: string]: string };
+
+                    /** Device gatewayConfig. */
+                    public gatewayConfig?: (google.cloud.iot.v1.IGatewayConfig|null);
+
+                    /**
+                     * Creates a new Device instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Device instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IDevice): google.cloud.iot.v1.Device;
+
+                    /**
+                     * Encodes the specified Device message. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
+                     * @param message Device message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Device message, length delimited. Does not implicitly {@link google.cloud.iot.v1.Device.verify|verify} messages.
+                     * @param message Device message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Device message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Device
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.Device;
+
+                    /**
+                     * Decodes a Device message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Device
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.Device;
+
+                    /**
+                     * Verifies a Device message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Device message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Device
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.Device;
+
+                    /**
+                     * Creates a plain object from a Device message. Also converts values to other types if specified.
+                     * @param message Device
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.Device, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Device to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GatewayConfig. */
+                interface IGatewayConfig {
+
+                    /** GatewayConfig gatewayType */
+                    gatewayType?: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType|null);
+
+                    /** GatewayConfig gatewayAuthMethod */
+                    gatewayAuthMethod?: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod|null);
+
+                    /** GatewayConfig lastAccessedGatewayId */
+                    lastAccessedGatewayId?: (string|null);
+
+                    /** GatewayConfig lastAccessedGatewayTime */
+                    lastAccessedGatewayTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GatewayConfig. */
+                class GatewayConfig implements IGatewayConfig {
+
+                    /**
+                     * Constructs a new GatewayConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IGatewayConfig);
+
+                    /** GatewayConfig gatewayType. */
+                    public gatewayType: (google.cloud.iot.v1.GatewayType|keyof typeof google.cloud.iot.v1.GatewayType);
+
+                    /** GatewayConfig gatewayAuthMethod. */
+                    public gatewayAuthMethod: (google.cloud.iot.v1.GatewayAuthMethod|keyof typeof google.cloud.iot.v1.GatewayAuthMethod);
+
+                    /** GatewayConfig lastAccessedGatewayId. */
+                    public lastAccessedGatewayId: string;
+
+                    /** GatewayConfig lastAccessedGatewayTime. */
+                    public lastAccessedGatewayTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GatewayConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GatewayConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IGatewayConfig): google.cloud.iot.v1.GatewayConfig;
+
+                    /**
+                     * Encodes the specified GatewayConfig message. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
+                     * @param message GatewayConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GatewayConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.GatewayConfig.verify|verify} messages.
+                     * @param message GatewayConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IGatewayConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GatewayConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GatewayConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.GatewayConfig;
+
+                    /**
+                     * Decodes a GatewayConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GatewayConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.GatewayConfig;
+
+                    /**
+                     * Verifies a GatewayConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GatewayConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GatewayConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.GatewayConfig;
+
+                    /**
+                     * Creates a plain object from a GatewayConfig message. Also converts values to other types if specified.
+                     * @param message GatewayConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.GatewayConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GatewayConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeviceRegistry. */
+                interface IDeviceRegistry {
+
+                    /** DeviceRegistry id */
+                    id?: (string|null);
+
+                    /** DeviceRegistry name */
+                    name?: (string|null);
+
+                    /** DeviceRegistry eventNotificationConfigs */
+                    eventNotificationConfigs?: (google.cloud.iot.v1.IEventNotificationConfig[]|null);
+
+                    /** DeviceRegistry stateNotificationConfig */
+                    stateNotificationConfig?: (google.cloud.iot.v1.IStateNotificationConfig|null);
+
+                    /** DeviceRegistry mqttConfig */
+                    mqttConfig?: (google.cloud.iot.v1.IMqttConfig|null);
+
+                    /** DeviceRegistry httpConfig */
+                    httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
+
+                    /** DeviceRegistry logLevel */
+                    logLevel?: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel|null);
+
+                    /** DeviceRegistry credentials */
+                    credentials?: (google.cloud.iot.v1.IRegistryCredential[]|null);
+                }
+
+                /** Represents a DeviceRegistry. */
+                class DeviceRegistry implements IDeviceRegistry {
+
+                    /**
+                     * Constructs a new DeviceRegistry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IDeviceRegistry);
+
+                    /** DeviceRegistry id. */
+                    public id: string;
+
+                    /** DeviceRegistry name. */
+                    public name: string;
+
+                    /** DeviceRegistry eventNotificationConfigs. */
+                    public eventNotificationConfigs: google.cloud.iot.v1.IEventNotificationConfig[];
+
+                    /** DeviceRegistry stateNotificationConfig. */
+                    public stateNotificationConfig?: (google.cloud.iot.v1.IStateNotificationConfig|null);
+
+                    /** DeviceRegistry mqttConfig. */
+                    public mqttConfig?: (google.cloud.iot.v1.IMqttConfig|null);
+
+                    /** DeviceRegistry httpConfig. */
+                    public httpConfig?: (google.cloud.iot.v1.IHttpConfig|null);
+
+                    /** DeviceRegistry logLevel. */
+                    public logLevel: (google.cloud.iot.v1.LogLevel|keyof typeof google.cloud.iot.v1.LogLevel);
+
+                    /** DeviceRegistry credentials. */
+                    public credentials: google.cloud.iot.v1.IRegistryCredential[];
+
+                    /**
+                     * Creates a new DeviceRegistry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeviceRegistry instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IDeviceRegistry): google.cloud.iot.v1.DeviceRegistry;
+
+                    /**
+                     * Encodes the specified DeviceRegistry message. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
+                     * @param message DeviceRegistry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IDeviceRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeviceRegistry message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceRegistry.verify|verify} messages.
+                     * @param message DeviceRegistry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeviceRegistry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeviceRegistry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceRegistry;
+
+                    /**
+                     * Decodes a DeviceRegistry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeviceRegistry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceRegistry;
+
+                    /**
+                     * Verifies a DeviceRegistry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeviceRegistry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeviceRegistry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceRegistry;
+
+                    /**
+                     * Creates a plain object from a DeviceRegistry message. Also converts values to other types if specified.
+                     * @param message DeviceRegistry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.DeviceRegistry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeviceRegistry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MqttConfig. */
+                interface IMqttConfig {
+
+                    /** MqttConfig mqttEnabledState */
+                    mqttEnabledState?: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState|null);
+                }
+
+                /** Represents a MqttConfig. */
+                class MqttConfig implements IMqttConfig {
+
+                    /**
+                     * Constructs a new MqttConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IMqttConfig);
+
+                    /** MqttConfig mqttEnabledState. */
+                    public mqttEnabledState: (google.cloud.iot.v1.MqttState|keyof typeof google.cloud.iot.v1.MqttState);
+
+                    /**
+                     * Creates a new MqttConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MqttConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IMqttConfig): google.cloud.iot.v1.MqttConfig;
+
+                    /**
+                     * Encodes the specified MqttConfig message. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
+                     * @param message MqttConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IMqttConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MqttConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.MqttConfig.verify|verify} messages.
+                     * @param message MqttConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IMqttConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MqttConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MqttConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.MqttConfig;
+
+                    /**
+                     * Decodes a MqttConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MqttConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.MqttConfig;
+
+                    /**
+                     * Verifies a MqttConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MqttConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MqttConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.MqttConfig;
+
+                    /**
+                     * Creates a plain object from a MqttConfig message. Also converts values to other types if specified.
+                     * @param message MqttConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.MqttConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MqttConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** MqttState enum. */
+                enum MqttState {
+                    MQTT_STATE_UNSPECIFIED = 0,
+                    MQTT_ENABLED = 1,
+                    MQTT_DISABLED = 2
+                }
+
+                /** Properties of a HttpConfig. */
+                interface IHttpConfig {
+
+                    /** HttpConfig httpEnabledState */
+                    httpEnabledState?: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState|null);
+                }
+
+                /** Represents a HttpConfig. */
+                class HttpConfig implements IHttpConfig {
+
+                    /**
+                     * Constructs a new HttpConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IHttpConfig);
+
+                    /** HttpConfig httpEnabledState. */
+                    public httpEnabledState: (google.cloud.iot.v1.HttpState|keyof typeof google.cloud.iot.v1.HttpState);
+
+                    /**
+                     * Creates a new HttpConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HttpConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IHttpConfig): google.cloud.iot.v1.HttpConfig;
+
+                    /**
+                     * Encodes the specified HttpConfig message. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
+                     * @param message HttpConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.HttpConfig.verify|verify} messages.
+                     * @param message HttpConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HttpConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HttpConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.HttpConfig;
+
+                    /**
+                     * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HttpConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.HttpConfig;
+
+                    /**
+                     * Verifies a HttpConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HttpConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.HttpConfig;
+
+                    /**
+                     * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
+                     * @param message HttpConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.HttpConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HttpConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** HttpState enum. */
+                enum HttpState {
+                    HTTP_STATE_UNSPECIFIED = 0,
+                    HTTP_ENABLED = 1,
+                    HTTP_DISABLED = 2
+                }
+
+                /** LogLevel enum. */
+                enum LogLevel {
+                    LOG_LEVEL_UNSPECIFIED = 0,
+                    NONE = 10,
+                    ERROR = 20,
+                    INFO = 30,
+                    DEBUG = 40
+                }
+
+                /** GatewayType enum. */
+                enum GatewayType {
+                    GATEWAY_TYPE_UNSPECIFIED = 0,
+                    GATEWAY = 1,
+                    NON_GATEWAY = 2
+                }
+
+                /** GatewayAuthMethod enum. */
+                enum GatewayAuthMethod {
+                    GATEWAY_AUTH_METHOD_UNSPECIFIED = 0,
+                    ASSOCIATION_ONLY = 1,
+                    DEVICE_AUTH_TOKEN_ONLY = 2,
+                    ASSOCIATION_AND_DEVICE_AUTH_TOKEN = 3
+                }
+
+                /** Properties of an EventNotificationConfig. */
+                interface IEventNotificationConfig {
+
+                    /** EventNotificationConfig subfolderMatches */
+                    subfolderMatches?: (string|null);
+
+                    /** EventNotificationConfig pubsubTopicName */
+                    pubsubTopicName?: (string|null);
+                }
+
+                /** Represents an EventNotificationConfig. */
+                class EventNotificationConfig implements IEventNotificationConfig {
+
+                    /**
+                     * Constructs a new EventNotificationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IEventNotificationConfig);
+
+                    /** EventNotificationConfig subfolderMatches. */
+                    public subfolderMatches: string;
+
+                    /** EventNotificationConfig pubsubTopicName. */
+                    public pubsubTopicName: string;
+
+                    /**
+                     * Creates a new EventNotificationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventNotificationConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IEventNotificationConfig): google.cloud.iot.v1.EventNotificationConfig;
+
+                    /**
+                     * Encodes the specified EventNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
+                     * @param message EventNotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IEventNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.EventNotificationConfig.verify|verify} messages.
+                     * @param message EventNotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IEventNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventNotificationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventNotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.EventNotificationConfig;
+
+                    /**
+                     * Decodes an EventNotificationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventNotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.EventNotificationConfig;
+
+                    /**
+                     * Verifies an EventNotificationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventNotificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventNotificationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.EventNotificationConfig;
+
+                    /**
+                     * Creates a plain object from an EventNotificationConfig message. Also converts values to other types if specified.
+                     * @param message EventNotificationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.EventNotificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventNotificationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a StateNotificationConfig. */
+                interface IStateNotificationConfig {
+
+                    /** StateNotificationConfig pubsubTopicName */
+                    pubsubTopicName?: (string|null);
+                }
+
+                /** Represents a StateNotificationConfig. */
+                class StateNotificationConfig implements IStateNotificationConfig {
+
+                    /**
+                     * Constructs a new StateNotificationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IStateNotificationConfig);
+
+                    /** StateNotificationConfig pubsubTopicName. */
+                    public pubsubTopicName: string;
+
+                    /**
+                     * Creates a new StateNotificationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StateNotificationConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IStateNotificationConfig): google.cloud.iot.v1.StateNotificationConfig;
+
+                    /**
+                     * Encodes the specified StateNotificationConfig message. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
+                     * @param message StateNotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IStateNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StateNotificationConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.StateNotificationConfig.verify|verify} messages.
+                     * @param message StateNotificationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IStateNotificationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StateNotificationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StateNotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.StateNotificationConfig;
+
+                    /**
+                     * Decodes a StateNotificationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StateNotificationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.StateNotificationConfig;
+
+                    /**
+                     * Verifies a StateNotificationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StateNotificationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StateNotificationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.StateNotificationConfig;
+
+                    /**
+                     * Creates a plain object from a StateNotificationConfig message. Also converts values to other types if specified.
+                     * @param message StateNotificationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.StateNotificationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StateNotificationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RegistryCredential. */
+                interface IRegistryCredential {
+
+                    /** RegistryCredential publicKeyCertificate */
+                    publicKeyCertificate?: (google.cloud.iot.v1.IPublicKeyCertificate|null);
+                }
+
+                /** Represents a RegistryCredential. */
+                class RegistryCredential implements IRegistryCredential {
+
+                    /**
+                     * Constructs a new RegistryCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IRegistryCredential);
+
+                    /** RegistryCredential publicKeyCertificate. */
+                    public publicKeyCertificate?: (google.cloud.iot.v1.IPublicKeyCertificate|null);
+
+                    /** RegistryCredential credential. */
+                    public credential?: "publicKeyCertificate";
+
+                    /**
+                     * Creates a new RegistryCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegistryCredential instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IRegistryCredential): google.cloud.iot.v1.RegistryCredential;
+
+                    /**
+                     * Encodes the specified RegistryCredential message. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
+                     * @param message RegistryCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IRegistryCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegistryCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.RegistryCredential.verify|verify} messages.
+                     * @param message RegistryCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IRegistryCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegistryCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegistryCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.RegistryCredential;
+
+                    /**
+                     * Decodes a RegistryCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegistryCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.RegistryCredential;
+
+                    /**
+                     * Verifies a RegistryCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegistryCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegistryCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.RegistryCredential;
+
+                    /**
+                     * Creates a plain object from a RegistryCredential message. Also converts values to other types if specified.
+                     * @param message RegistryCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.RegistryCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegistryCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a X509CertificateDetails. */
+                interface IX509CertificateDetails {
+
+                    /** X509CertificateDetails issuer */
+                    issuer?: (string|null);
+
+                    /** X509CertificateDetails subject */
+                    subject?: (string|null);
+
+                    /** X509CertificateDetails startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** X509CertificateDetails expiryTime */
+                    expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** X509CertificateDetails signatureAlgorithm */
+                    signatureAlgorithm?: (string|null);
+
+                    /** X509CertificateDetails publicKeyType */
+                    publicKeyType?: (string|null);
+                }
+
+                /** Represents a X509CertificateDetails. */
+                class X509CertificateDetails implements IX509CertificateDetails {
+
+                    /**
+                     * Constructs a new X509CertificateDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IX509CertificateDetails);
+
+                    /** X509CertificateDetails issuer. */
+                    public issuer: string;
+
+                    /** X509CertificateDetails subject. */
+                    public subject: string;
+
+                    /** X509CertificateDetails startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** X509CertificateDetails expiryTime. */
+                    public expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** X509CertificateDetails signatureAlgorithm. */
+                    public signatureAlgorithm: string;
+
+                    /** X509CertificateDetails publicKeyType. */
+                    public publicKeyType: string;
+
+                    /**
+                     * Creates a new X509CertificateDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns X509CertificateDetails instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IX509CertificateDetails): google.cloud.iot.v1.X509CertificateDetails;
+
+                    /**
+                     * Encodes the specified X509CertificateDetails message. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
+                     * @param message X509CertificateDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IX509CertificateDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified X509CertificateDetails message, length delimited. Does not implicitly {@link google.cloud.iot.v1.X509CertificateDetails.verify|verify} messages.
+                     * @param message X509CertificateDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IX509CertificateDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a X509CertificateDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns X509CertificateDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.X509CertificateDetails;
+
+                    /**
+                     * Decodes a X509CertificateDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns X509CertificateDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.X509CertificateDetails;
+
+                    /**
+                     * Verifies a X509CertificateDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a X509CertificateDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns X509CertificateDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.X509CertificateDetails;
+
+                    /**
+                     * Creates a plain object from a X509CertificateDetails message. Also converts values to other types if specified.
+                     * @param message X509CertificateDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.X509CertificateDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this X509CertificateDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PublicKeyCertificate. */
+                interface IPublicKeyCertificate {
+
+                    /** PublicKeyCertificate format */
+                    format?: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat|null);
+
+                    /** PublicKeyCertificate certificate */
+                    certificate?: (string|null);
+
+                    /** PublicKeyCertificate x509Details */
+                    x509Details?: (google.cloud.iot.v1.IX509CertificateDetails|null);
+                }
+
+                /** Represents a PublicKeyCertificate. */
+                class PublicKeyCertificate implements IPublicKeyCertificate {
+
+                    /**
+                     * Constructs a new PublicKeyCertificate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IPublicKeyCertificate);
+
+                    /** PublicKeyCertificate format. */
+                    public format: (google.cloud.iot.v1.PublicKeyCertificateFormat|keyof typeof google.cloud.iot.v1.PublicKeyCertificateFormat);
+
+                    /** PublicKeyCertificate certificate. */
+                    public certificate: string;
+
+                    /** PublicKeyCertificate x509Details. */
+                    public x509Details?: (google.cloud.iot.v1.IX509CertificateDetails|null);
+
+                    /**
+                     * Creates a new PublicKeyCertificate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PublicKeyCertificate instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IPublicKeyCertificate): google.cloud.iot.v1.PublicKeyCertificate;
+
+                    /**
+                     * Encodes the specified PublicKeyCertificate message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
+                     * @param message PublicKeyCertificate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IPublicKeyCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PublicKeyCertificate message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCertificate.verify|verify} messages.
+                     * @param message PublicKeyCertificate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IPublicKeyCertificate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PublicKeyCertificate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PublicKeyCertificate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.PublicKeyCertificate;
+
+                    /**
+                     * Decodes a PublicKeyCertificate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PublicKeyCertificate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.PublicKeyCertificate;
+
+                    /**
+                     * Verifies a PublicKeyCertificate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PublicKeyCertificate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PublicKeyCertificate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.PublicKeyCertificate;
+
+                    /**
+                     * Creates a plain object from a PublicKeyCertificate message. Also converts values to other types if specified.
+                     * @param message PublicKeyCertificate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.PublicKeyCertificate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PublicKeyCertificate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** PublicKeyCertificateFormat enum. */
+                enum PublicKeyCertificateFormat {
+                    UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT = 0,
+                    X509_CERTIFICATE_PEM = 1
+                }
+
+                /** Properties of a DeviceCredential. */
+                interface IDeviceCredential {
+
+                    /** DeviceCredential publicKey */
+                    publicKey?: (google.cloud.iot.v1.IPublicKeyCredential|null);
+
+                    /** DeviceCredential expirationTime */
+                    expirationTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeviceCredential. */
+                class DeviceCredential implements IDeviceCredential {
+
+                    /**
+                     * Constructs a new DeviceCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IDeviceCredential);
+
+                    /** DeviceCredential publicKey. */
+                    public publicKey?: (google.cloud.iot.v1.IPublicKeyCredential|null);
+
+                    /** DeviceCredential expirationTime. */
+                    public expirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceCredential credential. */
+                    public credential?: "publicKey";
+
+                    /**
+                     * Creates a new DeviceCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeviceCredential instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IDeviceCredential): google.cloud.iot.v1.DeviceCredential;
+
+                    /**
+                     * Encodes the specified DeviceCredential message. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
+                     * @param message DeviceCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IDeviceCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeviceCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceCredential.verify|verify} messages.
+                     * @param message DeviceCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeviceCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeviceCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceCredential;
+
+                    /**
+                     * Decodes a DeviceCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeviceCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceCredential;
+
+                    /**
+                     * Verifies a DeviceCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeviceCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeviceCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceCredential;
+
+                    /**
+                     * Creates a plain object from a DeviceCredential message. Also converts values to other types if specified.
+                     * @param message DeviceCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.DeviceCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeviceCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a PublicKeyCredential. */
+                interface IPublicKeyCredential {
+
+                    /** PublicKeyCredential format */
+                    format?: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat|null);
+
+                    /** PublicKeyCredential key */
+                    key?: (string|null);
+                }
+
+                /** Represents a PublicKeyCredential. */
+                class PublicKeyCredential implements IPublicKeyCredential {
+
+                    /**
+                     * Constructs a new PublicKeyCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IPublicKeyCredential);
+
+                    /** PublicKeyCredential format. */
+                    public format: (google.cloud.iot.v1.PublicKeyFormat|keyof typeof google.cloud.iot.v1.PublicKeyFormat);
+
+                    /** PublicKeyCredential key. */
+                    public key: string;
+
+                    /**
+                     * Creates a new PublicKeyCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PublicKeyCredential instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IPublicKeyCredential): google.cloud.iot.v1.PublicKeyCredential;
+
+                    /**
+                     * Encodes the specified PublicKeyCredential message. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
+                     * @param message PublicKeyCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IPublicKeyCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PublicKeyCredential message, length delimited. Does not implicitly {@link google.cloud.iot.v1.PublicKeyCredential.verify|verify} messages.
+                     * @param message PublicKeyCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IPublicKeyCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PublicKeyCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PublicKeyCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.PublicKeyCredential;
+
+                    /**
+                     * Decodes a PublicKeyCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PublicKeyCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.PublicKeyCredential;
+
+                    /**
+                     * Verifies a PublicKeyCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PublicKeyCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PublicKeyCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.PublicKeyCredential;
+
+                    /**
+                     * Creates a plain object from a PublicKeyCredential message. Also converts values to other types if specified.
+                     * @param message PublicKeyCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.PublicKeyCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PublicKeyCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** PublicKeyFormat enum. */
+                enum PublicKeyFormat {
+                    UNSPECIFIED_PUBLIC_KEY_FORMAT = 0,
+                    RSA_PEM = 3,
+                    RSA_X509_PEM = 1,
+                    ES256_PEM = 2,
+                    ES256_X509_PEM = 4
+                }
+
+                /** Properties of a DeviceConfig. */
+                interface IDeviceConfig {
+
+                    /** DeviceConfig version */
+                    version?: (number|Long|string|null);
+
+                    /** DeviceConfig cloudUpdateTime */
+                    cloudUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceConfig deviceAckTime */
+                    deviceAckTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceConfig binaryData */
+                    binaryData?: (Uint8Array|string|null);
+                }
+
+                /** Represents a DeviceConfig. */
+                class DeviceConfig implements IDeviceConfig {
+
+                    /**
+                     * Constructs a new DeviceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IDeviceConfig);
+
+                    /** DeviceConfig version. */
+                    public version: (number|Long|string);
+
+                    /** DeviceConfig cloudUpdateTime. */
+                    public cloudUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceConfig deviceAckTime. */
+                    public deviceAckTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceConfig binaryData. */
+                    public binaryData: (Uint8Array|string);
+
+                    /**
+                     * Creates a new DeviceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeviceConfig instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IDeviceConfig): google.cloud.iot.v1.DeviceConfig;
+
+                    /**
+                     * Encodes the specified DeviceConfig message. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
+                     * @param message DeviceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IDeviceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeviceConfig message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceConfig.verify|verify} messages.
+                     * @param message DeviceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeviceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeviceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceConfig;
+
+                    /**
+                     * Decodes a DeviceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeviceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceConfig;
+
+                    /**
+                     * Verifies a DeviceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeviceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeviceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceConfig;
+
+                    /**
+                     * Creates a plain object from a DeviceConfig message. Also converts values to other types if specified.
+                     * @param message DeviceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.DeviceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeviceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeviceState. */
+                interface IDeviceState {
+
+                    /** DeviceState updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceState binaryData */
+                    binaryData?: (Uint8Array|string|null);
+                }
+
+                /** Represents a DeviceState. */
+                class DeviceState implements IDeviceState {
+
+                    /**
+                     * Constructs a new DeviceState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.iot.v1.IDeviceState);
+
+                    /** DeviceState updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeviceState binaryData. */
+                    public binaryData: (Uint8Array|string);
+
+                    /**
+                     * Creates a new DeviceState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeviceState instance
+                     */
+                    public static create(properties?: google.cloud.iot.v1.IDeviceState): google.cloud.iot.v1.DeviceState;
+
+                    /**
+                     * Encodes the specified DeviceState message. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
+                     * @param message DeviceState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.iot.v1.IDeviceState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeviceState message, length delimited. Does not implicitly {@link google.cloud.iot.v1.DeviceState.verify|verify} messages.
+                     * @param message DeviceState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.iot.v1.IDeviceState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeviceState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeviceState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.iot.v1.DeviceState;
+
+                    /**
+                     * Decodes a DeviceState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeviceState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.iot.v1.DeviceState;
+
+                    /**
+                     * Verifies a DeviceState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeviceState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeviceState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.iot.v1.DeviceState;
+
+                    /**
+                     * Creates a plain object from a DeviceState message. Also converts values to other types if specified.
+                     * @param message DeviceState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.iot.v1.DeviceState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeviceState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
             }
         }
     }
 
     /** Namespace api. */
     namespace api {
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -4894,6 +4668,232 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -6754,11 +6754,11 @@ export namespace google {
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

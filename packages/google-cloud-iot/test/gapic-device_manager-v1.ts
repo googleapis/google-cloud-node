@@ -89,6 +89,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRegistryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -111,6 +112,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRegistryRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -135,6 +137,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRegistryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -157,6 +160,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRegistryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -231,6 +235,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRegistryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -253,6 +258,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRegistryRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -277,6 +283,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -299,6 +306,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ICreateDeviceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -323,6 +331,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -345,6 +354,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IGetDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -419,6 +429,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -441,6 +452,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IDeleteDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -465,6 +477,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -487,6 +500,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -514,6 +528,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceConfigVersionsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -536,6 +551,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceConfigVersionsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -563,6 +579,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceStatesRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -585,6 +602,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceStatesRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -609,6 +627,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -631,6 +650,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ISetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -655,6 +675,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -677,6 +698,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.IGetIamPolicyRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -701,6 +723,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -723,6 +746,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.iam.v1.ITestIamPermissionsRequest = {};
+      request.resource = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -747,6 +771,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ISendCommandToDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -769,6 +794,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.ISendCommandToDeviceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -793,6 +819,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IBindDeviceToGatewayRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -815,6 +842,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IBindDeviceToGatewayRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -839,6 +867,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -861,6 +890,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -888,6 +918,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceRegistriesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -914,8 +945,9 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDeviceRegistriesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDeviceRegistries = (
         actualRequest: {},
@@ -934,7 +966,7 @@ describe('v1.DeviceManagerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listDevices', () => {
@@ -945,6 +977,7 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDevicesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -971,8 +1004,9 @@ describe('v1.DeviceManagerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.iot.v1.IListDevicesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDevices = (
         actualRequest: {},
@@ -991,7 +1025,7 @@ describe('v1.DeviceManagerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
