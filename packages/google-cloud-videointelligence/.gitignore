@@ -10,3 +10,4 @@ system-test/*key.json
 package-lock.json
 .vscode
 __pycache__
+*.code-workspace
