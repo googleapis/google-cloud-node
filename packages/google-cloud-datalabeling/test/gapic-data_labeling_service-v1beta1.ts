@@ -117,6 +117,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -141,6 +142,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -167,6 +169,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -191,6 +194,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -217,6 +221,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -241,6 +246,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -267,6 +273,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDataItemRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -291,6 +298,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetDataItemRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -317,6 +325,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -341,6 +350,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -367,6 +377,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -391,6 +402,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -417,6 +429,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetExampleRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -441,6 +454,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetExampleRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -467,6 +481,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -491,6 +506,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -520,6 +536,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -544,6 +561,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -570,6 +588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -594,6 +613,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -623,6 +643,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetInstructionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -647,6 +668,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetInstructionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -673,6 +695,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -697,6 +720,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -723,6 +747,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -747,6 +772,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -773,6 +799,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -797,6 +824,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -877,6 +905,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -901,6 +930,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -927,6 +957,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -951,6 +982,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -977,6 +1009,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1001,6 +1034,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1027,6 +1061,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1051,6 +1086,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1077,6 +1113,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IImportDataRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1108,6 +1145,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IImportDataRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1142,6 +1180,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IExportDataRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1173,6 +1212,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IExportDataRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1207,6 +1247,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelImageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1238,6 +1279,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelImageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1272,6 +1314,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelVideoRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1303,6 +1346,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelVideoRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1337,6 +1381,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1368,6 +1413,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ILabelTextRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1402,6 +1448,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1433,6 +1480,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1467,6 +1515,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDatasetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1495,8 +1544,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDatasetsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDatasets = (
         actualRequest: {},
@@ -1515,7 +1565,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listDataItems', () => {
@@ -1528,6 +1578,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDataItemsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1556,8 +1607,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListDataItemsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDataItems = (
         actualRequest: {},
@@ -1576,7 +1628,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listAnnotatedDatasets', () => {
@@ -1589,6 +1641,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1617,8 +1670,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listAnnotatedDatasets = (
         actualRequest: {},
@@ -1637,7 +1691,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listExamples', () => {
@@ -1650,6 +1704,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListExamplesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1678,8 +1733,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListExamplesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listExamples = (
         actualRequest: {},
@@ -1698,7 +1754,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listAnnotationSpecSets', () => {
@@ -1711,6 +1767,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1739,8 +1796,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listAnnotationSpecSets = (
         actualRequest: {},
@@ -1759,7 +1817,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listInstructions', () => {
@@ -1772,6 +1830,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListInstructionsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1800,8 +1859,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListInstructionsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listInstructions = (
         actualRequest: {},
@@ -1820,7 +1880,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('searchEvaluations', () => {
@@ -1833,6 +1893,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1861,8 +1922,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchEvaluations = (
         actualRequest: {},
@@ -1881,7 +1943,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('searchExampleComparisons', () => {
@@ -1894,6 +1956,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1925,8 +1988,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.searchExampleComparisons = (
         actualRequest: {},
@@ -1945,7 +2009,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listEvaluationJobs', () => {
@@ -1958,6 +2022,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1986,8 +2051,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listEvaluationJobs = (
         actualRequest: {},
@@ -2006,7 +2072,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

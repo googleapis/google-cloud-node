@@ -143,24 +143,17 @@ export class DataLabelingServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      datasetPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/datasets/{dataset}'
-      ),
       annotatedDatasetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}'
-      ),
-      dataItemPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/datasets/{dataset}/dataItems/{data_item}'
-      ),
-      examplePathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
       ),
       annotationSpecSetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/annotationSpecSets/{annotation_spec_set}'
       ),
-      instructionPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/instructions/{instruction}'
+      dataItemPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/datasets/{dataset}/dataItems/{data_item}'
+      ),
+      datasetPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/datasets/{dataset}'
       ),
       evaluationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/evaluations/{evaluation}'
@@ -168,6 +161,13 @@ export class DataLabelingServiceClient {
       evaluationJobPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/evaluationJobs/{evaluation_job}'
       ),
+      examplePathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
+      ),
+      instructionPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/instructions/{instruction}'
+      ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2772,9 +2772,17 @@ export class DataLabelingServiceClient {
    */
   listDatasetsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDatasets.createStream(
       this._innerApiCalls.listDatasets as gax.GaxCall,
@@ -2915,9 +2923,17 @@ export class DataLabelingServiceClient {
    */
   listDataItemsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDataItems.createStream(
       this._innerApiCalls.listDataItems as gax.GaxCall,
@@ -3061,9 +3077,17 @@ export class DataLabelingServiceClient {
    */
   listAnnotatedDatasetsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listAnnotatedDatasets.createStream(
       this._innerApiCalls.listAnnotatedDatasets as gax.GaxCall,
@@ -3207,9 +3231,17 @@ export class DataLabelingServiceClient {
    */
   listExamplesStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listExamples.createStream(
       this._innerApiCalls.listExamples as gax.GaxCall,
@@ -3353,9 +3385,17 @@ export class DataLabelingServiceClient {
    */
   listAnnotationSpecSetsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listAnnotationSpecSets.createStream(
       this._innerApiCalls.listAnnotationSpecSets as gax.GaxCall,
@@ -3495,9 +3535,17 @@ export class DataLabelingServiceClient {
    */
   listInstructionsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listInstructions.createStream(
       this._innerApiCalls.listInstructions as gax.GaxCall,
@@ -3701,9 +3749,17 @@ export class DataLabelingServiceClient {
    */
   searchEvaluationsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchEvaluations.createStream(
       this._innerApiCalls.searchEvaluations as gax.GaxCall,
@@ -3853,9 +3909,17 @@ export class DataLabelingServiceClient {
    */
   searchExampleComparisonsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.searchExampleComparisons.createStream(
       this._innerApiCalls.searchExampleComparisons as gax.GaxCall,
@@ -4010,9 +4074,17 @@ export class DataLabelingServiceClient {
    */
   listEvaluationJobsStream(
     request?: protosTypes.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listEvaluationJobs.createStream(
       this._innerApiCalls.listEvaluationJobs as gax.GaxCall,
@@ -4023,65 +4095,6 @@ export class DataLabelingServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Return a fully-qualified dataset resource name string.
-   *
-   * @param {string} project
-   * @param {string} dataset
-   * @returns {string} Resource name string.
-   */
-  datasetPath(project: string, dataset: string) {
-    return this._pathTemplates.datasetPathTemplate.render({
-      project,
-      dataset,
-    });
-  }
-
-  /**
-   * Parse the project from Dataset resource.
-   *
-   * @param {string} datasetName
-   *   A fully-qualified path representing Dataset resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
-  }
-
-  /**
-   * Parse the dataset from Dataset resource.
-   *
-   * @param {string} datasetName
-   *   A fully-qualified path representing Dataset resource.
-   * @returns {string} A string representing the dataset.
-   */
-  matchDatasetFromDatasetName(datasetName: string) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
-  }
 
   /**
    * Return a fully-qualified annotatedDataset resource name string.
@@ -4143,6 +4156,48 @@ export class DataLabelingServiceClient {
   }
 
   /**
+   * Return a fully-qualified annotationSpecSet resource name string.
+   *
+   * @param {string} project
+   * @param {string} annotation_spec_set
+   * @returns {string} Resource name string.
+   */
+  annotationSpecSetPath(project: string, annotationSpecSet: string) {
+    return this._pathTemplates.annotationSpecSetPathTemplate.render({
+      project,
+      annotation_spec_set: annotationSpecSet,
+    });
+  }
+
+  /**
+   * Parse the project from AnnotationSpecSet resource.
+   *
+   * @param {string} annotationSpecSetName
+   *   A fully-qualified path representing AnnotationSpecSet resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAnnotationSpecSetName(annotationSpecSetName: string) {
+    return this._pathTemplates.annotationSpecSetPathTemplate.match(
+      annotationSpecSetName
+    ).project;
+  }
+
+  /**
+   * Parse the annotation_spec_set from AnnotationSpecSet resource.
+   *
+   * @param {string} annotationSpecSetName
+   *   A fully-qualified path representing AnnotationSpecSet resource.
+   * @returns {string} A string representing the annotation_spec_set.
+   */
+  matchAnnotationSpecSetFromAnnotationSpecSetName(
+    annotationSpecSetName: string
+  ) {
+    return this._pathTemplates.annotationSpecSetPathTemplate.match(
+      annotationSpecSetName
+    ).annotation_spec_set;
+  }
+
+  /**
    * Return a fully-qualified dataItem resource name string.
    *
    * @param {string} project
@@ -4193,151 +4248,39 @@ export class DataLabelingServiceClient {
   }
 
   /**
-   * Return a fully-qualified example resource name string.
+   * Return a fully-qualified dataset resource name string.
    *
    * @param {string} project
    * @param {string} dataset
-   * @param {string} annotated_dataset
-   * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(
-    project: string,
-    dataset: string,
-    annotatedDataset: string,
-    example: string
-  ) {
-    return this._pathTemplates.examplePathTemplate.render({
+  datasetPath(project: string, dataset: string) {
+    return this._pathTemplates.datasetPathTemplate.render({
       project,
       dataset,
-      annotated_dataset: annotatedDataset,
-      example,
     });
   }
 
   /**
-   * Parse the project from Example resource.
+   * Parse the project from Dataset resource.
    *
-   * @param {string} exampleName
-   *   A fully-qualified path representing Example resource.
+   * @param {string} datasetName
+   *   A fully-qualified path representing Dataset resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromExampleName(exampleName: string) {
-    return this._pathTemplates.examplePathTemplate.match(exampleName).project;
+  matchProjectFromDatasetName(datasetName: string) {
+    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
   }
 
   /**
-   * Parse the dataset from Example resource.
+   * Parse the dataset from Dataset resource.
    *
-   * @param {string} exampleName
-   *   A fully-qualified path representing Example resource.
+   * @param {string} datasetName
+   *   A fully-qualified path representing Dataset resource.
    * @returns {string} A string representing the dataset.
    */
-  matchDatasetFromExampleName(exampleName: string) {
-    return this._pathTemplates.examplePathTemplate.match(exampleName).dataset;
-  }
-
-  /**
-   * Parse the annotated_dataset from Example resource.
-   *
-   * @param {string} exampleName
-   *   A fully-qualified path representing Example resource.
-   * @returns {string} A string representing the annotated_dataset.
-   */
-  matchAnnotatedDatasetFromExampleName(exampleName: string) {
-    return this._pathTemplates.examplePathTemplate.match(exampleName)
-      .annotated_dataset;
-  }
-
-  /**
-   * Parse the example from Example resource.
-   *
-   * @param {string} exampleName
-   *   A fully-qualified path representing Example resource.
-   * @returns {string} A string representing the example.
-   */
-  matchExampleFromExampleName(exampleName: string) {
-    return this._pathTemplates.examplePathTemplate.match(exampleName).example;
-  }
-
-  /**
-   * Return a fully-qualified annotationSpecSet resource name string.
-   *
-   * @param {string} project
-   * @param {string} annotation_spec_set
-   * @returns {string} Resource name string.
-   */
-  annotationSpecSetPath(project: string, annotationSpecSet: string) {
-    return this._pathTemplates.annotationSpecSetPathTemplate.render({
-      project,
-      annotation_spec_set: annotationSpecSet,
-    });
-  }
-
-  /**
-   * Parse the project from AnnotationSpecSet resource.
-   *
-   * @param {string} annotationSpecSetName
-   *   A fully-qualified path representing AnnotationSpecSet resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromAnnotationSpecSetName(annotationSpecSetName: string) {
-    return this._pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).project;
-  }
-
-  /**
-   * Parse the annotation_spec_set from AnnotationSpecSet resource.
-   *
-   * @param {string} annotationSpecSetName
-   *   A fully-qualified path representing AnnotationSpecSet resource.
-   * @returns {string} A string representing the annotation_spec_set.
-   */
-  matchAnnotationSpecSetFromAnnotationSpecSetName(
-    annotationSpecSetName: string
-  ) {
-    return this._pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).annotation_spec_set;
-  }
-
-  /**
-   * Return a fully-qualified instruction resource name string.
-   *
-   * @param {string} project
-   * @param {string} instruction
-   * @returns {string} Resource name string.
-   */
-  instructionPath(project: string, instruction: string) {
-    return this._pathTemplates.instructionPathTemplate.render({
-      project,
-      instruction,
-    });
-  }
-
-  /**
-   * Parse the project from Instruction resource.
-   *
-   * @param {string} instructionName
-   *   A fully-qualified path representing Instruction resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromInstructionName(instructionName: string) {
-    return this._pathTemplates.instructionPathTemplate.match(instructionName)
-      .project;
-  }
-
-  /**
-   * Parse the instruction from Instruction resource.
-   *
-   * @param {string} instructionName
-   *   A fully-qualified path representing Instruction resource.
-   * @returns {string} A string representing the instruction.
-   */
-  matchInstructionFromInstructionName(instructionName: string) {
-    return this._pathTemplates.instructionPathTemplate.match(instructionName)
-      .instruction;
+  matchDatasetFromDatasetName(datasetName: string) {
+    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
   }
 
   /**
@@ -4430,6 +4373,135 @@ export class DataLabelingServiceClient {
     return this._pathTemplates.evaluationJobPathTemplate.match(
       evaluationJobName
     ).evaluation_job;
+  }
+
+  /**
+   * Return a fully-qualified example resource name string.
+   *
+   * @param {string} project
+   * @param {string} dataset
+   * @param {string} annotated_dataset
+   * @param {string} example
+   * @returns {string} Resource name string.
+   */
+  examplePath(
+    project: string,
+    dataset: string,
+    annotatedDataset: string,
+    example: string
+  ) {
+    return this._pathTemplates.examplePathTemplate.render({
+      project,
+      dataset,
+      annotated_dataset: annotatedDataset,
+      example,
+    });
+  }
+
+  /**
+   * Parse the project from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleName(exampleName: string) {
+    return this._pathTemplates.examplePathTemplate.match(exampleName).project;
+  }
+
+  /**
+   * Parse the dataset from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromExampleName(exampleName: string) {
+    return this._pathTemplates.examplePathTemplate.match(exampleName).dataset;
+  }
+
+  /**
+   * Parse the annotated_dataset from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the annotated_dataset.
+   */
+  matchAnnotatedDatasetFromExampleName(exampleName: string) {
+    return this._pathTemplates.examplePathTemplate.match(exampleName)
+      .annotated_dataset;
+  }
+
+  /**
+   * Parse the example from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the example.
+   */
+  matchExampleFromExampleName(exampleName: string) {
+    return this._pathTemplates.examplePathTemplate.match(exampleName).example;
+  }
+
+  /**
+   * Return a fully-qualified instruction resource name string.
+   *
+   * @param {string} project
+   * @param {string} instruction
+   * @returns {string} Resource name string.
+   */
+  instructionPath(project: string, instruction: string) {
+    return this._pathTemplates.instructionPathTemplate.render({
+      project,
+      instruction,
+    });
+  }
+
+  /**
+   * Parse the project from Instruction resource.
+   *
+   * @param {string} instructionName
+   *   A fully-qualified path representing Instruction resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstructionName(instructionName: string) {
+    return this._pathTemplates.instructionPathTemplate.match(instructionName)
+      .project;
+  }
+
+  /**
+   * Parse the instruction from Instruction resource.
+   *
+   * @param {string} instructionName
+   *   A fully-qualified path representing Instruction resource.
+   * @returns {string} A string representing the instruction.
+   */
+  matchInstructionFromInstructionName(instructionName: string) {
+    return this._pathTemplates.instructionPathTemplate.match(instructionName)
+      .instruction;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
