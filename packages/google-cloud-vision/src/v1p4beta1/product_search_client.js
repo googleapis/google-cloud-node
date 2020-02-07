@@ -574,7 +574,7 @@ class ProductSearchClient {
    *   Required. Resource name of the ProductSet to get.
    *
    *   Format is:
-   *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+   *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

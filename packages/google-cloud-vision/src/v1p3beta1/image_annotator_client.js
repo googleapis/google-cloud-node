@@ -305,7 +305,7 @@ class ImageAnnotatorClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object[]} request.requests
-   *   Individual async file annotation requests for this batch.
+   *   Required. Individual async file annotation requests for this batch.
    *
    *   This object should have the same structure as [AsyncAnnotateFileRequest]{@link google.cloud.vision.v1p3beta1.AsyncAnnotateFileRequest}
    * @param {Object} [options]

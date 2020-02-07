@@ -997,7 +997,7 @@ const AnnotateImageResponse = {
  * Multiple image annotation requests are batched into a single service call.
  *
  * @property {Object[]} requests
- *   Individual image annotation requests for this batch.
+ *   Required. Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1p4beta1.AnnotateImageRequest}
  *

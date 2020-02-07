@@ -24,20 +24,16 @@ const VERSION = require('../../package.json').version;
  * Manages Products and ProductSets of reference images for use in product
  * search. It uses the following resource model:
  *
- * - The API has a collection of
- * ProductSet resources, named
+ * - The API has a collection of ProductSet resources, named
  * `projects/* /locations/* /productSets/*`, which acts as a way to put different
  * products into groups to limit identification.
  *
  * In parallel,
  *
- * - The API has a collection of
- * Product resources, named
+ * - The API has a collection of Product resources, named
  *   `projects/* /locations/* /products/*`
  *
- * - Each Product has a collection of
- * ReferenceImage resources,
- * named
+ * - Each Product has a collection of ReferenceImage resources, named
  *   `projects/* /locations/* /products/* /referenceImages/*`
  *
  * @class
@@ -328,11 +324,11 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the ProductSet should be created.
+   *   Required. The project in which the ProductSet should be created.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.productSet
-   *   The ProductSet to create.
+   *   Required. The ProductSet to create.
    *
    *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1p3beta1.ProductSet}
    * @param {string} request.productSetId
@@ -405,7 +401,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
+   *   Required. The project from which ProductSets should be listed.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {number} [request.pageSize]
@@ -519,7 +515,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
+   *   Required. The project from which ProductSets should be listed.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {number} [request.pageSize]
@@ -570,10 +566,10 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the ProductSet to get.
+   *   Required. Resource name of the ProductSet to get.
    *
    *   Format is:
-   *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+   *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -634,7 +630,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.productSet
-   *   The ProductSet resource which replaces the one on the server.
+   *   Required. The ProductSet resource which replaces the one on the server.
    *
    *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1p3beta1.ProductSet}
    * @param {Object} request.updateMask
@@ -709,7 +705,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the ProductSet to delete.
+   *   Required. Resource name of the ProductSet to delete.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -765,12 +761,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the Product should be created.
+   *   Required. The project in which the Product should be created.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.product
-   *   The product to create.
+   *   Required. The product to create.
    *
    *   This object should have the same structure as [Product]{@link google.cloud.vision.v1p3beta1.Product}
    * @param {string} request.productId
@@ -842,7 +838,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project OR ProductSet from which Products should be listed.
+   *   Required. The project OR ProductSet from which Products should be listed.
    *
    *   Format:
    *   `projects/PROJECT_ID/locations/LOC_ID`
@@ -957,7 +953,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project OR ProductSet from which Products should be listed.
+   *   Required. The project OR ProductSet from which Products should be listed.
    *
    *   Format:
    *   `projects/PROJECT_ID/locations/LOC_ID`
@@ -1009,7 +1005,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of the Product to get.
+   *   Required. Resource name of the Product to get.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1079,7 +1075,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.product
-   *   The Product resource which replaces the one on the server.
+   *   Required. The Product resource which replaces the one on the server.
    *   product.name is immutable.
    *
    *   This object should have the same structure as [Product]{@link google.cloud.vision.v1p3beta1.Product}
@@ -1087,7 +1083,7 @@ class ProductSearchClient {
    *   The FieldMask that specifies which fields
    *   to update.
    *   If update_mask isn't specified, all mutable fields are to be updated.
-   *   Valid mask paths include `product_labels`, `display_name` and
+   *   Valid mask paths include `product_labels`, `display_name`, and
    *   `description`.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
@@ -1157,7 +1153,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Resource name of product to delete.
+   *   Required. Resource name of product to delete.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1224,12 +1220,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product in which to create the reference image.
+   *   Required. Resource name of the product in which to create the reference image.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
    * @param {Object} request.referenceImage
-   *   The reference image to create.
+   *   Required. The reference image to create.
    *   If an image ID is specified, it is ignored.
    *
    *   This object should have the same structure as [ReferenceImage]{@link google.cloud.vision.v1p3beta1.ReferenceImage}
@@ -1308,7 +1304,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the reference image to delete.
+   *   Required. The resource name of the reference image to delete.
    *
    *   Format is:
    *
@@ -1364,7 +1360,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product containing the reference images.
+   *   Required. Resource name of the product containing the reference images.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1479,7 +1475,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Resource name of the product containing the reference images.
+   *   Required. Resource name of the product containing the reference images.
    *
    *   Format is
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1531,7 +1527,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the ReferenceImage to get.
+   *   Required. The resource name of the ReferenceImage to get.
    *
    *   Format is:
    *
@@ -1596,12 +1592,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name for the ProductSet to modify.
+   *   Required. The resource name for the ProductSet to modify.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {string} request.product
-   *   The resource name for the Product to be added to this ProductSet.
+   *   Required. The resource name for the Product to be added to this ProductSet.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1663,12 +1659,12 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name for the ProductSet to modify.
+   *   Required. The resource name for the ProductSet to modify.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
    * @param {string} request.product
-   *   The resource name for the Product to be removed from this ProductSet.
+   *   Required. The resource name for the Product to be removed from this ProductSet.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1732,7 +1728,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The ProductSet resource for which to retrieve Products.
+   *   Required. The ProductSet resource for which to retrieve Products.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -1851,7 +1847,7 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The ProductSet resource for which to retrieve Products.
+   *   Required. The ProductSet resource for which to retrieve Products.
    *
    *   Format is:
    *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -1909,11 +1905,11 @@ class ProductSearchClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The project in which the ProductSets should be imported.
+   *   Required. The project in which the ProductSets should be imported.
    *
    *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
    * @param {Object} request.inputConfig
-   *   The input content for the list of requests.
+   *   Required. The input content for the list of requests.
    *
    *   This object should have the same structure as [ImportProductSetsInputConfig]{@link google.cloud.vision.v1p3beta1.ImportProductSetsInputConfig}
    * @param {Object} [options]

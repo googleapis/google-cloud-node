@@ -217,7 +217,7 @@ class ImageAnnotatorClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object[]} request.requests
-   *   Individual image annotation requests for this batch.
+   *   Required. Individual image annotation requests for this batch.
    *
    *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1p1beta1.AnnotateImageRequest}
    * @param {Object} [options]

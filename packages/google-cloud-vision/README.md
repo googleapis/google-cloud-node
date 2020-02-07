@@ -90,6 +90,7 @@ has instructions for running the samples.
 | Quickstart | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Set Endpoint | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
 | Text Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/textDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/textDetection.js,samples/README.md) |
+| Vision-face-detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md) |
 
 
 

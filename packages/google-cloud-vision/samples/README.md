@@ -22,6 +22,7 @@
   * [Quickstart](#quickstart)
   * [Set Endpoint](#set-endpoint)
   * [Text Detection](#text-detection)
+  * [Vision-face-detection](#vision-face-detection)
 
 ## Before you begin
 
@@ -201,6 +202,23 @@ __Usage:__
 
 
 `node samples/textDetection.js`
+
+
+-----
+
+
+
+
+### Vision-face-detection
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/vision-face-detection.js`
 
 
 
