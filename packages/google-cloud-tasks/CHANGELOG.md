@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.7.3](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.2...v1.7.3) (2020-02-07)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([ba267cc](https://www.github.com/googleapis/nodejs-tasks/commit/ba267ccc5c71cea747ec1fbdb9396a880fa2d902))
+
 ### [1.7.2](https://www.github.com/googleapis/nodejs-tasks/compare/v1.7.1...v1.7.2) (2020-01-28)
 
 
