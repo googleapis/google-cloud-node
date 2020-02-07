@@ -17,7 +17,9 @@
 const ClusterControllerClient = require('./cluster_controller_client');
 const JobControllerClient = require('./job_controller_client');
 const WorkflowTemplateServiceClient = require('./workflow_template_service_client');
+const AutoscalingPolicyServiceClient = require('./autoscaling_policy_service_client');
 
 module.exports.ClusterControllerClient = ClusterControllerClient;
 module.exports.JobControllerClient = JobControllerClient;
 module.exports.WorkflowTemplateServiceClient = WorkflowTemplateServiceClient;
+module.exports.AutoscalingPolicyServiceClient = AutoscalingPolicyServiceClient;

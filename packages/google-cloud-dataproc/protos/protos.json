@@ -14,6 +14,283 @@
                     "java_package": "com.google.cloud.dataproc.v1"
                   },
                   "nested": {
+                    "AutoscalingPolicyService": {
+                      "options": {
+                        "(google.api.default_host)": "dataproc.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateAutoscalingPolicy": {
+                          "requestType": "CreateAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/autoscalingPolicies",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies",
+                            "(google.api.http).additional_bindings.body": "policy"
+                          }
+                        },
+                        "UpdateAutoscalingPolicy": {
+                          "requestType": "UpdateAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).put": "/v1/{policy.name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.put": "/v1/{policy.name=projects/*/regions/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.body": "policy"
+                          }
+                        },
+                        "GetAutoscalingPolicy": {
+                          "requestType": "GetAutoscalingPolicyRequest",
+                          "responseType": "AutoscalingPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                          }
+                        },
+                        "ListAutoscalingPolicies": {
+                          "requestType": "ListAutoscalingPoliciesRequest",
+                          "responseType": "ListAutoscalingPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/autoscalingPolicies",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/regions/*}/autoscalingPolicies"
+                          }
+                        },
+                        "DeleteAutoscalingPolicy": {
+                          "requestType": "DeleteAutoscalingPolicyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/autoscalingPolicies/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/regions/*/autoscalingPolicies/*}"
+                          }
+                        }
+                      }
+                    },
+                    "AutoscalingPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "dataproc.googleapis.com/AutoscalingPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}"
+                      },
+                      "oneofs": {
+                        "algorithm": {
+                          "oneof": [
+                            "basicAlgorithm"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "basicAlgorithm": {
+                          "type": "BasicAutoscalingAlgorithm",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workerConfig": {
+                          "type": "InstanceGroupAutoscalingPolicyConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secondaryWorkerConfig": {
+                          "type": "InstanceGroupAutoscalingPolicyConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BasicAutoscalingAlgorithm": {
+                      "fields": {
+                        "yarnConfig": {
+                          "type": "BasicYarnAutoscalingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cooldownPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BasicYarnAutoscalingConfig": {
+                      "fields": {
+                        "gracefulDecommissionTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scaleUpFactor": {
+                          "type": "double",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scaleDownFactor": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scaleUpMinWorkerFraction": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scaleDownMinWorkerFraction": {
+                          "type": "double",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "InstanceGroupAutoscalingPolicyConfig": {
+                      "fields": {
+                        "minInstances": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxInstances": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "weight": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAutoscalingPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dataproc.googleapis.com/AutoscalingPolicy"
+                          }
+                        },
+                        "policy": {
+                          "type": "AutoscalingPolicy",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetAutoscalingPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataproc.googleapis.com/AutoscalingPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAutoscalingPolicyRequest": {
+                      "fields": {
+                        "policy": {
+                          "type": "AutoscalingPolicy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAutoscalingPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataproc.googleapis.com/AutoscalingPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "ListAutoscalingPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dataproc.googleapis.com/AutoscalingPolicy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAutoscalingPoliciesResponse": {
+                      "fields": {
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "AutoscalingPolicy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ClusterController": {
                       "options": {
                         "(google.api.default_host)": "dataproc.googleapis.com",
@@ -5510,7 +5787,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -5603,22 +5880,6 @@
                 }
               }
             },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
-            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -5700,6 +5961,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -6594,6 +6871,21 @@
                 }
               }
             },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -6617,21 +6909,6 @@
                   "id": 2
                 }
               }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Empty": {
-              "fields": {}
             },
             "FieldMask": {
               "fields": {
