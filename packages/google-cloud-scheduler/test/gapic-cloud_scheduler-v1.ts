@@ -91,6 +91,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IGetJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -133,6 +135,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -155,6 +158,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.ICreateJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -229,6 +233,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -251,6 +256,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IDeleteJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -275,6 +281,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -297,6 +304,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IPauseJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -321,6 +329,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -343,6 +352,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IResumeJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -367,6 +377,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -389,6 +400,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IRunJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -409,6 +421,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -435,8 +448,9 @@ describe('v1.CloudSchedulerClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.scheduler.v1.IListJobsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listJobs = (
         actualRequest: {},
@@ -455,7 +469,7 @@ describe('v1.CloudSchedulerClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
