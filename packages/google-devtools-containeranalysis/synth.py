@@ -18,64 +18,72 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 import logging
+import os
+import json
 
 logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
-gapic = gcp.GAPICGenerator()
+gapic = gcp.GAPICMicrogenerator()
 versions = ['v1beta1', 'v1']
 for version in versions:
-    library = gapic.node_library('containeranalysis', version,
-            config_path=f"/google/devtools/containeranalysis/artman_containeranalysis_{version}.yaml")
-    s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
+    library = gapic.typescript_library(
+      'containeranalysis', version,
+      generator_args={
+            "grpc-service-config": f"google/devtools/containeranalysis/{version}/containeranalysis_grpc_service_config.json",
+            "package-name": f"@google-cloud/containeranalysis",
+            "main-service": f"containeranalysis"
+            },
+        proto_path=f'/google/devtools/containeranalysis/{version}',
+        extra_proto_files=["google/cloud/common_resources.proto", "grafeas/v1"]
+        )
+    s.copy(library, excludes=['package.json', 'README.md', 'src/index.ts', 'src/v1beta1/index.ts', 'src/v1/index.ts', 'tslint.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
 
-# fix the URL of grafeas.io (this is already fixed upstream).
-s.replace('src/v1beta1/*.js',
-        'cloud.google.comgrafeas.io',
-        'grafeas.io')
+# # fix the URL of grafeas.io (this is already fixed upstream).
+s.replace('src/v1beta1/*.ts',
+        'grafeas.io',
+        'https://grafeas.io')
 
-# perform surgery inserting the Grafeas client.
-s.replace("src/v1/container_analysis_client.js",
-r"""const path = require\('path'\);
+# perform surgery inserting the Grafeas client. 
+s.replace("src/v1/container_analysis_client.ts",
+"""import \* as path from \'path\';
 """,
-r"""const path = require('path');
+"""import * as path from 'path';
 const { GrafeasClient } = require('@google-cloud/grafeas');
 """)
-
-s.replace("src/v1/container_analysis_client.js",
-r"""        defaults\[methodName\],
-        null
-      \);
-    }
-  }""",
-r"""
-        defaults[methodName],
-        null
-      );
-    }
-    // expose the fully hydrated options, for the benefit of
-    // the client.getGrafeas() method.
-    this.opts = opts;
-  }
+s.replace("src/v1/container_analysis_client.ts",
+"""auth\: gax\.GoogleAuth;
+""",
+"""auth: gax.GoogleAuth;
+opts: ClientOptions;
 """)
+s.replace("src/v1/container_analysis_client.ts",
+"""  \}
 
-s.replace("src/v1/container_analysis_client.js",
-r"""  matchNoteFromNoteName\(noteName\) {
-    return this\._pathTemplates\.notePathTemplate
-      \.match\(noteName\)
-      \.note;
+  \/\*\*
+   \* The DNS address for this API service\.
+   \*\/
+""",
+"""    this.opts = opts;
+  }
+
+  /**
+   * The DNS address for this API service.
+   */
+""")
+s.replace("src/v1/container_analysis_client.ts",
+r"""  matchNoteFromNoteName\(noteName: string\) {
+    return this\._pathTemplates\.notePathTemplate\.match\(noteName\)\.note;
   }
 """,
-r"""  matchNoteFromNoteName(noteName) {
+r"""  matchNoteFromNoteName(noteName: string) {
     return this._pathTemplates.notePathTemplate.match(noteName).note;
   }
-
-
   /**
    * Returns an instance of a @google-cloud/grafeas client, configured to
    * connect to Google Cloud's Container Analysis API. For documentation
@@ -89,8 +97,21 @@ r"""  matchNoteFromNoteName(noteName) {
     return new GrafeasClient(this.opts);
   }
 """)
-
 # Node.js specific cleanup
+to_remove=['src/v1/grafeas_client.ts', 'src/v1/grafeas_client_config.json', 'src/v1/grafeas_proto_list.json', 'src/v1beta1/grafeas_client.ts','src/v1beta1/grafeas_client_config.json', 'src/v1beta1/grafeas_proto_list.json', 'test/gapic-grafeas_v1_beta1-v1beta1.ts', 'test/gapic-grafeas-v1.ts', 'test/gapic-grafeas-v1beta1.ts']
+for filePath in to_remove:
+    os.unlink(filePath)
+# remove unneeded protos in proto_list.json
+proto_lists=['src/v1/container_analysis_proto_list.json', 'src/v1beta1/container_analysis_v1_beta1_proto_list.json', 'src/v1beta1/grafeas_v1_beta1_proto_list.json']
+remove_proto_keywords=['/google/api', '/google/protobuf', 'google/rpc']
+for file in proto_lists:
+  with open(file, 'r') as f:
+    items=json.load(f)
+    content =[item for item in items if all([(x not in item) for x in remove_proto_keywords])]
+    new_file=json.dumps(content, indent=2) + '\n'
+  with open(file, 'w') as f:  
+    f.write(new_file)
+
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
 subprocess.run(['npx', 'compileProtos', 'src'])

@@ -1,0 +1,3 @@
+{
+  "extends": "gts/tslint.json", "linterOptions": {"exclude": ["src/index.ts"]}
+}
