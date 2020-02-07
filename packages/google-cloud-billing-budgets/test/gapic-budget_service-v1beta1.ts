@@ -91,6 +91,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.ICreateBudgetRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -187,6 +189,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -209,6 +212,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IGetBudgetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -233,6 +237,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -255,6 +260,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IDeleteBudgetRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -279,6 +285,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -305,8 +312,9 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listBudgets = (
         actualRequest: {},
@@ -325,7 +333,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });
