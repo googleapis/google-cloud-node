@@ -158,11 +158,11 @@ export class CloudRedisClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      locationPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
       instancePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
+      ),
+      locationPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
     };
 
@@ -202,6 +202,12 @@ export class CloudRedisClient {
     const updateInstanceMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Any'
     ) as gax.protobuf.Type;
+    const upgradeInstanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.v1beta1.Instance'
+    ) as gax.protobuf.Type;
+    const upgradeInstanceMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Any'
+    ) as gax.protobuf.Type;
     const importInstanceResponse = protoFilesRoot.lookup(
       '.google.cloud.redis.v1beta1.Instance'
     ) as gax.protobuf.Type;
@@ -237,6 +243,11 @@ export class CloudRedisClient {
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
         updateInstanceMetadata.decode.bind(updateInstanceMetadata)
+      ),
+      upgradeInstance: new gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        upgradeInstanceResponse.decode.bind(upgradeInstanceResponse),
+        upgradeInstanceMetadata.decode.bind(upgradeInstanceMetadata)
       ),
       importInstance: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -292,6 +303,7 @@ export class CloudRedisClient {
       'getInstance',
       'createInstance',
       'updateInstance',
+      'upgradeInstance',
       'importInstance',
       'exportInstance',
       'failoverInstance',
@@ -660,9 +672,100 @@ export class CloudRedisClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      instance_name: request.instance!.name || '',
+      'instance.name': request.instance!.name || '',
     });
     return this._innerApiCalls.updateInstance(request, options, callback);
+  }
+  upgradeInstance(
+    request: protosTypes.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
+    options?: gax.CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protosTypes.google.cloud.redis.v1beta1.IInstance,
+        protosTypes.google.protobuf.IAny
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  upgradeInstance(
+    request: protosTypes.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
+    options: gax.CallOptions,
+    callback: Callback<
+      LROperation<
+        protosTypes.google.cloud.redis.v1beta1.IInstance,
+        protosTypes.google.protobuf.IAny
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    >
+  ): void;
+  /**
+   * Upgrades Redis instance to the newer Redis version specified in the
+   * request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {string} request.redisVersion
+   *   Required. Specifies the target version of Redis software to upgrade to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  upgradeInstance(
+    request: protosTypes.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          LROperation<
+            protosTypes.google.cloud.redis.v1beta1.IInstance,
+            protosTypes.google.protobuf.IAny
+          >,
+          protosTypes.google.longrunning.IOperation | undefined,
+          {} | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protosTypes.google.cloud.redis.v1beta1.IInstance,
+        protosTypes.google.protobuf.IAny
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protosTypes.google.cloud.redis.v1beta1.IInstance,
+        protosTypes.google.protobuf.IAny
+      >,
+      protosTypes.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name || '',
+    });
+    return this._innerApiCalls.upgradeInstance(request, options, callback);
   }
   importInstance(
     request: protosTypes.google.cloud.redis.v1beta1.IImportInstanceRequest,
@@ -1061,6 +1164,7 @@ export class CloudRedisClient {
    * location (region) or all locations.
    *
    * The location should have the following format:
+   *
    * * `projects/{project_id}/locations/{location_id}`
    *
    * If `location_id` is specified as `-` (wildcard), then all regions
@@ -1078,11 +1182,11 @@ export class CloudRedisClient {
    *   If not specified, a default value of 1000 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   [next_page_token][CloudRedis.ListInstancesResponse.next_page_token]
+   *   [`next_page_token`][google.cloud.redis.v1beta1.ListInstancesResponse.next_page_token]
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request,
-   *   if any.
+   *   The `next_page_token` value returned from a previous
+   *   [ListInstances][google.cloud.redis.v1beta1.CloudRedis.ListInstances] request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1166,11 +1270,11 @@ export class CloudRedisClient {
    *   If not specified, a default value of 1000 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   [next_page_token][CloudRedis.ListInstancesResponse.next_page_token]
+   *   [`next_page_token`][google.cloud.redis.v1beta1.ListInstancesResponse.next_page_token]
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request,
-   *   if any.
+   *   The `next_page_token` value returned from a previous
+   *   [ListInstances][google.cloud.redis.v1beta1.CloudRedis.ListInstances] request, if any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1178,9 +1282,17 @@ export class CloudRedisClient {
    */
   listInstancesStream(
     request?: protosTypes.google.cloud.redis.v1beta1.IListInstancesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listInstances.createStream(
       this._innerApiCalls.listInstances as gax.GaxCall,
@@ -1191,43 +1303,6 @@ export class CloudRedisClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @returns {string} Resource name string.
-   */
-  locationPath(project: string, location: string) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project,
-      location,
-    });
-  }
-
-  /**
-   * Parse the project from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the location from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLocationName(locationName: string) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
-  }
 
   /**
    * Return a fully-qualified instance resource name string.
@@ -1278,6 +1353,43 @@ export class CloudRedisClient {
   matchInstanceFromInstanceName(instanceName: string) {
     return this._pathTemplates.instancePathTemplate.match(instanceName)
       .instance;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project,
+      location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
   }
 
   /**

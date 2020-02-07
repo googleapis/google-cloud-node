@@ -110,6 +110,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IGetInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -132,6 +133,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IGetInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -156,6 +158,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.ICreateInstanceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -185,6 +188,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.ICreateInstanceRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -282,6 +286,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IImportInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -311,6 +316,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IImportInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -343,6 +349,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IExportInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -372,6 +379,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IExportInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -404,6 +412,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IFailoverInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -433,6 +442,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IFailoverInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -465,6 +475,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IDeleteInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -494,6 +505,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IDeleteInstanceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -526,6 +538,7 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IListInstancesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -552,8 +565,9 @@ describe('v1.CloudRedisClient', () => {
       });
       // Mock request
       const request: protosTypes.google.cloud.redis.v1.IListInstancesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listInstances = (
         actualRequest: {},
@@ -572,7 +586,7 @@ describe('v1.CloudRedisClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

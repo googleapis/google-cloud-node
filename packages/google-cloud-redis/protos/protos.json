@@ -230,6 +230,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "connectMode": {
+                          "type": "ConnectMode",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -251,6 +258,13 @@
                             "TIER_UNSPECIFIED": 0,
                             "BASIC": 1,
                             "STANDARD_HA": 3
+                          }
+                        },
+                        "ConnectMode": {
+                          "values": {
+                            "CONNECT_MODE_UNSPECIFIED": 0,
+                            "DIRECT_PEERING": 1,
+                            "PRIVATE_SERVICE_ACCESS": 2
                           }
                         }
                       }
@@ -578,6 +592,17 @@
                             "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
                           }
                         },
+                        "UpgradeInstance": {
+                          "requestType": "UpgradeInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:upgrade",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,redis_version",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.redis.v1beta1.Instance",
+                            "(google.longrunning.operation_info).metadata_type": "google.protobuf.Any"
+                          }
+                        },
                         "ImportInstance": {
                           "requestType": "ImportInstanceRequest",
                           "responseType": "google.longrunning.Operation",
@@ -750,6 +775,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "connectMode": {
+                          "type": "ConnectMode",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -771,6 +803,13 @@
                             "TIER_UNSPECIFIED": 0,
                             "BASIC": 1,
                             "STANDARD_HA": 3
+                          }
+                        },
+                        "ConnectMode": {
+                          "values": {
+                            "CONNECT_MODE_UNSPECIFIED": 0,
+                            "DIRECT_PEERING": 1,
+                            "PRIVATE_SERVICE_ACCESS": 2
                           }
                         }
                       }
@@ -862,6 +901,25 @@
                         },
                         "instance": {
                           "type": "Instance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "redis.googleapis.com/Instance"
+                          }
+                        },
+                        "redisVersion": {
+                          "type": "string",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"

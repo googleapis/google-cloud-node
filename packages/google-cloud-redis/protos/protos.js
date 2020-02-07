@@ -389,6 +389,7 @@
                          * @property {number|null} [memorySizeGb] Instance memorySizeGb
                          * @property {string|null} [authorizedNetwork] Instance authorizedNetwork
                          * @property {string|null} [persistenceIamIdentity] Instance persistenceIamIdentity
+                         * @property {google.cloud.redis.v1.Instance.ConnectMode|null} [connectMode] Instance connectMode
                          */
     
                         /**
@@ -553,6 +554,14 @@
                         Instance.prototype.persistenceIamIdentity = "";
     
                         /**
+                         * Instance connectMode.
+                         * @member {google.cloud.redis.v1.Instance.ConnectMode} connectMode
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.connectMode = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.redis.v1.Instance
@@ -614,6 +623,8 @@
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.authorizedNetwork);
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.persistenceIamIdentity);
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).int32(message.connectMode);
                             return writer;
                         };
     
@@ -711,6 +722,9 @@
                                     break;
                                 case 21:
                                     message.persistenceIamIdentity = reader.string();
+                                    break;
+                                case 22:
+                                    message.connectMode = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -831,6 +845,15 @@
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 if (!$util.isString(message.persistenceIamIdentity))
                                     return "persistenceIamIdentity: string expected";
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                switch (message.connectMode) {
+                                default:
+                                    return "connectMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -943,6 +966,20 @@
                                 message.authorizedNetwork = String(object.authorizedNetwork);
                             if (object.persistenceIamIdentity != null)
                                 message.persistenceIamIdentity = String(object.persistenceIamIdentity);
+                            switch (object.connectMode) {
+                            case "CONNECT_MODE_UNSPECIFIED":
+                            case 0:
+                                message.connectMode = 0;
+                                break;
+                            case "DIRECT_PEERING":
+                            case 1:
+                                message.connectMode = 1;
+                                break;
+                            case "PRIVATE_SERVICE_ACCESS":
+                            case 2:
+                                message.connectMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -980,6 +1017,7 @@
                                 object.memorySizeGb = 0;
                                 object.authorizedNetwork = "";
                                 object.persistenceIamIdentity = "";
+                                object.connectMode = options.enums === String ? "CONNECT_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1024,6 +1062,8 @@
                                 object.authorizedNetwork = message.authorizedNetwork;
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 object.persistenceIamIdentity = message.persistenceIamIdentity;
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                object.connectMode = options.enums === String ? $root.google.cloud.redis.v1.Instance.ConnectMode[message.connectMode] : message.connectMode;
                             return object;
                         };
     
@@ -1079,6 +1119,22 @@
                             values[valuesById[0] = "TIER_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BASIC"] = 1;
                             values[valuesById[3] = "STANDARD_HA"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ConnectMode enum.
+                         * @name google.cloud.redis.v1.Instance.ConnectMode
+                         * @enum {string}
+                         * @property {number} CONNECT_MODE_UNSPECIFIED=0 CONNECT_MODE_UNSPECIFIED value
+                         * @property {number} DIRECT_PEERING=1 DIRECT_PEERING value
+                         * @property {number} PRIVATE_SERVICE_ACCESS=2 PRIVATE_SERVICE_ACCESS value
+                         */
+                        Instance.ConnectMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONNECT_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DIRECT_PEERING"] = 1;
+                            values[valuesById[2] = "PRIVATE_SERVICE_ACCESS"] = 2;
                             return values;
                         })();
     
@@ -4770,6 +4826,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.redis.v1beta1.CloudRedis#upgradeInstance}.
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @typedef UpgradeInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpgradeInstance.
+                         * @function upgradeInstance
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest} request UpgradeInstanceRequest message or plain object
+                         * @param {google.cloud.redis.v1beta1.CloudRedis.UpgradeInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudRedis.prototype.upgradeInstance = function upgradeInstance(request, callback) {
+                            return this.rpcCall(upgradeInstance, $root.google.cloud.redis.v1beta1.UpgradeInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpgradeInstance" });
+    
+                        /**
+                         * Calls UpgradeInstance.
+                         * @function upgradeInstance
+                         * @memberof google.cloud.redis.v1beta1.CloudRedis
+                         * @instance
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest} request UpgradeInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.redis.v1beta1.CloudRedis#importInstance}.
                          * @memberof google.cloud.redis.v1beta1.CloudRedis
                          * @typedef ImportInstanceCallback
@@ -4928,6 +5017,7 @@
                          * @property {number|null} [memorySizeGb] Instance memorySizeGb
                          * @property {string|null} [authorizedNetwork] Instance authorizedNetwork
                          * @property {string|null} [persistenceIamIdentity] Instance persistenceIamIdentity
+                         * @property {google.cloud.redis.v1beta1.Instance.ConnectMode|null} [connectMode] Instance connectMode
                          */
     
                         /**
@@ -5092,6 +5182,14 @@
                         Instance.prototype.persistenceIamIdentity = "";
     
                         /**
+                         * Instance connectMode.
+                         * @member {google.cloud.redis.v1beta1.Instance.ConnectMode} connectMode
+                         * @memberof google.cloud.redis.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.connectMode = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.redis.v1beta1.Instance
@@ -5153,6 +5251,8 @@
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.authorizedNetwork);
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.persistenceIamIdentity);
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).int32(message.connectMode);
                             return writer;
                         };
     
@@ -5250,6 +5350,9 @@
                                     break;
                                 case 21:
                                     message.persistenceIamIdentity = reader.string();
+                                    break;
+                                case 22:
+                                    message.connectMode = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5370,6 +5473,15 @@
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 if (!$util.isString(message.persistenceIamIdentity))
                                     return "persistenceIamIdentity: string expected";
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                switch (message.connectMode) {
+                                default:
+                                    return "connectMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5482,6 +5594,20 @@
                                 message.authorizedNetwork = String(object.authorizedNetwork);
                             if (object.persistenceIamIdentity != null)
                                 message.persistenceIamIdentity = String(object.persistenceIamIdentity);
+                            switch (object.connectMode) {
+                            case "CONNECT_MODE_UNSPECIFIED":
+                            case 0:
+                                message.connectMode = 0;
+                                break;
+                            case "DIRECT_PEERING":
+                            case 1:
+                                message.connectMode = 1;
+                                break;
+                            case "PRIVATE_SERVICE_ACCESS":
+                            case 2:
+                                message.connectMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5519,6 +5645,7 @@
                                 object.memorySizeGb = 0;
                                 object.authorizedNetwork = "";
                                 object.persistenceIamIdentity = "";
+                                object.connectMode = options.enums === String ? "CONNECT_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5563,6 +5690,8 @@
                                 object.authorizedNetwork = message.authorizedNetwork;
                             if (message.persistenceIamIdentity != null && message.hasOwnProperty("persistenceIamIdentity"))
                                 object.persistenceIamIdentity = message.persistenceIamIdentity;
+                            if (message.connectMode != null && message.hasOwnProperty("connectMode"))
+                                object.connectMode = options.enums === String ? $root.google.cloud.redis.v1beta1.Instance.ConnectMode[message.connectMode] : message.connectMode;
                             return object;
                         };
     
@@ -5618,6 +5747,22 @@
                             values[valuesById[0] = "TIER_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "BASIC"] = 1;
                             values[valuesById[3] = "STANDARD_HA"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ConnectMode enum.
+                         * @name google.cloud.redis.v1beta1.Instance.ConnectMode
+                         * @enum {string}
+                         * @property {number} CONNECT_MODE_UNSPECIFIED=0 CONNECT_MODE_UNSPECIFIED value
+                         * @property {number} DIRECT_PEERING=1 DIRECT_PEERING value
+                         * @property {number} PRIVATE_SERVICE_ACCESS=2 PRIVATE_SERVICE_ACCESS value
+                         */
+                        Instance.ConnectMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONNECT_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DIRECT_PEERING"] = 1;
+                            values[valuesById[2] = "PRIVATE_SERVICE_ACCESS"] = 2;
                             return values;
                         })();
     
@@ -6768,6 +6913,216 @@
                         };
     
                         return UpdateInstanceRequest;
+                    })();
+    
+                    v1beta1.UpgradeInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of an UpgradeInstanceRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @interface IUpgradeInstanceRequest
+                         * @property {string|null} [name] UpgradeInstanceRequest name
+                         * @property {string|null} [redisVersion] UpgradeInstanceRequest redisVersion
+                         */
+    
+                        /**
+                         * Constructs a new UpgradeInstanceRequest.
+                         * @memberof google.cloud.redis.v1beta1
+                         * @classdesc Represents an UpgradeInstanceRequest.
+                         * @implements IUpgradeInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest=} [properties] Properties to set
+                         */
+                        function UpgradeInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpgradeInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @instance
+                         */
+                        UpgradeInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * UpgradeInstanceRequest redisVersion.
+                         * @member {string} redisVersion
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @instance
+                         */
+                        UpgradeInstanceRequest.prototype.redisVersion = "";
+    
+                        /**
+                         * Creates a new UpgradeInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1beta1.UpgradeInstanceRequest} UpgradeInstanceRequest instance
+                         */
+                        UpgradeInstanceRequest.create = function create(properties) {
+                            return new UpgradeInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeInstanceRequest message. Does not implicitly {@link google.cloud.redis.v1beta1.UpgradeInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest} message UpgradeInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.redisVersion != null && message.hasOwnProperty("redisVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.redisVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpgradeInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.redis.v1beta1.UpgradeInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.IUpgradeInstanceRequest} message UpgradeInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpgradeInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpgradeInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1beta1.UpgradeInstanceRequest} UpgradeInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeInstanceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1beta1.UpgradeInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.redisVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpgradeInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1beta1.UpgradeInstanceRequest} UpgradeInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpgradeInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpgradeInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpgradeInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.redisVersion != null && message.hasOwnProperty("redisVersion"))
+                                if (!$util.isString(message.redisVersion))
+                                    return "redisVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpgradeInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1beta1.UpgradeInstanceRequest} UpgradeInstanceRequest
+                         */
+                        UpgradeInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1beta1.UpgradeInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1beta1.UpgradeInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.redisVersion != null)
+                                message.redisVersion = String(object.redisVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpgradeInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @static
+                         * @param {google.cloud.redis.v1beta1.UpgradeInstanceRequest} message UpgradeInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpgradeInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.redisVersion = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.redisVersion != null && message.hasOwnProperty("redisVersion"))
+                                object.redisVersion = message.redisVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpgradeInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1beta1.UpgradeInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpgradeInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpgradeInstanceRequest;
                     })();
     
                     v1beta1.DeleteInstanceRequest = (function() {
