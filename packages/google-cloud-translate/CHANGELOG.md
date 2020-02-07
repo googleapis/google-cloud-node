@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [5.1.6](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.5...v5.1.6) (2020-02-07)
+
+
+### Bug Fixes
+
+* pass x-goog-request-params header for streaming calls ([40c90fa](https://www.github.com/googleapis/nodejs-translate/commit/40c90fa099ef0bd995b5923cd35ba4ac0f9344e1))
+
 ### [5.1.5](https://www.github.com/googleapis/nodejs-translate/compare/v5.1.4...v5.1.5) (2020-02-04)
 
 
