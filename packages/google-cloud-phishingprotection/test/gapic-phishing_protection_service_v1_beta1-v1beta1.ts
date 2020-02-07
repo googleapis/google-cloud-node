@@ -99,6 +99,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -123,6 +124,7 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
