@@ -10311,6 +10311,2600 @@
                         return StatisticalTimeSeriesFilter;
                     })();
     
+                    v1.Dashboard = (function() {
+    
+                        /**
+                         * Properties of a Dashboard.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IDashboard
+                         * @property {string|null} [name] Dashboard name
+                         * @property {string|null} [displayName] Dashboard displayName
+                         * @property {string|null} [etag] Dashboard etag
+                         * @property {google.monitoring.dashboard.v1.IGridLayout|null} [gridLayout] Dashboard gridLayout
+                         * @property {google.monitoring.dashboard.v1.IRowLayout|null} [rowLayout] Dashboard rowLayout
+                         * @property {google.monitoring.dashboard.v1.IColumnLayout|null} [columnLayout] Dashboard columnLayout
+                         */
+    
+                        /**
+                         * Constructs a new Dashboard.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a Dashboard.
+                         * @implements IDashboard
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IDashboard=} [properties] Properties to set
+                         */
+                        function Dashboard(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Dashboard name.
+                         * @member {string} name
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.name = "";
+    
+                        /**
+                         * Dashboard displayName.
+                         * @member {string} displayName
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.displayName = "";
+    
+                        /**
+                         * Dashboard etag.
+                         * @member {string} etag
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.etag = "";
+    
+                        /**
+                         * Dashboard gridLayout.
+                         * @member {google.monitoring.dashboard.v1.IGridLayout|null|undefined} gridLayout
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.gridLayout = null;
+    
+                        /**
+                         * Dashboard rowLayout.
+                         * @member {google.monitoring.dashboard.v1.IRowLayout|null|undefined} rowLayout
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.rowLayout = null;
+    
+                        /**
+                         * Dashboard columnLayout.
+                         * @member {google.monitoring.dashboard.v1.IColumnLayout|null|undefined} columnLayout
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Dashboard.prototype.columnLayout = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Dashboard layout.
+                         * @member {"gridLayout"|"rowLayout"|"columnLayout"|undefined} layout
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         */
+                        Object.defineProperty(Dashboard.prototype, "layout", {
+                            get: $util.oneOfGetter($oneOfFields = ["gridLayout", "rowLayout", "columnLayout"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Dashboard instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboard=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard instance
+                         */
+                        Dashboard.create = function create(properties) {
+                            return new Dashboard(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Dashboard message. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboard} message Dashboard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dashboard.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
+                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout"))
+                                $root.google.monitoring.dashboard.v1.GridLayout.encode(message.gridLayout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout"))
+                                $root.google.monitoring.dashboard.v1.RowLayout.encode(message.rowLayout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout"))
+                                $root.google.monitoring.dashboard.v1.ColumnLayout.encode(message.columnLayout, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Dashboard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IDashboard} message Dashboard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dashboard.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Dashboard message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dashboard.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Dashboard();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 4:
+                                    message.etag = reader.string();
+                                    break;
+                                case 5:
+                                    message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Dashboard message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dashboard.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Dashboard message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Dashboard.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout")) {
+                                properties.layout = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.GridLayout.verify(message.gridLayout);
+                                    if (error)
+                                        return "gridLayout." + error;
+                                }
+                            }
+                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
+                                if (properties.layout === 1)
+                                    return "layout: multiple values";
+                                properties.layout = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.RowLayout.verify(message.rowLayout);
+                                    if (error)
+                                        return "rowLayout." + error;
+                                }
+                            }
+                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout")) {
+                                if (properties.layout === 1)
+                                    return "layout: multiple values";
+                                properties.layout = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.ColumnLayout.verify(message.columnLayout);
+                                    if (error)
+                                        return "columnLayout." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Dashboard message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
+                         */
+                        Dashboard.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.Dashboard)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.Dashboard();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.gridLayout != null) {
+                                if (typeof object.gridLayout !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.gridLayout: object expected");
+                                message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.fromObject(object.gridLayout);
+                            }
+                            if (object.rowLayout != null) {
+                                if (typeof object.rowLayout !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.rowLayout: object expected");
+                                message.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.fromObject(object.rowLayout);
+                            }
+                            if (object.columnLayout != null) {
+                                if (typeof object.columnLayout !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.columnLayout: object expected");
+                                message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.fromObject(object.columnLayout);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Dashboard message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.Dashboard} message Dashboard
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Dashboard.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout")) {
+                                object.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.toObject(message.gridLayout, options);
+                                if (options.oneofs)
+                                    object.layout = "gridLayout";
+                            }
+                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
+                                object.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.toObject(message.rowLayout, options);
+                                if (options.oneofs)
+                                    object.layout = "rowLayout";
+                            }
+                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout")) {
+                                object.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.toObject(message.columnLayout, options);
+                                if (options.oneofs)
+                                    object.layout = "columnLayout";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Dashboard to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.Dashboard
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Dashboard.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Dashboard;
+                    })();
+    
+                    v1.GridLayout = (function() {
+    
+                        /**
+                         * Properties of a GridLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IGridLayout
+                         * @property {number|Long|null} [columns] GridLayout columns
+                         * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] GridLayout widgets
+                         */
+    
+                        /**
+                         * Constructs a new GridLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a GridLayout.
+                         * @implements IGridLayout
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IGridLayout=} [properties] Properties to set
+                         */
+                        function GridLayout(properties) {
+                            this.widgets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GridLayout columns.
+                         * @member {number|Long} columns
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @instance
+                         */
+                        GridLayout.prototype.columns = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * GridLayout widgets.
+                         * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @instance
+                         */
+                        GridLayout.prototype.widgets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GridLayout instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IGridLayout=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout instance
+                         */
+                        GridLayout.create = function create(properties) {
+                            return new GridLayout(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GridLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IGridLayout} message GridLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GridLayout.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columns != null && message.hasOwnProperty("columns"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.columns);
+                            if (message.widgets != null && message.widgets.length)
+                                for (var i = 0; i < message.widgets.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GridLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IGridLayout} message GridLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GridLayout.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GridLayout message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GridLayout.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.GridLayout();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.columns = reader.int64();
+                                    break;
+                                case 2:
+                                    if (!(message.widgets && message.widgets.length))
+                                        message.widgets = [];
+                                    message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GridLayout message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GridLayout.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GridLayout message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GridLayout.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columns != null && message.hasOwnProperty("columns"))
+                                if (!$util.isInteger(message.columns) && !(message.columns && $util.isInteger(message.columns.low) && $util.isInteger(message.columns.high)))
+                                    return "columns: integer|Long expected";
+                            if (message.widgets != null && message.hasOwnProperty("widgets")) {
+                                if (!Array.isArray(message.widgets))
+                                    return "widgets: array expected";
+                                for (var i = 0; i < message.widgets.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
+                                    if (error)
+                                        return "widgets." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GridLayout message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
+                         */
+                        GridLayout.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.GridLayout)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.GridLayout();
+                            if (object.columns != null)
+                                if ($util.Long)
+                                    (message.columns = $util.Long.fromValue(object.columns)).unsigned = false;
+                                else if (typeof object.columns === "string")
+                                    message.columns = parseInt(object.columns, 10);
+                                else if (typeof object.columns === "number")
+                                    message.columns = object.columns;
+                                else if (typeof object.columns === "object")
+                                    message.columns = new $util.LongBits(object.columns.low >>> 0, object.columns.high >>> 0).toNumber();
+                            if (object.widgets) {
+                                if (!Array.isArray(object.widgets))
+                                    throw TypeError(".google.monitoring.dashboard.v1.GridLayout.widgets: array expected");
+                                message.widgets = [];
+                                for (var i = 0; i < object.widgets.length; ++i) {
+                                    if (typeof object.widgets[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.GridLayout.widgets: object expected");
+                                    message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GridLayout message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.GridLayout} message GridLayout
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GridLayout.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.widgets = [];
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.columns = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.columns = options.longs === String ? "0" : 0;
+                            if (message.columns != null && message.hasOwnProperty("columns"))
+                                if (typeof message.columns === "number")
+                                    object.columns = options.longs === String ? String(message.columns) : message.columns;
+                                else
+                                    object.columns = options.longs === String ? $util.Long.prototype.toString.call(message.columns) : options.longs === Number ? new $util.LongBits(message.columns.low >>> 0, message.columns.high >>> 0).toNumber() : message.columns;
+                            if (message.widgets && message.widgets.length) {
+                                object.widgets = [];
+                                for (var j = 0; j < message.widgets.length; ++j)
+                                    object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GridLayout to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.GridLayout
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GridLayout.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GridLayout;
+                    })();
+    
+                    v1.RowLayout = (function() {
+    
+                        /**
+                         * Properties of a RowLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IRowLayout
+                         * @property {Array.<google.monitoring.dashboard.v1.RowLayout.IRow>|null} [rows] RowLayout rows
+                         */
+    
+                        /**
+                         * Constructs a new RowLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a RowLayout.
+                         * @implements IRowLayout
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IRowLayout=} [properties] Properties to set
+                         */
+                        function RowLayout(properties) {
+                            this.rows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RowLayout rows.
+                         * @member {Array.<google.monitoring.dashboard.v1.RowLayout.IRow>} rows
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @instance
+                         */
+                        RowLayout.prototype.rows = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RowLayout instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IRowLayout=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout instance
+                         */
+                        RowLayout.create = function create(properties) {
+                            return new RowLayout(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RowLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IRowLayout} message RowLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RowLayout.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.rows != null && message.rows.length)
+                                for (var i = 0; i < message.rows.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.RowLayout.Row.encode(message.rows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RowLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IRowLayout} message RowLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RowLayout.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RowLayout message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RowLayout.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.RowLayout();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.rows && message.rows.length))
+                                        message.rows = [];
+                                    message.rows.push($root.google.monitoring.dashboard.v1.RowLayout.Row.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RowLayout message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RowLayout.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RowLayout message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RowLayout.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.rows != null && message.hasOwnProperty("rows")) {
+                                if (!Array.isArray(message.rows))
+                                    return "rows: array expected";
+                                for (var i = 0; i < message.rows.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.RowLayout.Row.verify(message.rows[i]);
+                                    if (error)
+                                        return "rows." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RowLayout message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
+                         */
+                        RowLayout.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.RowLayout)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.RowLayout();
+                            if (object.rows) {
+                                if (!Array.isArray(object.rows))
+                                    throw TypeError(".google.monitoring.dashboard.v1.RowLayout.rows: array expected");
+                                message.rows = [];
+                                for (var i = 0; i < object.rows.length; ++i) {
+                                    if (typeof object.rows[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.RowLayout.rows: object expected");
+                                    message.rows[i] = $root.google.monitoring.dashboard.v1.RowLayout.Row.fromObject(object.rows[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RowLayout message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.RowLayout} message RowLayout
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RowLayout.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.rows = [];
+                            if (message.rows && message.rows.length) {
+                                object.rows = [];
+                                for (var j = 0; j < message.rows.length; ++j)
+                                    object.rows[j] = $root.google.monitoring.dashboard.v1.RowLayout.Row.toObject(message.rows[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RowLayout to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.RowLayout
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RowLayout.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        RowLayout.Row = (function() {
+    
+                            /**
+                             * Properties of a Row.
+                             * @memberof google.monitoring.dashboard.v1.RowLayout
+                             * @interface IRow
+                             * @property {number|Long|null} [weight] Row weight
+                             * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] Row widgets
+                             */
+    
+                            /**
+                             * Constructs a new Row.
+                             * @memberof google.monitoring.dashboard.v1.RowLayout
+                             * @classdesc Represents a Row.
+                             * @implements IRow
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow=} [properties] Properties to set
+                             */
+                            function Row(properties) {
+                                this.widgets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Row weight.
+                             * @member {number|Long} weight
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @instance
+                             */
+                            Row.prototype.weight = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Row widgets.
+                             * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @instance
+                             */
+                            Row.prototype.widgets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Row instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row instance
+                             */
+                            Row.create = function create(properties) {
+                                return new Row(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Row message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow} message Row message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Row.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.weight);
+                                if (message.widgets != null && message.widgets.length)
+                                    for (var i = 0; i < message.widgets.length; ++i)
+                                        $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Row message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow} message Row message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Row.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Row message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Row.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.RowLayout.Row();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.weight = reader.int64();
+                                        break;
+                                    case 2:
+                                        if (!(message.widgets && message.widgets.length))
+                                            message.widgets = [];
+                                        message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Row message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Row.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Row message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Row.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    if (!$util.isInteger(message.weight) && !(message.weight && $util.isInteger(message.weight.low) && $util.isInteger(message.weight.high)))
+                                        return "weight: integer|Long expected";
+                                if (message.widgets != null && message.hasOwnProperty("widgets")) {
+                                    if (!Array.isArray(message.widgets))
+                                        return "widgets: array expected";
+                                    for (var i = 0; i < message.widgets.length; ++i) {
+                                        var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
+                                        if (error)
+                                            return "widgets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
+                             */
+                            Row.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.RowLayout.Row)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.RowLayout.Row();
+                                if (object.weight != null)
+                                    if ($util.Long)
+                                        (message.weight = $util.Long.fromValue(object.weight)).unsigned = false;
+                                    else if (typeof object.weight === "string")
+                                        message.weight = parseInt(object.weight, 10);
+                                    else if (typeof object.weight === "number")
+                                        message.weight = object.weight;
+                                    else if (typeof object.weight === "object")
+                                        message.weight = new $util.LongBits(object.weight.low >>> 0, object.weight.high >>> 0).toNumber();
+                                if (object.widgets) {
+                                    if (!Array.isArray(object.widgets))
+                                        throw TypeError(".google.monitoring.dashboard.v1.RowLayout.Row.widgets: array expected");
+                                    message.widgets = [];
+                                    for (var i = 0; i < object.widgets.length; ++i) {
+                                        if (typeof object.widgets[i] !== "object")
+                                            throw TypeError(".google.monitoring.dashboard.v1.RowLayout.Row.widgets: object expected");
+                                        message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Row message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.RowLayout.Row} message Row
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Row.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.widgets = [];
+                                if (options.defaults)
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.weight = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.weight = options.longs === String ? "0" : 0;
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    if (typeof message.weight === "number")
+                                        object.weight = options.longs === String ? String(message.weight) : message.weight;
+                                    else
+                                        object.weight = options.longs === String ? $util.Long.prototype.toString.call(message.weight) : options.longs === Number ? new $util.LongBits(message.weight.low >>> 0, message.weight.high >>> 0).toNumber() : message.weight;
+                                if (message.widgets && message.widgets.length) {
+                                    object.widgets = [];
+                                    for (var j = 0; j < message.widgets.length; ++j)
+                                        object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Row to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Row.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Row;
+                        })();
+    
+                        return RowLayout;
+                    })();
+    
+                    v1.ColumnLayout = (function() {
+    
+                        /**
+                         * Properties of a ColumnLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IColumnLayout
+                         * @property {Array.<google.monitoring.dashboard.v1.ColumnLayout.IColumn>|null} [columns] ColumnLayout columns
+                         */
+    
+                        /**
+                         * Constructs a new ColumnLayout.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a ColumnLayout.
+                         * @implements IColumnLayout
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IColumnLayout=} [properties] Properties to set
+                         */
+                        function ColumnLayout(properties) {
+                            this.columns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ColumnLayout columns.
+                         * @member {Array.<google.monitoring.dashboard.v1.ColumnLayout.IColumn>} columns
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @instance
+                         */
+                        ColumnLayout.prototype.columns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ColumnLayout instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IColumnLayout=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout instance
+                         */
+                        ColumnLayout.create = function create(properties) {
+                            return new ColumnLayout(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ColumnLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IColumnLayout} message ColumnLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ColumnLayout.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.columns != null && message.columns.length)
+                                for (var i = 0; i < message.columns.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.ColumnLayout.Column.encode(message.columns[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ColumnLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IColumnLayout} message ColumnLayout message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ColumnLayout.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ColumnLayout message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ColumnLayout.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.ColumnLayout();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.columns && message.columns.length))
+                                        message.columns = [];
+                                    message.columns.push($root.google.monitoring.dashboard.v1.ColumnLayout.Column.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ColumnLayout message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ColumnLayout.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ColumnLayout message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ColumnLayout.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.columns != null && message.hasOwnProperty("columns")) {
+                                if (!Array.isArray(message.columns))
+                                    return "columns: array expected";
+                                for (var i = 0; i < message.columns.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.verify(message.columns[i]);
+                                    if (error)
+                                        return "columns." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ColumnLayout message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
+                         */
+                        ColumnLayout.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.ColumnLayout)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.ColumnLayout();
+                            if (object.columns) {
+                                if (!Array.isArray(object.columns))
+                                    throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.columns: array expected");
+                                message.columns = [];
+                                for (var i = 0; i < object.columns.length; ++i) {
+                                    if (typeof object.columns[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.columns: object expected");
+                                    message.columns[i] = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.fromObject(object.columns[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ColumnLayout message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.ColumnLayout} message ColumnLayout
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ColumnLayout.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.columns = [];
+                            if (message.columns && message.columns.length) {
+                                object.columns = [];
+                                for (var j = 0; j < message.columns.length; ++j)
+                                    object.columns[j] = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.toObject(message.columns[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ColumnLayout to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ColumnLayout.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ColumnLayout.Column = (function() {
+    
+                            /**
+                             * Properties of a Column.
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                             * @interface IColumn
+                             * @property {number|Long|null} [weight] Column weight
+                             * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] Column widgets
+                             */
+    
+                            /**
+                             * Constructs a new Column.
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout
+                             * @classdesc Represents a Column.
+                             * @implements IColumn
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn=} [properties] Properties to set
+                             */
+                            function Column(properties) {
+                                this.widgets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Column weight.
+                             * @member {number|Long} weight
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @instance
+                             */
+                            Column.prototype.weight = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Column widgets.
+                             * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @instance
+                             */
+                            Column.prototype.widgets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Column instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column instance
+                             */
+                            Column.create = function create(properties) {
+                                return new Column(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Column message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn} message Column message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Column.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.weight);
+                                if (message.widgets != null && message.widgets.length)
+                                    for (var i = 0; i < message.widgets.length; ++i)
+                                        $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Column message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn} message Column message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Column.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Column message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Column.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.ColumnLayout.Column();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.weight = reader.int64();
+                                        break;
+                                    case 2:
+                                        if (!(message.widgets && message.widgets.length))
+                                            message.widgets = [];
+                                        message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Column message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Column.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Column message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Column.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    if (!$util.isInteger(message.weight) && !(message.weight && $util.isInteger(message.weight.low) && $util.isInteger(message.weight.high)))
+                                        return "weight: integer|Long expected";
+                                if (message.widgets != null && message.hasOwnProperty("widgets")) {
+                                    if (!Array.isArray(message.widgets))
+                                        return "widgets: array expected";
+                                    for (var i = 0; i < message.widgets.length; ++i) {
+                                        var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
+                                        if (error)
+                                            return "widgets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Column message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
+                             */
+                            Column.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.ColumnLayout.Column)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.ColumnLayout.Column();
+                                if (object.weight != null)
+                                    if ($util.Long)
+                                        (message.weight = $util.Long.fromValue(object.weight)).unsigned = false;
+                                    else if (typeof object.weight === "string")
+                                        message.weight = parseInt(object.weight, 10);
+                                    else if (typeof object.weight === "number")
+                                        message.weight = object.weight;
+                                    else if (typeof object.weight === "object")
+                                        message.weight = new $util.LongBits(object.weight.low >>> 0, object.weight.high >>> 0).toNumber();
+                                if (object.widgets) {
+                                    if (!Array.isArray(object.widgets))
+                                        throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.Column.widgets: array expected");
+                                    message.widgets = [];
+                                    for (var i = 0; i < object.widgets.length; ++i) {
+                                        if (typeof object.widgets[i] !== "object")
+                                            throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.Column.widgets: object expected");
+                                        message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Column message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.ColumnLayout.Column} message Column
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Column.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.widgets = [];
+                                if (options.defaults)
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.weight = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.weight = options.longs === String ? "0" : 0;
+                                if (message.weight != null && message.hasOwnProperty("weight"))
+                                    if (typeof message.weight === "number")
+                                        object.weight = options.longs === String ? String(message.weight) : message.weight;
+                                    else
+                                        object.weight = options.longs === String ? $util.Long.prototype.toString.call(message.weight) : options.longs === Number ? new $util.LongBits(message.weight.low >>> 0, message.weight.high >>> 0).toNumber() : message.weight;
+                                if (message.widgets && message.widgets.length) {
+                                    object.widgets = [];
+                                    for (var j = 0; j < message.widgets.length; ++j)
+                                        object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Column to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Column.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Column;
+                        })();
+    
+                        return ColumnLayout;
+                    })();
+    
+                    v1.Widget = (function() {
+    
+                        /**
+                         * Properties of a Widget.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IWidget
+                         * @property {string|null} [title] Widget title
+                         * @property {google.monitoring.dashboard.v1.IXyChart|null} [xyChart] Widget xyChart
+                         * @property {google.monitoring.dashboard.v1.IScorecard|null} [scorecard] Widget scorecard
+                         * @property {google.monitoring.dashboard.v1.IText|null} [text] Widget text
+                         * @property {google.protobuf.IEmpty|null} [blank] Widget blank
+                         */
+    
+                        /**
+                         * Constructs a new Widget.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a Widget.
+                         * @implements IWidget
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IWidget=} [properties] Properties to set
+                         */
+                        function Widget(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Widget title.
+                         * @member {string} title
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.title = "";
+    
+                        /**
+                         * Widget xyChart.
+                         * @member {google.monitoring.dashboard.v1.IXyChart|null|undefined} xyChart
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.xyChart = null;
+    
+                        /**
+                         * Widget scorecard.
+                         * @member {google.monitoring.dashboard.v1.IScorecard|null|undefined} scorecard
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.scorecard = null;
+    
+                        /**
+                         * Widget text.
+                         * @member {google.monitoring.dashboard.v1.IText|null|undefined} text
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.text = null;
+    
+                        /**
+                         * Widget blank.
+                         * @member {google.protobuf.IEmpty|null|undefined} blank
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.blank = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Widget content.
+                         * @member {"xyChart"|"scorecard"|"text"|"blank"|undefined} content
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         */
+                        Object.defineProperty(Widget.prototype, "content", {
+                            get: $util.oneOfGetter($oneOfFields = ["xyChart", "scorecard", "text", "blank"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Widget instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IWidget=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.Widget} Widget instance
+                         */
+                        Widget.create = function create(properties) {
+                            return new Widget(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Widget message. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IWidget} message Widget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Widget.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                            if (message.xyChart != null && message.hasOwnProperty("xyChart"))
+                                $root.google.monitoring.dashboard.v1.XyChart.encode(message.xyChart, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.scorecard != null && message.hasOwnProperty("scorecard"))
+                                $root.google.monitoring.dashboard.v1.Scorecard.encode(message.scorecard, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                $root.google.monitoring.dashboard.v1.Text.encode(message.text, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.blank != null && message.hasOwnProperty("blank"))
+                                $root.google.protobuf.Empty.encode(message.blank, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Widget message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IWidget} message Widget message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Widget.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Widget message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Widget.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Widget();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.title = reader.string();
+                                    break;
+                                case 2:
+                                    message.xyChart = $root.google.monitoring.dashboard.v1.XyChart.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.text = $root.google.monitoring.dashboard.v1.Text.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.blank = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Widget message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Widget.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Widget message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Widget.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                if (!$util.isString(message.title))
+                                    return "title: string expected";
+                            if (message.xyChart != null && message.hasOwnProperty("xyChart")) {
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.XyChart.verify(message.xyChart);
+                                    if (error)
+                                        return "xyChart." + error;
+                                }
+                            }
+                            if (message.scorecard != null && message.hasOwnProperty("scorecard")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.verify(message.scorecard);
+                                    if (error)
+                                        return "scorecard." + error;
+                                }
+                            }
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.Text.verify(message.text);
+                                    if (error)
+                                        return "text." + error;
+                                }
+                            }
+                            if (message.blank != null && message.hasOwnProperty("blank")) {
+                                if (properties.content === 1)
+                                    return "content: multiple values";
+                                properties.content = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.blank);
+                                    if (error)
+                                        return "blank." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Widget message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
+                         */
+                        Widget.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.Widget)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.Widget();
+                            if (object.title != null)
+                                message.title = String(object.title);
+                            if (object.xyChart != null) {
+                                if (typeof object.xyChart !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.xyChart: object expected");
+                                message.xyChart = $root.google.monitoring.dashboard.v1.XyChart.fromObject(object.xyChart);
+                            }
+                            if (object.scorecard != null) {
+                                if (typeof object.scorecard !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.scorecard: object expected");
+                                message.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.fromObject(object.scorecard);
+                            }
+                            if (object.text != null) {
+                                if (typeof object.text !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.text: object expected");
+                                message.text = $root.google.monitoring.dashboard.v1.Text.fromObject(object.text);
+                            }
+                            if (object.blank != null) {
+                                if (typeof object.blank !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.blank: object expected");
+                                message.blank = $root.google.protobuf.Empty.fromObject(object.blank);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Widget message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.Widget} message Widget
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Widget.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.title = "";
+                            if (message.title != null && message.hasOwnProperty("title"))
+                                object.title = message.title;
+                            if (message.xyChart != null && message.hasOwnProperty("xyChart")) {
+                                object.xyChart = $root.google.monitoring.dashboard.v1.XyChart.toObject(message.xyChart, options);
+                                if (options.oneofs)
+                                    object.content = "xyChart";
+                            }
+                            if (message.scorecard != null && message.hasOwnProperty("scorecard")) {
+                                object.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.toObject(message.scorecard, options);
+                                if (options.oneofs)
+                                    object.content = "scorecard";
+                            }
+                            if (message.text != null && message.hasOwnProperty("text")) {
+                                object.text = $root.google.monitoring.dashboard.v1.Text.toObject(message.text, options);
+                                if (options.oneofs)
+                                    object.content = "text";
+                            }
+                            if (message.blank != null && message.hasOwnProperty("blank")) {
+                                object.blank = $root.google.protobuf.Empty.toObject(message.blank, options);
+                                if (options.oneofs)
+                                    object.content = "blank";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Widget to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.Widget
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Widget.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Widget;
+                    })();
+    
+                    v1.Scorecard = (function() {
+    
+                        /**
+                         * Properties of a Scorecard.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @interface IScorecard
+                         * @property {google.monitoring.dashboard.v1.ITimeSeriesQuery|null} [timeSeriesQuery] Scorecard timeSeriesQuery
+                         * @property {google.monitoring.dashboard.v1.Scorecard.IGaugeView|null} [gaugeView] Scorecard gaugeView
+                         * @property {google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null} [sparkChartView] Scorecard sparkChartView
+                         * @property {Array.<google.monitoring.dashboard.v1.IThreshold>|null} [thresholds] Scorecard thresholds
+                         */
+    
+                        /**
+                         * Constructs a new Scorecard.
+                         * @memberof google.monitoring.dashboard.v1
+                         * @classdesc Represents a Scorecard.
+                         * @implements IScorecard
+                         * @constructor
+                         * @param {google.monitoring.dashboard.v1.IScorecard=} [properties] Properties to set
+                         */
+                        function Scorecard(properties) {
+                            this.thresholds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Scorecard timeSeriesQuery.
+                         * @member {google.monitoring.dashboard.v1.ITimeSeriesQuery|null|undefined} timeSeriesQuery
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         */
+                        Scorecard.prototype.timeSeriesQuery = null;
+    
+                        /**
+                         * Scorecard gaugeView.
+                         * @member {google.monitoring.dashboard.v1.Scorecard.IGaugeView|null|undefined} gaugeView
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         */
+                        Scorecard.prototype.gaugeView = null;
+    
+                        /**
+                         * Scorecard sparkChartView.
+                         * @member {google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null|undefined} sparkChartView
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         */
+                        Scorecard.prototype.sparkChartView = null;
+    
+                        /**
+                         * Scorecard thresholds.
+                         * @member {Array.<google.monitoring.dashboard.v1.IThreshold>} thresholds
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         */
+                        Scorecard.prototype.thresholds = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Scorecard dataView.
+                         * @member {"gaugeView"|"sparkChartView"|undefined} dataView
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         */
+                        Object.defineProperty(Scorecard.prototype, "dataView", {
+                            get: $util.oneOfGetter($oneOfFields = ["gaugeView", "sparkChartView"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Scorecard instance using the specified properties.
+                         * @function create
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IScorecard=} [properties] Properties to set
+                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard instance
+                         */
+                        Scorecard.create = function create(properties) {
+                            return new Scorecard(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Scorecard message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IScorecard} message Scorecard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Scorecard.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
+                                $root.google.monitoring.dashboard.v1.TimeSeriesQuery.encode(message.timeSeriesQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView"))
+                                $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.encode(message.gaugeView, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView"))
+                                $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.encode(message.sparkChartView, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.thresholds != null && message.thresholds.length)
+                                for (var i = 0; i < message.thresholds.length; ++i)
+                                    $root.google.monitoring.dashboard.v1.Threshold.encode(message.thresholds[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Scorecard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.IScorecard} message Scorecard message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Scorecard.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Scorecard message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Scorecard.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    if (!(message.thresholds && message.thresholds.length))
+                                        message.thresholds = [];
+                                    message.thresholds.push($root.google.monitoring.dashboard.v1.Threshold.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Scorecard message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Scorecard.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Scorecard message.
+                         * @function verify
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Scorecard.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery")) {
+                                var error = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.verify(message.timeSeriesQuery);
+                                if (error)
+                                    return "timeSeriesQuery." + error;
+                            }
+                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView")) {
+                                properties.dataView = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.verify(message.gaugeView);
+                                    if (error)
+                                        return "gaugeView." + error;
+                                }
+                            }
+                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView")) {
+                                if (properties.dataView === 1)
+                                    return "dataView: multiple values";
+                                properties.dataView = 1;
+                                {
+                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify(message.sparkChartView);
+                                    if (error)
+                                        return "sparkChartView." + error;
+                                }
+                            }
+                            if (message.thresholds != null && message.hasOwnProperty("thresholds")) {
+                                if (!Array.isArray(message.thresholds))
+                                    return "thresholds: array expected";
+                                for (var i = 0; i < message.thresholds.length; ++i) {
+                                    var error = $root.google.monitoring.dashboard.v1.Threshold.verify(message.thresholds[i]);
+                                    if (error)
+                                        return "thresholds." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Scorecard message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
+                         */
+                        Scorecard.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard)
+                                return object;
+                            var message = new $root.google.monitoring.dashboard.v1.Scorecard();
+                            if (object.timeSeriesQuery != null) {
+                                if (typeof object.timeSeriesQuery !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.timeSeriesQuery: object expected");
+                                message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.fromObject(object.timeSeriesQuery);
+                            }
+                            if (object.gaugeView != null) {
+                                if (typeof object.gaugeView !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.gaugeView: object expected");
+                                message.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.fromObject(object.gaugeView);
+                            }
+                            if (object.sparkChartView != null) {
+                                if (typeof object.sparkChartView !== "object")
+                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.sparkChartView: object expected");
+                                message.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.fromObject(object.sparkChartView);
+                            }
+                            if (object.thresholds) {
+                                if (!Array.isArray(object.thresholds))
+                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.thresholds: array expected");
+                                message.thresholds = [];
+                                for (var i = 0; i < object.thresholds.length; ++i) {
+                                    if (typeof object.thresholds[i] !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.Scorecard.thresholds: object expected");
+                                    message.thresholds[i] = $root.google.monitoring.dashboard.v1.Threshold.fromObject(object.thresholds[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Scorecard message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @static
+                         * @param {google.monitoring.dashboard.v1.Scorecard} message Scorecard
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Scorecard.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.thresholds = [];
+                            if (options.defaults)
+                                object.timeSeriesQuery = null;
+                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
+                                object.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.toObject(message.timeSeriesQuery, options);
+                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView")) {
+                                object.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.toObject(message.gaugeView, options);
+                                if (options.oneofs)
+                                    object.dataView = "gaugeView";
+                            }
+                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView")) {
+                                object.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.toObject(message.sparkChartView, options);
+                                if (options.oneofs)
+                                    object.dataView = "sparkChartView";
+                            }
+                            if (message.thresholds && message.thresholds.length) {
+                                object.thresholds = [];
+                                for (var j = 0; j < message.thresholds.length; ++j)
+                                    object.thresholds[j] = $root.google.monitoring.dashboard.v1.Threshold.toObject(message.thresholds[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Scorecard to JSON.
+                         * @function toJSON
+                         * @memberof google.monitoring.dashboard.v1.Scorecard
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Scorecard.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        Scorecard.GaugeView = (function() {
+    
+                            /**
+                             * Properties of a GaugeView.
+                             * @memberof google.monitoring.dashboard.v1.Scorecard
+                             * @interface IGaugeView
+                             * @property {number|null} [lowerBound] GaugeView lowerBound
+                             * @property {number|null} [upperBound] GaugeView upperBound
+                             */
+    
+                            /**
+                             * Constructs a new GaugeView.
+                             * @memberof google.monitoring.dashboard.v1.Scorecard
+                             * @classdesc Represents a GaugeView.
+                             * @implements IGaugeView
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView=} [properties] Properties to set
+                             */
+                            function GaugeView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GaugeView lowerBound.
+                             * @member {number} lowerBound
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @instance
+                             */
+                            GaugeView.prototype.lowerBound = 0;
+    
+                            /**
+                             * GaugeView upperBound.
+                             * @member {number} upperBound
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @instance
+                             */
+                            GaugeView.prototype.upperBound = 0;
+    
+                            /**
+                             * Creates a new GaugeView instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView instance
+                             */
+                            GaugeView.create = function create(properties) {
+                                return new GaugeView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GaugeView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView} message GaugeView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GaugeView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.lowerBound);
+                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
+                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.upperBound);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GaugeView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView} message GaugeView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GaugeView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GaugeView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GaugeView.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard.GaugeView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.lowerBound = reader.double();
+                                        break;
+                                    case 2:
+                                        message.upperBound = reader.double();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GaugeView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GaugeView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GaugeView message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GaugeView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
+                                    if (typeof message.lowerBound !== "number")
+                                        return "lowerBound: number expected";
+                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
+                                    if (typeof message.upperBound !== "number")
+                                        return "upperBound: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GaugeView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
+                             */
+                            GaugeView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard.GaugeView)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.Scorecard.GaugeView();
+                                if (object.lowerBound != null)
+                                    message.lowerBound = Number(object.lowerBound);
+                                if (object.upperBound != null)
+                                    message.upperBound = Number(object.upperBound);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GaugeView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.GaugeView} message GaugeView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GaugeView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.lowerBound = 0;
+                                    object.upperBound = 0;
+                                }
+                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
+                                    object.lowerBound = options.json && !isFinite(message.lowerBound) ? String(message.lowerBound) : message.lowerBound;
+                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
+                                    object.upperBound = options.json && !isFinite(message.upperBound) ? String(message.upperBound) : message.upperBound;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GaugeView to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GaugeView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GaugeView;
+                        })();
+    
+                        Scorecard.SparkChartView = (function() {
+    
+                            /**
+                             * Properties of a SparkChartView.
+                             * @memberof google.monitoring.dashboard.v1.Scorecard
+                             * @interface ISparkChartView
+                             * @property {google.monitoring.dashboard.v1.SparkChartType|null} [sparkChartType] SparkChartView sparkChartType
+                             * @property {google.protobuf.IDuration|null} [minAlignmentPeriod] SparkChartView minAlignmentPeriod
+                             */
+    
+                            /**
+                             * Constructs a new SparkChartView.
+                             * @memberof google.monitoring.dashboard.v1.Scorecard
+                             * @classdesc Represents a SparkChartView.
+                             * @implements ISparkChartView
+                             * @constructor
+                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView=} [properties] Properties to set
+                             */
+                            function SparkChartView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SparkChartView sparkChartType.
+                             * @member {google.monitoring.dashboard.v1.SparkChartType} sparkChartType
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @instance
+                             */
+                            SparkChartView.prototype.sparkChartType = 0;
+    
+                            /**
+                             * SparkChartView minAlignmentPeriod.
+                             * @member {google.protobuf.IDuration|null|undefined} minAlignmentPeriod
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @instance
+                             */
+                            SparkChartView.prototype.minAlignmentPeriod = null;
+    
+                            /**
+                             * Creates a new SparkChartView instance using the specified properties.
+                             * @function create
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView=} [properties] Properties to set
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView instance
+                             */
+                            SparkChartView.create = function create(properties) {
+                                return new SparkChartView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SparkChartView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView} message SparkChartView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkChartView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sparkChartType);
+                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
+                                    $root.google.protobuf.Duration.encode(message.minAlignmentPeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SparkChartView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView} message SparkChartView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SparkChartView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SparkChartView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkChartView.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.sparkChartType = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.minAlignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SparkChartView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SparkChartView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SparkChartView message.
+                             * @function verify
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SparkChartView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
+                                    switch (message.sparkChartType) {
+                                    default:
+                                        return "sparkChartType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minAlignmentPeriod);
+                                    if (error)
+                                        return "minAlignmentPeriod." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SparkChartView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
+                             */
+                            SparkChartView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView)
+                                    return object;
+                                var message = new $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView();
+                                switch (object.sparkChartType) {
+                                case "SPARK_CHART_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.sparkChartType = 0;
+                                    break;
+                                case "SPARK_LINE":
+                                case 1:
+                                    message.sparkChartType = 1;
+                                    break;
+                                case "SPARK_BAR":
+                                case 2:
+                                    message.sparkChartType = 2;
+                                    break;
+                                }
+                                if (object.minAlignmentPeriod != null) {
+                                    if (typeof object.minAlignmentPeriod !== "object")
+                                        throw TypeError(".google.monitoring.dashboard.v1.Scorecard.SparkChartView.minAlignmentPeriod: object expected");
+                                    message.minAlignmentPeriod = $root.google.protobuf.Duration.fromObject(object.minAlignmentPeriod);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SparkChartView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @static
+                             * @param {google.monitoring.dashboard.v1.Scorecard.SparkChartView} message SparkChartView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SparkChartView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.sparkChartType = options.enums === String ? "SPARK_CHART_TYPE_UNSPECIFIED" : 0;
+                                    object.minAlignmentPeriod = null;
+                                }
+                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
+                                    object.sparkChartType = options.enums === String ? $root.google.monitoring.dashboard.v1.SparkChartType[message.sparkChartType] : message.sparkChartType;
+                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
+                                    object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SparkChartView to JSON.
+                             * @function toJSON
+                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SparkChartView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SparkChartView;
+                        })();
+    
+                        return Scorecard;
+                    })();
+    
                     v1.TimeSeriesQuery = (function() {
     
                         /**
@@ -11756,766 +14350,6 @@
                         return values;
                     })();
     
-                    v1.Scorecard = (function() {
-    
-                        /**
-                         * Properties of a Scorecard.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IScorecard
-                         * @property {google.monitoring.dashboard.v1.ITimeSeriesQuery|null} [timeSeriesQuery] Scorecard timeSeriesQuery
-                         * @property {google.monitoring.dashboard.v1.Scorecard.IGaugeView|null} [gaugeView] Scorecard gaugeView
-                         * @property {google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null} [sparkChartView] Scorecard sparkChartView
-                         * @property {Array.<google.monitoring.dashboard.v1.IThreshold>|null} [thresholds] Scorecard thresholds
-                         */
-    
-                        /**
-                         * Constructs a new Scorecard.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a Scorecard.
-                         * @implements IScorecard
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IScorecard=} [properties] Properties to set
-                         */
-                        function Scorecard(properties) {
-                            this.thresholds = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Scorecard timeSeriesQuery.
-                         * @member {google.monitoring.dashboard.v1.ITimeSeriesQuery|null|undefined} timeSeriesQuery
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         */
-                        Scorecard.prototype.timeSeriesQuery = null;
-    
-                        /**
-                         * Scorecard gaugeView.
-                         * @member {google.monitoring.dashboard.v1.Scorecard.IGaugeView|null|undefined} gaugeView
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         */
-                        Scorecard.prototype.gaugeView = null;
-    
-                        /**
-                         * Scorecard sparkChartView.
-                         * @member {google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null|undefined} sparkChartView
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         */
-                        Scorecard.prototype.sparkChartView = null;
-    
-                        /**
-                         * Scorecard thresholds.
-                         * @member {Array.<google.monitoring.dashboard.v1.IThreshold>} thresholds
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         */
-                        Scorecard.prototype.thresholds = $util.emptyArray;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * Scorecard dataView.
-                         * @member {"gaugeView"|"sparkChartView"|undefined} dataView
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         */
-                        Object.defineProperty(Scorecard.prototype, "dataView", {
-                            get: $util.oneOfGetter($oneOfFields = ["gaugeView", "sparkChartView"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new Scorecard instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IScorecard=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard instance
-                         */
-                        Scorecard.create = function create(properties) {
-                            return new Scorecard(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Scorecard message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IScorecard} message Scorecard message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Scorecard.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
-                                $root.google.monitoring.dashboard.v1.TimeSeriesQuery.encode(message.timeSeriesQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView"))
-                                $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.encode(message.gaugeView, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView"))
-                                $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.encode(message.sparkChartView, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.thresholds != null && message.thresholds.length)
-                                for (var i = 0; i < message.thresholds.length; ++i)
-                                    $root.google.monitoring.dashboard.v1.Threshold.encode(message.thresholds[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Scorecard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IScorecard} message Scorecard message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Scorecard.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Scorecard message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Scorecard.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.decode(reader, reader.uint32());
-                                    break;
-                                case 6:
-                                    if (!(message.thresholds && message.thresholds.length))
-                                        message.thresholds = [];
-                                    message.thresholds.push($root.google.monitoring.dashboard.v1.Threshold.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Scorecard message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Scorecard.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Scorecard message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Scorecard.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery")) {
-                                var error = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.verify(message.timeSeriesQuery);
-                                if (error)
-                                    return "timeSeriesQuery." + error;
-                            }
-                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView")) {
-                                properties.dataView = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.verify(message.gaugeView);
-                                    if (error)
-                                        return "gaugeView." + error;
-                                }
-                            }
-                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView")) {
-                                if (properties.dataView === 1)
-                                    return "dataView: multiple values";
-                                properties.dataView = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify(message.sparkChartView);
-                                    if (error)
-                                        return "sparkChartView." + error;
-                                }
-                            }
-                            if (message.thresholds != null && message.hasOwnProperty("thresholds")) {
-                                if (!Array.isArray(message.thresholds))
-                                    return "thresholds: array expected";
-                                for (var i = 0; i < message.thresholds.length; ++i) {
-                                    var error = $root.google.monitoring.dashboard.v1.Threshold.verify(message.thresholds[i]);
-                                    if (error)
-                                        return "thresholds." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Scorecard message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.Scorecard} Scorecard
-                         */
-                        Scorecard.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.Scorecard();
-                            if (object.timeSeriesQuery != null) {
-                                if (typeof object.timeSeriesQuery !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.timeSeriesQuery: object expected");
-                                message.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.fromObject(object.timeSeriesQuery);
-                            }
-                            if (object.gaugeView != null) {
-                                if (typeof object.gaugeView !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.gaugeView: object expected");
-                                message.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.fromObject(object.gaugeView);
-                            }
-                            if (object.sparkChartView != null) {
-                                if (typeof object.sparkChartView !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.sparkChartView: object expected");
-                                message.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.fromObject(object.sparkChartView);
-                            }
-                            if (object.thresholds) {
-                                if (!Array.isArray(object.thresholds))
-                                    throw TypeError(".google.monitoring.dashboard.v1.Scorecard.thresholds: array expected");
-                                message.thresholds = [];
-                                for (var i = 0; i < object.thresholds.length; ++i) {
-                                    if (typeof object.thresholds[i] !== "object")
-                                        throw TypeError(".google.monitoring.dashboard.v1.Scorecard.thresholds: object expected");
-                                    message.thresholds[i] = $root.google.monitoring.dashboard.v1.Threshold.fromObject(object.thresholds[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Scorecard message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.Scorecard} message Scorecard
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Scorecard.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.thresholds = [];
-                            if (options.defaults)
-                                object.timeSeriesQuery = null;
-                            if (message.timeSeriesQuery != null && message.hasOwnProperty("timeSeriesQuery"))
-                                object.timeSeriesQuery = $root.google.monitoring.dashboard.v1.TimeSeriesQuery.toObject(message.timeSeriesQuery, options);
-                            if (message.gaugeView != null && message.hasOwnProperty("gaugeView")) {
-                                object.gaugeView = $root.google.monitoring.dashboard.v1.Scorecard.GaugeView.toObject(message.gaugeView, options);
-                                if (options.oneofs)
-                                    object.dataView = "gaugeView";
-                            }
-                            if (message.sparkChartView != null && message.hasOwnProperty("sparkChartView")) {
-                                object.sparkChartView = $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView.toObject(message.sparkChartView, options);
-                                if (options.oneofs)
-                                    object.dataView = "sparkChartView";
-                            }
-                            if (message.thresholds && message.thresholds.length) {
-                                object.thresholds = [];
-                                for (var j = 0; j < message.thresholds.length; ++j)
-                                    object.thresholds[j] = $root.google.monitoring.dashboard.v1.Threshold.toObject(message.thresholds[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Scorecard to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.Scorecard
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Scorecard.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        Scorecard.GaugeView = (function() {
-    
-                            /**
-                             * Properties of a GaugeView.
-                             * @memberof google.monitoring.dashboard.v1.Scorecard
-                             * @interface IGaugeView
-                             * @property {number|null} [lowerBound] GaugeView lowerBound
-                             * @property {number|null} [upperBound] GaugeView upperBound
-                             */
-    
-                            /**
-                             * Constructs a new GaugeView.
-                             * @memberof google.monitoring.dashboard.v1.Scorecard
-                             * @classdesc Represents a GaugeView.
-                             * @implements IGaugeView
-                             * @constructor
-                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView=} [properties] Properties to set
-                             */
-                            function GaugeView(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GaugeView lowerBound.
-                             * @member {number} lowerBound
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @instance
-                             */
-                            GaugeView.prototype.lowerBound = 0;
-    
-                            /**
-                             * GaugeView upperBound.
-                             * @member {number} upperBound
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @instance
-                             */
-                            GaugeView.prototype.upperBound = 0;
-    
-                            /**
-                             * Creates a new GaugeView instance using the specified properties.
-                             * @function create
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView=} [properties] Properties to set
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView instance
-                             */
-                            GaugeView.create = function create(properties) {
-                                return new GaugeView(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GaugeView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView} message GaugeView message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GaugeView.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
-                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.lowerBound);
-                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
-                                    writer.uint32(/* id 2, wireType 1 =*/17).double(message.upperBound);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GaugeView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.IGaugeView} message GaugeView message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GaugeView.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GaugeView message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GaugeView.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard.GaugeView();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.lowerBound = reader.double();
-                                        break;
-                                    case 2:
-                                        message.upperBound = reader.double();
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GaugeView message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GaugeView.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GaugeView message.
-                             * @function verify
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GaugeView.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
-                                    if (typeof message.lowerBound !== "number")
-                                        return "lowerBound: number expected";
-                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
-                                    if (typeof message.upperBound !== "number")
-                                        return "upperBound: number expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GaugeView message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.GaugeView} GaugeView
-                             */
-                            GaugeView.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard.GaugeView)
-                                    return object;
-                                var message = new $root.google.monitoring.dashboard.v1.Scorecard.GaugeView();
-                                if (object.lowerBound != null)
-                                    message.lowerBound = Number(object.lowerBound);
-                                if (object.upperBound != null)
-                                    message.upperBound = Number(object.upperBound);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GaugeView message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.GaugeView} message GaugeView
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GaugeView.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.lowerBound = 0;
-                                    object.upperBound = 0;
-                                }
-                                if (message.lowerBound != null && message.hasOwnProperty("lowerBound"))
-                                    object.lowerBound = options.json && !isFinite(message.lowerBound) ? String(message.lowerBound) : message.lowerBound;
-                                if (message.upperBound != null && message.hasOwnProperty("upperBound"))
-                                    object.upperBound = options.json && !isFinite(message.upperBound) ? String(message.upperBound) : message.upperBound;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GaugeView to JSON.
-                             * @function toJSON
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.GaugeView
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GaugeView.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return GaugeView;
-                        })();
-    
-                        Scorecard.SparkChartView = (function() {
-    
-                            /**
-                             * Properties of a SparkChartView.
-                             * @memberof google.monitoring.dashboard.v1.Scorecard
-                             * @interface ISparkChartView
-                             * @property {google.monitoring.dashboard.v1.SparkChartType|null} [sparkChartType] SparkChartView sparkChartType
-                             * @property {google.protobuf.IDuration|null} [minAlignmentPeriod] SparkChartView minAlignmentPeriod
-                             */
-    
-                            /**
-                             * Constructs a new SparkChartView.
-                             * @memberof google.monitoring.dashboard.v1.Scorecard
-                             * @classdesc Represents a SparkChartView.
-                             * @implements ISparkChartView
-                             * @constructor
-                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView=} [properties] Properties to set
-                             */
-                            function SparkChartView(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * SparkChartView sparkChartType.
-                             * @member {google.monitoring.dashboard.v1.SparkChartType} sparkChartType
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @instance
-                             */
-                            SparkChartView.prototype.sparkChartType = 0;
-    
-                            /**
-                             * SparkChartView minAlignmentPeriod.
-                             * @member {google.protobuf.IDuration|null|undefined} minAlignmentPeriod
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @instance
-                             */
-                            SparkChartView.prototype.minAlignmentPeriod = null;
-    
-                            /**
-                             * Creates a new SparkChartView instance using the specified properties.
-                             * @function create
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView=} [properties] Properties to set
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView instance
-                             */
-                            SparkChartView.create = function create(properties) {
-                                return new SparkChartView(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified SparkChartView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView} message SparkChartView message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            SparkChartView.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sparkChartType);
-                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
-                                    $root.google.protobuf.Duration.encode(message.minAlignmentPeriod, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified SparkChartView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.ISparkChartView} message SparkChartView message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            SparkChartView.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a SparkChartView message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            SparkChartView.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.sparkChartType = reader.int32();
-                                        break;
-                                    case 2:
-                                        message.minAlignmentPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a SparkChartView message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            SparkChartView.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a SparkChartView message.
-                             * @function verify
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            SparkChartView.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
-                                    switch (message.sparkChartType) {
-                                    default:
-                                        return "sparkChartType: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                        break;
-                                    }
-                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod")) {
-                                    var error = $root.google.protobuf.Duration.verify(message.minAlignmentPeriod);
-                                    if (error)
-                                        return "minAlignmentPeriod." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a SparkChartView message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.monitoring.dashboard.v1.Scorecard.SparkChartView} SparkChartView
-                             */
-                            SparkChartView.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView)
-                                    return object;
-                                var message = new $root.google.monitoring.dashboard.v1.Scorecard.SparkChartView();
-                                switch (object.sparkChartType) {
-                                case "SPARK_CHART_TYPE_UNSPECIFIED":
-                                case 0:
-                                    message.sparkChartType = 0;
-                                    break;
-                                case "SPARK_LINE":
-                                case 1:
-                                    message.sparkChartType = 1;
-                                    break;
-                                case "SPARK_BAR":
-                                case 2:
-                                    message.sparkChartType = 2;
-                                    break;
-                                }
-                                if (object.minAlignmentPeriod != null) {
-                                    if (typeof object.minAlignmentPeriod !== "object")
-                                        throw TypeError(".google.monitoring.dashboard.v1.Scorecard.SparkChartView.minAlignmentPeriod: object expected");
-                                    message.minAlignmentPeriod = $root.google.protobuf.Duration.fromObject(object.minAlignmentPeriod);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a SparkChartView message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.Scorecard.SparkChartView} message SparkChartView
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            SparkChartView.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.sparkChartType = options.enums === String ? "SPARK_CHART_TYPE_UNSPECIFIED" : 0;
-                                    object.minAlignmentPeriod = null;
-                                }
-                                if (message.sparkChartType != null && message.hasOwnProperty("sparkChartType"))
-                                    object.sparkChartType = options.enums === String ? $root.google.monitoring.dashboard.v1.SparkChartType[message.sparkChartType] : message.sparkChartType;
-                                if (message.minAlignmentPeriod != null && message.hasOwnProperty("minAlignmentPeriod"))
-                                    object.minAlignmentPeriod = $root.google.protobuf.Duration.toObject(message.minAlignmentPeriod, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this SparkChartView to JSON.
-                             * @function toJSON
-                             * @memberof google.monitoring.dashboard.v1.Scorecard.SparkChartView
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            SparkChartView.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return SparkChartView;
-                        })();
-    
-                        return Scorecard;
-                    })();
-    
                     v1.Text = (function() {
     
                         /**
@@ -13904,1840 +15738,6 @@
                         })();
     
                         return ChartOptions;
-                    })();
-    
-                    v1.Widget = (function() {
-    
-                        /**
-                         * Properties of a Widget.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IWidget
-                         * @property {string|null} [title] Widget title
-                         * @property {google.monitoring.dashboard.v1.IXyChart|null} [xyChart] Widget xyChart
-                         * @property {google.monitoring.dashboard.v1.IScorecard|null} [scorecard] Widget scorecard
-                         * @property {google.monitoring.dashboard.v1.IText|null} [text] Widget text
-                         * @property {google.protobuf.IEmpty|null} [blank] Widget blank
-                         */
-    
-                        /**
-                         * Constructs a new Widget.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a Widget.
-                         * @implements IWidget
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IWidget=} [properties] Properties to set
-                         */
-                        function Widget(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Widget title.
-                         * @member {string} title
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Widget.prototype.title = "";
-    
-                        /**
-                         * Widget xyChart.
-                         * @member {google.monitoring.dashboard.v1.IXyChart|null|undefined} xyChart
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Widget.prototype.xyChart = null;
-    
-                        /**
-                         * Widget scorecard.
-                         * @member {google.monitoring.dashboard.v1.IScorecard|null|undefined} scorecard
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Widget.prototype.scorecard = null;
-    
-                        /**
-                         * Widget text.
-                         * @member {google.monitoring.dashboard.v1.IText|null|undefined} text
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Widget.prototype.text = null;
-    
-                        /**
-                         * Widget blank.
-                         * @member {google.protobuf.IEmpty|null|undefined} blank
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Widget.prototype.blank = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * Widget content.
-                         * @member {"xyChart"|"scorecard"|"text"|"blank"|undefined} content
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         */
-                        Object.defineProperty(Widget.prototype, "content", {
-                            get: $util.oneOfGetter($oneOfFields = ["xyChart", "scorecard", "text", "blank"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new Widget instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IWidget=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.Widget} Widget instance
-                         */
-                        Widget.create = function create(properties) {
-                            return new Widget(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Widget message. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IWidget} message Widget message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Widget.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.title != null && message.hasOwnProperty("title"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
-                            if (message.xyChart != null && message.hasOwnProperty("xyChart"))
-                                $root.google.monitoring.dashboard.v1.XyChart.encode(message.xyChart, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.scorecard != null && message.hasOwnProperty("scorecard"))
-                                $root.google.monitoring.dashboard.v1.Scorecard.encode(message.scorecard, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.text != null && message.hasOwnProperty("text"))
-                                $root.google.monitoring.dashboard.v1.Text.encode(message.text, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.blank != null && message.hasOwnProperty("blank"))
-                                $root.google.protobuf.Empty.encode(message.blank, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Widget message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IWidget} message Widget message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Widget.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Widget message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Widget.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Widget();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.title = reader.string();
-                                    break;
-                                case 2:
-                                    message.xyChart = $root.google.monitoring.dashboard.v1.XyChart.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.text = $root.google.monitoring.dashboard.v1.Text.decode(reader, reader.uint32());
-                                    break;
-                                case 5:
-                                    message.blank = $root.google.protobuf.Empty.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Widget message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Widget.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Widget message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Widget.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.title != null && message.hasOwnProperty("title"))
-                                if (!$util.isString(message.title))
-                                    return "title: string expected";
-                            if (message.xyChart != null && message.hasOwnProperty("xyChart")) {
-                                properties.content = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.XyChart.verify(message.xyChart);
-                                    if (error)
-                                        return "xyChart." + error;
-                                }
-                            }
-                            if (message.scorecard != null && message.hasOwnProperty("scorecard")) {
-                                if (properties.content === 1)
-                                    return "content: multiple values";
-                                properties.content = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.Scorecard.verify(message.scorecard);
-                                    if (error)
-                                        return "scorecard." + error;
-                                }
-                            }
-                            if (message.text != null && message.hasOwnProperty("text")) {
-                                if (properties.content === 1)
-                                    return "content: multiple values";
-                                properties.content = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.Text.verify(message.text);
-                                    if (error)
-                                        return "text." + error;
-                                }
-                            }
-                            if (message.blank != null && message.hasOwnProperty("blank")) {
-                                if (properties.content === 1)
-                                    return "content: multiple values";
-                                properties.content = 1;
-                                {
-                                    var error = $root.google.protobuf.Empty.verify(message.blank);
-                                    if (error)
-                                        return "blank." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Widget message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.Widget} Widget
-                         */
-                        Widget.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.Widget)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.Widget();
-                            if (object.title != null)
-                                message.title = String(object.title);
-                            if (object.xyChart != null) {
-                                if (typeof object.xyChart !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.xyChart: object expected");
-                                message.xyChart = $root.google.monitoring.dashboard.v1.XyChart.fromObject(object.xyChart);
-                            }
-                            if (object.scorecard != null) {
-                                if (typeof object.scorecard !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.scorecard: object expected");
-                                message.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.fromObject(object.scorecard);
-                            }
-                            if (object.text != null) {
-                                if (typeof object.text !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.text: object expected");
-                                message.text = $root.google.monitoring.dashboard.v1.Text.fromObject(object.text);
-                            }
-                            if (object.blank != null) {
-                                if (typeof object.blank !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Widget.blank: object expected");
-                                message.blank = $root.google.protobuf.Empty.fromObject(object.blank);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Widget message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.Widget} message Widget
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Widget.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.title = "";
-                            if (message.title != null && message.hasOwnProperty("title"))
-                                object.title = message.title;
-                            if (message.xyChart != null && message.hasOwnProperty("xyChart")) {
-                                object.xyChart = $root.google.monitoring.dashboard.v1.XyChart.toObject(message.xyChart, options);
-                                if (options.oneofs)
-                                    object.content = "xyChart";
-                            }
-                            if (message.scorecard != null && message.hasOwnProperty("scorecard")) {
-                                object.scorecard = $root.google.monitoring.dashboard.v1.Scorecard.toObject(message.scorecard, options);
-                                if (options.oneofs)
-                                    object.content = "scorecard";
-                            }
-                            if (message.text != null && message.hasOwnProperty("text")) {
-                                object.text = $root.google.monitoring.dashboard.v1.Text.toObject(message.text, options);
-                                if (options.oneofs)
-                                    object.content = "text";
-                            }
-                            if (message.blank != null && message.hasOwnProperty("blank")) {
-                                object.blank = $root.google.protobuf.Empty.toObject(message.blank, options);
-                                if (options.oneofs)
-                                    object.content = "blank";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Widget to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.Widget
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Widget.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return Widget;
-                    })();
-    
-                    v1.GridLayout = (function() {
-    
-                        /**
-                         * Properties of a GridLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IGridLayout
-                         * @property {number|Long|null} [columns] GridLayout columns
-                         * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] GridLayout widgets
-                         */
-    
-                        /**
-                         * Constructs a new GridLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a GridLayout.
-                         * @implements IGridLayout
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IGridLayout=} [properties] Properties to set
-                         */
-                        function GridLayout(properties) {
-                            this.widgets = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * GridLayout columns.
-                         * @member {number|Long} columns
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @instance
-                         */
-                        GridLayout.prototype.columns = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * GridLayout widgets.
-                         * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @instance
-                         */
-                        GridLayout.prototype.widgets = $util.emptyArray;
-    
-                        /**
-                         * Creates a new GridLayout instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IGridLayout=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout instance
-                         */
-                        GridLayout.create = function create(properties) {
-                            return new GridLayout(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified GridLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IGridLayout} message GridLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GridLayout.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.columns != null && message.hasOwnProperty("columns"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.columns);
-                            if (message.widgets != null && message.widgets.length)
-                                for (var i = 0; i < message.widgets.length; ++i)
-                                    $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified GridLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IGridLayout} message GridLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        GridLayout.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a GridLayout message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GridLayout.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.GridLayout();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.columns = reader.int64();
-                                    break;
-                                case 2:
-                                    if (!(message.widgets && message.widgets.length))
-                                        message.widgets = [];
-                                    message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a GridLayout message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        GridLayout.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a GridLayout message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        GridLayout.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.columns != null && message.hasOwnProperty("columns"))
-                                if (!$util.isInteger(message.columns) && !(message.columns && $util.isInteger(message.columns.low) && $util.isInteger(message.columns.high)))
-                                    return "columns: integer|Long expected";
-                            if (message.widgets != null && message.hasOwnProperty("widgets")) {
-                                if (!Array.isArray(message.widgets))
-                                    return "widgets: array expected";
-                                for (var i = 0; i < message.widgets.length; ++i) {
-                                    var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
-                                    if (error)
-                                        return "widgets." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a GridLayout message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.GridLayout} GridLayout
-                         */
-                        GridLayout.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.GridLayout)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.GridLayout();
-                            if (object.columns != null)
-                                if ($util.Long)
-                                    (message.columns = $util.Long.fromValue(object.columns)).unsigned = false;
-                                else if (typeof object.columns === "string")
-                                    message.columns = parseInt(object.columns, 10);
-                                else if (typeof object.columns === "number")
-                                    message.columns = object.columns;
-                                else if (typeof object.columns === "object")
-                                    message.columns = new $util.LongBits(object.columns.low >>> 0, object.columns.high >>> 0).toNumber();
-                            if (object.widgets) {
-                                if (!Array.isArray(object.widgets))
-                                    throw TypeError(".google.monitoring.dashboard.v1.GridLayout.widgets: array expected");
-                                message.widgets = [];
-                                for (var i = 0; i < object.widgets.length; ++i) {
-                                    if (typeof object.widgets[i] !== "object")
-                                        throw TypeError(".google.monitoring.dashboard.v1.GridLayout.widgets: object expected");
-                                    message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a GridLayout message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.GridLayout} message GridLayout
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        GridLayout.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.widgets = [];
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.columns = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.columns = options.longs === String ? "0" : 0;
-                            if (message.columns != null && message.hasOwnProperty("columns"))
-                                if (typeof message.columns === "number")
-                                    object.columns = options.longs === String ? String(message.columns) : message.columns;
-                                else
-                                    object.columns = options.longs === String ? $util.Long.prototype.toString.call(message.columns) : options.longs === Number ? new $util.LongBits(message.columns.low >>> 0, message.columns.high >>> 0).toNumber() : message.columns;
-                            if (message.widgets && message.widgets.length) {
-                                object.widgets = [];
-                                for (var j = 0; j < message.widgets.length; ++j)
-                                    object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this GridLayout to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.GridLayout
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        GridLayout.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return GridLayout;
-                    })();
-    
-                    v1.RowLayout = (function() {
-    
-                        /**
-                         * Properties of a RowLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IRowLayout
-                         * @property {Array.<google.monitoring.dashboard.v1.RowLayout.IRow>|null} [rows] RowLayout rows
-                         */
-    
-                        /**
-                         * Constructs a new RowLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a RowLayout.
-                         * @implements IRowLayout
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IRowLayout=} [properties] Properties to set
-                         */
-                        function RowLayout(properties) {
-                            this.rows = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * RowLayout rows.
-                         * @member {Array.<google.monitoring.dashboard.v1.RowLayout.IRow>} rows
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @instance
-                         */
-                        RowLayout.prototype.rows = $util.emptyArray;
-    
-                        /**
-                         * Creates a new RowLayout instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IRowLayout=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout instance
-                         */
-                        RowLayout.create = function create(properties) {
-                            return new RowLayout(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified RowLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IRowLayout} message RowLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RowLayout.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.rows != null && message.rows.length)
-                                for (var i = 0; i < message.rows.length; ++i)
-                                    $root.google.monitoring.dashboard.v1.RowLayout.Row.encode(message.rows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified RowLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IRowLayout} message RowLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        RowLayout.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a RowLayout message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RowLayout.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.RowLayout();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.rows && message.rows.length))
-                                        message.rows = [];
-                                    message.rows.push($root.google.monitoring.dashboard.v1.RowLayout.Row.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a RowLayout message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        RowLayout.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a RowLayout message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        RowLayout.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.rows != null && message.hasOwnProperty("rows")) {
-                                if (!Array.isArray(message.rows))
-                                    return "rows: array expected";
-                                for (var i = 0; i < message.rows.length; ++i) {
-                                    var error = $root.google.monitoring.dashboard.v1.RowLayout.Row.verify(message.rows[i]);
-                                    if (error)
-                                        return "rows." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a RowLayout message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.RowLayout} RowLayout
-                         */
-                        RowLayout.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.RowLayout)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.RowLayout();
-                            if (object.rows) {
-                                if (!Array.isArray(object.rows))
-                                    throw TypeError(".google.monitoring.dashboard.v1.RowLayout.rows: array expected");
-                                message.rows = [];
-                                for (var i = 0; i < object.rows.length; ++i) {
-                                    if (typeof object.rows[i] !== "object")
-                                        throw TypeError(".google.monitoring.dashboard.v1.RowLayout.rows: object expected");
-                                    message.rows[i] = $root.google.monitoring.dashboard.v1.RowLayout.Row.fromObject(object.rows[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a RowLayout message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.RowLayout} message RowLayout
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        RowLayout.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.rows = [];
-                            if (message.rows && message.rows.length) {
-                                object.rows = [];
-                                for (var j = 0; j < message.rows.length; ++j)
-                                    object.rows[j] = $root.google.monitoring.dashboard.v1.RowLayout.Row.toObject(message.rows[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this RowLayout to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.RowLayout
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        RowLayout.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        RowLayout.Row = (function() {
-    
-                            /**
-                             * Properties of a Row.
-                             * @memberof google.monitoring.dashboard.v1.RowLayout
-                             * @interface IRow
-                             * @property {number|Long|null} [weight] Row weight
-                             * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] Row widgets
-                             */
-    
-                            /**
-                             * Constructs a new Row.
-                             * @memberof google.monitoring.dashboard.v1.RowLayout
-                             * @classdesc Represents a Row.
-                             * @implements IRow
-                             * @constructor
-                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow=} [properties] Properties to set
-                             */
-                            function Row(properties) {
-                                this.widgets = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Row weight.
-                             * @member {number|Long} weight
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @instance
-                             */
-                            Row.prototype.weight = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                            /**
-                             * Row widgets.
-                             * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @instance
-                             */
-                            Row.prototype.widgets = $util.emptyArray;
-    
-                            /**
-                             * Creates a new Row instance using the specified properties.
-                             * @function create
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow=} [properties] Properties to set
-                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row instance
-                             */
-                            Row.create = function create(properties) {
-                                return new Row(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Row message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow} message Row message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Row.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.weight);
-                                if (message.widgets != null && message.widgets.length)
-                                    for (var i = 0; i < message.widgets.length; ++i)
-                                        $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Row message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.RowLayout.IRow} message Row message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Row.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Row message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Row.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.RowLayout.Row();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.weight = reader.int64();
-                                        break;
-                                    case 2:
-                                        if (!(message.widgets && message.widgets.length))
-                                            message.widgets = [];
-                                        message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Row message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Row.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Row message.
-                             * @function verify
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Row.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    if (!$util.isInteger(message.weight) && !(message.weight && $util.isInteger(message.weight.low) && $util.isInteger(message.weight.high)))
-                                        return "weight: integer|Long expected";
-                                if (message.widgets != null && message.hasOwnProperty("widgets")) {
-                                    if (!Array.isArray(message.widgets))
-                                        return "widgets: array expected";
-                                    for (var i = 0; i < message.widgets.length; ++i) {
-                                        var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
-                                        if (error)
-                                            return "widgets." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Row message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.monitoring.dashboard.v1.RowLayout.Row} Row
-                             */
-                            Row.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.monitoring.dashboard.v1.RowLayout.Row)
-                                    return object;
-                                var message = new $root.google.monitoring.dashboard.v1.RowLayout.Row();
-                                if (object.weight != null)
-                                    if ($util.Long)
-                                        (message.weight = $util.Long.fromValue(object.weight)).unsigned = false;
-                                    else if (typeof object.weight === "string")
-                                        message.weight = parseInt(object.weight, 10);
-                                    else if (typeof object.weight === "number")
-                                        message.weight = object.weight;
-                                    else if (typeof object.weight === "object")
-                                        message.weight = new $util.LongBits(object.weight.low >>> 0, object.weight.high >>> 0).toNumber();
-                                if (object.widgets) {
-                                    if (!Array.isArray(object.widgets))
-                                        throw TypeError(".google.monitoring.dashboard.v1.RowLayout.Row.widgets: array expected");
-                                    message.widgets = [];
-                                    for (var i = 0; i < object.widgets.length; ++i) {
-                                        if (typeof object.widgets[i] !== "object")
-                                            throw TypeError(".google.monitoring.dashboard.v1.RowLayout.Row.widgets: object expected");
-                                        message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Row message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.RowLayout.Row} message Row
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Row.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.widgets = [];
-                                if (options.defaults)
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.weight = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.weight = options.longs === String ? "0" : 0;
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    if (typeof message.weight === "number")
-                                        object.weight = options.longs === String ? String(message.weight) : message.weight;
-                                    else
-                                        object.weight = options.longs === String ? $util.Long.prototype.toString.call(message.weight) : options.longs === Number ? new $util.LongBits(message.weight.low >>> 0, message.weight.high >>> 0).toNumber() : message.weight;
-                                if (message.widgets && message.widgets.length) {
-                                    object.widgets = [];
-                                    for (var j = 0; j < message.widgets.length; ++j)
-                                        object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Row to JSON.
-                             * @function toJSON
-                             * @memberof google.monitoring.dashboard.v1.RowLayout.Row
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Row.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return Row;
-                        })();
-    
-                        return RowLayout;
-                    })();
-    
-                    v1.ColumnLayout = (function() {
-    
-                        /**
-                         * Properties of a ColumnLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IColumnLayout
-                         * @property {Array.<google.monitoring.dashboard.v1.ColumnLayout.IColumn>|null} [columns] ColumnLayout columns
-                         */
-    
-                        /**
-                         * Constructs a new ColumnLayout.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a ColumnLayout.
-                         * @implements IColumnLayout
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IColumnLayout=} [properties] Properties to set
-                         */
-                        function ColumnLayout(properties) {
-                            this.columns = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ColumnLayout columns.
-                         * @member {Array.<google.monitoring.dashboard.v1.ColumnLayout.IColumn>} columns
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @instance
-                         */
-                        ColumnLayout.prototype.columns = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ColumnLayout instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IColumnLayout=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout instance
-                         */
-                        ColumnLayout.create = function create(properties) {
-                            return new ColumnLayout(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ColumnLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IColumnLayout} message ColumnLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ColumnLayout.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.columns != null && message.columns.length)
-                                for (var i = 0; i < message.columns.length; ++i)
-                                    $root.google.monitoring.dashboard.v1.ColumnLayout.Column.encode(message.columns[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ColumnLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IColumnLayout} message ColumnLayout message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ColumnLayout.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ColumnLayout message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ColumnLayout.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.ColumnLayout();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    if (!(message.columns && message.columns.length))
-                                        message.columns = [];
-                                    message.columns.push($root.google.monitoring.dashboard.v1.ColumnLayout.Column.decode(reader, reader.uint32()));
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ColumnLayout message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ColumnLayout.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ColumnLayout message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ColumnLayout.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.columns != null && message.hasOwnProperty("columns")) {
-                                if (!Array.isArray(message.columns))
-                                    return "columns: array expected";
-                                for (var i = 0; i < message.columns.length; ++i) {
-                                    var error = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.verify(message.columns[i]);
-                                    if (error)
-                                        return "columns." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ColumnLayout message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.ColumnLayout} ColumnLayout
-                         */
-                        ColumnLayout.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.ColumnLayout)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.ColumnLayout();
-                            if (object.columns) {
-                                if (!Array.isArray(object.columns))
-                                    throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.columns: array expected");
-                                message.columns = [];
-                                for (var i = 0; i < object.columns.length; ++i) {
-                                    if (typeof object.columns[i] !== "object")
-                                        throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.columns: object expected");
-                                    message.columns[i] = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.fromObject(object.columns[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ColumnLayout message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.ColumnLayout} message ColumnLayout
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ColumnLayout.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.columns = [];
-                            if (message.columns && message.columns.length) {
-                                object.columns = [];
-                                for (var j = 0; j < message.columns.length; ++j)
-                                    object.columns[j] = $root.google.monitoring.dashboard.v1.ColumnLayout.Column.toObject(message.columns[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ColumnLayout to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ColumnLayout.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        ColumnLayout.Column = (function() {
-    
-                            /**
-                             * Properties of a Column.
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                             * @interface IColumn
-                             * @property {number|Long|null} [weight] Column weight
-                             * @property {Array.<google.monitoring.dashboard.v1.IWidget>|null} [widgets] Column widgets
-                             */
-    
-                            /**
-                             * Constructs a new Column.
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout
-                             * @classdesc Represents a Column.
-                             * @implements IColumn
-                             * @constructor
-                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn=} [properties] Properties to set
-                             */
-                            function Column(properties) {
-                                this.widgets = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Column weight.
-                             * @member {number|Long} weight
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @instance
-                             */
-                            Column.prototype.weight = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                            /**
-                             * Column widgets.
-                             * @member {Array.<google.monitoring.dashboard.v1.IWidget>} widgets
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @instance
-                             */
-                            Column.prototype.widgets = $util.emptyArray;
-    
-                            /**
-                             * Creates a new Column instance using the specified properties.
-                             * @function create
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn=} [properties] Properties to set
-                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column instance
-                             */
-                            Column.create = function create(properties) {
-                                return new Column(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Column message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn} message Column message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Column.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.weight);
-                                if (message.widgets != null && message.widgets.length)
-                                    for (var i = 0; i < message.widgets.length; ++i)
-                                        $root.google.monitoring.dashboard.v1.Widget.encode(message.widgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Column message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.ColumnLayout.IColumn} message Column message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Column.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Column message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Column.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.ColumnLayout.Column();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.weight = reader.int64();
-                                        break;
-                                    case 2:
-                                        if (!(message.widgets && message.widgets.length))
-                                            message.widgets = [];
-                                        message.widgets.push($root.google.monitoring.dashboard.v1.Widget.decode(reader, reader.uint32()));
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Column message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Column.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Column message.
-                             * @function verify
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Column.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    if (!$util.isInteger(message.weight) && !(message.weight && $util.isInteger(message.weight.low) && $util.isInteger(message.weight.high)))
-                                        return "weight: integer|Long expected";
-                                if (message.widgets != null && message.hasOwnProperty("widgets")) {
-                                    if (!Array.isArray(message.widgets))
-                                        return "widgets: array expected";
-                                    for (var i = 0; i < message.widgets.length; ++i) {
-                                        var error = $root.google.monitoring.dashboard.v1.Widget.verify(message.widgets[i]);
-                                        if (error)
-                                            return "widgets." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Column message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.monitoring.dashboard.v1.ColumnLayout.Column} Column
-                             */
-                            Column.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.monitoring.dashboard.v1.ColumnLayout.Column)
-                                    return object;
-                                var message = new $root.google.monitoring.dashboard.v1.ColumnLayout.Column();
-                                if (object.weight != null)
-                                    if ($util.Long)
-                                        (message.weight = $util.Long.fromValue(object.weight)).unsigned = false;
-                                    else if (typeof object.weight === "string")
-                                        message.weight = parseInt(object.weight, 10);
-                                    else if (typeof object.weight === "number")
-                                        message.weight = object.weight;
-                                    else if (typeof object.weight === "object")
-                                        message.weight = new $util.LongBits(object.weight.low >>> 0, object.weight.high >>> 0).toNumber();
-                                if (object.widgets) {
-                                    if (!Array.isArray(object.widgets))
-                                        throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.Column.widgets: array expected");
-                                    message.widgets = [];
-                                    for (var i = 0; i < object.widgets.length; ++i) {
-                                        if (typeof object.widgets[i] !== "object")
-                                            throw TypeError(".google.monitoring.dashboard.v1.ColumnLayout.Column.widgets: object expected");
-                                        message.widgets[i] = $root.google.monitoring.dashboard.v1.Widget.fromObject(object.widgets[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Column message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @static
-                             * @param {google.monitoring.dashboard.v1.ColumnLayout.Column} message Column
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Column.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.widgets = [];
-                                if (options.defaults)
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.weight = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.weight = options.longs === String ? "0" : 0;
-                                if (message.weight != null && message.hasOwnProperty("weight"))
-                                    if (typeof message.weight === "number")
-                                        object.weight = options.longs === String ? String(message.weight) : message.weight;
-                                    else
-                                        object.weight = options.longs === String ? $util.Long.prototype.toString.call(message.weight) : options.longs === Number ? new $util.LongBits(message.weight.low >>> 0, message.weight.high >>> 0).toNumber() : message.weight;
-                                if (message.widgets && message.widgets.length) {
-                                    object.widgets = [];
-                                    for (var j = 0; j < message.widgets.length; ++j)
-                                        object.widgets[j] = $root.google.monitoring.dashboard.v1.Widget.toObject(message.widgets[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Column to JSON.
-                             * @function toJSON
-                             * @memberof google.monitoring.dashboard.v1.ColumnLayout.Column
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Column.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            return Column;
-                        })();
-    
-                        return ColumnLayout;
-                    })();
-    
-                    v1.Dashboard = (function() {
-    
-                        /**
-                         * Properties of a Dashboard.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @interface IDashboard
-                         * @property {string|null} [name] Dashboard name
-                         * @property {string|null} [displayName] Dashboard displayName
-                         * @property {string|null} [etag] Dashboard etag
-                         * @property {google.monitoring.dashboard.v1.IGridLayout|null} [gridLayout] Dashboard gridLayout
-                         * @property {google.monitoring.dashboard.v1.IRowLayout|null} [rowLayout] Dashboard rowLayout
-                         * @property {google.monitoring.dashboard.v1.IColumnLayout|null} [columnLayout] Dashboard columnLayout
-                         */
-    
-                        /**
-                         * Constructs a new Dashboard.
-                         * @memberof google.monitoring.dashboard.v1
-                         * @classdesc Represents a Dashboard.
-                         * @implements IDashboard
-                         * @constructor
-                         * @param {google.monitoring.dashboard.v1.IDashboard=} [properties] Properties to set
-                         */
-                        function Dashboard(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Dashboard name.
-                         * @member {string} name
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.name = "";
-    
-                        /**
-                         * Dashboard displayName.
-                         * @member {string} displayName
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.displayName = "";
-    
-                        /**
-                         * Dashboard etag.
-                         * @member {string} etag
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.etag = "";
-    
-                        /**
-                         * Dashboard gridLayout.
-                         * @member {google.monitoring.dashboard.v1.IGridLayout|null|undefined} gridLayout
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.gridLayout = null;
-    
-                        /**
-                         * Dashboard rowLayout.
-                         * @member {google.monitoring.dashboard.v1.IRowLayout|null|undefined} rowLayout
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.rowLayout = null;
-    
-                        /**
-                         * Dashboard columnLayout.
-                         * @member {google.monitoring.dashboard.v1.IColumnLayout|null|undefined} columnLayout
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Dashboard.prototype.columnLayout = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * Dashboard layout.
-                         * @member {"gridLayout"|"rowLayout"|"columnLayout"|undefined} layout
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         */
-                        Object.defineProperty(Dashboard.prototype, "layout", {
-                            get: $util.oneOfGetter($oneOfFields = ["gridLayout", "rowLayout", "columnLayout"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new Dashboard instance using the specified properties.
-                         * @function create
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IDashboard=} [properties] Properties to set
-                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard instance
-                         */
-                        Dashboard.create = function create(properties) {
-                            return new Dashboard(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Dashboard message. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IDashboard} message Dashboard message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Dashboard.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-                            if (message.etag != null && message.hasOwnProperty("etag"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.etag);
-                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout"))
-                                $root.google.monitoring.dashboard.v1.GridLayout.encode(message.gridLayout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout"))
-                                $root.google.monitoring.dashboard.v1.RowLayout.encode(message.rowLayout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout"))
-                                $root.google.monitoring.dashboard.v1.ColumnLayout.encode(message.columnLayout, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Dashboard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.IDashboard} message Dashboard message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Dashboard.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Dashboard message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Dashboard.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.monitoring.dashboard.v1.Dashboard();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.displayName = reader.string();
-                                    break;
-                                case 4:
-                                    message.etag = reader.string();
-                                    break;
-                                case 5:
-                                    message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.decode(reader, reader.uint32());
-                                    break;
-                                case 8:
-                                    message.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.decode(reader, reader.uint32());
-                                    break;
-                                case 9:
-                                    message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Dashboard message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Dashboard.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Dashboard message.
-                         * @function verify
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Dashboard.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            if (message.etag != null && message.hasOwnProperty("etag"))
-                                if (!$util.isString(message.etag))
-                                    return "etag: string expected";
-                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout")) {
-                                properties.layout = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.GridLayout.verify(message.gridLayout);
-                                    if (error)
-                                        return "gridLayout." + error;
-                                }
-                            }
-                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
-                                if (properties.layout === 1)
-                                    return "layout: multiple values";
-                                properties.layout = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.RowLayout.verify(message.rowLayout);
-                                    if (error)
-                                        return "rowLayout." + error;
-                                }
-                            }
-                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout")) {
-                                if (properties.layout === 1)
-                                    return "layout: multiple values";
-                                properties.layout = 1;
-                                {
-                                    var error = $root.google.monitoring.dashboard.v1.ColumnLayout.verify(message.columnLayout);
-                                    if (error)
-                                        return "columnLayout." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Dashboard message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.monitoring.dashboard.v1.Dashboard} Dashboard
-                         */
-                        Dashboard.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.monitoring.dashboard.v1.Dashboard)
-                                return object;
-                            var message = new $root.google.monitoring.dashboard.v1.Dashboard();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            if (object.etag != null)
-                                message.etag = String(object.etag);
-                            if (object.gridLayout != null) {
-                                if (typeof object.gridLayout !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.gridLayout: object expected");
-                                message.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.fromObject(object.gridLayout);
-                            }
-                            if (object.rowLayout != null) {
-                                if (typeof object.rowLayout !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.rowLayout: object expected");
-                                message.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.fromObject(object.rowLayout);
-                            }
-                            if (object.columnLayout != null) {
-                                if (typeof object.columnLayout !== "object")
-                                    throw TypeError(".google.monitoring.dashboard.v1.Dashboard.columnLayout: object expected");
-                                message.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.fromObject(object.columnLayout);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Dashboard message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @static
-                         * @param {google.monitoring.dashboard.v1.Dashboard} message Dashboard
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Dashboard.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.displayName = "";
-                                object.etag = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.etag != null && message.hasOwnProperty("etag"))
-                                object.etag = message.etag;
-                            if (message.gridLayout != null && message.hasOwnProperty("gridLayout")) {
-                                object.gridLayout = $root.google.monitoring.dashboard.v1.GridLayout.toObject(message.gridLayout, options);
-                                if (options.oneofs)
-                                    object.layout = "gridLayout";
-                            }
-                            if (message.rowLayout != null && message.hasOwnProperty("rowLayout")) {
-                                object.rowLayout = $root.google.monitoring.dashboard.v1.RowLayout.toObject(message.rowLayout, options);
-                                if (options.oneofs)
-                                    object.layout = "rowLayout";
-                            }
-                            if (message.columnLayout != null && message.hasOwnProperty("columnLayout")) {
-                                object.columnLayout = $root.google.monitoring.dashboard.v1.ColumnLayout.toObject(message.columnLayout, options);
-                                if (options.oneofs)
-                                    object.layout = "columnLayout";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Dashboard to JSON.
-                         * @function toJSON
-                         * @memberof google.monitoring.dashboard.v1.Dashboard
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Dashboard.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return Dashboard;
                     })();
     
                     v1.DashboardsService = (function() {

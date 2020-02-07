@@ -91,6 +91,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -113,6 +114,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.ICreateDashboardRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -137,6 +139,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -159,6 +162,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IGetDashboardRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -183,6 +187,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -205,6 +210,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IDeleteDashboardRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -279,6 +285,7 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -305,8 +312,9 @@ describe('v1.DashboardsServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDashboards = (
         actualRequest: {},
@@ -325,7 +333,7 @@ describe('v1.DashboardsServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

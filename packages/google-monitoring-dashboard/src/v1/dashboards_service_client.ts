@@ -743,9 +743,17 @@ export class DashboardsServiceClient {
    */
   listDashboardsStream(
     request?: protosTypes.google.monitoring.dashboard.v1.IListDashboardsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDashboards.createStream(
       this._innerApiCalls.listDashboards as gax.GaxCall,

@@ -1050,6 +1050,196 @@
                         }
                       }
                     },
+                    "Dashboard": {
+                      "oneofs": {
+                        "layout": {
+                          "oneof": [
+                            "gridLayout",
+                            "rowLayout",
+                            "columnLayout"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "gridLayout": {
+                          "type": "GridLayout",
+                          "id": 5
+                        },
+                        "rowLayout": {
+                          "type": "RowLayout",
+                          "id": 8
+                        },
+                        "columnLayout": {
+                          "type": "ColumnLayout",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "GridLayout": {
+                      "fields": {
+                        "columns": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "widgets": {
+                          "rule": "repeated",
+                          "type": "Widget",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RowLayout": {
+                      "fields": {
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Row": {
+                          "fields": {
+                            "weight": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Widget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ColumnLayout": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "Column",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Column": {
+                          "fields": {
+                            "weight": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Widget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Widget": {
+                      "oneofs": {
+                        "content": {
+                          "oneof": [
+                            "xyChart",
+                            "scorecard",
+                            "text",
+                            "blank"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "title": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "xyChart": {
+                          "type": "XyChart",
+                          "id": 2
+                        },
+                        "scorecard": {
+                          "type": "Scorecard",
+                          "id": 3
+                        },
+                        "text": {
+                          "type": "Text",
+                          "id": 4
+                        },
+                        "blank": {
+                          "type": "google.protobuf.Empty",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "Scorecard": {
+                      "oneofs": {
+                        "dataView": {
+                          "oneof": [
+                            "gaugeView",
+                            "sparkChartView"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeSeriesQuery": {
+                          "type": "TimeSeriesQuery",
+                          "id": 1
+                        },
+                        "gaugeView": {
+                          "type": "GaugeView",
+                          "id": 4
+                        },
+                        "sparkChartView": {
+                          "type": "SparkChartView",
+                          "id": 5
+                        },
+                        "thresholds": {
+                          "rule": "repeated",
+                          "type": "Threshold",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "GaugeView": {
+                          "fields": {
+                            "lowerBound": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "upperBound": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SparkChartView": {
+                          "fields": {
+                            "sparkChartType": {
+                              "type": "SparkChartType",
+                              "id": 1
+                            },
+                            "minAlignmentPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "TimeSeriesQuery": {
                       "oneofs": {
                         "source": {
@@ -1197,61 +1387,6 @@
                         "SPARK_BAR": 2
                       }
                     },
-                    "Scorecard": {
-                      "oneofs": {
-                        "dataView": {
-                          "oneof": [
-                            "gaugeView",
-                            "sparkChartView"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "timeSeriesQuery": {
-                          "type": "TimeSeriesQuery",
-                          "id": 1
-                        },
-                        "gaugeView": {
-                          "type": "GaugeView",
-                          "id": 4
-                        },
-                        "sparkChartView": {
-                          "type": "SparkChartView",
-                          "id": 5
-                        },
-                        "thresholds": {
-                          "rule": "repeated",
-                          "type": "Threshold",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "GaugeView": {
-                          "fields": {
-                            "lowerBound": {
-                              "type": "double",
-                              "id": 1
-                            },
-                            "upperBound": {
-                              "type": "double",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SparkChartView": {
-                          "fields": {
-                            "sparkChartType": {
-                              "type": "SparkChartType",
-                              "id": 1
-                            },
-                            "minAlignmentPeriod": {
-                              "type": "google.protobuf.Duration",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
                     "Text": {
                       "fields": {
                         "content": {
@@ -1375,141 +1510,6 @@
                             "X_RAY": 2,
                             "STATS": 3
                           }
-                        }
-                      }
-                    },
-                    "Widget": {
-                      "oneofs": {
-                        "content": {
-                          "oneof": [
-                            "xyChart",
-                            "scorecard",
-                            "text",
-                            "blank"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "title": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "xyChart": {
-                          "type": "XyChart",
-                          "id": 2
-                        },
-                        "scorecard": {
-                          "type": "Scorecard",
-                          "id": 3
-                        },
-                        "text": {
-                          "type": "Text",
-                          "id": 4
-                        },
-                        "blank": {
-                          "type": "google.protobuf.Empty",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "GridLayout": {
-                      "fields": {
-                        "columns": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "widgets": {
-                          "rule": "repeated",
-                          "type": "Widget",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "RowLayout": {
-                      "fields": {
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Row": {
-                          "fields": {
-                            "weight": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "widgets": {
-                              "rule": "repeated",
-                              "type": "Widget",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ColumnLayout": {
-                      "fields": {
-                        "columns": {
-                          "rule": "repeated",
-                          "type": "Column",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Column": {
-                          "fields": {
-                            "weight": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "widgets": {
-                              "rule": "repeated",
-                              "type": "Widget",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Dashboard": {
-                      "oneofs": {
-                        "layout": {
-                          "oneof": [
-                            "gridLayout",
-                            "rowLayout",
-                            "columnLayout"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "gridLayout": {
-                          "type": "GridLayout",
-                          "id": 5
-                        },
-                        "rowLayout": {
-                          "type": "RowLayout",
-                          "id": 8
-                        },
-                        "columnLayout": {
-                          "type": "ColumnLayout",
-                          "id": 9
                         }
                       }
                     },
