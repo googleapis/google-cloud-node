@@ -99,6 +99,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -123,6 +124,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -149,6 +151,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -173,6 +176,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -199,6 +203,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -223,6 +228,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -249,6 +255,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -273,6 +280,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -349,6 +357,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -373,6 +382,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -399,6 +409,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -427,8 +438,9 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listKeys = (
         actualRequest: {},
@@ -447,7 +459,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

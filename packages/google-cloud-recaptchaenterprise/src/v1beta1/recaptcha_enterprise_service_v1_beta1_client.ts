@@ -144,13 +144,13 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
       assessmentPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/assessments/{assessment}'
       ),
       keyPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/keys/{key}'
       ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -901,9 +901,17 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    */
   listKeysStream(
     request?: protosTypes.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listKeys.createStream(
       this._innerApiCalls.listKeys as gax.GaxCall,
@@ -914,29 +922,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
 
   /**
    * Return a fully-qualified assessment resource name string.
@@ -1010,6 +995,29 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    */
   matchKeyFromKeyName(keyName: string) {
     return this._pathTemplates.keyPathTemplate.match(keyName).key;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
