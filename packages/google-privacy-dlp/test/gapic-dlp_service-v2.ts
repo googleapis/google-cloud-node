@@ -89,6 +89,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -111,6 +112,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IInspectContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -135,6 +137,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -157,6 +160,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IRedactImageRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -181,6 +185,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -203,6 +208,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeidentifyContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -227,6 +233,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -249,6 +256,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IReidentifyContentRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -319,6 +327,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -341,6 +350,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateInspectTemplateRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -365,6 +375,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -387,6 +398,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -411,6 +423,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -433,6 +446,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -457,6 +471,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -479,6 +494,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteInspectTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -503,6 +519,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -525,6 +542,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -552,6 +570,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -574,6 +593,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -601,6 +621,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -623,6 +644,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -647,6 +669,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -669,6 +692,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -696,6 +720,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -718,6 +743,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateJobTriggerRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -742,6 +768,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -764,6 +791,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -788,6 +816,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -810,6 +839,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -834,6 +864,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -856,6 +887,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -880,6 +912,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -902,6 +935,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IActivateJobTriggerRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -926,6 +960,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -948,6 +983,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateDlpJobRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -972,6 +1008,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -994,6 +1031,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1018,6 +1056,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1040,6 +1079,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1064,6 +1104,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1086,6 +1127,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICancelDlpJobRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1110,6 +1152,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1132,6 +1175,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1156,6 +1200,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1178,6 +1223,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1202,6 +1248,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1224,6 +1271,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IGetStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1248,6 +1296,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1270,6 +1319,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -1294,6 +1344,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1320,8 +1371,9 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listInspectTemplates = (
         actualRequest: {},
@@ -1340,7 +1392,7 @@ describe('v2.DlpServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listDeidentifyTemplates', () => {
@@ -1351,6 +1403,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1380,8 +1433,9 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDeidentifyTemplates = (
         actualRequest: {},
@@ -1400,7 +1454,7 @@ describe('v2.DlpServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listJobTriggers', () => {
@@ -1411,6 +1465,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1437,8 +1492,9 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listJobTriggers = (
         actualRequest: {},
@@ -1457,7 +1513,7 @@ describe('v2.DlpServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listDlpJobs', () => {
@@ -1468,6 +1524,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1494,8 +1551,9 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDlpJobs = (
         actualRequest: {},
@@ -1514,7 +1572,7 @@ describe('v2.DlpServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listStoredInfoTypes', () => {
@@ -1525,6 +1583,7 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -1551,8 +1610,9 @@ describe('v2.DlpServiceClient', () => {
       });
       // Mock request
       const request: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listStoredInfoTypes = (
         actualRequest: {},
@@ -1571,7 +1631,7 @@ describe('v2.DlpServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

@@ -150,30 +150,30 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      organizationPathTemplate: new gaxModule.PathTemplate(
-        'organizations/{organization}'
-      ),
-      organizationInspectTemplatePathTemplate: new gaxModule.PathTemplate(
-        'organizations/{organization}/inspectTemplates/{inspect_template}'
-      ),
-      projectInspectTemplatePathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/inspectTemplates/{inspect_template}'
+      dlpJobPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/dlpJobs/{dlp_job}'
       ),
       jobTriggerPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/jobTriggers/{job_trigger}'
       ),
-      dlpJobPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/dlpJobs/{dlp_job}'
+      organizationPathTemplate: new gaxModule.PathTemplate(
+        'organizations/{organization}'
       ),
       organizationDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/deidentifyTemplates/{deidentify_template}'
       ),
-      projectDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/deidentifyTemplates/{deidentify_template}'
+      organizationInspectTemplatePathTemplate: new gaxModule.PathTemplate(
+        'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
       organizationStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
+      ),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      projectDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/deidentifyTemplates/{deidentify_template}'
+      ),
+      projectInspectTemplatePathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/inspectTemplates/{inspect_template}'
       ),
       projectStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
@@ -2733,9 +2733,17 @@ export class DlpServiceClient {
    */
   listInspectTemplatesStream(
     request?: protosTypes.google.privacy.dlp.v2.IListInspectTemplatesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listInspectTemplates.createStream(
       this._innerApiCalls.listInspectTemplates as gax.GaxCall,
@@ -2905,9 +2913,17 @@ export class DlpServiceClient {
    */
   listDeidentifyTemplatesStream(
     request?: protosTypes.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDeidentifyTemplates.createStream(
       this._innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
@@ -3124,9 +3140,17 @@ export class DlpServiceClient {
    */
   listJobTriggersStream(
     request?: protosTypes.google.privacy.dlp.v2.IListJobTriggersRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listJobTriggers.createStream(
       this._innerApiCalls.listJobTriggers as gax.GaxCall,
@@ -3348,9 +3372,17 @@ export class DlpServiceClient {
    */
   listDlpJobsStream(
     request?: protosTypes.google.privacy.dlp.v2.IListDlpJobsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDlpJobs.createStream(
       this._innerApiCalls.listDlpJobs as gax.GaxCall,
@@ -3518,9 +3550,17 @@ export class DlpServiceClient {
    */
   listStoredInfoTypesStream(
     request?: protosTypes.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listStoredInfoTypes.createStream(
       this._innerApiCalls.listStoredInfoTypes as gax.GaxCall,
@@ -3533,141 +3573,39 @@ export class DlpServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified dlpJob resource name string.
    *
    * @param {string} project
+   * @param {string} dlp_job
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
+  dlpJobPath(project: string, dlpJob: string) {
+    return this._pathTemplates.dlpJobPathTemplate.render({
       project,
+      dlp_job: dlpJob,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from DlpJob resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
+   * @param {string} dlpJobName
+   *   A fully-qualified path representing DlpJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromDlpJobName(dlpJobName: string) {
+    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).project;
   }
 
   /**
-   * Return a fully-qualified organization resource name string.
+   * Parse the dlp_job from DlpJob resource.
    *
-   * @param {string} organization
-   * @returns {string} Resource name string.
+   * @param {string} dlpJobName
+   *   A fully-qualified path representing DlpJob resource.
+   * @returns {string} A string representing the dlp_job.
    */
-  organizationPath(organization: string) {
-    return this._pathTemplates.organizationPathTemplate.render({
-      organization,
-    });
-  }
-
-  /**
-   * Parse the organization from Organization resource.
-   *
-   * @param {string} organizationName
-   *   A fully-qualified path representing Organization resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationName(organizationName: string) {
-    return this._pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
-  }
-
-  /**
-   * Return a fully-qualified organizationInspectTemplate resource name string.
-   *
-   * @param {string} organization
-   * @param {string} inspect_template
-   * @returns {string} Resource name string.
-   */
-  organizationInspectTemplatePath(
-    organization: string,
-    inspectTemplate: string
-  ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.render({
-      organization,
-      inspect_template: inspectTemplate,
-    });
-  }
-
-  /**
-   * Parse the organization from OrganizationInspectTemplate resource.
-   *
-   * @param {string} organizationInspectTemplateName
-   *   A fully-qualified path representing organization_inspect_template resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromOrganizationInspectTemplateName(
-    organizationInspectTemplateName: string
-  ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
-      organizationInspectTemplateName
-    ).organization;
-  }
-
-  /**
-   * Parse the inspect_template from OrganizationInspectTemplate resource.
-   *
-   * @param {string} organizationInspectTemplateName
-   *   A fully-qualified path representing organization_inspect_template resource.
-   * @returns {string} A string representing the inspect_template.
-   */
-  matchInspectTemplateFromOrganizationInspectTemplateName(
-    organizationInspectTemplateName: string
-  ) {
-    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
-      organizationInspectTemplateName
-    ).inspect_template;
-  }
-
-  /**
-   * Return a fully-qualified projectInspectTemplate resource name string.
-   *
-   * @param {string} project
-   * @param {string} inspect_template
-   * @returns {string} Resource name string.
-   */
-  projectInspectTemplatePath(project: string, inspectTemplate: string) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.render({
-      project,
-      inspect_template: inspectTemplate,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectInspectTemplate resource.
-   *
-   * @param {string} projectInspectTemplateName
-   *   A fully-qualified path representing project_inspect_template resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectInspectTemplateName(
-    projectInspectTemplateName: string
-  ) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
-      projectInspectTemplateName
-    ).project;
-  }
-
-  /**
-   * Parse the inspect_template from ProjectInspectTemplate resource.
-   *
-   * @param {string} projectInspectTemplateName
-   *   A fully-qualified path representing project_inspect_template resource.
-   * @returns {string} A string representing the inspect_template.
-   */
-  matchInspectTemplateFromProjectInspectTemplateName(
-    projectInspectTemplateName: string
-  ) {
-    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
-      projectInspectTemplateName
-    ).inspect_template;
+  matchDlpJobFromDlpJobName(dlpJobName: string) {
+    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).dlp_job;
   }
 
   /**
@@ -3709,39 +3647,27 @@ export class DlpServiceClient {
   }
 
   /**
-   * Return a fully-qualified dlpJob resource name string.
+   * Return a fully-qualified organization resource name string.
    *
-   * @param {string} project
-   * @param {string} dlp_job
+   * @param {string} organization
    * @returns {string} Resource name string.
    */
-  dlpJobPath(project: string, dlpJob: string) {
-    return this._pathTemplates.dlpJobPathTemplate.render({
-      project,
-      dlp_job: dlpJob,
+  organizationPath(organization: string) {
+    return this._pathTemplates.organizationPathTemplate.render({
+      organization,
     });
   }
 
   /**
-   * Parse the project from DlpJob resource.
+   * Parse the organization from Organization resource.
    *
-   * @param {string} dlpJobName
-   *   A fully-qualified path representing DlpJob resource.
-   * @returns {string} A string representing the project.
+   * @param {string} organizationName
+   *   A fully-qualified path representing Organization resource.
+   * @returns {string} A string representing the organization.
    */
-  matchProjectFromDlpJobName(dlpJobName: string) {
-    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).project;
-  }
-
-  /**
-   * Parse the dlp_job from DlpJob resource.
-   *
-   * @param {string} dlpJobName
-   *   A fully-qualified path representing DlpJob resource.
-   * @returns {string} A string representing the dlp_job.
-   */
-  matchDlpJobFromDlpJobName(dlpJobName: string) {
-    return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).dlp_job;
+  matchOrganizationFromOrganizationName(organizationName: string) {
+    return this._pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -3794,47 +3720,50 @@ export class DlpServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectDeidentifyTemplate resource name string.
+   * Return a fully-qualified organizationInspectTemplate resource name string.
    *
-   * @param {string} project
-   * @param {string} deidentify_template
+   * @param {string} organization
+   * @param {string} inspect_template
    * @returns {string} Resource name string.
    */
-  projectDeidentifyTemplatePath(project: string, deidentifyTemplate: string) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.render({
-      project,
-      deidentify_template: deidentifyTemplate,
+  organizationInspectTemplatePath(
+    organization: string,
+    inspectTemplate: string
+  ) {
+    return this._pathTemplates.organizationInspectTemplatePathTemplate.render({
+      organization,
+      inspect_template: inspectTemplate,
     });
   }
 
   /**
-   * Parse the project from ProjectDeidentifyTemplate resource.
+   * Parse the organization from OrganizationInspectTemplate resource.
    *
-   * @param {string} projectDeidentifyTemplateName
-   *   A fully-qualified path representing project_deidentify_template resource.
-   * @returns {string} A string representing the project.
+   * @param {string} organizationInspectTemplateName
+   *   A fully-qualified path representing organization_inspect_template resource.
+   * @returns {string} A string representing the organization.
    */
-  matchProjectFromProjectDeidentifyTemplateName(
-    projectDeidentifyTemplateName: string
+  matchOrganizationFromOrganizationInspectTemplateName(
+    organizationInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
-      projectDeidentifyTemplateName
-    ).project;
+    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
+      organizationInspectTemplateName
+    ).organization;
   }
 
   /**
-   * Parse the deidentify_template from ProjectDeidentifyTemplate resource.
+   * Parse the inspect_template from OrganizationInspectTemplate resource.
    *
-   * @param {string} projectDeidentifyTemplateName
-   *   A fully-qualified path representing project_deidentify_template resource.
-   * @returns {string} A string representing the deidentify_template.
+   * @param {string} organizationInspectTemplateName
+   *   A fully-qualified path representing organization_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
    */
-  matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
-    projectDeidentifyTemplateName: string
+  matchInspectTemplateFromOrganizationInspectTemplateName(
+    organizationInspectTemplateName: string
   ) {
-    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
-      projectDeidentifyTemplateName
-    ).deidentify_template;
+    return this._pathTemplates.organizationInspectTemplatePathTemplate.match(
+      organizationInspectTemplateName
+    ).inspect_template;
   }
 
   /**
@@ -3879,6 +3808,117 @@ export class DlpServiceClient {
     return this._pathTemplates.organizationStoredInfoTypePathTemplate.match(
       organizationStoredInfoTypeName
     ).stored_info_type;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectDeidentifyTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} deidentify_template
+   * @returns {string} Resource name string.
+   */
+  projectDeidentifyTemplatePath(project: string, deidentifyTemplate: string) {
+    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.render({
+      project,
+      deidentify_template: deidentifyTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectDeidentifyTemplate resource.
+   *
+   * @param {string} projectDeidentifyTemplateName
+   *   A fully-qualified path representing project_deidentify_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectDeidentifyTemplateName(
+    projectDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
+      projectDeidentifyTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the deidentify_template from ProjectDeidentifyTemplate resource.
+   *
+   * @param {string} projectDeidentifyTemplateName
+   *   A fully-qualified path representing project_deidentify_template resource.
+   * @returns {string} A string representing the deidentify_template.
+   */
+  matchDeidentifyTemplateFromProjectDeidentifyTemplateName(
+    projectDeidentifyTemplateName: string
+  ) {
+    return this._pathTemplates.projectDeidentifyTemplatePathTemplate.match(
+      projectDeidentifyTemplateName
+    ).deidentify_template;
+  }
+
+  /**
+   * Return a fully-qualified projectInspectTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} inspect_template
+   * @returns {string} Resource name string.
+   */
+  projectInspectTemplatePath(project: string, inspectTemplate: string) {
+    return this._pathTemplates.projectInspectTemplatePathTemplate.render({
+      project,
+      inspect_template: inspectTemplate,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectInspectTemplate resource.
+   *
+   * @param {string} projectInspectTemplateName
+   *   A fully-qualified path representing project_inspect_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectInspectTemplateName(
+    projectInspectTemplateName: string
+  ) {
+    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
+      projectInspectTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the inspect_template from ProjectInspectTemplate resource.
+   *
+   * @param {string} projectInspectTemplateName
+   *   A fully-qualified path representing project_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
+   */
+  matchInspectTemplateFromProjectInspectTemplateName(
+    projectInspectTemplateName: string
+  ) {
+    return this._pathTemplates.projectInspectTemplatePathTemplate.match(
+      projectInspectTemplateName
+    ).inspect_template;
   }
 
   /**
