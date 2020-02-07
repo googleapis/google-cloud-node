@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.1.2...v1.2.0) (2020-02-07)
+
+
+### Features
+
+* **docs:** add deprecation message to version 1.x.x README ([#526](https://www.github.com/googleapis/nodejs-dialogflow/issues/526)) ([5474ec1](https://www.github.com/googleapis/nodejs-dialogflow/commit/5474ec19e943d01e4fc31bf8a728ee0299af8621))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v1.1.1...v1.1.2) (2020-01-28)
 
 
