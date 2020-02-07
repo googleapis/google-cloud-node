@@ -93,6 +93,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -117,6 +118,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetDataSourceRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -143,6 +145,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -167,6 +170,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICreateTransferConfigRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -247,6 +251,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -271,6 +276,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -297,6 +303,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -321,6 +328,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferConfigRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -347,6 +355,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -371,6 +380,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IScheduleTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -397,6 +407,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -421,6 +432,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IStartManualTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -450,6 +462,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -474,6 +487,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IGetTransferRunRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -500,6 +514,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -524,6 +539,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IDeleteTransferRunRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -550,6 +566,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -574,6 +591,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.ICheckValidCredsRequest = {};
+      request.name = '';
       // Mock response
       const expectedResponse = {};
       // Mock gRPC layer
@@ -600,6 +618,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -628,8 +647,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listDataSources = (
         actualRequest: {},
@@ -648,7 +668,7 @@ describe('v1.DataTransferServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listTransferConfigs', () => {
@@ -661,6 +681,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -689,8 +710,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listTransferConfigs = (
         actualRequest: {},
@@ -709,7 +731,7 @@ describe('v1.DataTransferServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listTransferRuns', () => {
@@ -722,6 +744,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -750,8 +773,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listTransferRuns = (
         actualRequest: {},
@@ -770,7 +794,7 @@ describe('v1.DataTransferServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
   describe('listTransferLogs', () => {
@@ -783,6 +807,7 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest = {};
+      request.parent = '';
       // Mock response
       const expectedResponse = {};
       // Mock Grpc layer
@@ -811,8 +836,9 @@ describe('v1.DataTransferServiceClient', () => {
       );
       // Mock request
       const request: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest = {};
+      request.parent = '';
       // Mock response
-      const expectedResponse = {};
+      const expectedResponse = {response: 'data'};
       // Mock Grpc layer
       client._innerApiCalls.listTransferLogs = (
         actualRequest: {},
@@ -831,7 +857,7 @@ describe('v1.DataTransferServiceClient', () => {
         .on('error', (err: FakeError) => {
           done(err);
         });
-      stream.write(request);
+      stream.write(expectedResponse);
     });
   });
 });

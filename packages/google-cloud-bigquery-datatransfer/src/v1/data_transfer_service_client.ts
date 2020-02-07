@@ -145,24 +145,24 @@ export class DataTransferServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
       projectDataSourcePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/dataSources/{data_source}'
       ),
       projectLocationDataSourcePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataSources/{data_source}'
       ),
-      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
-      projectTransferConfigPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/transferConfigs/{transfer_config}'
-      ),
       projectLocationTransferConfigPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/transferConfigs/{transfer_config}'
       ),
-      projectTransferConfigRunPathTemplate: new gaxModule.PathTemplate(
-        'projects/{project}/transferConfigs/{transfer_config}/runs/{run}'
-      ),
       projectLocationTransferConfigRunPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}'
+      ),
+      projectTransferConfigPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/transferConfigs/{transfer_config}'
+      ),
+      projectTransferConfigRunPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/transferConfigs/{transfer_config}/runs/{run}'
       ),
     };
 
@@ -1360,9 +1360,17 @@ export class DataTransferServiceClient {
    */
   listDataSourcesStream(
     request?: protosTypes.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listDataSources.createStream(
       this._innerApiCalls.listDataSources as gax.GaxCall,
@@ -1502,9 +1510,17 @@ export class DataTransferServiceClient {
    */
   listTransferConfigsStream(
     request?: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listTransferConfigs.createStream(
       this._innerApiCalls.listTransferConfigs as gax.GaxCall,
@@ -1650,9 +1666,17 @@ export class DataTransferServiceClient {
    */
   listTransferRunsStream(
     request?: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listTransferRuns.createStream(
       this._innerApiCalls.listTransferRuns as gax.GaxCall,
@@ -1794,9 +1818,17 @@ export class DataTransferServiceClient {
    */
   listTransferLogsStream(
     request?: protosTypes.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
-    options?: gax.CallOptions | {}
+    options?: gax.CallOptions
   ): Transform {
     request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     const callSettings = new gax.CallSettings(options);
     return this._descriptors.page.listTransferLogs.createStream(
       this._innerApiCalls.listTransferLogs as gax.GaxCall,
@@ -1807,6 +1839,29 @@ export class DataTransferServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  }
 
   /**
    * Return a fully-qualified projectDataSource resource name string.
@@ -1914,71 +1969,6 @@ export class DataTransferServiceClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  projectPath(project: string) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project,
-    });
-  }
-
-  /**
-   * Parse the project from Project resource.
-   *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectName(projectName: string) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Return a fully-qualified projectTransferConfig resource name string.
-   *
-   * @param {string} project
-   * @param {string} transfer_config
-   * @returns {string} Resource name string.
-   */
-  projectTransferConfigPath(project: string, transferConfig: string) {
-    return this._pathTemplates.projectTransferConfigPathTemplate.render({
-      project,
-      transfer_config: transferConfig,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectTransferConfig resource.
-   *
-   * @param {string} projectTransferConfigName
-   *   A fully-qualified path representing project_transfer_config resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectTransferConfigName(projectTransferConfigName: string) {
-    return this._pathTemplates.projectTransferConfigPathTemplate.match(
-      projectTransferConfigName
-    ).project;
-  }
-
-  /**
-   * Parse the transfer_config from ProjectTransferConfig resource.
-   *
-   * @param {string} projectTransferConfigName
-   *   A fully-qualified path representing project_transfer_config resource.
-   * @returns {string} A string representing the transfer_config.
-   */
-  matchTransferConfigFromProjectTransferConfigName(
-    projectTransferConfigName: string
-  ) {
-    return this._pathTemplates.projectTransferConfigPathTemplate.match(
-      projectTransferConfigName
-    ).transfer_config;
-  }
-
-  /**
    * Return a fully-qualified projectLocationTransferConfig resource name string.
    *
    * @param {string} project
@@ -2043,71 +2033,6 @@ export class DataTransferServiceClient {
     return this._pathTemplates.projectLocationTransferConfigPathTemplate.match(
       projectLocationTransferConfigName
     ).transfer_config;
-  }
-
-  /**
-   * Return a fully-qualified projectTransferConfigRun resource name string.
-   *
-   * @param {string} project
-   * @param {string} transfer_config
-   * @param {string} run
-   * @returns {string} Resource name string.
-   */
-  projectTransferConfigRunPath(
-    project: string,
-    transferConfig: string,
-    run: string
-  ) {
-    return this._pathTemplates.projectTransferConfigRunPathTemplate.render({
-      project,
-      transfer_config: transferConfig,
-      run,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectTransferConfigRun resource.
-   *
-   * @param {string} projectTransferConfigRunName
-   *   A fully-qualified path representing project_transfer_config_run resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectTransferConfigRunName(
-    projectTransferConfigRunName: string
-  ) {
-    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
-      projectTransferConfigRunName
-    ).project;
-  }
-
-  /**
-   * Parse the transfer_config from ProjectTransferConfigRun resource.
-   *
-   * @param {string} projectTransferConfigRunName
-   *   A fully-qualified path representing project_transfer_config_run resource.
-   * @returns {string} A string representing the transfer_config.
-   */
-  matchTransferConfigFromProjectTransferConfigRunName(
-    projectTransferConfigRunName: string
-  ) {
-    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
-      projectTransferConfigRunName
-    ).transfer_config;
-  }
-
-  /**
-   * Parse the run from ProjectTransferConfigRun resource.
-   *
-   * @param {string} projectTransferConfigRunName
-   *   A fully-qualified path representing project_transfer_config_run resource.
-   * @returns {string} A string representing the run.
-   */
-  matchRunFromProjectTransferConfigRunName(
-    projectTransferConfigRunName: string
-  ) {
-    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
-      projectTransferConfigRunName
-    ).run;
   }
 
   /**
@@ -2192,6 +2117,113 @@ export class DataTransferServiceClient {
   ) {
     return this._pathTemplates.projectLocationTransferConfigRunPathTemplate.match(
       projectLocationTransferConfigRunName
+    ).run;
+  }
+
+  /**
+   * Return a fully-qualified projectTransferConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} transfer_config
+   * @returns {string} Resource name string.
+   */
+  projectTransferConfigPath(project: string, transferConfig: string) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.render({
+      project,
+      transfer_config: transferConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectTransferConfig resource.
+   *
+   * @param {string} projectTransferConfigName
+   *   A fully-qualified path representing project_transfer_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectTransferConfigName(projectTransferConfigName: string) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.match(
+      projectTransferConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the transfer_config from ProjectTransferConfig resource.
+   *
+   * @param {string} projectTransferConfigName
+   *   A fully-qualified path representing project_transfer_config resource.
+   * @returns {string} A string representing the transfer_config.
+   */
+  matchTransferConfigFromProjectTransferConfigName(
+    projectTransferConfigName: string
+  ) {
+    return this._pathTemplates.projectTransferConfigPathTemplate.match(
+      projectTransferConfigName
+    ).transfer_config;
+  }
+
+  /**
+   * Return a fully-qualified projectTransferConfigRun resource name string.
+   *
+   * @param {string} project
+   * @param {string} transfer_config
+   * @param {string} run
+   * @returns {string} Resource name string.
+   */
+  projectTransferConfigRunPath(
+    project: string,
+    transferConfig: string,
+    run: string
+  ) {
+    return this._pathTemplates.projectTransferConfigRunPathTemplate.render({
+      project,
+      transfer_config: transferConfig,
+      run,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectTransferConfigRun resource.
+   *
+   * @param {string} projectTransferConfigRunName
+   *   A fully-qualified path representing project_transfer_config_run resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectTransferConfigRunName(
+    projectTransferConfigRunName: string
+  ) {
+    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
+      projectTransferConfigRunName
+    ).project;
+  }
+
+  /**
+   * Parse the transfer_config from ProjectTransferConfigRun resource.
+   *
+   * @param {string} projectTransferConfigRunName
+   *   A fully-qualified path representing project_transfer_config_run resource.
+   * @returns {string} A string representing the transfer_config.
+   */
+  matchTransferConfigFromProjectTransferConfigRunName(
+    projectTransferConfigRunName: string
+  ) {
+    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
+      projectTransferConfigRunName
+    ).transfer_config;
+  }
+
+  /**
+   * Parse the run from ProjectTransferConfigRun resource.
+   *
+   * @param {string} projectTransferConfigRunName
+   *   A fully-qualified path representing project_transfer_config_run resource.
+   * @returns {string} A string representing the run.
+   */
+  matchRunFromProjectTransferConfigRunName(
+    projectTransferConfigRunName: string
+  ) {
+    return this._pathTemplates.projectTransferConfigRunPathTemplate.match(
+      projectTransferConfigRunName
     ).run;
   }
 
